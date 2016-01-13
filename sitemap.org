@@ -1,4 +1,10 @@
-#+TITLE: 站点地图
+# -*- coding:utf-8-unix -*-
+#+LANGUAGE:  zh
+#+TITLE:     站点导航
+#+AUTHOR:    纪秀峰
+#+EMAIL:     jixiuf@gmail.com
+#+DATE:      2016-01-13
+#+URI:         /blog/sitemap
 
    + Linux
      + [[file:Linux/gentoo.org][Gentoo 拾遗]]
