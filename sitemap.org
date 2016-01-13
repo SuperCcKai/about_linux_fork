@@ -64,7 +64,7 @@
      + [[file:emacs/emacs-some-func.org][emacs-some-func.org]]
      + [[file:emacs/artist-mode.org][emacs画文本图]]
      + [[file:emacs/nxml-mode.org][nxml-mode补全]]
-     + [[file:emacs/auto-insert-and-yasnippet.org][yasnippet ,Auto Insert mode整合]]
+     + [[file:emacs/auto-insert-and-yasnippet.org][yasnippet Auto Insert mode整合]]
      + [[file:emacs/sqlparser.org][为mysql、sqlserver、oracle编写sql脚本时补全表名、列名]]
      + [[file:emacs/ediff-git-mergetool.org][使用Emacs中的Ediff 作为git mergetool使用的工具进行文件合并]]
      + [[file:emacs/image-suport-on-windows.org][在Windows 下让Emacs 支持打开jpeg png 图片]]
