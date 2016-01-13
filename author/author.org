@@ -1,6 +1,6 @@
 # -*- coding:utf-8-unix -*-
 #+LANGUAGE:  zh
-#+TITLE:     纪秀峰_个人简历(Erlang求职)
+#+TITLE:     纪秀峰_个人简历
 #+AUTHOR:    纪秀峰
 #+EMAIL:     jixiuf@gmail.com
 #+DATE:     2012-03-14 三
@@ -9,7 +9,7 @@
 #+OPTIONS:   H:2 num:nil toc:nil \n:t @:t ::t |:t ^:nil -:t f:t *:t <:t
 #+FILETAGS:
 * Word 版简历
-+  [[file:../download/JiXiufeng_Erlang.doc][纪秀峰_Erlang.doc]]
++  [[file:~/Documents/org/src/download/JiXiufeng.doc][纪秀峰.doc]]
 * 基本信息
   |------------+--------------------|
   | 电    话   | 13522419247　      |
@@ -22,25 +22,35 @@
   | 户口所在地 | 山东青岛           |
   | 现居住地   | 北京海淀区         |
 * 择业目标：
-  + Erlang 开发工程师
+  + Golang/Erlang 服务端 开发工程师
 * 自我介绍：
-Erlang个人代码仓库:   https://github.com/jixiuf/helloerlang
-EmacsWiki个人主页：  http://emacswiki.org/Joseph
-个人主页:              http://jixiuf.github.com/sitemap.html
-csdn博客：            http://blog.csdn.net/jixiuffff
-自学能力强，所有计算机知识均为自学。以上几个网址是个人成果的展示， Erlang个人代码仓库为
-学习Erlang过程中写的一些代码; EmacsWiki个人主页  为我为Emacs开源社区贡献的代码。
+GitHub个人主页：            https://github.com/jixiuf
+公司Golang部分开源代码： https://github.com/0studio （90%以上是我提交）
+Erlang个人代码仓库:       https://github.com/jixiuf/helloerlang
+EmacsWiki个人主页：      http://emacswiki.org/Joseph
+个人博客:                 http://jixiuf.github.com/
+自学能力强，所有计算机知识均为自学。以上几个网址是个人成果的展示，
+Erlang个人代码仓库为
+学习Erlang过程中写的一些代码;
+ EmacsWiki个人主页  为我为Emacs开源社区贡献的代码。
 * 专业技能：
-+ 具有较强自学能力，熟悉erlang ,emacs lisp 函数式编辑语言。
-+ 熟悉mnesia、ets ,熟悉erlang 的OTP(gen_server gen_event等模块的使用) 。
-+ 一年Emacs编辑器使用经验，熟练掌握Emacs Lisp语言，为emacs开源社区贡献过代码，
-+ 其中主要代码放在 [[http://www.emacswiki.org/emacs/Joseph][emacswiki/Joseph]] ,包括erlang开发用的 [[https://github.com/jixiuf/erlang-dired-mode][erlang-dired-mode.el]]
-  并对 emacs下 erlang 开发工具distel 进行增强[[http://jixiuf.github.com/erlang/distel.html][distel介绍]]
-+ 半年erlang实际开发经验、有一定的代码积累
-+ 三年Linux(Gentoo)系统使用经验。
-+ 掌握基于Oracle的数据库编程：JDBC 、 PLSQL；
-+ 熟悉java 编程语言，有一定的c c++基础
++ 两年golang 游戏后端开发经验（2014-3~2016-1）
++ 一年erlang 游戏后端开发经验（2012-9 ~ 2014~3）
++ 两年Emacs编辑器使用经验，熟练掌握Emacs Lisp语言，为emacs开源社区贡献过代码，
+   其中主要代码放在[[http://www.emacswiki.org/emacs/Joseph]] 开发用的 erlang-dired-mode.el ，修改增强erlang Emacs IDE distel  distel中文介绍
++ 熟悉java、eclipse 写过插件 https://github.com/emacs-java/eclipse_goto_editor
++ 简单了解 python
+  用其做过 游戏管理后台
+
 * 开发经验：
+**  2014-3~2016-1
+   近两年在雪狸主要参与了 手机游戏《超神传奇》 《点点大战》《casino 街
+   机电玩大师/老虎机大师/诈金花大师》等几款游戏的服务端开发。最初后端
+   只我一人， 基本架构由我设计主要语言 golang， 数据存储选用mysql 为应
+   对高并发做了主从备份，且进行了mysql分库设计，golang GC较差 故用
+   memcache 作缓存，排行相关使用redis，游戏进程做到了水平可扩展。即可
+   以任意增加服务器进程数量，使用了etcd 来做服务发现及负载均衡
+
 ** 页游桃园外传项目(2012-2~2012-9)
    在乐元素公司旗下桃园外传项目组内负责erlang服务器端代码的编写,有erlang连
    mysql memcached等数据库的经验，了解 memcached、redis的协议并尝试
