@@ -1,7 +1,7 @@
 # -*- coding:utf-8-unix -*-
 #+LANGUAGE:  zh
 #+TITLE:     emacs-some-func.org
-#+AUTHOR:    孤峰独秀
+#+AUTHOR:    纪秀峰
 #+EMAIL:     jixiuf@gmail.com
 #+DATE:     2011-07-04 一
 #+DESCRIPTION:emacs-some-func.org

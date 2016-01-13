@@ -1,6 +1,6 @@
 # -*- coding:utf-8-unix -*-
 #+TITLE:     使用Emacs中的Ediff 作为git mergetool使用的工具进行文件合并
-#+AUTHOR:    孤峰独秀
+#+AUTHOR:    纪秀峰
 #+EMAIL:     jixiuf@gmail.com
 #+DATE:     2011-07-04 一
 #+DESCRIPTION:使用Emacs中的Ediff 作为git mergetool使用的工具进行文件合并

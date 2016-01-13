@@ -1,7 +1,7 @@
 # -*- coding:utf-8-unix -*-
 #+LANGUAGE:  zh
 #+TITLE:     kill所有连接到某库的连接
-#+AUTHOR:    孤峰独秀
+#+AUTHOR:    纪秀峰
 #+EMAIL:     jixiuf@gmail.com
 #+DATE:     2011-09-27 星期二
 #+DESCRIPTION:kill所有连接到某库的连接

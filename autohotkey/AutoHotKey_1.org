@@ -1,7 +1,7 @@
 # -*- coding:utf-8-unix -*-
 #+LANGUAGE:  zh
 #+TITLE:     AutoHotKey 几个简单的小例子
-#+AUTHOR:    孤峰独秀
+#+AUTHOR:    纪秀峰
 #+EMAIL:     jixiuf@gmail.com
 #+DATE:     2011-06-15 星期三
 #+FILETAGS: @AutoHotKey @Windows

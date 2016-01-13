@@ -1,7 +1,7 @@
 # -*- coding:utf-8-unix -*-
 #+LANGUAGE:  zh
 #+TITLE:     AutoHotKey 简介
-#+AUTHOR:    孤峰独秀
+#+AUTHOR:    纪秀峰
 #+EMAIL:     jixiuf@gmail.com
 #+FILETAGS: @AutoHotKey @Windows
 #+DESCRIPTION:autohotkey 简介

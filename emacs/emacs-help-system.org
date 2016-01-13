@@ -2,7 +2,7 @@
 #+LANGUAGE:  zh
 
 #+TITLE:     emacs 的帮助系统
-#+AUTHOR:    孤峰独秀
+#+AUTHOR:    纪秀峰
 #+EMAIL:     jixiuf@gmail.com
 #+DATE:      2011-06-09 星期四
 #+DESCRIPTION: emacs 的帮助系统

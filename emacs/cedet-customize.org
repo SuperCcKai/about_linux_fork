@@ -1,7 +1,7 @@
 # -*- coding:utf-8-unix -*-
 #+LANGUAGE:  zh
 #+TITLE:     cedet 的定制，（译文）
-#+AUTHOR:    孤峰独秀
+#+AUTHOR:    纪秀峰
 #+EMAIL:     jixiuf@gmail.com
 #+DATE:      2011-06-08 星期三
 #+DESCRIPTION: 对cedet进行定制 

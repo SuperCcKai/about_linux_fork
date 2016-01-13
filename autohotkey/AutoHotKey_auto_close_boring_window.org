@@ -1,5 +1,5 @@
 #+TITLE:     自动关闭某些窗口
-#+AUTHOR:    孤峰独秀
+#+AUTHOR:    纪秀峰
 #+EMAIL:     jixiuf@gmail.com
 #+DATE:     2011-06-25 星期六
 #+LANGUAGE:  zh

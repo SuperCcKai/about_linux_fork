@@ -1,6 +1,6 @@
 # -*- coding:utf-8-unix -*-
 #+TITLE:     emacs-23.2安装官网cedet
-#+AUTHOR:    孤峰独秀
+#+AUTHOR:    纪秀峰
 #+EMAIL:     jixiuf@gmail.com
 #+DATE:      2011-06-08 星期三
 #+DESCRIPTION: emacs cedet 
