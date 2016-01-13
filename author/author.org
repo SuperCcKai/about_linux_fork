@@ -9,7 +9,7 @@
 #+OPTIONS:   H:2 num:nil toc:nil \n:t @:t ::t |:t ^:nil -:t f:t *:t <:t
 #+FILETAGS:
 * Word 版简历
-+  [[file:download/JiXiufeng_Erlang.doc][纪秀峰_Erlang.doc]]
++  [[file:../download/JiXiufeng_Erlang.doc][纪秀峰_Erlang.doc]]
 * 基本信息
   |------------+--------------------|
   | 电    话   | 13522419247　      |
