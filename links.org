@@ -4,7 +4,7 @@
 #+EMAIL:     jixiuf@gmail.com
 #+DATE:      2011-06-03 星期五
 #+DESCRIPTION: 我收集的一些链接地址
-#+KEYWORDS:  link url emacs 
+#+KEYWORDS:  link url emacs
 #+LANGUAGE:  zh
 #+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:{} -:t f:t *:t <:t timestamp:t
 
@@ -30,7 +30,7 @@
 + [[http://rcir.sjtu.edu.cn/~cgliu/webwiki/index.html][刘成刚 博士研究生上海交通大学]]
 + [[http://emacser.com/emacs-beginner-must-know.htm][emacser 初学者必知必会]]
 + [[http://www.pconline.com.cn/pcedu/soft/gj/photo/0609/865628.html][Emacs是一种信仰！世界最强编辑器介绍 作者：王垠 ]]
-+ [[http://docs.huihoo.com/homepage/shredderyin/][王垠,那个有名的辍学博士，我估计他不喜欢别人这样称呼他]] 
++ [[http://docs.huihoo.com/homepage/shredderyin/][王垠,那个有名的辍学博士，我估计他不喜欢别人这样称呼他]]
 + [[http://lisie.hdu.edu.cn/passionke/tag/emacs/][柯激情]]Vim Emacs 对战
 + [[http://grid.tsinghua.edu.cn/home/liulk/][liulk org-mode]]
 + [[http://grid.tsinghua.edu.cn/home/liulk/wiki/emacs/WelcomePage.html][liulk wiki]]
@@ -49,5 +49,3 @@
 + [[https://github.com/jixiuf][我的许多代码都托管在github]]
 + [[http://blog.csdn.net/jixiuffff][csdn 上我的博客主页]]
 + [[http://www.baidupcs.com/file/4d672faaa0f820cff195cc9308b22879?fid=2181393914-250528-647736722&time=1363243362&sign=FDTA-DCb740ccc5511e5e8fedcff06b081203-yUm07JXClRem%2F0D0cTYjYZG%2BUSs%3D&expires=8h&sh=1&response-cache-control=private][Mac 镜像]]
-
-
