@@ -1,6 +1,6 @@
 # -*- coding:utf-8-unix -*-
 #+LANGUAGE:  zh
-#+TITLE:     纪秀峰_个人简历
+#+TITLE:     纪秀峰_个人简历2
 #+AUTHOR:    纪秀峰
 #+EMAIL:     jixiuf@gmail.com
 #+DATE:     2012-03-14 三
@@ -8,6 +8,7 @@
 #+KEYWORDS: 个人简历
 #+OPTIONS:   H:2 num:nil toc:nil \n:t @:t ::t |:t ^:nil -:t f:t *:t <:t
 #+TAGS:
+#+URI:         /author2/
 * Word 版简历
 +  [[file:../download/JiXiufeng_Java_Web.doc][纪秀峰.doc]]
 * 基本信息
