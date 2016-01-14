@@ -4,7 +4,7 @@
 #+AUTHOR:    纪秀峰
 #+EMAIL:     jixiuf@gmail.com
 #+DATE:      2011-06-03 星期五
-#+FILETAGS: @Emacs @Linux @Windows
+#+TAGS: :Emacs: :Linux: :Windows:
 #+DESCRIPTION: Emacs 实现auto insert 时整合yasnippet 的模版功能
 #+KEYWORDS: Emacs yasnippet auto insert
 #+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t

@@ -10,7 +10,7 @@
 #+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: noexport
-#+FILETAGS: @AutoHotKey @Windows 
+#+TAGS: :AutoHotKey: :Windows: 
 
 
 * 利用AutoHotKey 关闭某些烦人的广告弹出窗口

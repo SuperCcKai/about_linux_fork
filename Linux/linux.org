@@ -5,10 +5,10 @@
 #+EMAIL:     jixiuf@gmail.com
 #+DATE:     2013-02-17 日
 #+DESCRIPTION:linux拾遗
-#+KEYWORDS: @Linux
+#+KEYWORDS: :Linux:
 #+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
-#+FILETAGS: @Linux
+#+TAGS: :Linux:
 * 几个工具
 - nload 查看网卡流量
 - nethugs 查看具体的进程发包收包情况

@@ -8,7 +8,7 @@
 #+KEYWORDS:
 #+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
-#+FILETAGS:
+#+TAGS:
 * MyISAM
   MyISAM表如果在创建选项里指定为DELAY_KEY_WRITE的话，它不会立即将改变的索引数据写
   到硬盘，而是将这个改变缓存到内存中。当表被关闭或者缓冲区需要修整时，它会将索引

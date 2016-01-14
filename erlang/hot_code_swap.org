@@ -8,7 +8,7 @@
 #+KEYWORDS: Erlang
 #+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
-#+FILETAGS: @Erlang
+#+TAGS: :Erlang:
 
 *与代码替换相关的函数
  + erlang:purge_module(Mod)

@@ -11,7 +11,7 @@
 #+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: noexport
-#+FILETAGS: @Emacs @Ediff @Git
+#+TAGS: :Emacs: :Ediff: :Git:
 什么是版本控制就不多说了，常见的版本控制工具有svn git cvs 等。我只用过svn及
 git ,常用git ，所以以git 以例进行说明。另外，Emacs 中有个vc.el ,vc是version
 control 的缩写，它不是svn git 之类的版本控制工具。怎么介绍它呢，它是一个接口
@@ -168,7 +168,7 @@ update commit ,checkout 等最基本的操作它都实现了。所以vc的存在
   (setq diff-switches "-ubB")
   ;;注意linux下的diff a b ,其中a 是旧文件,b是新文件
   ;;在Emacs中`M-x' diff  先就你选择的是b然后才是a
-  ;; 一个hunk 就是一处: @@ -130,7 +130,7 @@
+  ;; 一个hunk 就是一处: :@ -130:,7 +130,7 :@
 
   ;; `M-n' 跳到下一个差异处(hunk)
   ;; `M-p' 跳到上一个差异处(hunk)

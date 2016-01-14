@@ -5,10 +5,10 @@
 #+EMAIL:     jixiuf@gmail.com
 #+DATE:     2012-04-22 日
 #+DESCRIPTION:mysql压力测试 实战
-#+KEYWORDS: @Mysql @DB
+#+KEYWORDS: :Mysql: :DB:
 #+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
-#+FILETAGS:@DB @Mysql @SQL
+#+TAGS::DB: :Mysql: :SQL:
 关于mysql的压力测试工具mysqlslap用法在[[file:benchmark.org][这里]].
 建表及存诸过程的语句 create_table.sql
 mysqlslap 有--create参数

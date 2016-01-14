@@ -8,7 +8,7 @@
 #+KEYWORDS: C
 #+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
-#+FILETAGS: @C
+#+TAGS: :C:
 很多系统函数在错误返回时将错误原因记录在libc定义的全局变量errno中，每种错误原因
 对应一个错误码，请查阅errno(3)的Man Page了解各种错误码，errno在头文件errno.h中
 声明，是一个整型变量，所有错误码都是正整数。

@@ -8,7 +8,7 @@
 #+KEYWORDS:
 #+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
-#+FILETAGS:@Erlang
+#+TAGS::Erlang:
 
 * 测试代码位置
   https://github.com/jixiuf/helloerlang/tree/master/release_handle

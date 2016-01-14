@@ -11,7 +11,7 @@
 #+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: noexport
-#+FILETAGS: @Emacs @SQL @DB @Oracle
+#+TAGS: :Emacs: :SQL: :DB: :Oracle:
 * 链接
 演示视频screencast [[http://screencast-repos.googlecode.com/files/emacs-sqlparse-mysql-complete.mkv.bz2][screencast]] mkv格式 ，用bzip 进行压缩
 文件上传到了 [[http://emacswiki.org/Joseph]],

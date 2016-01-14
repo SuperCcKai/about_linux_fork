@@ -6,7 +6,7 @@
 #+DESCRIPTION: emacs cedet 
 #+KEYWORDS: emacs cedet 
 #+LANGUAGE:  zh
-#+FILETAGS: @Emacs @Linux @Windows
+#+TAGS: :Emacs: :Linux: :Windows:
 
 关于emacs-23.2安装官方提供的cedet 的方法
 对于linux 来说来cedet目录下执行make 一般就可以了.

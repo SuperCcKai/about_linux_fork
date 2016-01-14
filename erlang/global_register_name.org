@@ -8,7 +8,7 @@
 #+KEYWORDS:
 #+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
-#+FILETAGS: @Erlang
+#+TAGS: :Erlang:
 global:register_name(Name, Pid).
 global:unregister_name(Name).
 当global 出现命名冲突时，默认是随机kill其中一个

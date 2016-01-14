@@ -5,7 +5,7 @@
 #+EMAIL:     jixiuf@gmail.com
 #+DATE:      2011-06-01 星期四
 #+DESCRIPTION:
-#+FILETAGS: @Emacs @Linux @Windows
+#+TAGS: :Emacs: :Linux: :Windows:
 #+KEYWORDS: emacs 入门
 #+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t <:t
 * 无聊的开场白

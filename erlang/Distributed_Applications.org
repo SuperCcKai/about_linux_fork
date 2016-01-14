@@ -8,7 +8,7 @@
 #+KEYWORDS:
 #+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
-#+FILETAGS:
+#+TAGS:
 * distributed application 某节点挂了后，此种application 会在另外一个节点上启动
 
  http://www.erlang.org/doc/design_principles/distributed_applications.html

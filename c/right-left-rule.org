@@ -11,7 +11,7 @@
 #+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: noexport
-#+FILETAGS: @C
+#+TAGS: :C:
 * 比如看到这样一个声明,你肯定头都大了.:
 int *(*(*F())[])();
  - F is a function returning a pointer to an array of pointers to

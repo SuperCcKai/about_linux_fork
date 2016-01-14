@@ -10,7 +10,7 @@
 #+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: noexport
-#+FILETAGS: @Emacs @Git 
+#+TAGS: :Emacs: :Git: 
 
 关于什么是Ediff 什么是Git 就不作详细介绍了，简单讲Ediff是Emacs进行文件比较、
 合并的工具，Git 是与svn 一样的版本控制工具。我个人的许多代码都用git进行管理。

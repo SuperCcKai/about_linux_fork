@@ -8,7 +8,7 @@
 #+KEYWORDS:
 #+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
-#+FILETAGS:@Erlang
+#+TAGS::Erlang:
 * Mnesia 的几个参数
   mnesia有 LATEST.LOG 日志文件 及 *.DAT, *.DCD *.DCL 等数据文件
   mnesia是先向 LATEST.LOG写日志，当日志达到dump_log_write_threshold参数(默认

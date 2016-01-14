@@ -7,7 +7,7 @@
 #+KEYWORDS:
 #+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
-#+FILETAGS:
+#+TAGS:
 
 emacs 自带的教程是 英文版和繁体中文版，下面的内容是利用在线繁体转简单工具生成
 有些地方翻译的不精准，凑和看 在emacs 中按下 Ctrl-h t 或者F1 t即可打开自带的此文档

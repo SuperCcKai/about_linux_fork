@@ -7,7 +7,7 @@
 #+DESCRIPTION:3ManageAnOracleInstance.org
 #+KEYWORDS: oracle linux 
 #+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
-#+FILETAGS: @Oracle
+#+TAGS: :Oracle:
 * 学习目标
   + create and manager  initialization parameter files 管理参数文件
   + start up and shutdown oracle instance.启动关闭oracle instance

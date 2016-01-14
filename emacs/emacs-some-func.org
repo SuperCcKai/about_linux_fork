@@ -11,7 +11,7 @@
 #+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: noexport
-#+FILETAGS: @Emacs
+#+TAGS: :Emacs:
 这个函数，用于跳转到下一处空格的位置，如果是连续的多个空格，则跳转到所有空
 格的开头及结尾。这个键我绑定在C-o上。
 #+begin_src emacs-lisp

@@ -8,7 +8,7 @@
 #+KEYWORDS:
 #+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
-#+FILETAGS: @C
+#+TAGS: :C:
 [[file:../download/register.png]] [[file:../download/stack.jpg]]
 * 32位CPU所含有的寄存器有：
   4个数据寄存器(EAX、EBX、ECX和EDX)

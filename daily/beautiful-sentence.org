@@ -3,7 +3,7 @@
 #+AUTHOR:    纪秀峰
 #+EMAIL:     jixiuf@gmail.com
 #+DATE:      2011-06-03 星期五
-#+FILETAGS: @Daily
+#+TAGS: :Daily:
 #+LANGUAGE:  zh
 
 + 是这样的张总，妳在家里的电脑上按了CTRL+C，然后在公司的电脑上再按CTRL+V是肯定不行的。即使同一篇文章也不行。不不，多贵的电脑都不行。

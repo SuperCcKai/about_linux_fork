@@ -9,7 +9,7 @@
 #+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:t -:t f:t *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
 #+LANGUAGE:  zh
-#+FILETAGS: @Emacs  @Windows
+#+TAGS: :Emacs:  :Windows:
 
 * link 关于几种diff tool 的比较 KDiff3, Diffuse, and VimDiff  Meld Emacs-Ediff(有图有真相)
   http://rvb.mytanet.de/comparing-latex-files-with-latexdiff.shtml (此链接已失效)

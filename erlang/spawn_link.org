@@ -11,7 +11,7 @@
 #+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: noexport
-#+FILETAGS: @Erlang
+#+TAGS: :Erlang:
 
 进程可以互相监视。这里要引入两个概念，进程链接和EXIT信号。在执行期间，进程可
 以与其他进程（和端口，参见??章节）建立链接。当一个进程终止（无论正常或非正常

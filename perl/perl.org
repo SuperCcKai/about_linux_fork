@@ -11,7 +11,7 @@
 #+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: noexport
-#+FILETAGS: @perl @Linux
+#+TAGS: :perl: :Linux:
 * perl 中变量以$开头，数组以@开头,关联数组(map) 以%开头;
 #+begin_src perl
 # variable 

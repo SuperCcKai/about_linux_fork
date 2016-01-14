@@ -8,7 +8,7 @@
 #+KEYWORDS:
 #+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
-#+FILETAGS:@Linux @C
+#+TAGS::Linux: :C:
 * 安装 在Gentoo系统上安装
   http://blog.kompiler.org/post/10/2011-11-30/Fix_Valgrind%27s_must-be-redirected_error_in_Gentoo/
 #+srcname: c

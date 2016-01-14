@@ -6,7 +6,7 @@
 #+EMAIL:     jixiuf@gmail.com
 #+DATE:      2011-06-09 星期四
 #+DESCRIPTION: emacs 的帮助系统
-#+FILETAGS: @Emacs @Linux @Windows
+#+TAGS: :Emacs: :Linux: :Windows:
 #+KEYWORDS:  emacs help system
 
 Emacs的帮助系统的按键前缀是C-h, 和F1

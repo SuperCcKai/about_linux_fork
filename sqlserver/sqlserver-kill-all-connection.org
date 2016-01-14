@@ -11,7 +11,7 @@
 #+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: noexport
-#+FILETAGS: @SQL @Windows 
+#+TAGS: :SQL: :Windows: 
 
 在进行sqlserver数据库恢复时，需要关闭所有连接到此数据库的连接。
 下面这个存储过程，可以做到，

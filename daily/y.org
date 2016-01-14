@@ -8,7 +8,7 @@
 #+KEYWORDS: 
 #+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil 
-#+FILETAGS: 
+#+TAGS: 
 
 备注 ：：：：：：其中大部分是胡言乱语，更有一些狐狸才会说的话，自然充不得真，，翟某某已下
 了“散而无味”评语（大意如此），所以我连谦虚的资格都没有，能搏一笑便够了，但愿看了不骂我便

@@ -11,7 +11,7 @@
 #+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: noexport
-#+FILETAGS: @Git @Windows
+#+TAGS: :Git: :Windows:
 公司上网用代理，但是git 与ssh似乎没开代理。导致无没访问github.com 来更新我
 的配置文件。下面是解法。
 github.com 的git 提供了三种方式： http:// git:// 与ssh 方式

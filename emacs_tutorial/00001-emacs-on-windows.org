@@ -5,7 +5,7 @@
 #+DATE:      2011-06-03 星期五
 #+DESCRIPTION: 我收集的一些链接地址
 #+KEYWORDS:  Emacs emacsclient Client/Server
-#+FILETAGS: @Emacs  @Windows
+#+TAGS: :Emacs:  :Windows:
 #+LANGUAGE:  zh
 #+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:{} -:t f:t *:t <:t timestamp:t
 * 一堆废话

@@ -8,7 +8,7 @@
 #+KEYWORDS:@Emacs artist-mode
 #+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
-#+FILETAGS: @Emacs
+#+TAGS: :Emacs:
 * emacs 自带artist-mode
   在一个新buffer ,或者 `C-xnn'后的buffer中 M-x:artist-mode
   Shift+中键 选择画什么图形

@@ -4,7 +4,7 @@
 #+AUTHOR:    纪秀峰
 #+EMAIL:     jixiuf@gmail.com
 #+DATE:     2011-06-15 星期三
-#+FILETAGS: @AutoHotKey @Windows
+#+TAGS: :AutoHotKey: :Windows:
 #+DESCRIPTION:AutoHotKey 几个简单的小例子
 #+KEYWORDS: autohotkey windows demo
 #+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:t -:t f:t *:t <:t

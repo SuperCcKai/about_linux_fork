@@ -8,7 +8,7 @@
 #+KEYWORDS:
 #+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
-#+FILETAGS:
+#+TAGS:
 * GNU Emacs For Mac OS X
  http://emacsformacosx.com/
    去这里下载 ，下载完  托动到 /Applications/目录就可以了

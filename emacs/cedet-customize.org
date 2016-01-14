@@ -6,7 +6,7 @@
 #+DATE:      2011-06-08 星期三
 #+DESCRIPTION: 对cedet进行定制 
 #+KEYWORDS:emacs cedet c c++ 
-#+FILETAGS: @Emacs @Linux 
+#+TAGS: :Emacs: :Linux: 
 
 * Customization
 Cedet最简单的配置就是加载cedet.el

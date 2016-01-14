@@ -3,7 +3,7 @@
 #+TITLE:     AutoHotKey 简介
 #+AUTHOR:    纪秀峰
 #+EMAIL:     jixiuf@gmail.com
-#+FILETAGS: @AutoHotKey @Windows
+#+TAGS: :AutoHotKey: :Windows:
 #+DESCRIPTION:autohotkey 简介
 #+KEYWORDS: autohotkey windows 
 #+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:t -:t f:t *:t <:t

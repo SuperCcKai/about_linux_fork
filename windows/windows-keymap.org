@@ -5,7 +5,7 @@
 #+EMAIL:     jixiuf@gmail.com
 #+DATE:      2011-06-08 星期三
 #+DESCRIPTION:    windows 的键盘映射
-#+FILETAGS: @Emacs @Windows
+#+TAGS: :Emacs: :Windows:
 #+KEYWORDS: windows  keymap 键盘映射 Emacs
 * 参考文献：
 **** [[http://msdn.microsoft.com/zh-cn/windows/hardware/gg463372][Windows官网]] 有个下载链接[[http://download.microsoft.com/download/1/6/1/161ba512-40e2-4cc9-843a-923143f3456c/scancode.doc][scancode.doc]] ,第11页16页图表对应介绍每个按键对应哪个code

@@ -11,7 +11,7 @@
 #+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: noexport
-#+FILETAGS: @Emacs
+#+TAGS: :Emacs:
 
 * `C-cC-s'  `C-uC-cC-s'  
   显示当前行的indent信息

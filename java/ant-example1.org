@@ -6,7 +6,7 @@
 #+DATE:      2011-06-04 星期六
 #+KEYWORDS: ant java build.xml 
 #+LANGUAGE:  zh
-#+FILETAGS: @Java
+#+TAGS: :Java:
 
 *自已写的关于ant 的一个build脚本，没什么好说的，脚本在这里。
 [[file:../download/ant_build.xml][build.xml]]

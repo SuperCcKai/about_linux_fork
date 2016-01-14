@@ -8,7 +8,7 @@
 #+KEYWORDS:
 #+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
-#+FILETAGS: @Cedet @Emacs @C-C++
+#+TAGS: :Cedet: :Emacs: :C-C++:
 eassist.el是cedet/contrib/下的一个文件,主要提供了两项功能，
  + 列出当前类的所有方法(还可以直接输入方法名来从众多的方法中过滤)
  + 在头文件与代码文件间切换，即在 .h 与.c 或.h 与.cpp两个相关文件间切换
