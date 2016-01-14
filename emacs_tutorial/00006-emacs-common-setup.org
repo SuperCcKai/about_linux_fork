@@ -6,6 +6,7 @@
 #+DATE:     2015-10-18 日
 #+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
+#+TAGS: :Emacs:
 * 不使用对话框进行（是，否 取消,打开文件） 的选择，而是用minibuffer
   #+BEGIN_SRC emacs-lisp
     (setq-default  use-dialog-box nil)

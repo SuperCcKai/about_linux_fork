@@ -4,6 +4,8 @@
 #+AUTHOR:    纪秀峰
 #+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
+#+TAGS: :Emacs:
+
 * Tips: dropbox 里的视频不要用迅雷下载， 似乎下不了(PS. 似乎国内现在封了dropbox，试从微盘vdist.weibo.com下载相应的视频链接)
   微盘里也上传一份供下载
   http://vdisk.weibo.com/s/A2UdJFfhA_GG5/1412260686

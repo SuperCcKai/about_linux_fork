@@ -7,24 +7,24 @@
 #+KEYWORDS: :C:
 #+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
-#+TAGS::C:
+#+TAGS: :C:
 * make_mark
   #+BEGIN_SRC c
-比如MAKE_MASK(3 )会生成  二进制的 00000111
-#define MAKE_MASK(n)  ((((int)1) << (n)) -1)
+  比如MAKE_MASK(3 )会生成  二进制的 00000111
+  #define MAKE_MASK(n)  ((((int)1) << (n)) -1)
   #+END_SRC
 * c cpp  的一些判断
   #+BEGIN_SRC c
-if(flag)
-if(!flag)
-而非
-if(0==flag)
+  if(flag)
+  if(!flag)
+  而非
+  if(0==flag)
 
-判断指针非空用
-if(p==NULL) // NULL 定义的 #include<cstdlib>  或c的stdlib.h
-尽量少用:
-if(p)
-if(p==0)
+  判断指针非空用
+  if(p==NULL) // NULL 定义的 #include<cstdlib>  或c的stdlib.h
+  尽量少用:
+  if(p)
+  if(p==0)
   #+END_SRC
 
 * const 的作用
@@ -105,17 +105,17 @@ if(p==0)
 * string 相关
 **  string.size() 返回string::size_type类型,而非int
    #+BEGIN_SRC c++
-  string::size_type len=  s.size();//ok
-  int len=  s.size();//error, 但是我试了 编译运行都 可过， 但是不推荐
+   string::size_type len=  s.size();//ok
+   int len=  s.size();//error, 但是我试了 编译运行都 可过， 但是不推荐
    #+END_SRC
 ** 取string第n个字符用[]下标操作即可,也可对其赋值,只能对已经存在的元素赋值，不能添加
    []中的数是一个size_type类型,从0 始计
    #+BEGIN_SRC c++
-  string str("hello");
-  char c=str [1];
-  std::cout << c << std::endl;
-  str[1]='E';
-  std::cout << str << std::endl;  // "hEllo"
+   string str("hello");
+   char c=str [1];
+   std::cout << c << std::endl;
+   str[1]='E';
+   std::cout << str << std::endl;  // "hEllo"
    #+END_SRC
    #+BEGIN_SRC c++
    遍历
@@ -125,14 +125,14 @@ if(p==0)
    #+END_SRC
 ** cctype 头文件里一些函数如isupper tolower isspace
    #+BEGIN_SRC c++
-#include <cctype>
-// isdigit(int)
-// islower(int)
-// isupper
-// isalnum
-// isspace 这些函数也是在std::下的
-char c='d';
-std::cout << isupper(c) << std::endl;
+   #include <cctype>
+   // isdigit(int)
+   // islower(int)
+   // isupper
+   // isalnum
+   // isspace 这些函数也是在std::下的
+   char c='d';
+   std::cout << isupper(c) << std::endl;
 
    #+END_SRC
 * vector 容器
@@ -140,25 +140,25 @@ std::cout << isupper(c) << std::endl;
   vector是类模版，不是数据类型
   vector<int> vector<string>则是数据类型
   #+BEGIN_SRC c++
-vector<string> v1;
-string s1("aaa");
-string s2("bbb");
+  vector<string> v1;
+  string s1("aaa");
+  string s2("bbb");
 
-v1.push_back(s1);
-v1.push_back(s2);
-vector<string> v2(v1);
+  v1.push_back(s1);
+  v1.push_back(s2);
+  vector<string> v2(v1);
 
-s1="ccc";//对s1的改变 变不会影响v1 v2中的元素
+  s1="ccc";//对s1的改变 变不会影响v1 v2中的元素
 
-// size_type类型的写法,不可以写成vector::size_type
-for (vector<string>::size_type i = 0; i<v1.size(); i++) {
-  std::cout << v1.at(i) << std::endl;
- } // 打印后的是"aaa" "bbb",
-std::cout << "" << std::endl;
+  // size_type类型的写法,不可以写成vector::size_type
+  for (vector<string>::size_type i = 0; i<v1.size(); i++) {
+    std::cout << v1.at(i) << std::endl;
+   } // 打印后的是"aaa" "bbb",
+  std::cout << "" << std::endl;
 
-for (vector<string>::size_type i = 0; i<v2.size(); i++) {
-  std::cout << v2.at(i) << std::endl;
- }// 打印后的是"aaa" "bbb",
+  for (vector<string>::size_type i = 0; i<v2.size(); i++) {
+    std::cout << v2.at(i) << std::endl;
+   }// 打印后的是"aaa" "bbb",
   #+END_SRC
 ** vector [] 下标操作同 string ,可get 可set,只能针对存在的元素,但不能add
 ** 使用iterator
@@ -214,12 +214,12 @@ for (vector<string>::size_type i = 0; i<v2.size(); i++) {
   #+END_SRC
 ** 初始化
    #+BEGIN_SRC c++
-//数组初始化
-int array[3] = {1,2,3};
-int array[] = {1,2,3};//不指定数据长度也可，此时
-char array[] = "c";//等同于 char array[]= {'c','\0'}
-// 可以用sizeof(array) 取数组的长度(数组的长度编译期就确定了，所以sizeof可以做到, c语言里也一样)
-// 但是 数组作为参数传递时会自动转化成char* 指针， 它是没法取到数组的长度的
+   //数组初始化
+   int array[3] = {1,2,3};
+   int array[] = {1,2,3};//不指定数据长度也可，此时
+   char array[] = "c";//等同于 char array[]= {'c','\0'}
+   // 可以用sizeof(array) 取数组的长度(数组的长度编译期就确定了，所以sizeof可以做到, c语言里也一样)
+   // 但是 数组作为参数传递时会自动转化成char* 指针， 它是没法取到数组的长度的
    #+END_SRC
 
 ***  在函数体外定义的内置类型的数组，其元素初始化为0
@@ -228,22 +228,22 @@ char array[] = "c";//等同于 char array[]= {'c','\0'}
 * 指针
 ** 指针的定义 风格
    #+BEGIN_SRC c++
-   char *p1 ,*p2; //p1 p2 都是指针
+    char *p1 ,*p2; //p1 p2 都是指针
 
-  //p1 是指针 ，p2是char ,//跟 char *p1 p2;写法一样
-  // 建议使用 char *p1 ,而非 char* p1;
-   char* p1 p2 ;
+   //p1 是指针 ，p2是char ,//跟 char *p1 p2;写法一样
+   // 建议使用 char *p1 ,而非 char* p1;
+    char* p1 p2 ;
    #+END_SRC
 ** 指针的初始化
    #+BEGIN_SRC c++
-//指针不可以用int类型的变量来赋值,
- //但可以用值为0 的const 变量来初始化
-int a =0;
-const b=0;
-int *p =a;//错误
-int *p2=b;// ok,
-int *p2=0;// ok,
-int *p2=NULL;// ok, #include<cstdlib>
+   //指针不可以用int类型的变量来赋值,
+    //但可以用值为0 的const 变量来初始化
+   int a =0;
+   const b=0;
+   int *p =a;//错误
+   int *p2=b;// ok,
+   int *p2=0;// ok,
+   int *p2=NULL;// ok, #include<cstdlib>
    #+END_SRC
 ** 指针类型要匹配
    #+BEGIN_SRC c++
@@ -268,17 +268,17 @@ int *p2=NULL;// ok, #include<cstdlib>
 ** 指向const对象的指针 和const 指针(本身的值不可变)
 *** 指向const对象的指针
     #+BEGIN_SRC c++
-   const double d=1;
-   const double *p=&d;//ok, 指向const 对象的指针 ,p 并不是const的
-   double *p2 = &d;//error ,普通的指针 不可以指向const对象
-   void *p3 = &d ;//错
-   const void *p4=&d;//ok
+    const double d=1;
+    const double *p=&d;//ok, 指向const 对象的指针 ,p 并不是const的
+    double *p2 = &d;//error ,普通的指针 不可以指向const对象
+    void *p3 = &d ;//错
+    const void *p4=&d;//ok
 
-   允许 把非const对象的地址赋值给 指向const对象的指针
-    double d2=2;
+    允许 把非const对象的地址赋值给 指向const对象的指针
+     double d2=2;
 
-   // 自以为指向const对象的指针
-    const double *p5 =&d2;     //ok, 但是不能通过*p5来改变 d2的值,虽然可以通过其他方法改d2的值
+    // 自以为指向const对象的指针
+     const double *p5 =&d2;     //ok, 但是不能通过*p5来改变 d2的值,虽然可以通过其他方法改d2的值
     #+END_SRC
 *** const 指针(本身的值不可变),即定义时必须初始化
     #+BEGIN_SRC c++
@@ -287,25 +287,25 @@ int *p2=NULL;// ok, #include<cstdlib>
     #+END_SRC
 *** typedef 与const易引起歧义
     #+BEGIN_SRC c++
- typedef string *pstring;
- const pstring ctr;
- 并不能简单的将 上述两句像宏一样 扩展成 const  *pstring ctr; ,这则说明ctr是指向const对象的指针
- 而实际 ctr 是const 指针 ,即， 不可以将ctr再指向其他对象 ，但可以改变当前所指对象的值
+     typedef string *pstring;
+     const pstring ctr;
+     并不能简单的将 上述两句像宏一样 扩展成 const  *pstring ctr; ,这则说明ctr是指向const对象的指针
+     而实际 ctr 是const 指针 ,即， 不可以将ctr再指向其他对象 ，但可以改变当前所指对象的值
 
-可以这样理解， typedef string *pstring ; 说明 这种类型的指向string的指针， 并没有const限定,
-const pstring ctr; 这里const只是限定ctr这个变量，  而非pstring这种类型， 这种类型在typedef时就已经确定了
-并不会因为在它前面加一个const 就改变
+    可以这样理解， typedef string *pstring ; 说明 这种类型的指向string的指针， 并没有const限定,
+    const pstring ctr; 这里const只是限定ctr这个变量，  而非pstring这种类型， 这种类型在typedef时就已经确定了
+    并不会因为在它前面加一个const 就改变
     #+END_SRC
 * 动态数组
   普通数组长度在编译期就需要确定下来，动态数组长度可以在运行期确定
   #+BEGIN_SRC c++
-  int *p = new int[10];//返回指向第一个元素的指针
+   int *p = new int[10];//返回指向第一个元素的指针
 
-   动态数据允许长度为0
- int *p = new int[0];//ok, 返回不是空， 但是不能进行解引用操作， 似类于vector.end()的返回值
-  int i[0]; //error
+    动态数据允许长度为0
+  int *p = new int[0];//ok, 返回不是空， 但是不能进行解引用操作， 似类于vector.end()的返回值
+   int i[0]; //error
 
-  delete[] p; //释放
+   delete[] p; //释放
   #+END_SRC
 * -> 操作符
   #+BEGIN_SRC c++
@@ -323,19 +323,19 @@ const pstring ctr; 这里const只是限定ctr这个变量，  而非pstring这�
   #+END_SRC
 
   #+BEGIN_SRC c++
-char *c=(char*) malloc(sizeof(char)*3);
-strcpy(c, "ab");
-std::cout << sizeof(c) << std::endl; // 4 返回指针的大小
-std::cout << sizeof(*c) << std::endl; //1 返回指针所指对象的大小
-// 上面两个都没有返回"ab"长度相关的内容
+  char *c=(char*) malloc(sizeof(char)*3);
+  strcpy(c, "ab");
+  std::cout << sizeof(c) << std::endl; // 4 返回指针的大小
+  std::cout << sizeof(*c) << std::endl; //1 返回指针所指对象的大小
+  // 上面两个都没有返回"ab"长度相关的内容
   #+END_SRC
 * new delete
   #+BEGIN_SRC c++
- string *str= new string; //初始化为空串
- int *i = new int;   //内建类型 则未初始化
+   string *str= new string; //初始化为空串
+   int *i = new int;   //内建类型 则未初始化
 
-,*
- int *j  = new int(); // 初始化为0
+  ,*
+   int *j  = new int(); // 初始化为0
   #+END_SRC
 * 强制类型转换( static_cast const_cast, dynamic_cast, reinterpret_cast)
 ** static_cast 默认所有的隐式类型转换，都可以通过static_cast显示实现
@@ -366,9 +366,9 @@ std::cout << sizeof(*c) << std::endl; //1 返回指针所指对象的大小
    //用int 来初始化string
    #+END_SRC
    #+BEGIN_SRC c++
-char* pc=(char*)ip;//  c++ 似乎不建议使用 这种c里使用的强转
-//效果与使用 reinterpret_cast一样
-//这种强转 具有 static_cast const_cast  reinterpret_cast 相同的功能,更笼统
+   char* pc=(char*)ip;//  c++ 似乎不建议使用 这种c里使用的强转
+   //效果与使用 reinterpret_cast一样
+   //这种强转 具有 static_cast const_cast  reinterpret_cast 相同的功能,更笼统
    #+END_SRC
 * switch
   执行到某个case后，如果不加break，会继续执行余下的case里的代码
@@ -416,14 +416,14 @@ char* pc=(char*)ip;//  c++ 似乎不建议使用 这种c里使用的强转
 ** 必须在类中声明， 可在类内或类外定义
 ** 构造函数的初始化列表(在参数列表后，函数体前的代码)
    #+BEGIN_SRC c++
-class Test
-{
-public:
-  Test(int parmI):i(parmI){
-  }
-private:
-  int i;
-};
+   class Test
+   {
+   public:
+     Test(int parmI):i(parmI){
+     }
+   private:
+     int i;
+   };
 
    #+END_SRC
 ** 默认构造函数不能自动初始化 内置类型 的成员,必须自定义构造函数初始化这些成员,对于类类型的成员默认用他们默认构造函数来初始化
@@ -464,16 +464,16 @@ private:
 *** 对于值传递的参数,操作的只是副本,const与否并不影响副本,
     值传递参数 仅const 的区别,认为是同一个函数,不能根据是否有const来区分两个函数
     #+BEGIN_SRC c++
- 以下两种重载是  不 允许的
-string getj(const int pi){
-}
-string getj(int pi){
-}
+     以下两种重载是  不 允许的
+    string getj(const int pi){
+    }
+    string getj(int pi){
+    }
 
-string getj(const Test pi){
-}
-string getj(Test pi){
-}
+    string getj(const Test pi){
+    }
+    string getj(Test pi){
+    }
     #+END_SRC
 *** 对于引用形参和指针形参 可以根据 是否const 来区分两个函数
     #+BEGIN_SRC c++

@@ -8,7 +8,7 @@
 #+KEYWORDS:
 #+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
-#+TAGS: :Cedet: :Emacs: :C-C++:
+#+TAGS: :Cedet: :Emacs: :C: :C++:
 * semantic-symref semantic-symref-symbol
 ** Search for places where function is called(寻找某函数、变量在哪个地方被调用了)
 semantic-symref命令 可以查找到光标下变量的在本项目中声明位置 semantic-symref-symbol 可以输入你想要找的具体变量名.

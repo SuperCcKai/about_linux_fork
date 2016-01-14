@@ -8,7 +8,7 @@
 #+KEYWORDS: golang heap stack
 #+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
-#+TAGS:
+#+TAGS: :Go:
 下面一段代码 ，附上行号， 主要用来分析 stu ,stu2,stu3 3个变量 究竟是在堆上分配，
 还 是在栈上分配,
 主要使用 gdb 调试， 来查看3个变量的地址

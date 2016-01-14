@@ -7,6 +7,7 @@
 #+KEYWORDS:
 #+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
+#+TAGS: :Emacs:
 *  C-x n n narrow-to-region
  效果是 当你选中一个区域 然后按下C-x n n 后
  选中区域 之外的其他内容不会再显示（并没有被删掉， 只是不显示了而已）

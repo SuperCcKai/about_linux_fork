@@ -7,6 +7,7 @@
 #+KEYWORDS:
 #+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
+#+TAGS: :Emacs:
 
 * C-s isearch-forward
 按下 C-s 然后输入你想搜索的词，emacs 随着你的输入会自动把光标移动到第

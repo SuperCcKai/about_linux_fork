@@ -8,6 +8,7 @@
 #+TAGS: :Emacs: :Linux: :Windows:
 #+KEYWORDS: emacs 入门
 #+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t <:t
+#+TAGS: :Emacs:
 * 无聊的开场白
   所谓“名不正则言不顺,言不顺则事不成，事不成则礼乐不兴，礼乐不兴则刑
   罚不中，刑罚不中则民无所措手足”又所谓“瞽不知黑白者，非以其名也，以
