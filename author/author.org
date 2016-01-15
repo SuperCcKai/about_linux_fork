@@ -39,10 +39,9 @@ EmacsWiki个人主页  为我为Emacs开源社区贡献的代码。
 + 简单了解python,用其做过 游戏管理后台
 + 两年Emacs编辑器使用经验，熟练掌握Emacs Lisp语言，为emacs开源社区贡献
   过代码，其中主要代码放在[[http://www.emacswiki.org/emacs/Joseph]] 开发用
-  的 erlang-dired-mode.el ，修改增强erlang Emacs IDE distel distel中文
-  介绍,
+  的 [[https://github.com/jixiuf/erlang-dired-mode][erlang-dired-mode]] ，修改增强erlang Emacs IDE [[https://github.com/jixiuf/distel][distel]] [[http://jixiuf.github.io/blog/2012/03/16/erlang-distel/][distel 中文介绍]]
   其中为Emacs编辑器写了一个插件，实现编写java代码时进行补全(包括类名 包名 方法名等)
-  http://www.emacswiki.org/emacs/AutoJavaComplete#toc6
+  [[http://www.emacswiki.org/emacs/AutoJavaComplete][AutoJavaComplete]]
 
 
 * 开发经验：
