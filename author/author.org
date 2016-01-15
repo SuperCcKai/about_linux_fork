@@ -17,7 +17,6 @@
   | 出生年月   | 1989-01            |
   | E-mail     | jixiuf@qq.com　    |
   | 英语水平   | 六级460            |
-  | 证    书   | 数据库三级         |
   | 毕业院校   | 青岛科技大学       |
   | 学    历   | 本科 2007-9~2011-7 |
   | 户口所在地 | 山东青岛           |
@@ -29,19 +28,22 @@ GitHub个人主页：            https://github.com/jixiuf
 公司Golang部分开源代码： https://github.com/0studio （90%以上是我提交）
 Erlang个人代码仓库:       https://github.com/jixiuf/helloerlang
 EmacsWiki个人主页：      http://emacswiki.org/Joseph
-个人博客:                 http://jixiuf.github.com/
-自学能力强，所有计算机知识均为自学。以上几个网址是个人成果的展示，
-Erlang个人代码仓库为
-学习Erlang过程中写的一些代码;
- EmacsWiki个人主页  为我为Emacs开源社区贡献的代码。
+个人博客:                 http://jixiuf.github.io
+以上几个网址是个人成果的展示，
+Erlang个人代码仓库为学习Erlang过程中写的一些代码;
+EmacsWiki个人主页  为我为Emacs开源社区贡献的代码。
 * 专业技能：
 + 两年golang 游戏后端开发经验（2014-3~2016-1）
 + 一年erlang 游戏后端开发经验（2012-9 ~ 2014~3）
-+ 两年Emacs编辑器使用经验，熟练掌握Emacs Lisp语言，为emacs开源社区贡献过代码，
-   其中主要代码放在[[http://www.emacswiki.org/emacs/Joseph]] 开发用的 erlang-dired-mode.el ，修改增强erlang Emacs IDE distel  distel中文介绍
 + 熟悉java、eclipse 写过插件 https://github.com/emacs-java/eclipse_goto_editor
-+ 简单了解 python
-  用其做过 游戏管理后台
++ 简单了解python,用其做过 游戏管理后台
++ 两年Emacs编辑器使用经验，熟练掌握Emacs Lisp语言，为emacs开源社区贡献
+  过代码，其中主要代码放在[[http://www.emacswiki.org/emacs/Joseph]] 开发用
+  的 erlang-dired-mode.el ，修改增强erlang Emacs IDE distel distel中文
+  介绍,
+  其中为Emacs编辑器写了一个插件，实现编写java代码时进行补全(包括类名 包名 方法名等)
+  http://www.emacswiki.org/emacs/AutoJavaComplete#toc6
+
 
 * 开发经验：
 **  2014-3~2016-1
@@ -51,7 +53,14 @@ Erlang个人代码仓库为
    对高并发做了主从备份，且进行了mysql分库设计，golang GC较差 故用
    memcache 作缓存，排行相关使用redis，游戏进程做到了水平可扩展。即可
    以任意增加服务器进程数量，使用了etcd 来做服务发现及负载均衡
-
+** 网页游戏<<乱世诛魔>>及<<兰陵王>> (Erlang) (2012-9~2014-2)
+   <<乱世诛魔>>游戏在腾讯游戏平台目前已开服700多个。 在乱世诛魔项目中主要
+   参与游戏服务端代码的编写，实现策划设计的新功能。 优化改造了此项目中
+   读取策划文档数据的方式，加快了服务端程序的启动速度。 之后转到新项目
+   组<<兰陵王>>,在<<乱世诛魔>>项目代码基础上进行开发。 对代码进行了较
+   大改造 ，数据存储由原来的mnesia改成mysql,编写了底层连接mysql 数据库
+   相关的代码，并对大量游戏基础模块的数据存储进行改造,改造完成之后<<兰
+   陵王>> 项目正式立项， 与其他成员一些完成新的游戏逻辑的编写
 ** 页游桃园外传项目(2012-2~2012-9)
    在乐元素公司旗下桃园外传项目组内负责erlang服务器端代码的编写,有erlang连
    mysql memcached等数据库的经验，了解 memcached、redis的协议并尝试
@@ -72,3 +81,4 @@ Erlang个人代码仓库为
    灌壁盘点)(灌壁入库)、 等多个画面。PC端负责1个盘点画面(半制品盘点)、3个出库画
    面(中间仓库出库、灌壁出库、 粉碎丝出库、)、及半制品的管理(新增、更新、冻结、
    初始化库存)等操作。
+
