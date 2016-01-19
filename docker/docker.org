@@ -1,0 +1,59 @@
+# -*- coding:utf-8 -*-
+#+LANGUAGE:  zh
+#+TITLE:     docker学习过程
+#+AUTHOR:    纪秀峰
+#+EMAIL:     jixiuf@gmail.com
+#+DATE:     2016-01-19 二
+#+DESCRIPTION:docker学习过程
+#+KEYWORDS: docker Centos
+#+TAGS:Docker:Linux:Centos
+#+FILETAGS:
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
+
+* link
+  教程 http://dockerpool.com/static/books/docker_practice/basic_concept/repository.html
+* 安装
+  centos 7 下的安装
+   #+BEGIN_SRC sh
+     sudo yum install docker
+     sudo service start docker
+     sudo chkconfig docker on
+
+     # 这一部 会从网上 pull hello-world 这个镜像
+     sudo docker run hello-world
+   #+END_SRC
+* pull 镜像
+  理论上:
+#+BEGIN_SRC sh
+  sudo docker pull centos
+  sudo docker pull ubuntu:12.04
+#+END_SRC
+网速的原因，下载太慢。所以国内 使用如下方法
+#+BEGIN_SRC sh
+  sudo docker pull dl.dockerpool.com:5000/ubuntu:12.04
+  sudo docker pull dl.dockerpool.com:5000/centos
+#+END_SRC
+centos7 上 会报类似如下错误
+#+BEGIN_QUOTE
+Error response from daemon: invalid registry endpoint https://dl.dockerpool.com:5000/v0/: unable to ping registry endpoint https://dl.dockerpool.com:5000/v0/
+v2 ping attempt failed with error: Get https://dl.dockerpool.com:5000/v2/: tls: oversized record received with length 28012
+v1 ping attempt failed with error: Get https://dl.dockerpool.com:5000/v1/_ping: tls: oversized record received with length 28012. If this private registry supports only HTTP or HTTPS with an unknown CA certificate, please add `--insecure-registry dl.dockerpool.com:5000` to the daemon's arguments. In the case of HTTPS, if you have access to the registry's CA certificate, no need for the flag; simply place the CA certificate at /etc/docker/certs.d/dl.dockerpool.com:5000/ca.crt IT
+#+END_QUOTE
+解决办法
+修改 /etc/sysconfig/docker
+#+BEGIN_QUOTE
+OPTIONS='--selinux-enabled'
+#+END_QUOTE
+为
+#+BEGIN_QUOTE
+OPTIONS='--selinux-enabled --insecure-registry dl.dockerpool.com:5000'
+#+END_QUOTE
+重启
+#+BEGIN_SRC sh
+  systemctl restart docker.service
+#+END_SRC
+下载完毕后需要这样启动
+#+BEGIN_SRC sh
+  docker run -t -i dl.dockerpool.com:5000/centos /bin/bash
+#+END_SRC
