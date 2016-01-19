@@ -1,0 +1,1692 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <title>perl 一的些总结 - 一个人的狂欢</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="纪秀峰" />
+    <meta name="description" content="perl 一的些总结" />
+    <meta name="keywords" content="perl " />
+    <link rel="stylesheet" href="/media/css/main.css" type="text/css">
+    <link rel="stylesheet" href="/media/css/prettify.css" type="text/css">
+  </head>
+  <body class="container">
+    <div>
+      <header class="masthead">
+        <h1 class="masthead-title"><a href="/">一个人的狂欢</a></h1>
+        <p></p>
+        <ul>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/tags/">Tags</a></li>
+          <li><a href="/tags/">Tags</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="http://github.com/jixiuf">GitHub</a></li>
+          <li><a href="/rss.xml">RSS</a></li>
+        </ul>
+        <form method="get" id="searchform" action="http://www.google.com/search">
+          <input type="text" class="field" name="q" id="s" placeholder="Search">
+          <input type="hidden" name="as_sitesearch" value="jixiuf.github.io">
+        </form>
+      </header>
+    </div>
+
+<div>
+<div class="post">
+<h1>perl 一的些总结</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgheadline1">perl 中变量以$开头，数组以@开头,关联数组(map) 以%开头;</a></li>
+<li><a href="#orgheadline6">Regexp :处在//之间</a>
+<ul>
+<li><a href="#orgheadline7">模式匹配选项</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline10">替换 s/// 与tr/// 的区别</a></li>
+<li><a href="#orgheadline11">子程序，函数</a>
+<ul>
+<li><a href="#orgheadline12">局部变量 my ,与local</a></li>
+<li><a href="#orgheadline15">参数传递 @_</a></li>
+<li><a href="#orgheadline16">别名传参（指针）</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline62">Filesystem</a>
+<ul>
+<li><a href="#orgheadline17">打开文件，一行行读取.</a></li>
+<li><a href="#orgheadline18">linux相关特性， 管道 "|"</a></li>
+<li><a href="#orgheadline19">写文件 &gt; 与&gt;&gt; 重定向</a></li>
+<li><a href="#orgheadline20">是否使用缓冲区(写文件时)</a></li>
+<li><a href="#orgheadline21">4)指定读写权限</a></li>
+<li><a href="#orgheadline22">5)close函数</a></li>
+<li><a href="#orgheadline23">6)print, printf和write函数</a></li>
+<li><a href="#orgheadline24">7)select函数</a></li>
+<li><a href="#orgheadline25">8)eof函数 (endoffile)</a></li>
+<li><a href="#orgheadline26">间接文件变量</a></li>
+<li><a href="#orgheadline29">跳过和重读数据 seek tell</a></li>
+<li><a href="#orgheadline30">read (filevar, result, length, skipval);</a></li>
+<li><a href="#orgheadline31">sysread (filevar, result, length, skipval);</a></li>
+<li><a href="#orgheadline32">syswrite (filevar, data, length, skipval);</a></li>
+<li><a href="#orgheadline33">$char = getc (infile);     #从文件中读取单个字符。</a></li>
+<li><a href="#orgheadline34">binmode (filevar);</a></li>
+<li><a href="#orgheadline35">mkdir (dirname, permissions);</a></li>
+<li><a href="#orgheadline36">chdir (dirname); #改变当前工作目录。参数dirname可以为字符串，也可以为表达式</a></li>
+<li><a href="#orgheadline37">opendir (dirvar, dirname);</a></li>
+<li><a href="#orgheadline38">closedir (mydir)</a></li>
+<li><a href="#orgheadline39">readdir (mydir);</a></li>
+<li><a href="#orgheadline40">location = telldir (mydir);</a></li>
+<li><a href="#orgheadline41">seekdir(mydir, location);</a></li>
+<li><a href="#orgheadline42">rewinddir (mydir);</a></li>
+<li><a href="#orgheadline43">rmdir (dirname);</a></li>
+<li><a href="#orgheadline44">rename (oldname, newname);</a></li>
+<li><a href="#orgheadline45">num = unlink (filelist);</a></li>
+<li><a href="#orgheadline46">link (newlink, file);</a></li>
+<li><a href="#orgheadline47">symlink (newlink, file);</a></li>
+<li><a href="#orgheadline48">filename = readlink (linkname);</a></li>
+<li><a href="#orgheadline49">chmod (permissions, filelist);</a></li>
+<li><a href="#orgheadline50">chown (userid, groupid, filelist);</a></li>
+<li><a href="#orgheadline51">oldmaskval = umask (maskval);</a></li>
+<li><a href="#orgheadline52">truncate (filename, length);</a></li>
+<li><a href="#orgheadline53">stat (file);</a></li>
+<li><a href="#orgheadline54">lstat (file); #与stat类似，区别是将file看作是符号链接</a></li>
+<li><a href="#orgheadline55">currtime = time();</a></li>
+<li><a href="#orgheadline56">timelist = gmtime (timeval);</a></li>
+<li><a href="#orgheadline57">timelist = localtime (timeval);#与gmtime类似，区别为将时间值转换为本地时间</a></li>
+<li><a href="#orgheadline58">utime (acctime, modtime, filelist);</a></li>
+<li><a href="#orgheadline59">filedesc = fileno (filevar);#返回文件的内部UNIX文件描述。参数filevar为文件变量。</a></li>
+<li><a href="#orgheadline60">fcntl (filevar, fcntlrtn, value); #    详见同名UNIX函数帮助。</a></li>
+<li><a href="#orgheadline61">-e -r 测试文件、目录是否存在，是否可读</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline63">pointer 引用，指针</a>
+<ul>
+<li><a href="#orgheadline64">使用反斜线(\)操作符</a></li>
+<li><a href="#orgheadline65">不仅变量、数组、Map 可以用指针引用之，子程序（函数）也可以</a></li>
+<li><a href="#orgheadline66">子程序的返回值不仅限于数据，还可以返回子程序的引用。返回的子程序在调用处执行</a></li>
+<li><a href="#orgheadline67">子程序，多数组参数传递</a></li>
+<li><a href="#orgheadline68">文件句柄的引用 \*</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline69">多维数组</a></li>
+<li><a href="#orgheadline70">OO 面向对象</a></li>
+<li><a href="#orgheadline77">q qq qw qr qx 等的含义</a>
+<ul>
+<li><a href="#orgheadline71">q 与qq</a></li>
+<li><a href="#orgheadline74">qw 代表用空格来分元素</a></li>
+<li><a href="#orgheadline75">qr 代表创建正则</a></li>
+<li><a href="#orgheadline76">qx</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline88">@_ $_ $, $. $$ ,$&amp; 等几个符号的含义</a>
+<ul>
+<li><a href="#orgheadline78">@_ 表示函数传参时，放置参数的数组</a></li>
+<li><a href="#orgheadline79">匹配时 各部分 $&amp; $` $' $1 ,$2</a></li>
+<li><a href="#orgheadline80">$<sup>o</sup> 表示操作系统</a></li>
+<li><a href="#orgheadline81">$. 表示在读取文件时，当前行是第几行</a></li>
+<li><a href="#orgheadline82">$$ 表示当前进程号</a></li>
+<li><a href="#orgheadline83">$_</a></li>
+<li><a href="#orgheadline86">$/ $\</a></li>
+<li><a href="#orgheadline87">$,</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline91">关于 .. 两点</a>
+<ul>
+<li><a href="#orgheadline89">最简单的用法是表示一个数组</a></li>
+<li><a href="#orgheadline90">这两个点前后的内容，不仅仅可以是数字，字符串，也可以是一个表达式</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline92">shift unshift push pop</a></li>
+<li><a href="#orgheadline93">last ===break</a></li>
+<li><a href="#orgheadline94"></a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">perl 中变量以$开头，数组以@开头,关联数组(map) 以%开头;</h2>
+<div class="outline-text-2" id="text-orgheadline1">
+<div class="org-src-container">
+
+<pre class="src src-perl"># variable 
+$var="abcab";
+
+#array
+@array=("a","b" );
+print($array[0]);
+$array[2]="c";
+# .数组间拷贝
+ @result = @original;
+
+@list1 = (2, 3, 4);
+@list2 = (1, @list1, 5); # @list2 = (1, 2, 3, 4, 5);
+($v1,$v2)=@list1;
+
+(1..10) = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+("aaa".."aad") = ("aaa","aab", "aac", "aad")
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-perl">#4、数组的输出：
+ @array = (1, 2, 3);
+    print (@array, "\n");
+#  结果为： 123
+
+@array = (1, 2, 3);
+ print ("@array\n");
+#  结果为： 1 2 3
+</pre>
+</div>
+</div>
+<ul class="org-ul"><li><a id="orgheadline2"></a>数组长度<br  /><div class="outline-text-4" id="text-orgheadline2">
+<div class="org-src-container">
+
+<pre class="src src-perl">@array=("a","b","c")
+$length=@array
+</pre>
+</div>
+</div></li>
+<li><a id="orgheadline3"></a>子数组<br  /><div class="outline-text-4" id="text-orgheadline3">
+<p>
+@array = (1 ,2,3 ,4,5);<br  />
+@subarr=@array[0,1];<br  />
+@subarr2=@array[1..4];<br  />
+</p>
+</div></li>
+<li><a id="orgheadline4"></a>数组 函数    sort() ,reverse() join() ,split<br  /><div class="outline-text-4" id="text-orgheadline4">
+<div class="org-src-container">
+
+<pre class="src src-perl">join("," ,"a","b","c") ; #= "a,b,c"
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-perl"># map
+%map=("key","value","key2", "value2");
+ 注：用列表给关联数组赋值时，Perl5允许使用"=&gt;"或","来分隔下标与值，用"=&gt;"可读性更好些，上面语句等效于：
+ %fruit = ("apples"=&gt;17,"bananas"=&gt;9,"oranges"=&gt;"none");
+##取map 的值
+$map{"key"} =value;
+
+## add
+$map{"key3"}="v3";
+
+## delete
+delete ($map{"key"});
+</pre>
+</div>
+<p>
+数组,map 可以相互转换,如<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-perl">%a=@a;
+@a=%a;
+</pre>
+</div>
+<p>
+与map 相关的函数:<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-perl">keys(%map) #取所有keys 值
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-perl">each 取出map中每个键值对， 这种方式比foreach与keys()合作 快
+%map=("a","b", "c","d" );
+while (($k,$v) = each(%map)){
+    print("$k:$v\n");
+}
+</pre>
+</div>
+</div>
+<ul class="org-ul"><li><a id="orgheadline5"></a>split 返回数组 与返回匹配的次数<br  /><div class="outline-text-5" id="text-orgheadline5">
+<div class="org-src-container">
+
+<pre class="src src-perl">$line='abcabcde';
+@result =split(/c/ , $line); #result= ("ab" ,"ab" ,"de")
+foreach $ele (@result){
+    print($ele ,"\n");
+}
+$result =split(/c/ , $line);
+print($result); # result =3
+</pre>
+</div>
+</div></li></ul></li></ul>
+</div>
+
+<div id="outline-container-orgheadline6" class="outline-2">
+<h2 id="orgheadline6">Regexp :处在//之间</h2>
+<div class="outline-text-2" id="text-orgheadline6">
+<p>
+缺省的，模式定界符为反斜线/，但其可用字母m自行指定，如：<br  />
+ m!/u/jqpublic/perl/prog1! 等价于/\/u\/jqpublic\/perl\/prog1/<br  />
+例1:<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-perl">$pattern = "[\\t ]+";
+ @words = split(/$pattern/, $line);
+</pre>
+</div>
+<p>
+在模式匹配后调用重用部分的结果可用变量$n，全部的结果用变量$&amp;。<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-perl">$string = "This string contains the number 25.11.";
+$string =~ /-?(\d+)\.?(\d+)/; # 匹配结果为25.11
+$integerpart = $1; # now $integerpart = 25
+$decimalpart = $2; # now $decimalpart = 11
+$totalpart = $&amp;; # now totalpart = 25.11
+</pre>
+</div>
+</div>
+<div id="outline-container-orgheadline7" class="outline-3">
+<h3 id="orgheadline7">模式匹配选项</h3>
+<div class="outline-text-3" id="text-orgheadline7">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">g</td>
+<td class="org-left">global，匹配所有</td>
+</tr>
+
+<tr>
+<td class="org-left">i</td>
+<td class="org-left">忽略大小写</td>
+</tr>
+
+<tr>
+<td class="org-left">m</td>
+<td class="org-left">multiply ,将串视为多行，即$ ,匹配\n,而不是整个字符串的末尾</td>
+</tr>
+
+<tr>
+<td class="org-left">s</td>
+<td class="org-left">single 与m反</td>
+</tr>
+
+<tr>
+<td class="org-left">o</td>
+<td class="org-left">只赋值一次</td>
+</tr>
+
+<tr>
+<td class="org-left">x</td>
+<td class="org-left">忽略regexp中的空白</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul class="org-ul"><li><a id="orgheadline8"></a>g<br  /><div class="outline-text-4" id="text-orgheadline8">
+<div class="org-src-container">
+
+<pre class="src src-perl">匹配所有可能的模式(g选项)
+   @matches = "balata" =~ /.a/g; # now @matches = ("ba", "la", "ta")
+   匹配的循环：
+   while ("balata" =~ /.a/g) {
+     $match = $&amp;;
+     print ("$match\n");
+   }
+</pre>
+</div>
+<p>
+结果为：<br  />
+  ba<br  />
+  la<br  />
+  ta<br  />
+</p>
+</div></li>
+<li><a id="orgheadline9"></a>s<br  /><div class="outline-text-4" id="text-orgheadline9">
+<p>
+/a.*bc/s匹配字符串axxxxx \nxxxxbc，但/a.*bc/则不匹配该字符串。<br  />
+</p>
+</div></li></ul>
+</div>
+</div>
+<div id="outline-container-orgheadline10" class="outline-2">
+<h2 id="orgheadline10">替换 s/// 与tr/// 的区别</h2>
+<div class="outline-text-2" id="text-orgheadline10">
+<p>
+  两者都是进行替换操作,区别是前者用正则表达示，后者：<br  />
+  tr/searchment/repalcement/;是把searchment的第一个字符换成replacement的第一<br  />
+  个字符，searchment的第二个字符换成replacement的第二个字符，类推<br  />
+举例<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-perl">$line="abcab";
+$line =~ s/ab/d/ ;
+print($line);
+</pre>
+</div>
+<p>
+结果为: dcab<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-perl">$line="abcab";
+$line =~ s/ab/d/g ;
+print($line);
+</pre>
+</div>
+<p>
+结果为 : dcd<br  />
+</p>
+
+<p>
+区别是正则表达式后加一个g ，表示global ,即不仅仅进行一次替换，如果字符串中<br  />
+出现多处匹配正则的，所有匹配均予考虑<br  />
+</p>
+
+<p>
+tr/searchment/repalcement/;是把searchment的第一个字符换成replacement的第一<br  />
+个字符，searchment的第二个字符换成replacement的第二个字符，类推<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-perl">$line='abcDeF';
+$line =~ tr/abc/ABC/;
+print($line);
+</pre>
+</div>
+<p>
+结果：ABCDeF<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline11" class="outline-2">
+<h2 id="orgheadline11">子程序，函数</h2>
+<div class="outline-text-2" id="text-orgheadline11">
+<div class="org-src-container">
+
+<pre class="src src-perl">  sub subname{
+    print("hello");
+  }
+# 调用方法 ，用&amp;
+#如
+$subname;
+
+#如果调用在子程序定义之后，可以省略&amp;
+subname;
+
+# 可以用关键字do 调用
+do subname;
+</pre>
+</div>
+</div>
+<div id="outline-container-orgheadline12" class="outline-3">
+<h3 id="orgheadline12">局部变量 my ,与local</h3>
+<div class="outline-text-3" id="text-orgheadline12">
+<p>
+my 只在此子程序中有效，local 在子程序及此子程序所调用的子程序中有效<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-perl">local ($localVar) =43;
+my ($my_var)="abc";
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline15" class="outline-3">
+<h3 id="orgheadline15">参数传递 @_</h3>
+<div class="outline-text-3" id="text-orgheadline15">
+</div><ul class="org-ul"><li><a id="orgheadline13"></a>普通参数<br  /><div class="outline-text-4" id="text-orgheadline13">
+<div class="org-src-container">
+
+<pre class="src src-perl">&amp;subname(1 ,2 ,3 );
+sub subname{
+  my($v1 ,$v2,$v3)=@_;
+}
+</pre>
+</div>
+</div></li>
+<li><a id="orgheadline14"></a>array param<br  /><div class="outline-text-4" id="text-orgheadline14">
+<p>
+    &amp;addlist(@mylist);<br  />
+    &amp;addlist($v1,$v2,$v3);<br  />
+sub addlist{<br  />
+  my (@list)=@_;<br  />
+}<br  />
+参数为数组时，子程序只将它赋给一个数组变量。如<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-perl">sub twolists {
+    my (@list1, @list2) = @_;
+  }
+# 中@list2必然为空。但简单变量和数组变量可以同时传递：
+</pre>
+</div>
+</div></li></ul>
+</div>
+<div id="outline-container-orgheadline16" class="outline-3">
+<h3 id="orgheadline16">别名传参（指针）</h3>
+<div class="outline-text-3" id="text-orgheadline16">
+<p>
+3、用别名的方法可以传递多个数组，如：<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-perl">@array1 = (1, 2, 3);
+@array2 = (4, 5, 6);
+&amp;two_array_sub (*array1, *array2);
+sub two_array_sub {
+  my (*subarray1, *subarray2) = @_;
+}
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline62" class="outline-2">
+<h2 id="orgheadline62">Filesystem</h2>
+<div class="outline-text-2" id="text-orgheadline62">
+</div><div id="outline-container-orgheadline17" class="outline-3">
+<h3 id="orgheadline17">打开文件，一行行读取.</h3>
+<div class="outline-text-3" id="text-orgheadline17">
+<div class="org-src-container">
+
+<pre class="src src-perl">open (VERSION , "/proc/version");
+while ($line = &lt;VERSION&gt;){
+    print($line ,"\n");
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline18" class="outline-3">
+<h3 id="orgheadline18">linux相关特性， 管道 "|"</h3>
+<div class="outline-text-3" id="text-orgheadline18">
+<div class="org-src-container">
+
+<pre class="src src-perl">     open(pipo,"cat /proc/swaps |");
+     while( $line = &lt;pipo&gt; ){
+         print($line,"\n");
+     }
+# 此处cat 读取/proc/swaps文件的内容，然后通过管道输出，open()打开这个管道里
+# 的内容
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline19" class="outline-3">
+<h3 id="orgheadline19">写文件 &gt; 与&gt;&gt; 重定向</h3>
+<div class="outline-text-3" id="text-orgheadline19">
+<p>
+缺省地，open打开文件用以读取其内容，若想打开文件以写入内容，则在文件名前加个<br  />
+大于号：open(MYVAR, "&gt;/u/file",)向已有的文件末尾添加内容用两个大于号<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-perl">open (STDOUT, "&gt;file1") || die ("open STDOUT failed");
+open (STDERR, "&gt;&amp;STDOUT") || die ("open STDERR failed");
+print STDOUT ("line 1\n");
+print STDERR ("line 2\n");
+close (STDOUT);
+close (STDERR);
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-perl">open (a, "&gt;file1") || die ("open STDOUT failed");
+open (b, "&gt;&amp;a") || die ("open STDERR failed");
+print a ("line 1\n");
+print b ("line 2\n");
+close (a);
+close (b);
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline20" class="outline-3">
+<h3 id="orgheadline20">是否使用缓冲区(写文件时)</h3>
+<div class="outline-text-3" id="text-orgheadline20">
+<p>
+把值1赋给系统变量"$|"<br  />
+系统变量"$|"指定文件是否进行缓冲而不管其是否应该使用缓冲。<br  />
+ 如果$|为非零值则不使用缓冲。$|与系统变量\(~和\)<sup>协同工作</sup>，当未调用select函<br  />
+ 数时，$|影响当前缺省文件<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-perl"> open (STDOUT, "&gt;file1") || die ("open STDOUT failed");
+ open (STDERR, "&gt;&amp;STDOUT") || die ("open STDERR failed");
+ $| = 1; # 因未调用select（），当前的缺省文件为重定向到文件file1的STDOUT ,
+# 此将$|=1 , 意为stdout不用缓冲区
+
+ select (STDERR);
+ $| = 1;
+
+ print STDOUT ("line 1\n");
+ print STDERR ("line 2\n");
+ close (STDOUT);
+ close (STDERR);
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline21" class="outline-3">
+<h3 id="orgheadline21">4)指定读写权限</h3>
+<div class="outline-text-3" id="text-orgheadline21">
+<p>
+打开一个既可读又可写的文件方法是在文件名前加上"+&gt;"，如下：<br  />
+ open (READWRITE, "+&gt;file1");<br  />
+此语句打开既可读又可写的文件file1，即可以重写其中的内容。文件读写操作最好与库函数seek和tell一起使用，这样可以跳到文件任何一点。<br  />
+注：也可用前缀"+&lt;"指定可读写权限<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline22" class="outline-3">
+<h3 id="orgheadline22">5)close函数</h3>
+<div class="outline-text-3" id="text-orgheadline22">
+<p>
+用于关闭打开的文件。当用close关闭管道，即重定向的命令时，程序等待重定向的命令结束，如：<br  />
+ open (MYPIPE, "cat file*|");<br  />
+ close (MYPIPE);<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline23" class="outline-3">
+<h3 id="orgheadline23">6)print, printf和write函数</h3>
+<div class="outline-text-3" id="text-orgheadline23">
+<p>
+print是这三个函数中最简单的，它向指定的文件输出，如果未指定，则输出到当前缺省文件中，如：<br  />
+ print ("Hello, there!\n");<br  />
+ print OUTFILE ("Hello, there!\n");<br  />
+第一句输出到当前缺省文件中，若未调用select，则为STDOUT。第二句输出到由文件变量OUTFILE指定的文件中。<br  />
+printf函数先格式化字符串再输出到指定文件或当前缺省文件中，如：<br  />
+ printf OUTFILE (“You owe me %8.2f", $owing);<br  />
+此语句取出变量$owing的值并替换掉串中的%8.2f，%8.2f是域格式的例子，把$owing的值看作浮点数。<br  />
+write函数使用输出格式把信息输出到文件中，如：<br  />
+ select (OUTFILE);<br  />
+ $~ = "MYFORMAT";<br  />
+ write;<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline24" class="outline-3">
+<h3 id="orgheadline24">7)select函数</h3>
+<div class="outline-text-3" id="text-orgheadline24">
+<p>
+select函数将通过参数传递的文件变量指定为新的当前缺省文件，如：<br  />
+ select (MYFILE);<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline25" class="outline-3">
+<h3 id="orgheadline25">8)eof函数 (endoffile)</h3>
+<div class="outline-text-3" id="text-orgheadline25">
+<p>
+eof函数查看最后一次读文件操作是否为文件最后一个记录，如果是，则返回非零<br  />
+值，如果文件还有内容，返回零。一般情况下，对eof的调用不加括号，因为eof和<br  />
+eof()是等效的，但与&lt;&gt;操作符一起使用时，eof和eof()就不同了。现在我们来创<br  />
+建两个文件，分别叫做file1和file2。file1的内容为<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-perl">while ($line = &lt;STDIN&gt;) {
+   print ($line);
+   if (eof) {
+     print ("-- end of current file --\n");
+   }
+ }
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-perl">while ($line = &lt;STDIN&gt;) {
+   print ($line);
+   if (eof()) {
+     print ("-- end of current file --\n");
+   }
+ }
+</pre>
+</div>
+<p>
+如此运行上面两程序:<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">root@localhost$&gt;   test.pl file1 file2
+</pre>
+</div>
+<p>
+只有所有文件都读过了，eof()才返回真，如果只是多个文件中前几个的末尾，返回值为假，因为还有要读取的输入<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline26" class="outline-3">
+<h3 id="orgheadline26">间接文件变量</h3>
+<div class="outline-text-3" id="text-orgheadline26">
+<p>
+可以用简单变量来代替文件变量，这时，简单变量中所存贮的字符串就被看作文件变量名<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-perl">&amp;open_file("INFILE", "", "file1");
+&amp;open_file("OUTFILE", "&gt;", "file2");
+while ($line = &amp;read_from_file("INFILE")) {
+  &amp;print_to_file("OUTFILE", $line);
+}
+
+sub open_file {
+   local ($filevar, $filemode, $filename) = @_;
+
+   open ($filevar, $filemode . $filename) ||
+     die ("Can't open $filename");
+ }
+ sub read_from_file {
+   local ($filevar) = @_;
+
+   &lt;$filevar&gt;;
+ }
+ sub print_to_file {
+   local ($filevar, $line) = @_;
+
+   print $filevar ($line);
+ }
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline29" class="outline-3">
+<h3 id="orgheadline29">跳过和重读数据 seek tell</h3>
+<div class="outline-text-3" id="text-orgheadline29">
+</div><ul class="org-ul"><li><a id="orgheadline27"></a>seek(filevar,distance,relative<sub>to</sub>);<br  /><div class="outline-text-4" id="text-orgheadline27">
+<p>
+在文件中向前/后移动，有三个参数：<br  />
+</p>
+<ul class="org-ul">
+<li>1、filevar，文件变量<br  /></li>
+<li>2、distance，移动的字节数，正数向前移动，负数往回移动<br  /></li>
+<li>3、reletive<sub>to</sub>，值可为0、1或2。为0时，从文件头开始移动，为1时，相对于当<br  />
+前位置（将要读的下一行）移动，为2时，相对于文件末尾移动。运行成功返回真<br  />
+（非零值），失败则返回零，常与tell函数合用。<br  /></li>
+</ul>
+</div></li>
+<li><a id="orgheadline28"></a>tell (filevar);<br  /><div class="outline-text-4" id="text-orgheadline28">
+<p>
+返回从文件头到当前位置的距离。<br  />
+</p>
+<ol class="org-ol">
+<li>seek和tell不能用于指向管道的文件变量。<br  /></li>
+<li>seek和tell中文件变量参数可使用表达式。<br  /></li>
+</ol>
+</div></li></ul>
+</div>
+<div id="outline-container-orgheadline30" class="outline-3">
+<h3 id="orgheadline30">read (filevar, result, length, skipval);</h3>
+<div class="outline-text-3" id="text-orgheadline30">
+<p>
+解说 read函数设计得与UNIX的fread函数等效，可以读取任意长度的字符（字节）存入一个简单变量。其参数有四个：<br  />
+</p>
+<ul class="org-ul">
+<li>1、filevar：文件变量<br  /></li>
+<li>2、result：存贮结果的简单变量（或数组元素）<br  /></li>
+<li>3、length：读取的字节数<br  /></li>
+<li>4、skipval：可选项，指定读文件之前跳过的字节数。 返回值为实际读取的字<br  />
+节数，如果已到了文件末尾，则返回零，如果出错，则返回空串。<br  /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgheadline31" class="outline-3">
+<h3 id="orgheadline31">sysread (filevar, result, length, skipval);</h3>
+<div class="outline-text-3" id="text-orgheadline31">
+<p>
+更快的读取数据，与UNIX函数read等效，参数与read相同<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline32" class="outline-3">
+<h3 id="orgheadline32">syswrite (filevar, data, length, skipval);</h3>
+<div class="outline-text-3" id="text-orgheadline32">
+<p>
+更快的写入数据，与UNIX函数write等效，参数：<br  />
+</p>
+<ul class="org-ul">
+<li>1、filevar：将要写入的文件<br  /></li>
+<li>2、data：存贮要写入数据的变量<br  /></li>
+<li>3、length：要写入的字节数<br  /></li>
+<li>4、skipval写操作之前跳过的字节数。<br  /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgheadline33" class="outline-3">
+<h3 id="orgheadline33">$char = getc (infile);     #从文件中读取单个字符。</h3>
+</div>
+<div id="outline-container-orgheadline34" class="outline-3">
+<h3 id="orgheadline34">binmode (filevar);</h3>
+<div class="outline-text-3" id="text-orgheadline34">
+<p>
+当你的系统（如类DOS系统）对文本文件和二进制文件有所区别时使用。必须在打<br  />
+开文件后、读取文件前使用<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline35" class="outline-3">
+<h3 id="orgheadline35">mkdir (dirname, permissions);</h3>
+<div class="outline-text-3" id="text-orgheadline35">
+<p>
+  1、dirname：将要创建的目录名，可以为字符串或表达式<br  />
+  2、permissions：8进制数，指定目录的访问权限，其值和意义见下表，权限的组<br  />
+  合方法为将相应的值相加<br  />
+  值 | 权限             |<br  />
+4000 | 运行时设置用户ID |<br  />
+2000 | 运行时设置组ID   |<br  />
+1000 | 粘贴位           |<br  />
+0400 | 拥有者读权限     |<br  />
+0200 | 拥有者写权限     |<br  />
+0100 | 拥有者执行权限   |<br  />
+0040 | 组读权限         |<br  />
+0020 | 组写权限         |<br  />
+0010 | 组执行权限       |<br  />
+0004 | 所有人读权限     |<br  />
+0002 | 所有人写权限     |<br  />
+0001 | 所有人执行权限   |<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline36" class="outline-3">
+<h3 id="orgheadline36">chdir (dirname); #改变当前工作目录。参数dirname可以为字符串，也可以为表达式</h3>
+</div>
+<div id="outline-container-orgheadline37" class="outline-3">
+<h3 id="orgheadline37">opendir (dirvar, dirname);</h3>
+<div class="outline-text-3" id="text-orgheadline37">
+<p>
+开目录，与下面几个函数合用，可查看某目录中文件列表。参数为：<br  />
+、dirvar：目录变量，与文件变量类似<br  />
+、dirname：目录名，可为字符串或表达式<br  />
+功返回真值，失败返回假。<br  />
+：程序中可用同名的目录变量和文件变量，根据环境确定取成分<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-perl">opendir (tmpdir, "/tmp/") ||print "die";
+@fs=readdir (tmpdir);
+foreach my $f ( @fs){
+    print $f ,"\n" ;    
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline38" class="outline-3">
+<h3 id="orgheadline38">closedir (mydir)</h3>
+</div>
+
+<div id="outline-container-orgheadline39" class="outline-3">
+<h3 id="orgheadline39">readdir (mydir);</h3>
+<div class="outline-text-3" id="text-orgheadline39">
+<p>
+给简单变量时，每次赋予一个文件或子目录名，对数组则赋予全部文件和子目录名<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline40" class="outline-3">
+<h3 id="orgheadline40">location = telldir (mydir);</h3>
+<div class="outline-text-3" id="text-orgheadline40">
+<p>
+象在文件中前后移动一样，telldir和下面的seekdir用于在目录列表中前后移动<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline41" class="outline-3">
+<h3 id="orgheadline41">seekdir(mydir, location);</h3>
+<div class="outline-text-3" id="text-orgheadline41">
+<p>
+location必须为telldir返回的值<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline42" class="outline-3">
+<h3 id="orgheadline42">rewinddir (mydir);</h3>
+<div class="outline-text-3" id="text-orgheadline42">
+<p>
+将读取目录的位置重置回开头，从而可以重读目录列表<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline43" class="outline-3">
+<h3 id="orgheadline43">rmdir (dirname);</h3>
+<div class="outline-text-3" id="text-orgheadline43">
+<p>
+删除空目录。成功则返回真（非零值），失败返回假（零值）<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline44" class="outline-3">
+<h3 id="orgheadline44">rename (oldname, newname);</h3>
+</div>
+<div id="outline-container-orgheadline45" class="outline-3">
+<h3 id="orgheadline45">num = unlink (filelist);</h3>
+<div class="outline-text-3" id="text-orgheadline45">
+<p>
+   删除文件。参数为文件名列表，返回值为实际删除的文件数目。此函数之所以叫<br  />
+nlink而不叫delete是因为它实际所做的是删除文件的链接<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline46" class="outline-3">
+<h3 id="orgheadline46">link (newlink, file);</h3>
+<div class="outline-text-3" id="text-orgheadline46">
+<p>
+   创建现有文件的链接&#x2013;硬链接，file是被链接的文件，newlink是被创建的链接。<br  />
+功返回真，失败返回假。当删除这两个链接中的一个时，还可以用另一个来访问该文<br  />
+。<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline47" class="outline-3">
+<h3 id="orgheadline47">symlink (newlink, file);</h3>
+<div class="outline-text-3" id="text-orgheadline47">
+<p>
+建现有文件的符号链接，即指向文件名，而不是指向文件本身。参数和返回值同上。<br  />
+原文件被删除（如：被unlinke函数删除），则被创建链接不可用，除非再创建一个与原被链接的文件同名的文件。<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline48" class="outline-3">
+<h3 id="orgheadline48">filename = readlink (linkname);</h3>
+<div class="outline-text-3" id="text-orgheadline48">
+<p>
+如果linkname为符号链接文件，返回其实际指向的文件。否则返回空串<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline49" class="outline-3">
+<h3 id="orgheadline49">chmod (permissions, filelist);</h3>
+<div class="outline-text-3" id="text-orgheadline49">
+<p>
+   改变文件的访问权限。参数为：<br  />
+、permissions为将要设置的权限，其含义见上述mkdir中权限表<br  />
+、filelist为欲改变权限的文件列表<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline50" class="outline-3">
+<h3 id="orgheadline50">chown (userid, groupid, filelist);</h3>
+</div>
+<div id="outline-container-orgheadline51" class="outline-3">
+<h3 id="orgheadline51">oldmaskval = umask (maskval);</h3>
+<div class="outline-text-3" id="text-orgheadline51">
+<p>
+设置文件访问权限掩码，返回值为当前掩码。<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline52" class="outline-3">
+<h3 id="orgheadline52">truncate (filename, length);</h3>
+<div class="outline-text-3" id="text-orgheadline52">
+<p>
+将文件的长度减少到length字节。如果文件长度已经小于length，则不做任何事。<br  />
+其中filename可以为文件名，也可以为文件变量<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline53" class="outline-3">
+<h3 id="orgheadline53">stat (file);</h3>
+<div class="outline-text-3" id="text-orgheadline53">
+<p>
+获取文件状态。参数file可为文件名也可为文件变量。返回列表元素依次为：<br  />
+</p>
+<ul class="org-ul">
+<li>文件所在设备<br  /></li>
+<li>内部参考号(inode)<br  /></li>
+<li>访问权限<br  /></li>
+<li>硬链接数<br  /></li>
+<li>属主的(数字)ID<br  /></li>
+<li>所属组的(数字)ID<br  /></li>
+<li>设备类型（如果file是设备的话）<br  /></li>
+<li>文件大小（字节数）<br  /></li>
+<li>最后访问时间<br  /></li>
+<li>最后修改时间<br  /></li>
+<li>最后改变状态时间<br  /></li>
+<li>I/O操作最佳块大小<br  /></li>
+<li>分配给该文件的块数<br  /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgheadline54" class="outline-3">
+<h3 id="orgheadline54">lstat (file); #与stat类似，区别是将file看作是符号链接</h3>
+</div>
+<div id="outline-container-orgheadline55" class="outline-3">
+<h3 id="orgheadline55">currtime = time();</h3>
+<div class="outline-text-3" id="text-orgheadline55">
+<p>
+返回从1970年1月1日起累计秒数。<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline56" class="outline-3">
+<h3 id="orgheadline56">timelist = gmtime (timeval);</h3>
+<div class="outline-text-3" id="text-orgheadline56">
+<p>
+将由time, stat 或 -A 和 -M 文件测试操作符返回的时间转换成格林威治时间。返回列表元素依次为：<br  />
+</p>
+<ul class="org-ul">
+<li>秒<br  /></li>
+<li>分钟<br  /></li>
+<li>小时，0~23<br  /></li>
+<li>日期<br  /></li>
+<li>月份，0~11(一月~十二月)<br  /></li>
+<li>年份<br  /></li>
+<li>星期，0~6(周日~周六)<br  /></li>
+<li>一年中的日期，0~364<br  /></li>
+<li>是否夏令时的标志<br  /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgheadline57" class="outline-3">
+<h3 id="orgheadline57">timelist = localtime (timeval);#与gmtime类似，区别为将时间值转换为本地时间</h3>
+</div>
+<div id="outline-container-orgheadline58" class="outline-3">
+<h3 id="orgheadline58">utime (acctime, modtime, filelist);</h3>
+<div class="outline-text-3" id="text-orgheadline58">
+<p>
+变文件的最后访问时间和最后更改时间。例如：<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-perl">acctime = -A "file1";
+modtime = -M "file1";
+filelist = ("file2", "file3");
+time ($acctime, $modtime, @filelist);
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline59" class="outline-3">
+<h3 id="orgheadline59">filedesc = fileno (filevar);#返回文件的内部UNIX文件描述。参数filevar为文件变量。</h3>
+</div>
+<div id="outline-container-orgheadline60" class="outline-3">
+<h3 id="orgheadline60">fcntl (filevar, fcntlrtn, value); #    详见同名UNIX函数帮助。</h3>
+<div class="outline-text-3" id="text-orgheadline60">
+<p>
+flock (filevar, flockop);<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline61" class="outline-3">
+<h3 id="orgheadline61">-e -r 测试文件、目录是否存在，是否可读</h3>
+<div class="outline-text-3" id="text-orgheadline61">
+<div class="org-src-container">
+
+<pre class="src src-perl">$x="abc.txt";
+if(-e $x) { #abc.txt是否存在？
+    　　# 存在操作
+} else {
+    　　printf "文件不存在。\n";
+}
+</pre>
+</div>
+<blockquote>
+<p>
+-r 文件或目录可读<br  />
+-w 文件或目录可写<br  />
+-x 文件或目录执行<br  />
+-o 文件或目录归用户所有<br  />
+-R 文件或目录对真正用户可读<br  />
+-W 文件或目录对真正用户可写<br  />
+-X 文件或目录对真正用户执行<br  />
+-O 文件或目录归真正用户所有<br  />
+-e 文件或目录存在<br  />
+-z 文件存在且大小为0<br  />
+-s 文件或目录存在且不为0(返回字节数)<br  />
+-f 文件为普通文件<br  />
+-d 文件为目录<br  />
+-l 文件为符号链接<br  />
+-p 文件为命名管道(FIFO)<br  />
+-S 文件为一个套口(socket)<br  />
+-b 文件为块特殊文件<br  />
+-c 文件为字符特殊文件<br  />
+-t 打开tty控制台的文件句柄<br  />
+-u 文件或目录是设置用户ID号<br  />
+-g 文件或目录是设置用户组ID号<br  />
+-k 文件或目录的sticky位置位<br  />
+-T 文件是文本文件<br  />
+-B 文件是二进制文件<br  />
+-M 以天为单位的存在时间<br  />
+-A 以天为单位访问时间<br  />
+-C 以天为单位同代码更改时间<br  />
+</p>
+</blockquote>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline63" class="outline-2">
+<h2 id="orgheadline63">pointer 引用，指针</h2>
+<div class="outline-text-2" id="text-orgheadline63">
+<p>
+如果$pointer的值为一个数组的指针，则通过形式@$pointer来访问数组中的元素。<br  />
+形式@$pointer的意义为“取出$pointer中的地址值当作数组使用”。类似的，<br  />
+%$pointer为指向哈希表中第一个元素的引用<br  />
+</p>
+</div>
+<div id="outline-container-orgheadline64" class="outline-3">
+<h3 id="orgheadline64">使用反斜线(\)操作符</h3>
+<div class="outline-text-3" id="text-orgheadline64">
+<p>
+反斜线操作符与C语言中传递地址的操作符&amp;功能类似。一般是用\创建变量又一个<br  />
+新的引用。下面为创建简单变量的引用的例子<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-perl">  $var="abc";
+ $pointer=\$var;
+ print($$pointer);
+
+@array = ("a","b","c");
+$p =\@array;
+print(@$p);
+
+%map=("a","aaa","b","bbbe");
+$p=\%map;
+print(%$p);
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline65" class="outline-3">
+<h3 id="orgheadline65">不仅变量、数组、Map 可以用指针引用之，子程序（函数）也可以</h3>
+<div class="outline-text-3" id="text-orgheadline65">
+<p>
+$pointer<sub>to</sub><sub>sub</sub> = sub {&#x2026; declaration of sub &#x2026;};<br  />
+调用方法<br  />
+&amp;$pointer<sub>to</sub><sub>sub</sub>(param)<br  />
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline66" class="outline-3">
+<h3 id="orgheadline66">子程序的返回值不仅限于数据，还可以返回子程序的引用。返回的子程序在调用处执行</h3>
+<div class="outline-text-3" id="text-orgheadline66">
+<div class="org-src-container">
+
+<pre class="src src-perl">sub errorMsg {
+    my $lvl = shift;
+#
+# define the subroutine to run when called.
+#
+    return sub {
+        my $msg = shift; # Define the error type now.
+        print "Err Level $lvl:$msg\n"; }; # print later.
+}
+$severe = errorMsg("Severe");
+$fatal = errorMsg("Fatal");
+$annoy = errorMsg("Annoying");
+
+&amp;$severe("Divide by zero");
+&amp;$fatal("Did you forget to use a semi-colon?");
+&amp;$annoy("Uninitialized variable in use");
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline67" class="outline-3">
+<h3 id="orgheadline67">子程序，多数组参数传递</h3>
+<div class="outline-text-3" id="text-orgheadline67">
+<div class="org-src-container">
+
+<pre class="src src-perl">@a1=("a" ,"b","c");
+@a2= ("1","2","3");
+sub sub1{
+    my ($p1,$p2)=@_;
+    print(@$p1,"\n");
+    print(@$p2,"\n");
+}
+&amp;sub1(\@a1,\@a2);
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline68" class="outline-3">
+<h3 id="orgheadline68">文件句柄的引用 \*</h3>
+<div class="outline-text-3" id="text-orgheadline68">
+<div class="org-src-container">
+
+<pre class="src src-perl"># 文件句柄的传递 \* 
+&amp;spitOut(\*STDOUT);
+
+open(file1,"&gt;/tmp/file1");
+&amp;spitOut(\*file1);
+
+#这样似乎也可以
+open($file2,"&gt;/tmp/file2");
+&amp;spitOut($file2);
+
+sub spitOut {
+    my $filehandle=shift;
+    print $filehandle "Gee Wilbur, I like this lettuce\n";
+}
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline69" class="outline-2">
+<h2 id="orgheadline69">多维数组</h2>
+<div class="outline-text-2" id="text-orgheadline69">
+<div class="org-src-container">
+
+<pre class="src src-perl">$line = ['solid', 'black', ['1','2','3'] , ['4', '5', '6']];
+print "\$line-&gt;[0] = $line-&gt;[0] \n";
+print "\$line-&gt;[2][0] = $line-&gt;[2][0] \n";
+</pre>
+</div>
+<p>
+使用哈希表和数组时，用$和用-&gt;是类似的，对数组而言下面两个语句等效：<br  />
+ \($names[ 0] = "kamran";
+    $names->[ 0] = "kamran";
+    对哈希表而言下面两个语句等效：
+    $\)lastnames{"kamran"} = "Husain";<br  />
+ $lastnames-&gt;{"kamran"} = "Husain";<br  />
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline70" class="outline-2">
+<h2 id="orgheadline70">OO 面向对象</h2>
+<div class="outline-text-2" id="text-orgheadline70">
+<p>
+模块(module)就是Perl包(pachage)   扩展名pm是包的缺省扩展名，意为Perl Module<br  />
+一个Perl类是仅是一个包而已。当你看到Perl文档中提到“类”时，把它看作<br  />
+“包”就行了<br  />
+保留“1;”为最后一行。这是Perl包的必需条件<br  />
+</p>
+
+<p>
+可以用单引号(')操作符来定位类中的变量，类中成员的定位形式如：<br  />
+Perl5中，可用双冒号替代单引号<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-perl">$class'$member
+$class::$member
+</pre>
+</div>
+
+<p>
+创建建一个 Cocoa.pm<br  />
+</p>
+<ul class="org-ul">
+<li><p>
+构造方法为new<br  />
+构造函数是类的子程序，它返回与类名相关的一个引用。将类名与引用相结合称为<br  />
+“祝福”一个对象，因为建立该结合的函数名为bless()<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-perl">bless YeReference [,classname]
+YeReference是对被“祝福”的对象的引用，classname是可选项，指定对象获取方法的包名，其缺省值为当前包名。
+</pre>
+</div>
+<p>
+将下文存为Cocoa.pm<br  />
+</p></li>
+</ul>
+<div class="org-src-container">
+
+<pre class="src src-perl"># 1、一定要在构造函数中初始化变量；
+# 2、一定要用my函数在方法中创建变量；
+# 3、一定不要在方法中使用local，除非真的想把变量传递给其它子程序；
+# 4、一定不要在类模块中使用全局变量。 
+  sub new {
+      my  $this= {} Create an anonymous hash, and #self points to it.
+          bless $this  # bless($this) # Connect the hash to the package Cocoa.
+          return $this; # Return the reference to the hash.
+  }
+
+    ;1 #这一行必须为放在最后一行
+</pre>
+</div>
+<p>
+创建一个Cocoa 对象<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-perl">push (@INC,'pwd'); # 将当行路径加到include 下
+use Cocoa;  #在@INC 下搜寻Cocoa.pm 并include 之
+# 三种创建对象的方法
+$cup = new Cocoa;  创建一个对象
+$cup = Cocoa-&gt;new(); 
+$cup = Cocoa::new(); #    如果你是C程序员，可以用双冒号强制使用Cocoa包中的new()函数，如：
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline77" class="outline-2">
+<h2 id="orgheadline77">q qq qw qr qx 等的含义</h2>
+<div class="outline-text-2" id="text-orgheadline77">
+</div><div id="outline-container-orgheadline71" class="outline-3">
+<h3 id="orgheadline71">q 与qq</h3>
+<div class="outline-text-3" id="text-orgheadline71">
+<p>
+q~~是对对'号转义的方式而提倡用的，，这样写的时候就可以不用\'<br  />
+qq~~是对对"号转义的方式而提倡用的，这样写的时候就可以不用\"<br  />
+</p>
+</div>
+<ul class="org-ul"><li><a id="orgheadline72"></a>q 是对单引号的转义<br  /><div class="outline-text-4" id="text-orgheadline72">
+<p>
+q~~是对对'号转义的方式而提倡用的，，这样写的时候就可以不用\'<br  />
+q{abc'd},或者<br  />
+q&lt;abc'c&gt;<br  />
+q[abc'd]等<br  />
+</p>
+</div></li>
+<li><a id="orgheadline73"></a>qq<br  /><div class="outline-text-4" id="text-orgheadline73">
+<div class="org-src-container">
+
+<pre class="src src-perl">  qq{hello}
+”hello“
+# 同义 ,即相当于把一段内容引起来
+</pre>
+</div>
+</div></li></ul>
+</div>
+
+<div id="outline-container-orgheadline74" class="outline-3">
+<h3 id="orgheadline74">qw 代表用空格来分元素</h3>
+<div class="outline-text-3" id="text-orgheadline74">
+<p>
+qw{foo bar}的意思为用空格分解字符串，得到列表，相当于如下语句<br  />
+split(' ','foo bar') 得到的结果是'foo','bar'<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-perl">@list = ("perl","Regular","network","web");
+#可以等价于:
+@list = qw(perl Regular network web);
+@list = qw{perl Regular network web};
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline75" class="outline-3">
+<h3 id="orgheadline75">qr 代表创建正则</h3>
+<div class="outline-text-3" id="text-orgheadline75">
+<div class="org-src-container">
+
+<pre class="src src-perl">     $myword = "cnangel";
+     $replaceword = qr(cnangel);
+     $finalword = "ok" if ($myword =~ $replaceword);
+# qr{whatever} 与qr(whaterver) 与/whatever/同
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-perl">$v = "abc";
+$r=  qr{b};
+$match =  $v =~ $r;
+print "match" if $match==1 ;
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline76" class="outline-3">
+<h3 id="orgheadline76">qx</h3>
+<div class="outline-text-3" id="text-orgheadline76">
+<div class="org-src-container">
+
+<pre class="src src-perl">qx {cat /proc/version &gt;/tmp/c}
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline88" class="outline-2">
+<h2 id="orgheadline88">@_ $_ $, $. $$ ,$&amp; 等几个符号的含义</h2>
+<div class="outline-text-2" id="text-orgheadline88">
+</div><div id="outline-container-orgheadline78" class="outline-3">
+<h3 id="orgheadline78">@_ 表示函数传参时，放置参数的数组</h3>
+<div class="outline-text-3" id="text-orgheadline78">
+<div class="org-src-container">
+
+<pre class="src src-perl">    sub sub1{
+        my ($var1 ,$var2)=@_;
+# 也可以写成
+my var1 = $_[0];
+my var2 = $_[1];
+#可以理解为参数存放在数组@_ 中，可以
+#用$_加下标 取其中某个元素
+    }
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline79" class="outline-3">
+<h3 id="orgheadline79">匹配时 各部分 $&amp; $` $' $1 ,$2</h3>
+<div class="outline-text-3" id="text-orgheadline79">
+<p>
+$&amp; 用来存放匹配的值<br  />
+$` 用来存放匹配内容之前的串<br  />
+$' 用来存放匹配内容之后的串<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-perl">$var ="beforehelloafter";
+$var =~ /h(el)lo/ ;
+print ($&amp; ,"\n"); # print  "hello"
+print ($`, "\n"); # print "before"
+print ($', "\n"); # print 'after'
+print ($1, "\n"); # print "el"
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgheadline80" class="outline-3">
+<h3 id="orgheadline80">$<sup>o</sup> 表示操作系统</h3>
+</div>
+
+<div id="outline-container-orgheadline81" class="outline-3">
+<h3 id="orgheadline81">$. 表示在读取文件时，当前行是第几行</h3>
+<div class="outline-text-3" id="text-orgheadline81">
+<div class="org-src-container">
+
+<pre class="src src-perl">open(file , "/tmp/b.pl");
+while($line = &lt;file&gt;){
+    print ( "当前是第" , $. , "行,内容是:", $line,"\n"); 
+}
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline82" class="outline-3">
+<h3 id="orgheadline82">$$ 表示当前进程号</h3>
+</div>
+<div id="outline-container-orgheadline83" class="outline-3">
+<h3 id="orgheadline83">$_</h3>
+<div class="outline-text-3" id="text-orgheadline83">
+<p>
+$_ is known as the "default input and pattern matching space". In other words, if you read in<br  />
+from a file handle at the top of a while loop, or run a foreach loop and don't name a loop<br  />
+variable, $_ is set up for you. Then any regular expression matches, chops (and lcs and many<br  />
+more) without a parameter, and even prints assume you want to work on $_. 就是说如果从一个文件用<br  />
+while 或foreach 读取一行内容， 而你没用一个变量存变读取到的这一行，那么，默认把它放到$_ 变量中。<br  />
+不仅如此，任何像match chos print 等操作的函数，默认以它作参数，如果你没指定的话因此<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-perl">open(file , "/tmp/b.pl");
+while($line = &lt;file&gt;){
+    print ( "当前是第" , $. , "行,内容是:", $line,"\n"); 
+}
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-perl">open(file , "/tmp/b.pl");
+while( &lt;file&gt;){
+ print ( "当前是第" , $. , "行,内容是:", $_,"\n"); 
+}
+</pre>
+</div>
+<p>
+两段代码等价<br  />
+</p>
+
+<p>
+再给一个例子<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-perl">open(file , "/tmp/b.pl");
+while( &lt;file&gt;){
+    print ; 
+}
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgheadline86" class="outline-3">
+<h3 id="orgheadline86">$/ $\</h3>
+<div class="outline-text-3" id="text-orgheadline86">
+</div><ul class="org-ul"><li><a id="orgheadline84"></a>$/<br  /><div class="outline-text-4" id="text-orgheadline84">
+<p>
+“$/” 和 “$\”分别是输入输出记录分隔符。当你在读或者写数据时，他们主要控制用什么来定义一个“记<br  />
+录”。<br  />
+&lt;STDIN&gt;<br  />
+&lt;file&gt;<br  />
+表示从stdin 或一个文件读入一“行”数据，注意，被引号引起来的行。之所以称为行是因为我们把变量<br  />
+$/ 设成了\n ,如果把它设成其他的值，如<br  />
+</p>
+<blockquote>
+<p>
+   This is the definition of my life<br  />
+%%<br  />
+We are far too young and clever<br  />
+%%<br  />
+Stab a sorry heart<br  />
+With your favorite finger<br  />
+</p>
+</blockquote>
+<p>
+有这样一段内容,把们把$/ 设成 %%\n时，如此从此文件读数据时&lt;file&gt; 读的不再是一行，而是靠%%分隔的内<br  />
+家<br  />
+而chmop()函数，要从一个字符串删除的内容，也是这个变量里指定的内容<br  />
+但是当你修改了这些特殊变量的值后，你会得到一个警告<br  />
+因为你有可能忘记把它恢复原值，而使其他部分的程序可能产生bug<br  />
+好的做法是local 化之<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-perl">{ # 注意到没，可以把一段代码放在{} 块中，而其中的local变量，在外不起作用
+ local $/ = "%%\n";
+
+ open(QUOTE, "/tmp/a.java");)
+ while (&lt;QUOTE&gt;) {
+  chomp;
+  print;
+ }
+ }
+</pre>
+</div>
+<p>
+另外如果将$/ 置空的话，则从一个文件中读取内容时则一次读取整个文件<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-perl">my $file = do { local $/; &lt;FILE&gt; };
+</pre>
+</div>
+<p>
+又如果，$/ 值是一个数字的指针时，则一次读取这个数字的大小的字节数<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-perl"> {
+local $/ = \2048; # 一次读取2k
+
+while (&lt;FILE&gt;) {
+ # $_ contains the next 2048 bytes from FILE
+}
+}
+</pre>
+</div>
+</div></li>
+<li><a id="orgheadline85"></a>$\<br  /><div class="outline-text-4" id="text-orgheadline85">
+<p>
+$\而与输出有关，即print 打印一个字符串时默认在其末尾添加此字符串<br  />
+默认$\为空串什么也不打印<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-perl">       sub println{
+       local $\="\n";
+       print @_ ;
+      }
+#比如，可以定义一个println()函数
+ println("hello");
+ println("world");
+</pre>
+</div>
+</div></li></ul>
+</div>
+
+
+<div id="outline-container-orgheadline87" class="outline-3">
+<h3 id="orgheadline87">$,</h3>
+<div class="outline-text-3" id="text-orgheadline87">
+<div class="org-src-container">
+
+<pre class="src src-perl">my @arr = (1, 2, 3);
+
+ print @arr;  # 打印123 
+ print "@arr"; # 打印 “1 2 3" ,分隔符默认是空格，由$, 变量指定
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline91" class="outline-2">
+<h2 id="orgheadline91">关于 .. 两点</h2>
+<div class="outline-text-2" id="text-orgheadline91">
+</div><div id="outline-container-orgheadline89" class="outline-3">
+<h3 id="orgheadline89">最简单的用法是表示一个数组</h3>
+<div class="outline-text-3" id="text-orgheadline89">
+<div class="org-src-container">
+
+<pre class="src src-perl">   @v = 1 .. 10;
+   print (@v);
+# 定义从1到10的数组
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline90" class="outline-3">
+<h3 id="orgheadline90">这两个点前后的内容，不仅仅可以是数字，字符串，也可以是一个表达式</h3>
+<div class="outline-text-3" id="text-orgheadline90">
+<p>
+如果是表达式：<br  />
+第一个操作数（“..“左侧的表达式）将被求值，如果得出的值为假，此次操作将什么也不做并<br  />
+返回假值。<br  />
+如果得出的值为真，操作返回真值并继续依次返回下面的值直到第二个操作数（“..”操作符右面<br  />
+的表达式）返回真值 .注意到 “直到” 这两个字没有<br  />
+</p>
+
+<p>
+也就是说可以把它用作if 后的括号中做真假判断<br  />
+比如java 中的代码注释以 /* 为开头 */为结束<br  />
+我现在想取出这种代码中的这种注释。<br  />
+我可以把判断 当前行中包不包括 <i>* 作为第一个操作数，而把判断当前行包不包括*</i> 作为第二个操作数<br  />
+就是说，如果遇到/* 就满足了if 条件，开始作if 里的操作，做完一次操作就判断一下第二个操作数满不满<br  />
+足，如果满足的话，停止，否则，继续<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-perl">open(FILE,"/tmp/a.java");
+while (&lt;FILE&gt;) {
+    if  ( m!/\*! .. m!\*/!){
+        print  $_ ;
+     }
+}
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline92" class="outline-2">
+<h2 id="orgheadline92">shift unshift push pop</h2>
+<div class="outline-text-2" id="text-orgheadline92">
+<ul class="org-ul">
+<li>shift 头部插入<br  /></li>
+<li>unshift 头部删除<br  /></li>
+<li>push 末尾插入<br  /></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgheadline93" class="outline-2">
+<h2 id="orgheadline93">last ===break</h2>
+<div class="outline-text-2" id="text-orgheadline93">
+<p>
+next <code>=</code> continue;<br  />
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline94" class="outline-2">
+<h2 id="orgheadline94"></h2>
+</div>
+
+</div>
+</div>
+    <div>
+      <div class="post-meta">
+        <span title="post date" class="post-info">2011-08-25</span>
+        <span title="last modification date" class="post-info">2016-01-14</span>
+        <span title="tags" class="post-info"><a href="/tags/perl/">perl</a>, <a href="/tags/linux/">Linux</a></span>
+        <span title="author" class="post-info">纪秀峰</span>
+      </div>
+      <section>
+        <h1>Comments</h1>
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+          //var disqus_developer = 1;
+          var disqus_identifier = "/blog/perl-一的些总结/";
+          var disqus_url = "http://jixiuf.github.io/blog/perl-一的些总结/";
+          var disqus_shortname = 'jixiuf';
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        <div class="ds-thread"></div>
+        <script type="text/javascript">
+          var duoshuoQuery = {short_name:'jixiuf'};
+          (function() {
+          var ds = document.createElement('script');
+          ds.type = 'text/javascript';ds.async = true;
+          ds.src = 'http://static.duoshuo.com/embed.js';
+          ds.charset = 'UTF-8';
+          (document.getElementsByTagName('head')[0]
+          || document.getElementsByTagName('body')[0]).appendChild(ds);
+          })();
+        </script>
+      </section>
+      <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.js"></script>
+      <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script src="/media/js/main.js"></script>
+      <div class="footer">
+        <p>Generated by <a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.x (<a href="http://orgmode.org">Org mode</a> 8.x)</p>
+        <p>
+          Copyright &copy; 2012 - <span id="footerYear"></span> <a href="mailto:jixiuf &lt;at&gt; gmail &lt;dot&gt; com">纪秀峰</a>
+          &nbsp;&nbsp;-&nbsp;&nbsp;
+          Powered by <a href="https://github.com/kelvinh/org-page" target="_blank">org-page</a>
+          <script type="text/javascript">document.getElementById("footerYear").innerHTML = (new Date()).getFullYear();</script>
+        </p>
+      </div>
+    </div>
+
+  </body>
+</html>

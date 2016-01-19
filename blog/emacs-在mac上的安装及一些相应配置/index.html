@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <title>emacs 在Mac上的安装及一些相应配置 - 一个人的狂欢</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="纪秀峰" />
+    <meta name="description" content="emacs 在Mac上的安装" />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="/media/css/main.css" type="text/css">
+    <link rel="stylesheet" href="/media/css/prettify.css" type="text/css">
+  </head>
+  <body class="container">
+    <div>
+      <header class="masthead">
+        <h1 class="masthead-title"><a href="/">一个人的狂欢</a></h1>
+        <p></p>
+        <ul>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/tags/">Tags</a></li>
+          <li><a href="/tags/">Tags</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="http://github.com/jixiuf">GitHub</a></li>
+          <li><a href="/rss.xml">RSS</a></li>
+        </ul>
+        <form method="get" id="searchform" action="http://www.google.com/search">
+          <input type="text" class="field" name="q" id="s" placeholder="Search">
+          <input type="hidden" name="as_sitesearch" value="jixiuf.github.io">
+        </form>
+      </header>
+    </div>
+
+<div>
+<div class="post">
+<h1>emacs 在Mac上的安装及一些相应配置</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgheadline1">GNU Emacs For Mac OS X&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Emacs">Emacs</span></span></a></li>
+<li><a href="#orgheadline4">使用brew 命令安装</a>
+<ul>
+<li><a href="#orgheadline2">安装 带图形界面的emacs</a></li>
+<li><a href="#orgheadline3">安装 不带图形界面的emacs,只能在终端下使用的，</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline8">从源代码编译emacs</a>
+<ul>
+<li><a href="#orgheadline5">获取emacs 源码</a></li>
+<li><a href="#orgheadline6">只编译终端下可用的版本 编译完后 会安装到/usr/local/bin/下</a></li>
+<li><a href="#orgheadline7">编译 图形界面的</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline9">mac 启动时自动启动 emacs &#x2013;daemon进程</a></li>
+<li><a href="#orgheadline10">~/bin/em emacsclient 封装</a></li>
+<li><a href="#orgheadline11">让emacs 支持编辑 plist 文件</a></li>
+<li><a href="#orgheadline12">让emacs 支持编辑 applescript 脚本</a></li>
+<li><a href="#orgheadline15">emacs 与 iTerm2</a>
+<ul>
+<li><a href="#orgheadline13">iTerm2 下 的emacs 绑定 C-, C-; Ctrl-return 等按键的问题</a></li>
+<li><a href="#orgheadline14">在Finder 中使用iTerm2 中的emacs/emacsclient 打开文件</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">GNU Emacs For Mac OS X&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Emacs">Emacs</span></span></h2>
+<div class="outline-text-2" id="text-orgheadline1">
+<p>
+<a href="http://emacsformacosx.com/">http://emacsformacosx.com/</a><br  />
+  去这里下载 ，下载完  托动到 /Applications/目录就可以了<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline4" class="outline-2">
+<h2 id="orgheadline4">使用brew 命令安装</h2>
+<div class="outline-text-2" id="text-orgheadline4">
+</div><div id="outline-container-orgheadline2" class="outline-3">
+<h3 id="orgheadline2">安装 带图形界面的emacs</h3>
+<div class="outline-text-3" id="text-orgheadline2">
+<div class="org-src-container">
+
+<pre class="src src-sh">brew install emacs --cocoa
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline3" class="outline-3">
+<h3 id="orgheadline3">安装 不带图形界面的emacs,只能在终端下使用的，</h3>
+<div class="outline-text-3" id="text-orgheadline3">
+<p>
+mac 自带了emacs22 ，但是版本太老所以需要删掉<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">sudo rm -f /usr/bin/emacs
+sudo rm -f /usr/bin/emacsclient
+brew install emacs
+</pre>
+</div>
+<p>
+为方便终端下使用 定义些别名<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">alias e='emacs -nw'
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline8" class="outline-2">
+<h2 id="orgheadline8">从源代码编译emacs</h2>
+<div class="outline-text-2" id="text-orgheadline8">
+</div><div id="outline-container-orgheadline5" class="outline-3">
+<h3 id="orgheadline5">获取emacs 源码</h3>
+<div class="outline-text-3" id="text-orgheadline5">
+<div class="org-src-container">
+
+<pre class="src src-sh">git clone  git://git.sv.gnu.org/emacs.git
+或者
+git clone  git://git.sv.gnu.org/emacs.git --depth=1
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline6" class="outline-3">
+<h3 id="orgheadline6">只编译终端下可用的版本 编译完后 会安装到/usr/local/bin/下</h3>
+<div class="outline-text-3" id="text-orgheadline6">
+<div class="org-src-container">
+
+<pre class="src src-sh">  cd emacs
+  ./configure --without-ns
+  or
+  ./configure --disable-ns-self-contained
+  make
+  make install
+#+BEGIN_QUOTE
+    If you pass the --disable-ns-self-contained option to configure, the lisp
+    files will be installed under whatever 'prefix' is set to (defaults to
+    /usr/local).  The bundle will be smaller, but depend on these resources (may
+    require 'sudo' for "make install").
+#+END_QUOTE
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline7" class="outline-3">
+<h3 id="orgheadline7">编译 图形界面的</h3>
+<div class="outline-text-3" id="text-orgheadline7">
+<div class="org-src-container">
+
+<pre class="src src-sh">cd emacs
+ ./configure
+ make
+ make install
+</pre>
+</div>
+<p>
+编译完之后 会生成nextstep/Emacs.app<br  />
+把Emacs.app 移动到/Applications/目录即可<br  />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline9" class="outline-2">
+<h2 id="orgheadline9">mac 启动时自动启动 emacs &#x2013;daemon进程</h2>
+<div class="outline-text-2" id="text-orgheadline9">
+<p>
+~/Library/LaunchAgents/emacs-daemon.plist<br  />
+把这个文件放到~/Library/LaunchAgents/目录下 ，重起下电脑，就会启动emacs &#x2013;deamon 进程<br  />
+或者执行下<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">launchctl load ~/Library/LaunchAgents/emacs-daemon.plist
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;
+&lt;plist version="1.0"&gt;
+&lt;dict&gt;
+    &lt;key&gt;EnableGlobbing&lt;/key&gt;
+    &lt;true/&gt;
+    &lt;key&gt;KeepAlive&lt;/key&gt;
+    &lt;true/&gt;
+    &lt;key&gt;Label&lt;/key&gt;
+    &lt;string&gt;emacs-daemon&lt;/string&gt;
+    &lt;key&gt;ProgramArguments&lt;/key&gt;
+    &lt;array&gt;
+        &lt;string&gt;/usr/local/bin/emacs&lt;/string&gt;
+        &lt;string&gt;--daemon&lt;/string&gt;
+    &lt;/array&gt;
+    &lt;key&gt;RunAtLoad&lt;/key&gt;
+    &lt;true/&gt;
+    &lt;key&gt;WorkingDirectory&lt;/key&gt;
+    &lt;string&gt;/Users/&lt;/string&gt;
+&lt;/dict&gt;
+&lt;/plist&gt;
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline10" class="outline-2">
+<h2 id="orgheadline10">~/bin/em emacsclient 封装</h2>
+<div class="outline-text-2" id="text-orgheadline10">
+<p>
+写了个脚本命名为  ~/bin/em  封装emacsclient,配合emacs &#x2013;daemon 使用<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">#!/bin/sh
+# use default emacsclient in $PATH
+EMACSCLIENT=`command -v emacsclient`
+# if emacsclient major version ==22
+if [ ! -z $EMACSCLIENT ] &amp;&amp; [ `$EMACSCLIENT --version 2&gt;&amp;1| awk -F ' ' '/emacsclient/ {print $2}'|awk -F '.' '{print $1}'` = "22" ] ; then
+    EMACSCLIENT=""
+fi
+#  if EMACSCLIENT is empty
+if [  -z $EMACSCLIENT ] &amp;&amp; [ -x "~/bin/emacsclient"  ] &amp;&amp; [ `~/bin/emacsclient --version 2&gt;&amp;1| awk -F ' ' '/emacsclient/ {print $2}'|awk -F '.' '{print $1}'` != "22" ]; then
+    EMACSCLIENT="~/bin/emacsclient"
+fi
+
+if [  -z $EMACSCLIENT ] &amp;&amp; [ -x "/usr/local/bin/emacsclient"  ] &amp;&amp; [ `/usr/local/bin/emacsclient --version 2&gt;&amp;1| awk -F ' ' '/emacsclient/ {print $2}'|awk -F '.' '{print $1}'` != "22" ]; then
+    EMACSCLIENT="/usr/local/bin/emacsclient"
+fi
+if [  -z $EMACSCLIENT ] &amp;&amp; [ -x "/usr/bin/emacsclient"  ] &amp;&amp; [ `/usr/bin/emacsclient --version 2&gt;&amp;1| awk -F ' ' '/emacsclient/ {print $2}'|awk -F '.' '{print $1}'` != "22" ]; then
+    EMACSCLIENT="/usr/bin/emacsclient"
+fi
+
+if [  -z $EMACSCLIENT ] &amp;&amp; [ -x "/Applications/Emacs.app/Contents/MacOS/bin/emacsclient"  ]; then
+    EMACSCLIENT="/Applications/Emacs.app/Contents/MacOS/bin/emacsclient"
+fi
+
+if [  -z $EMACSCLIENT ] ; then
+    echo "can not find emacsclient exit"
+    exit 1
+fi
+
+if [ -z "$1" ]
+then
+    #/usr/bin/emacsclient -t  --socket-name=$HOME/.emacs.d/cache/emacs-server-file
+    $EMACSCLIENT -t  -nw
+else
+    #/usr/bin/emacsclient -t  --socket-name=$HOME/.emacs.d/cache/emacs-server-file "$@"
+    $EMACSCLIENT -t   -nw "$@"
+fi
+</pre>
+</div>
+<p>
+在 ~/.bashrc 或 ~/.zshrc 中加入以下内容<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">if [ -f /Applications/Emacs.app/Contents/MacOS/Emacs ]; then
+    export  ALTERNATE_EDITOR=/Applications/Emacs.app/Contents/MacOS/Emacs
+fi
+if [ -f /usr/local/bin/emacs ]; then
+    export  ALTERNATE_EDITOR=/usr/local/bin/emacs
+fi
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline11" class="outline-2">
+<h2 id="orgheadline11">让emacs 支持编辑 plist 文件</h2>
+<div class="outline-text-2" id="text-orgheadline11">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(add-to-list 'jka-compr-compression-info-list
+             ["\\.plist$"
+              "converting text XML to binary plist"
+              "plutil"
+              ("-convert" "binary1" "-o" "-" "-")
+              "converting binary plist to text XML"
+              "plutil"
+              ("-convert" "xml1" "-o" "-" "-")
+              nil nil "bplist"])
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline12" class="outline-2">
+<h2 id="orgheadline12">让emacs 支持编辑 applescript 脚本</h2>
+<div class="outline-text-2" id="text-orgheadline12">
+<p>
+~/.emacs.d/bin/applescript-helper.sh<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">#/bin/sh
+# mac 上 emacs 直接编辑二进制applescript
+if [ "$1" = "-d" ]; then
+    RANDOMFILE="applescript${RANDOM}.scpt"
+    cat /dev/stdin &gt;"/tmp/$RANDOMFILE"
+    osadecompile "/tmp/$RANDOMFILE"
+    rm "/tmp/$RANDOMFILE"
+else
+    RANDOMFILE="applescript${RANDOM}.scpt"
+    osacompile -o "/tmp/$RANDOMFILE"
+    cat "/tmp/$RANDOMFILE"
+    rm "/tmp/$RANDOMFILE"
+fi
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">;; # mac 上 emacs 直接编辑二进制applescript
+(add-to-list 'jka-compr-compression-info-list
+             `["\\.scpt\\'"
+               "converting text applescript to binary applescprit " ,(expand-file-name "applescript-helper.sh" "~/.emacs.d/bin/") nil
+               "converting binary applescript to text applescprit " ,(expand-file-name "applescript-helper.sh" "~/.emacs.d/bin/") ("-d")
+               nil t "FasdUAS"])
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline15" class="outline-2">
+<h2 id="orgheadline15">emacs 与 iTerm2</h2>
+<div class="outline-text-2" id="text-orgheadline15">
+</div><div id="outline-container-orgheadline13" class="outline-3">
+<h3 id="orgheadline13">iTerm2 下 的emacs 绑定 C-, C-; Ctrl-return 等按键的问题</h3>
+<div class="outline-text-3" id="text-orgheadline13">
+<p>
+我喜欢使用 <a href="https://iterm2.com/">iTerm2</a>这款终端<br  />
+但是在终端下的emacs 有些按键是不能按的,比如C-, C-;<br  />
+ 与<a href="https://iterm2.com/">iTerm2</a> 配合 可以解决这样的问题<br  />
+ <a href="http://superuser.com/questions/731427/how-do-i-send-ctrl-in-iterm2">http://superuser.com/questions/731427/how-do-i-send-ctrl-in-iterm2</a><br  />
+ <img src="/assets/blog/emacs-在mac上的安装及一些相应配置/iterm-key.png" alt="iterm-key.png" /><br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(global-set-key (kbd "C-[ [ a f") 'backward-kill-word) ;== "M-[ a f" iterm2 map to ctrl-;
+
+也可以对其他键进行绑定
+(global-set-key (kbd "C-[ [ a a") 'backward-kill-word) ;== "M-[ a a" iterm2 map to ctrl-backspace
+(global-set-key (kbd "C-[ [ a b") 'toggle-eshell-cd)   ;iterm2 map to ctrl-f2
+(global-set-key (kbd "C-[ [ a c") 'hippie-expand)   ; iterm map to ctrl-return
+(global-set-key (kbd "C-[ [ a d") 'bm-previous)   ; iterm map to ctrl-,
+(global-set-key (kbd "C-[ [ a e") 'goto-definition)   ; iterm map to ctrl-.
+</pre>
+</div>
+<p>
+这样就实现了iTerm下的emacs 对C-; 进行绑定了<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline14" class="outline-3">
+<h3 id="orgheadline14">在Finder 中使用iTerm2 中的emacs/emacsclient 打开文件</h3>
+<div class="outline-text-3" id="text-orgheadline14">
+<p>
+打开/Applications/Automator.app 文件-&gt;新建-&gt;应用程序<br  />
+然后选择 实现工具-&gt;运行applescript 脚本<br  />
+右侧会出现 编辑applescript 脚本的内容， 里面输入以下内容<br  />
+然后 存储为EmcacClientOpenWith-InIterm2.app<br  />
+把这个EmcacClientOpenWith-InIterm2.app 移动到/Applications/目录<br  />
+在Finder 中的文件右键  打开方式 选择 /Applications/EmcacClientOpenWith-InIterm2.app<br  />
+即可用终端下的emacs/emacsclient 打开此文件<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-applescript">-- -*- coding:utf-8 mode:applescript-*-
+-- 打开 automator.app ，然后 文件  选择本目录下的EmcacClientOpenWith-InIterm2.app
+-- 本文件只是其txt 格式的备份
+-- http://superuser.com/questions/457484/how-to-open-emacs-from-macs-finder
+-- https://gist.github.com/ambethia/304964#comment-799519
+-- http://superuser.com/questions/662815/how-to-exec-command-in-iterm-2-from-applescript
+-- 在Finder 中右键使用emacsclient 打开文件
+--  这个需要用automator.app 存成app  ,用applescript.app 存成的app 不行
+
+-- em is my script wrapper for emacsclient
+
+-- #!/bin/sh
+-- if [ -z "$1" ]
+-- then
+--     emacsclient -t
+-- else
+--     emacsclient -t   "$@"
+-- fi
+
+
+on run {input, parameters}
+    tell application "iTerm"
+        activate
+        if (count of terminals) = 0 then
+            set t to (make new terminal)
+        else
+            set t to current terminal
+
+        end if
+        tell t
+            set s to (make new session at the end of sessions)
+            tell s
+                -- em 命令是 上面注释的emacsclient 脚本，
+                -- exec command (("emacs \"" &amp; POSIX path of first item of input as text) &amp; "\"")
+                exec command (("em \"" &amp; POSIX path of first item of input as text) &amp; "\"")
+            end tell
+        end tell
+    end tell
+end run
+</pre>
+</div>
+<p>
+<img src="/assets/blog/emacs-在mac上的安装及一些相应配置/automator1.jpg" alt="automator1.jpg" /><br  />
+<img src="/assets/blog/emacs-在mac上的安装及一些相应配置/automator2.jpg" alt="automator2.jpg" /><br  />
+</p>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+    <div>
+      <div class="post-meta">
+        <span title="post date" class="post-info">2015-10-17</span>
+        <span title="last modification date" class="post-info">2016-01-14</span>
+        <span title="tags" class="post-info"><a href="/tags/emacs/">Emacs</a>, <a href="/tags/mac/">Mac</a></span>
+        <span title="author" class="post-info">纪秀峰</span>
+      </div>
+      <section>
+        <h1>Comments</h1>
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+          //var disqus_developer = 1;
+          var disqus_identifier = "/blog/emacs-在mac上的安装及一些相应配置/";
+          var disqus_url = "http://jixiuf.github.io/blog/emacs-在mac上的安装及一些相应配置/";
+          var disqus_shortname = 'jixiuf';
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        <div class="ds-thread"></div>
+        <script type="text/javascript">
+          var duoshuoQuery = {short_name:'jixiuf'};
+          (function() {
+          var ds = document.createElement('script');
+          ds.type = 'text/javascript';ds.async = true;
+          ds.src = 'http://static.duoshuo.com/embed.js';
+          ds.charset = 'UTF-8';
+          (document.getElementsByTagName('head')[0]
+          || document.getElementsByTagName('body')[0]).appendChild(ds);
+          })();
+        </script>
+      </section>
+      <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.js"></script>
+      <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script src="/media/js/main.js"></script>
+      <div class="footer">
+        <p>Generated by <a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.x (<a href="http://orgmode.org">Org mode</a> 8.x)</p>
+        <p>
+          Copyright &copy; 2012 - <span id="footerYear"></span> <a href="mailto:jixiuf &lt;at&gt; gmail &lt;dot&gt; com">纪秀峰</a>
+          &nbsp;&nbsp;-&nbsp;&nbsp;
+          Powered by <a href="https://github.com/kelvinh/org-page" target="_blank">org-page</a>
+          <script type="text/javascript">document.getElementById("footerYear").innerHTML = (new Date()).getFullYear();</script>
+        </p>
+      </div>
+    </div>
+
+  </body>
+</html>

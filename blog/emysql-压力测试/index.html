@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <title>emysql 压力测试 - 一个人的狂欢</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="纪秀峰" />
+    <meta name="description" content="emysql 压力测试" />
+    <meta name="keywords" content="erlang mysql emysql benchmark" />
+    <link rel="stylesheet" href="/media/css/main.css" type="text/css">
+    <link rel="stylesheet" href="/media/css/prettify.css" type="text/css">
+  </head>
+  <body class="container">
+    <div>
+      <header class="masthead">
+        <h1 class="masthead-title"><a href="/">一个人的狂欢</a></h1>
+        <p></p>
+        <ul>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/tags/">Tags</a></li>
+          <li><a href="/tags/">Tags</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="http://github.com/jixiuf">GitHub</a></li>
+          <li><a href="/rss.xml">RSS</a></li>
+        </ul>
+        <form method="get" id="searchform" action="http://www.google.com/search">
+          <input type="text" class="field" name="q" id="s" placeholder="Search">
+          <input type="hidden" name="as_sitesearch" value="jixiuf.github.io">
+        </form>
+      </header>
+    </div>
+
+<div>
+<div class="post">
+<h1>emysql 压力测试</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgheadline1">建表语句</a></li>
+<li><a href="#orgheadline2">mysqlslap 测试</a></li>
+<li><a href="#orgheadline3">emysql的压力测试，开一条mysql连接，用存储过程插入10000条数据</a>
+<ul>
+<li><a href="#orgheadline4">测试用 press.erl</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<p>
+本站关于mysql的测试在 <a href="../mysql/benchmark_demo.html">../mysql/benchmark_demo.html</a><br  />
+</p>
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">建表语句</h2>
+<div class="outline-text-2" id="text-orgheadline1">
+<div class="org-src-container">
+
+<pre class="src src-sql"> CREATE TABLE `tbl_test` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `onOffType` int(11) DEFAULT NULL,
+  `accountId` int(11) DEFAULT NULL,
+  `accountType` int(11) DEFAULT NULL,
+  `playerId` int(11) DEFAULT NULL,
+  `headHeroId` int(11) DEFAULT NULL,
+  `playerLevel` int(11) DEFAULT NULL,
+  `playerName` varchar(255) DEFAULT NULL,
+  `logTime` datetime DEFAULT NULL,
+  `clientVersion` varchar(255) DEFAULT NULL,
+  `clientType` varchar(255) DEFAULT NULL,
+  `issuers` varchar(255) DEFAULT NULL,
+  `flashPlayerVersion` int(11) DEFAULT NULL,
+  `connectType` int(11) DEFAULT NULL,
+  `gameServerName` varchar(255) DEFAULT NULL,
+  `ipAddr` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+
+DELIMITER $$
+drop procedure if exists `insert_tbl_test`$$
+create procedure `insert_tbl_test`(
+IN inaccountId int(11),/**/
+IN inaccountType int(11),/**/
+IN inplayerId int(11),/**/
+IN inheadHeroId int(11),/**/
+IN inplayerLevel int(11),/**/
+IN inplayerName varchar(255),/**/
+IN inlogTime datetime,/**/
+IN inclientVersion varchar(255),/**/
+IN inclientType varchar(255),/**/
+IN inissuers varchar(255),/**/
+IN inflashPlayerVersion int(11),/**/
+IN inconnectType int(11),/**/
+IN ingameServerName varchar(255),/**/
+IN inipAddr varchar(255),/**/
+IN inonOffType int(11) /**/
+)
+BEGIN
+insert into `tbl_on_off`(
+`accountId`, /**/
+`accountType`, /**/
+`playerId`, /**/
+`headHeroId`, /**/
+`playerLevel`, /**/
+`playerName`, /**/
+`logTime`, /**/
+`clientVersion`, /**/
+`clientType`, /**/
+`issuers`, /**/
+`flashPlayerVersion`, /**/
+`connectType`, /**/
+`gameServerName`, /**/
+`ipAddr`, /**/
+`onOffType` /**/
+) values(
+inaccountId,/**/
+inaccountType,/**/
+inplayerId,/**/
+inheadHeroId,/**/
+inplayerLevel,/**/
+inplayerName,/**/
+inlogTime,/**/
+inclientVersion,/**/
+inclientType,/**/
+inissuers,/**/
+inflashPlayerVersion,/**/
+inconnectType,/**/
+ingameServerName,/**/
+inipAddr,/**/
+ inonOffType /**/
+);
+END$$
+DELIMITER ;
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2">mysqlslap 测试</h2>
+<div class="outline-text-2" id="text-orgheadline2">
+<div class="org-src-container">
+
+<pre class="src src-sh">其中关于开一个mysql连接执行10000次存储过程插入10000条数据的测试
+ mysqlslap --query="call insert_tbl_test(1,1,1,1,1,'name','1989-01-26','ver','t','dd',1,1,'name','localhost',1)" --concurrency=1  --number-of-queries 10000 --iterations=3 --engine=myisam -uroot -proot
+</pre>
+</div>
+<blockquote>
+<p>
+结果显示不用3s就插入了10000条数据<br  />
+jixiuf@jf /tmp/d $ mysqlslap &#x2013;query="call insert_tbl_test(1,1,1,1,1,'name','1989-01-26','ver','t','dd',1,1,'name','localhost',1)" &#x2013;concurrency=1  &#x2013;number-of-queries 10000 &#x2013;iterations=3 &#x2013;engine=myisam -uroot -proot<br  />
+Benchmark<br  />
+    Running for engine myisam<br  />
+    Average number of seconds to run all queries: 2.496 seconds<br  />
+    Minimum number of seconds to run all queries: 2.469 seconds<br  />
+    Maximum number of seconds to run all queries: 2.551 seconds<br  />
+    Number of clients running queries: 1<br  />
+    Average number of queries per client: 10000<br  />
+</p>
+</blockquote>
+<div class="org-src-container">
+
+<pre class="src src-sh">使用普通的insert 语句 (对于非常简单的insert语句 没有必要包装成存储过程，以下
+ 证明，存储过程不比简单insert快)
+ mysqlslap --query="insert into tbl_test(  accountId,  accountType,  playerId,  headHeroId,  playerLevel,  playerName,  logTime,  clientVersion,  clientType,  issuers,  flashPlayerVersion,  connectType,  gameServerName,  ipAddr,  onOffType  ) values(1,1,1,1,1,'name','1989-01-26','ver','t','dd',1,1,'name','localhost',1)"  --concurrency=1  --number-of-queries 10000 --iterations=3 --engine=myisam -uroot -proot
+</pre>
+</div>
+<blockquote>
+<p>
+jixiuf@jf /tmp/d $ mysqlslap &#x2013;query="insert into tbl_test(  accountId,  accountType,  playerId,  headHeroId,  playerLevel,  playerName,  logTime,  clientVersion,  clientType,  issuers,  flashPlayerVersion,  connectType,  gameServerName,  ipAddr,  onOffType  ) values(1,1,1,1,1,'name','1989-01-26','ver','t','dd',1,1,'name','localhost',1)"  &#x2013;concurrency=1  &#x2013;number-of-queries 10000 &#x2013;iterations=3 &#x2013;engine=myisam -uroot -proot<br  />
+Benchmark<br  />
+  Running for engine myisam<br  />
+  Average number of seconds to run all queries: 1.642 seconds<br  />
+  Minimum number of seconds to run all queries: 1.620 seconds<br  />
+  Maximum number of seconds to run all queries: 1.676 seconds<br  />
+  Number of clients running queries: 1<br  />
+Average number of queries per client: 10000<br  />
+</p>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-orgheadline3" class="outline-2">
+<h2 id="orgheadline3">emysql的压力测试，开一条mysql连接，用存储过程插入10000条数据</h2>
+<div class="outline-text-2" id="text-orgheadline3">
+<ol class="org-ol">
+<li><p>
+首先修改emysql的 emysql.app.src,添加env的值{lock_timeout,infinity}<br  />
+,以避免因超时 emysql不工作 。别忘了重新编译emysql<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">%% Emysql .app file template
+%% This template is filled out by rebar,
+%% or make (Makefile made to fill modules in)
+%% and then cp src/emysql.app.src ebin/emysql.app
+
+%% Settings (defaults in include/emysql.hrl):
+%% default_timeout (TIMEOUT = 8000)
+%% lock_timeout (LOCK_TIMEOUT = 5000)
+
+{application, emysql, [
+        {description, "Emysql - Erlang MySQL driver"},
+        {vsn, "0.2"},
+        {modules, []},
+        {mod, {emysql_app, ["%MAKETIME%"]}},
+        {registered, []},
+        {applications, [kernel, stdlib, crypto]},
+        {env, [{default_timeout, 5000},
+                {lock_timeout,infinity}
+                ]}
+        ]}.
+</pre>
+</div></li>
+</ol>
+</div>
+
+<div id="outline-container-orgheadline4" class="outline-3">
+<h3 id="orgheadline4">测试用 press.erl</h3>
+<div class="outline-text-3" id="text-orgheadline4">
+<div class="org-src-container">
+
+<pre class="src src-erlang">-module(press).
+-export([get_timestamp/0,start/3,run/3]).
+-include("emysql.hrl").
+
+-record(state,{running=0,start_time,process_count_all,sql_count_each_process}).
+%% 启动ProcessCount个进程，每个进程执行SqlCountEachProcess次sql 操作
+start(ProcessCount,SqlCountEachProcess,MysqlConnectionCount)-&gt;
+    crypto:start(),
+    application:start(emysql),
+    emysql:add_pool(hello_pool, MysqlConnectionCount, "root", "root", "localhost", 3306, "mysqlslap", utf8),
+
+    CurrentTime=get_timestamp(),
+    spawn_link(?MODULE,run,[ProcessCount,SqlCountEachProcess,#state{start_time=CurrentTime,
+                                                                    process_count_all=ProcessCount,
+                                                                    sql_count_each_process=SqlCountEachProcess}])
+        .
+
+
+recv(#state{running=0,start_time=StartTime,
+            process_count_all=ProcessCount,
+            sql_count_each_process=SqlCountEachProcess
+           })-&gt;
+    Usedtime =get_timestamp()-StartTime,
+    io:format("process_count:~p sql count each process:~p used time:~p~n",[ProcessCount,SqlCountEachProcess,Usedtime]),
+    emysql:remove_pool(hello_pool);
+recv(#state{running=Running}=State)-&gt;
+    receive
+        done-&gt;
+            recv(State#state{running=Running-1})
+    end
+        .
+
+run(0,_SqlCountEachProcess,#state{}=State)-&gt;
+    recv(State);
+run(ProcessCount,SqlCountEachProcess,#state{running=Running}=State) -&gt;
+    Parent =self(),
+    spawn(fun()-&gt; run_sql(SqlCountEachProcess,Parent)end),
+    run(ProcessCount-1,SqlCountEachProcess,State#state{running=Running+1})
+        .
+
+run_sql(0,Parent)-&gt;
+    Parent!done;
+run_sql(SqlCountEachProcess,Parent) -&gt;
+    test2(),
+    run_sql(SqlCountEachProcess-1 ,Parent)
+        .
+
+
+test2()-&gt;
+    %%"insert into tbl_test(  accountId,  accountType,  playerId,  headHeroId,  playerLevel,  playerName,  logTime,  clientVersion,  clientType,  issuers,  flashPlayerVersion,  connectType,  gameServerName,  ipAddr,  onOffType  ) values(1,1,1,1,1,'name','1989-01-26','ver','t','dd',1,1,'name','localhost',1)"
+    %% "call insert_tbl_test(1,1,1,1,1,'name','1989-01-26','ver','t','dd',1,1,'name','localhost',1);"
+    Result=emysql:execute(hello_pool,&lt;&lt; "call insert_tbl_test(1,1,1,1,1,'name','1989-01-26','ver','t','dd',1,1,'name','localhost',1);"&gt;&gt;),
+    case Result of
+        Rec when is_record(Rec ,ok_packet) -&gt;
+            ok;
+        Rec when is_record(Rec ,error_packet) -&gt;
+            io:format("~p~n",[Result])
+    end
+
+    %% %% Pid=global:whereis_name(emysql_center)
+        .
+get_timestamp() -&gt;
+    {Mega,Sec,Micro} = erlang:now(),
+    ((Mega*1000000+Sec)*1000000+Micro)/1000.
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-sh">启用10000个erlang进程，每个进程向emysql发一条sql(存储过程),最后一个参数是emysql连接池
+里只开一个mysql连接
+press:start(10000,1,1).
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-sh">测试结果显示大概用了8秒，大概是比单纯的mysql测试慢3~4倍 (7583/2496=3.45)
+(emacsdd@jf.org)4&gt; press:start(10000,1,1).
+process_count:10000 sql count each process:1 used time:7583.25390625
+</pre>
+</div>
+<p>
+有些网友怀疑创建10000个进程也会消耗一部分时间 ，所以增加下面几个测试 ，结果显<br  />
+示所用时间仍然处于7~9s这个范围内，影响不大<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">起用一个进程，此进程向emysql发送10000条sql语句
+1&gt;  press:start(1,10000,1).
+process_count:1 sql count each process:10000 used time:8632.112060546875
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-sh">1&gt;  press:start(10,1000,1).
+process_count:10 sql count each process:1000 used time:7520.348876953125
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-sh">1&gt;  press:start(100,100,1).
+process_count:100 sql count each process:100 used time:7613.68896484375
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-java">import java.sql.Date;
+import java.sql.Types;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.DriverManager;
+public class TestMysqlConn {
+    public static void main(String[] args) throws Exception {
+        // Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("org.gjt.mm.mysql.Driver");
+        long start= System.currentTimeMillis();
+        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mysqlslap?user=root&amp;password=root");
+        // call insert_tbl_test(1,1,1,1,1,'name','1989-01-26','ver','t','dd',1,1,'name','localhost',1)
+        CallableStatement cs = conn.prepareCall("{call insert_tbl_test(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+        cs.setInt(1 , 1);
+        cs.setInt(2 , 1);
+        cs.setInt(3 , 1);
+        cs.setInt(4 , 1);
+        cs.setInt(5 , 1);
+        cs.setString(6 , "name");
+        cs.setDate(7 , new Date(1989 , 1 , 26));
+        cs.setString(8 , "ver");
+        cs.setString(9 , "t");
+        cs.setString(10 , "dd");
+        cs.setInt(11 ,1);
+        cs.setInt(12 ,1);
+        cs.setString(13 , "name");
+        cs.setString(14 , "localhost");
+        cs.setInt(15 , 1);
+        for (int i = 0; i &lt; 10000; i++) {
+            cs.executeUpdate();
+        }
+        long end= System.currentTimeMillis();
+        System.out.println(end-start);
+
+    }
+}
+</pre>
+</div>
+<blockquote>
+<p>
+java TestMysqlConn<br  />
+7198<br  />
+java TestMysqlConn<br  />
+7453<br  />
+java TestMysqlConn<br  />
+7031<br  />
+</p>
+</blockquote>
+<p>
+测测结果显示，jdbc也用了大概7s左右的时间执行10000次存储过程的插入,<br  />
+可以证明emysql跟java jdbc连mysql基本不相上下<br  />
+</p>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+    <div>
+      <div class="post-meta">
+        <span title="post date" class="post-info">2012-04-22</span>
+        <span title="last modification date" class="post-info">2016-01-14</span>
+        <span title="tags" class="post-info"><a href="/tags/erlang/">Erlang</a>, <a href="/tags/mysql/">Mysql</a>, <a href="/tags/db/">DB</a></span>
+        <span title="author" class="post-info">纪秀峰</span>
+      </div>
+      <section>
+        <h1>Comments</h1>
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+          //var disqus_developer = 1;
+          var disqus_identifier = "/blog/emysql-压力测试/";
+          var disqus_url = "http://jixiuf.github.io/blog/emysql-压力测试/";
+          var disqus_shortname = 'jixiuf';
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        <div class="ds-thread"></div>
+        <script type="text/javascript">
+          var duoshuoQuery = {short_name:'jixiuf'};
+          (function() {
+          var ds = document.createElement('script');
+          ds.type = 'text/javascript';ds.async = true;
+          ds.src = 'http://static.duoshuo.com/embed.js';
+          ds.charset = 'UTF-8';
+          (document.getElementsByTagName('head')[0]
+          || document.getElementsByTagName('body')[0]).appendChild(ds);
+          })();
+        </script>
+      </section>
+      <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.js"></script>
+      <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script src="/media/js/main.js"></script>
+      <div class="footer">
+        <p>Generated by <a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.x (<a href="http://orgmode.org">Org mode</a> 8.x)</p>
+        <p>
+          Copyright &copy; 2012 - <span id="footerYear"></span> <a href="mailto:jixiuf &lt;at&gt; gmail &lt;dot&gt; com">纪秀峰</a>
+          &nbsp;&nbsp;-&nbsp;&nbsp;
+          Powered by <a href="https://github.com/kelvinh/org-page" target="_blank">org-page</a>
+          <script type="text/javascript">document.getElementById("footerYear").innerHTML = (new Date()).getFullYear();</script>
+        </p>
+      </div>
+    </div>
+
+  </body>
+</html>

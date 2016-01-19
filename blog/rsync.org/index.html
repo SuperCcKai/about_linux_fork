@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <title>rsync.org - 一个人的狂欢</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="纪秀峰" />
+    <meta name="description" content="rsync.org" />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="/media/css/main.css" type="text/css">
+    <link rel="stylesheet" href="/media/css/prettify.css" type="text/css">
+  </head>
+  <body class="container">
+    <div>
+      <header class="masthead">
+        <h1 class="masthead-title"><a href="/">一个人的狂欢</a></h1>
+        <p></p>
+        <ul>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/tags/">Tags</a></li>
+          <li><a href="/tags/">Tags</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="http://github.com/jixiuf">GitHub</a></li>
+          <li><a href="/rss.xml">RSS</a></li>
+        </ul>
+        <form method="get" id="searchform" action="http://www.google.com/search">
+          <input type="text" class="field" name="q" id="s" placeholder="Search">
+          <input type="hidden" name="as_sitesearch" value="jixiuf.github.io">
+        </form>
+      </header>
+    </div>
+
+<div>
+<div class="post">
+<h1>rsync.org</h1>
+<p>
+rsyncd.conf<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh"># /etc/rsyncd.conf
+
+# Minimal configuration file for rsync daemon
+# See rsync(1) and rsyncd.conf(5) man pages for help
+
+# This line is required by the /etc/init.d/rsyncd script
+pid file = /var/run/rsyncd.pid
+use chroot = yes
+read only = yes
+
+[sql_remote]
+   path = /tmp/sql_remote
+    read only = no
+    write only= yes
+    auth users= root jixiuf
+    secrets file=/etc/rsyncd_pass.conf
+    strict modes=no
+   comment = sql remote
+    uid=0
+    gid=0
+   # exclude = /distfiles /packages
+
+# Simple example for enabling your own local rsync server
+#[gentoo-portage]
+#  path = /usr/portage
+#  comment = Gentoo Portage tree
+#  exclude = /distfiles /packages
+</pre>
+</div>
+<p>
+/etc/rsyncd_pass.conf<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">jixiuf:jixiuf
+root:root
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-sh">rsync  -ahqzt  /home/jixiuf/Linux-C.pdf jixiuf@127.0.0.1::sql_remote  --password-file=/home/jixiuf/passwd
+-a 存档模式
+-h 保存硬连接
+-q 制止非错误信息
+-z 压缩文件数据在传输
+-t 维护修改时间
+-delete 删除于多余文件
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-sh">cat /home/jixiuf/passwd
+jixiuf
+</pre>
+</div>
+<p>
+inotify监控目录 inotify-tools<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">#/bin/sh
+# REMOTE_IP=192.168.1.202
+REMOTE_IP=127.0.0.1
+# 以下目录要以 /结尾,
+
+# 相对路径 可以包含本地ip作为目录名的一部分以便区分不同服务器
+REMOTE_DEST_DIR=tmp/
+# 绝对路径
+LOCAL_SRC_DIR=/home/jixiuf/lszm2/server/game_server/sql_dest/
+# 以上目录要以/结尾
+USER_NAME=jixiuf
+RSYNC_PASSWORD=jixiuf
+# --password-file=FILE
+# DST=rsync@$REMOTE_IP:$REMOTE_DEST_DIR
+DST=$USER_NAME@$REMOTE_IP::sql_remote/$REMOTE_DEST_DIR
+# rsync /home/jixiuf/notes.org $REMOTE_IP::$REMOTE_DIR
+
+# 在对目录进行监控之前，先把已经存在的文件　上传到服务器
+FileCnt=`find $LOCAL_SRC_DIR  -maxdepth 2 -type f  -name "*.sql"|wc -l`
+if ! [ $FileCnt == 0 ] ; then
+    for i in `find $LOCAL_SRC_DIR -maxdepth 2 -type f  -name "*.sql"`
+    do
+        relativePath=${i:${#LOCAL_SRC_DIR}}
+        echo $relativePath
+        cd $LOCAL_SRC_DIR &amp;&amp; RSYNC_PASSWORD=$RSYNC_PASSWORD rsync  -ahqztR   --exclude '*~' --exclude '.#*'    $relativePath$File $DST
+        exit_status=$?
+    # 如果成功传到服务器，则删除本地的文件
+        if [ $exit_status==0 ]  ; then
+            echo rm $i
+            rm -f $i
+        fi
+    done
+fi
+
+# rsync
+# -a 存档模式
+# -h 保存硬连接
+# -q 制止非错误信息
+# -z 压缩文件数据在传输
+# -t 维护修改时间
+# -delete 删除于多余文件
+inotifywait -mrq --exclude '.#.*' -e moved_to,create ${LOCAL_SRC_DIR} | while read Dir Type File
+# -m 是保持一直监听
+# -r 是递归查看目录
+# -q 是打印出事件
+do
+    # echo $File , $Dir,$Type
+    # ${#变量名}得到字符串长度
+    # ${变量名:起始}得到子字符串
+    relativePath=${Dir:${#LOCAL_SRC_DIR}}
+    # -R 使用相对路径，　所以先cd到根目录
+    cd $LOCAL_SRC_DIR &amp;&amp; RSYNC_PASSWORD=$RSYNC_PASSWORD rsync  -ahqztR   --exclude '*~' --exclude '.#*'    $relativePath$File $DST
+    exit_status=$?
+    # 如果成功传到服务器，则删除本地的文件
+    if [ $exit_status==0 ]  ; then
+        echo rm $Dir$File
+        rm -f $Dir$File
+    fi
+    # 为了以防万一有漏网之鱼，每次有新的文件创建时也进行一次全目录扫描
+    FileCnt=`find $LOCAL_SRC_DIR  -maxdepth 2 -type f  -name "*.sql"|wc -l`
+    if ! [ $FileCnt == 0 ] ; then
+        for i in `find $LOCAL_SRC_DIR -maxdepth 2 -type f  -name "*.sql"`
+        do
+            relativePath=${i:${#LOCAL_SRC_DIR}}
+            echo $relativePath
+            cd $LOCAL_SRC_DIR &amp;&amp; RSYNC_PASSWORD=$RSYNC_PASSWORD rsync  -ahqztR   --exclude '*~' --exclude '.#*'    $relativePath$File $DST
+            exit_status=$?
+    # 如果成功传到服务器，则删除本地的文件
+            if [ $exit_status==0 ]  ; then
+                echo rm $i
+                rm -f $i
+            fi
+        done
+    fi
+    # end 为了以防万一有漏网之鱼，每次有新的文件创建时也进行一次全目录扫描
+done
+#
+# rsync  -ahqzt  /home/jixiuf/Linux-C.pdf jixiuf@127.0.0.1::sql_remote  --password-file=/home/jixiuf/passwd
+</pre>
+</div>
+
+
+<div class="org-src-container">
+
+<pre class="src src-sh">/usr/local/bin/inotifywait -mrq -e modify,delete,create,attrib ${src}
+-m 是保持一直监听
+-r 是递归查看目录
+-q 是打印出事件
+</pre>
+</div>
+
+</div>
+</div>
+    <div>
+      <div class="post-meta">
+        <span title="post date" class="post-info">2012-11-01</span>
+        <span title="last modification date" class="post-info">2016-01-14</span>
+        <span title="tags" class="post-info"><a href="/tags/linux/">Linux</a></span>
+        <span title="author" class="post-info">纪秀峰</span>
+      </div>
+      <section>
+        <h1>Comments</h1>
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+          //var disqus_developer = 1;
+          var disqus_identifier = "/blog/rsync.org/";
+          var disqus_url = "http://jixiuf.github.io/blog/rsync.org/";
+          var disqus_shortname = 'jixiuf';
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        <div class="ds-thread"></div>
+        <script type="text/javascript">
+          var duoshuoQuery = {short_name:'jixiuf'};
+          (function() {
+          var ds = document.createElement('script');
+          ds.type = 'text/javascript';ds.async = true;
+          ds.src = 'http://static.duoshuo.com/embed.js';
+          ds.charset = 'UTF-8';
+          (document.getElementsByTagName('head')[0]
+          || document.getElementsByTagName('body')[0]).appendChild(ds);
+          })();
+        </script>
+      </section>
+      <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.js"></script>
+      <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script src="/media/js/main.js"></script>
+      <div class="footer">
+        <p>Generated by <a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.x (<a href="http://orgmode.org">Org mode</a> 8.x)</p>
+        <p>
+          Copyright &copy; 2012 - <span id="footerYear"></span> <a href="mailto:jixiuf &lt;at&gt; gmail &lt;dot&gt; com">纪秀峰</a>
+          &nbsp;&nbsp;-&nbsp;&nbsp;
+          Powered by <a href="https://github.com/kelvinh/org-page" target="_blank">org-page</a>
+          <script type="text/javascript">document.getElementById("footerYear").innerHTML = (new Date()).getFullYear();</script>
+        </p>
+      </div>
+    </div>
+
+  </body>
+</html>

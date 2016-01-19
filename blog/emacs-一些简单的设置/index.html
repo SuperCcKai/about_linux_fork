@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <title>emacs 一些简单的设置 - 一个人的狂欢</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="纪秀峰" />
+    <link rel="stylesheet" href="/media/css/main.css" type="text/css">
+    <link rel="stylesheet" href="/media/css/prettify.css" type="text/css">
+  </head>
+  <body class="container">
+    <div>
+      <header class="masthead">
+        <h1 class="masthead-title"><a href="/">一个人的狂欢</a></h1>
+        <p></p>
+        <ul>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/tags/">Tags</a></li>
+          <li><a href="/tags/">Tags</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="http://github.com/jixiuf">GitHub</a></li>
+          <li><a href="/rss.xml">RSS</a></li>
+        </ul>
+        <form method="get" id="searchform" action="http://www.google.com/search">
+          <input type="text" class="field" name="q" id="s" placeholder="Search">
+          <input type="hidden" name="as_sitesearch" value="jixiuf.github.io">
+        </form>
+      </header>
+    </div>
+
+<div>
+<div class="post">
+<h1>emacs 一些简单的设置</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgheadline1">不使用对话框进行（是，否 取消,打开文件） 的选择，而是用minibuffer</a></li>
+<li><a href="#orgheadline2">关闭scratch消息提示</a></li>
+<li><a href="#orgheadline3">隐藏启动显示画面</a></li>
+<li><a href="#orgheadline4">设置窗口标题格式</a></li>
+<li><a href="#orgheadline5">关闭烦人的出错时的提示声。</a></li>
+<li><a href="#orgheadline6">输入括号时 自动添加半边括号的功能</a></li>
+<li><a href="#orgheadline7">隐藏菜单栏 工具栏 滚动条</a></li>
+<li><a href="#orgheadline8">鼠标粘贴相关</a></li>
+<li><a href="#orgheadline9">kill-ring 设置的大一些,默认60</a></li>
+<li><a href="#orgheadline10">space vs tab  代码缩进</a></li>
+<li><a href="#orgheadline11">C-k kill-line 相关</a>
+<ul>
+<li><a href="#orgheadline12">C-k 的改进版</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline13">kill 相关</a></li>
+<li><a href="#orgheadline14">default-major-mode</a></li>
+<li><a href="#orgheadline15">自动备份相关</a></li>
+<li><a href="#orgheadline16">打开大文件</a></li>
+<li><a href="#orgheadline17">recentf  最近打开过的文件</a></li>
+<li><a href="#orgheadline18">即便重新打开emacs 也要保存emacs 的某些变量 ，比如kill-ring</a></li>
+<li><a href="#orgheadline19">记住上次打开某文件时光标所在的位置</a></li>
+<li><a href="#orgheadline20">个人信息</a></li>
+<li><a href="#orgheadline21">y-or-n-p</a></li>
+<li><a href="#orgheadline22">如果没选中区域，则默认选中当前行</a></li>
+<li><a href="#orgheadline23">minibuffer 相关配置(minibuffer文件名补全相关)</a></li>
+<li><a href="#orgheadline24">fill-column 当某行的长度大于70个字符的时候，再次输入文字会自动添加到下一行</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">不使用对话框进行（是，否 取消,打开文件） 的选择，而是用minibuffer</h2>
+<div class="outline-text-2" id="text-orgheadline1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq-default  use-dialog-box nil)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2">关闭scratch消息提示</h2>
+<div class="outline-text-2" id="text-orgheadline2">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp"># 默认的 *scratch* buffer 里面会有一段下面的内容，
+;; This buffer is for notes you don't want to save, and for Lisp evaluation.
+;; If you want to create a file, visit that file with C-x C-f,
+;; then enter the text in that file's own buffer.
+默认不想显示此内容，则这样设置
+(setq  initial-scratch-message nil)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline3" class="outline-2">
+<h2 id="orgheadline3">隐藏启动显示画面</h2>
+<div class="outline-text-2" id="text-orgheadline3">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq inhibit-startup-screen t)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline4" class="outline-2">
+<h2 id="orgheadline4">设置窗口标题格式</h2>
+<div class="outline-text-2" id="text-orgheadline4">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp"> ;标题显示文件名，而不是默认的username@localhost
+(setq frame-title-format "%b  [%I] %f  GNU/Emacs" )
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline5" class="outline-2">
+<h2 id="orgheadline5">关闭烦人的出错时的提示声。</h2>
+<div class="outline-text-2" id="text-orgheadline5">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq visible-bell t)
+(setq  ring-bell-function 'ignore)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline6" class="outline-2">
+<h2 id="orgheadline6">输入括号时 自动添加半边括号的功能</h2>
+<div class="outline-text-2" id="text-orgheadline6">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(electric-pair-mode t)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline7" class="outline-2">
+<h2 id="orgheadline7">隐藏菜单栏 工具栏 滚动条</h2>
+<div class="outline-text-2" id="text-orgheadline7">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(require 'menu-bar)
+(menu-bar-mode nil)
+(require 'tool-bar)
+(tool-bar-mode nil)
+(require 'scroll-bar)
+(scroll-bar-mode nil)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline8" class="outline-2">
+<h2 id="orgheadline8">鼠标粘贴相关</h2>
+<div class="outline-text-2" id="text-orgheadline8">
+<p>
+不要在鼠标点击的那个地方插入剪贴板内容。我不喜欢那样，经常把 我的文档<br  />
+搞的一团糟。我觉得先用光标定位，然后鼠标中键点击要好 的多。不管你的光<br  />
+标在文档的那个位置，或是在 minibuffer，鼠标 中键一点击，X selection 的<br  />
+内容就被插入到那个位置<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq mouse-yank-at-point t)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline9" class="outline-2">
+<h2 id="orgheadline9">kill-ring 设置的大一些,默认60</h2>
+<div class="outline-text-2" id="text-orgheadline9">
+<p>
+emacs 会维护一个 剪切环，所有你剪切 复制,kill掉的内容都会先放到这里<br  />
+面你粘贴的时候 就是把这里面的内容粘贴到光标处,在windows 上你复制两个<br  />
+内容到剪切板，最先复制的那个就是被丢弃只保留最后复制的一个，而emacs<br  />
+可以保存多份你复制过的内容，这里就设置最多允许保存多少份与此相关的粘<br  />
+贴命令是C-y ，使用一个C-y会把最近复制的内容放到光标处此时再按多次M-y<br  />
+则后 把前一次复制的内容放到光标处 ，重复多次M-y 就可以遍历kill-ring<br  />
+中的内容<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq kill-ring-max 200)
+(setq kill-do-not-save-duplicates t);不向kill-ring中加入重复内容
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline10" class="outline-2">
+<h2 id="orgheadline10">space vs tab  代码缩进</h2>
+<div class="outline-text-2" id="text-orgheadline10">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">用空格代替tab来进行代码的缩进
+(setq-default indent-tabs-mode nil)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline11" class="outline-2">
+<h2 id="orgheadline11">C-k kill-line 相关</h2>
+<div class="outline-text-2" id="text-orgheadline11">
+<p>
+默认C-k 绑定 kill-line 命令<br  />
+这个命令的作用是 删除从光标到行末的内容<br  />
+如果此时光标在行首 则删除整行内容，但不包括行尾的换行符<br  />
+需要你再按一次C-k 才会删除行尾的换行符<br  />
+C-u 0 C-k 则会删除从光标到行首的内容<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq kill-whole-line t);在行首 C-k 时，同时删除末尾换行符
+</pre>
+</div>
+</div>
+<div id="outline-container-orgheadline12" class="outline-3">
+<h3 id="orgheadline12">C-k 的改进版</h3>
+<div class="outline-text-3" id="text-orgheadline12">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">;;我写的一个函数,如果有选中区域,则kill选区,否则删除当前行
+;;注意当前行并不代表整行,它只删除光标到行尾的内容,也就是默认情况下
+;;C-k 所具有的功能
+;; C-w kill-region 这个按键可以省下来，此改进版 包含了kill-region 功能
+;; 你可以把C-w 绑定到其他命令上去
+(defun joseph-kill-region-or-line(&amp;optional arg)
+  "this function is a wrapper of (kill-line).
+        When called interactively with no active region, this function
+       will call (kill-line) ,else kill the region."
+  (interactive "P")
+  (if mark-active
+      (if (= (region-beginning) (region-end) ) (kill-line arg)
+        (kill-region (region-beginning) (region-end)))
+    (kill-line arg)))
+(global-set-key (kbd "C-k") 'joseph-kill-region-or-line)
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline13" class="outline-2">
+<h2 id="orgheadline13">kill 相关</h2>
+<div class="outline-text-2" id="text-orgheadline13">
+<p>
+如果在一些read-only 的buffer 中去kill (kill-line kill-region) 默认是<br  />
+kill 不成功的会给出警告,如在dired-mode 中按C-k<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq kill-read-only-ok t)
+;;kill read-only buffer内容时,会把此内容放到kill-ring中而不用警告
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(delete-selection-mode 1) ;;当选中内容时，输入新内容则会替换掉,启用delete-selection-mode
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline14" class="outline-2">
+<h2 id="orgheadline14">default-major-mode</h2>
+<div class="outline-text-2" id="text-orgheadline14">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">;; 把缺省的 major mode 设置为 text-mode, 而不是几乎什么功能也 没有的 fundamental-mode.
+(setq default-major-mode 'text-mode)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline15" class="outline-2">
+<h2 id="orgheadline15">自动备份相关</h2>
+<div class="outline-text-2" id="text-orgheadline15">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq
+ backup-by-copying t    ;自动备份
+ delete-old-versions t ; 自动删除旧的备份文件
+ kept-new-versions 10   ; 保留最近的10个备份文件
+ kept-old-versions 2   ; 保留最早的2个备份文件
+ version-control t    ; 多次备份
+ ;; 把生成的备份文件放到统一的一个目录,而不在在文件当前目录生成好多 ~ #的文件
+ ;; 如果你编辑某个文件时 后悔了想恢复成以前的一个版本 你可以到这个目录下
+ ;; 找到备份的版本
+ backup-directory-alist `((".*" . "~/.emacs.d/cache/backup_files/")) ;
+ auto-save-file-name-transforms `((".*" "~/.emacs.d/cache/backup_files/" t))
+ auto-save-list-file-prefix   "~/.emacs.d/cache/backup_files/saves-")
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline16" class="outline-2">
+<h2 id="orgheadline16">打开大文件</h2>
+<div class="outline-text-2" id="text-orgheadline16">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq  large-file-warning-threshold nil);打开大文件时不必警告
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline17" class="outline-2">
+<h2 id="orgheadline17">recentf  最近打开过的文件</h2>
+<div class="outline-text-2" id="text-orgheadline17">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq recentf-max-saved-items 500)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline18" class="outline-2">
+<h2 id="orgheadline18">即便重新打开emacs 也要保存emacs 的某些变量 ，比如kill-ring</h2>
+<div class="outline-text-2" id="text-orgheadline18">
+<p>
+即保存剪切板中的内容<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq-default savehist-additional-variables
+      '(kill-ring))
+(savehist-mode 1)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline19" class="outline-2">
+<h2 id="orgheadline19">记住上次打开某文件时光标所在的位置</h2>
+<div class="outline-text-2" id="text-orgheadline19">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq-default save-place t)
+(require 'saveplace)
+(save-place-mode 1)                     ;emacs-25 以后才有
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline20" class="outline-2">
+<h2 id="orgheadline20">个人信息</h2>
+<div class="outline-text-2" id="text-orgheadline20">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq user-full-name "myname")
+(setq user-mail-address "my@qq.com")
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline21" class="outline-2">
+<h2 id="orgheadline21">y-or-n-p</h2>
+<div class="outline-text-2" id="text-orgheadline21">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(fset 'yes-or-no-p 'y-or-n-p) ;; 把Yes用y代替
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline22" class="outline-2">
+<h2 id="orgheadline22">如果没选中区域，则默认选中当前行</h2>
+<div class="outline-text-2" id="text-orgheadline22">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">;;; 关于没有选中区域,则默认为选中整行的advice
+;;;;默认情况下M-w复制一个区域，但是如果没有区域被选中，则复制当前行
+(defadvice kill-ring-save (before slickcopy activate compile)
+  "When called interactively with no active region, copy a single line instead."
+  (interactive
+   (if mark-active (list (region-beginning) (region-end))
+     (message "已选中当前行!")
+     (list (line-beginning-position)
+           (line-beginning-position 2)))))
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline23" class="outline-2">
+<h2 id="orgheadline23">minibuffer 相关配置(minibuffer文件名补全相关)</h2>
+<div class="outline-text-2" id="text-orgheadline23">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq-default
+ enable-recursive-minibuffers t        ;在minibuffer 中也可以再次使用minibuffer
+ history-delete-duplicates t          ;minibuffer 删除重复历史
+ minibuffer-prompt-properties (quote (read-only t point-entered minibuffer-avoid-prompt face minibuffer-prompt)) ;;;;minibuffer prompt 只读，且不允许光标进入其中
+ resize-mini-windows t ;; 当minibuffer 内容一行显示不下来时 允许调整minibuffer大小
+ read-buffer-completion-ignore-case t ;;补全buffer名时忽略大小写
+ read-file-name-completion-ignore-case t;;补全文件名时忽略大小写
+ completion-cycle-threshold 8)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline24" class="outline-2">
+<h2 id="orgheadline24">fill-column 当某行的长度大于70个字符的时候，再次输入文字会自动添加到下一行</h2>
+<div class="outline-text-2" id="text-orgheadline24">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq-default fill-column 80)
+或者可以 C-x f 交互式的设置这个值
+</pre>
+</div>
+<p>
+与此相关的一个命令是M-q fill-paragraph比如 某一段文字，每一行的字数<br  />
+长度不一，比较混乱光标移动到此段文字上 然后按下C-q 后， 会自动调整每<br  />
+一行的字数到fill-column 个.<br  />
+</p>
+</div>
+</div>
+
+</div>
+</div>
+    <div>
+      <div class="post-meta">
+        <span title="post date" class="post-info">2015-10-18</span>
+        <span title="last modification date" class="post-info">2016-01-14</span>
+        <span title="tags" class="post-info"><a href="/tags/emacs/">Emacs</a></span>
+        <span title="author" class="post-info">纪秀峰</span>
+      </div>
+      <section>
+        <h1>Comments</h1>
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+          //var disqus_developer = 1;
+          var disqus_identifier = "/blog/emacs-一些简单的设置/";
+          var disqus_url = "http://jixiuf.github.io/blog/emacs-一些简单的设置/";
+          var disqus_shortname = 'jixiuf';
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        <div class="ds-thread"></div>
+        <script type="text/javascript">
+          var duoshuoQuery = {short_name:'jixiuf'};
+          (function() {
+          var ds = document.createElement('script');
+          ds.type = 'text/javascript';ds.async = true;
+          ds.src = 'http://static.duoshuo.com/embed.js';
+          ds.charset = 'UTF-8';
+          (document.getElementsByTagName('head')[0]
+          || document.getElementsByTagName('body')[0]).appendChild(ds);
+          })();
+        </script>
+      </section>
+      <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.js"></script>
+      <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script src="/media/js/main.js"></script>
+      <div class="footer">
+        <p>Generated by <a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.x (<a href="http://orgmode.org">Org mode</a> 8.x)</p>
+        <p>
+          Copyright &copy; 2012 - <span id="footerYear"></span> <a href="mailto:jixiuf &lt;at&gt; gmail &lt;dot&gt; com">纪秀峰</a>
+          &nbsp;&nbsp;-&nbsp;&nbsp;
+          Powered by <a href="https://github.com/kelvinh/org-page" target="_blank">org-page</a>
+          <script type="text/javascript">document.getElementById("footerYear").innerHTML = (new Date()).getFullYear();</script>
+        </p>
+      </div>
+    </div>
+
+  </body>
+</html>

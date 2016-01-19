@@ -1,0 +1,3175 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <title>c cpp 拾遗 - 一个人的狂欢</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="纪秀峰" />
+    <meta name="description" content="c拾遗" />
+    <meta name="keywords" content=":C:" />
+    <link rel="stylesheet" href="/media/css/main.css" type="text/css">
+    <link rel="stylesheet" href="/media/css/prettify.css" type="text/css">
+  </head>
+  <body class="container">
+    <div>
+      <header class="masthead">
+        <h1 class="masthead-title"><a href="/">一个人的狂欢</a></h1>
+        <p></p>
+        <ul>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/tags/">Tags</a></li>
+          <li><a href="/tags/">Tags</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="http://github.com/jixiuf">GitHub</a></li>
+          <li><a href="/rss.xml">RSS</a></li>
+        </ul>
+        <form method="get" id="searchform" action="http://www.google.com/search">
+          <input type="text" class="field" name="q" id="s" placeholder="Search">
+          <input type="hidden" name="as_sitesearch" value="jixiuf.github.io">
+        </form>
+      </header>
+    </div>
+
+<div>
+<div class="post">
+<h1>c cpp 拾遗</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgheadline1">make_mark</a></li>
+<li><a href="#orgheadline2">c cpp  的一些判断</a></li>
+<li><a href="#orgheadline3">const 的作用</a></li>
+<li><a href="#orgheadline4">c++的初始化</a></li>
+<li><a href="#orgheadline5">c++ 的声明与定义，</a>
+<ul>
+<li><a href="#orgheadline6">在头文件中不可以出现定义,只能有声明,因为会被多个源文件引用， 导致多处定义</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline7">c++ 引用</a></li>
+<li><a href="#orgheadline8">c++ 枚举 enum</a></li>
+<li><a href="#orgheadline12">string 相关</a>
+<ul>
+<li><a href="#orgheadline9">string.size() 返回string::size_type类型,而非int</a></li>
+<li><a href="#orgheadline10">取string第n个字符用[]下标操作即可,也可对其赋值,只能对已经存在的元素赋值，不能添加</a></li>
+<li><a href="#orgheadline11">cctype 头文件里一些函数如isupper tolower isspace</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline13">vector 容器</a>
+<ul>
+<li><a href="#orgheadline14">vector [] 下标操作同 string ,可get 可set,只能针对存在的元素,但不能add</a></li>
+<li><a href="#orgheadline15">使用iterator</a></li>
+<li><a href="#orgheadline16">使用const_iterator</a></li>
+<li><a href="#orgheadline17">vector的iterator可以进行简单的算术运算操作，</a></li>
+<li><a href="#orgheadline18">任何改变vector长度的操作，都会使已存在的iterator 失效,</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline19">bitset</a></li>
+<li><a href="#orgheadline20">数组</a>
+<ul>
+<li><a href="#orgheadline21">初始化</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline34">指针</a>
+<ul>
+<li><a href="#orgheadline25">指针的定义 风格</a></li>
+<li><a href="#orgheadline26">指针的初始化</a></li>
+<li><a href="#orgheadline27">指针类型要匹配</a></li>
+<li><a href="#orgheadline28">指针与引用的区别</a></li>
+<li><a href="#orgheadline29">指针的运算</a></li>
+<li><a href="#orgheadline33">指向const对象的指针 和const 指针(本身的值不可变)</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline35">动态数组</a></li>
+<li><a href="#orgheadline36">-&gt; 操作符</a></li>
+<li><a href="#orgheadline37">sizeof 操作符 的结果是 编译时常量</a></li>
+<li><a href="#orgheadline38">new delete</a></li>
+<li><a href="#orgheadline42">强制类型转换( static_cast const_cast, dynamic_cast, reinterpret_cast)</a>
+<ul>
+<li><a href="#orgheadline39">static_cast 默认所有的隐式类型转换，都可以通过static_cast显示实现</a></li>
+<li><a href="#orgheadline40">const_cast 去掉var的const 属性</a></li>
+<li><a href="#orgheadline41">reinterpret_cast</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline43">switch</a></li>
+<li><a href="#orgheadline45">内联函数</a>
+<ul>
+<li><a href="#orgheadline44">内联函数应该在头文件中定义(对编译器必须是可见的)</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline48">成员函数</a>
+<ul>
+<li><a href="#orgheadline46">成员函数可在类外或类内定义，在类内定义 ，编译器隐式的将其转成内联函数</a></li>
+<li><a href="#orgheadline47">成员函数的隐含形参this 是一个指针(不是引用),指向调用此函数的对象的地址</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline54">构造函数</a>
+<ul>
+<li><a href="#orgheadline49">必须在类中声明， 可在类内或类外定义</a></li>
+<li><a href="#orgheadline50">构造函数的初始化列表(在参数列表后，函数体前的代码)</a></li>
+<li><a href="#orgheadline51">默认构造函数不能自动初始化 内置类型 的成员,必须自定义构造函数初始化这些成员,对于类类型的成员默认用他们默认构造函数来初始化</a></li>
+<li><a href="#orgheadline52">构造函数隐式转换</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline60">函数重载(同一个类中 ，函数名相同参数不同)</a>
+<ul>
+<li><a href="#orgheadline55">参数不同的含义，使用typedef定义一个别名后，认为使用别名跟使用本名是同一种类型</a></li>
+<li><a href="#orgheadline58">参数的const 与否，与重载</a></li>
+<li><a href="#orgheadline59">不能仅仅根据返回值类型不同来区别两个函数</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline61">函数指针</a></li>
+<li><a href="#orgheadline69">IO</a>
+<ul>
+<li><a href="#orgheadline62">类的关系</a></li>
+<li><a href="#orgheadline63">io 与宽字符</a></li>
+<li><a href="#orgheadline64">IO 对象 不可赋值或复制</a></li>
+<li><a href="#orgheadline65">条件状态</a></li>
+<li><a href="#orgheadline66">File</a></li>
+<li><a href="#orgheadline68">字符流 stringstream ostringstream istringstream</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline78">顺序容器</a>
+<ul>
+<li><a href="#orgheadline70">包括哪些</a></li>
+<li><a href="#orgheadline71">容器内元素的约束</a></li>
+<li><a href="#orgheadline72">容器iterator支持的操作</a></li>
+<li><a href="#orgheadline74">容器提供的类型</a></li>
+<li><a href="#orgheadline75">插入元素</a></li>
+<li><a href="#orgheadline77">删除元素</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline86">关联容器</a>
+<ul>
+<li><a href="#orgheadline79">关联窗口列表</a></li>
+<li><a href="#orgheadline80">pair</a></li>
+<li><a href="#orgheadline81">map</a></li>
+<li><a href="#orgheadline85">set</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline87">泛形算法(可以操作在多种容器类型上)</a>
+<ul>
+<li><a href="#orgheadline88">find(iter_beg,iter_end,search_value) 从某段范围内查找search_value,失败返回iter_end,成功返回iter</a></li>
+<li><a href="#orgheadline89">accumulate(iter_beg,iter_end,init_value) 求和,类似于erlang里的lists:foldl</a></li>
+<li><a href="#orgheadline90">find_first_of(iter1_beg,iter1_end,iter2_beg,iter2_end)</a></li>
+<li><a href="#orgheadline91">fill(beg,end,value) 填充value</a></li>
+<li><a href="#orgheadline92">fill_n(beg,N,value) 填充N个value</a></li>
+<li><a href="#orgheadline93">replace(beg,end,old,new) 把old换成new</a></li>
+<li><a href="#orgheadline94">replace_copy(beg,end,NewIterBeg,old,new) 不改变原来的容器，将改变后的内容存入NewIterBeg所指容器中</a></li>
+<li><a href="#orgheadline95">sort unique 排序 去重，</a></li>
+<li><a href="#orgheadline96">count_if(beg,end,Pred)  类似函数式编程，</a></li>
+<li><a href="#orgheadline100">泛形与iterator</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline101">类</a></li>
+<li><a href="#orgheadline102">类 this 指针</a>
+<ul>
+<li><a href="#orgheadline103">this 与const</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline104">mutable 可变数据成员</a></li>
+<li><a href="#orgheadline107">友元 friend</a>
+<ul>
+<li><a href="#orgheadline105">friend Class</a></li>
+<li><a href="#orgheadline106">friend Function</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline109">static 数据成员</a>
+<ul>
+<li><a href="#orgheadline108">static 数据成员必须在 类的定义 外 初始化 (只能一次）</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline110">复制构造函数</a></li>
+<li><a href="#orgheadline111">赋值操作符</a></li>
+<li><a href="#orgheadline112">析构函数</a></li>
+<li><a href="#orgheadline113">管理具有指针成员的类（引用计数)</a></li>
+<li><a href="#orgheadline114">操作符重载</a></li>
+<li><a href="#orgheadline135">面向对象 多承 多态(动态绑定,父类引用指向子类对象)) 封装</a>
+<ul>
+<li><a href="#orgheadline115">父类 通常 应该 将 子类需要重新定义的函数 声明为 virtual</a></li>
+<li><a href="#orgheadline116">继承语法  子类:[public |private|protected] 父类, 子类权限的控制</a></li>
+<li><a href="#orgheadline120">子类可以选择性的继承父类的 virtaul 函数</a></li>
+<li><a href="#orgheadline121">子类的声明(并非定义)</a></li>
+<li><a href="#orgheadline122">virtaul</a></li>
+<li><a href="#orgheadline123">virtaul 函数 与　默认参数</a></li>
+<li><a href="#orgheadline124">友元关系不能继承</a></li>
+<li><a href="#orgheadline125">static</a></li>
+<li><a href="#orgheadline126">继承与转化</a></li>
+<li><a href="#orgheadline127">构造函数 与继承</a></li>
+<li><a href="#orgheadline128">复制构造函数 与继承</a></li>
+<li><a href="#orgheadline129">赋值操作符 与继承</a></li>
+<li><a href="#orgheadline130">如果在构造函数 或 析构函数 中调用  虚函数,</a></li>
+<li><a href="#orgheadline131">名字冲突与继承</a></li>
+<li><a href="#orgheadline132">重载</a></li>
+<li><a href="#orgheadline133">纯虚函数 ,</a></li>
+<li><a href="#orgheadline134">容器与继承</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline136">模版</a></li>
+<li><a href="#orgheadline142">高级内存分配</a>
+<ul>
+<li><a href="#orgheadline137">allocator 模版类</a></li>
+<li><a href="#orgheadline138">普通的new</a></li>
+<li><a href="#orgheadline139">特殊的new ,定位new表达式</a></li>
+<li><a href="#orgheadline140">string *str = new string("hello");</a></li>
+<li><a href="#orgheadline141">例子 一个内存分配置基类</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">make_mark</h2>
+<div class="outline-text-2" id="text-orgheadline1">
+<div class="org-src-container">
+
+<pre class="src src-c">比如MAKE_MASK(3 )会生成  二进制的 00000111
+#define MAKE_MASK(n)  ((((int)1) &lt;&lt; (n)) -1)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2">c cpp  的一些判断</h2>
+<div class="outline-text-2" id="text-orgheadline2">
+<div class="org-src-container">
+
+<pre class="src src-c">if(flag)
+if(!flag)
+而非
+if(0==flag)
+
+判断指针非空用
+if(p==NULL) // NULL 定义的 #include&lt;cstdlib&gt;  或c的stdlib.h
+尽量少用:
+if(p)
+if(p==0)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline3" class="outline-2">
+<h2 id="orgheadline3">const 的作用</h2>
+<div class="outline-text-2" id="text-orgheadline3">
+<ol class="org-ol">
+<li>定义常量<br  /></li>
+<li>在函数的返回值或参数中对其类型进行限制，防止函数内修改参数，一般多指指针类型<br  /></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgheadline4" class="outline-2">
+<h2 id="orgheadline4">c++的初始化</h2>
+<div class="outline-text-2" id="text-orgheadline4">
+<div class="org-src-container">
+
+<pre class="src src-c++">   int i(1024);// 直接初始化
+   int i=1024; //复制初始化
+
+#include&lt;string&gt;
+std:string str="asfdasd";
+std:string str("asfdasd");
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline5" class="outline-2">
+<h2 id="orgheadline5">c++ 的声明与定义，</h2>
+<div class="outline-text-2" id="text-orgheadline5">
+<p>
+声明可以多次， 定义只能一次，声明不分配内存<br  />
+用extern关键来来声明<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++"> extern int i ;//声明i
+ int i ;//声明 并定义,所以这是定义 ，不可以出现多次
+ int i=2 ;//声明 并定义,并初始值
+ 因为声明 不分配内存 所以不可以初始化，一旦有初始化的行为，则认为是定义，即便使用了ertern 也认为是定义而非声明
+ extern int i =3; // 声明 定义 并初始化， 这里的extern 几乎无意义.
+定义之后可以再次出现 单独声明的语句， 但是不能出现
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-c++">int main(int argc, char *argv[]){
+  extern  string s;// 只是声明 ，编译会报错
+  std::cout &lt;&lt; s &lt;&lt; std::endl;
+}
+</pre>
+</div>
+<p>
+非const 变量默认extern ,要使const 变量可以在其他文件中使用，<br  />
+必须在本文件及其他文件中声明它为extern<br  />
+默认const 变量只在定义它的文件中有用的局部变量,<br  />
+</p>
+</div>
+<div id="outline-container-orgheadline6" class="outline-3">
+<h3 id="orgheadline6">在头文件中不可以出现定义,只能有声明,因为会被多个源文件引用， 导致多处定义</h3>
+<div class="outline-text-3" id="text-orgheadline6">
+<p>
+头文件里不能有定义有3个例外:<br  />
+</p>
+<ol class="org-ol">
+<li>定义类<br  /></li>
+<li>编译期就已经知道的const对象<br  /></li>
+<li>内联函数<br  /></li>
+</ol>
+<p>
+这些实体可在多个源文件中出现 只要处处定义相同<br  />
+编译器需要知道这些来产生代码(为什么允许这3个例外)<br  />
+默认const 变量只在定义它的文件中有用的局部变量,这样规定后， const变量就允许<br  />
+出现在头文件里,但是必须用常量表达式出始化 否则必须像正常变量一样源文件里定义并<br  />
+初始化，在头文件里添加extern 声明，以使其被多个文件共享<br  />
+const int a = squt(2 ) ;就不是常量表达式<br  />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline7" class="outline-2">
+<h2 id="orgheadline7">c++ 引用</h2>
+<div class="outline-text-2" id="text-orgheadline7">
+<p>
+引用不可以为null ,定义时必须初始化,<br  />
+初始化后，不可能绑定到其他对象了,所以一个引用只能绑定一个对象<br  />
+const 引用 是指向 const对象的 引用 both ref and object are const<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++">int i =1;
+int &amp;iRef=i;//正确
+int &amp;iRef2; //错
+int &amp;iref3=10;//错  10是常量
+
+const  int i3=10;
+const  int &amp;i3ref=i3;//对
+int &amp;i3ref2=i3;//错 必须 加 const
+
+const int &amp;i4=111;//对 ，const引用可以指向常量
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline8" class="outline-2">
+<h2 id="orgheadline8">c++ 枚举 enum</h2>
+<div class="outline-text-2" id="text-orgheadline8">
+<div class="org-src-container">
+
+<pre class="src src-c++">  enum Forms{shape=1,sphere,cylinder,polygon}
+  枚举的值后一个比前一个加1,除非显示初始化
+  shape=1 , sphere=2,cylinder=3,
+
+  枚举的值可以重复
+  enum Forms{shape=1,sphere,cylinder=2,polygon}
+  则shape=1 sphere=2 cylinder=2 polygon=3
+ 定义成枚举后， 枚举跟int是不同类型
+ 如
+Froms f1=shape; //ok
+Froms f2=2 ; // error
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline12" class="outline-2">
+<h2 id="orgheadline12">string 相关</h2>
+<div class="outline-text-2" id="text-orgheadline12">
+</div><div id="outline-container-orgheadline9" class="outline-3">
+<h3 id="orgheadline9">string.size() 返回string::size_type类型,而非int</h3>
+<div class="outline-text-3" id="text-orgheadline9">
+<div class="org-src-container">
+
+<pre class="src src-c++">string::size_type len=  s.size();//ok
+int len=  s.size();//error, 但是我试了 编译运行都 可过， 但是不推荐
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline10" class="outline-3">
+<h3 id="orgheadline10">取string第n个字符用[]下标操作即可,也可对其赋值,只能对已经存在的元素赋值，不能添加</h3>
+<div class="outline-text-3" id="text-orgheadline10">
+<p>
+[]中的数是一个size_type类型,从0 始计<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++">string str("hello");
+char c=str [1];
+std::cout &lt;&lt; c &lt;&lt; std::endl;
+str[1]='E';
+std::cout &lt;&lt; str &lt;&lt; std::endl;  // "hEllo"
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-c++">遍历
+for (string::size_type  i= 0; i &lt; str.size(); i++){
+  std::cout &lt;&lt; str[i] &lt;&lt; std::endl;
+ }
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline11" class="outline-3">
+<h3 id="orgheadline11">cctype 头文件里一些函数如isupper tolower isspace</h3>
+<div class="outline-text-3" id="text-orgheadline11">
+<div class="org-src-container">
+
+<pre class="src src-c++">#include &lt;cctype&gt;
+// isdigit(int)
+// islower(int)
+// isupper
+// isalnum
+// isspace 这些函数也是在std::下的
+char c='d';
+std::cout &lt;&lt; isupper(c) &lt;&lt; std::endl;
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline13" class="outline-2">
+<h2 id="orgheadline13">vector 容器</h2>
+<div class="outline-text-2" id="text-orgheadline13">
+<p>
+是同一种类型的对象的集合<br  />
+vector是类模版，不是数据类型<br  />
+vector&lt;int&gt; vector&lt;string&gt;则是数据类型<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++">vector&lt;string&gt; v1;
+string s1("aaa");
+string s2("bbb");
+
+v1.push_back(s1);
+v1.push_back(s2);
+vector&lt;string&gt; v2(v1);
+
+s1="ccc";//对s1的改变 变不会影响v1 v2中的元素
+
+// size_type类型的写法,不可以写成vector::size_type
+for (vector&lt;string&gt;::size_type i = 0; i&lt;v1.size(); i++) {
+  std::cout &lt;&lt; v1.at(i) &lt;&lt; std::endl;
+ } // 打印后的是"aaa" "bbb",
+std::cout &lt;&lt; "" &lt;&lt; std::endl;
+
+for (vector&lt;string&gt;::size_type i = 0; i&lt;v2.size(); i++) {
+  std::cout &lt;&lt; v2.at(i) &lt;&lt; std::endl;
+ }// 打印后的是"aaa" "bbb",
+</pre>
+</div>
+</div>
+<div id="outline-container-orgheadline14" class="outline-3">
+<h3 id="orgheadline14">vector [] 下标操作同 string ,可get 可set,只能针对存在的元素,但不能add</h3>
+</div>
+<div id="outline-container-orgheadline15" class="outline-3">
+<h3 id="orgheadline15">使用iterator</h3>
+<div class="outline-text-3" id="text-orgheadline15">
+<div class="org-src-container">
+
+<pre class="src src-c++"># vector1.begin()指向首元素，
+#vector1.end()指向尾元素的下一个位置
+iterator的解引用操作(*it)，取得指向元素的对象 如元素类型是string ,则返回的是string对象
+for (vector&lt;string&gt;::iterator it =  v1.begin();it!= v1.end() ; it++){
+  std::cout &lt;&lt; *it &lt;&lt; std::endl;
+  *it= *it+"hello";  //可以改变元素的值
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline16" class="outline-3">
+<h3 id="orgheadline16">使用const_iterator</h3>
+<div class="outline-text-3" id="text-orgheadline16">
+<p>
+与iterator一样， 只是不能对iterator指向的元素进行赋值操作.<br  />
+其指向的元素是只读的，并不是 const_iterator只读<br  />
+意思是不能改变它指向元素的值， 但能改变他指向什么元素<br  />
+所以 const vector&lt;string&gt;:iterator it;<br  />
+vector&lt;string&gt;:const_iterator it;<br  />
+并不相同<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline17" class="outline-3">
+<h3 id="orgheadline17">vector的iterator可以进行简单的算术运算操作，</h3>
+<div class="outline-text-3" id="text-orgheadline17">
+<p>
+不是所有的容器类型都支持<br  />
+iter+n<br  />
+iter-n<br  />
+iter1-iter2<br  />
+// 返回两元素间的位置差,返回的类型是vector&lt;string&gt;:difference_type<br  />
+//可正可负<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline18" class="outline-3">
+<h3 id="orgheadline18">任何改变vector长度的操作，都会使已存在的iterator 失效,</h3>
+<div class="outline-text-3" id="text-orgheadline18">
+<p>
+如push_back()之后，   原来iterator指向的值就不可信了<br  />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline19" class="outline-2">
+<h2 id="orgheadline19">bitset</h2>
+<div class="outline-text-2" id="text-orgheadline19">
+<p>
+bitset 是模版， 不同的是区别只在长度 ，不在类型<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++"> #include&lt;bitset&gt;
+ using std::bitset;
+ bitset&lt;32&gt; bs; //32 bits all 0
+ bitset&lt;16&gt; bs2(0xffff);// 用0xffff的低16位填充
+ bs[0]  指的是低位第一位
+ bitset&lt;16&gt; bs2("11110001");
+
+// bitset 提供 了 set all() any() ,count() test(pos)
+//  flip()  flip(pos) 按位取反
+// to_string to_ulong()
+//  std::cout &lt;&lt; bs &lt;&lt; std::endl; //可以直接 入 流
+// count() 返回有多少位是1，类型是size_t,在 #include&lt;cstddef&gt;中定义
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline20" class="outline-2">
+<h2 id="orgheadline20">数组</h2>
+<div class="outline-text-2" id="text-orgheadline20">
+<p>
+数组的维数 只能用 包含整形字面值常量、枚举常量 或者用常量表达式初始化的整形<br  />
+const对象 ,非const变量， 以及到运行时才知道其值的const变量都不能用来定义其维数<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++">const int i=10;
+int j=10;
+int arr[i+1];                   // 合法的 常量表达式(i是const变量， 编译其就知道其大小)
+int arr2[j];                   // 不合法的 (j不是const变量， 编译其不知道其大小)
+</pre>
+</div>
+</div>
+<div id="outline-container-orgheadline21" class="outline-3">
+<h3 id="orgheadline21">初始化</h3>
+<div class="outline-text-3" id="text-orgheadline21">
+<div class="org-src-container">
+
+<pre class="src src-c++">//数组初始化
+int array[3] = {1,2,3};
+int array[] = {1,2,3};//不指定数据长度也可，此时
+char array[] = "c";//等同于 char array[]= {'c','\0'}
+// 可以用sizeof(array) 取数组的长度(数组的长度编译期就确定了，所以sizeof可以做到, c语言里也一样)
+// 但是 数组作为参数传递时会自动转化成char* 指针， 它是没法取到数组的长度的
+</pre>
+</div>
+</div>
+
+<ul class="org-ul"><li><a id="orgheadline22"></a>在函数体外定义的内置类型的数组，其元素初始化为0<br  /></li>
+<li><a id="orgheadline23"></a>在函数体内定义的内置类型的数组，其元素未初始化，<br  /></li>
+<li><a id="orgheadline24"></a>不论数组在哪定义，若元素类型为类，则自动调用其默认构造函数初始化，若无默认构造函数，则必须显示初始化<br  /></li></ul>
+</div>
+</div>
+<div id="outline-container-orgheadline34" class="outline-2">
+<h2 id="orgheadline34">指针</h2>
+<div class="outline-text-2" id="text-orgheadline34">
+</div><div id="outline-container-orgheadline25" class="outline-3">
+<h3 id="orgheadline25">指针的定义 风格</h3>
+<div class="outline-text-3" id="text-orgheadline25">
+<div class="org-src-container">
+
+<pre class="src src-c++"> char *p1 ,*p2; //p1 p2 都是指针
+
+//p1 是指针 ，p2是char ,//跟 char *p1 p2;写法一样
+// 建议使用 char *p1 ,而非 char* p1;
+ char* p1 p2 ;
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline26" class="outline-3">
+<h3 id="orgheadline26">指针的初始化</h3>
+<div class="outline-text-3" id="text-orgheadline26">
+<div class="org-src-container">
+
+<pre class="src src-c++">//指针不可以用int类型的变量来赋值,
+ //但可以用值为0 的const 变量来初始化
+int a =0;
+const b=0;
+int *p =a;//错误
+int *p2=b;// ok,
+int *p2=0;// ok,
+int *p2=NULL;// ok, #include&lt;cstdlib&gt;
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline27" class="outline-3">
+<h3 id="orgheadline27">指针类型要匹配</h3>
+<div class="outline-text-3" id="text-orgheadline27">
+<div class="org-src-container">
+
+<pre class="src src-c++">double d =10;
+double *pd=&amp;d;
+int *pi =pd;//error
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline28" class="outline-3">
+<h3 id="orgheadline28">指针与引用的区别</h3>
+<div class="outline-text-3" id="text-orgheadline28">
+<ol class="org-ol">
+<li>引用必须指向某个对象，不可以为null, 必须进行初始化<br  /></li>
+<li>赋值行为的差异，对指针进行赋值，是让指针指向另一个对象<br  />
+而对引用进行赋值，则是改变当前引用所指对象的值(引用就是对象)<br  /></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgheadline29" class="outline-3">
+<h3 id="orgheadline29">指针的运算</h3>
+<div class="outline-text-3" id="text-orgheadline29">
+<p>
+指针的类型不能乱用，所以一个指针是什么类型的是知道的 ，<br  />
+对指针加一个数， 实际就是将指针往后移动这种类型的一个单位<br  />
+比如<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++"> int i=1;
+ int *p =&amp;i;
+ p++; //往后移动一个int单位,指向下一个int
+*(p+4) ;//可以这样取p往后挪4个 int后所指对象的值
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline33" class="outline-3">
+<h3 id="orgheadline33">指向const对象的指针 和const 指针(本身的值不可变)</h3>
+<div class="outline-text-3" id="text-orgheadline33">
+</div><ul class="org-ul"><li><a id="orgheadline30"></a>指向const对象的指针<br  /><div class="outline-text-4" id="text-orgheadline30">
+<div class="org-src-container">
+
+<pre class="src src-c++">const double d=1;
+const double *p=&amp;d;//ok, 指向const 对象的指针 ,p 并不是const的
+double *p2 = &amp;d;//error ,普通的指针 不可以指向const对象
+void *p3 = &amp;d ;//错
+const void *p4=&amp;d;//ok
+
+允许 把非const对象的地址赋值给 指向const对象的指针
+ double d2=2;
+
+// 自以为指向const对象的指针
+ const double *p5 =&amp;d2;     //ok, 但是不能通过*p5来改变 d2的值,虽然可以通过其他方法改d2的值
+</pre>
+</div>
+</div></li>
+<li><a id="orgheadline31"></a>const 指针(本身的值不可变),即定义时必须初始化<br  /><div class="outline-text-4" id="text-orgheadline31">
+<div class="org-src-container">
+
+<pre class="src src-c++">int i=1;
+int *const p = &amp;i;// p 只能指向i , 不可以指向其他值了
+</pre>
+</div>
+</div></li>
+<li><a id="orgheadline32"></a>typedef 与const易引起歧义<br  /><div class="outline-text-4" id="text-orgheadline32">
+<div class="org-src-container">
+
+<pre class="src src-c++"> typedef string *pstring;
+ const pstring ctr;
+ 并不能简单的将 上述两句像宏一样 扩展成 const  *pstring ctr; ,这则说明ctr是指向const对象的指针
+ 而实际 ctr 是const 指针 ,即， 不可以将ctr再指向其他对象 ，但可以改变当前所指对象的值
+
+可以这样理解， typedef string *pstring ; 说明 这种类型的指向string的指针， 并没有const限定,
+const pstring ctr; 这里const只是限定ctr这个变量，  而非pstring这种类型， 这种类型在typedef时就已经确定了
+并不会因为在它前面加一个const 就改变
+</pre>
+</div>
+</div></li></ul>
+</div>
+</div>
+<div id="outline-container-orgheadline35" class="outline-2">
+<h2 id="orgheadline35">动态数组</h2>
+<div class="outline-text-2" id="text-orgheadline35">
+<p>
+普通数组长度在编译期就需要确定下来，动态数组长度可以在运行期确定<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++"> int *p = new int[10];//返回指向第一个元素的指针
+
+  动态数据允许长度为0
+int *p = new int[0];//ok, 返回不是空， 但是不能进行解引用操作， 似类于vector.end()的返回值
+ int i[0]; //error
+
+ delete[] p; //释放
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline36" class="outline-2">
+<h2 id="orgheadline36">-&gt; 操作符</h2>
+<div class="outline-text-2" id="text-orgheadline36">
+<div class="org-src-container">
+
+<pre class="src src-c++">Item item;
+Item *p=&amp;item;
+item.sth().
+// 下面这两个操作同义
+(*p).sth().
+ p-&gt;sth().
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline37" class="outline-2">
+<h2 id="orgheadline37">sizeof 操作符 的结果是 编译时常量</h2>
+<div class="outline-text-2" id="text-orgheadline37">
+<div class="org-src-container">
+
+<pre class="src src-c++">int array[3]={1,2,3};
+sizeof(array); //12  3*sizeof(int)
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-c++">char *c=(char*) malloc(sizeof(char)*3);
+strcpy(c, "ab");
+std::cout &lt;&lt; sizeof(c) &lt;&lt; std::endl; // 4 返回指针的大小
+std::cout &lt;&lt; sizeof(*c) &lt;&lt; std::endl; //1 返回指针所指对象的大小
+// 上面两个都没有返回"ab"长度相关的内容
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline38" class="outline-2">
+<h2 id="orgheadline38">new delete</h2>
+<div class="outline-text-2" id="text-orgheadline38">
+<div class="org-src-container">
+
+<pre class="src src-c++"> string *str= new string; //初始化为空串
+ int *i = new int;   //内建类型 则未初始化
+
+*
+ int *j  = new int(); // 初始化为0
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline42" class="outline-2">
+<h2 id="orgheadline42">强制类型转换( static_cast const_cast, dynamic_cast, reinterpret_cast)</h2>
+<div class="outline-text-2" id="text-orgheadline42">
+</div><div id="outline-container-orgheadline39" class="outline-3">
+<h3 id="orgheadline39">static_cast 默认所有的隐式类型转换，都可以通过static_cast显示实现</h3>
+<div class="outline-text-3" id="text-orgheadline39">
+<div class="org-src-container">
+
+<pre class="src src-c++">double d =1;
+int i =2;
+i *= static_cast&lt;int&gt;(d) ;// 将d 强制转化成int ,然后与 int i相乘
+
+void *p = &amp;d;
+double *pd= static_const&lt;double*&gt; (p);
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline40" class="outline-3">
+<h3 id="orgheadline40">const_cast 去掉var的const 属性</h3>
+<div class="outline-text-3" id="text-orgheadline40">
+<div class="org-src-container">
+
+<pre class="src src-c++">void test(char* c){}
+int main(){
+  const char* c;
+  test(c);// error
+  test(const_cast&lt;char*&gt;(c)); //ok
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline41" class="outline-3">
+<h3 id="orgheadline41">reinterpret_cast</h3>
+<div class="outline-text-3" id="text-orgheadline41">
+<div class="org-src-container">
+
+<pre class="src src-c++">  int i =1;
+ int *ip=&amp;i;
+ //  转化之后， pc 依然是int* 类型的指针
+ char *pc = reinterpret_cast&lt;char*&gt;(ip);
+ string str(pc);////导致运行时error, 但是编译时不会出警告
+//用int 来初始化string
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-c++">char* pc=(char*)ip;//  c++ 似乎不建议使用 这种c里使用的强转
+//效果与使用 reinterpret_cast一样
+//这种强转 具有 static_cast const_cast  reinterpret_cast 相同的功能,更笼统
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline43" class="outline-2">
+<h2 id="orgheadline43">switch</h2>
+<div class="outline-text-2" id="text-orgheadline43">
+<p>
+执行到某个case后，如果不加break，会继续执行余下的case里的代码<br  />
+所以 在case里定义变量，可能导致重复定义同一个变量，或者因为没有执行某个case里<br  />
+的定义 ，导致 后面的case使用未定义 的变量,<br  />
+所以switch里除了最后一个case 或default可以定义变量外， 其他case语句里不可以定<br  />
+义变量, 如果一定要在case里定义变量可以用块语句(即大括号),在大括号里定义的变量<br  />
+只在此块中有效<br  />
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-c++">int i=1;
+switch (i) {
+case 1:
+  int j =0; // 这句出错，
+  break;
+case 2:
+  int j =0;
+  break;
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline45" class="outline-2">
+<h2 id="orgheadline45">内联函数</h2>
+<div class="outline-text-2" id="text-orgheadline45">
+</div><div id="outline-container-orgheadline44" class="outline-3">
+<h3 id="orgheadline44">内联函数应该在头文件中定义(对编译器必须是可见的)</h3>
+</div>
+</div>
+<div id="outline-container-orgheadline48" class="outline-2">
+<h2 id="orgheadline48">成员函数</h2>
+<div class="outline-text-2" id="text-orgheadline48">
+</div><div id="outline-container-orgheadline46" class="outline-3">
+<h3 id="orgheadline46">成员函数可在类外或类内定义，在类内定义 ，编译器隐式的将其转成内联函数</h3>
+</div>
+<div id="outline-container-orgheadline47" class="outline-3">
+<h3 id="orgheadline47">成员函数的隐含形参this 是一个指针(不是引用),指向调用此函数的对象的地址</h3>
+<div class="outline-text-3" id="text-orgheadline47">
+<div class="org-src-container">
+
+<pre class="src src-c++">class Test
+{
+public:
+  Test(int parmI){
+    i=parmI;
+  }
+  bool test(int j) const{// const 是对this 对象的限制,意思是说此函数内不可以改变this对象的属性
+    // this-&gt;i=3; // 这种编译出错，尝试对const this对象进行修改
+
+    //  这两种方式是一样的
+    // return i==j;
+    return this-&gt;i==j;
+  }
+private:
+  int i;
+};
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline54" class="outline-2">
+<h2 id="orgheadline54">构造函数</h2>
+<div class="outline-text-2" id="text-orgheadline54">
+</div><div id="outline-container-orgheadline49" class="outline-3">
+<h3 id="orgheadline49">必须在类中声明， 可在类内或类外定义</h3>
+</div>
+<div id="outline-container-orgheadline50" class="outline-3">
+<h3 id="orgheadline50">构造函数的初始化列表(在参数列表后，函数体前的代码)</h3>
+<div class="outline-text-3" id="text-orgheadline50">
+<div class="org-src-container">
+
+<pre class="src src-c++">class Test
+{
+public:
+  Test(int parmI):i(parmI){
+  }
+private:
+  int i;
+};
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline51" class="outline-3">
+<h3 id="orgheadline51">默认构造函数不能自动初始化 内置类型 的成员,必须自定义构造函数初始化这些成员,对于类类型的成员默认用他们默认构造函数来初始化</h3>
+</div>
+<div id="outline-container-orgheadline52" class="outline-3">
+<h3 id="orgheadline52">构造函数隐式转换</h3>
+<div class="outline-text-3" id="text-orgheadline52">
+<div class="org-src-container">
+
+<pre class="src src-c++">class Name
+{
+public:
+  Name(string &amp;str){
+
+  }
+  void copy(Name n){           // 接受一个Name类型
+    std::cout &lt;&lt; "it works" &lt;&lt; std::endl;
+  }
+};
+ int main(int argc, char *argv[])
+ {
+   string str=string("hello");
+   string world=string("world");
+   Name name(str);
+   name.copy(world);  // 传过来的是string 类型， 但是copy()接受的是Name,编译器会自动用string调用Name的相应构造函数
+   return 0;
+ }
+</pre>
+</div>
+</div>
+<ul class="org-ul"><li><a id="orgheadline53"></a>抑制构造函数隐匿转换<br  /><div class="outline-text-4" id="text-orgheadline53">
+<div class="org-src-container">
+
+<pre class="src src-c++">class Name
+{
+public:
+  explicit Name(string &amp;str){
+  }
+};
+</pre>
+</div>
+</div></li></ul>
+</div>
+</div>
+<div id="outline-container-orgheadline60" class="outline-2">
+<h2 id="orgheadline60">函数重载(同一个类中 ，函数名相同参数不同)</h2>
+<div class="outline-text-2" id="text-orgheadline60">
+</div><div id="outline-container-orgheadline55" class="outline-3">
+<h3 id="orgheadline55">参数不同的含义，使用typedef定义一个别名后，认为使用别名跟使用本名是同一种类型</h3>
+</div>
+<div id="outline-container-orgheadline58" class="outline-3">
+<h3 id="orgheadline58">参数的const 与否，与重载</h3>
+<div class="outline-text-3" id="text-orgheadline58">
+</div><ul class="org-ul"><li><a id="orgheadline56"></a>对于值传递的参数,操作的只是副本,const与否并不影响副本,<br  /><div class="outline-text-4" id="text-orgheadline56">
+<p>
+值传递参数 仅const 的区别,认为是同一个函数,不能根据是否有const来区分两个函数<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++"> 以下两种重载是  不 允许的
+string getj(const int pi){
+}
+string getj(int pi){
+}
+
+string getj(const Test pi){
+}
+string getj(Test pi){
+}
+</pre>
+</div>
+</div></li>
+<li><a id="orgheadline57"></a>对于引用形参和指针形参 可以根据 是否const 来区分两个函数<br  /><div class="outline-text-4" id="text-orgheadline57">
+<div class="org-src-container">
+
+<pre class="src src-c++">// 以下两种重载是允许的
+ string getj(const int *pi){
+   return str;
+ }
+ string getj(int *pi){
+   return str;
+ }
+
+ string getj(const int &amp;pi){
+   return str;
+ }
+ string getj(int &amp;pi){
+   return str;
+ }
+</pre>
+</div>
+</div></li></ul>
+</div>
+<div id="outline-container-orgheadline59" class="outline-3">
+<h3 id="orgheadline59">不能仅仅根据返回值类型不同来区别两个函数</h3>
+</div>
+</div>
+<div id="outline-container-orgheadline61" class="outline-2">
+<h2 id="orgheadline61">函数指针</h2>
+<div class="outline-text-2" id="text-orgheadline61">
+<div class="org-src-container">
+
+<pre class="src src-c++">typedef bool (*compFun) (const string &amp;,const string);
+ // 以下两种方式 效果相同
+ compFun comF1= lengComp;
+ compFun comF2= &amp;lengComp;
+
+//调用 的时候 以下效果也相同
+compF1(str1,str2);
+(*compF1)(str1,str2);
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline69" class="outline-2">
+<h2 id="orgheadline69">IO</h2>
+<div class="outline-text-2" id="text-orgheadline69">
+</div><div id="outline-container-orgheadline62" class="outline-3">
+<h3 id="orgheadline62">类的关系</h3>
+<div class="outline-text-3" id="text-orgheadline62">
+<p>
+fstream sstring中定义的类型都是从iostream中定义的类型继承而来<br  />
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">头文件</th>
+<th scope="col" class="org-left">头文件中的类</th>
+<th scope="col" class="org-left">类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">iostream</td>
+<td class="org-left">istream,ostream,iostream</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">fstream</td>
+<td class="org-left">ifstream ofstream fstream</td>
+<td class="org-left">文件</td>
+</tr>
+
+<tr>
+<td class="org-left">sstream</td>
+<td class="org-left">istringstream,ostringstream,stringstream</td>
+<td class="org-left">string</td>
+</tr>
+</tbody>
+</table>
+
+<div class="figure">
+<p><img src="/assets/blog/c-cpp-拾遗/cpp-io-class.png" alt="cpp-io-class.png" /><br  />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline63" class="outline-3">
+<h3 id="orgheadline63">io 与宽字符</h3>
+<div class="outline-text-3" id="text-orgheadline63">
+<p>
+以上类名前加一个w ,则支持读写wchar_t类型的字符，如 wostream wistream<br  />
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline64" class="outline-3">
+<h3 id="orgheadline64">IO 对象 不可赋值或复制</h3>
+</div>
+<div id="outline-container-orgheadline65" class="outline-3">
+<h3 id="orgheadline65">条件状态</h3>
+<div class="outline-text-3" id="text-orgheadline65">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">eof()</td>
+<td class="org-left">判断是否eof</td>
+</tr>
+
+<tr>
+<td class="org-left">good()</td>
+<td class="org-left">流处于有效状态，则true</td>
+</tr>
+
+<tr>
+<td class="org-left">fail()</td>
+<td class="org-left">失败的IO操作</td>
+</tr>
+
+<tr>
+<td class="org-left">bad()</td>
+<td class="org-left">是否被破坏，strm::badbit位</td>
+</tr>
+
+<tr>
+<td class="org-left">clear()</td>
+<td class="org-left">重置所有状态为有效态</td>
+</tr>
+
+<tr>
+<td class="org-left">clear(flag)</td>
+<td class="org-left">重置某状态为有效态</td>
+</tr>
+
+<tr>
+<td class="org-left">setstate(strm::iostate)</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">rdstate()</td>
+<td class="org-left">返回strm::iostate</td>
+</tr>
+</tbody>
+</table>
+<div class="org-src-container">
+
+<pre class="src src-c++">int i;
+cin&gt;&gt;i;
+if(cin){// 这里是判断 cin是处于有效状态，cin跟据当前条件状态 自动转换 成bool
+}
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-c++">#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+using std::cin;
+using std::cout;
+using std::cerr;
+using std::endl;
+using std::string;
+using std::istream;
+int read_int(istream &amp;in){
+  int i =0;
+  while(in&gt;&gt;i , !in.eof()){// 读取一个int ,然后判断是否读到结尾
+    if(in.bad()){
+      exit(1);
+    }else if (in.fail()){
+      cerr&lt;&lt;"bad data,not int ,try again " &lt;&lt;std::endl;
+      in.clear(istream::failbit); // reset failbit
+      std::cerr&lt;&lt; "failbit flag after in.clear(istream::failbit) "&lt;&lt; in.fail() &lt;&lt; std::endl;
+      in.clear();
+      std::cerr &lt;&lt; "failbit flag after in.clear() "&lt;&lt; in.fail() &lt;&lt; std::endl;
+      cin.ignore();// 忽略掉上次读取失败的字符，以便继续读下一个
+      continue;
+    }else{//成功读取一个int后退出循环
+      break;
+    }
+  }
+  return i;
+}
+main(int argc, char *argv[]){
+  int i =read_int(cin);
+  std::cout &lt;&lt; i &lt;&lt; std::endl;
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline66" class="outline-3">
+<h3 id="orgheadline66">File</h3>
+<div class="outline-text-3" id="text-orgheadline66">
+<div class="org-src-container">
+
+<pre class="src src-c++">//一行行读取一个文件， 写到另一个文件
+main(int argc, char *argv[]){
+  ifstream fin("c.cpp");
+  ofstream fout("c.cpp2");
+  string buf;
+  if (fin ){
+    while(std::getline(fin, buf)){
+      fout&lt;&lt; buf &lt;&lt;std::endl ;
+    }
+  }
+  fout.close();
+  fin.close();
+}
+</pre>
+</div>
+</div>
+<ul class="org-ul"><li><a id="orgheadline67"></a>open close<br  /><div class="outline-text-4" id="text-orgheadline67">
+<div class="org-src-container">
+
+<pre class="src src-c++">ifstream fin;
+fin.open("filename");
+fin.close();
+</pre>
+</div>
+</div></li></ul>
+</div>
+<div id="outline-container-orgheadline68" class="outline-3">
+<h3 id="orgheadline68">字符流 stringstream ostringstream istringstream</h3>
+<div class="outline-text-3" id="text-orgheadline68">
+<div class="org-src-container">
+
+<pre class="src src-c++">#include &lt;sstream&gt;
+using std::stringstream;
+
+stringstream ss("hello");
+std::cout &lt;&lt; ss.str() &lt;&lt; std::endl;
+
+ss&lt;&lt; "hello" &lt;&lt; 1&lt;&lt; "world";
+std::cout &lt;&lt; ss.str() &lt;&lt; std::endl;
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline78" class="outline-2">
+<h2 id="orgheadline78">顺序容器</h2>
+<div class="outline-text-2" id="text-orgheadline78">
+</div><div id="outline-container-orgheadline70" class="outline-3">
+<h3 id="orgheadline70">包括哪些</h3>
+<div class="outline-text-3" id="text-orgheadline70">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">vector</td>
+<td class="org-left">快速随机访问</td>
+</tr>
+
+<tr>
+<td class="org-left">list</td>
+<td class="org-left">支持快速插入、删除</td>
+</tr>
+
+<tr>
+<td class="org-left">deque</td>
+<td class="org-left">双端队列</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+以上类型的适配器<br  />
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">stack</td>
+<td class="org-left">后进先出</td>
+</tr>
+
+<tr>
+<td class="org-left">queue</td>
+<td class="org-left">先进先出</td>
+</tr>
+
+<tr>
+<td class="org-left">priority_queue</td>
+<td class="org-left">有优先级</td>
+</tr>
+</tbody>
+</table>
+<div class="org-src-container">
+
+<pre class="src src-c++">#include&lt;vector&gt;
+#include&lt;list&gt;
+#include&lt;deque&gt;
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline71" class="outline-3">
+<h3 id="orgheadline71">容器内元素的约束</h3>
+<div class="outline-text-3" id="text-orgheadline71">
+<ol class="org-ol">
+<li>元素类型必须支持 赋值<br  /></li>
+<li>元素类型对象必须可以复制<br  /></li>
+</ol>
+<p>
+所以 引用不可以作元素 IO类不可以作元素<br  />
+容器的容器<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++">vector&lt; vector&lt;string&gt; &gt; lol;//中间需要有空格 ，否则 误解为&gt;&gt; &lt;&lt;
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline72" class="outline-3">
+<h3 id="orgheadline72">容器iterator支持的操作</h3>
+<div class="outline-text-3" id="text-orgheadline72">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">*iter</td>
+</tr>
+
+<tr>
+<td class="org-left">iter-&gt;mem</td>
+</tr>
+
+<tr>
+<td class="org-left">++iter</td>
+</tr>
+
+<tr>
+<td class="org-left">iter++</td>
+</tr>
+
+<tr>
+<td class="org-left">&#x2013;iter</td>
+</tr>
+
+<tr>
+<td class="org-left">iter--</td>
+</tr>
+
+<tr>
+<td class="org-left">iter==iter2</td>
+</tr>
+
+<tr>
+<td class="org-left">iter !=iter2</td>
+</tr>
+</tbody>
+</table>
+<div class="org-src-container">
+
+<pre class="src src-c++">vector&lt;int&gt; v1;
+v1.push_back(1);
+v1.push_back(2);
+v1.push_back(3);
+vector&lt;int&gt;::iterator it = v1.begin()+ v1.size()/2;
+std::cout &lt;&lt; *it &lt;&lt; std::endl;
+
+list&lt;int&gt; il(v1.begin(),v1.end());
+
+// list&lt;int&gt;::iterator it = il.begin()+il.size()/2; //error  list doesnot support
+</pre>
+</div>
+</div>
+
+<ul class="org-ul"><li><a id="orgheadline73"></a>vector deque 支持的特殊操作(数组实现的 支持随机访问的)<br  /><div class="outline-text-4" id="text-orgheadline73">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-left">return</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">iter+n</td>
+<td class="org-left">iter</td>
+</tr>
+
+<tr>
+<td class="org-left">iter-n</td>
+<td class="org-left">iter</td>
+</tr>
+
+<tr>
+<td class="org-left">iter1+=iter2</td>
+<td class="org-left">iter</td>
+</tr>
+
+<tr>
+<td class="org-left">iter1-=iter2</td>
+<td class="org-left">iter</td>
+</tr>
+
+<tr>
+<td class="org-left">iter1-iter2</td>
+<td class="org-left">vector&lt;type&gt;::difference_type</td>
+</tr>
+
+<tr>
+<td class="org-left">&gt; &gt;= &lt; &lt;=</td>
+<td class="org-left">bool</td>
+</tr>
+</tbody>
+</table>
+</div></li></ul>
+</div>
+
+<div id="outline-container-orgheadline74" class="outline-3">
+<h3 id="orgheadline74">容器提供的类型</h3>
+<div class="outline-text-3" id="text-orgheadline74">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-left">例</th>
+<th scope="col" class="org-left">&#xa0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">size_type</td>
+<td class="org-left">vector&lt;int&gt;::size_type</td>
+<td class="org-left">v1.size()</td>
+</tr>
+
+<tr>
+<td class="org-left">difference_type</td>
+<td class="org-left">list&lt;int&gt;::difference_type</td>
+<td class="org-left">iter1-iter2</td>
+</tr>
+
+<tr>
+<td class="org-left">iterator</td>
+<td class="org-left">vector&lt;string&gt;::iterator</td>
+<td class="org-left">vector&lt;int&gt;::iterator beg=v1.begin()</td>
+</tr>
+
+<tr>
+<td class="org-left">const_iterator</td>
+<td class="org-left">vector&lt;string&gt;::const_iterator</td>
+<td class="org-left">vector&lt;int&gt;::const_iterator beg=v1.begin()</td>
+</tr>
+
+<tr>
+<td class="org-left">reverse_iterator</td>
+<td class="org-left">vector&lt;string&gt;::reverse_iterator</td>
+<td class="org-left">v1.rbegin(),v1.rend()</td>
+</tr>
+
+<tr>
+<td class="org-left">const_reverse_iterator</td>
+<td class="org-left">list&lt;string&gt;::const_reverse_iterator</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">value_type</td>
+<td class="org-left">vector&lt;string&gt;::value_type</td>
+<td class="org-left">vector&lt;int&gt;::value_type value1=  *(v1.begin());</td>
+</tr>
+
+<tr>
+<td class="org-left">reference</td>
+<td class="org-left">vector&lt;string&gt;::reference</td>
+<td class="org-left">同value_type&amp;</td>
+</tr>
+
+<tr>
+<td class="org-left">const_reference</td>
+<td class="org-left">vector&lt;string&gt;::const_reference</td>
+<td class="org-left">const value_type&amp;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-orgheadline75" class="outline-3">
+<h3 id="orgheadline75">插入元素</h3>
+<div class="outline-text-3" id="text-orgheadline75">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">push_back(New)</td>
+<td class="org-left">append to end of &#x2026;</td>
+</tr>
+
+<tr>
+<td class="org-left">insert(iter1,New)</td>
+<td class="org-left">insert before element of iter1</td>
+</tr>
+
+<tr>
+<td class="org-left">insert(iter1,n,New)</td>
+<td class="org-left">insert n个 New</td>
+</tr>
+
+<tr>
+<td class="org-left">insert(iter1,iter_beg,iter_end)</td>
+<td class="org-left">在iter1前插入从iter_beg,到iter_end之间的元素</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul class="org-ul"><li><a id="orgheadline76"></a>插入元素会使iterator失效<br  /><div class="outline-text-4" id="text-orgheadline76">
+<div class="org-src-container">
+
+<pre class="src src-c++">vector&lt;int&gt;::iterator first= v1.begin();
+v1.push_back(3);
+vector&lt;int&gt;::iterator first2= v1.begin();
+std::cout &lt;&lt; first==first2 &lt;&lt; std::endl;
+两次返回的begin()是不同的，如果下面的处理，使用到了first局部变量，
+后果不可预知
+</pre>
+</div>
+</div></li></ul>
+</div>
+<div id="outline-container-orgheadline77" class="outline-3">
+<h3 id="orgheadline77">删除元素</h3>
+<div class="outline-text-3" id="text-orgheadline77">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">c.erase(iter1)</td>
+</tr>
+
+<tr>
+<td class="org-left">c.erase(beg,end)</td>
+</tr>
+
+<tr>
+<td class="org-left">c.clear()</td>
+</tr>
+
+<tr>
+<td class="org-left">c.pop_back()</td>
+</tr>
+
+<tr>
+<td class="org-left">c.pop_front()</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline86" class="outline-2">
+<h2 id="orgheadline86">关联容器</h2>
+<div class="outline-text-2" id="text-orgheadline86">
+</div><div id="outline-container-orgheadline79" class="outline-3">
+<h3 id="orgheadline79">关联窗口列表</h3>
+<div class="outline-text-3" id="text-orgheadline79">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">map</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">set</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">multimap</td>
+<td class="org-left">key可多次出现</td>
+</tr>
+
+<tr>
+<td class="org-left">multiset</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-orgheadline80" class="outline-3">
+<h3 id="orgheadline80">pair</h3>
+<div class="outline-text-3" id="text-orgheadline80">
+<div class="org-src-container">
+
+<pre class="src src-c++">#include &lt;utility&gt;
+pair&lt;string ,int&gt; p("v1" ,100);
+std::cout &lt;&lt; p.first &lt;&lt; " "&lt;&lt; p.second&lt;&lt; std::endl;
+p=make_pair("hello", 300);
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline81" class="outline-3">
+<h3 id="orgheadline81">map</h3>
+<div class="outline-text-3" id="text-orgheadline81">
+<div class="org-src-container">
+
+<pre class="src src-c++">   map&lt;string,int&gt; m;
+   m["3"]=3;
+   // 使用下标访问元素，如果key不存在， 则自动创建一个，value为相应类型的默认值
+   std::cout &lt;&lt;m["3"]&lt;&lt; std::endl;
+// 如果不想自动插入，则用map.count() ,map.find() ,来处理
+if(m.count("3")){
+  map&lt;string,int&gt;::iterator it=m.find("3");
+    pair&lt;string,int&gt; p = *it;
+    std::cout &lt;&lt; p.second &lt;&lt; std::endl;
+}
+
+
+   for (map&lt;string,int&gt;::iterator it=m.begin(); it!=m.end(); it++) {
+     pair&lt;string,int&gt; p = *it;
+     std::cout &lt;&lt; p.first &lt;&lt;"="&lt;&lt;p.second &lt;&lt; std::endl;
+    }
+</pre>
+</div>
+</div>
+<ul class="org-ul"><li><a id="orgheadline82"></a>map 的iterator解引用 是pair类型<br  /></li>
+
+<li><a id="orgheadline83"></a>map 插入<br  /><div class="outline-text-4" id="text-orgheadline83">
+<div class="org-src-container">
+
+<pre class="src src-c++">map&lt;string,string&gt; m;
+m.insert(make_pair("3", "111"));
+pair&lt;map&lt;string,string&gt;::iterator,bool&gt; ret=
+  m.insert(make_pair("3", "222"));//重复则什么都不做, 返回值是一个pair&lt;iterator,boolInsertSuccessful&gt;
+std::cout &lt;&lt; m["3"] &lt;&lt; std::endl;//m["3"] 的值 是"111" ,而不是"222"
+
+m["4"]="111";
+m["4"]="222"; //覆盖
+std::cout &lt;&lt; m["4"] &lt;&lt; std::endl;//m["4"] 的值 是"222" ,而不是"111"
+</pre>
+</div>
+</div></li>
+<li><a id="orgheadline84"></a>map 删除<br  /><div class="outline-text-4" id="text-orgheadline84">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">erase(Key)</td>
+</tr>
+
+<tr>
+<td class="org-left">erase(iter)</td>
+</tr>
+
+<tr>
+<td class="org-left">erase(beg,end)</td>
+</tr>
+</tbody>
+</table>
+</div></li></ul>
+</div>
+<div id="outline-container-orgheadline85" class="outline-3">
+<h3 id="orgheadline85">set</h3>
+<div class="outline-text-3" id="text-orgheadline85">
+<div class="org-src-container">
+
+<pre class="src src-c++">//count(Key) 返回0 1 是否含有此key
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline87" class="outline-2">
+<h2 id="orgheadline87">泛形算法(可以操作在多种容器类型上)</h2>
+<div class="outline-text-2" id="text-orgheadline87">
+<p>
+多数算法都是通过  iterator来标记一段范围<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++">#include &lt;algorithm&gt;
+#include &lt;numeric&gt;
+</pre>
+</div>
+</div>
+<div id="outline-container-orgheadline88" class="outline-3">
+<h3 id="orgheadline88">find(iter_beg,iter_end,search_value) 从某段范围内查找search_value,失败返回iter_end,成功返回iter</h3>
+</div>
+<div id="outline-container-orgheadline89" class="outline-3">
+<h3 id="orgheadline89">accumulate(iter_beg,iter_end,init_value) 求和,类似于erlang里的lists:foldl</h3>
+<div class="outline-text-3" id="text-orgheadline89">
+<div class="org-src-container">
+
+<pre class="src src-c++">vector&lt;int&gt; v;
+vector&lt;int&gt; v;
+v.push_back(1);
+v.push_back(2);
+v.push_back(3);
+int value=accumulate(v.begin(),v.end(),0);
+std::cout &lt;&lt; value &lt;&lt; std::endl;
+
+//字符串连接
+vector&lt;string&gt; v;
+v.push_back("1");
+v.push_back("2");
+v.push_back("3");
+string value=accumulate(v.begin(),v.end(),string(""));
+std::cout &lt;&lt; value &lt;&lt; std::endl;
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline90" class="outline-3">
+<h3 id="orgheadline90">find_first_of(iter1_beg,iter1_end,iter2_beg,iter2_end)</h3>
+<div class="outline-text-3" id="text-orgheadline90">
+<p>
+在iter1_beg iter1_end的范围内查找任意一个属于iter2_beg iter2_end<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++">vector&lt;string&gt; v;
+v.push_back("1");
+v.push_back("2");
+v.push_back("3");
+
+list&lt;string&gt; l;
+l.push_back("2");
+l.push_back("4");
+
+vector&lt;string&gt;::iterator it=find_first_of(v.begin(), v.end(), l.begin(), l.end());
+if(it!=v.end()){
+  std::cout &lt;&lt; *it &lt;&lt; std::endl;
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline91" class="outline-3">
+<h3 id="orgheadline91">fill(beg,end,value) 填充value</h3>
+<div class="outline-text-3" id="text-orgheadline91">
+<div class="org-src-container">
+
+<pre class="src src-c++">vector&lt;string&gt; v;
+v.push_back("1");
+v.push_back("2");
+v.push_back("3");
+fill(v.begin(),v.end(),"test");
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline92" class="outline-3">
+<h3 id="orgheadline92">fill_n(beg,N,value) 填充N个value</h3>
+<div class="outline-text-3" id="text-orgheadline92">
+<div class="org-src-container">
+
+<pre class="src src-c++">vector&lt;string&gt; v;
+v.push_back("1");
+v.push_back("2");
+v.push_back("3");
+fill_n(v.begin(),2,"test");// 填充2个test
+fill_n(v.begin(),4,"test");// error,长度不够4 个
+</pre>
+</div>
+<p>
+引入back_iterator ,当fill_n 的N 超出容器长度之后， 自动使用push_back添加到末尾<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++">vector&lt;string&gt; v;
+v.push_back("1");
+v.push_back("2");
+v.push_back("3");
+fill_n(back_inserter(v),4,"test");
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline93" class="outline-3">
+<h3 id="orgheadline93">replace(beg,end,old,new) 把old换成new</h3>
+</div>
+<div id="outline-container-orgheadline94" class="outline-3">
+<h3 id="orgheadline94">replace_copy(beg,end,NewIterBeg,old,new) 不改变原来的容器，将改变后的内容存入NewIterBeg所指容器中</h3>
+<div class="outline-text-3" id="text-orgheadline94">
+<div class="org-src-container">
+
+<pre class="src src-c++">vector&lt;string&gt; v;
+v.push_back(string("1"));
+v.push_back(string("2"));
+v.push_back(string("3"));
+
+vector&lt;string&gt; v2;
+
+replace_copy(v.begin(),v.end(),back_inserter(v2),string("2"),string("222"));
+for (vector&lt;string&gt;::iterator it=v2.begin();it!= v2.end(); it++) {
+  std::cout &lt;&lt; *it &lt;&lt; std::endl;
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline95" class="outline-3">
+<h3 id="orgheadline95">sort unique 排序 去重，</h3>
+<div class="outline-text-3" id="text-orgheadline95">
+<div class="org-src-container">
+
+<pre class="src src-c++"> vector&lt;string&gt; v;
+ v.push_back(string("2"));
+ v.push_back(string("2"));
+ v.push_back(string("1"));
+ v.push_back(string("1"));
+ v.push_back(string("3"));
+
+ sort(v.begin(),v.end());//排序
+ //把不重复的元素移动到容器的前面，返回多余的重复元素的首地址
+ // unique 并没有真正的去重， 只是把重复 的移动容器尾部 以便删除
+//算法并不删除或添加元素，若需要 ，则要则使用容器删除
+ vector&lt;string&gt;::iterator it=unique(v.begin(), v.end());
+ v.erase(it,v.end());//删除那些重复的元素 ,从it所指位置到 end()
+
+ for (vector&lt;string&gt;::iterator it=v.begin(); it!=v.end(); it++) {
+   std::cout &lt;&lt; *it &lt;&lt; std::endl;
+ }
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline96" class="outline-3">
+<h3 id="orgheadline96">count_if(beg,end,Pred)  类似函数式编程，</h3>
+<div class="outline-text-3" id="text-orgheadline96">
+<div class="org-src-container">
+
+<pre class="src src-c++">bool is_2(string str){
+  str=="2";
+}
+
+vector&lt;string&gt; v;
+v.push_back(string("2"));
+v.push_back(string("2"));
+v.push_back(string("1"));
+v.push_back(string("1"));
+v.push_back(string("3"));
+vector&lt;string&gt;::size_type cnt=count_if(v.begin(),v.end(),is_2);
+std::cout &lt;&lt; cnt &lt;&lt; std::endl;
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline100" class="outline-3">
+<h3 id="orgheadline100">泛形与iterator</h3>
+<div class="outline-text-3" id="text-orgheadline100">
+</div><ul class="org-ul"><li><a id="orgheadline97"></a>插入迭代器<br  /><div class="outline-text-4" id="text-orgheadline97">
+<ol class="org-ol">
+<li>back_inserter  当需要插入时 用push_back<br  /></li>
+<li>front_inserter当需要插入时 用push_front (容器需支持push_front)<br  /></li>
+<li>inserter(vector,iter) 当需要插入时 在iter所指位置后插入<br  /></li>
+</ol>
+</div></li>
+<li><a id="orgheadline98"></a>iostream 迭代器<br  /></li>
+<li><a id="orgheadline99"></a>反向迭代器<br  /></li></ul>
+</div>
+</div>
+<div id="outline-container-orgheadline101" class="outline-2">
+<h2 id="orgheadline101">类</h2>
+<div class="outline-text-2" id="text-orgheadline101">
+<ol class="org-ol">
+<li><p>
+类的定义必须以分号结束 ， 因为可以}后加 对象定义列表,像struct一样<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++">class Name
+{
+} name1, name2;
+</pre>
+</div></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgheadline102" class="outline-2">
+<h2 id="orgheadline102">类 this 指针</h2>
+<div class="outline-text-2" id="text-orgheadline102">
+<div class="org-src-container">
+
+<pre class="src src-c++">//this 是指针
+class Name
+{
+public:
+  int i;
+  Name&amp; get(){
+    return *this;//this指针   转成对象的引用
+  }
+  Name get2(){                  // // 转成对象
+    return *this;
+  }
+
+};
+
+int main(int argc, char *argv[]){
+  Name n;
+  n.i=3;
+  Name &amp;p = n.get();
+  Name same = n.get2();
+  // 打印结果都是3
+  std::cout &lt;&lt; p.i &lt;&lt; std::endl;
+  std::cout &lt;&lt; same.i &lt;&lt; std::endl;
+  return 0;
+}
+</pre>
+</div>
+</div>
+<div id="outline-container-orgheadline103" class="outline-3">
+<h3 id="orgheadline103">this 与const</h3>
+<div class="outline-text-3" id="text-orgheadline103">
+<ol class="org-ol">
+<li>this 的类型是 指向类类型的const 指针， 意思是它只能指向当前对象， 不能指向其<br  />
+他对象 ，可以改变所指对象 的值 ， 但不能改变this所指的地址<br  /></li>
+<li><p>
+在const 成员函数中，this是一个指向const类类型对象的const 指针<br  />
+即 不能改变其所指的对象 ，也不能改变其地址<br  />
+有一个问题 ，即return 当前对象时 类型也固定成this的类型，<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++">class Name
+{
+public:
+  int i;
+  Name&amp; get() const{// 编译是通不过的(这里的const 是对this的限制)
+    //因为*this 的类型是const的
+    return *this;
+  }
+  const Name&amp; get2() const{      //这样是允许的
+    return *this;
+  }
+};
+</pre>
+</div></li>
+</ol>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline104" class="outline-2">
+<h2 id="orgheadline104">mutable 可变数据成员</h2>
+<div class="outline-text-2" id="text-orgheadline104">
+<p>
+即使在const成员函数中， 也可以对mutable成员变量进行更改<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++">class Name
+{
+public:
+  mutable int i;
+  Name&amp; set() const{
+    i=3;//this 是const的， 但是依然可以对this-&gt;i 进行更改
+  }
+};
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline107" class="outline-2">
+<h2 id="orgheadline107">友元 friend</h2>
+<div class="outline-text-2" id="text-orgheadline107">
+</div><div id="outline-container-orgheadline105" class="outline-3">
+<h3 id="orgheadline105">friend Class</h3>
+<div class="outline-text-3" id="text-orgheadline105">
+<p>
+允许某些 非成员函数或类 访问类private成员，同时阻止其他一般的访问<br  />
+如 重载的操作符（操作符不是类的成员)<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++">  class Name
+  {
+// 声明， NameF 类，可以访问我的么有成员
+    friend class NameF;//只是一个声明， 不是定义
+  private :
+    string name;
+  public:
+    Name(string n){
+      name=n;
+    }
+  };
+  class NameF
+  {
+  public:
+    void print(Name n){
+      //访问n 的private成员 name
+      std::cout &lt;&lt; n.name &lt;&lt; std::endl;
+    }
+  };
+
+  int main(int argc, char *argv[])
+  {
+    Name n("hello");
+    NameF f;
+    f.print(n);
+    return 0;
+  }
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline106" class="outline-3">
+<h3 id="orgheadline106">friend Function</h3>
+<div class="outline-text-3" id="text-orgheadline106">
+<div class="org-src-container">
+
+<pre class="src src-c++">class Name; // 前向声明，因为NameF依赖Name , Name也依赖NameF
+
+class NameF{
+public:
+  void print(Name n);
+  void print2(Name n);
+};
+
+class Name
+{
+  // 声明， NameF.print，可以访问我的私有成员
+  friend void NameF::print(Name n);//只是一个声明， 不是定义
+private :
+  string name;
+public:
+  Name(string n){
+    name=n;
+  }
+};
+
+void NameF::print(Name n)
+{
+  //访问n 的private成员 name
+  std::cout &lt;&lt; n.name &lt;&lt; std::endl;
+}
+
+void NameF::print2(Name n){
+  // 在这里访问n.name是不允许 的，print2不是friend
+  // std::cout &lt;&lt; n.name &lt;&lt; std::endl;
+}
+int main(int argc, char *argv[])
+{
+  Name n("hello");
+  NameF f;
+  f.print(n);
+  return 0;
+}
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline109" class="outline-2">
+<h2 id="orgheadline109">static 数据成员</h2>
+<div class="outline-text-2" id="text-orgheadline109">
+</div><div id="outline-container-orgheadline108" class="outline-3">
+<h3 id="orgheadline108">static 数据成员必须在 类的定义 外 初始化 (只能一次）</h3>
+<div class="outline-text-3" id="text-orgheadline108">
+<div class="org-src-container">
+
+<pre class="src src-c++">class Name
+{
+private:
+  static int init_i(int iParm){
+    return iParm;
+  }
+
+public:
+  // static int i=3; // error 不允许在类内初始化 static 数据成员
+  //static const int i=4;  //ok 例外是 static const类型的常量，则可以在类体用常量表达式初始化，
+
+  static int i;
+};
+// 在类外定义  初始化 ,初始化的时候 不能加static 关键字
+//init_i() 是Name类private static 成员， 此处也可以直接这样调
+int Name::i =init_i(3);
+
+int main(int argc, char *argv[])
+{
+  return 0;
+}
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline110" class="outline-2">
+<h2 id="orgheadline110">复制构造函数</h2>
+<div class="outline-text-2" id="text-orgheadline110">
+<div class="org-src-container">
+
+<pre class="src src-c++">class MyClass
+{
+public:
+ //用另一个MyClass  初始化
+ //若要禁止复制 ， 则声明为private
+//若要连自身的成员函数 或友元函数也不能访问， 则只声明 不定义
+  MyClass(const MyClass &amp;cls);
+};
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline111" class="outline-2">
+<h2 id="orgheadline111">赋值操作符</h2>
+<div class="outline-text-2" id="text-orgheadline111">
+<div class="org-src-container">
+
+<pre class="src src-c++">MyClass&amp; MyClass::operator=(const MyClass &amp;rhs) {
+  // Check for self-assignment!
+  if (this == &amp;rhs)
+    return *this;
+  return *this;
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline112" class="outline-2">
+<h2 id="orgheadline112">析构函数</h2>
+<div class="outline-text-2" id="text-orgheadline112">
+<div class="org-src-container">
+
+<pre class="src src-c++">class Name
+{
+private :
+  string name;
+public:
+  Name(string &amp;n){name=n;}
+  virtual ~Name(){
+    std::cout &lt;&lt; "deleted Name class:" &lt;&lt;name &lt;&lt; std::endl;
+  }
+};
+
+int main(int argc, char *argv[])
+{
+  string hello= "hello";
+  Name *n  = new Name(hello);
+  delete n;
+  return 0;
+}
+</pre>
+</div>
+<ol class="org-ol">
+<li>即使我们自己编写了析构函数 ， 系统为我们自动 生成的合成析构函数也会运行<br  /></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgheadline113" class="outline-2">
+<h2 id="orgheadline113">管理具有指针成员的类（引用计数)</h2>
+<div class="outline-text-2" id="text-orgheadline113">
+<div class="org-src-container">
+
+<pre class="src src-c++">#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+class Nptr
+{
+  friend class Obj;
+private:
+  size_t cnt;
+  int *p;
+public:
+  Nptr(size_t c,int *pr):cnt(c), p(pr)  {}
+  ~Nptr(){
+    std::cout &lt;&lt; "~Nptr() is called" &lt;&lt; std::endl;
+    delete p;
+  }
+  int * get_value(){
+    return p;
+  }
+  size_t  get_cnt(){
+    return cnt;
+  }
+
+};
+class Obj
+{
+public:
+  Nptr *nptr;
+  Obj(int *i ):nptr( new Nptr(1,i)) {}
+  virtual ~Obj(){
+    std::cout &lt;&lt; "nptr.cnt--" &lt;&lt; std::endl;
+    if (--nptr-&gt;cnt==0){
+          delete nptr;
+      std::cout &lt;&lt; "nptr cnt =0 ,deleted" &lt;&lt; std::endl;
+    }
+  }
+  Obj(Obj &amp;another): nptr(another.nptr)
+  {
+    another.nptr-&gt;cnt++;
+  }
+  Obj&amp; operator=(const Obj &amp;rhs) {
+    // Check for self-assignment!
+    if (this == &amp;rhs)
+      return *this;
+    if ((--nptr-&gt;cnt)==0){
+      delete nptr;
+    }
+    nptr=rhs.nptr;
+    rhs.nptr-&gt;cnt++;
+    return *this;
+  }
+};
+
+int main(int argc, char *argv[]){
+  int *i   = new int(3) ;
+  Obj obj(i);
+  std::cout &lt;&lt; obj.nptr-&gt;get_cnt()&lt;&lt; std::endl;
+  Obj obj2(obj);
+  std::cout &lt;&lt; obj.nptr-&gt;get_cnt()&lt;&lt; std::endl;
+  Obj obj3=obj2;
+
+  std::cout &lt;&lt; obj.nptr-&gt;get_cnt()&lt;&lt; std::endl;
+  return 0;
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline114" class="outline-2">
+<h2 id="orgheadline114">操作符重载</h2>
+<div class="outline-text-2" id="text-orgheadline114">
+<ol class="org-ol">
+<li><p>
+重载操作符 必须 具有  一个 类类型 操作数，即 不能重载内置类型的操作符，<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++">int  operator+(int ,int )//eror , int int 都是内转类型
+</pre>
+</div></li>
+<li>优先级 结合性是固定的<br  /></li>
+<li>不再具备短路求值特殊性（重载 || &amp;&amp;时） ，因 重载后  ，不能保证 求值顺序，<br  />
+所以 两个值都要 求<br  /></li>
+<li><p>
+一般将自述和关系操作符 定义为 非成员函数，赋值 定义为成员函数(=  += )<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++">MyClass&amp; MyClass::operator=(const MyClass &amp;rhs) { //赋值= 与+=  返回 引用
+  // Check for self-assignment!
+  if (this == &amp;rhs)
+    return *this;
+  return *this;
+}
+
+MyClass operator+(const MyClass &amp;me const MyClass &amp;other) //返回 不是引用
+{
+  MyClass result = *this;
+  result += other;
+  return result;
+}
+</pre>
+</div></li>
+<li><p>
+与友元函数 ，当为非成员函数时， 通常设为它的友好函数<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++">class A
+{
+  friend A operator+(const A &amp;a, const A &amp;a2);// 声明为A的码元函数,这样 ，可以访问A的private member
+
+};
+
+A operator+(const A &amp;self,const A &amp;other)
+{
+  A result =*self +*other;
+
+  return result;
+}
+</pre>
+</div></li>
+<li>不建议 重载  逗号 取地址 逻辑与 逻辑或<br  /></li>
+<li>如果重载了 ＋  通常也会重载 +=<br  /></li>
+<li>要作为map 的key 的类 ，通常要重载&lt;号与==, 如果定义了== 一般会定义!= ,如果定<br  />
+义的&lt;  通常也该提供 &gt; &gt;= &lt;=<br  /></li>
+<li>= [] ()  -&gt; 四个必须定义的成员函数（否则编译错)， \+= 建议定义成成员，改变对<br  />
+象状态 如++ &#x2013; 通常定义为成员，对象的操作符通常定义为非成员 如 + - * / = =<br  />
+! =<br  /></li>
+<li><p>
+&lt; &lt; 与 &gt; &gt; 必须非成员函数<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++">std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const MyClass&amp; c)
+{
+  return s;
+}
+
+istream&amp; operator&gt;&gt;(istream&amp; s, const MyClass&amp; c)
+{
+ //要处理 错误 ，与eof
+  return s;
+}
+</pre>
+</div></li>
+<li>= 操作符 ，可以重载 ,必须定义为成员函数<br  /></li>
+<li><p>
+[] 下标<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++">Class&amp; operator[](int index);
+</pre>
+</div></li>
+<li><p>
+成员访问 解引用*  箭头-&gt; (通常用在 智能指针的类中)<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++">//* 必须定义为成员
+MyClass&amp; MyClass::operator*() {
+  return *ptr-&gt;sp;  //return ref
+}
+
+MyClass* MyClass::operator-&gt;():const { //const or not
+  return ptr-&gt;sp;  //return pointer
+}
+</pre>
+</div></li>
+<li><p>
+++ &#x2013;<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++">MyClass&amp; MyClass::operator++() { //++i
+  return *this;
+}
+MyClass&amp; MyClass::operator++(int) {//i++ ,参数int 无意义 ，只是为了区分i++ ++i
+  return *this;
+}
+</pre>
+</div></li>
+<li>调用操作符（） 和函数对象<br  /></li>
+</ol>
+<div class="org-src-container">
+
+<pre class="src src-c++">class MyClass
+{
+public:
+  int operator() (int i) {
+    return i+1;
+  }
+};
+int main(int argc, char *argv[])
+{
+  MyClass c;//c is object
+  int ret=c(1);                 // 调用操作符,定义了调用操作符的类，的对象 常称为函数对象 ，
+  return 0;
+}
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-c++"> //函数对象在 算法库中的应用
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;cstdlib&gt;
+#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+
+class IsGreatThanN
+{
+private:
+  size_t n;
+public:
+IsGreatThanN(size_t N){
+    this-&gt;n=N;
+  }
+
+  bool operator() (const string &amp; str) { //定义了 调用操作符()
+    return str.size()&gt;n;
+  }
+};
+
+int main(int argc, char *argv[])
+{
+  vector&lt;string&gt; v;
+  v.push_back(string("abc"));
+  v.push_back(string("abcccccc"));
+  v.push_back(string("dddddabc"));
+  int cnt=count_if(v.begin(),v.end(),IsGreatThanN(5)); // 这里利用函数对像 ，在初始化时，将参数5传过去 ，count_if 其实是利用了 IsGreatThanN 对象的() 操作符来完成bool的判断的
+  std::cout &lt;&lt; cnt &lt;&lt; std::endl;
+  return 0;
+}
+</pre>
+</div>
+<p>
+16  转换操作符<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++">class SmallInt
+{
+public:
+  //转换成int 的转换操作符
+  operator int() const{ return 0}
+};
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline135" class="outline-2">
+<h2 id="orgheadline135">面向对象 多承 多态(动态绑定,父类引用指向子类对象)) 封装</h2>
+<div class="outline-text-2" id="text-orgheadline135">
+</div><div id="outline-container-orgheadline115" class="outline-3">
+<h3 id="orgheadline115">父类 通常 应该 将 子类需要重新定义的函数 声明为 virtual</h3>
+</div>
+<div id="outline-container-orgheadline116" class="outline-3">
+<h3 id="orgheadline116">继承语法  子类:[public |private|protected] 父类, 子类权限的控制</h3>
+<div class="outline-text-3" id="text-orgheadline116">
+<p>
+子类可以进一步限制 但不能 放松 它所继承来的成员的访问权限<br  />
+</p>
+</div>
+<ul class="org-ul"><li><a id="orgheadline117"></a>class Child:public Parent ,原来为public 则为public,原来为protected 则为  protected<br  /></li>
+<li><a id="orgheadline118"></a>class Child:protect Parent ,原来为public 则为protected,原来为protected 则为protected(默认)<br  /></li>
+<li><a id="orgheadline119"></a>class Child:private Parent ,parent所有成员在Child为成为private<br  /><div class="outline-text-4" id="text-orgheadline119">
+<p>
+public 的,可以继承Parent继承的接口,private protected 不行<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++">class Base{};
+ struct D1: Base{}  ;;默认是public
+ class D2:Base{}  默认是protected
+</pre>
+</div>
+</div></li></ul>
+</div>
+
+
+<div id="outline-container-orgheadline120" class="outline-3">
+<h3 id="orgheadline120">子类可以选择性的继承父类的 virtaul 函数</h3>
+<div class="outline-text-3" id="text-orgheadline120">
+<div class="org-src-container">
+
+<pre class="src src-c++"> class Parent
+ {
+ public:
+   virtaul void test();
+ };
+class Child:public Parent
+{
+public:
+  void test();
+};
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline121" class="outline-3">
+<h3 id="orgheadline121">子类的声明(并非定义)</h3>
+<div class="outline-text-3" id="text-orgheadline121">
+<div class="org-src-container">
+
+<pre class="src src-c++">//正确
+class Child;
+class Parent;
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-c++">//错误
+class Child :Parent
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline122" class="outline-3">
+<h3 id="orgheadline122">virtaul</h3>
+<div class="outline-text-3" id="text-orgheadline122">
+<div class="org-src-container">
+
+<pre class="src src-c++">#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+class Parent
+{
+public:
+  virtual void test(){
+    std::cout &lt;&lt; "pppp" &lt;&lt; std::endl;
+  }
+};
+class Child:public Parent
+{
+public:
+  virtual void test(){
+    std::cout &lt;&lt; "childdddd" &lt;&lt; std::endl;
+  }
+};
+
+void call_test(Parent *p){// 这里声明为Parent* 类型,
+  p-&gt;test(); // 因为Parent 将test()函数 声明为 virtaul
+};
+
+int main(int argc, char *argv[]){
+  Parent p  ;
+  Child c;
+  call_test(&amp;p);
+  call_test(&amp;c);
+  c.Parent::test();// 强制使用 parent版 的test
+  return 0;
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline123" class="outline-3">
+<h3 id="orgheadline123">virtaul 函数 与　默认参数</h3>
+<div class="outline-text-3" id="text-orgheadline123">
+<p>
+若　父类　子类都为virtal 函数 指定了默认参数 , 则 传过来的是什么跟所指对象<br  />
+的实际类型无关, 跟 传过来形参的类型有关<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++">#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+class Parent
+{
+public:
+  virtual void test(int i=1 ){
+    std::cout &lt;&lt; "pppp"&lt;&lt; i &lt;&lt; std::endl;
+  }
+};
+class Child:public Parent
+{
+public:
+  virtual void test(int i=2){
+    std::cout &lt;&lt; "childdddd"&lt;&lt;i &lt;&lt; std::endl;
+  }
+};
+
+void call_test(Parent *p){
+  p-&gt;test();
+};
+
+int main(int argc, char *argv[]){
+  Parent p  ;
+  Child c;
+  call_test(&amp;p); //打印的int 是 1
+  call_test(&amp;c);//打印的int 是 1 ,因为 call_test()里调用的时候 , 指针的类型是Parent* 类型的
+  c.Parent::test();
+  // 最佳实践,默认参数 要一致
+  return 0;
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline124" class="outline-3">
+<h3 id="orgheadline124">友元关系不能继承</h3>
+<div class="outline-text-3" id="text-orgheadline124">
+<div class="org-src-container">
+
+<pre class="src src-c++">#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+class Parent
+{
+  friend class Friend;
+protected:
+  int i;
+};
+
+class Child:public Parent
+{
+protected:
+  int j;
+};
+class Friend
+{
+public:
+  void test(Parent p){p.i=3;}           // ok
+  // void test(Child c){c.j=3;}            // errro
+};
+class FriendChild:public Friend
+{
+public:
+  // void test(Parent p){p.i=3;};   // error
+};
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline125" class="outline-3">
+<h3 id="orgheadline125">static</h3>
+<div class="outline-text-3" id="text-orgheadline125">
+<p>
+父类定义了static成员, 则无论继承多少次, 整个继承层次中只有一个这样的成员<br  />
+若为private ,则子类不能访问之<br  />
+可以这样访问 Parent.static_mem ,Child.static_mem<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline126" class="outline-3">
+<h3 id="orgheadline126">继承与转化</h3>
+<div class="outline-text-3" id="text-orgheadline126">
+<ol class="org-ol">
+<li>可以将子类对象传给接受 "父类引用" 的函数,此行为并非对象的转换, 引用依然指向子<br  />
+类<br  /></li>
+<li>可以将子类对象 传给 接受 父类对象 的函数,会将 子类对象中父类的那部分 复制<br  />
+到形参(值传递)<br  /></li>
+<li><p>
+父类转子类<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++">Child c;
+Parent *p =&amp;c;                  // ok
+Child *cp =p;                   //  error ,虽然p所指向的是个Child,但,p是 Parent* 类型的指针, 转化失败,
+// 不过可以用static_cast 或dynamic_cast 进行转换
+</pre>
+</div></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgheadline127" class="outline-3">
+<h3 id="orgheadline127">构造函数 与继承</h3>
+<div class="outline-text-3" id="text-orgheadline127">
+<div class="org-src-container">
+
+<pre class="src src-c++">class Parent
+{
+public:
+  Parent(int i){}
+};
+
+class Child:public Parent
+{
+private:
+  int member_j;
+public:
+// 先初始化父类, 然后按照 声明的顺序 初始化自己的成员,
+  Child(int i ,int j) :Parent(i),member_j(j){}
+};
+</pre>
+</div>
+<p>
+只能初始化直接父类,祖父的的初始化让父类去完成就可以了.<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline128" class="outline-3">
+<h3 id="orgheadline128">复制构造函数 与继承</h3>
+<div class="outline-text-3" id="text-orgheadline128">
+<div class="org-src-container">
+
+<pre class="src src-c++">class Child
+{
+public:
+  Child(Child c ){
+    Parent(c); //先调用父类的复制构造函数 ,
+    //然后对自己的部分进行处理
+  }
+};
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline129" class="outline-3">
+<h3 id="orgheadline129">赋值操作符 与继承</h3>
+<div class="outline-text-3" id="text-orgheadline129">
+<div class="org-src-container">
+
+<pre class="src src-c++">Child&amp; Child::operator=(const Child &amp;rhs) {
+  // Check for self-assignment!
+  if (this == &amp;rhs)
+    return *this;
+  Parent::operator=(rhs);//先初始化父类部分
+  // ...
+  return *this;
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline130" class="outline-3">
+<h3 id="orgheadline130">如果在构造函数 或 析构函数 中调用  虚函数,</h3>
+<div class="outline-text-3" id="text-orgheadline130">
+<p>
+则调用的是 对象本身类型定义的版本,<br  />
+在运行构造函数 或析构函数时, 自身对象是不完整的,<br  />
+在父类构造或析构函数中,将子类对象当作父类对象对待,此时调用的虚函数<br  />
+是父类中定义的版本<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline131" class="outline-3">
+<h3 id="orgheadline131">名字冲突与继承</h3>
+<div class="outline-text-3" id="text-orgheadline131">
+<p>
+与父类成员同名的子类成员 会屏蔽父类的,函数也一样(即便参数不同)<br  />
+Base::i ,这样可以访问 父类的,函数也一样 ,<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++">class Parent
+{
+public:
+  void test(){}
+};
+class Child:public Parent
+{
+public:
+  void test(int i){} //隐藏了 父类中的同名函数,虽然 参数不同
+};
+int main(int argc, char *argv[])
+{
+  Parent p;
+  Child c;
+  p.test();                     // ok
+  c.test(1);                    // ok
+  c.Parent::test();             // ok
+  // c.test();                     // error
+  return 0;
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline132" class="outline-3">
+<h3 id="orgheadline132">重载</h3>
+<div class="outline-text-3" id="text-orgheadline132">
+<p>
+如果 子类重定义了重载的成员, 则通过子类型 只能访问 子类中定义 的那些成员<br  />
+子类想通过自身类型使用所有的重载版本,要么重定义所有的重载版本, 要么一个不定义<br  />
+或者子类中使用using声明, using声明 只能指定函数名,不能指向参数 ,所以可以把父<br  />
+类中所有同名函数 引到子类中,然后 只重载需要的就可<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++">using namespace std;
+class Parent
+{
+public:
+  void test(){
+    std::cout &lt;&lt; "parent test()" &lt;&lt; std::endl;
+  }
+  void test(int i){
+    std::cout &lt;&lt; "parent test(int)" &lt;&lt; std::endl;
+  }
+};
+class Child:public Parent
+{
+public:
+  using Parent::test;// 使用 using声明
+  void test(int i){//只重载需要重载的部分
+    std::cout &lt;&lt; "child test(int)" &lt;&lt; std::endl;
+  }
+};
+int main(int argc, char *argv[])
+{
+  Parent p;
+  Child c;
+  p.test();                     // ok
+  c.test(1);                    // ok
+  c.test();                     // ok 这里不在报错
+  return 0;
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline133" class="outline-3">
+<h3 id="orgheadline133">纯虚函数 ,</h3>
+<div class="outline-text-3" id="text-orgheadline133">
+<p>
+含有纯虚函数的类是抽象的 ,类似于java abstract关键字<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++">class AbClass
+{
+public:
+    public void test():const =0; //=0 定义 为纯虚函数
+};
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline134" class="outline-3">
+<h3 id="orgheadline134">容器与继承</h3>
+<div class="outline-text-3" id="text-orgheadline134">
+<p>
+容器存储是 值copy的,所以把子类存到一个父类型的容器里, 只是存了子类中属于父类<br  />
+的那一部分,<br  />
+所以, 要想解决问题,可以存储 指针到容器中,  带来的问题是, 需要管理指针所指对象<br  />
+,进一步的解决办法:又回到了 引用计数.<br  />
+设计一个中间类 里面存着 类型为父类的一个指针类型(可以指向子类向象),<br  />
+及 引用计数 来管理指向此对象的引用数,以便管理内存,为方便可能需要重定义操作符<br  />
+</p>
+<ul class="org-ul">
+<li>-&gt;<br  /></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline136" class="outline-2">
+<h2 id="orgheadline136">模版</h2>
+<div class="outline-text-2" id="text-orgheadline136">
+<div class="org-src-container">
+
+<pre class="src src-c++"> template&lt;typename T&gt; compare(const T &amp;v1,const &amp;v2){
+   if (v1 &lt;v2)return 1;
+   if (v1 &gt;v2)return -1;
+   return 0;
+ }
+
+ template&lt;class T&gt; class List{
+ public:
+   List();
+   T&amp; first();
+   void add(T &amp;t);
+   void del(T &amp;t);
+
+ }
+//关键字 class typename 完全相同 , 只是给程序员 直观的感受来区分 T的可能类型
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline142" class="outline-2">
+<h2 id="orgheadline142">高级内存分配</h2>
+<div class="outline-text-2" id="text-orgheadline142">
+</div><div id="outline-container-orgheadline137" class="outline-3">
+<h3 id="orgheadline137">allocator 模版类</h3>
+<div class="outline-text-3" id="text-orgheadline137">
+<p>
+内存分配和对象的初始化是可以分开进行的 ，<br  />
+主要作用是 ，预先分配一段内存 ，然后在这段内存上分配对象，<br  />
+这段内存<br  />
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">allocator&lt;T&gt; a</td>
+<td class="org-left">定义a,a可以用来为类型T申请内存，在这段内存上构造销毁对象</td>
+</tr>
+
+<tr>
+<td class="org-left">a.allocate(N)</td>
+<td class="org-left">为类型T 申请N个大小的内存空间，</td>
+</tr>
+
+<tr>
+<td class="org-left">a.deallocate(ptr,N)</td>
+<td class="org-left">回收allocate(N)分配的内存空间</td>
+</tr>
+
+<tr>
+<td class="org-left">a.construct(ptr,t)</td>
+<td class="org-left">在ptr所指的内存中 利用t的复制构造函数 构造一个新的对象 (copy t 到ptr),ptr是a.allocate(n),分配到的内存</td>
+</tr>
+
+<tr>
+<td class="org-left">a.destroy(ptr)</td>
+<td class="org-left">调用ptr所指对象的析构函数，并没有释放这段内存 ，在deallocate调用之前,这段内存 可以再次分配给另一个t对象了</td>
+</tr>
+
+<tr>
+<td class="org-left">uninitialized_copy(beg end,beg2)</td>
+<td class="org-left">从beg end 范围内的对象 copy 到beg2所指对象处，beg2 指向a.allocate(n) 所分配的未初始化内存中</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+a.construct(ptr,t) 不灵活的一点是 ，只能得用T的复制构造函数来初始化这段内存，<br  />
+即必须事先构造一个t对象， 然后利用这个t来初始化之<br  />
+应用场合， 比如vector 的实现， 预先分配n的对象的空间， add 或delete 时， 直接<br  />
+使用这些已经申请到的内存， 不必每次都向操作系统申请<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline138" class="outline-3">
+<h3 id="orgheadline138">普通的new</h3>
+<div class="outline-text-3" id="text-orgheadline138">
+<p>
+string *str = new string("hello");<br  />
+实际分3 部<br  />
+</p>
+<ol class="org-ol">
+<li>调用 operator new 的标准库函数 ，分配足够大的内存<br  /></li>
+<li>调用构造函数构造对象<br  /></li>
+<li>返回指针<br  /></li>
+</ol>
+
+<p>
+这里提到了 operator new ,标准库函数 只是分配内存， 未初始化,功能类似于c里的malloc<br  />
+void *operator  new (size_t); //分配size_t 大小的内存,为一个object,<br  />
+void <b>operator  new[] (size_t);//分配size_t大小的内存，为一个数组<br  />
+void *operator  delete (void</b>);// free an object<br  />
+void <b>operator  delete[] (void</b>);// free an array<br  />
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orgheadline139" class="outline-3">
+<h3 id="orgheadline139">特殊的new ,定位new表达式</h3>
+<div class="outline-text-3" id="text-orgheadline139">
+<p>
+new (ptr) T(param);<br  />
+在ptr所指的内存中 构造T(param)对象,比 allocator.construct(T) 好的地方是<br  />
+直接在所指内存中构造对象 ，可以使用其任何构造函数，<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++">allocator&lt;string&gt; a;
+string* str=a.allocate(2) ;//分配空间 hold  2 strings
+new (str)string("he");
+a.construct((str+1),string("llo"));
+std::cout &lt;&lt; *str &lt;&lt; std::endl;
+std::cout &lt;&lt; *(str+1) &lt;&lt; std::endl;
+
+str-&gt;~string(); //调用析构函数
+a.destroy(str+1);//调用析构函数
+a.deallocate(str,2);//释放内存
+</pre>
+</div>
+<p>
+这个操作并没有分配内存，ptr所指的内存是事先申请好了的，<br  />
+其反操作是直接调用 相应对象的析构函数<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline140" class="outline-3">
+<h3 id="orgheadline140">string *str = new string("hello");</h3>
+<div class="outline-text-3" id="text-orgheadline140">
+<p>
+综上 ，对此语句进行细化<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++">allocator&lt;string&gt; a;
+string* str=a.allocate(1) ;//分配空间 hold  1 string
+new (str)string("hell");
+std::cout &lt;&lt; *str &lt;&lt; std::endl;
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-c++">string *str = static_cast&lt;string*&gt; (operator new (sizeof(string)));
+new (str)string("hell");
+std::cout &lt;&lt; *str &lt;&lt; std::endl;
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline141" class="outline-3">
+<h3 id="orgheadline141">例子 一个内存分配置基类</h3>
+<div class="outline-text-3" id="text-orgheadline141">
+<div class="org-src-container">
+
+<pre class="src src-c++">#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;vector&gt;
+#include &lt;stdexcept&gt;
+#include &lt;memory&gt;
+
+using namespace std;
+template&lt;class T&gt; class CacheObj
+{
+public:
+  static size_t sz;// debug用，记录 当前早请了多少个T了
+protected:
+  T *next;//指向下一个
+private:
+  static allocator&lt;T&gt; t_allocator;
+  static T *free_list;                 // 申请到的内存里，尚未被使用的
+  static const std::size_t incr_size;      // 每次内存不足时 扩容那么大
+  static void add_to_free_list(T *t);
+
+public:
+  virtual ~CacheObj(){};
+  void* operator new (size_t sz);
+  void operator delete (void* ptr,size_t sz);
+};
+
+template&lt;class T&gt;  allocator&lt;T&gt; CacheObj&lt;T&gt;::t_allocator;
+template&lt;class T&gt;  T* CacheObj&lt;T&gt;::free_list=NULL;
+template&lt;class T&gt;  const size_t CacheObj&lt;T&gt;::incr_size=2;
+template&lt;class T&gt;  size_t CacheObj&lt;T&gt;::sz=0;
+
+template&lt;class T&gt; void* CacheObj&lt;T&gt;::operator new (size_t sz){
+
+  std::cout &lt;&lt; "new called" &lt;&lt; std::endl;
+  if (sizeof(T)!= sz){//这里做检查 ，保证传过来是T本身， 而非其子类
+    throw std::runtime_error("CacheObj wrong size");
+  }
+  if(!free_list){               // 如果free_list null
+    T* array=t_allocator.allocate(incr_size);
+    CacheObj&lt;T&gt;::sz= CacheObj&lt;T&gt;::sz+incr_size;
+    for (int i = 0; i !=incr_size ; i++){
+      add_to_free_list(&amp;array[0]);
+    }
+  }
+  T* tmp = free_list;
+  free_list=free_list-&gt;CacheObj&lt;T&gt;::next;
+  return tmp;
+}
+
+template&lt;class T&gt; void CacheObj&lt;T&gt;::operator delete(void* ptr,size_t sz){
+  std::cout &lt;&lt; "delted called" &lt;&lt; std::endl;
+  if(ptr){
+    add_to_free_list(static_cast&lt;T*&gt; (ptr));
+  }
+}
+
+template&lt;class T&gt; void CacheObj&lt;T&gt;::add_to_free_list(T* t){
+  t-&gt;CacheObj&lt;T&gt;::next=free_list;
+  free_list=t;
+}
+class Item: public CacheObj&lt;Item&gt;
+{
+public:
+  int value;
+};
+
+// 实现了为 Item new 新对象时 ，提前分配好CacheObj&lt;T&gt;::incr_size 大小的空间
+//限制是Item 不可以有子类， 或者说 不可以将Item的子类对象放进去
+//哪个类继承了CacheObj&lt;T&gt; ,哪个类可以放
+// 因为提前分配内存时 是按照T的大小来分配的，而其子类的大小必然比其本身大
+
+int main(int argc, char *argv[]){
+
+  Item *item = new Item();
+  std::cout &lt;&lt; item-&gt;sz &lt;&lt; std::endl;
+
+  Item *item2 = new Item();
+  std::cout &lt;&lt; item2-&gt;sz &lt;&lt; std::endl;
+
+  Item *item3 = new Item();
+  std::cout &lt;&lt; item3-&gt;sz &lt;&lt; std::endl;
+
+  delete item;
+  delete item2;
+  delete item3;
+  return 0;
+}
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+    <div>
+      <div class="post-meta">
+        <span title="post date" class="post-info">2012-08-01</span>
+        <span title="last modification date" class="post-info">2016-01-14</span>
+        <span title="tags" class="post-info"><a href="/tags/c/">C</a></span>
+        <span title="author" class="post-info">纪秀峰</span>
+      </div>
+      <section>
+        <h1>Comments</h1>
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+          //var disqus_developer = 1;
+          var disqus_identifier = "/blog/c-cpp-拾遗/";
+          var disqus_url = "http://jixiuf.github.io/blog/c-cpp-拾遗/";
+          var disqus_shortname = 'jixiuf';
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        <div class="ds-thread"></div>
+        <script type="text/javascript">
+          var duoshuoQuery = {short_name:'jixiuf'};
+          (function() {
+          var ds = document.createElement('script');
+          ds.type = 'text/javascript';ds.async = true;
+          ds.src = 'http://static.duoshuo.com/embed.js';
+          ds.charset = 'UTF-8';
+          (document.getElementsByTagName('head')[0]
+          || document.getElementsByTagName('body')[0]).appendChild(ds);
+          })();
+        </script>
+      </section>
+      <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.js"></script>
+      <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script src="/media/js/main.js"></script>
+      <div class="footer">
+        <p>Generated by <a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.x (<a href="http://orgmode.org">Org mode</a> 8.x)</p>
+        <p>
+          Copyright &copy; 2012 - <span id="footerYear"></span> <a href="mailto:jixiuf &lt;at&gt; gmail &lt;dot&gt; com">纪秀峰</a>
+          &nbsp;&nbsp;-&nbsp;&nbsp;
+          Powered by <a href="https://github.com/kelvinh/org-page" target="_blank">org-page</a>
+          <script type="text/javascript">document.getElementById("footerYear").innerHTML = (new Date()).getFullYear();</script>
+        </p>
+      </div>
+    </div>
+
+  </body>
+</html>

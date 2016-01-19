@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <title>emacs 按键绑定 - 一个人的狂欢</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="纪秀峰" />
+    <link rel="stylesheet" href="/media/css/main.css" type="text/css">
+    <link rel="stylesheet" href="/media/css/prettify.css" type="text/css">
+  </head>
+  <body class="container">
+    <div>
+      <header class="masthead">
+        <h1 class="masthead-title"><a href="/">一个人的狂欢</a></h1>
+        <p></p>
+        <ul>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/tags/">Tags</a></li>
+          <li><a href="/tags/">Tags</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="http://github.com/jixiuf">GitHub</a></li>
+          <li><a href="/rss.xml">RSS</a></li>
+        </ul>
+        <form method="get" id="searchform" action="http://www.google.com/search">
+          <input type="text" class="field" name="q" id="s" placeholder="Search">
+          <input type="hidden" name="as_sitesearch" value="jixiuf.github.io">
+        </form>
+      </header>
+    </div>
+
+<div>
+<div class="post">
+<h1>emacs 按键绑定</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgheadline1">全局按键绑定global-set-key</a></li>
+<li><a href="#orgheadline2">绑定新的前缀键</a></li>
+<li><a href="#orgheadline3">创建新的 prefix command</a></li>
+<li><a href="#orgheadline4">如何查看 某个快捷键绑定了什么命令</a></li>
+<li><a href="#orgheadline5">如何查看 某个函数或命令的文档</a></li>
+<li><a href="#orgheadline6">为具体的 major mode 绑定按键</a></li>
+<li><a href="#orgheadline9">常用按键总结</a>
+<ul>
+<li><a href="#orgheadline7">光标移动/快速定位相关</a></li>
+<li><a href="#orgheadline8">常用操作相关</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline10">一些常用操作的优化</a>
+<ul>
+<li><a href="#orgheadline11">C-a smart-beginning-of-line</a></li>
+<li><a href="#orgheadline12">C-e smart-end-of-line</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">全局按键绑定global-set-key</h2>
+<div class="outline-text-2" id="text-orgheadline1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(global-set-key ... 'my-funtion)
+比如
+(global-set-key (kbd "C-f") 'forward-char)
+(global-set-key (kbd "C-x C-f") 'find-file)
+或者
+(define-key global-map (kbd "C-f") 'forward-char)
+(define-key global-map (kbd "C-x C-f") ''find-file)
+</pre>
+</div>
+<p>
+常用的 像C-x C-f  ,C-f ,C-c C-f  等按键 很容易写出来<br  />
+但是有些按键 包含  f1 f2 backspace,delete return shift 等按键<br  />
+这样的按键不好配置。<br  />
+有一种方法可以帮你解决这个问题<br  />
+</p>
+
+<ol class="org-ol">
+<li>M-x global-set-key RET 交互式的绑定你的键。<br  /></li>
+<li>C-x Esc Esc 调出上一条“复杂命令”。<br  /></li>
+</ol>
+<p>
+    好了，你现在就能在 minibuffer 里看到你应该写在 .emacs 的东西 了。<br  />
+比如 我想绑定 Alt-Return 到 forward-char 这个命令<br  />
+M-x:global-set-key RET 然后 按下 Alt-Return 按键 ，然后输入forward-char 然后回来<br  />
+再然后 按下 C-x Esc Esc 就会在minibuffer 里显示出<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(global-set-key [27 13] (quote forward-char))
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2">绑定新的前缀键</h2>
+<div class="outline-text-2" id="text-orgheadline2">
+<p>
+其实上面的办法只能让你绑定一个已有的前缀。你有可能想绑定一个<br  />
+save-buffer 到 "C-c C-c C-b a"。上面的办法就不灵了。我们必须 使用另外<br  />
+的办法：<br  />
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(global-set-key (kbd "C-c C-c C-b a") 'save-buffer)
+</pre>
+</div>
+<p>
+上面的那个 "C-c C-c C-b a" 是自动把 "C-c C-c", "C-c C-c C-b" 都定义<br  />
+成了一个 prefix-command.<br  />
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline3" class="outline-2">
+<h2 id="orgheadline3">创建新的 prefix command</h2>
+<div class="outline-text-2" id="text-orgheadline3">
+<p>
+上面这个办法只对开头的键已经是 prefix command 的键序列起作用， 如果<br  />
+你的第一个键不是一个 prefix，那么就会出错。你可以试试：<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(global-set-key (kbd "C-z C-c C-w b") 'find-file)
+</pre>
+</div>
+<p>
+出现错误：(error "Key sequence C-z C-c C-w b uses invalid prefix characters")<br  />
+</p>
+
+<p>
+所以你必须事先把第一个键设定为 prefix:<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(define-prefix-command 'ctl-z-map)
+(global-set-key (kbd "C-z") 'ctl-z-map)
+(global-set-key (kbd "C-z C-c C-w b") 'find-file)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline4" class="outline-2">
+<h2 id="orgheadline4">如何查看 某个快捷键绑定了什么命令</h2>
+<div class="outline-text-2" id="text-orgheadline4">
+<p>
+C-h k 或 F1 k<br  />
+比如我想看 C-x C-s 这个快捷键 绑定了什么命令<br  />
+C-h k 然后按下C-x C-s按键<br  />
+或者<br  />
+F1 k 然后按下C-s C-s按键<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline5" class="outline-2">
+<h2 id="orgheadline5">如何查看 某个函数或命令的文档</h2>
+<div class="outline-text-2" id="text-orgheadline5">
+<p>
+C-h f 或F1 f 然后输入相应函数名<br  />
+如查看 forward-char 命令的文档<br  />
+C-h f 然后输入forward-char 回车<br  />
+F1 f 然后输入forward-char 回车<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline6" class="outline-2">
+<h2 id="orgheadline6">为具体的 major mode 绑定按键</h2>
+<div class="outline-text-2" id="text-orgheadline6">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(require 'dired)
+;;比如在dired mode 下  直接按u  就回到上层目录dired-up-directory
+(define-key dired-mode-map "u" 'dired-up-directory)
+;; 或者
+(defun my-dired-mode-hook()
+  (local-set-key "u" 'dired-up-directory))
+(add-hook 'dired-mode-hook 'my-dired-mode-hook)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline9" class="outline-2">
+<h2 id="orgheadline9">常用按键总结</h2>
+<div class="outline-text-2" id="text-orgheadline9">
+</div><div id="outline-container-orgheadline7" class="outline-3">
+<h3 id="orgheadline7">光标移动/快速定位相关</h3>
+<div class="outline-text-3" id="text-orgheadline7">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">快捷键</th>
+<th scope="col" class="org-left">绑定的函数</th>
+<th scope="col" class="org-left">解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">C-f, C-b</td>
+<td class="org-left">forward-char backward-char</td>
+<td class="org-left">以字符为单位移动。</td>
+</tr>
+
+<tr>
+<td class="org-left">M-f, M-b</td>
+<td class="org-left">forward-word,backward-word</td>
+<td class="org-left">以单词为单位移动。</td>
+</tr>
+
+<tr>
+<td class="org-left">C-M-f, C-M-b</td>
+<td class="org-left">forward-sexp backward-sexp</td>
+<td class="org-left">以一个语法单元尾单位前后移动</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">C-a, C-e</td>
+<td class="org-left">move-beginning-of-line move-end-of-line</td>
+<td class="org-left">移动到行首，行末。</td>
+</tr>
+
+<tr>
+<td class="org-left">M-a, M-e</td>
+<td class="org-left">backward-sentence forward-sentence</td>
+<td class="org-left">移动到句子头，句子尾。</td>
+</tr>
+
+<tr>
+<td class="org-left">C-M-a ,C-M-e</td>
+<td class="org-left">beginning-of-defun end-of-defun</td>
+<td class="org-left">到函数头尾</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">M-{, M-}</td>
+<td class="org-left">forward-paragraph backward-paragraph</td>
+<td class="org-left">移动到段落头，段落尾。</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">C-d</td>
+<td class="org-left">delete-char</td>
+<td class="org-left">删除光标后的字符</td>
+</tr>
+
+<tr>
+<td class="org-left">M-d</td>
+<td class="org-left">kill-word</td>
+<td class="org-left">删除光标后的单词</td>
+</tr>
+
+<tr>
+<td class="org-left">C-backspace</td>
+<td class="org-left">backward-kill-word</td>
+<td class="org-left">删除光标前的一个单词</td>
+</tr>
+
+<tr>
+<td class="org-left">M-backspace</td>
+<td class="org-left">backward-kill-word</td>
+<td class="org-left">删除光标前的一个单词</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">C-k</td>
+<td class="org-left">kill-line</td>
+<td class="org-left">删除一行</td>
+</tr>
+
+<tr>
+<td class="org-left">C-M-k</td>
+<td class="org-left">kill-sexp</td>
+<td class="org-left">删除一个语法单元(比如一对(),[]{})</td>
+</tr>
+
+<tr>
+<td class="org-left">C-x k</td>
+<td class="org-left">kill-buffer</td>
+<td class="org-left">关闭打开的文件/buffer</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">M-h</td>
+<td class="org-left">mark-paragraph</td>
+<td class="org-left">选择一段</td>
+</tr>
+
+<tr>
+<td class="org-left">C-M-h</td>
+<td class="org-left">mark-defun</td>
+<td class="org-left">选择一个函数</td>
+</tr>
+
+<tr>
+<td class="org-left">C-x h</td>
+<td class="org-left">mark-whole-buffer</td>
+<td class="org-left">全选</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">C-v, M-v</td>
+<td class="org-left">scroll-up-command scroll-down-command</td>
+<td class="org-left">翻页。</td>
+</tr>
+
+<tr>
+<td class="org-left">M-&lt;, M-&gt;</td>
+<td class="org-left">beginning-of-buffer end-of-buffer</td>
+<td class="org-left">到文件头和文件尾。</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">M-r</td>
+<td class="org-left">move-to-window-line-top-bottom</td>
+<td class="org-left">加参数，移动到窗口里的某一行。不加参数缺省移动到窗口中间。</td>
+</tr>
+
+<tr>
+<td class="org-left">M-g c</td>
+<td class="org-left">goto-char</td>
+<td class="org-left">到文件的第 N 字节。</td>
+</tr>
+
+<tr>
+<td class="org-left">M-g g</td>
+<td class="org-left">goto-line</td>
+<td class="org-left">到文件第 N 行。</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">C-g</td>
+<td class="org-left">keyboard-quit</td>
+<td class="org-left">取消或放弃一个操作</td>
+</tr>
+</tbody>
+</table>
+<p>
+C-g的详细说明: 比如我想打开一个文件C-x C-f 当我按完C-x 还没按C-f 前，我突然想放弃了，这个时候直接C-g 就可以了<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline8" class="outline-3">
+<h3 id="orgheadline8">常用操作相关</h3>
+<div class="outline-text-3" id="text-orgheadline8">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">C-x C-f</td>
+<td class="org-left">find-file</td>
+<td class="org-left">open file</td>
+</tr>
+
+<tr>
+<td class="org-left">C-x C-s</td>
+<td class="org-left">save-buffer</td>
+<td class="org-left">save file</td>
+</tr>
+
+<tr>
+<td class="org-left">C-x C-w</td>
+<td class="org-left">write-file</td>
+<td class="org-left">save as</td>
+</tr>
+
+<tr>
+<td class="org-left">C-x k</td>
+<td class="org-left">kill-buffer</td>
+<td class="org-left">close current file</td>
+</tr>
+
+<tr>
+<td class="org-left">C-x C-c</td>
+<td class="org-left">save-buffers-kill-terminal</td>
+<td class="org-left">exit</td>
+</tr>
+
+<tr>
+<td class="org-left">C-_ 或C-/</td>
+<td class="org-left">undo</td>
+<td class="org-left">undo</td>
+</tr>
+
+<tr>
+<td class="org-left">C-@ or C-&lt;SPC&gt;</td>
+<td class="org-left">set-mark-command</td>
+<td class="org-left">设置起始点，设置完之后移动光标，光标所在位置与C-@时所在位置之前的区域即为选中区域</td>
+</tr>
+
+<tr>
+<td class="org-left">C-w</td>
+<td class="org-left">kill-region</td>
+<td class="org-left">cut</td>
+</tr>
+
+<tr>
+<td class="org-left">M-w</td>
+<td class="org-left">kill-ring-save</td>
+<td class="org-left">copy</td>
+</tr>
+
+<tr>
+<td class="org-left">C-y</td>
+<td class="org-left">yank</td>
+<td class="org-left">paste</td>
+</tr>
+
+<tr>
+<td class="org-left">M-x:truncate-line</td>
+<td class="org-left">truncate-line</td>
+<td class="org-left">set word wrap</td>
+</tr>
+
+<tr>
+<td class="org-left">C-s</td>
+<td class="org-left">isearch-forward</td>
+<td class="org-left">search forward</td>
+</tr>
+
+<tr>
+<td class="org-left">C-r</td>
+<td class="org-left">isearch-backward</td>
+<td class="org-left">search backward</td>
+</tr>
+
+<tr>
+<td class="org-left">C-s C-s</td>
+<td class="org-left">isearch-repeat-forward</td>
+<td class="org-left">find next forward</td>
+</tr>
+
+<tr>
+<td class="org-left">C-r C-r</td>
+<td class="org-left">isearch-repeat-backward</td>
+<td class="org-left">find next backward</td>
+</tr>
+
+<tr>
+<td class="org-left">M-x:replace-string</td>
+<td class="org-left">replace-string</td>
+<td class="org-left">replace</td>
+</tr>
+</tbody>
+</table>
+<p>
+对于拷贝粘贴，Emacs 有点不一样。在一般的编辑器中，先鼠标选择一段区域，<br  />
+然后 C-c 拷贝。Emacs 中的不是这样的，当前光标位置叫point ， 还有一个<br  />
+点是 mark ，可以用 C-@ 设置 mark 的位置，然后移动光标 point 和 mark 之间的内容<br  />
+就是 region ， C-w 剪切 , M-w 拷贝都是针对 region 的。 C-@ 的作用就是<br  />
+设置一块region的起始位置，point 是光标当前的位 置， region 是 mark 和<br  />
+point 之间的区域。<br  />
+</p>
+
+<p>
+上面有好多命令都是kill-开头的 如kill-line ,kill-word kill-region等这些<br  />
+命令执行后被删除的东西都会放到kill-ring 中， 然后 C-y 可以再次把它粘贴<br  />
+回来<br  />
+</p>
+
+
+<p>
+唯一让我觉得不方便的就是 C-@ ，因为 C-&lt;SPC&gt; 一般用来切换输入法了。还好，<br  />
+用他的次数也不多， 就算用鼠标，也挺好， 习惯问题。<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp"> C-@ = C-S-2 不好按，所以我设置成 C-2 好按一下，
+(global-set-key  (kbd "C-2") 'set-mark-command)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline10" class="outline-2">
+<h2 id="orgheadline10">一些常用操作的优化</h2>
+<div class="outline-text-2" id="text-orgheadline10">
+<p>
+比如 C-x k kill-buffer 默认会提示你输入要kill 的buffer 名 ，如果是当前buffer 则直接回车<br  />
+我嫌输入回车麻烦， 我想做到输入C-x k 直接把当前buffer 关闭<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(autoload 'server-edit "server")
+;;;###autoload
+(defun kill-buffer-or-server-edit()
+  (interactive)
+  (message "kill buffer %s" (buffer-name))
+  (when (equal (buffer-name) "*scratch*")
+    (copy-region-as-kill (point-min)(point-max)))
+  (if (and (featurep 'server) server-buffer-clients)
+      (server-edit)
+    (kill-this-buffer)
+    )
+  )
+(global-set-key (kbd "C-x k") 'kill-buffer-or-server-edit)
+</pre>
+</div>
+</div>
+<div id="outline-container-orgheadline11" class="outline-3">
+<h3 id="orgheadline11">C-a smart-beginning-of-line</h3>
+<div class="outline-text-3" id="text-orgheadline11">
+<p>
+默认情况下C-a 绑定的的函数move-beginning-of-line 。<br  />
+但是我对   move-beginning-of-line这个函数不太满意，我想做到，当我第一次<br  />
+按下C-a时，跳到行首，当已经在行首时，则忽略行首的空白字符，并且C-a 可以在这<br  />
+两个位置来回跳转.于是有了下面的  smart-beginning-of-line<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">;;;###autoload
+(defun smart-beginning-of-line ()
+  "Move point to first non-whitespace character or beginning-of-line.
+Move point to beginning-of-line ,if point was already at that position,
+  move point to first non-whitespace character. "
+  (interactive)
+  (let ((oldpos (point)))
+    (beginning-of-line)
+    (and (= oldpos (point))
+         (back-to-indentation) )))
+(global-set-key (kbd "C-a") 'smart-beginning-of-line)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline12" class="outline-3">
+<h3 id="orgheadline12">C-e smart-end-of-line</h3>
+<div class="outline-text-3" id="text-orgheadline12">
+<p>
+C-e对于end-of-line ,也想要同样的效果。<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">;;;###autoload
+(defun smart-end-of-line()
+  "Move point to first non-whitespace character or end-of-line.
+Move point to end-of-line ,if point was already at that position,
+  move point to first non-whitespace character."
+  (interactive)
+  (let ((oldpos (point)))
+    (beginning-of-line)
+    (when (re-search-forward "[ \t]*$" (point-at-eol) t)
+      (goto-char (match-beginning 0)))
+    (when (= oldpos (point))
+      (end-of-line))))
+(global-set-key (kbd "C-e") 'smart-end-of-line)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+    <div>
+      <div class="post-meta">
+        <span title="post date" class="post-info">2015-10-18</span>
+        <span title="last modification date" class="post-info">2016-01-14</span>
+        <span title="tags" class="post-info"><a href="/tags/emacs/">Emacs</a></span>
+        <span title="author" class="post-info">纪秀峰</span>
+      </div>
+      <section>
+        <h1>Comments</h1>
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+          //var disqus_developer = 1;
+          var disqus_identifier = "/blog/emacs-按键绑定/";
+          var disqus_url = "http://jixiuf.github.io/blog/emacs-按键绑定/";
+          var disqus_shortname = 'jixiuf';
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        <div class="ds-thread"></div>
+        <script type="text/javascript">
+          var duoshuoQuery = {short_name:'jixiuf'};
+          (function() {
+          var ds = document.createElement('script');
+          ds.type = 'text/javascript';ds.async = true;
+          ds.src = 'http://static.duoshuo.com/embed.js';
+          ds.charset = 'UTF-8';
+          (document.getElementsByTagName('head')[0]
+          || document.getElementsByTagName('body')[0]).appendChild(ds);
+          })();
+        </script>
+      </section>
+      <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.js"></script>
+      <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script src="/media/js/main.js"></script>
+      <div class="footer">
+        <p>Generated by <a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.x (<a href="http://orgmode.org">Org mode</a> 8.x)</p>
+        <p>
+          Copyright &copy; 2012 - <span id="footerYear"></span> <a href="mailto:jixiuf &lt;at&gt; gmail &lt;dot&gt; com">纪秀峰</a>
+          &nbsp;&nbsp;-&nbsp;&nbsp;
+          Powered by <a href="https://github.com/kelvinh/org-page" target="_blank">org-page</a>
+          <script type="text/javascript">document.getElementById("footerYear").innerHTML = (new Date()).getFullYear();</script>
+        </p>
+      </div>
+    </div>
+
+  </body>
+</html>

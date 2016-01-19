@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <title>在Windows上使用MSYS中的bash并使ls可以显示颜色 - 一个人的狂欢</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="纪秀峰" />
+    <meta name="description" content="在Windows上使用MSYS中的bash并使ls可以显示颜色" />
+    <meta name="keywords" content="msys windows bash emacs color" />
+    <link rel="stylesheet" href="/media/css/main.css" type="text/css">
+    <link rel="stylesheet" href="/media/css/prettify.css" type="text/css">
+  </head>
+  <body class="container">
+    <div>
+      <header class="masthead">
+        <h1 class="masthead-title"><a href="/">一个人的狂欢</a></h1>
+        <p></p>
+        <ul>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/tags/">Tags</a></li>
+          <li><a href="/tags/">Tags</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="http://github.com/jixiuf">GitHub</a></li>
+          <li><a href="/rss.xml">RSS</a></li>
+        </ul>
+        <form method="get" id="searchform" action="http://www.google.com/search">
+          <input type="text" class="field" name="q" id="s" placeholder="Search">
+          <input type="hidden" name="as_sitesearch" value="jixiuf.github.io">
+        </form>
+      </header>
+    </div>
+
+<div>
+<div class="post">
+<h1>在Windows上使用MSYS中的bash并使ls可以显示颜色</h1>
+<p>
+在Windows上，有Emacs中使用MSYS中的bash作为shell,首先为了方便使用，写了两个<br  />
+函数bash 与bash-cd 分别绑定在 Control+F1 ,Alt+F1上<br  />
+，两者的区别上bash-cd 会在每次切换到*bash* buffer时，<br  />
+运行cd 命令，跳到当前文件所在目录，而bash则不会。<br  />
+另外按一个C-f1 是以半窗口的形式启动bash ,按下两次C-f1<br  />
+切换到全屏模式，这两次按下C-f1中间不能有其他按键 ，否则是隐藏bash所在窗口，<br  />
+而在全屏模式按下C-f1则是隐藏*bash*<br  />
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(global-set-key [C-f1] 'bash-cd)
+(global-set-key [M-f1] 'bash)
+
+;;这里很多变量，都被我用let 置成临时变量，而全局的相应变量并没做修改，
+;;因为在windows 上，我使用默认的cdmproxy
+;;;###autoload
+(defun bash ()
+  "Start `bash' shell."
+  (interactive)
+  (let ((binary-process-input t)
+        (binary-process-output nil)
+        (comint-scroll-show-maximum-output 'this)
+        (shell-file-name "bash")
+        ;; I don't know why on windows ,if I add -C switch ,then the color
+        ;; can't show correctly, so I comment it (shell-command-switch "-c");
+        (explicit-shell-file-name "bash") ;;term.el
+        (explicit-bash-args '("-login" "-i"))
+        (comint-completion-addsuffix t);;目录补全时,在末尾加一个"/"字符
+        (comint-eol-on-send t)
+        (comint-file-name-quote-list '(?\  ?\")) ;;当文件名中有这些(空格引号)特殊字符时会把这些特殊字符用"\"转义
+        (w32-quote-process-args ?\")  ;;再给程序传递参数的时候,使用这个字符将参数括起来
+        ;; (eval-after-load 'ediff-diff '(progn (setq ediff-shell shell-file-name))) ;;Ediff shell
+        ;; Unfortunately, when you visit a DOS text file within an
+        ;; encoded file, you'll see CRs (^Ms) in the buffer.
+        ;; If `binary-process-output' is set to `nil', this problem goes
+        ;; away, which is fine for files of type `.gz'.
+        (ediff-shell shell-file-name))
+    ;; (when (equal system-type 'windows-nt)
+    ;;   (setq comint-output-filter-functions '(comint-strip-ctrl-m))) 不知原因为何windows 上，加了这句后，shell不显颜色
+    (setenv "SHELL" explicit-shell-file-name)
+    (if (and (get-buffer "*bash*")
+             (buffer-live-p (get-buffer "*bash*")))
+        (cond
+         ( (not (string= (buffer-name) "*bash*"))
+           (switch-to-buffer-other-window "*bash*"))
+         ((and (string= (buffer-name) "*bash*")
+               (&gt; (length (window-list)) 1)
+               (member last-command '(bash-cd bash)))
+          (delete-other-windows)
+          )
+         ((and (string= (buffer-name) "*bash*")
+               (&gt; (length (window-list)) 1))
+          (delete-window)
+          )
+         ((and
+           (string= (buffer-name) "*bash*")
+           (equal (length (window-list)) 1))
+          (bury-buffer)
+          ))
+      (shell "*bash*")(sleep-for 1)
+      )
+    ))
+
+;;;###autoload
+(defun bash-cd(&amp;optional dir)
+  (interactive)
+  (let ((dest-dir-cd (or dir default-directory)))
+    (bash)
+    (with-current-buffer "*bash*"
+      (goto-char (point-max))
+      (insert (concat "cd " dest-dir-cd))
+      (comint-send-input))
+    ))
+</pre>
+</div>
+
+<p>
+$HOME/.bashrc的设置<br  />
+注意，在 d:/usr/MinGW/msys/1.0/etc/profile中需要加上下面一句放在$HOME下<br  />
+的.bashrc才会起作用<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">. "$HOME/.bashrc"
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-sh">cd "$HOME"
+cd ~
+
+GREP_OPTIONS="--exclude-dir=\.svn --exclude=*.class --exclude-dir=classes --exclude=*.doc --exclude=*.csv --exclude=TAGS"
+export GREP_OPTIONS
+# 设置颜色
+LS_COLORS='no=00:fi=00:di=01;37;44:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=01;05;37;41:mi=01;05;37;41:ex=01;32:*.cmd=01;32:*.exe=01;32:*.com=01;32:*.btm=01;32:*.bat=01;32:*.sh=01;32:*.csh=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.bz2=01;31:*.bz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.rar=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.mng=01;35:*.xcf=01;35:*.pcx=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.avi=01;35:*.mkv=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.mov=01;35:*.qt=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.fli=01;35:*.gl=01;35:*.dl=01;35:*.pdf=00;32:*.ps=00;32:*.txt=00;32:*.patch=00;32:*.diff=00;32:*.log=00;32:*.tex=00;32:*.doc=00;32:*.mp3=01;32:*.wav=01;32:*.mid=01;32:*.midi=01;32:*.au=01;32:*.ogg=01;32:*.flac=01;32:*.aac=01;32:';
+export LS_COLORS 
+
+
+# export LANG=zh_CN.UTF-8
+# export LC_CTYPE="zh_CN.UTF-8"
+# export LC_NUMERIC="zh_CN.UTF-8"
+# export LC_TIME="zh_CN.UTF-8"
+# export LC_COLLATE="zh_CN.UTF-8"
+# export LC_MONETARY="zh_CN.UTF-8"
+# export LC_MESSAGES="zh_CN.UTF-8"
+# export LC_ALL="zh_CN.UTF-8"
+# alias ls='ls --show-control-chars -F --color=tty'
+alias ls="ls --color  --show-control-chars -F"
+alias la="ls -a --color=auto"
+alias ll="ls -lh --color=auto"
+alias rm="rm -r"
+alias cp="cp -r"
+alias ps="ps -ef -W"
+alias pp="ps -ef -W |grep"
+alias ..="cd .."
+alias cd..="cd .."
+
+
+export LANG=zh_CN.UTF-8
+export LC_CTYPE="zh_CN.UTF-8"
+export LC_NUMERIC="zh_CN.UTF-8"
+export LC_TIME="zh_CN.UTF-8"
+export LC_COLLATE="zh_CN.UTF-8"
+export LC_MONETARY="zh_CN.UTF-8"
+export LC_MESSAGES="zh_CN.UTF-8"
+export LC_ALL="zh_CN.UTF-8"
+
+;;这里为emacs及正常的cygwin ,或mssy 设置不同的PS1
+case $TERM in
+cygwin)
+export PS1='\[\033]0;$MSYSTEM:\w\007
+\033[32m\]\u@\h \[\033[33m\w\033[0m\]
+$ '
+;;
+*)
+export PS1='\W\$ ' # for emacs and others 
+;;
+esac
+</pre>
+</div>
+
+<p>
+;; (when (equal system-type 'windows-nt)<br  />
+;;   (setq comint-output-filter-functions '(comint-strip-ctrl-m))) 不知原因为何windows 上，加了这句后，shell不显颜色<br  />
+</p>
+
+</div>
+</div>
+    <div>
+      <div class="post-meta">
+        <span title="post date" class="post-info">2011-10-28</span>
+        <span title="last modification date" class="post-info">2016-01-14</span>
+        <span title="tags" class="post-info"><a href="/tags/emacs/">Emacs</a>, <a href="/tags/windows/">Windows</a></span>
+        <span title="author" class="post-info">纪秀峰</span>
+      </div>
+      <section>
+        <h1>Comments</h1>
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+          //var disqus_developer = 1;
+          var disqus_identifier = "/blog/在windows上使用msys中的bash并使ls可以显示颜色/";
+          var disqus_url = "http://jixiuf.github.io/blog/在windows上使用msys中的bash并使ls可以显示颜色/";
+          var disqus_shortname = 'jixiuf';
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        <div class="ds-thread"></div>
+        <script type="text/javascript">
+          var duoshuoQuery = {short_name:'jixiuf'};
+          (function() {
+          var ds = document.createElement('script');
+          ds.type = 'text/javascript';ds.async = true;
+          ds.src = 'http://static.duoshuo.com/embed.js';
+          ds.charset = 'UTF-8';
+          (document.getElementsByTagName('head')[0]
+          || document.getElementsByTagName('body')[0]).appendChild(ds);
+          })();
+        </script>
+      </section>
+      <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.js"></script>
+      <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script src="/media/js/main.js"></script>
+      <div class="footer">
+        <p>Generated by <a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.x (<a href="http://orgmode.org">Org mode</a> 8.x)</p>
+        <p>
+          Copyright &copy; 2012 - <span id="footerYear"></span> <a href="mailto:jixiuf &lt;at&gt; gmail &lt;dot&gt; com">纪秀峰</a>
+          &nbsp;&nbsp;-&nbsp;&nbsp;
+          Powered by <a href="https://github.com/kelvinh/org-page" target="_blank">org-page</a>
+          <script type="text/javascript">document.getElementById("footerYear").innerHTML = (new Date()).getFullYear();</script>
+        </p>
+      </div>
+    </div>
+
+  </body>
+</html>

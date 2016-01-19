@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <title>yasnippet Auto Insert mode整合 - 一个人的狂欢</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="纪秀峰" />
+    <meta name="description" content="Emacs 实现auto insert 时整合yasnippet 的模版功能" />
+    <meta name="keywords" content="Emacs yasnippet auto insert" />
+    <link rel="stylesheet" href="/media/css/main.css" type="text/css">
+    <link rel="stylesheet" href="/media/css/prettify.css" type="text/css">
+  </head>
+  <body class="container">
+    <div>
+      <header class="masthead">
+        <h1 class="masthead-title"><a href="/">一个人的狂欢</a></h1>
+        <p></p>
+        <ul>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/tags/">Tags</a></li>
+          <li><a href="/tags/">Tags</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="http://github.com/jixiuf">GitHub</a></li>
+          <li><a href="/rss.xml">RSS</a></li>
+        </ul>
+        <form method="get" id="searchform" action="http://www.google.com/search">
+          <input type="text" class="field" name="q" id="s" placeholder="Search">
+          <input type="hidden" name="as_sitesearch" value="jixiuf.github.io">
+        </form>
+      </header>
+    </div>
+
+<div>
+<div class="post">
+<h1>yasnippet Auto Insert mode整合</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgheadline1">1. c模版代码1</a></li>
+<li><a href="#orgheadline2">2. 启用Auto Insert 的配置代码</a></li>
+<li><a href="#orgheadline3">3. 将auto-insert-mode与yasnippet 进行整合的代码</a></li>
+<li><a href="#orgheadline4">4. Yasnippet 格式的模版</a></li>
+</ul>
+</div>
+</div>
+<p>
+auto-insert 是GNU/Emacs自带的一个功能，它可以实现当你新建一个文件的时候，自动
+在这个新建的文件里插入相应的内容，比如你新建一个c源文件的时候它自动加入这样一
+段代码：
+</p>
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1"><span class="section-number-2">1</span> c模版代码1</h2>
+<div class="outline-text-2" id="text-1">
+<div class="org-src-container">
+
+<pre class="src src-c">#include &lt;stdio.h&gt;
+
+int main(void){
+  return 0;
+}
+</pre>
+</div>
+<p>
+auto-insert 会根据你所新建文件的后缀名或major mode种类决定插入哪个模版文件。要
+实现上述功能 ，只需要在你Emacs的配置文件中加入似类如下的代码
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2"><span class="section-number-2">2</span> 启用Auto Insert 的配置代码</h2>
+<div class="outline-text-2" id="text-2">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">;;首先这句话设置一个目录，你的auto-insert 的模版文件会存放在这个目录中，
+(setq-default auto-insert-directory "~/.emacs.d/auto-insert/")
+(auto-insert-mode)  ;;; 启用auto-insert
+;; 默认情况下插入模版前会循问你要不要自动插入，这里设置为不必询问，
+;; 在新建一个org文件时，自动插入`auto-insert-directory'目录下的`org-auto-insert`文件中的内容
+(setq auto-insert-query nil)
+(define-auto-insert "\\.org" "org-auto-insert")
+;;这个就是新建以.c 结尾的C文件时，会自动插入c-auto-insert文件中的内容
+(define-auto-insert "\\.c" "c-auto-insert")
+</pre>
+</div>
+<p>
+下面要做在只需要在~/.emacs.d/auto-insert/c-auto-insert 文件中插入上面提到的<a href="#orgheadline1">c模
+版代码1</a>建好~/.emacs.d/auto-insert/c-auto-insert 文件后，用Emacs新建 一个c文
+件，你就会发现你新建的文件中已经包含上面那段c代码片段了。故事并没有到此结束 ，
+写到这里，还一直没yasnippet什么事呢.假如我想在创建这个c文件的时候，在文件开头
+插入文件创建的时间，作者的姓名，又或者是这个刚刚创建的文件的名称，其格式大概如
+下
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c">//file name : hellworld.c
+//created at: 2011-11-11 11:11:11
+//author: 爱谁谁
+
+#include &lt;stdio.h&gt;
+
+int main(void){
+  return 0;
+}
+</pre>
+</div>
+<p>
+这个作者姓名或许你可以硬编码到这个模版文件中，因为毕竟只有你自己在用你的Emacs
+,可是这个创建时间，及文件名你就很难把它办到了，当然EmacsWiki上介绍
+<a href="http://www.emacswiki.org/emacs/AutoInsertMode">AutoInSertMode</a>的页面上有解决这个问题的办法 ，但是它针对上面提到的每个问题都要
+写一个elisp函数来实现其功能。很明显，易用性、扩展性差了点。而讲到模版功能，相
+信在Emacs中可用的模版功能，目前可以说<a href="http://code.google.com/p/yasnippet/">yasnippet</a> 算得上是最强大的了。
+将这两者结合来用，自然再合适不过了。
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline3" class="outline-2">
+<h2 id="orgheadline3"><span class="section-number-2">3</span> 将auto-insert-mode与yasnippet 进行整合的代码</h2>
+<div class="outline-text-2" id="text-3">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(defadvice auto-insert  (around yasnippet-expand-after-auto-insert activate)
+  "expand auto-inserted content as yasnippet templete,
+  so that we could use yasnippet in autoinsert mode"
+  (let ((is-new-file (and (not buffer-read-only)
+                          (or (eq this-command 'auto-insert)
+                              (and auto-insert (bobp) (eobp))))))
+    ad-do-it
+    (let ((old-point-max (point-max)))
+      (when is-new-file
+        (goto-char old-point-max)
+        (yas/expand-snippet (buffer-substring-no-properties (point-min) (point-max)))
+        (delete-region (point-min) old-point-max)
+        )
+      )
+    )
+  )
+</pre>
+</div>
+<p>
+将这段代码放到<a href="#orgheadline2">2</a> 的后面，即可。然后c-auto-insert 这个
+文件里的代码 就可以是yasnippet 支持的模版文件的代码了,上面提到的功能，
+可以这样实现
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline4" class="outline-2">
+<h2 id="orgheadline4"><span class="section-number-2">4</span> Yasnippet 格式的模版</h2>
+<div class="outline-text-2" id="text-4">
+<div class="org-src-container">
+
+<pre class="src src-c">//file name : `(buffer-name)`
+//created at: `(format-time-string "%c")`
+//author:  `user-full-name`
+
+#include &lt;stdio.h&gt;
+
+int main(void){
+  return 0;
+}
+</pre>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+    <div>
+      <div class="post-meta">
+        <span title="post date" class="post-info">2011-06-03</span>
+        <span title="last modification date" class="post-info">2016-01-14</span>
+        <span title="tags" class="post-info"><a href="/tags/emacs/">Emacs</a>, <a href="/tags/linux/">Linux</a>, <a href="/tags/windows/">Windows</a></span>
+        <span title="author" class="post-info">纪秀峰</span>
+      </div>
+      <section>
+        <h1>Comments</h1>
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+          //var disqus_developer = 1;
+          var disqus_identifier = "/blog/yasnippet-auto-insert-mode整合/";
+          var disqus_url = "http://jixiuf.github.io/blog/yasnippet-auto-insert-mode整合/";
+          var disqus_shortname = 'jixiuf';
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        <div class="ds-thread"></div>
+        <script type="text/javascript">
+          var duoshuoQuery = {short_name:'jixiuf'};
+          (function() {
+          var ds = document.createElement('script');
+          ds.type = 'text/javascript';ds.async = true;
+          ds.src = 'http://static.duoshuo.com/embed.js';
+          ds.charset = 'UTF-8';
+          (document.getElementsByTagName('head')[0]
+          || document.getElementsByTagName('body')[0]).appendChild(ds);
+          })();
+        </script>
+      </section>
+      <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.js"></script>
+      <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script src="/media/js/main.js"></script>
+      <div class="footer">
+        <p>Generated by <a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.x (<a href="http://orgmode.org">Org mode</a> 8.x)</p>
+        <p>
+          Copyright &copy; 2012 - <span id="footerYear"></span> <a href="mailto:jixiuf &lt;at&gt; gmail &lt;dot&gt; com">纪秀峰</a>
+          &nbsp;&nbsp;-&nbsp;&nbsp;
+          Powered by <a href="https://github.com/kelvinh/org-page" target="_blank">org-page</a>
+          <script type="text/javascript">document.getElementById("footerYear").innerHTML = (new Date()).getFullYear();</script>
+        </p>
+      </div>
+    </div>
+
+  </body>
+</html>

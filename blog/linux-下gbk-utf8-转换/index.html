@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <title>linux 下gbk utf8 转换 - 一个人的狂欢</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="纪秀峰" />
+    <meta name="description" content="linux 下gbk utf8 转换" />
+    <meta name="keywords" content=":Linux:" />
+    <link rel="stylesheet" href="/media/css/main.css" type="text/css">
+    <link rel="stylesheet" href="/media/css/prettify.css" type="text/css">
+  </head>
+  <body class="container">
+    <div>
+      <header class="masthead">
+        <h1 class="masthead-title"><a href="/">一个人的狂欢</a></h1>
+        <p></p>
+        <ul>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/tags/">Tags</a></li>
+          <li><a href="/tags/">Tags</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="http://github.com/jixiuf">GitHub</a></li>
+          <li><a href="/rss.xml">RSS</a></li>
+        </ul>
+        <form method="get" id="searchform" action="http://www.google.com/search">
+          <input type="text" class="field" name="q" id="s" placeholder="Search">
+          <input type="hidden" name="as_sitesearch" value="jixiuf.github.io">
+        </form>
+      </header>
+    </div>
+
+<div>
+<div class="post">
+<h1>linux 下gbk utf8 转换</h1>
+<div class="org-src-container">
+
+<pre class="src src-c">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;iconv.h&gt;
+#define OUTLEN 255
+/* 用 file a.out 来看输出文件的编码*/
+int main()
+{
+  char  buf[255];
+  char out[OUTLEN];
+  int rec;
+
+  FILE *fin = fopen("/tmp/a.in", "r");
+  FILE *fout = fopen("a.out", "w");
+  fscanf(fin,"%s\n",buf);
+  rec = g2u(buf,strlen(buf),out,OUTLEN);
+  fprintf (fout,"%s\n",out);
+  /* fprintf (fout,"%s\n",buf); */
+
+  fclose(fout);
+  fclose(fin);
+  return 0;
+}
+//代码转换:从一种编码转为另一种编码
+int code_convert(char *from_charset, char *to_charset, char *inbuf, int inlen,
+                 char *outbuf, int outlen) {
+  iconv_t cd;
+  int rc;
+  char **pin = &amp;inbuf;
+  char **pout = &amp;outbuf;
+
+  cd = iconv_open(to_charset, from_charset);
+  if (cd == 0)
+    return -1;
+  memset(outbuf, 0, outlen);
+  if (iconv(cd, pin, &amp;inlen, pout, &amp;outlen) == -1)
+    return -1;
+  iconv_close(cd);
+  return 0;
+}
+//UNICODE码转为GB2312码
+int u2g(char *inbuf, int inlen, char *outbuf, int outlen) {
+  return code_convert("utf-8", "gb2312", inbuf, inlen, outbuf, outlen);
+}
+//GB2312码转为UNICODE码
+int g2u(char *inbuf, size_t inlen, char *outbuf, size_t outlen) {
+  return code_convert("gb2312", "utf-8", inbuf, inlen, outbuf, outlen);
+}
+</pre>
+</div>
+<p>
+测试 的时候从windows下创建a.in文件(gbk编码)，<br  />
+</p>
+
+</div>
+</div>
+    <div>
+      <div class="post-meta">
+        <span title="post date" class="post-info">2013-02-23</span>
+        <span title="last modification date" class="post-info">2016-01-14</span>
+        <span title="tags" class="post-info"><a href="/tags/linux/">Linux</a>, <a href="/tags/c/">C</a></span>
+        <span title="author" class="post-info">纪秀峰</span>
+      </div>
+      <section>
+        <h1>Comments</h1>
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+          //var disqus_developer = 1;
+          var disqus_identifier = "/blog/linux-下gbk-utf8-转换/";
+          var disqus_url = "http://jixiuf.github.io/blog/linux-下gbk-utf8-转换/";
+          var disqus_shortname = 'jixiuf';
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        <div class="ds-thread"></div>
+        <script type="text/javascript">
+          var duoshuoQuery = {short_name:'jixiuf'};
+          (function() {
+          var ds = document.createElement('script');
+          ds.type = 'text/javascript';ds.async = true;
+          ds.src = 'http://static.duoshuo.com/embed.js';
+          ds.charset = 'UTF-8';
+          (document.getElementsByTagName('head')[0]
+          || document.getElementsByTagName('body')[0]).appendChild(ds);
+          })();
+        </script>
+      </section>
+      <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.js"></script>
+      <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script src="/media/js/main.js"></script>
+      <div class="footer">
+        <p>Generated by <a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.x (<a href="http://orgmode.org">Org mode</a> 8.x)</p>
+        <p>
+          Copyright &copy; 2012 - <span id="footerYear"></span> <a href="mailto:jixiuf &lt;at&gt; gmail &lt;dot&gt; com">纪秀峰</a>
+          &nbsp;&nbsp;-&nbsp;&nbsp;
+          Powered by <a href="https://github.com/kelvinh/org-page" target="_blank">org-page</a>
+          <script type="text/javascript">document.getElementById("footerYear").innerHTML = (new Date()).getFullYear();</script>
+        </p>
+      </div>
+    </div>
+
+  </body>
+</html>

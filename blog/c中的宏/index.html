@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <title>c中的宏 - 一个人的狂欢</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="纪秀峰" />
+    <meta name="description" content="c中的宏" />
+    <meta name="keywords" content="macro c 宏" />
+    <link rel="stylesheet" href="/media/css/main.css" type="text/css">
+    <link rel="stylesheet" href="/media/css/prettify.css" type="text/css">
+  </head>
+  <body class="container">
+    <div>
+      <header class="masthead">
+        <h1 class="masthead-title"><a href="/">一个人的狂欢</a></h1>
+        <p></p>
+        <ul>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/tags/">Tags</a></li>
+          <li><a href="/tags/">Tags</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="http://github.com/jixiuf">GitHub</a></li>
+          <li><a href="/rss.xml">RSS</a></li>
+        </ul>
+        <form method="get" id="searchform" action="http://www.google.com/search">
+          <input type="text" class="field" name="q" id="s" placeholder="Search">
+          <input type="hidden" name="as_sitesearch" value="jixiuf.github.io">
+        </form>
+      </header>
+    </div>
+
+<div>
+<div class="post">
+<h1>c中的宏</h1>
+<div class="org-src-container">
+
+<pre class="src src-c">#与##在宏定义中的--宏展开
+#include &lt;stdio.h&gt;
+#define f(a,b) a##b
+#define g(a) #a
+#define h(a) g(a)
+int main()
+{
+  printf("%s\n", h(f(1,2))); // 12
+  printf("%s\n", g(f(1,2))); // f(1,2)
+  return 0;
+}
+</pre>
+</div>
+<blockquote>
+<p>
+"#" 与"##" 是宏中两个特殊的符号<br  />
+"##"相当于连字符,即java中进行字符串连接的加号,sqlplus 中的||  如a##b##c 等同于 "abc"<br  />
+而#用来控制是否展开宏,下面详解.<br  />
+</p>
+</blockquote>
+<ul class="org-ul">
+<li>规则1: 如果宏定义以#开头，不展开参数，直接替换。 规则1包括三句话<br  />
+<ul class="org-ul">
+<li>如果宏定义以#开头,<br  />
+在代码中遇到一个宏,而这个宏的定义,二话没说,第一个字符是#<br  /></li>
+<li>不展开参数<br  />
+无论参数有多复杂,把它作为一个字符串整体,不再进行展开,因为一个宏内容中<br  />
+可能包含另一个宏,正常情况下,这个宏中宏也会被展开,但遇到#则例外.<br  /></li>
+<li><p>
+直接替换。<br  />
+把这个参数放到宏内容中参数的相应位置,即所谓的"直接替换".<br  />
+比如 下面这个宏<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c">#define g(a) #a
+ 这个宏的内容以#开头,它的参数名为a
+下面对其进行调用时传过去的参数是"f(1,2)"
+虽然传过去的参数是另一个宏,但并不把它当作宏,而仅认为它是个字符串
+ printf("%s\n", g(f(1,2))); //结果打: f(1,2)
+</pre>
+</div></li>
+</ul></li>
+</ul>
+<ul class="org-ul">
+<li>规则2:如果宏定义不以#开头，展开参数，直接替换，如果碰到的是#开头的宏，不继续往里层展开，往外层展开。<br  />
+<ul class="org-ul">
+<li><p>
+含义是,首先把参数作为一个宏进行展开,将其展开后的结果作为参数传到本宏<br  />
+中,然后才对本宏进行展开<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c">printf("%s\n", h(f(1,2))); // 12
+</pre>
+</div>
+<p>
+比如对h(a)这个宏,传过去的参数是"f(1,2)",首先把其作为一个宏进行展开<br  />
+如展开 f(1,2)的结果是:12<br  />
+然后对h(12)进行展开,第一步展开的结果是g(12)<br  />
+g(12)展开的结果是12<br  />
+h(f(1,2))&#x2013;&gt;h(12)&#x2013;&gt;g(12)&#x2013;&gt;12<br  />
+</p></li>
+</ul></li>
+</ul>
+
+
+<div class="org-src-container">
+
+<pre class="src src-c">另外几个更复杂的例子
+printf("%s\n", h(f(1,2))); // 12
+  printf("%s\n", g(f(1,2))); // f(1,2)
+  printf("%s\n", g(h(f(1,2)))); // h(f(1,2))
+  printf("%s\n", h(g(f(1,2)))); // "f(1,2)"
+  printf("%s\n", h(h(f(1,2)))); // "12"
+</pre>
+</div>
+<p>
+总而言之,先展开参数,再展开自身. 遇#则停<br  />
+另外,如果验证结果gcc 可以加 -E 选项<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">gcc -E macro.c
+或
+gcc -E macro.c -o macro.i
+</pre>
+</div>
+
+</div>
+</div>
+    <div>
+      <div class="post-meta">
+        <span title="post date" class="post-info">2011-10-24</span>
+        <span title="last modification date" class="post-info">2016-01-14</span>
+        <span title="tags" class="post-info"><a href="/tags/c/">C</a></span>
+        <span title="author" class="post-info">纪秀峰</span>
+      </div>
+      <section>
+        <h1>Comments</h1>
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+          //var disqus_developer = 1;
+          var disqus_identifier = "/blog/c中的宏/";
+          var disqus_url = "http://jixiuf.github.io/blog/c中的宏/";
+          var disqus_shortname = 'jixiuf';
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        <div class="ds-thread"></div>
+        <script type="text/javascript">
+          var duoshuoQuery = {short_name:'jixiuf'};
+          (function() {
+          var ds = document.createElement('script');
+          ds.type = 'text/javascript';ds.async = true;
+          ds.src = 'http://static.duoshuo.com/embed.js';
+          ds.charset = 'UTF-8';
+          (document.getElementsByTagName('head')[0]
+          || document.getElementsByTagName('body')[0]).appendChild(ds);
+          })();
+        </script>
+      </section>
+      <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.js"></script>
+      <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script src="/media/js/main.js"></script>
+      <div class="footer">
+        <p>Generated by <a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.x (<a href="http://orgmode.org">Org mode</a> 8.x)</p>
+        <p>
+          Copyright &copy; 2012 - <span id="footerYear"></span> <a href="mailto:jixiuf &lt;at&gt; gmail &lt;dot&gt; com">纪秀峰</a>
+          &nbsp;&nbsp;-&nbsp;&nbsp;
+          Powered by <a href="https://github.com/kelvinh/org-page" target="_blank">org-page</a>
+          <script type="text/javascript">document.getElementById("footerYear").innerHTML = (new Date()).getFullYear();</script>
+        </p>
+      </div>
+    </div>
+
+  </body>
+</html>
