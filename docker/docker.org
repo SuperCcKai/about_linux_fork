@@ -23,11 +23,27 @@
      # 这一部 会从网上 pull hello-world 这个镜像
      sudo docker run hello-world
    #+END_SRC
+** 安装特定的版本
+   centos8 默认安装的docker是1.8 版本 ，
+   经常出现一个bug (Layer already being pulled by another client)
+   https://github.com/docker/docker/releases
+   比如以docker1.9.1 为例
+  #+BEGIN_SRC sh
+  wget https://get.docker.com/builds/Linux/x86_64/docker-1.9.1
+  sudo mv docker-1.9.1 /usr/local/bin/docker
+   # centos7 上 作为服务启动
+  wget https://github.com/docker/docker/raw/master/contrib/init/systemd/docker.service
+  wget https://raw.githubusercontent.com/docker/docker/master/contrib/init/systemd/docker.socket
+  sudo mv docker.socket /etc/systemd/system
+  sudo mv docker.service  /etc/systemd/system
+  #+END_SRC
 * pull 镜像
   理论上:
 #+BEGIN_SRC sh
   sudo docker pull centos
   sudo docker pull ubuntu:12.04
+  如果能下载下来 则用下面这句就可run 之
+  docker run -t -i centos /bin/bash
 #+END_SRC
 网速的原因，下载太慢。所以国内 使用如下方法
 #+BEGIN_SRC sh
@@ -57,3 +73,53 @@ OPTIONS='--selinux-enabled --insecure-registry dl.dockerpool.com:5000'
 #+BEGIN_SRC sh
   docker run -t -i dl.dockerpool.com:5000/centos /bin/bash
 #+END_SRC
+
+* 列出镜像 docker images
+  #+BEGIN_HTML
+  <pre>
+  root@localhost ~ # docker images
+  REPOSITORY                      TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
+  docker.io/centos                latest              60e65a8e4030        3 weeks ago         196.6 MB
+  docker.io/hello-world           latest              975b84d108f1        3 months ago        960 B
+  dl.dockerpool.com:5000/centos   latest              87e5b6b3ccc1        15 months ago       224 MB
+  </pre>
+  #+END_HTML
+* 创建镜像 docker commit
+  #+BEGIN_SRC sh
+    docker run -t -i centos /bin/bash
+  #+END_SRC
+#+BEGIN_QUOTE
+root@localhost ~ #
+[root@c00aeccfb3a6 /]#
+#+END_QUOTE
+官网上运行后的效果是这样的 提示符 @后面的是IMAGE ID
+你会发现这个Image Id 跟 docker images 列出的 docker.io/centos 的imageId 不一样
+你 run 出来之后 对其进行的修改 可以用这个imageId 来标志出来
+比如我 yum install zsh 之后
+#+BEGIN_SRC sh
+root@localhost ~ # docker commit -m "install zsh" -a "jixiuf" e658c5517df2 docker.io/centos:with-zsh
+ab3fb905f9cfb1de43519cb5975e582761ce4a0a83facd96c786a525a40b2da4
+#+END_SRC
+你会发现 docker images 后 会多出个 docker.io/centos with-zsh
+#+BEGIN_HTML
+<pre>
+root@localhost ~ # docker images
+REPOSITORY                      TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
+docker.io/centos                with-zsh            ab3fb905f9cf        28 seconds ago      261.7 MB
+docker.io/centos                latest              60e65a8e4030        3 weeks ago         196.6 MB
+docker.io/hello-world           latest              975b84d108f1        3 months ago        960 B
+dl.dockerpool.com:5000/centos   latest              87e5b6b3ccc1        15 months ago       224 MB
+</pre>
+#+END_HTML
+随后就可以这样使用with-zsh 这个镜像
+#+BEGIN_SRC sh
+  docker run -t -i centos:with-zsh
+#+END_SRC
+#+BEGIN_SRC sh
+docker ps -l 也可以列出 容器的ImageId
+deployer@bogon ~ $ docker ps -l
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                     PORTS               NAMES
+2ddd2f107676        centos              "bash"              14 minutes ago      Exited (0) 3 seconds ago                       gigantic_meninsky
+#+END_SRC
+
+*  DockerFile
