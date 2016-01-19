@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <title>docker学习过程 - 一个人的狂欢</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="纪秀峰" />
+    <meta name="description" content="docker学习过程" />
+    <meta name="keywords" content="docker Centos" />
+    <link rel="stylesheet" href="/media/css/main.css" type="text/css">
+    <link rel="stylesheet" href="/media/css/prettify.css" type="text/css">
+  </head>
+  <body class="container">
+    <div>
+      <header class="masthead">
+        <h1 class="masthead-title"><a href="/">一个人的狂欢</a></h1>
+        <p></p>
+        <ul>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/docker/">Docker</a></li>
+          <li><a href="/tags/">Tags</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="http://github.com/jixiuf">GitHub</a></li>
+          <li><a href="/rss.xml">RSS</a></li>
+        </ul>
+        <form method="get" id="searchform" action="http://www.google.com/search">
+          <input type="text" class="field" name="q" id="s" placeholder="Search">
+          <input type="hidden" name="as_sitesearch" value="jixiuf.github.io">
+        </form>
+      </header>
+    </div>
+
+<div>
+<div class="post">
+<h1>docker学习过程</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgheadline1">link</a></li>
+<li><a href="#orgheadline2">安装</a></li>
+<li><a href="#orgheadline3">pull 镜像</a></li>
+<li><a href="#orgheadline4">列出镜像 docker images</a></li>
+<li><a href="#orgheadline5">创建镜像 docker commit</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">link</h2>
+<div class="outline-text-2" id="text-orgheadline1">
+<p>
+教程 <a href="http://dockerpool.com/static/books/docker_practice/basic_concept/repository.html">http://dockerpool.com/static/books/docker_practice/basic_concept/repository.html</a><br  />
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2">安装</h2>
+<div class="outline-text-2" id="text-orgheadline2">
+<p>
+centos 7 下的安装<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">sudo yum install docker
+sudo service start docker
+sudo chkconfig docker on
+
+# 这一部 会从网上 pull hello-world 这个镜像
+sudo docker run hello-world
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline3" class="outline-2">
+<h2 id="orgheadline3">pull 镜像</h2>
+<div class="outline-text-2" id="text-orgheadline3">
+<p>
+理论上:<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">sudo docker pull centos
+sudo docker pull ubuntu:12.04
+如果能下载下来 则用下面这句就可run 之
+docker run -t -i centos /bin/bash
+</pre>
+</div>
+<p>
+网速的原因，下载太慢。所以国内 使用如下方法<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">sudo docker pull dl.dockerpool.com:5000/ubuntu:12.04
+sudo docker pull dl.dockerpool.com:5000/centos
+</pre>
+</div>
+<p>
+centos7 上 会报类似如下错误<br  />
+</p>
+<blockquote>
+<p>
+Error response from daemon: invalid registry endpoint <a href="https://dl.dockerpool.com:5000/v0/">https://dl.dockerpool.com:5000/v0/</a>: unable to ping registry endpoint <a href="https://dl.dockerpool.com:5000/v0/">https://dl.dockerpool.com:5000/v0/</a><br  />
+v2 ping attempt failed with error: Get <a href="https://dl.dockerpool.com:5000/v2/">https://dl.dockerpool.com:5000/v2/</a>: tls: oversized record received with length 28012<br  />
+v1 ping attempt failed with error: Get <a href="https://dl.dockerpool.com:5000/v1/_ping">https://dl.dockerpool.com:5000/v1/_ping</a>: tls: oversized record received with length 28012. If this private registry supports only HTTP or HTTPS with an unknown CA certificate, please add `&#x2013;insecure-registry dl.dockerpool.com:5000` to the daemon's arguments. In the case of HTTPS, if you have access to the registry's CA certificate, no need for the flag; simply place the CA certificate at /etc/docker/certs.d/dl.dockerpool.com:5000/ca.crt IT<br  />
+</p>
+</blockquote>
+<p>
+解决办法<br  />
+修改 /etc/sysconfig/docker<br  />
+</p>
+<blockquote>
+<p>
+OPTIONS='&#x2013;selinux-enabled'<br  />
+</p>
+</blockquote>
+<p>
+为<br  />
+</p>
+<blockquote>
+<p>
+OPTIONS='&#x2013;selinux-enabled &#x2013;insecure-registry dl.dockerpool.com:5000'<br  />
+</p>
+</blockquote>
+<p>
+重启<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">systemctl restart docker.service
+</pre>
+</div>
+<p>
+下载完毕后需要这样启动<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">docker run -t -i dl.dockerpool.com:5000/centos /bin/bash
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline4" class="outline-2">
+<h2 id="orgheadline4">列出镜像 docker images</h2>
+<div class="outline-text-2" id="text-orgheadline4">
+<pre>
+root@localhost ~ # docker images
+REPOSITORY                      TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
+docker.io/centos                latest              60e65a8e4030        3 weeks ago         196.6 MB
+docker.io/hello-world           latest              975b84d108f1        3 months ago        960 B
+dl.dockerpool.com:5000/centos   latest              87e5b6b3ccc1        15 months ago       224 MB
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgheadline5" class="outline-2">
+<h2 id="orgheadline5">创建镜像 docker commit</h2>
+<div class="outline-text-2" id="text-orgheadline5">
+<div class="org-src-container">
+
+<pre class="src src-sh">docker run -t -i centos /bin/bash
+</pre>
+</div>
+<blockquote>
+<p>
+root@localhost ~ #<br  />
+[root@c00aeccfb3a6 /]#<br  />
+</p>
+</blockquote>
+<p>
+官网上运行后的效果是这样的 提示符 @后面的是IMAGE ID<br  />
+你会发现这个Image Id 跟 docker images 列出的 docker.io/centos 的imageId 不一样<br  />
+你 run 出来之后 对其进行的修改 可以用这个imageId 来标志出来<br  />
+比如我 yum install zsh 之后<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">root@localhost ~ # docker commit -m "install zsh" -a "jixiuf" e658c5517df2 docker.io/centos:with-zsh
+ab3fb905f9cfb1de43519cb5975e582761ce4a0a83facd96c786a525a40b2da4
+</pre>
+</div>
+<p>
+你会发现 docker images 后 会多出个 docker.io/centos with-zsh<br  />
+</p>
+<pre>
+root@localhost ~ # docker images
+REPOSITORY                      TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
+docker.io/centos                with-zsh            ab3fb905f9cf        28 seconds ago      261.7 MB
+docker.io/centos                latest              60e65a8e4030        3 weeks ago         196.6 MB
+docker.io/hello-world           latest              975b84d108f1        3 months ago        960 B
+dl.dockerpool.com:5000/centos   latest              87e5b6b3ccc1        15 months ago       224 MB
+</pre>
+<p>
+随后就可以这样使用with-zsh 这个镜像<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">docker run -t -i centos:with-zsh
+</pre>
+</div>
+<p>
+*<br  />
+</p>
+</div>
+</div>
+
+</div>
+</div>
+    <div>
+      <div class="post-meta">
+        <span title="post date" class="post-info">2016-01-19</span>
+        <span title="last modification date" class="post-info">2016-01-20</span>
+        <span title="tags" class="post-info"><a href="/tags/docker/">Docker</a>, <a href="/tags/linux/">Linux</a>, <a href="/tags/centos/">Centos</a></span>
+        <span title="author" class="post-info">纪秀峰</span>
+      </div>
+      <section>
+        <h1>Comments</h1>
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+          //var disqus_developer = 1;
+          var disqus_identifier = "/blog/docker学习过程/";
+          var disqus_url = "http://jixiuf.github.io/blog/docker学习过程/";
+          var disqus_shortname = 'jixiuf';
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        <div class="ds-thread"></div>
+        <script type="text/javascript">
+          var duoshuoQuery = {short_name:'jixiuf'};
+          (function() {
+          var ds = document.createElement('script');
+          ds.type = 'text/javascript';ds.async = true;
+          ds.src = 'http://static.duoshuo.com/embed.js';
+          ds.charset = 'UTF-8';
+          (document.getElementsByTagName('head')[0]
+          || document.getElementsByTagName('body')[0]).appendChild(ds);
+          })();
+        </script>
+      </section>
+      <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.js"></script>
+      <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script src="/media/js/main.js"></script>
+      <div class="footer">
+        <p>Generated by <a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.x (<a href="http://orgmode.org">Org mode</a> 8.x)</p>
+        <p>
+          Copyright &copy; 2012 - <span id="footerYear"></span> <a href="mailto:jixiuf &lt;at&gt; gmail &lt;dot&gt; com">纪秀峰</a>
+          &nbsp;&nbsp;-&nbsp;&nbsp;
+          Powered by <a href="https://github.com/kelvinh/org-page" target="_blank">org-page</a>
+          <script type="text/javascript">document.getElementById("footerYear").innerHTML = (new Date()).getFullYear();</script>
+        </p>
+      </div>
+    </div>
+
+  </body>
+</html>

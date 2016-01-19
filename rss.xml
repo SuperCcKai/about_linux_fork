@@ -4,79 +4,79 @@
     <title>一个人的狂欢</title>
     <link>http://jixiuf.github.io</link>
     <description></description>
-    <pubDate>二, 19  1 2016 16:58:23 CST</pubDate>
-    <lastBuildDate>二, 19  1 2016 16:58:23 CST</lastBuildDate>
+    <pubDate>三, 20  1 2016 00:08:47 CST</pubDate>
+    <lastBuildDate>三, 20  1 2016 00:08:47 CST</lastBuildDate>
     <docs>http://www.rssboard.org/rss-specification</docs>
     <generator>Org-page static site generator (https://github.com/kelvinh/org-page)</generator>
     <item>
+      <title>docker学习过程</title>
+      <link>http://jixiuf.github.io/blog/docker学习过程/</link>
+      <description><![CDATA[docker学习过程]]></description>
+      <pubDate>2016-01-20</pubDate>
+      <guid>http://jixiuf.github.io/blog/docker学习过程/</guid>
+    </item>
+    <item>
       <title>用cow 翻墙的配置</title>
       <link>http://jixiuf.github.io/blog/用cow-翻墙的配置/</link>
-      <description><![CDATA[用cow 翻墙的配置]]></description>
+      <description><![CDATA[]]></description>
       <pubDate>2016-01-19</pubDate>
       <guid>http://jixiuf.github.io/blog/用cow-翻墙的配置/</guid>
     </item>
     <item>
       <title>golang 变量倒底是在堆上还是栈上分配的分析</title>
       <link>http://jixiuf.github.io/blog/golang-变量倒底是在堆上还是栈上分配的分析/</link>
-      <description><![CDATA[golang 变量倒底是在堆上还是栈上分配的分析]]></description>
+      <description><![CDATA[]]></description>
       <pubDate>2016-01-19</pubDate>
       <guid>http://jixiuf.github.io/blog/golang-变量倒底是在堆上还是栈上分配的分析/</guid>
     </item>
     <item>
       <title>纪秀峰_个人简历</title>
       <link>http://jixiuf.github.io/author/</link>
-      <description><![CDATA[个人简历]]></description>
+      <description><![CDATA[]]></description>
       <pubDate>2016-01-15</pubDate>
       <guid>http://jixiuf.github.io/author/</guid>
     </item>
     <item>
       <title>ext2文件系统</title>
       <link>http://jixiuf.github.io/blog/ext2文件系统/</link>
-      <description><![CDATA[ext2文件系统]]></description>
+      <description><![CDATA[]]></description>
       <pubDate>2016-01-14</pubDate>
       <guid>http://jixiuf.github.io/blog/ext2文件系统/</guid>
     </item>
     <item>
       <title>linux 下字体相关</title>
       <link>http://jixiuf.github.io/blog/linux-下字体相关/</link>
-      <description><![CDATA[font.org]]></description>
+      <description><![CDATA[]]></description>
       <pubDate>2016-01-14</pubDate>
       <guid>http://jixiuf.github.io/blog/linux-下字体相关/</guid>
     </item>
     <item>
       <title>Gentoo 拾遗</title>
       <link>http://jixiuf.github.io/blog/gentoo-拾遗/</link>
-      <description><![CDATA[gentoo.org]]></description>
+      <description><![CDATA[]]></description>
       <pubDate>2016-01-14</pubDate>
       <guid>http://jixiuf.github.io/blog/gentoo-拾遗/</guid>
     </item>
     <item>
       <title>linux 下gbk utf8 转换</title>
       <link>http://jixiuf.github.io/blog/linux-下gbk-utf8-转换/</link>
-      <description><![CDATA[linux 下gbk utf8 转换]]></description>
+      <description><![CDATA[]]></description>
       <pubDate>2016-01-14</pubDate>
       <guid>http://jixiuf.github.io/blog/linux-下gbk-utf8-转换/</guid>
     </item>
     <item>
       <title>iptables防火墙</title>
       <link>http://jixiuf.github.io/blog/iptables防火墙/</link>
-      <description><![CDATA[iptables防火墙]]></description>
+      <description><![CDATA[]]></description>
       <pubDate>2016-01-14</pubDate>
       <guid>http://jixiuf.github.io/blog/iptables防火墙/</guid>
     </item>
     <item>
       <title>linux拾遗</title>
       <link>http://jixiuf.github.io/blog/linux拾遗/</link>
-      <description><![CDATA[linux拾遗]]></description>
+      <description><![CDATA[]]></description>
       <pubDate>2016-01-14</pubDate>
       <guid>http://jixiuf.github.io/blog/linux拾遗/</guid>
-    </item>
-    <item>
-      <title>linux IO性能测试    </title>
-      <link>http://jixiuf.github.io/blog/linux-io性能测试-/</link>
-      <description><![CDATA[llinux_benchum.org]]></description>
-      <pubDate>2016-01-14</pubDate>
-      <guid>http://jixiuf.github.io/blog/linux-io性能测试-/</guid>
     </item>
   </channel>
 </rss>
