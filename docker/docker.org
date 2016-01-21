@@ -84,6 +84,13 @@ OPTIONS='--selinux-enabled --insecure-registry dl.dockerpool.com:5000'
   dl.dockerpool.com:5000/centos   latest              87e5b6b3ccc1        15 months ago       224 MB
   </pre>
   #+END_HTML
+
+* 删除镜像 docker rmi imageId
+  #+BEGIN_SRC sh
+    docker rmi imageId
+    docker rmi --force=true imageId
+  #+END_SRC
+
 * 创建镜像 docker commit
   #+BEGIN_SRC sh
     docker run -t -i centos /bin/bash
@@ -115,11 +122,24 @@ dl.dockerpool.com:5000/centos   latest              87e5b6b3ccc1        15 month
 #+BEGIN_SRC sh
   docker run -t -i centos:with-zsh
 #+END_SRC
+
+查看所有的容器列表的命令是：docker ps -a ，显示最近一个容器的命令是：docker ps -l，
 #+BEGIN_SRC sh
-docker ps -l 也可以列出 容器的ImageId
 deployer@bogon ~ $ docker ps -l
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                     PORTS               NAMES
 2ddd2f107676        centos              "bash"              14 minutes ago      Exited (0) 3 seconds ago                       gigantic_meninsky
 #+END_SRC
 
 *  DockerFile
+  #+BEGIN_SRC sh
+    docker build  -t tagname .
+    # 不生成镜像，只根据imageid 来找对应的镜像
+    docker build  .
+    docker build --rm=true .
+  #+END_SRC
+  Dockerfile example:
+#+BEGIN_QUOTE
+FROM docker.io/centos:latest
+# 1 install go1.4+
+Run yum install -y go
+#+END_QUOTE
