@@ -1,4 +1,4 @@
-# -*- coding:utf-8 -*-
+# -*- coding:utf-8-unix -*-
 #+LANGUAGE:  zh
 #+TITLE:     docker学习过程
 #+AUTHOR:    纪秀峰
