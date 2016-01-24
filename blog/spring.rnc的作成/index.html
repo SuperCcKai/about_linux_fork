@@ -156,7 +156,7 @@ namespace指向<a href="http://www.w3.org/XML/1998/namespace%E5%9C%B0%E5%9D%80%E
 </p>
 <div class="org-src-container">
 
-<pre class="src src-sh">然后用这条命令生成 rnc文件
+<pre class="src src-sh">&#28982;&#21518;&#29992;&#36825;&#26465;&#21629;&#20196;&#29983;&#25104; rnc&#25991;&#20214;
   java -jar trang.jar  spring-beans-3.0.rng spring-beans-3.0.rnc
 </pre>
 </div>
@@ -174,16 +174,16 @@ namespace指向<a href="http://www.w3.org/XML/1998/namespace%E5%9C%B0%E5%9D%80%E
 <div class="org-src-container">
 
 <pre class="src src-emacs-lisp">(eval-after-load 'rng-loc
-  '(progn
-     (add-to-list 'rng-schema-locating-files (expand-file-name "~/.emacs.d/script/nxml/schemas.xml"))
+  '(<span style="color: #FBDE2D;">progn</span>
+     (add-to-list 'rng-schema-locating-files (expand-file-name <span style="color: #ffa07a;">"~/.emacs.d/script/nxml/schemas.xml"</span>))
      ))
-(defun nxml-mode-hook-fun ()
-  ;;默认绑定的键是`C-cC-sC-a' ,将当前编辑的文件与特定的rnc 文件进行关联,只有
-  ;;关联后的xml 才可以解析其语法规则进行补全
-  (require 'rng-valid)
-  (rng-auto-set-schema-and-validate)
+(<span style="color: #FBDE2D;">defun</span> <span style="color: #FF6400;">nxml-mode-hook-fun</span> ()
+  <span style="color: #AEAEAE;">;;</span><span style="color: #AEAEAE;">&#40664;&#35748;&#32465;&#23450;&#30340;&#38190;&#26159;`</span><span style="color: #D8FA3C;">C-cC-sC-a</span><span style="color: #AEAEAE;">' ,&#23558;&#24403;&#21069;&#32534;&#36753;&#30340;&#25991;&#20214;&#19982;&#29305;&#23450;&#30340;rnc &#25991;&#20214;&#36827;&#34892;&#20851;&#32852;,&#21482;&#26377;</span>
+  <span style="color: #AEAEAE;">;;</span><span style="color: #AEAEAE;">&#20851;&#32852;&#21518;&#30340;xml &#25165;&#21487;&#20197;&#35299;&#26512;&#20854;&#35821;&#27861;&#35268;&#21017;&#36827;&#34892;&#34917;&#20840;</span>
+  (<span style="color: #FBDE2D;">require</span> '<span style="color: #D8FA3C;">rng-valid</span>)
+  (rng-auto-set-schema-<span style="color: #FBDE2D;">and</span>-validate)
   )
-(add-hook 'nxml-mode-hook 'nxml-mode-hook-fun)
+(<span style="color: #FF6400;">add-hook</span> 'nxml-mode-hook 'nxml-mode-hook-fun)
 </pre>
 </div>
 <p>
@@ -194,14 +194,14 @@ namespace指向<a href="http://www.w3.org/XML/1998/namespace%E5%9C%B0%E5%9D%80%E
 </p>
 <div class="org-src-container">
 
-<pre class="src src-xml">&lt;namespace ns="http://www.springframework.org/schema/beans" typeId="Spring3.0" /&gt;
- &lt;typeId id="Spring3.0" uri="spring-3.0.rnc"/&gt;
+<pre class="src src-xml">&lt;<span style="color: #FF6400;">namespace</span> <span style="color: #40E0D0;">ns</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">http://www.springframework.org/schema/beans</span><span style="color: #ffa07a;">"</span> <span style="color: #40E0D0;">typeId</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">Spring3.0</span><span style="color: #ffa07a;">"</span> /&gt;
+ &lt;<span style="color: #FF6400;">typeId</span> <span style="color: #40E0D0;">id</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">Spring3.0</span><span style="color: #ffa07a;">"</span> <span style="color: #40E0D0;">uri</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">spring-3.0.rnc</span><span style="color: #ffa07a;">"</span>/&gt;
 </pre>
 </div>
 <div class="org-src-container">
 
-<pre class="src src-xml">这一句等效于上面两句
- &lt;namespace ns="http://www.springframework.org/schema/beans"  uri="spring-3.0.rnc" /&gt;
+<pre class="src src-xml">&#36825;&#19968;&#21477;&#31561;&#25928;&#20110;&#19978;&#38754;&#20004;&#21477;
+ &lt;<span style="color: #FF6400;">namespace</span> <span style="color: #40E0D0;">ns</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">http://www.springframework.org/schema/beans</span><span style="color: #ffa07a;">"</span>  <span style="color: #40E0D0;">uri</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">spring-3.0.rnc</span><span style="color: #ffa07a;">"</span> /&gt;
 </pre>
 </div>
 <p>
@@ -212,7 +212,7 @@ namespace指向<a href="http://www.w3.org/XML/1998/namespace%E5%9C%B0%E5%9D%80%E
 </p>
 <div class="org-src-container">
 
-<pre class="src src-xml">&lt;beans xmlns="http://www.springframework.org/schema/beans"&gt;
+<pre class="src src-xml">&lt;<span style="color: #FF6400;">beans</span> <span style="color: #F8F8F8;">xmlns</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">http://www.springframework.org/schema/beans</span><span style="color: #ffa07a;">"</span>&gt;
 </pre>
 </div>
 
@@ -222,13 +222,13 @@ namespace指向<a href="http://www.w3.org/XML/1998/namespace%E5%9C%B0%E5%9D%80%E
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">Debugger entered--Lisp error: (error "Expected `}' but got `+'")
-  signal(error ("Expected `}' but got `+'"))
-  error("%s" "Expected `}' but got `+'")
-  nxml-display-file-parse-error((rng-c-incorrect-schema "/tmp/spring-beans-3.0.rnc" 743 "Expected `}' but got `+'"))
-  rng-set-schema-file("/tmp/spring-beans-3.0.rnc")
-  rng-set-schema-file-and-validate("/tmp/spring-beans-3.0.rnc")
-  call-interactively(rng-set-schema-file-and-validate nil nil)
+<pre class="src src-emacs-lisp">Debugger entered--Lisp error: (<span style="color: #ffc0cb;">error</span> <span style="color: #ffa07a;">"Expected `}' but got `+'"</span>)
+  signal(<span style="color: #ffc0cb;">error</span> (<span style="color: #ffa07a;">"Expected `}' but got `+'"</span>))
+  error(<span style="color: #ffa07a;">"%s"</span> <span style="color: #ffa07a;">"Expected `}' but got `+'"</span>)
+  nxml-display-file-parse-error((rng-c-incorrect-schema <span style="color: #ffa07a;">"/tmp/spring-beans-3.0.rnc"</span> 743 <span style="color: #ffa07a;">"Expected `}' but got `+'"</span>))
+  rng-set-schema-file(<span style="color: #ffa07a;">"/tmp/spring-beans-3.0.rnc"</span>)
+  rng-set-schema-file-<span style="color: #FBDE2D;">and</span>-validate(<span style="color: #ffa07a;">"/tmp/spring-beans-3.0.rnc"</span>)
+  call-interactively(rng-set-schema-file-<span style="color: #FBDE2D;">and</span>-validate <span style="color: #D8FA3C;">nil</span> <span style="color: #D8FA3C;">nil</span>)
 </pre>
 </div>
 <p>
@@ -236,13 +236,13 @@ namespace指向<a href="http://www.w3.org/XML/1998/namespace%E5%9C%B0%E5%9D%80%E
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">Debugger entered--Lisp error: (error "Invalid grammar content")
-  signal(error ("Invalid grammar content"))
-  error("%s" "Invalid grammar content")
-  nxml-display-file-parse-error((rng-c-incorrect-schema "/tmp/spring-beans-3.0.rnc" 1627 "Invalid grammar content"))
-  rng-set-schema-file("/tmp/spring-beans-3.0.rnc")
-  rng-set-schema-file-and-validate("/tmp/spring-beans-3.0.rnc")
-  call-interactively(rng-set-schema-file-and-validate nil nil)
+<pre class="src src-emacs-lisp">Debugger entered--Lisp error: (<span style="color: #ffc0cb;">error</span> <span style="color: #ffa07a;">"Invalid grammar content"</span>)
+  signal(<span style="color: #ffc0cb;">error</span> (<span style="color: #ffa07a;">"Invalid grammar content"</span>))
+  error(<span style="color: #ffa07a;">"%s"</span> <span style="color: #ffa07a;">"Invalid grammar content"</span>)
+  nxml-display-file-parse-error((rng-c-incorrect-schema <span style="color: #ffa07a;">"/tmp/spring-beans-3.0.rnc"</span> 1627 <span style="color: #ffa07a;">"Invalid grammar content"</span>))
+  rng-set-schema-file(<span style="color: #ffa07a;">"/tmp/spring-beans-3.0.rnc"</span>)
+  rng-set-schema-file-<span style="color: #FBDE2D;">and</span>-validate(<span style="color: #ffa07a;">"/tmp/spring-beans-3.0.rnc"</span>)
+  call-interactively(rng-set-schema-file-<span style="color: #FBDE2D;">and</span>-validate <span style="color: #D8FA3C;">nil</span> <span style="color: #D8FA3C;">nil</span>)
 </pre>
 </div>
 <p>
@@ -280,11 +280,11 @@ spring-aop-3.0.xsd比 spring-beans-3.0.xsd的处理要复杂一点<br  />
 </div>
 <div class="org-src-container">
 
-<pre class="src src-sh">"schemaLocation" attribute is required for "xsd:import" element, but is not specified
+<pre class="src src-sh"><span style="color: #ffa07a;">"schemaLocation"</span> attribute is required for <span style="color: #ffa07a;">"xsd:import"</span> element, but is <span style="color: #FBDE2D;">not</span> specified
   7:64@http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-"schemaLocation" attribute is required for "xsd:import" element, but is not specified
+<span style="color: #ffa07a;">"schemaLocation"</span> attribute is required for <span style="color: #ffa07a;">"xsd:import"</span> element, but is <span style="color: #FBDE2D;">not</span> specified
   8:64@http://www.springframework.org/schema/tool/spring-tool-3.0.xsd
-namespace "http://www.w3.org/XML/1998/namespace" is referenced but no schema definition of this namespace was found.
+namespace <span style="color: #ffa07a;">"http://www.w3.org/XML/1998/namespace"</span> is referenced but no schema definition of this namespace was found.
   7:64@http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 failed to load the grammar
 </pre>
@@ -295,8 +295,8 @@ failed to load the grammar
 </p>
 <div class="org-src-container">
 
-<pre class="src src-xml">&lt;xsd:import namespace="http://www.springframework.org/schema/beans" schemaLocation="http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"/&gt;
-&lt;xsd:import namespace="http://www.springframework.org/schema/tool" schemaLocation="http://www.springframework.org/schema/tool/spring-tool-3.0.xsd"/&gt;
+<pre class="src src-xml">&lt;<span style="color: #F8F8F8;">xsd</span>:<span style="color: #FF6400;">import</span> <span style="color: #40E0D0;">namespace</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">http://www.springframework.org/schema/beans</span><span style="color: #ffa07a;">"</span> <span style="color: #40E0D0;">schemaLocation</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">http://www.springframework.org/schema/beans/spring-beans-3.0.xsd</span><span style="color: #ffa07a;">"</span>/&gt;
+&lt;<span style="color: #F8F8F8;">xsd</span>:<span style="color: #FF6400;">import</span> <span style="color: #40E0D0;">namespace</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">http://www.springframework.org/schema/tool</span><span style="color: #ffa07a;">"</span> <span style="color: #40E0D0;">schemaLocation</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">http://www.springframework.org/schema/tool/spring-tool-3.0.xsd</span><span style="color: #ffa07a;">"</span>/&gt;
 </pre>
 </div>
 <p>
@@ -304,8 +304,8 @@ failed to load the grammar
 </p>
 <div class="org-src-container">
 
-<pre class="src src-xml">&lt;xsd:import namespace="http://www.springframework.org/schema/beans" schemaLocation="spring-beans-3.0.xsd" /&gt;
-&lt;xsd:import namespace="http://www.springframework.org/schema/tool" schemaLocation="spring-tool-3.0.xsd" /&gt;
+<pre class="src src-xml">&lt;<span style="color: #F8F8F8;">xsd</span>:<span style="color: #FF6400;">import</span> <span style="color: #40E0D0;">namespace</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">http://www.springframework.org/schema/beans</span><span style="color: #ffa07a;">"</span> <span style="color: #40E0D0;">schemaLocation</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">spring-beans-3.0.xsd</span><span style="color: #ffa07a;">"</span> /&gt;
+&lt;<span style="color: #F8F8F8;">xsd</span>:<span style="color: #FF6400;">import</span> <span style="color: #40E0D0;">namespace</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">http://www.springframework.org/schema/tool</span><span style="color: #ffa07a;">"</span> <span style="color: #40E0D0;">schemaLocation</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">spring-tool-3.0.xsd</span><span style="color: #ffa07a;">"</span> /&gt;
 </pre>
 </div>
 <p>
@@ -313,7 +313,7 @@ failed to load the grammar
 </p>
 <div class="org-src-container">
 
-<pre class="src src-xml">&lt;xsd:import namespace="http://www.w3.org/XML/1998/namespace"/&gt;
+<pre class="src src-xml">&lt;<span style="color: #F8F8F8;">xsd</span>:<span style="color: #FF6400;">import</span> <span style="color: #40E0D0;">namespace</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">http://www.w3.org/XML/1998/namespace</span><span style="color: #ffa07a;">"</span>/&gt;
 </pre>
 </div>
 <p>
@@ -322,11 +322,11 @@ failed to load the grammar
 </p>
 <div class="org-src-container">
 
-<pre class="src src-xml">&lt;bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager"&gt;
-    &lt;property name="sessionFactory"&gt;
-        &lt;ref local="sessionFactory"/&gt;
-    &lt;/property&gt;
-&lt;/bean&gt;
+<pre class="src src-xml">&lt;<span style="color: #FF6400;">bean</span> <span style="color: #40E0D0;">id</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">transactionManager</span><span style="color: #ffa07a;">"</span> <span style="color: #40E0D0;">class</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">org.springframework.orm.hibernate3.HibernateTransactionManager</span><span style="color: #ffa07a;">"</span>&gt;
+    &lt;<span style="color: #FF6400;">property</span> <span style="color: #40E0D0;">name</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">sessionFactory</span><span style="color: #ffa07a;">"</span>&gt;
+        &lt;<span style="color: #FF6400;">ref</span> <span style="color: #40E0D0;">local</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">sessionFactory</span><span style="color: #ffa07a;">"</span>/&gt;
+    &lt;/<span style="color: #FF6400;">property</span>&gt;
+&lt;/<span style="color: #FF6400;">bean</span>&gt;
 </pre>
 </div>
 <p>
@@ -335,8 +335,8 @@ failed to load the grammar
 </p>
 <div class="org-src-container">
 
-<pre class="src src-xml">&lt;aop:config&gt;
-    &lt;aop:pointcut id="allManagerMethod" expression="execution (* org.jixiuf.drp.service.*.*(..))"/&gt;
+<pre class="src src-xml">&lt;<span style="color: #F8F8F8;">aop</span>:<span style="color: #FF6400;">config</span>&gt;
+    &lt;<span style="color: #F8F8F8;">aop</span>:<span style="color: #FF6400;">pointcut</span> <span style="color: #40E0D0;">id</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">allManagerMethod</span><span style="color: #ffa07a;">"</span> <span style="color: #40E0D0;">expression</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">execution (* org.jixiuf.drp.service.*.*(..))</span><span style="color: #ffa07a;">"</span>/&gt;
 </pre>
 </div>
 <p>
@@ -344,8 +344,8 @@ failed to load the grammar
 </p>
 <div class="org-src-container">
 
-<pre class="src src-xml">&lt;context:annotation-config /&gt;
- &lt;context:component-scan base-package="org.jixiuf" /&gt;
+<pre class="src src-xml">&lt;<span style="color: #F8F8F8;">context</span>:<span style="color: #FF6400;">annotation-config</span> /&gt;
+ &lt;<span style="color: #F8F8F8;">context</span>:<span style="color: #FF6400;">component-scan</span> <span style="color: #40E0D0;">base-package</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">org.jixiuf</span><span style="color: #ffa07a;">"</span> /&gt;
 </pre>
 </div>
 <p>
@@ -367,33 +367,33 @@ spring-aop-3.0.rnc 就包含了其他几个xsd文件中的内容<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-xml">&lt;xsd:schema xmlns="http://www.springframework.org/schema/aop"
-        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-        xmlns:beans="http://www.springframework.org/schema/beans"
-        xmlns:tx="http://www.springframework.org/schema/tx"
-        xmlns:tool="http://www.springframework.org/schema/tool"
-        xmlns:context="http://www.springframework.org/schema/context"
-        xmlns:jdbc="http://www.springframework.org/schema/jdbc"
-        xmlns:jee="http://www.springframework.org/schema/jee"
-        xmlns:jms="http://www.springframework.org/schema/jms"
-        xmlns:lang="http://www.springframework.org/schema/lang"
-        xmlns:mvc="http://www.springframework.org/schema/mvc"
-        xmlns:oxm="http://www.springframework.org/schema/oxm"
-        xmlns:task="http://www.springframework.org/schema/task"
-        xmlns:util="http://www.springframework.org/schema/util"
-        targetNamespace="http://www.springframework.org/schema/aop"
-        elementFormDefault="qualified"
-        attributeFormDefault="unqualified"&gt;
-    &lt;xsd:import namespace="http://www.springframework.org/schema/tx" schemaLocation="spring-tx-3.0.xsd" /&gt;
-    &lt;xsd:import namespace="http://www.springframework.org/schema/context" schemaLocation="spring-context-3.0.xsd" /&gt;
-    &lt;xsd:import namespace="http://www.springframework.org/schema/jdbc" schemaLocation="spring-jdbc-3.0.xsd" /&gt;
-    &lt;xsd:import namespace="http://www.springframework.org/schema/jee" schemaLocation="spring-jee-3.0.xsd" /&gt;
-    &lt;xsd:import namespace="http://www.springframework.org/schema/jms" schemaLocation="spring-jms-3.0.xsd" /&gt;
-    &lt;xsd:import namespace="http://www.springframework.org/schema/lang" schemaLocation="spring-lang-3.0.xsd" /&gt;
-    &lt;xsd:import namespace="http://www.springframework.org/schema/mvc" schemaLocation="spring-mvc-3.0.xsd" /&gt;
-    &lt;xsd:import namespace="http://www.springframework.org/schema/oxm" schemaLocation="spring-oxm-3.0.xsd" /&gt;
-    &lt;xsd:import namespace="http://www.springframework.org/schema/task" schemaLocation="spring-task-3.0.xsd" /&gt;
-    &lt;xsd:import namespace="http://www.springframework.org/schema/util" schemaLocation="spring-util-3.0.xsd" /&gt;
+<pre class="src src-xml">&lt;<span style="color: #F8F8F8;">xsd</span>:<span style="color: #FF6400;">schema</span> <span style="color: #F8F8F8;">xmlns</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">http://www.springframework.org/schema/aop</span><span style="color: #ffa07a;">"</span>
+        <span style="color: #F8F8F8;">xmlns</span>:<span style="color: #40E0D0;">xsd</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">http://www.w3.org/2001/XMLSchema</span><span style="color: #ffa07a;">"</span>
+        <span style="color: #F8F8F8;">xmlns</span>:<span style="color: #40E0D0;">beans</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">http://www.springframework.org/schema/beans</span><span style="color: #ffa07a;">"</span>
+        <span style="color: #F8F8F8;">xmlns</span>:<span style="color: #40E0D0;">tx</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">http://www.springframework.org/schema/tx</span><span style="color: #ffa07a;">"</span>
+        <span style="color: #F8F8F8;">xmlns</span>:<span style="color: #40E0D0;">tool</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">http://www.springframework.org/schema/tool</span><span style="color: #ffa07a;">"</span>
+        <span style="color: #F8F8F8;">xmlns</span>:<span style="color: #40E0D0;">context</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">http://www.springframework.org/schema/context</span><span style="color: #ffa07a;">"</span>
+        <span style="color: #F8F8F8;">xmlns</span>:<span style="color: #40E0D0;">jdbc</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">http://www.springframework.org/schema/jdbc</span><span style="color: #ffa07a;">"</span>
+        <span style="color: #F8F8F8;">xmlns</span>:<span style="color: #40E0D0;">jee</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">http://www.springframework.org/schema/jee</span><span style="color: #ffa07a;">"</span>
+        <span style="color: #F8F8F8;">xmlns</span>:<span style="color: #40E0D0;">jms</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">http://www.springframework.org/schema/jms</span><span style="color: #ffa07a;">"</span>
+        <span style="color: #F8F8F8;">xmlns</span>:<span style="color: #40E0D0;">lang</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">http://www.springframework.org/schema/lang</span><span style="color: #ffa07a;">"</span>
+        <span style="color: #F8F8F8;">xmlns</span>:<span style="color: #40E0D0;">mvc</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">http://www.springframework.org/schema/mvc</span><span style="color: #ffa07a;">"</span>
+        <span style="color: #F8F8F8;">xmlns</span>:<span style="color: #40E0D0;">oxm</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">http://www.springframework.org/schema/oxm</span><span style="color: #ffa07a;">"</span>
+        <span style="color: #F8F8F8;">xmlns</span>:<span style="color: #40E0D0;">task</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">http://www.springframework.org/schema/task</span><span style="color: #ffa07a;">"</span>
+        <span style="color: #F8F8F8;">xmlns</span>:<span style="color: #40E0D0;">util</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">http://www.springframework.org/schema/util</span><span style="color: #ffa07a;">"</span>
+        <span style="color: #40E0D0;">targetNamespace</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">http://www.springframework.org/schema/aop</span><span style="color: #ffa07a;">"</span>
+        <span style="color: #40E0D0;">elementFormDefault</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">qualified</span><span style="color: #ffa07a;">"</span>
+        <span style="color: #40E0D0;">attributeFormDefault</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">unqualified</span><span style="color: #ffa07a;">"</span>&gt;
+    &lt;<span style="color: #F8F8F8;">xsd</span>:<span style="color: #FF6400;">import</span> <span style="color: #40E0D0;">namespace</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">http://www.springframework.org/schema/tx</span><span style="color: #ffa07a;">"</span> <span style="color: #40E0D0;">schemaLocation</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">spring-tx-3.0.xsd</span><span style="color: #ffa07a;">"</span> /&gt;
+    &lt;<span style="color: #F8F8F8;">xsd</span>:<span style="color: #FF6400;">import</span> <span style="color: #40E0D0;">namespace</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">http://www.springframework.org/schema/context</span><span style="color: #ffa07a;">"</span> <span style="color: #40E0D0;">schemaLocation</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">spring-context-3.0.xsd</span><span style="color: #ffa07a;">"</span> /&gt;
+    &lt;<span style="color: #F8F8F8;">xsd</span>:<span style="color: #FF6400;">import</span> <span style="color: #40E0D0;">namespace</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">http://www.springframework.org/schema/jdbc</span><span style="color: #ffa07a;">"</span> <span style="color: #40E0D0;">schemaLocation</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">spring-jdbc-3.0.xsd</span><span style="color: #ffa07a;">"</span> /&gt;
+    &lt;<span style="color: #F8F8F8;">xsd</span>:<span style="color: #FF6400;">import</span> <span style="color: #40E0D0;">namespace</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">http://www.springframework.org/schema/jee</span><span style="color: #ffa07a;">"</span> <span style="color: #40E0D0;">schemaLocation</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">spring-jee-3.0.xsd</span><span style="color: #ffa07a;">"</span> /&gt;
+    &lt;<span style="color: #F8F8F8;">xsd</span>:<span style="color: #FF6400;">import</span> <span style="color: #40E0D0;">namespace</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">http://www.springframework.org/schema/jms</span><span style="color: #ffa07a;">"</span> <span style="color: #40E0D0;">schemaLocation</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">spring-jms-3.0.xsd</span><span style="color: #ffa07a;">"</span> /&gt;
+    &lt;<span style="color: #F8F8F8;">xsd</span>:<span style="color: #FF6400;">import</span> <span style="color: #40E0D0;">namespace</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">http://www.springframework.org/schema/lang</span><span style="color: #ffa07a;">"</span> <span style="color: #40E0D0;">schemaLocation</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">spring-lang-3.0.xsd</span><span style="color: #ffa07a;">"</span> /&gt;
+    &lt;<span style="color: #F8F8F8;">xsd</span>:<span style="color: #FF6400;">import</span> <span style="color: #40E0D0;">namespace</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">http://www.springframework.org/schema/mvc</span><span style="color: #ffa07a;">"</span> <span style="color: #40E0D0;">schemaLocation</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">spring-mvc-3.0.xsd</span><span style="color: #ffa07a;">"</span> /&gt;
+    &lt;<span style="color: #F8F8F8;">xsd</span>:<span style="color: #FF6400;">import</span> <span style="color: #40E0D0;">namespace</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">http://www.springframework.org/schema/oxm</span><span style="color: #ffa07a;">"</span> <span style="color: #40E0D0;">schemaLocation</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">spring-oxm-3.0.xsd</span><span style="color: #ffa07a;">"</span> /&gt;
+    &lt;<span style="color: #F8F8F8;">xsd</span>:<span style="color: #FF6400;">import</span> <span style="color: #40E0D0;">namespace</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">http://www.springframework.org/schema/task</span><span style="color: #ffa07a;">"</span> <span style="color: #40E0D0;">schemaLocation</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">spring-task-3.0.xsd</span><span style="color: #ffa07a;">"</span> /&gt;
+    &lt;<span style="color: #F8F8F8;">xsd</span>:<span style="color: #FF6400;">import</span> <span style="color: #40E0D0;">namespace</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">http://www.springframework.org/schema/util</span><span style="color: #ffa07a;">"</span> <span style="color: #40E0D0;">schemaLocation</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">spring-util-3.0.xsd</span><span style="color: #ffa07a;">"</span> /&gt;
 </pre>
 </div>
 <p>
@@ -415,8 +415,8 @@ spring-util-3.0.xsd<br  />
 </blockquote>
 <div class="org-src-container">
 
-<pre class="src src-xml">&lt;xsd:import namespace="http://www.springframework.org/schema/beans" schemaLocation="http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"/&gt;
-&lt;xsd:import namespace="http://www.springframework.org/schema/tool" schemaLocation="http://www.springframework.org/schema/tool/spring-tool-3.0.xsd"/&gt;
+<pre class="src src-xml">&lt;<span style="color: #F8F8F8;">xsd</span>:<span style="color: #FF6400;">import</span> <span style="color: #40E0D0;">namespace</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">http://www.springframework.org/schema/beans</span><span style="color: #ffa07a;">"</span> <span style="color: #40E0D0;">schemaLocation</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">http://www.springframework.org/schema/beans/spring-beans-3.0.xsd</span><span style="color: #ffa07a;">"</span>/&gt;
+&lt;<span style="color: #F8F8F8;">xsd</span>:<span style="color: #FF6400;">import</span> <span style="color: #40E0D0;">namespace</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">http://www.springframework.org/schema/tool</span><span style="color: #ffa07a;">"</span> <span style="color: #40E0D0;">schemaLocation</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">http://www.springframework.org/schema/tool/spring-tool-3.0.xsd</span><span style="color: #ffa07a;">"</span>/&gt;
 </pre>
 </div>
 
@@ -425,8 +425,8 @@ spring-util-3.0.xsd<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-xml">&lt;xsd:import namespace="http://www.springframework.org/schema/beans" schemaLocation="spring-beans-3.0.xsd" /&gt;
-&lt;xsd:import namespace="http://www.springframework.org/schema/tool" schemaLocation="spring-tool-3.0.xsd" /&gt;
+<pre class="src src-xml">&lt;<span style="color: #F8F8F8;">xsd</span>:<span style="color: #FF6400;">import</span> <span style="color: #40E0D0;">namespace</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">http://www.springframework.org/schema/beans</span><span style="color: #ffa07a;">"</span> <span style="color: #40E0D0;">schemaLocation</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">spring-beans-3.0.xsd</span><span style="color: #ffa07a;">"</span> /&gt;
+&lt;<span style="color: #F8F8F8;">xsd</span>:<span style="color: #FF6400;">import</span> <span style="color: #40E0D0;">namespace</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">http://www.springframework.org/schema/tool</span><span style="color: #ffa07a;">"</span> <span style="color: #40E0D0;">schemaLocation</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">spring-tool-3.0.xsd</span><span style="color: #ffa07a;">"</span> /&gt;
 </pre>
 </div>
 

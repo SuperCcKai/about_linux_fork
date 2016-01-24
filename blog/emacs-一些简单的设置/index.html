@@ -68,7 +68,7 @@
 <div class="outline-text-2" id="text-orgheadline1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq-default  use-dialog-box nil)
+<pre class="src src-emacs-lisp">(<span style="color: #FF6400;">setq-default</span>  use-dialog-box <span style="color: #D8FA3C;">nil</span>)
 </pre>
 </div>
 </div>
@@ -78,12 +78,12 @@
 <div class="outline-text-2" id="text-orgheadline2">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"># 默认的 *scratch* buffer 里面会有一段下面的内容，
-;; This buffer is for notes you don't want to save, and for Lisp evaluation.
-;; If you want to create a file, visit that file with C-x C-f,
-;; then enter the text in that file's own buffer.
-默认不想显示此内容，则这样设置
-(setq  initial-scratch-message nil)
+<pre class="src src-emacs-lisp"># &#40664;&#35748;&#30340; *scratch* buffer &#37324;&#38754;&#20250;&#26377;&#19968;&#27573;&#19979;&#38754;&#30340;&#20869;&#23481;&#65292;
+<span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">This buffer is for notes you don't want to save, and for Lisp evaluation.</span>
+<span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">If you want to create a file, visit that file with C-x C-f,</span>
+<span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">then enter the text in that file's own buffer.</span>
+&#40664;&#35748;&#19981;&#24819;&#26174;&#31034;&#27492;&#20869;&#23481;&#65292;&#21017;&#36825;&#26679;&#35774;&#32622;
+(<span style="color: #FF6400;">setq</span>  initial-scratch-message <span style="color: #D8FA3C;">nil</span>)
 </pre>
 </div>
 </div>
@@ -93,7 +93,7 @@
 <div class="outline-text-2" id="text-orgheadline3">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq inhibit-startup-screen t)
+<pre class="src src-emacs-lisp">(<span style="color: #FF6400;">setq</span> inhibit-startup-screen <span style="color: #D8FA3C;">t</span>)
 </pre>
 </div>
 </div>
@@ -104,8 +104,8 @@
 <div class="outline-text-2" id="text-orgheadline4">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"> ;标题显示文件名，而不是默认的username@localhost
-(setq frame-title-format "%b  [%I] %f  GNU/Emacs" )
+<pre class="src src-emacs-lisp"> <span style="color: #AEAEAE;">;</span><span style="color: #AEAEAE;">&#26631;&#39064;&#26174;&#31034;&#25991;&#20214;&#21517;&#65292;&#32780;&#19981;&#26159;&#40664;&#35748;&#30340;username@localhost</span>
+(<span style="color: #FF6400;">setq</span> frame-title-format <span style="color: #ffa07a;">"%b  [%I] %f  GNU/Emacs"</span> )
 </pre>
 </div>
 </div>
@@ -115,8 +115,8 @@
 <div class="outline-text-2" id="text-orgheadline5">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq visible-bell t)
-(setq  ring-bell-function 'ignore)
+<pre class="src src-emacs-lisp">(<span style="color: #FF6400;">setq</span> visible-bell <span style="color: #D8FA3C;">t</span>)
+(<span style="color: #FF6400;">setq</span>  ring-bell-function 'ignore)
 </pre>
 </div>
 </div>
@@ -126,7 +126,7 @@
 <div class="outline-text-2" id="text-orgheadline6">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(electric-pair-mode t)
+<pre class="src src-emacs-lisp">(electric-pair-mode <span style="color: #D8FA3C;">t</span>)
 </pre>
 </div>
 </div>
@@ -136,12 +136,12 @@
 <div class="outline-text-2" id="text-orgheadline7">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(require 'menu-bar)
-(menu-bar-mode nil)
-(require 'tool-bar)
-(tool-bar-mode nil)
-(require 'scroll-bar)
-(scroll-bar-mode nil)
+<pre class="src src-emacs-lisp">(<span style="color: #FBDE2D;">require</span> '<span style="color: #D8FA3C;">menu-bar</span>)
+(menu-bar-mode <span style="color: #D8FA3C;">nil</span>)
+(<span style="color: #FBDE2D;">require</span> '<span style="color: #D8FA3C;">tool-bar</span>)
+(tool-bar-mode <span style="color: #D8FA3C;">nil</span>)
+(<span style="color: #FBDE2D;">require</span> '<span style="color: #D8FA3C;">scroll-bar</span>)
+(scroll-bar-mode <span style="color: #D8FA3C;">nil</span>)
 </pre>
 </div>
 </div>
@@ -157,7 +157,7 @@
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq mouse-yank-at-point t)
+<pre class="src src-emacs-lisp">(<span style="color: #FF6400;">setq</span> mouse-yank-at-point <span style="color: #D8FA3C;">t</span>)
 </pre>
 </div>
 </div>
@@ -176,8 +176,8 @@ emacs 会维护一个 剪切环，所有你剪切 复制,kill掉的内容都会�
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq kill-ring-max 200)
-(setq kill-do-not-save-duplicates t);不向kill-ring中加入重复内容
+<pre class="src src-emacs-lisp">(<span style="color: #FF6400;">setq</span> kill-ring-max 200)
+(<span style="color: #FF6400;">setq</span> kill-do-<span style="color: #FBDE2D;">not</span>-save-duplicates <span style="color: #D8FA3C;">t</span>)<span style="color: #AEAEAE;">;</span><span style="color: #AEAEAE;">&#19981;&#21521;kill-ring&#20013;&#21152;&#20837;&#37325;&#22797;&#20869;&#23481;</span>
 </pre>
 </div>
 </div>
@@ -187,8 +187,8 @@ emacs 会维护一个 剪切环，所有你剪切 复制,kill掉的内容都会�
 <div class="outline-text-2" id="text-orgheadline10">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">用空格代替tab来进行代码的缩进
-(setq-default indent-tabs-mode nil)
+<pre class="src src-emacs-lisp">&#29992;&#31354;&#26684;&#20195;&#26367;tab&#26469;&#36827;&#34892;&#20195;&#30721;&#30340;&#32553;&#36827;
+(<span style="color: #FF6400;">setq-default</span> indent-tabs-mode <span style="color: #D8FA3C;">nil</span>)
 </pre>
 </div>
 </div>
@@ -205,7 +205,7 @@ C-u 0 C-k 则会删除从光标到行首的内容<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq kill-whole-line t);在行首 C-k 时，同时删除末尾换行符
+<pre class="src src-emacs-lisp">(<span style="color: #FF6400;">setq</span> kill-whole-line <span style="color: #D8FA3C;">t</span>)<span style="color: #AEAEAE;">;</span><span style="color: #AEAEAE;">&#22312;&#34892;&#39318; C-k &#26102;&#65292;&#21516;&#26102;&#21024;&#38500;&#26411;&#23614;&#25442;&#34892;&#31526;</span>
 </pre>
 </div>
 </div>
@@ -214,21 +214,21 @@ C-u 0 C-k 则会删除从光标到行首的内容<br  />
 <div class="outline-text-3" id="text-orgheadline12">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">;;我写的一个函数,如果有选中区域,则kill选区,否则删除当前行
-;;注意当前行并不代表整行,它只删除光标到行尾的内容,也就是默认情况下
-;;C-k 所具有的功能
-;; C-w kill-region 这个按键可以省下来，此改进版 包含了kill-region 功能
-;; 你可以把C-w 绑定到其他命令上去
-(defun joseph-kill-region-or-line(&amp;optional arg)
-  "this function is a wrapper of (kill-line).
-        When called interactively with no active region, this function
-       will call (kill-line) ,else kill the region."
-  (interactive "P")
-  (if mark-active
-      (if (= (region-beginning) (region-end) ) (kill-line arg)
+<pre class="src src-emacs-lisp"><span style="color: #AEAEAE;">;;</span><span style="color: #AEAEAE;">&#25105;&#20889;&#30340;&#19968;&#20010;&#20989;&#25968;,&#22914;&#26524;&#26377;&#36873;&#20013;&#21306;&#22495;,&#21017;kill&#36873;&#21306;,&#21542;&#21017;&#21024;&#38500;&#24403;&#21069;&#34892;</span>
+<span style="color: #AEAEAE;">;;</span><span style="color: #AEAEAE;">&#27880;&#24847;&#24403;&#21069;&#34892;&#24182;&#19981;&#20195;&#34920;&#25972;&#34892;,&#23427;&#21482;&#21024;&#38500;&#20809;&#26631;&#21040;&#34892;&#23614;&#30340;&#20869;&#23481;,&#20063;&#23601;&#26159;&#40664;&#35748;&#24773;&#20917;&#19979;</span>
+<span style="color: #AEAEAE;">;;</span><span style="color: #AEAEAE;">C-k &#25152;&#20855;&#26377;&#30340;&#21151;&#33021;</span>
+<span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">C-w kill-region &#36825;&#20010;&#25353;&#38190;&#21487;&#20197;&#30465;&#19979;&#26469;&#65292;&#27492;&#25913;&#36827;&#29256; &#21253;&#21547;&#20102;kill-region &#21151;&#33021;</span>
+<span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">&#20320;&#21487;&#20197;&#25226;C-w &#32465;&#23450;&#21040;&#20854;&#20182;&#21629;&#20196;&#19978;&#21435;</span>
+(<span style="color: #FBDE2D;">defun</span> joseph-kill-region-<span style="color: #FBDE2D;">or</span>-line(<span style="color: #8DA6CE;">&amp;optional</span> arg)
+  <span style="color: #ffa07a;">"this function is a wrapper of (kill-line).</span>
+<span style="color: #ffa07a;">        When called interactively with no active region, this function</span>
+<span style="color: #ffa07a;">       will call (kill-line) ,else kill the region."</span>
+  (<span style="color: #FBDE2D;">interactive</span> <span style="color: #ffa07a;">"P"</span>)
+  (<span style="color: #FBDE2D;">if</span> mark-active
+      (<span style="color: #FBDE2D;">if</span> (= (region-beginning) (region-end) ) (kill-line arg)
         (kill-region (region-beginning) (region-end)))
     (kill-line arg)))
-(global-set-key (kbd "C-k") 'joseph-kill-region-or-line)
+(<span style="color: #FF6400;">global-set-key</span> (kbd <span style="color: #ffa07a;">"C-k"</span>) 'joseph-kill-region-<span style="color: #FBDE2D;">or</span>-line)
 </pre>
 </div>
 </div>
@@ -243,13 +243,13 @@ kill 不成功的会给出警告,如在dired-mode 中按C-k<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq kill-read-only-ok t)
-;;kill read-only buffer内容时,会把此内容放到kill-ring中而不用警告
+<pre class="src src-emacs-lisp">(<span style="color: #FF6400;">setq</span> kill-read-only-ok <span style="color: #D8FA3C;">t</span>)
+<span style="color: #AEAEAE;">;;</span><span style="color: #AEAEAE;">kill read-only buffer&#20869;&#23481;&#26102;,&#20250;&#25226;&#27492;&#20869;&#23481;&#25918;&#21040;kill-ring&#20013;&#32780;&#19981;&#29992;&#35686;&#21578;</span>
 </pre>
 </div>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(delete-selection-mode 1) ;;当选中内容时，输入新内容则会替换掉,启用delete-selection-mode
+<pre class="src src-emacs-lisp">(delete-selection-mode 1) <span style="color: #AEAEAE;">;;</span><span style="color: #AEAEAE;">&#24403;&#36873;&#20013;&#20869;&#23481;&#26102;&#65292;&#36755;&#20837;&#26032;&#20869;&#23481;&#21017;&#20250;&#26367;&#25442;&#25481;,&#21551;&#29992;delete-selection-mode</span>
 </pre>
 </div>
 </div>
@@ -259,8 +259,8 @@ kill 不成功的会给出警告,如在dired-mode 中按C-k<br  />
 <div class="outline-text-2" id="text-orgheadline14">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">;; 把缺省的 major mode 设置为 text-mode, 而不是几乎什么功能也 没有的 fundamental-mode.
-(setq default-major-mode 'text-mode)
+<pre class="src src-emacs-lisp"><span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">&#25226;&#32570;&#30465;&#30340; major mode &#35774;&#32622;&#20026; text-mode, &#32780;&#19981;&#26159;&#20960;&#20046;&#20160;&#20040;&#21151;&#33021;&#20063; &#27809;&#26377;&#30340; fundamental-mode.</span>
+(<span style="color: #FF6400;">setq</span> default-major-mode 'text-mode)
 </pre>
 </div>
 </div>
@@ -270,18 +270,18 @@ kill 不成功的会给出警告,如在dired-mode 中按C-k<br  />
 <div class="outline-text-2" id="text-orgheadline15">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq
- backup-by-copying t    ;自动备份
- delete-old-versions t ; 自动删除旧的备份文件
- kept-new-versions 10   ; 保留最近的10个备份文件
- kept-old-versions 2   ; 保留最早的2个备份文件
- version-control t    ; 多次备份
- ;; 把生成的备份文件放到统一的一个目录,而不在在文件当前目录生成好多 ~ #的文件
- ;; 如果你编辑某个文件时 后悔了想恢复成以前的一个版本 你可以到这个目录下
- ;; 找到备份的版本
- backup-directory-alist `((".*" . "~/.emacs.d/cache/backup_files/")) ;
- auto-save-file-name-transforms `((".*" "~/.emacs.d/cache/backup_files/" t))
- auto-save-list-file-prefix   "~/.emacs.d/cache/backup_files/saves-")
+<pre class="src src-emacs-lisp">(<span style="color: #FF6400;">setq</span>
+ backup-by-copying <span style="color: #D8FA3C;">t</span>    <span style="color: #AEAEAE;">;</span><span style="color: #AEAEAE;">&#33258;&#21160;&#22791;&#20221;</span>
+ delete-old-versions <span style="color: #D8FA3C;">t</span> <span style="color: #AEAEAE;">; </span><span style="color: #AEAEAE;">&#33258;&#21160;&#21024;&#38500;&#26087;&#30340;&#22791;&#20221;&#25991;&#20214;</span>
+ kept-new-versions 10   <span style="color: #AEAEAE;">; </span><span style="color: #AEAEAE;">&#20445;&#30041;&#26368;&#36817;&#30340;10&#20010;&#22791;&#20221;&#25991;&#20214;</span>
+ kept-old-versions 2   <span style="color: #AEAEAE;">; </span><span style="color: #AEAEAE;">&#20445;&#30041;&#26368;&#26089;&#30340;2&#20010;&#22791;&#20221;&#25991;&#20214;</span>
+ version-control <span style="color: #D8FA3C;">t</span>    <span style="color: #AEAEAE;">; </span><span style="color: #AEAEAE;">&#22810;&#27425;&#22791;&#20221;</span>
+ <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">&#25226;&#29983;&#25104;&#30340;&#22791;&#20221;&#25991;&#20214;&#25918;&#21040;&#32479;&#19968;&#30340;&#19968;&#20010;&#30446;&#24405;,&#32780;&#19981;&#22312;&#22312;&#25991;&#20214;&#24403;&#21069;&#30446;&#24405;&#29983;&#25104;&#22909;&#22810; ~ #&#30340;&#25991;&#20214;</span>
+ <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">&#22914;&#26524;&#20320;&#32534;&#36753;&#26576;&#20010;&#25991;&#20214;&#26102; &#21518;&#24724;&#20102;&#24819;&#24674;&#22797;&#25104;&#20197;&#21069;&#30340;&#19968;&#20010;&#29256;&#26412; &#20320;&#21487;&#20197;&#21040;&#36825;&#20010;&#30446;&#24405;&#19979;</span>
+ <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">&#25214;&#21040;&#22791;&#20221;&#30340;&#29256;&#26412;</span>
+ backup-directory-alist `((<span style="color: #ffa07a;">".*"</span> . <span style="color: #ffa07a;">"~/.emacs.d/cache/backup_files/"</span>)) <span style="color: #AEAEAE;">;</span>
+ auto-save-file-name-transforms `((<span style="color: #ffa07a;">".*"</span> <span style="color: #ffa07a;">"~/.emacs.d/cache/backup_files/"</span> <span style="color: #D8FA3C;">t</span>))
+ auto-save-list-file-prefix   <span style="color: #ffa07a;">"~/.emacs.d/cache/backup_files/saves-"</span>)
 </pre>
 </div>
 </div>
@@ -291,7 +291,7 @@ kill 不成功的会给出警告,如在dired-mode 中按C-k<br  />
 <div class="outline-text-2" id="text-orgheadline16">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq  large-file-warning-threshold nil);打开大文件时不必警告
+<pre class="src src-emacs-lisp">(<span style="color: #FF6400;">setq</span>  large-file-warning-threshold <span style="color: #D8FA3C;">nil</span>)<span style="color: #AEAEAE;">;</span><span style="color: #AEAEAE;">&#25171;&#24320;&#22823;&#25991;&#20214;&#26102;&#19981;&#24517;&#35686;&#21578;</span>
 </pre>
 </div>
 </div>
@@ -301,7 +301,7 @@ kill 不成功的会给出警告,如在dired-mode 中按C-k<br  />
 <div class="outline-text-2" id="text-orgheadline17">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq recentf-max-saved-items 500)
+<pre class="src src-emacs-lisp">(<span style="color: #FF6400;">setq</span> recentf-max-saved-items 500)
 </pre>
 </div>
 </div>
@@ -314,7 +314,7 @@ kill 不成功的会给出警告,如在dired-mode 中按C-k<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq-default savehist-additional-variables
+<pre class="src src-emacs-lisp">(<span style="color: #FF6400;">setq-default</span> savehist-additional-variables
       '(kill-ring))
 (savehist-mode 1)
 </pre>
@@ -326,9 +326,9 @@ kill 不成功的会给出警告,如在dired-mode 中按C-k<br  />
 <div class="outline-text-2" id="text-orgheadline19">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq-default save-place t)
-(require 'saveplace)
-(save-place-mode 1)                     ;emacs-25 以后才有
+<pre class="src src-emacs-lisp">(<span style="color: #FF6400;">setq-default</span> save-place <span style="color: #D8FA3C;">t</span>)
+(<span style="color: #FBDE2D;">require</span> '<span style="color: #D8FA3C;">saveplace</span>)
+(save-place-mode 1)                     <span style="color: #AEAEAE;">;</span><span style="color: #AEAEAE;">emacs-25 &#20197;&#21518;&#25165;&#26377;</span>
 </pre>
 </div>
 </div>
@@ -338,8 +338,8 @@ kill 不成功的会给出警告,如在dired-mode 中按C-k<br  />
 <div class="outline-text-2" id="text-orgheadline20">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq user-full-name "myname")
-(setq user-mail-address "my@qq.com")
+<pre class="src src-emacs-lisp">(<span style="color: #FF6400;">setq</span> user-full-name <span style="color: #ffa07a;">"myname"</span>)
+(<span style="color: #FF6400;">setq</span> user-mail-address <span style="color: #ffa07a;">"my@qq.com"</span>)
 </pre>
 </div>
 </div>
@@ -349,7 +349,7 @@ kill 不成功的会给出警告,如在dired-mode 中按C-k<br  />
 <div class="outline-text-2" id="text-orgheadline21">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(fset 'yes-or-no-p 'y-or-n-p) ;; 把Yes用y代替
+<pre class="src src-emacs-lisp">(fset 'yes-<span style="color: #FBDE2D;">or</span>-no-p 'y-<span style="color: #FBDE2D;">or</span>-n-p) <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">&#25226;Yes&#29992;y&#20195;&#26367;</span>
 </pre>
 </div>
 </div>
@@ -359,13 +359,13 @@ kill 不成功的会给出警告,如在dired-mode 中按C-k<br  />
 <div class="outline-text-2" id="text-orgheadline22">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">;;; 关于没有选中区域,则默认为选中整行的advice
-;;;;默认情况下M-w复制一个区域，但是如果没有区域被选中，则复制当前行
-(defadvice kill-ring-save (before slickcopy activate compile)
-  "When called interactively with no active region, copy a single line instead."
-  (interactive
-   (if mark-active (list (region-beginning) (region-end))
-     (message "已选中当前行!")
+<pre class="src src-emacs-lisp"><span style="color: #AEAEAE;">;;; </span><span style="color: #AEAEAE;">&#20851;&#20110;&#27809;&#26377;&#36873;&#20013;&#21306;&#22495;,&#21017;&#40664;&#35748;&#20026;&#36873;&#20013;&#25972;&#34892;&#30340;advice</span>
+<span style="color: #AEAEAE;">;;;;</span><span style="color: #AEAEAE;">&#40664;&#35748;&#24773;&#20917;&#19979;M-w&#22797;&#21046;&#19968;&#20010;&#21306;&#22495;&#65292;&#20294;&#26159;&#22914;&#26524;&#27809;&#26377;&#21306;&#22495;&#34987;&#36873;&#20013;&#65292;&#21017;&#22797;&#21046;&#24403;&#21069;&#34892;</span>
+(<span style="color: #FBDE2D;">defadvice</span> <span style="color: #FF6400;">kill-ring-save</span> (before slickcopy activate compile)
+  <span style="color: #ffa07a;">"When called interactively with no active region, copy a single line instead."</span>
+  (<span style="color: #FBDE2D;">interactive</span>
+   (<span style="color: #FBDE2D;">if</span> mark-active (list (region-beginning) (region-end))
+     (message <span style="color: #ffa07a;">"&#24050;&#36873;&#20013;&#24403;&#21069;&#34892;!"</span>)
      (list (line-beginning-position)
            (line-beginning-position 2)))))
 </pre>
@@ -377,13 +377,13 @@ kill 不成功的会给出警告,如在dired-mode 中按C-k<br  />
 <div class="outline-text-2" id="text-orgheadline23">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq-default
- enable-recursive-minibuffers t        ;在minibuffer 中也可以再次使用minibuffer
- history-delete-duplicates t          ;minibuffer 删除重复历史
- minibuffer-prompt-properties (quote (read-only t point-entered minibuffer-avoid-prompt face minibuffer-prompt)) ;;;;minibuffer prompt 只读，且不允许光标进入其中
- resize-mini-windows t ;; 当minibuffer 内容一行显示不下来时 允许调整minibuffer大小
- read-buffer-completion-ignore-case t ;;补全buffer名时忽略大小写
- read-file-name-completion-ignore-case t;;补全文件名时忽略大小写
+<pre class="src src-emacs-lisp">(<span style="color: #FF6400;">setq-default</span>
+ enable-recursive-minibuffers <span style="color: #D8FA3C;">t</span>        <span style="color: #AEAEAE;">;</span><span style="color: #AEAEAE;">&#22312;minibuffer &#20013;&#20063;&#21487;&#20197;&#20877;&#27425;&#20351;&#29992;minibuffer</span>
+ history-delete-duplicates <span style="color: #D8FA3C;">t</span>          <span style="color: #AEAEAE;">;</span><span style="color: #AEAEAE;">minibuffer &#21024;&#38500;&#37325;&#22797;&#21382;&#21490;</span>
+ minibuffer-prompt-properties (<span style="color: #FBDE2D;">quote</span> (read-only <span style="color: #D8FA3C;">t</span> point-entered minibuffer-avoid-prompt face minibuffer-prompt)) <span style="color: #AEAEAE;">;;;;</span><span style="color: #AEAEAE;">minibuffer prompt &#21482;&#35835;&#65292;&#19988;&#19981;&#20801;&#35768;&#20809;&#26631;&#36827;&#20837;&#20854;&#20013;</span>
+ resize-mini-windows <span style="color: #D8FA3C;">t</span> <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">&#24403;minibuffer &#20869;&#23481;&#19968;&#34892;&#26174;&#31034;&#19981;&#19979;&#26469;&#26102; &#20801;&#35768;&#35843;&#25972;minibuffer&#22823;&#23567;</span>
+ read-buffer-completion-ignore-case <span style="color: #D8FA3C;">t</span> <span style="color: #AEAEAE;">;;</span><span style="color: #AEAEAE;">&#34917;&#20840;buffer&#21517;&#26102;&#24573;&#30053;&#22823;&#23567;&#20889;</span>
+ read-file-name-completion-ignore-case <span style="color: #D8FA3C;">t</span><span style="color: #AEAEAE;">;;</span><span style="color: #AEAEAE;">&#34917;&#20840;&#25991;&#20214;&#21517;&#26102;&#24573;&#30053;&#22823;&#23567;&#20889;</span>
  completion-cycle-threshold 8)
 </pre>
 </div>
@@ -394,8 +394,8 @@ kill 不成功的会给出警告,如在dired-mode 中按C-k<br  />
 <div class="outline-text-2" id="text-orgheadline24">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq-default fill-column 80)
-或者可以 C-x f 交互式的设置这个值
+<pre class="src src-emacs-lisp">(<span style="color: #FF6400;">setq-default</span> fill-column 80)
+&#25110;&#32773;&#21487;&#20197; C-x f &#20132;&#20114;&#24335;&#30340;&#35774;&#32622;&#36825;&#20010;&#20540;
 </pre>
 </div>
 <p>

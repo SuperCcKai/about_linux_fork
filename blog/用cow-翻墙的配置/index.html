@@ -59,16 +59,16 @@
 <div class="outline-text-3" id="text-orgheadline2">
 <div class="org-src-container">
 
-<pre class="src src-sh">##### ##### ##### ##### ##### ######      on client
-#设置本机的http代理服务器和端口
-listen=http://127.0.0.1:6666
-dialTimeout = 60s
-# 从服务器读超时
-readTimeout = 60s
-authTimeout = 2h
-#设置墙外的二级代理，这里同样用了COW的，因为安装太简单，根据二级代理的情况设置用户，密码，服务器ip，端口
-proxy=cow://aes-128-cfb:passwordddddddddddd@taphero.yinni.chaoshenxy.com:6666
-#===================================================end on client
+<pre class="src src-sh"><span style="color: #AEAEAE;">##### </span><span style="color: #AEAEAE;">##### ##### ##### ##### ######      on client</span>
+<span style="color: #AEAEAE;">#</span><span style="color: #AEAEAE;">&#35774;&#32622;&#26412;&#26426;&#30340;http&#20195;&#29702;&#26381;&#21153;&#22120;&#21644;&#31471;&#21475;</span>
+<span style="color: #40E0D0;">listen</span>=http://127.0.0.1:6666
+<span style="color: #40E0D0;">dialTimeout</span> = 60s
+<span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">&#20174;&#26381;&#21153;&#22120;&#35835;&#36229;&#26102;</span>
+<span style="color: #40E0D0;">readTimeout</span> = 60s
+<span style="color: #40E0D0;">authTimeout</span> = 2h
+<span style="color: #AEAEAE;">#</span><span style="color: #AEAEAE;">&#35774;&#32622;&#22681;&#22806;&#30340;&#20108;&#32423;&#20195;&#29702;&#65292;&#36825;&#37324;&#21516;&#26679;&#29992;&#20102;COW&#30340;&#65292;&#22240;&#20026;&#23433;&#35013;&#22826;&#31616;&#21333;&#65292;&#26681;&#25454;&#20108;&#32423;&#20195;&#29702;&#30340;&#24773;&#20917;&#35774;&#32622;&#29992;&#25143;&#65292;&#23494;&#30721;&#65292;&#26381;&#21153;&#22120;ip&#65292;&#31471;&#21475;</span>
+<span style="color: #40E0D0;">proxy</span>=cow://aes-128-cfb:passwordddddddddddd@taphero.yinni.chaoshenxy.com:6666
+<span style="color: #AEAEAE;">#</span><span style="color: #AEAEAE;">===================================================end on client</span>
 </pre>
 </div>
 </div>
@@ -78,11 +78,11 @@ proxy=cow://aes-128-cfb:passwordddddddddddd@taphero.yinni.chaoshenxy.com:6666
 <div class="outline-text-3" id="text-orgheadline3">
 <div class="org-src-container">
 
-<pre class="src src-sh">##### ##### ##### ##### ##### #####
-#          on server
-# 6666 端口需打开
-listen = cow://aes-128-cfb:passwordddddddddddd@0.0.0.0:6666
-##### ##### ##### ##### ##### #####
+<pre class="src src-sh"><span style="color: #AEAEAE;">##### </span><span style="color: #AEAEAE;">##### ##### ##### ##### #####</span>
+<span style="color: #AEAEAE;">#          </span><span style="color: #AEAEAE;">on server</span>
+<span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">6666 &#31471;&#21475;&#38656;&#25171;&#24320;</span>
+<span style="color: #40E0D0;">listen</span> = cow://aes-128-cfb:passwordddddddddddd@0.0.0.0:6666
+<span style="color: #AEAEAE;">##### </span><span style="color: #AEAEAE;">##### ##### ##### ##### #####</span>
 </pre>
 </div>
 </div>

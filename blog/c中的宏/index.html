@@ -33,16 +33,16 @@
 <h1>c中的宏</h1>
 <div class="org-src-container">
 
-<pre class="src src-c">#与##在宏定义中的--宏展开
-#include &lt;stdio.h&gt;
-#define f(a,b) a##b
-#define g(a) #a
-#define h(a) g(a)
-int main()
+<pre class="src src-c"><span style="color: #7fffd4;">#&#19982;</span>##&#22312;&#23439;&#23450;&#20041;&#20013;&#30340;--&#23439;&#23637;&#24320;
+<span style="color: #7fffd4;">#include</span> <span style="color: #ffa07a;">&lt;stdio.h&gt;</span>
+<span style="color: #7fffd4;">#define</span> <span style="color: #FF6400;">f</span>(<span style="color: #40E0D0;">a</span>,<span style="color: #40E0D0;">b</span>) a##b
+<span style="color: #7fffd4;">#define</span> <span style="color: #FF6400;">g</span>(<span style="color: #40E0D0;">a</span>) #a
+<span style="color: #7fffd4;">#define</span> <span style="color: #FF6400;">h</span>(<span style="color: #40E0D0;">a</span>) g(a)
+<span style="color: #8DA6CE;">int</span> <span style="color: #FF6400;">main</span>()
 {
-  printf("%s\n", h(f(1,2))); // 12
-  printf("%s\n", g(f(1,2))); // f(1,2)
-  return 0;
+  printf(<span style="color: #ffa07a;">"%s\n"</span>, h(f(1,2))); <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">12</span>
+  printf(<span style="color: #ffa07a;">"%s\n"</span>, g(f(1,2))); <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">f(1,2)</span>
+  <span style="color: #FBDE2D;">return</span> 0;
 }
 </pre>
 </div>
@@ -68,11 +68,11 @@ int main()
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c">#define g(a) #a
- 这个宏的内容以#开头,它的参数名为a
-下面对其进行调用时传过去的参数是"f(1,2)"
-虽然传过去的参数是另一个宏,但并不把它当作宏,而仅认为它是个字符串
- printf("%s\n", g(f(1,2))); //结果打: f(1,2)
+<pre class="src src-c"><span style="color: #7fffd4;">#define</span> <span style="color: #FF6400;">g</span>(<span style="color: #40E0D0;">a</span>) #a
+ &#36825;&#20010;&#23439;&#30340;&#20869;&#23481;&#20197;#&#24320;&#22836;,<span style="color: #8DA6CE;">&#23427;&#30340;&#21442;&#25968;&#21517;&#20026;a</span>
+<span style="color: #40E0D0;">&#19979;&#38754;&#23545;&#20854;&#36827;&#34892;&#35843;&#29992;&#26102;&#20256;&#36807;&#21435;&#30340;&#21442;&#25968;&#26159;</span><span style="color: #ffa07a;">"f(1,2)"</span>
+&#34429;&#28982;&#20256;&#36807;&#21435;&#30340;&#21442;&#25968;&#26159;&#21478;&#19968;&#20010;&#23439;,&#20294;&#24182;&#19981;&#25226;&#23427;&#24403;&#20316;&#23439;,<span style="color: #8DA6CE;">&#32780;&#20165;&#35748;&#20026;&#23427;&#26159;&#20010;&#23383;&#31526;&#20018;</span>
+ <span style="color: #FF6400;">printf</span>(<span style="color: #ffa07a;">"%s\n"</span>, <span style="color: #8DA6CE;">g</span>(<span style="color: #40E0D0;">f</span>(1,2))); <span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#32467;&#26524;&#25171;: f(1,2)</span>
 </pre>
 </div></li>
 </ul></li>
@@ -86,7 +86,7 @@ int main()
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c">printf("%s\n", h(f(1,2))); // 12
+<pre class="src src-c">printf(<span style="color: #ffa07a;">"%s\n"</span>, h(f(1,2))); <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">12</span>
 </pre>
 </div>
 <p>
@@ -102,12 +102,12 @@ h(f(1,2))&#x2013;&gt;h(12)&#x2013;&gt;g(12)&#x2013;&gt;12<br  />
 
 <div class="org-src-container">
 
-<pre class="src src-c">另外几个更复杂的例子
-printf("%s\n", h(f(1,2))); // 12
-  printf("%s\n", g(f(1,2))); // f(1,2)
-  printf("%s\n", g(h(f(1,2)))); // h(f(1,2))
-  printf("%s\n", h(g(f(1,2)))); // "f(1,2)"
-  printf("%s\n", h(h(f(1,2)))); // "12"
+<pre class="src src-c"><span style="color: #8DA6CE;">&#21478;&#22806;&#20960;&#20010;&#26356;&#22797;&#26434;&#30340;&#20363;&#23376;</span>
+<span style="color: #FF6400;">printf</span>(<span style="color: #ffa07a;">"%s\n"</span>, <span style="color: #8DA6CE;">h</span>(<span style="color: #40E0D0;">f</span>(1,2))); <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">12</span>
+  printf(<span style="color: #ffa07a;">"%s\n"</span>, g(f(1,2))); <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">f(1,2)</span>
+  printf(<span style="color: #ffa07a;">"%s\n"</span>, g(h(f(1,2)))); <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">h(f(1,2))</span>
+  printf(<span style="color: #ffa07a;">"%s\n"</span>, h(g(f(1,2)))); <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">"f(1,2)"</span>
+  printf(<span style="color: #ffa07a;">"%s\n"</span>, h(h(f(1,2)))); <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">"12"</span>
 </pre>
 </div>
 <p>
@@ -117,7 +117,7 @@ printf("%s\n", h(f(1,2))); // 12
 <div class="org-src-container">
 
 <pre class="src src-sh">gcc -E macro.c
-或
+&#25110;
 gcc -E macro.c -o macro.i
 </pre>
 </div>

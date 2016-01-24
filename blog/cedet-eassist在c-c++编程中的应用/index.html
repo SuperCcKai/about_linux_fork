@@ -74,13 +74,13 @@ same folder, it will be opened.<br  /></li>
 </blockquote>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(require 'eassisct)
-(defun my-c-mode-cedet-hook ()
-  (local-set-key "\C-ct" 'eassist-switch-h-cpp)
-  (local-set-key "\C-xt" 'eassist-switch-h-cpp)
-  (local-set-key "\C-ce" 'eassist-list-methods)
+<pre class="src src-emacs-lisp">(<span style="color: #FBDE2D;">require</span> '<span style="color: #D8FA3C;">eassisct</span>)
+(<span style="color: #FBDE2D;">defun</span> <span style="color: #FF6400;">my-c-mode-cedet-hook</span> ()
+  (local-set-key <span style="color: #ffa07a;">"\C-ct"</span> 'eassist-switch-h-cpp)
+  (local-set-key <span style="color: #ffa07a;">"\C-xt"</span> 'eassist-switch-h-cpp)
+  (local-set-key <span style="color: #ffa07a;">"\C-ce"</span> 'eassist-list-methods)
   )
-(add-hook 'c-mode-common-hook 'my-c-mode-cedet-hook)
+(<span style="color: #FF6400;">add-hook</span> 'c-mode-common-hook 'my-c-mode-cedet-hook)
 </pre>
 </div>
 <p>
@@ -88,15 +88,15 @@ same folder, it will be opened.<br  /></li>
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">;; (require 'eassisct)
-;; eassist-switch-h-cpp and eassist-list-methods is autoloaded in cedet-contrib-load
-(require 'cedet-contrib-load)
-(defun my-c-mode-cedet-hook ()
-  (local-set-key "\C-ct" 'eassist-switch-h-cpp)
-  (local-set-key "\C-xt" 'eassist-switch-h-cpp)
-  (local-set-key "\C-ce" 'eassist-list-methods)
+<pre class="src src-emacs-lisp"><span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">(require 'eassisct)</span>
+<span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">eassist-switch-h-cpp and eassist-list-methods is autoloaded in cedet-contrib-load</span>
+(<span style="color: #FBDE2D;">require</span> '<span style="color: #D8FA3C;">cedet-contrib-load</span>)
+(<span style="color: #FBDE2D;">defun</span> <span style="color: #FF6400;">my-c-mode-cedet-hook</span> ()
+  (local-set-key <span style="color: #ffa07a;">"\C-ct"</span> 'eassist-switch-h-cpp)
+  (local-set-key <span style="color: #ffa07a;">"\C-xt"</span> 'eassist-switch-h-cpp)
+  (local-set-key <span style="color: #ffa07a;">"\C-ce"</span> 'eassist-list-methods)
   )
-(add-hook 'c-mode-common-hook 'my-c-mode-cedet-hook)
+(<span style="color: #FF6400;">add-hook</span> 'c-mode-common-hook 'my-c-mode-cedet-hook)
 </pre>
 </div>
 <p>

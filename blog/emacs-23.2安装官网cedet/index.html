@@ -50,7 +50,7 @@
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(load-file "~/.emacs.d/site-lisp/cedet-1.0/common/cedet.el")
+<pre class="src src-emacs-lisp">(load-file <span style="color: #ffa07a;">"~/.emacs.d/site-lisp/cedet-1.0/common/cedet.el"</span>)
 </pre>
 </div>
 <p>
@@ -67,7 +67,7 @@
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(add-to-list 'load-path  "cedet/..");
+<pre class="src src-emacs-lisp">(add-to-list 'load-path  <span style="color: #ffa07a;">"cedet/.."</span>)<span style="color: #AEAEAE;">;</span>
 </pre>
 </div>
 
@@ -82,7 +82,7 @@
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(defvar cedet-path "/tmp/cedet-1.0/" "Path of `cedet'")  
+<pre class="src src-emacs-lisp">(<span style="color: #FBDE2D;">defvar</span> <span style="color: #40E0D0;">cedet-path</span> <span style="color: #ffa07a;">"/tmp/cedet-1.0/"</span> <span style="color: #ffa07a;">"Path of `</span><span style="color: #D8FA3C;">cedet</span><span style="color: #ffa07a;">'"</span>)  
 (my-add-subdirs-to-load-path cedet-path)
 </pre>
 </div>
@@ -92,57 +92,57 @@
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"> ;; -*- Emacs-Lisp -*-
+<pre class="src src-emacs-lisp"> <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">-*- Emacs-Lisp -*-</span>
 
-(defun my-add-subdirs-to-load-path (dir)
-  "把DIR的所有子目录都加到`load-path'里面"
-  (interactive)
-  (let ((default-directory (concat dir "/")))
+(<span style="color: #FBDE2D;">defun</span> <span style="color: #FF6400;">my-add-subdirs-to-load-path</span> (dir)
+  <span style="color: #ffa07a;">"&#25226;DIR&#30340;&#25152;&#26377;&#23376;&#30446;&#24405;&#37117;&#21152;&#21040;`</span><span style="color: #D8FA3C;">load-path</span><span style="color: #ffa07a;">'&#37324;&#38754;"</span>
+  (<span style="color: #FBDE2D;">interactive</span>)
+  (<span style="color: #FBDE2D;">let</span> ((default-directory (concat dir <span style="color: #ffa07a;">"/"</span>)))
     (add-to-list 'load-path dir)
-    (if (fboundp 'normal-top-level-add-subdirs-to-load-path)
+    (<span style="color: #FBDE2D;">if</span> (fboundp 'normal-top-level-add-subdirs-to-load-path)
         (normal-top-level-add-subdirs-to-load-path))))
 
-;; Fix bug of `normal-top-level-add-subdirs-to-load-path'
-;; which can not add directory which name end with ".elc?"
-;; copy from emacs23 startup.el and modify it
-(defun normal-top-level-add-subdirs-to-load-path ()
-  "Add all subdirectories of current directory to `load-path'.
-More precisely, this uses only the subdirectories whose names
-start with letters or digits; it excludes any subdirectory named `RCS'
-or `CVS', and any subdirectory that contains a file named `.nosearch'."
-  (let (dirs
+<span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">Fix bug of `</span><span style="color: #D8FA3C;">normal-top-level-add-subdirs-to-load-path</span><span style="color: #AEAEAE;">'</span>
+<span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">which can not add directory which name end with ".elc?"</span>
+<span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">copy from emacs23 startup.el and modify it</span>
+(<span style="color: #FBDE2D;">defun</span> <span style="color: #FF6400;">normal-top-level-add-subdirs-to-load-path</span> ()
+  <span style="color: #ffa07a;">"Add all subdirectories of current directory to `</span><span style="color: #D8FA3C;">load-path</span><span style="color: #ffa07a;">'.</span>
+<span style="color: #ffa07a;">More precisely, this uses only the subdirectories whose names</span>
+<span style="color: #ffa07a;">start with letters or digits; it excludes any subdirectory named `</span><span style="color: #D8FA3C;">RCS</span><span style="color: #ffa07a;">'</span>
+<span style="color: #ffa07a;">or `</span><span style="color: #D8FA3C;">CVS</span><span style="color: #ffa07a;">', and any subdirectory that contains a file named `</span><span style="color: #D8FA3C;">.nosearch</span><span style="color: #ffa07a;">'."</span>
+  (<span style="color: #FBDE2D;">let</span> (dirs
         attrs
         (pending (list default-directory)))
-    ;; This loop does a breadth-first tree walk on DIR's subtree,
-    ;; putting each subdir into DIRS as its contents are examined.
-    (while pending
-      (push (pop pending) dirs)
-      (let* ((this-dir (car dirs))
+    <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">This loop does a breadth-first tree walk on DIR's subtree,</span>
+    <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">putting each subdir into DIRS as its contents are examined.</span>
+    (<span style="color: #FBDE2D;">while</span> pending
+      (<span style="color: #FBDE2D;">push</span> (<span style="color: #FBDE2D;">pop</span> pending) dirs)
+      (<span style="color: #FBDE2D;">let*</span> ((this-dir (car dirs))
              (contents (directory-files this-dir))
              (default-directory this-dir)
-             (canonicalized (if (fboundp 'untranslated-canonical-name)
+             (canonicalized (<span style="color: #FBDE2D;">if</span> (fboundp 'untranslated-canonical-name)
                                 (untranslated-canonical-name this-dir))))
-        ;; The Windows version doesn't report meaningful inode
-        ;; numbers, so use the canonicalized absolute file name of the
-        ;; directory instead.
-        (setq attrs (or canonicalized
+        <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">The Windows version doesn't report meaningful inode</span>
+        <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">numbers, so use the canonicalized absolute file name of the</span>
+        <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">directory instead.</span>
+        (<span style="color: #FF6400;">setq</span> attrs (<span style="color: #FBDE2D;">or</span> canonicalized
                         (nthcdr 10 (file-attributes this-dir))))
-        (unless (member attrs normal-top-level-add-subdirs-inode-list)
-          (push attrs normal-top-level-add-subdirs-inode-list)
-          (dolist (file contents)
-            ;; The lower-case variants of RCS and CVS are for DOS/Windows.
-            (unless (member file '("." ".." "RCS" "CVS" "rcs" "cvs"))
-              (when (and (string-match "\\`[[:alnum:]]" file)
-                         ;; Avoid doing a `stat' when it isn't necessary
-                         ;; because that can cause trouble when an NFS server
-                         ;; is down.
+        (<span style="color: #FBDE2D;">unless</span> (member attrs normal-top-level-add-subdirs-inode-list)
+          (<span style="color: #FBDE2D;">push</span> attrs normal-top-level-add-subdirs-inode-list)
+          (<span style="color: #FBDE2D;">dolist</span> (file contents)
+            <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">The lower-case variants of RCS and CVS are for DOS/Windows.</span>
+            (<span style="color: #FBDE2D;">unless</span> (member file '(<span style="color: #ffa07a;">"."</span> <span style="color: #ffa07a;">".."</span> <span style="color: #ffa07a;">"RCS"</span> <span style="color: #ffa07a;">"CVS"</span> <span style="color: #ffa07a;">"rcs"</span> <span style="color: #ffa07a;">"cvs"</span>))
+              (<span style="color: #FBDE2D;">when</span> (<span style="color: #FBDE2D;">and</span> (string-match <span style="color: #ffa07a;">"\\`[[:alnum:]]"</span> file)
+                         <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">Avoid doing a `</span><span style="color: #D8FA3C;">stat</span><span style="color: #AEAEAE;">' when it isn't necessary</span>
+                         <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">because that can cause trouble when an NFS server</span>
+                         <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">is down.</span>
                          (file-directory-p file))
-                (let ((expanded (expand-file-name file)))
-                  (unless (file-exists-p (expand-file-name ".nosearch"
+                (<span style="color: #FBDE2D;">let</span> ((expanded (expand-file-name file)))
+                  (<span style="color: #FBDE2D;">unless</span> (file-exists-p (expand-file-name <span style="color: #ffa07a;">".nosearch"</span>
                                                            expanded))
-                    (setq pending (nconc pending (list expanded)))))))))))
-    (if (equal window-system 'w32)
-        (setq load-path (append (nreverse dirs) load-path))
+                    (<span style="color: #FF6400;">setq</span> pending (nconc pending (list expanded)))))))))))
+    (<span style="color: #FBDE2D;">if</span> (<span style="color: #FBDE2D;">equal</span> window-system 'w32)
+        (<span style="color: #FF6400;">setq</span> load-path (append (nreverse dirs) load-path))
       (normal-top-level-add-to-load-path (cdr (nreverse dirs))))))
 </pre>
 </div>

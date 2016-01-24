@@ -86,16 +86,16 @@ index.html
 </p>
 <div class="org-src-container">
 
-<pre class="src src-javascript">function get(){
+<pre class="src src-javascript"><span style="color: #FBDE2D;">function</span> <span style="color: #FF6400;">get</span>(){
         $.ajax({
-            type: "GET",
-            url: "chat",
-            cache:false,
+            type: <span style="color: #ffa07a;">"GET"</span>,
+            url: <span style="color: #ffa07a;">"chat"</span>,
+            cache:<span style="color: #D8FA3C;">false</span>,
             success:getMsg
           });
 }
-function getMsg(data){
-    $("#history").append(new Date().toLocaleString()+":"+data+"&lt;br/&gt;");
+<span style="color: #FBDE2D;">function</span> <span style="color: #FF6400;">getMsg</span>(<span style="color: #40E0D0;">data</span>){
+    $(<span style="color: #ffa07a;">"#history"</span>).append(<span style="color: #FBDE2D;">new</span> <span style="color: #8DA6CE;">Date</span>().toLocaleString()+<span style="color: #ffa07a;">":"</span>+data+<span style="color: #ffa07a;">"&lt;br/&gt;"</span>);
     get();
 }
 </pre>
@@ -118,16 +118,16 @@ function getMsg(data){
 
 <div class="org-src-container">
 
-<pre class="src src-javascript">$('#send').click(
-    function(){
+<pre class="src src-javascript">$(<span style="color: #ffa07a;">'#send'</span>).click(
+    <span style="color: #FBDE2D;">function</span>(){
         $.ajax({
-            type: "POST",
-            url: "chat",
-            cache:false,
-            data: "message="+$("#message").val(),
-            success: function(msg){
-                $("#status").empty(); // remove children
-                $("#status").append(new Date().toLocaleString()+":"+msg); // add child
+            type: <span style="color: #ffa07a;">"POST"</span>,
+            url: <span style="color: #ffa07a;">"chat"</span>,
+            cache:<span style="color: #D8FA3C;">false</span>,
+            data: <span style="color: #ffa07a;">"message="</span>+$(<span style="color: #ffa07a;">"#message"</span>).val(),
+            <span style="color: #FF6400;">success</span>: <span style="color: #FBDE2D;">function</span>(<span style="color: #40E0D0;">msg</span>){
+                $(<span style="color: #ffa07a;">"#status"</span>).empty(); <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">remove children</span>
+                $(<span style="color: #ffa07a;">"#status"</span>).append(<span style="color: #FBDE2D;">new</span> <span style="color: #8DA6CE;">Date</span>().toLocaleString()+<span style="color: #ffa07a;">":"</span>+msg); <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">add child</span>
             }
         });
     }
@@ -141,11 +141,11 @@ function getMsg(data){
 </p>
 <div class="org-src-container">
 
-<pre class="src src-erlang">Data = Req:parse_post(),
-Room = get_the_room(),
-% post
-io:format("message from post:~p~n",[proplists:get_value("message", Data)]) ,
-Room ! {self(), post, list_to_binary(proplists:get_value("message", Data))},
+<pre class="src src-erlang">Data = <span style="color: #40E0D0;">Req</span>:<span style="color: #8DA6CE;">parse_post</span>(),
+<span style="color: #40E0D0;">Room</span> = <span style="color: #8DA6CE;">get_the_room</span>(),
+<span style="color: #AEAEAE;">% </span><span style="color: #AEAEAE;">post</span>
+<span style="color: #8DA6CE;">io</span>:<span style="color: #8DA6CE;">format</span>(<span style="color: #ffa07a;">"message from post:~p~n"</span>,[<span style="color: #8DA6CE;">proplists</span>:<span style="color: #8DA6CE;">get_value</span>(<span style="color: #ffa07a;">"message"</span>, <span style="color: #40E0D0;">Data</span>)]) ,
+<span style="color: #40E0D0;">Room</span> ! {<span style="color: #F8F8F8;">self</span>(), post, <span style="color: #F8F8F8;">list_to_binary</span>(<span style="color: #8DA6CE;">proplists</span>:<span style="color: #8DA6CE;">get_value</span>(<span style="color: #ffa07a;">"message"</span>, <span style="color: #40E0D0;">Data</span>))},
 </pre>
 </div>
 <p>
@@ -155,18 +155,18 @@ Room ! {self(), post, list_to_binary(proplists:get_value("message", Data))},
 </p>
 <div class="org-src-container">
 
-<pre class="src src-erlang">{From, post, Message} -&gt;
-    From ! posted,
-    lists:foreach(fun(User) -&gt;
-                                        % broadcast the message
-                          User ! Message
-                  end, Users),
-    %% room(Users),
-    %% 所有等待的用户都会接收的消息，
-    %% 从队列中去掉他们
-    room([]),
-    io:format("~n",[]) ;
-%% room([]);
+<pre class="src src-erlang">{<span style="color: #40E0D0;">From</span>, post, <span style="color: #40E0D0;">Message</span>} -&gt;
+    <span style="color: #40E0D0;">From</span> ! posted,
+    <span style="color: #8DA6CE;">lists</span>:<span style="color: #8DA6CE;">foreach</span>(<span style="color: #FBDE2D;">fun</span>(<span style="color: #40E0D0;">User</span>) -&gt;
+                                        <span style="color: #AEAEAE;">% </span><span style="color: #AEAEAE;">broadcast the message</span>
+                          <span style="color: #40E0D0;">User</span> ! <span style="color: #40E0D0;">Message</span>
+                  <span style="color: #FBDE2D;">end</span>, <span style="color: #40E0D0;">Users</span>),
+    <span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">room(Users),</span>
+    <span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">&#25152;&#26377;&#31561;&#24453;&#30340;&#29992;&#25143;&#37117;&#20250;&#25509;&#25910;&#30340;&#28040;&#24687;&#65292;</span>
+    <span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">&#20174;&#38431;&#21015;&#20013;&#21435;&#25481;&#20182;&#20204;</span>
+    <span style="color: #8DA6CE;">room</span>([]),
+    <span style="color: #8DA6CE;">io</span>:<span style="color: #8DA6CE;">format</span>(<span style="color: #ffa07a;">"~n"</span>,[]) ;
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">room([]);</span>
 </pre>
 </div>
 </div>

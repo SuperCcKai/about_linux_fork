@@ -56,8 +56,8 @@ record到json 格式的转换函数的话，是没法实现的，因为它只在
 </p>
 <div class="org-src-container">
 
-<pre class="src src-erlang">-record(user,{id,name,age}).
--record(classes,{name,id,nums}).
+<pre class="src src-erlang"><span style="color: #7fffd4;">-record</span>(<span style="color: #8DA6CE;">user</span>,{id,name,age}).
+<span style="color: #7fffd4;">-record</span>(<span style="color: #8DA6CE;">classes</span>,{name,id,nums}).
 </pre>
 </div>
 <p>
@@ -65,11 +65,11 @@ record到json 格式的转换函数的话，是没法实现的，因为它只在
 </p>
 <div class="org-src-container">
 
-<pre class="src src-erlang">-define(HEAD_FILE_PATH,"../include/myhead.hrl").%relative to ebin/
-%% save ?MODULENAME.erl in this dir
--define(DEST_DIR,"../src"). %relative to ebin/
--define(MODULENAME,"myhead_util").
--define(INCLUDE_CMD_IN_DEST_MODULE,"-include(\"myhead.hrl\").").
+<pre class="src src-erlang"><span style="color: #7fffd4;">-define</span>(<span style="color: #40E0D0;">HEAD_FILE_PATH</span>,<span style="color: #ffa07a;">"../include/myhead.hrl"</span>).<span style="color: #AEAEAE;">%</span><span style="color: #AEAEAE;">relative to ebin/</span>
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">save ?MODULENAME.erl in this dir</span>
+<span style="color: #7fffd4;">-define</span>(<span style="color: #40E0D0;">DEST_DIR</span>,<span style="color: #ffa07a;">"../src"</span>). <span style="color: #AEAEAE;">%</span><span style="color: #AEAEAE;">relative to ebin/</span>
+<span style="color: #7fffd4;">-define</span>(<span style="color: #40E0D0;">MODULENAME</span>,<span style="color: #ffa07a;">"myhead_util"</span>).
+<span style="color: #7fffd4;">-define</span>(<span style="color: #40E0D0;">INCLUDE_CMD_IN_DEST_MODULE</span>,<span style="color: #ffa07a;">"-include(\"myhead.hrl\")."</span>).
 </pre>
 </div>
 <p>
@@ -77,98 +77,98 @@ record到json 格式的转换函数的话，是没法实现的，因为它只在
 </p>
 <div class="org-src-container">
 
-<pre class="src src-erlang">%% This module automatically generated - do not edit
+<pre class="src src-erlang"><span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">This module automatically generated - do not edit</span>
 
-%%% This module provides utilities for getting info about records
-%% suppose there is a record in myhead.erl
+<span style="color: #AEAEAE;">%%% </span><span style="color: #AEAEAE;">This module provides utilities for getting info about records</span>
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">suppose there is a record in myhead.erl</span>
 
-%% -record(user,[id,name,age]).
-%% U=#user{id=100,name=joseph,age=11}.
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">-record(user,[id,name,age]).</span>
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">U=#user{id=100,name=joseph,age=11}.</span>
 
-%% get_index(user,id)==1
-%% get_index(U,id)==1
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">get_index(user,id)==1</span>
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">get_index(U,id)==1</span>
 
-%% get_value(U,id)==100
-%% get_value(U,1)==100
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">get_value(U,id)==100</span>
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">get_value(U,1)==100</span>
 
-%% get_key(U,1)==key
-%% get_key(user,1)==key
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">get_key(U,1)==key</span>
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">get_key(user,1)==key</span>
 
-%% fields_info(user)==[id,name,age]
-%% fields_info(U)==[id,name,age]
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">fields_info(user)==[id,name,age]</span>
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">fields_info(U)==[id,name,age]</span>
 
-%% length(user)==3
-%% length(U)==3
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">length(user)==3</span>
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">length(U)==3</span>
 
--module(myhead_util).
+<span style="color: #7fffd4;">-module</span>(myhead_util).
 
--include("myhead.hrl").
--export([get_index/2,get_key/2,get_value/2,length/1,fields_info/1]).
+<span style="color: #7fffd4;">-include</span>(<span style="color: #ffa07a;">"myhead.hrl"</span>).
+<span style="color: #7fffd4;">-export</span>([<span style="color: #8DA6CE;">get_index/2</span>,<span style="color: #8DA6CE;">get_key/2</span>,<span style="color: #8DA6CE;">get_value/2</span>,<span style="color: #8DA6CE;">length/1</span>,<span style="color: #8DA6CE;">fields_info/1</span>]).
 
-%% get the filed index (1 based ) of a record
-get_index(user,id)-&gt; #user.id-1 ;
-get_index(Record,id) when is_record(Record,user)-&gt; #user.id-1 ;
-get_index(user,name)-&gt; #user.name-1 ;
-get_index(Record,name) when is_record(Record,user)-&gt; #user.name-1 ;
-get_index(user,age)-&gt; #user.age-1 ;
-get_index(Record,age) when is_record(Record,user)-&gt; #user.age-1 ;
-get_index(user,F) -&gt; exit({error,"Record: user has no field called "++atom_to_list(F)});
-get_index(classes,name)-&gt; #classes.name-1 ;
-get_index(Record,name) when is_record(Record,classes)-&gt; #classes.name-1 ;
-get_index(classes,id)-&gt; #classes.id-1 ;
-get_index(Record,id) when is_record(Record,classes)-&gt; #classes.id-1 ;
-get_index(classes,nums)-&gt; #classes.nums-1 ;
-get_index(Record,nums) when is_record(Record,classes)-&gt; #classes.nums-1 ;
-get_index(classes,F) -&gt; exit({error,"Record: classes has no field called "++atom_to_list(F)});
-get_index(Record,_Field) -&gt; exit({error,"Invalid Record Name: "++Record}).
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">get the filed index (1 based ) of a record</span>
+<span style="color: #FF6400;">get_index</span>(user,id)-&gt;<span style="color: #FF6400;"> </span>#<span style="color: #8DA6CE;">user</span>.id-1 ;
+<span style="color: #FF6400;">get_index</span>(<span style="color: #40E0D0;">Record</span>,id) <span style="color: #FBDE2D;">when</span> <span style="color: #F8F8F8;">is_record</span>(<span style="color: #40E0D0;">Record</span>,user)-&gt;<span style="color: #FF6400;"> </span>#<span style="color: #8DA6CE;">user</span>.id-1 ;
+<span style="color: #FF6400;">get_index</span>(user,name)-&gt;<span style="color: #FF6400;"> </span>#<span style="color: #8DA6CE;">user</span>.name-1 ;
+<span style="color: #FF6400;">get_index</span>(<span style="color: #40E0D0;">Record</span>,name) <span style="color: #FBDE2D;">when</span> <span style="color: #F8F8F8;">is_record</span>(<span style="color: #40E0D0;">Record</span>,user)-&gt;<span style="color: #FF6400;"> </span>#<span style="color: #8DA6CE;">user</span>.name-1 ;
+<span style="color: #FF6400;">get_index</span>(user,age)-&gt;<span style="color: #FF6400;"> </span>#<span style="color: #8DA6CE;">user</span>.age-1 ;
+<span style="color: #FF6400;">get_index</span>(<span style="color: #40E0D0;">Record</span>,age) <span style="color: #FBDE2D;">when</span> <span style="color: #F8F8F8;">is_record</span>(<span style="color: #40E0D0;">Record</span>,user)-&gt;<span style="color: #FF6400;"> </span>#<span style="color: #8DA6CE;">user</span>.age-1 ;
+<span style="color: #FF6400;">get_index</span>(user,<span style="color: #40E0D0;">F</span>) -&gt;<span style="color: #FF6400;"> </span><span style="color: #F8F8F8;">exit</span>({error,<span style="color: #ffa07a;">"Record: user has no field called "</span>++<span style="color: #F8F8F8;">atom_to_list</span>(<span style="color: #40E0D0;">F</span>)});
+<span style="color: #FF6400;">get_index</span>(classes,name)-&gt;<span style="color: #FF6400;"> </span>#<span style="color: #8DA6CE;">classes</span>.name-1 ;
+<span style="color: #FF6400;">get_index</span>(<span style="color: #40E0D0;">Record</span>,name) <span style="color: #FBDE2D;">when</span> <span style="color: #F8F8F8;">is_record</span>(<span style="color: #40E0D0;">Record</span>,classes)-&gt;<span style="color: #FF6400;"> </span>#<span style="color: #8DA6CE;">classes</span>.name-1 ;
+<span style="color: #FF6400;">get_index</span>(classes,id)-&gt;<span style="color: #FF6400;"> </span>#<span style="color: #8DA6CE;">classes</span>.id-1 ;
+<span style="color: #FF6400;">get_index</span>(<span style="color: #40E0D0;">Record</span>,id) <span style="color: #FBDE2D;">when</span> <span style="color: #F8F8F8;">is_record</span>(<span style="color: #40E0D0;">Record</span>,classes)-&gt;<span style="color: #FF6400;"> </span>#<span style="color: #8DA6CE;">classes</span>.id-1 ;
+<span style="color: #FF6400;">get_index</span>(classes,nums)-&gt;<span style="color: #FF6400;"> </span>#<span style="color: #8DA6CE;">classes</span>.nums-1 ;
+<span style="color: #FF6400;">get_index</span>(<span style="color: #40E0D0;">Record</span>,nums) <span style="color: #FBDE2D;">when</span> <span style="color: #F8F8F8;">is_record</span>(<span style="color: #40E0D0;">Record</span>,classes)-&gt;<span style="color: #FF6400;"> </span>#<span style="color: #8DA6CE;">classes</span>.nums-1 ;
+<span style="color: #FF6400;">get_index</span>(classes,<span style="color: #40E0D0;">F</span>) -&gt;<span style="color: #FF6400;"> </span><span style="color: #F8F8F8;">exit</span>({error,<span style="color: #ffa07a;">"Record: classes has no field called "</span>++<span style="color: #F8F8F8;">atom_to_list</span>(<span style="color: #40E0D0;">F</span>)});
+<span style="color: #FF6400;">get_index</span>(<span style="color: #40E0D0;">Record</span>,<span style="color: #40E0D0;">_Field</span>) -&gt;<span style="color: #FF6400;"> </span><span style="color: #F8F8F8;">exit</span>({error,<span style="color: #ffa07a;">"Invalid Record Name: "</span>++<span style="color: #40E0D0;">Record</span>}).
 
-%% get field value of a record by index(1 based) or field name
-get_value(Record,id) when  is_record(Record,user)-&gt;Record#user.id;
-get_value(Record,1) when  is_record(Record,user)-&gt;Record#user.id;
-get_value(Record,name) when  is_record(Record,user)-&gt;Record#user.name;
-get_value(Record,2) when  is_record(Record,user)-&gt;Record#user.name;
-get_value(Record,age) when  is_record(Record,user)-&gt;Record#user.age;
-get_value(Record,3) when  is_record(Record,user)-&gt;Record#user.age;
-get_value(user,Index) -&gt; exit({error,"Record: user has no field index "++integer_to_list(Index)});
-get_value(Record,name) when  is_record(Record,classes)-&gt;Record#classes.name;
-get_value(Record,1) when  is_record(Record,classes)-&gt;Record#classes.name;
-get_value(Record,id) when  is_record(Record,classes)-&gt;Record#classes.id;
-get_value(Record,2) when  is_record(Record,classes)-&gt;Record#classes.id;
-get_value(Record,nums) when  is_record(Record,classes)-&gt;Record#classes.nums;
-get_value(Record,3) when  is_record(Record,classes)-&gt;Record#classes.nums;
-get_value(classes,Index) -&gt; exit({error,"Record: classes has no field index "++integer_to_list(Index)});
-get_value(Record,_KeyIndex) -&gt; exit({error,"Invalid Record Name: "++Record}).
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">get field value of a record by index(1 based) or field name</span>
+<span style="color: #FF6400;">get_value</span>(<span style="color: #40E0D0;">Record</span>,id) <span style="color: #FBDE2D;">when</span>  <span style="color: #F8F8F8;">is_record</span>(<span style="color: #40E0D0;">Record</span>,user)-&gt;<span style="color: #40E0D0;">Record</span>#<span style="color: #8DA6CE;">user</span>.id;
+<span style="color: #FF6400;">get_value</span>(<span style="color: #40E0D0;">Record</span>,1) <span style="color: #FBDE2D;">when</span>  <span style="color: #F8F8F8;">is_record</span>(<span style="color: #40E0D0;">Record</span>,user)-&gt;<span style="color: #40E0D0;">Record</span>#<span style="color: #8DA6CE;">user</span>.id;
+<span style="color: #FF6400;">get_value</span>(<span style="color: #40E0D0;">Record</span>,name) <span style="color: #FBDE2D;">when</span>  <span style="color: #F8F8F8;">is_record</span>(<span style="color: #40E0D0;">Record</span>,user)-&gt;<span style="color: #40E0D0;">Record</span>#<span style="color: #8DA6CE;">user</span>.name;
+<span style="color: #FF6400;">get_value</span>(<span style="color: #40E0D0;">Record</span>,2) <span style="color: #FBDE2D;">when</span>  <span style="color: #F8F8F8;">is_record</span>(<span style="color: #40E0D0;">Record</span>,user)-&gt;<span style="color: #40E0D0;">Record</span>#<span style="color: #8DA6CE;">user</span>.name;
+<span style="color: #FF6400;">get_value</span>(<span style="color: #40E0D0;">Record</span>,age) <span style="color: #FBDE2D;">when</span>  <span style="color: #F8F8F8;">is_record</span>(<span style="color: #40E0D0;">Record</span>,user)-&gt;<span style="color: #40E0D0;">Record</span>#<span style="color: #8DA6CE;">user</span>.age;
+<span style="color: #FF6400;">get_value</span>(<span style="color: #40E0D0;">Record</span>,3) <span style="color: #FBDE2D;">when</span>  <span style="color: #F8F8F8;">is_record</span>(<span style="color: #40E0D0;">Record</span>,user)-&gt;<span style="color: #40E0D0;">Record</span>#<span style="color: #8DA6CE;">user</span>.age;
+<span style="color: #FF6400;">get_value</span>(user,<span style="color: #40E0D0;">Index</span>) -&gt;<span style="color: #FF6400;"> </span><span style="color: #F8F8F8;">exit</span>({error,<span style="color: #ffa07a;">"Record: user has no field index "</span>++<span style="color: #F8F8F8;">integer_to_list</span>(<span style="color: #40E0D0;">Index</span>)});
+<span style="color: #FF6400;">get_value</span>(<span style="color: #40E0D0;">Record</span>,name) <span style="color: #FBDE2D;">when</span>  <span style="color: #F8F8F8;">is_record</span>(<span style="color: #40E0D0;">Record</span>,classes)-&gt;<span style="color: #40E0D0;">Record</span>#<span style="color: #8DA6CE;">classes</span>.name;
+<span style="color: #FF6400;">get_value</span>(<span style="color: #40E0D0;">Record</span>,1) <span style="color: #FBDE2D;">when</span>  <span style="color: #F8F8F8;">is_record</span>(<span style="color: #40E0D0;">Record</span>,classes)-&gt;<span style="color: #40E0D0;">Record</span>#<span style="color: #8DA6CE;">classes</span>.name;
+<span style="color: #FF6400;">get_value</span>(<span style="color: #40E0D0;">Record</span>,id) <span style="color: #FBDE2D;">when</span>  <span style="color: #F8F8F8;">is_record</span>(<span style="color: #40E0D0;">Record</span>,classes)-&gt;<span style="color: #40E0D0;">Record</span>#<span style="color: #8DA6CE;">classes</span>.id;
+<span style="color: #FF6400;">get_value</span>(<span style="color: #40E0D0;">Record</span>,2) <span style="color: #FBDE2D;">when</span>  <span style="color: #F8F8F8;">is_record</span>(<span style="color: #40E0D0;">Record</span>,classes)-&gt;<span style="color: #40E0D0;">Record</span>#<span style="color: #8DA6CE;">classes</span>.id;
+<span style="color: #FF6400;">get_value</span>(<span style="color: #40E0D0;">Record</span>,nums) <span style="color: #FBDE2D;">when</span>  <span style="color: #F8F8F8;">is_record</span>(<span style="color: #40E0D0;">Record</span>,classes)-&gt;<span style="color: #40E0D0;">Record</span>#<span style="color: #8DA6CE;">classes</span>.nums;
+<span style="color: #FF6400;">get_value</span>(<span style="color: #40E0D0;">Record</span>,3) <span style="color: #FBDE2D;">when</span>  <span style="color: #F8F8F8;">is_record</span>(<span style="color: #40E0D0;">Record</span>,classes)-&gt;<span style="color: #40E0D0;">Record</span>#<span style="color: #8DA6CE;">classes</span>.nums;
+<span style="color: #FF6400;">get_value</span>(classes,<span style="color: #40E0D0;">Index</span>) -&gt;<span style="color: #FF6400;"> </span><span style="color: #F8F8F8;">exit</span>({error,<span style="color: #ffa07a;">"Record: classes has no field index "</span>++<span style="color: #F8F8F8;">integer_to_list</span>(<span style="color: #40E0D0;">Index</span>)});
+<span style="color: #FF6400;">get_value</span>(<span style="color: #40E0D0;">Record</span>,<span style="color: #40E0D0;">_KeyIndex</span>) -&gt;<span style="color: #FF6400;"> </span><span style="color: #F8F8F8;">exit</span>({error,<span style="color: #ffa07a;">"Invalid Record Name: "</span>++<span style="color: #40E0D0;">Record</span>}).
 
-%% get field name by index
-get_key(user,1)-&gt; id;
-get_key(Record,1) when is_record(Record,user) -&gt;id;
-get_key(user,2)-&gt; name;
-get_key(Record,2) when is_record(Record,user) -&gt;name;
-get_key(user,3)-&gt; age;
-get_key(Record,3) when is_record(Record,user) -&gt;age;
-get_key(user,Index) -&gt; exit({error,"Record: user has no field index "++integer_to_list(Index)});
-get_key(classes,1)-&gt; name;
-get_key(Record,1) when is_record(Record,classes) -&gt;name;
-get_key(classes,2)-&gt; id;
-get_key(Record,2) when is_record(Record,classes) -&gt;id;
-get_key(classes,3)-&gt; nums;
-get_key(Record,3) when is_record(Record,classes) -&gt;nums;
-get_key(classes,Index) -&gt; exit({error,"Record: classes has no field index "++integer_to_list(Index)});
-get_key(Record,_Index) -&gt; exit({error,"Invalid  Record Name or Index out of bound : "++lists:flatten(io_lib:format("~p",[Record]))}).
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">get field name by index</span>
+<span style="color: #FF6400;">get_key</span>(user,1)-&gt;<span style="color: #FF6400;"> </span>id;
+<span style="color: #FF6400;">get_key</span>(<span style="color: #40E0D0;">Record</span>,1) <span style="color: #FBDE2D;">when</span> <span style="color: #F8F8F8;">is_record</span>(<span style="color: #40E0D0;">Record</span>,user) -&gt;id;
+<span style="color: #FF6400;">get_key</span>(user,2)-&gt;<span style="color: #FF6400;"> </span>name;
+<span style="color: #FF6400;">get_key</span>(<span style="color: #40E0D0;">Record</span>,2) <span style="color: #FBDE2D;">when</span> <span style="color: #F8F8F8;">is_record</span>(<span style="color: #40E0D0;">Record</span>,user) -&gt;name;
+<span style="color: #FF6400;">get_key</span>(user,3)-&gt;<span style="color: #FF6400;"> </span>age;
+<span style="color: #FF6400;">get_key</span>(<span style="color: #40E0D0;">Record</span>,3) <span style="color: #FBDE2D;">when</span> <span style="color: #F8F8F8;">is_record</span>(<span style="color: #40E0D0;">Record</span>,user) -&gt;age;
+<span style="color: #FF6400;">get_key</span>(user,<span style="color: #40E0D0;">Index</span>) -&gt;<span style="color: #FF6400;"> </span><span style="color: #F8F8F8;">exit</span>({error,<span style="color: #ffa07a;">"Record: user has no field index "</span>++<span style="color: #F8F8F8;">integer_to_list</span>(<span style="color: #40E0D0;">Index</span>)});
+<span style="color: #FF6400;">get_key</span>(classes,1)-&gt;<span style="color: #FF6400;"> </span>name;
+<span style="color: #FF6400;">get_key</span>(<span style="color: #40E0D0;">Record</span>,1) <span style="color: #FBDE2D;">when</span> <span style="color: #F8F8F8;">is_record</span>(<span style="color: #40E0D0;">Record</span>,classes) -&gt;name;
+<span style="color: #FF6400;">get_key</span>(classes,2)-&gt;<span style="color: #FF6400;"> </span>id;
+<span style="color: #FF6400;">get_key</span>(<span style="color: #40E0D0;">Record</span>,2) <span style="color: #FBDE2D;">when</span> <span style="color: #F8F8F8;">is_record</span>(<span style="color: #40E0D0;">Record</span>,classes) -&gt;id;
+<span style="color: #FF6400;">get_key</span>(classes,3)-&gt;<span style="color: #FF6400;"> </span>nums;
+<span style="color: #FF6400;">get_key</span>(<span style="color: #40E0D0;">Record</span>,3) <span style="color: #FBDE2D;">when</span> <span style="color: #F8F8F8;">is_record</span>(<span style="color: #40E0D0;">Record</span>,classes) -&gt;nums;
+<span style="color: #FF6400;">get_key</span>(classes,<span style="color: #40E0D0;">Index</span>) -&gt;<span style="color: #FF6400;"> </span><span style="color: #F8F8F8;">exit</span>({error,<span style="color: #ffa07a;">"Record: classes has no field index "</span>++<span style="color: #F8F8F8;">integer_to_list</span>(<span style="color: #40E0D0;">Index</span>)});
+<span style="color: #FF6400;">get_key</span>(<span style="color: #40E0D0;">Record</span>,<span style="color: #40E0D0;">_Index</span>) -&gt;<span style="color: #FF6400;"> </span><span style="color: #F8F8F8;">exit</span>({error,<span style="color: #ffa07a;">"Invalid  Record Name or Index out of bound : "</span>++<span style="color: #8DA6CE;">lists</span>:<span style="color: #8DA6CE;">flatten</span>(<span style="color: #8DA6CE;">io_lib</span>:<span style="color: #8DA6CE;">format</span>(<span style="color: #ffa07a;">"~p"</span>,[<span style="color: #40E0D0;">Record</span>]))}).
 
-%% get all field name of a record
-fields_info(classes) -&gt; [name,id,nums];
-fields_info(Record ) when is_record(Record,classes)-&gt;[name,id,nums];
-fields_info(user) -&gt; [id,name,age];
-fields_info(Record ) when is_record(Record,user)-&gt;[id,name,age];
-fields_info(Other) -&gt; exit({error,"Invalid Record Name: "++Other}).
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">get all field name of a record</span>
+<span style="color: #FF6400;">fields_info</span>(classes) -&gt;<span style="color: #FF6400;"> </span>[name,id,nums];
+<span style="color: #FF6400;">fields_info</span>(<span style="color: #40E0D0;">Record</span> ) <span style="color: #FBDE2D;">when</span> <span style="color: #F8F8F8;">is_record</span>(<span style="color: #40E0D0;">Record</span>,classes)-&gt;[name,id,nums];
+<span style="color: #FF6400;">fields_info</span>(user) -&gt;<span style="color: #FF6400;"> </span>[id,name,age];
+<span style="color: #FF6400;">fields_info</span>(<span style="color: #40E0D0;">Record</span> ) <span style="color: #FBDE2D;">when</span> <span style="color: #F8F8F8;">is_record</span>(<span style="color: #40E0D0;">Record</span>,user)-&gt;[id,name,age];
+<span style="color: #FF6400;">fields_info</span>(<span style="color: #40E0D0;">Other</span>) -&gt;<span style="color: #FF6400;"> </span><span style="color: #F8F8F8;">exit</span>({error,<span style="color: #ffa07a;">"Invalid Record Name: "</span>++<span style="color: #40E0D0;">Other</span>}).
 
-%% get count of fields of a record
-length(classes) -&gt; 3;
-length(Record ) when is_record(Record,classes)-&gt;3;
-length(user) -&gt; 3;
-length(Record ) when is_record(Record,user)-&gt;3;
-length(Other) -&gt; exit({error,"Invalid Record Name: "++Other}).
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">get count of fields of a record</span>
+<span style="color: #FF6400;">length</span>(classes) -&gt;<span style="color: #FF6400;"> </span>3;
+<span style="color: #FF6400;">length</span>(<span style="color: #40E0D0;">Record</span> ) <span style="color: #FBDE2D;">when</span> <span style="color: #F8F8F8;">is_record</span>(<span style="color: #40E0D0;">Record</span>,classes)-&gt;3;
+<span style="color: #FF6400;">length</span>(user) -&gt;<span style="color: #FF6400;"> </span>3;
+<span style="color: #FF6400;">length</span>(<span style="color: #40E0D0;">Record</span> ) <span style="color: #FBDE2D;">when</span> <span style="color: #F8F8F8;">is_record</span>(<span style="color: #40E0D0;">Record</span>,user)-&gt;3;
+<span style="color: #FF6400;">length</span>(<span style="color: #40E0D0;">Other</span>) -&gt;<span style="color: #FF6400;"> </span><span style="color: #F8F8F8;">exit</span>({error,<span style="color: #ffa07a;">"Invalid Record Name: "</span>++<span style="color: #40E0D0;">Other</span>}).
 </pre>
 </div>
 </div>

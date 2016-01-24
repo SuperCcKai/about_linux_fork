@@ -86,7 +86,7 @@
 <div class="outline-text-2" id="text-orgheadline3">
 <div class="org-src-container">
 
-<pre class="src src-sh">cd release_handle/release_h/
+<pre class="src src-sh"><span style="color: #F8F8F8;">cd</span> release_handle/release_h/
 make clean
 </pre>
 </div>
@@ -104,8 +104,8 @@ make
 <div class="org-src-container">
 
 <pre class="src src-sh">make createnode
-#这个make 指令其实执行如下命令
-mkdir rel;cd rel;../rebar create-node nodeid=release_h
+<span style="color: #AEAEAE;">#</span><span style="color: #AEAEAE;">&#36825;&#20010;make &#25351;&#20196;&#20854;&#23454;&#25191;&#34892;&#22914;&#19979;&#21629;&#20196;</span>
+mkdir rel;<span style="color: #F8F8F8;">cd</span> rel;../rebar create-node <span style="color: #40E0D0;">nodeid</span>=release_h
 </pre>
 </div>
 
@@ -123,43 +123,43 @@ mkdir rel;cd rel;../rebar create-node nodeid=release_h
        {lib_dirs, []},
        {erts, [{mod_cond, derived}, {app_file, strip}]},
        {app_file, strip},
-       {rel, "release_h", "1",
+       {rel, <span style="color: #ffa07a;">"release_h"</span>, <span style="color: #ffa07a;">"1"</span>,
         [
          kernel,
          stdlib,
          sasl,
          release_h
         ]},
-       {rel, "start_clean", "",
+       {rel, <span style="color: #ffa07a;">"start_clean"</span>, <span style="color: #ffa07a;">""</span>,
         [
          kernel,
          stdlib
         ]},
-       {boot_rel, "release_h"},
+       {boot_rel, <span style="color: #ffa07a;">"release_h"</span>},
        {profile, embedded},
        {incl_cond, exclude},
-       {excl_archive_filters, [".*"]}, %% Do not archive built libs
-       {excl_sys_filters, ["^bin/.*", "^erts.*/bin/(dialyzer|typer)",
-                           "^erts.*/(doc|info|include|lib|man|src)"]},
-       {excl_app_filters, ["\.gitignore"]},
+       {excl_archive_filters, [<span style="color: #ffa07a;">".*"</span>]}, <span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">Do not archive built libs</span>
+       {excl_sys_filters, [<span style="color: #ffa07a;">"^bin/.*"</span>, <span style="color: #ffa07a;">"^erts.*/bin/(dialyzer|typer)"</span>,
+                           <span style="color: #ffa07a;">"^erts.*/(doc|info|include|lib|man|src)"</span>]},
+       {excl_app_filters, [<span style="color: #ffa07a;">"\.gitignore"</span>]},
        {app, sasl,   [{incl_cond, include}]},
        {app, stdlib, [{incl_cond, include}]},
        {app, kernel, [{incl_cond, include}]},
        {app, release_h, [{incl_cond, include}]}
       ]}.
 
-{target_dir, "release_h"}.
+{target_dir, <span style="color: #ffa07a;">"release_h"</span>}.
 
 {overlay, [
-           {mkdir, "log/sasl"},
-           {copy, "files/erl", "\{\{erts_vsn\}\}/bin/erl"},
-           {copy, "files/nodetool", "\{\{erts_vsn\}\}/bin/nodetool"},
-           {copy, "files/release_h", "bin/release_h"},
-           {copy, "files/release_h.cmd", "bin/release_h.cmd"},
-           {copy, "files/start_erl.cmd", "bin/start_erl.cmd"},
-           {copy, "files/install_upgrade.escript", "bin/install_upgrade.escript"},
-           {copy, "files/sys.config", "releases/\{\{rel_vsn\}\}/sys.config"},
-           {copy, "files/vm.args", "releases/\{\{rel_vsn\}\}/vm.args"}
+           {mkdir, <span style="color: #ffa07a;">"log/sasl"</span>},
+           {copy, <span style="color: #ffa07a;">"files/erl"</span>, <span style="color: #ffa07a;">"\{\{erts_vsn\}\}/bin/erl"</span>},
+           {copy, <span style="color: #ffa07a;">"files/nodetool"</span>, <span style="color: #ffa07a;">"\{\{erts_vsn\}\}/bin/nodetool"</span>},
+           {copy, <span style="color: #ffa07a;">"files/release_h"</span>, <span style="color: #ffa07a;">"bin/release_h"</span>},
+           {copy, <span style="color: #ffa07a;">"files/release_h.cmd"</span>, <span style="color: #ffa07a;">"bin/release_h.cmd"</span>},
+           {copy, <span style="color: #ffa07a;">"files/start_erl.cmd"</span>, <span style="color: #ffa07a;">"bin/start_erl.cmd"</span>},
+           {copy, <span style="color: #ffa07a;">"files/install_upgrade.escript"</span>, <span style="color: #ffa07a;">"bin/install_upgrade.escript"</span>},
+           {copy, <span style="color: #ffa07a;">"files/sys.config"</span>, <span style="color: #ffa07a;">"releases/\{\{rel_vsn\}\}/sys.config"</span>},
+           {copy, <span style="color: #ffa07a;">"files/vm.args"</span>, <span style="color: #ffa07a;">"releases/\{\{rel_vsn\}\}/vm.args"</span>}
           ]}.
 </pre>
 </div>
@@ -183,46 +183,46 @@ mkdir rel;cd rel;../rebar create-node nodeid=release_h
 <div class="org-src-container">
 
 <pre class="src src-erlang">{sys, [
-       {lib_dirs, ["../.."]},
+       {lib_dirs, [<span style="color: #ffa07a;">"../.."</span>]},
        {erts, [{mod_cond, derived}, {app_file, strip}]},
-       %% {app_file, strip},
-       {rel, "release_h", "0.1",
+       <span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">{app_file, strip},</span>
+       {rel, <span style="color: #ffa07a;">"release_h"</span>, <span style="color: #ffa07a;">"0.1"</span>,
         [
          kernel,
          stdlib,
          sasl,
          release_h
         ]},
-       {rel, "start_clean", "",
+       {rel, <span style="color: #ffa07a;">"start_clean"</span>, <span style="color: #ffa07a;">""</span>,
         [
          kernel,
          stdlib
         ]},
-       {boot_rel, "release_h"},
+       {boot_rel, <span style="color: #ffa07a;">"release_h"</span>},
        {profile, embedded},
        {incl_cond, exclude},
-       {excl_archive_filters, [".*"]}, %% Do not archive built libs
-       {excl_sys_filters, ["^bin/.*", "^erts.*/bin/(dialyzer|typer)",
-                           "^erts.*/(doc|info|include|lib|man|src)"]},
-       {excl_app_filters, ["\.gitignore"]},
+       {excl_archive_filters, [<span style="color: #ffa07a;">".*"</span>]}, <span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">Do not archive built libs</span>
+       {excl_sys_filters, [<span style="color: #ffa07a;">"^bin/.*"</span>, <span style="color: #ffa07a;">"^erts.*/bin/(dialyzer|typer)"</span>,
+                           <span style="color: #ffa07a;">"^erts.*/(doc|info|include|lib|man|src)"</span>]},
+       {excl_app_filters, [<span style="color: #ffa07a;">"\.gitignore"</span>]},
        {app, sasl,   [{incl_cond, include}]},
        {app, stdlib, [{incl_cond, include}]},
        {app, kernel, [{incl_cond, include}]},
        {app, release_h, [{incl_cond, include}]}
       ]}.
 
-{target_dir, "release_h"}.
+{target_dir, <span style="color: #ffa07a;">"release_h"</span>}.
 
 {overlay, [
-           {mkdir, "log/sasl"},
-           {copy, "files/erl", "\{\{erts_vsn\}\}/bin/erl"},
-           {copy, "files/nodetool", "\{\{erts_vsn\}\}/bin/nodetool"},
-           {copy, "files/release_h", "bin/release_h"},
-           {copy, "files/release_h.cmd", "bin/release_h.cmd"},
-           {copy, "files/start_erl.cmd", "bin/start_erl.cmd"},
-           {copy, "files/install_upgrade.escript", "bin/install_upgrade.escript"},
-           {copy, "files/sys.config", "releases/\{\{rel_vsn\}\}/sys.config"},
-           {copy, "files/vm.args", "releases/\{\{rel_vsn\}\}/vm.args"}
+           {mkdir, <span style="color: #ffa07a;">"log/sasl"</span>},
+           {copy, <span style="color: #ffa07a;">"files/erl"</span>, <span style="color: #ffa07a;">"\{\{erts_vsn\}\}/bin/erl"</span>},
+           {copy, <span style="color: #ffa07a;">"files/nodetool"</span>, <span style="color: #ffa07a;">"\{\{erts_vsn\}\}/bin/nodetool"</span>},
+           {copy, <span style="color: #ffa07a;">"files/release_h"</span>, <span style="color: #ffa07a;">"bin/release_h"</span>},
+           {copy, <span style="color: #ffa07a;">"files/release_h.cmd"</span>, <span style="color: #ffa07a;">"bin/release_h.cmd"</span>},
+           {copy, <span style="color: #ffa07a;">"files/start_erl.cmd"</span>, <span style="color: #ffa07a;">"bin/start_erl.cmd"</span>},
+           {copy, <span style="color: #ffa07a;">"files/install_upgrade.escript"</span>, <span style="color: #ffa07a;">"bin/install_upgrade.escript"</span>},
+           {copy, <span style="color: #ffa07a;">"files/sys.config"</span>, <span style="color: #ffa07a;">"releases/\{\{rel_vsn\}\}/sys.config"</span>},
+           {copy, <span style="color: #ffa07a;">"files/vm.args"</span>, <span style="color: #ffa07a;">"releases/\{\{rel_vsn\}\}/vm.args"</span>}
           ]}.
 </pre>
 </div>
@@ -232,9 +232,9 @@ mkdir rel;cd rel;../rebar create-node nodeid=release_h
 <div class="org-src-container">
 
 <pre class="src src-sh">make generate
-#实际运行的是 ./rebar generate
+<span style="color: #AEAEAE;">#</span><span style="color: #AEAEAE;">&#23454;&#38469;&#36816;&#34892;&#30340;&#26159; ./rebar generate</span>
 
-可以查看下确保release_h-0.1被 打包到相应版本中
+&#21487;&#20197;&#26597;&#30475;&#19979;&#30830;&#20445;release_h-0.1&#34987; &#25171;&#21253;&#21040;&#30456;&#24212;&#29256;&#26412;&#20013;
  ls ./rel/release_h/lib/|grep release_h
 mv ./rel/release_h/ ./rel/release_h-0.1/
 </pre>
@@ -244,7 +244,7 @@ mv ./rel/release_h/ ./rel/release_h-0.1/
 </p>
 <div class="org-src-container">
 
-<pre class="src src-sh">cd ./rel/release_h/bin
+<pre class="src src-sh"><span style="color: #F8F8F8;">cd</span> ./rel/release_h/bin
 ./release_h console
 </pre>
 </div>
@@ -254,12 +254,12 @@ mv ./rel/release_h/ ./rel/release_h-0.1/
 (release_h@jixiufeng-Joseph)1&gt; hello_gen:hello().
 1
 (release_h@jixiufeng-Joseph)2&gt; hello_gen:module_info(attributes).
-[{vsn,"0.1"}]
+[{vsn,<span style="color: #ffa07a;">"0.1"</span>}]
 (release_h@jixiufeng-Joseph)3&gt;
 (release_h@jixiufeng-Joseph)3&gt; release_handler:which_releases().
-[{"release_h","0.1",
-  ["kernel-2.15.1","stdlib-1.18.1","sasl-2.2.1",
-   "release_h-0.1"],
+[{<span style="color: #ffa07a;">"release_h"</span>,<span style="color: #ffa07a;">"0.1"</span>,
+  [<span style="color: #ffa07a;">"kernel-2.15.1"</span>,<span style="color: #ffa07a;">"stdlib-1.18.1"</span>,<span style="color: #ffa07a;">"sasl-2.2.1"</span>,
+   <span style="color: #ffa07a;">"release_h-0.1"</span>],
   permanent}]
 (release_h@jixiufeng-Joseph)4&gt; tool:sayhello().
 this is just a common module withou process running on ,so
@@ -296,8 +296,8 @@ make up 命令执行两个命令<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-sh">./rebar generate-appups previous_release=release_h-0.1
-./rebar generate-upgrade previous_release=release_h-0.1
+<pre class="src src-sh">./rebar generate-appups <span style="color: #40E0D0;">previous_release</span>=release_h-0.1
+./rebar generate-upgrade <span style="color: #40E0D0;">previous_release</span>=release_h-0.1
 </pre>
 </div>
 <p>
@@ -311,7 +311,7 @@ generate-upgrade命令会在./rebar 生成一个tar.gz包<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-sh">把release_h_0.2.tar.gz升级包  copy到 0.1版 的releases目录下
+<pre class="src src-sh">&#25226;release_h_0.2.tar.gz&#21319;&#32423;&#21253;  copy&#21040; 0.1&#29256; &#30340;releases&#30446;&#24405;&#19979;
 cp ./rel/release_h_0.2.tar.gz ./rel/release-0.1/releases/
 </pre>
 </div>
@@ -320,26 +320,26 @@ cp ./rel/release_h_0.2.tar.gz ./rel/release-0.1/releases/
 </p>
 <div class="org-src-container">
 
-<pre class="src src-erlang">erl&gt; release_handler:unpack_release("release_h_0.2"). %解包
-erl&gt; release_handler:install_release("0.2"). % install
-erl&gt; release_handler:make_permanent("0.2"). % 使0.2版成为默认版本
+<pre class="src src-erlang">erl&gt; <span style="color: #8DA6CE;">release_handler</span>:<span style="color: #8DA6CE;">unpack_release</span>(<span style="color: #ffa07a;">"release_h_0.2"</span>). <span style="color: #AEAEAE;">%</span><span style="color: #AEAEAE;">&#35299;&#21253;</span>
+erl&gt; <span style="color: #8DA6CE;">release_handler</span>:<span style="color: #8DA6CE;">install_release</span>(<span style="color: #ffa07a;">"0.2"</span>). <span style="color: #AEAEAE;">% </span><span style="color: #AEAEAE;">install</span>
+erl&gt; <span style="color: #8DA6CE;">release_handler</span>:<span style="color: #8DA6CE;">make_permanent</span>(<span style="color: #ffa07a;">"0.2"</span>). <span style="color: #AEAEAE;">% </span><span style="color: #AEAEAE;">&#20351;0.2&#29256;&#25104;&#20026;&#40664;&#35748;&#29256;&#26412;</span>
 </pre>
 </div>
 
 <div class="org-src-container">
 
-<pre class="src src-erlang">(release_h@jixiufeng-Joseph)2&gt; release_handler:unpack_release("release_h_0.2").
-{ok,"0.2"}
-(release_h@jixiufeng-Joseph)3&gt;  release_handler:install_release("0.2").
-if you see this line ,that means hello_gen.erl is updated
-hello_gen update from version 0.1 and current version is 0.2
-and the third param Extra is "Extra info for code_change/3"
+<pre class="src src-erlang">(release_h@jixiufeng-<span style="color: #40E0D0;">Joseph</span>)2&gt; <span style="color: #8DA6CE;">release_handler</span>:<span style="color: #8DA6CE;">unpack_release</span>(<span style="color: #ffa07a;">"release_h_0.2"</span>).
+{ok,<span style="color: #ffa07a;">"0.2"</span>}
+(release_h@jixiufeng-<span style="color: #40E0D0;">Joseph</span>)3&gt;  <span style="color: #8DA6CE;">release_handler</span>:<span style="color: #8DA6CE;">install_release</span>(<span style="color: #ffa07a;">"0.2"</span>).
+<span style="color: #FBDE2D;">if</span> you see this line ,that means hello_gen.erl is updated
+hello_gen update from version 0.1 <span style="color: #FBDE2D;">and</span> current version is 0.2
+<span style="color: #FBDE2D;">and</span> the third param <span style="color: #40E0D0;">Extra</span> is <span style="color: #ffa07a;">"Extra info for code_change/3"</span>
 
-if you see this line that means world_gen is started
-{ok,"0.1",[]}
-(release_h@jixiufeng-Joseph)4&gt;  release_handler:make_permanent("0.2").
+<span style="color: #FBDE2D;">if</span> you see this line that means world_gen is started
+{ok,<span style="color: #ffa07a;">"0.1"</span>,[]}
+(release_h@jixiufeng-<span style="color: #40E0D0;">Joseph</span>)4&gt;  <span style="color: #8DA6CE;">release_handler</span>:<span style="color: #8DA6CE;">make_permanent</span>(<span style="color: #ffa07a;">"0.2"</span>).
 ok
-(release_h@jixiufeng-Joseph)5&gt;
+(release_h@jixiufeng-<span style="color: #40E0D0;">Joseph</span>)5&gt;
 </pre>
 </div>
 
@@ -348,22 +348,22 @@ ok
 </p>
 <div class="org-src-container">
 
-<pre class="src src-erlang">(release_h@jixiufeng-Joseph)5&gt; release_handler:which_releases().
-[{"release_h","0.2",
-  ["kernel-2.15.1","stdlib-1.18.1","sasl-2.2.1",
-   "release_h-0.2"],
+<pre class="src src-erlang">(release_h@jixiufeng-<span style="color: #40E0D0;">Joseph</span>)5&gt; <span style="color: #8DA6CE;">release_handler</span>:<span style="color: #8DA6CE;">which_releases</span>().
+[{<span style="color: #ffa07a;">"release_h"</span>,<span style="color: #ffa07a;">"0.2"</span>,
+  [<span style="color: #ffa07a;">"kernel-2.15.1"</span>,<span style="color: #ffa07a;">"stdlib-1.18.1"</span>,<span style="color: #ffa07a;">"sasl-2.2.1"</span>,
+   <span style="color: #ffa07a;">"release_h-0.2"</span>],
   current},
- {"release_h","0.1",
-  ["kernel-2.15.1","stdlib-1.18.1","sasl-2.2.1",
-   "release_h-0.1"],
+ {<span style="color: #ffa07a;">"release_h"</span>,<span style="color: #ffa07a;">"0.1"</span>,
+  [<span style="color: #ffa07a;">"kernel-2.15.1"</span>,<span style="color: #ffa07a;">"stdlib-1.18.1"</span>,<span style="color: #ffa07a;">"sasl-2.2.1"</span>,
+   <span style="color: #ffa07a;">"release_h-0.1"</span>],
   permanent}]
-(release_h@jixiufeng-Joseph)7&gt; whereis(world_gen).
+(release_h@jixiufeng-<span style="color: #40E0D0;">Joseph</span>)7&gt; <span style="color: #F8F8F8;">whereis</span>(world_gen).
 &lt;0.60.0&gt;
-(release_h@jixiufeng-Joseph)10&gt; supervisor:which_children(hello_sup).
+(release_h@jixiufeng-<span style="color: #40E0D0;">Joseph</span>)10&gt; <span style="color: #8DA6CE;">supervisor</span>:<span style="color: #8DA6CE;">which_children</span>(hello_sup).
 [{world_gen,&lt;0.60.0&gt;,worker,[world_gen]},
  {hello_gen,&lt;0.49.0&gt;,worker,[hello_gen]}]
-(release_h@jixiufeng-Joseph)11&gt;
-(release_h@jixiufeng-Joseph)11&gt; tool:sayworld().
+(release_h@jixiufeng-<span style="color: #40E0D0;">Joseph</span>)11&gt;
+(release_h@jixiufeng-<span style="color: #40E0D0;">Joseph</span>)11&gt; <span style="color: #8DA6CE;">tool</span>:<span style="color: #8DA6CE;">sayworld</span>().
 this is just a common module withou process running on ,so
 update this module is easy
 </pre>

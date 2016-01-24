@@ -92,10 +92,10 @@ distel 的另一卖点是函数的跳转<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(defun my-erlang-mode-hook ()
-  (local-set-key "\M-."  'erl-find-source-under-point )
-  (local-set-key "\M-,"  'erl-find-source-unwind))
-(add-hook 'erlang-mode-hook 'my-erlang-mode-hook)
+<pre class="src src-emacs-lisp">(<span style="color: #FBDE2D;">defun</span> <span style="color: #FF6400;">my-erlang-mode-hook</span> ()
+  (local-set-key <span style="color: #ffa07a;">"\M-."</span>  'erl-find-source-under-point )
+  (local-set-key <span style="color: #ffa07a;">"\M-,"</span>  'erl-find-source-unwind))
+(<span style="color: #FF6400;">add-hook</span> 'erlang-mode-hook 'my-erlang-mode-hook)
 </pre>
 </div>
 <p>
@@ -120,10 +120,10 @@ distel 的另一卖点是函数的跳转<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"> (defun my-erlang-mode-hook2 ()
+<pre class="src src-emacs-lisp"> (<span style="color: #FBDE2D;">defun</span> <span style="color: #FF6400;">my-erlang-mode-hook2</span> ()
     (local-set-key  [(control return)]  'erl-complete)
  )
-(add-hook 'erlang-mode-hook 'my-erlang-mode-hook2)
+(<span style="color: #FF6400;">add-hook</span> 'erlang-mode-hook 'my-erlang-mode-hook2)
 </pre>
 </div>
 <p>

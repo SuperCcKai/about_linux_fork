@@ -182,7 +182,7 @@ inode表占多少个块在格式化时就要决定并写入块组描述符中，
 
 <div class="org-src-container">
 
-<pre class="src src-sh">dd if=/dev/zero of=fs count=256 bs=4K
+<pre class="src src-sh">dd <span style="color: #40E0D0;">if</span>=/dev/zero <span style="color: #40E0D0;">of</span>=fs <span style="color: #40E0D0;">count</span>=256 <span style="color: #40E0D0;">bs</span>=4K
 mke2fs fs
 </pre>
 </div>
@@ -321,32 +321,32 @@ dumpe2fs<br  />
 <div class="outline-text-2" id="text-orgheadline10">
 <div class="org-src-container">
 
-<pre class="src src-c">#include &lt;stdio.h&gt;
-#include &lt;dirent.h&gt;
-#include &lt;string.h&gt;
-#include &lt;stdlib.h&gt;
+<pre class="src src-c"><span style="color: #7fffd4;">#include</span> <span style="color: #ffa07a;">&lt;stdio.h&gt;</span>
+<span style="color: #7fffd4;">#include</span> <span style="color: #ffa07a;">&lt;dirent.h&gt;</span>
+<span style="color: #7fffd4;">#include</span> <span style="color: #ffa07a;">&lt;string.h&gt;</span>
+<span style="color: #7fffd4;">#include</span> <span style="color: #ffa07a;">&lt;stdlib.h&gt;</span>
 
-/* struct dirent { */
-/*  ino_t          d_ino;       /\* inode number *\/ */
-/*  off_t          d_off;       /\* offset to the next dirent *\/ */
-/*  unsigned short d_reclen;    /\* length of this record *\/ */
-/*  unsigned char  d_type;      /\* type of file *\/ */
-/*  char           d_name[256]; /\* filename *\/ */
-/* }; */
+<span style="color: #AEAEAE;">/* </span><span style="color: #AEAEAE;">struct dirent { </span><span style="color: #AEAEAE;">*/</span>
+<span style="color: #AEAEAE;">/*  </span><span style="color: #AEAEAE;">ino_t          d_ino;       /\* inode number *\/ </span><span style="color: #AEAEAE;">*/</span>
+<span style="color: #AEAEAE;">/*  </span><span style="color: #AEAEAE;">off_t          d_off;       /\* offset to the next dirent *\/ </span><span style="color: #AEAEAE;">*/</span>
+<span style="color: #AEAEAE;">/*  </span><span style="color: #AEAEAE;">unsigned short d_reclen;    /\* length of this record *\/ </span><span style="color: #AEAEAE;">*/</span>
+<span style="color: #AEAEAE;">/*  </span><span style="color: #AEAEAE;">unsigned char  d_type;      /\* type of file *\/ </span><span style="color: #AEAEAE;">*/</span>
+<span style="color: #AEAEAE;">/*  </span><span style="color: #AEAEAE;">char           d_name[256]; /\* filename *\/ </span><span style="color: #AEAEAE;">*/</span>
+<span style="color: #AEAEAE;">/* </span><span style="color: #AEAEAE;">}; </span><span style="color: #AEAEAE;">*/</span>
 
-int main(int argc, char *argv[])
+<span style="color: #8DA6CE;">int</span> <span style="color: #FF6400;">main</span>(<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">argc</span>, <span style="color: #8DA6CE;">char</span> *<span style="color: #40E0D0;">argv</span>[])
 {
-  struct dirent *dp;
-  DIR *dfd;
-  if((dfd= opendir("/tmp/d/"))==NULL){
-    fprintf(stderr,"opendir error");
+  <span style="color: #FBDE2D;">struct</span> <span style="color: #8DA6CE;">dirent</span> *<span style="color: #40E0D0;">dp</span>;
+  <span style="color: #8DA6CE;">DIR</span> *<span style="color: #40E0D0;">dfd</span>;
+  <span style="color: #FBDE2D;">if</span>((dfd= opendir(<span style="color: #ffa07a;">"/tmp/d/"</span>))==<span style="color: #D8FA3C;">NULL</span>){
+    fprintf(stderr,<span style="color: #ffa07a;">"opendir error"</span>);
     exit(1);
   }
-  while( (dp = readdir(dfd))!=NULL){
-    fprintf(stdout,"%s\n",dp-&gt;d_name);
+  <span style="color: #FBDE2D;">while</span>( (dp = readdir(dfd))!=<span style="color: #D8FA3C;">NULL</span>){
+    fprintf(stdout,<span style="color: #ffa07a;">"%s\n"</span>,dp-&gt;d_name);
   }
   closedir(dfd);
-  return 0;
+  <span style="color: #FBDE2D;">return</span> 0;
 }
 </pre>
 </div>

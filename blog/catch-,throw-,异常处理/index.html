@@ -33,91 +33,91 @@
 <h1>catch ,throw ,异常处理</h1>
 <div class="org-src-container">
 
-<pre class="src src-erlang">-module(foo).
--export([foo/1,demo/1]).
+<pre class="src src-erlang"><span style="color: #7fffd4;">-module</span>(foo).
+<span style="color: #7fffd4;">-export</span>([<span style="color: #8DA6CE;">foo/1</span>,<span style="color: #8DA6CE;">demo/1</span>]).
 
 
 
-foo(1) -&gt;
+<span style="color: #FF6400;">foo</span>(1) -&gt;
     hello;
-foo(2) -&gt;
-    throw({myerror, abc});
-foo(3) -&gt;
-    tuple_to_list(a);
-foo(4) -&gt;
-    exit({myExit, 222}).
+<span style="color: #FF6400;">foo</span>(2) -&gt;
+    <span style="color: #F8F8F8;">throw</span>({myerror, abc});
+<span style="color: #FF6400;">foo</span>(3) -&gt;
+    <span style="color: #F8F8F8;">tuple_to_list</span>(a);
+<span style="color: #FF6400;">foo</span>(4) -&gt;
+    <span style="color: #F8F8F8;">exit</span>({myExit, 222}).
 
-demo(X)-&gt;
-    case  catch foo(X) of
+<span style="color: #FF6400;">demo</span>(<span style="color: #40E0D0;">X</span>)-&gt;
+    <span style="color: #FBDE2D;">case</span>  <span style="color: #FBDE2D;">catch</span> <span style="color: #8DA6CE;">foo</span>(<span style="color: #40E0D0;">X</span>) <span style="color: #FBDE2D;">of</span>
         {myerror, abc} -&gt;
             when2error;
-        {'EXIT',What} -&gt;
-            {i_catch_this_error ,What};
-        Other -&gt;
-            Other
-    end.
+        {<span style="color: #ffa07a;">'EXIT'</span>,<span style="color: #40E0D0;">What</span>} -&gt;
+            {i_catch_this_error ,<span style="color: #40E0D0;">What</span>};
+        <span style="color: #40E0D0;">Other</span> -&gt;
+            <span style="color: #40E0D0;">Other</span>
+    <span style="color: #FBDE2D;">end</span>.
 
-%% 24&gt; foo:demo(4).
-%% {i_catch_this_error,{myExit,222}}
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">24&gt; foo:demo(4).</span>
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">{i_catch_this_error,{myExit,222}}</span>
 
-%% 25&gt; foo:demo(3).
-%% {i_catch_this_error,{badarg,[{foo,foo,1},
-%%                              {foo,demo,1},
-%%                              {erl_eval,do_apply,5},
-%%                              {shell,exprs,7},
-%%                              {shell,eval_exprs,7},
-%%                              {shell,eval_loop,3}]}}
-%% 26&gt;
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">25&gt; foo:demo(3).</span>
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">{i_catch_this_error,{badarg,[{foo,foo,1},</span>
+<span style="color: #AEAEAE;">%%                              </span><span style="color: #AEAEAE;">{foo,demo,1},</span>
+<span style="color: #AEAEAE;">%%                              </span><span style="color: #AEAEAE;">{erl_eval,do_apply,5},</span>
+<span style="color: #AEAEAE;">%%                              </span><span style="color: #AEAEAE;">{shell,exprs,7},</span>
+<span style="color: #AEAEAE;">%%                              </span><span style="color: #AEAEAE;">{shell,eval_exprs,7},</span>
+<span style="color: #AEAEAE;">%%                              </span><span style="color: #AEAEAE;">{shell,eval_loop,3}]}}</span>
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">26&gt;</span>
 </pre>
 </div>
 
 
 <div class="org-src-container">
 
-<pre class="src src-erlang">-module(a).
--compile([export_all]).
+<pre class="src src-erlang"><span style="color: #7fffd4;">-module</span>(a).
+<span style="color: #7fffd4;">-compile</span>([export_all]).
 
-t(F)-&gt;
-    try F() of
-        _ -&gt; ok
-    catch
-        T -&gt; {throw,caughted, T};
-        exit:custom_exit -&gt; {exit,caughted ,custom_exit};
-        exit:Exit -&gt;{exit,caughted ,Exit};
+<span style="color: #FF6400;">t</span>(<span style="color: #40E0D0;">F</span>)-&gt;
+    <span style="color: #FBDE2D;">try</span> <span style="color: #40E0D0;">F</span>() <span style="color: #FBDE2D;">of</span>
+        <span style="color: #40E0D0;">_</span> -&gt;<span style="color: #FF6400;"> </span>ok
+    <span style="color: #FBDE2D;">catch</span>
+        <span style="color: #40E0D0;">T</span> -&gt;<span style="color: #FF6400;"> </span>{throw,caughted, <span style="color: #40E0D0;">T</span>};
+        exit:custom_exit -&gt;<span style="color: #FF6400;"> </span>{exit,caughted ,custom_exit};
+        exit:<span style="color: #40E0D0;">Exit</span> -&gt;{exit,caughted ,<span style="color: #40E0D0;">Exit</span>};
         error:custom_error -&gt;{error, caughted,custom_error};
-        error:Error -&gt;{error, caughted,Error}
-    end.
+        error:<span style="color: #40E0D0;">Error</span> -&gt;{error, caughted,<span style="color: #40E0D0;">Error</span>}
+    <span style="color: #FBDE2D;">end</span>.
 
-%% a:t(fun()  -&gt; throw(msg) end).
-%% a:t(fun()  -&gt; error(msg) end).
-%% a:t(fun()  -&gt; exit(custom_exit) end).
-%% a:t(fun()  -&gt; exit(msg) end).
-%% a:t(fun()  -&gt; exit(custom_error) end).
-%% a:t(fun()  -&gt; list:addddddd(ele) end).
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">a:t(fun()  -&gt; throw(msg) end).</span>
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">a:t(fun()  -&gt; error(msg) end).</span>
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">a:t(fun()  -&gt; exit(custom_exit) end).</span>
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">a:t(fun()  -&gt; exit(msg) end).</span>
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">a:t(fun()  -&gt; exit(custom_error) end).</span>
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">a:t(fun()  -&gt; list:addddddd(ele) end).</span>
 
-%% after == finally in java
-t2(F)-&gt;
-    try F() of
-        _ -&gt; ok
-    catch
-        T -&gt; {throw,caughted, T};
-        exit:Exit -&gt;{exit,caughted ,Exit};
-        error:Error -&gt;{error, caughted,Error}
-    after
-        io:format("this will be execute anyway like 'finally' ~n",[])
-    end.
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">after == finally in java</span>
+<span style="color: #FF6400;">t2</span>(<span style="color: #40E0D0;">F</span>)-&gt;
+    <span style="color: #FBDE2D;">try</span> <span style="color: #40E0D0;">F</span>() <span style="color: #FBDE2D;">of</span>
+        <span style="color: #40E0D0;">_</span> -&gt;<span style="color: #FF6400;"> </span>ok
+    <span style="color: #FBDE2D;">catch</span>
+        <span style="color: #40E0D0;">T</span> -&gt;<span style="color: #FF6400;"> </span>{throw,caughted, <span style="color: #40E0D0;">T</span>};
+        exit:<span style="color: #40E0D0;">Exit</span> -&gt;{exit,caughted ,<span style="color: #40E0D0;">Exit</span>};
+        error:<span style="color: #40E0D0;">Error</span> -&gt;{error, caughted,<span style="color: #40E0D0;">Error</span>}
+    <span style="color: #FBDE2D;">after</span>
+        <span style="color: #8DA6CE;">io</span>:<span style="color: #8DA6CE;">format</span>(<span style="color: #ffa07a;">"this will be execute anyway like 'finally' ~n"</span>,[])
+    <span style="color: #FBDE2D;">end</span>.
 
-%% of 语句可以省略
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">of &#35821;&#21477;&#21487;&#20197;&#30465;&#30053;</span>
 
-t2(F)-&gt;
-    try F()
-    catch
-        T -&gt; {throw,caughted, T};
-        exit:Exit -&gt;{exit,caughted ,Exit};
-        error:Error -&gt;{error, caughted,Error}
-    after
-        io:format("this will be execute anyway like 'finally' ~n",[])
-    end.
+<span style="color: #FF6400;">t2</span>(<span style="color: #40E0D0;">F</span>)-&gt;
+    <span style="color: #FBDE2D;">try</span> <span style="color: #40E0D0;">F</span>()
+    <span style="color: #FBDE2D;">catch</span>
+        <span style="color: #40E0D0;">T</span> -&gt;<span style="color: #FF6400;"> </span>{throw,caughted, <span style="color: #40E0D0;">T</span>};
+        exit:<span style="color: #40E0D0;">Exit</span> -&gt;{exit,caughted ,<span style="color: #40E0D0;">Exit</span>};
+        error:<span style="color: #40E0D0;">Error</span> -&gt;{error, caughted,<span style="color: #40E0D0;">Error</span>}
+    <span style="color: #FBDE2D;">after</span>
+        <span style="color: #8DA6CE;">io</span>:<span style="color: #8DA6CE;">format</span>(<span style="color: #ffa07a;">"this will be execute anyway like 'finally' ~n"</span>,[])
+    <span style="color: #FBDE2D;">end</span>.
 </pre>
 </div>
 

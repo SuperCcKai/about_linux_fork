@@ -205,8 +205,8 @@ create spfile= '/tmp/spfile<sub>example1</sub>'  FROM pfile= '/tmp/init.ora';
 <div class="outline-text-4" id="text-3-2-2">
 <div class="org-src-container">
 
-<pre class="src src-sql">alert system set parameter = value  &lt;comment= 'text'&gt;  &lt;deferred&gt;
-&lt;scope=  memory|spfile|both&gt; &lt;sid='sid|*'&gt;
+<pre class="src src-sql">alert <span style="color: #FBDE2D;">system</span> <span style="color: #FBDE2D;">set</span> <span style="color: #FBDE2D;">parameter</span> = <span style="color: #FBDE2D;">value</span>  &lt;comment= <span style="color: #ffa07a;">'text'</span>&gt;  &lt;<span style="color: #FBDE2D;">deferred</span>&gt;
+&lt;<span style="color: #8DA6CE;">scope</span>=  memory|spfile|<span style="color: #FBDE2D;">both</span>&gt; &lt;sid=<span style="color: #ffa07a;">'sid|*'</span>&gt;
 </pre>
 </div>
 <p>
@@ -289,7 +289,7 @@ startup  pfile='/path/to/pfile.ora'
 </p>
 <div class="org-src-container">
 
-<pre class="src src-sql">SPFILE=/path/to/spfile
+<pre class="src src-sql">SPFILE=/<span style="color: #FBDE2D;">path</span>/<span style="color: #FBDE2D;">to</span>/spfile
 </pre>
 </div>
 <p>
@@ -297,7 +297,7 @@ startup  pfile='/path/to/pfile.ora'
 </p>
 <div class="org-src-container">
 
-<pre class="src src-sql">startup pfile='/path/to/pfile'
+<pre class="src src-sql">startup pfile=<span style="color: #ffa07a;">'/path/to/pfile'</span>
 </pre>
 </div>
 <p>
@@ -346,7 +346,7 @@ shutdown -&#x2014;&gt; nomount&#x2014;&#x2014;&gt;mount&#x2014;&#x2014;&gt;open
 <div class="org-src-container">
 
 <pre class="src src-sql">sqlplus /nolog
-conn / as sysdba 
+conn / <span style="color: #FBDE2D;">as</span> sysdba 
 startup nomount
 alert database mount
 </pre>
@@ -405,7 +405,7 @@ datafiles ,or redo log files ,会报错.一般此时需要进行恢复。
 </p>
 <div class="org-src-container">
 
-<pre class="src src-sql">startup restrict
+<pre class="src src-sql">startup <span style="color: #FBDE2D;">restrict</span>
 </pre>
 </div>
 <p>
@@ -413,8 +413,8 @@ datafiles ,or redo log files ,会报错.一般此时需要进行恢复。
 </p>
 <div class="org-src-container">
 
-<pre class="src src-sql">alter system enable restricted session
-alter system diable restricted session (回到正常open状态)
+<pre class="src src-sql"><span style="color: #FBDE2D;">alter</span> <span style="color: #FBDE2D;">system</span> enable restricted <span style="color: #FBDE2D;">session</span>
+<span style="color: #FBDE2D;">alter</span> <span style="color: #FBDE2D;">system</span> diable restricted <span style="color: #FBDE2D;">session</span> (&#22238;&#21040;&#27491;&#24120;<span style="color: #FBDE2D;">open</span>&#29366;&#24577;)
 </pre>
 </div>
 <p>
@@ -423,7 +423,7 @@ alter system diable restricted session (回到正常open状态)
 </p>
 <div class="org-src-container">
 
-<pre class="src src-sql">grant restricted session to scott;
+<pre class="src src-sql"><span style="color: #FBDE2D;">grant</span> restricted <span style="color: #FBDE2D;">session</span> <span style="color: #FBDE2D;">to</span> scott;
 </pre>
 </div>
 </div>
@@ -436,7 +436,7 @@ alter system diable restricted session (回到正常open状态)
 </p>
 <div class="org-src-container">
 
-<pre class="src src-sql">select  SADDR ,SID,  SERIAL#,  AUDSID ,username from v$session;
+<pre class="src src-sql"><span style="color: #FBDE2D;">select</span>  SADDR ,SID,  SERIAL#,  AUDSID ,username <span style="color: #FBDE2D;">from</span> v$<span style="color: #FBDE2D;">session</span>;
 </pre>
 </div>
 <p>
@@ -445,8 +445,8 @@ alter system diable restricted session (回到正常open状态)
 </p>
 <div class="org-src-container">
 
-<pre class="src src-sql"> alter system kill session 'sid,serial#'
-alter system kill session '15,6'
+<pre class="src src-sql"> <span style="color: #FBDE2D;">alter</span> <span style="color: #FBDE2D;">system</span> kill <span style="color: #FBDE2D;">session</span> <span style="color: #ffa07a;">'sid,serial#'</span>
+<span style="color: #FBDE2D;">alter</span> <span style="color: #FBDE2D;">system</span> kill <span style="color: #FBDE2D;">session</span> <span style="color: #ffa07a;">'15,6'</span>
 </pre>
 </div>
 </div>
@@ -459,7 +459,7 @@ alter system kill session '15,6'
 <div class="org-src-container">
 
 <pre class="src src-sql">startup mount
-alter database open read only
+<span style="color: #FBDE2D;">alter</span> database <span style="color: #FBDE2D;">open</span> <span style="color: #FBDE2D;">read</span> <span style="color: #FBDE2D;">only</span>
 </pre>
 </div>
 <p>
@@ -569,8 +569,8 @@ SGA 内存释放，杀掉后台进程
 </table>
 <div class="org-src-container">
 
-<pre class="src src-sql">shutdown immediate ,最常用，它不等事务完成，而是回滚，保证数据的完整，同时
-快速的关闭
+<pre class="src src-sql">shutdown <span style="color: #FBDE2D;">immediate</span> ,&#26368;&#24120;&#29992;&#65292;&#23427;&#19981;&#31561;&#20107;&#21153;&#23436;&#25104;&#65292;&#32780;&#26159;&#22238;&#28378;&#65292;&#20445;&#35777;&#25968;&#25454;&#30340;&#23436;&#25972;&#65292;&#21516;&#26102;
+&#24555;&#36895;&#30340;&#20851;&#38381;
 </pre>
 </div>
 </div>
@@ -581,7 +581,7 @@ SGA 内存释放，杀掉后台进程
 <div class="outline-text-4" id="text-6-7-5">
 <div class="org-src-container">
 
-<pre class="src src-sql">select addr ,status from v$transcation
+<pre class="src src-sql"><span style="color: #FBDE2D;">select</span> addr ,status <span style="color: #FBDE2D;">from</span> v$transcation
 </pre>
 </div>
 <p>

@@ -110,17 +110,17 @@ mysql-query.el<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">;; the normal way to use mysql-query.el is :
-;; 1:
-(defvar mysql-connection (mysql-query-create-connection connection-info))
-or
-(defvar mysql-connection nil)
-(unless (mysql-query-connection-alive-p  mysql-connection)
-  (setq mysql-connection (call-interactively 'mysql-query-create-connection)))
+<pre class="src src-emacs-lisp"><span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">the normal way to use mysql-query.el is :</span>
+<span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">1:</span>
+(<span style="color: #FBDE2D;">defvar</span> <span style="color: #40E0D0;">mysql-connection</span> (mysql-query-create-connection connection-info))
+<span style="color: #FBDE2D;">or</span>
+(<span style="color: #FBDE2D;">defvar</span> <span style="color: #40E0D0;">mysql-connection</span> <span style="color: #D8FA3C;">nil</span>)
+(<span style="color: #FBDE2D;">unless</span> (mysql-query-connection-alive-p  mysql-connection)
+  (<span style="color: #FF6400;">setq</span> mysql-connection (call-interactively 'mysql-query-create-connection)))
 
-;; 2:
-  (mysql-query              "select user from mysql.user" mysql-connection)
-  (mysql-query-with-heading "select user from mysql.user" mysql-connection)
+<span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">2:</span>
+  (mysql-query              <span style="color: #ffa07a;">"select user from mysql.user"</span> mysql-connection)
+  (mysql-query-with-heading <span style="color: #ffa07a;">"select user from mysql.user"</span> mysql-connection)
 </pre>
 </div></li>
 <li><p>
@@ -128,24 +128,24 @@ oracle-query.el<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">;; execute sql using sqlplus and return as list .
-(oracle-query "select empno,ename from emp where empno&lt;=7499")
-;; got :     (("7369" "SMITH") ("7499" "ALLEN"))
-;; or
-(oracle-query-with-heading "select empno,ename from emp where empno&lt;=7499")
-;; got :     (("EMPNO" "ENAME") ("7369" "SMITH") ("7499" "ALLEN"))
-;; using default connection ,not recommended.
-(defvar connection (oracle-query-create-connection "scott/tiger"))
-(oracle-query "select empno from emp" connection)
-;; recommended
-;; the normal way to use oracle-query.el is :
-;; 1:
-(defvar sqlplus-connection nil)
-(unless (oracle-query-connection-alive-p c)
-  (setq sqlplus-connection (call-interactively 'oracle-query-create-connection)))
-;; 2:
-(oracle-query "select empno from emp" sqlplus-connection)
-;; 3:
+<pre class="src src-emacs-lisp"><span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">execute sql using sqlplus and return as list .</span>
+(oracle-query <span style="color: #ffa07a;">"select empno,ename from emp where empno&lt;=7499"</span>)
+<span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">got :     (("7369" "SMITH") ("7499" "ALLEN"))</span>
+<span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">or</span>
+(oracle-query-with-heading <span style="color: #ffa07a;">"select empno,ename from emp where empno&lt;=7499"</span>)
+<span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">got :     (("EMPNO" "ENAME") ("7369" "SMITH") ("7499" "ALLEN"))</span>
+<span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">using default connection ,not recommended.</span>
+(<span style="color: #FBDE2D;">defvar</span> <span style="color: #40E0D0;">connection</span> (oracle-query-create-connection <span style="color: #ffa07a;">"scott/tiger"</span>))
+(oracle-query <span style="color: #ffa07a;">"select empno from emp"</span> connection)
+<span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">recommended</span>
+<span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">the normal way to use oracle-query.el is :</span>
+<span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">1:</span>
+(<span style="color: #FBDE2D;">defvar</span> <span style="color: #40E0D0;">sqlplus-connection</span> <span style="color: #D8FA3C;">nil</span>)
+(<span style="color: #FBDE2D;">unless</span> (oracle-query-connection-alive-p c)
+  (<span style="color: #FF6400;">setq</span> sqlplus-connection (call-interactively 'oracle-query-create-connection)))
+<span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">2:</span>
+(oracle-query <span style="color: #ffa07a;">"select empno from emp"</span> sqlplus-connection)
+<span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">3:</span>
 (oracle-query-close-connection sqlplus-connection)
 </pre>
 </div></li>
@@ -154,16 +154,16 @@ sqlserver-query.el<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">  ;; the normal way to use sqlserver-query.el is :
-;; 1:
-(defvar c nil)
-(unless (sqlserver-query-connection-alive-p c)
-  (setq c (call-interactively 'sqlserver-query-create-connection)))
-;; 2:
-  (sqlserver-query "select empno from emp" c)
-  ;; or
-  (sqlserver-query-with-heading "select empno from emp" c)
-;; 3:
+<pre class="src src-emacs-lisp">  <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">the normal way to use sqlserver-query.el is :</span>
+<span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">1:</span>
+(<span style="color: #FBDE2D;">defvar</span> <span style="color: #40E0D0;">c</span> <span style="color: #D8FA3C;">nil</span>)
+(<span style="color: #FBDE2D;">unless</span> (sqlserver-query-connection-alive-p c)
+  (<span style="color: #FF6400;">setq</span> c (call-interactively 'sqlserver-query-create-connection)))
+<span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">2:</span>
+  (sqlserver-query <span style="color: #ffa07a;">"select empno from emp"</span> c)
+  <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">or</span>
+  (sqlserver-query-with-heading <span style="color: #ffa07a;">"select empno from emp"</span> c)
+<span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">3:</span>
   (sqlserver-query-close-connection c)
 </pre>
 </div></li>
@@ -176,76 +176,76 @@ sqlserver-query.el<br  />
 <div class="outline-text-2" id="text-orgheadline3">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(require 'sqlparser-mysql-complete)
-(define-key sql-mode-map (quote [M-return]) 'sqlparser-mysql-complete)
-(define-key sql-interactive-mode-map  (quote [M-return]) 'sqlparser-mysql-complete)
-;; or
-(defadvice sql-mysql (around start-mysql-complete-minor-mode activate)
-  "enable `mysql-complete-minor-mode' minor mode."
+<pre class="src src-emacs-lisp">(<span style="color: #FBDE2D;">require</span> '<span style="color: #D8FA3C;">sqlparser-mysql-complete</span>)
+(<span style="color: #FF6400;">define-key</span> sql-mode-map (<span style="color: #FBDE2D;">quote</span> [M-return]) 'sqlparser-mysql-complete)
+(<span style="color: #FF6400;">define-key</span> sql-interactive-mode-map  (<span style="color: #FBDE2D;">quote</span> [M-return]) 'sqlparser-mysql-complete)
+<span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">or</span>
+(<span style="color: #FBDE2D;">defadvice</span> <span style="color: #FF6400;">sql-mysql</span> (around start-mysql-complete-minor-mode activate)
+  <span style="color: #ffa07a;">"enable `</span><span style="color: #D8FA3C;">mysql-complete-minor-mode</span><span style="color: #ffa07a;">' minor mode."</span>
   ad-do-it
   (mysql-complete-minor-mode))
-(define-derived-mode mysql-mode sql-mode "mysql"
-  "mysql mode"
+(<span style="color: #FBDE2D;">define-derived-mode</span> <span style="color: #FF6400;">mysql-mode</span> sql-mode <span style="color: #ffa07a;">"mysql"</span>
+  <span style="color: #ffa07a;">"mysql mode"</span>
   (mysql-complete-minor-mode))
 
-;; `sqlparser-mysql-complete' default  bind on `TAB' in
-;; with `C-u' you can change the dbname
-;; with `C-uC-u' you can use another new mysql connection
+<span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">`</span><span style="color: #D8FA3C;">sqlparser-mysql-complete</span><span style="color: #AEAEAE;">' default  bind on `</span><span style="color: #D8FA3C;">TAB</span><span style="color: #AEAEAE;">' in</span>
+<span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">with `</span><span style="color: #D8FA3C;">C-u</span><span style="color: #AEAEAE;">' you can change the dbname</span>
+<span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">with `</span><span style="color: #D8FA3C;">C-uC-u</span><span style="color: #AEAEAE;">' you can use another new mysql connection</span>
 </pre>
 </div>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(require 'sqlparser-oracle-complete)
-(add-hook 'sql-mode-hook 'oracle-complete-minor-mode)
-(add-hook 'sqlplus-mode-hook 'oracle-complete-minor-mode)
-;; or you can call M-x: oracle-complete-minor-mode
-;; and complete command is binded on `TAB' .
-;; with `C-u' you can complete with new connection string.
+<pre class="src src-emacs-lisp">(<span style="color: #FBDE2D;">require</span> '<span style="color: #D8FA3C;">sqlparser-oracle-complete</span>)
+(<span style="color: #FF6400;">add-hook</span> 'sql-mode-hook 'oracle-complete-minor-mode)
+(<span style="color: #FF6400;">add-hook</span> 'sqlplus-mode-hook 'oracle-complete-minor-mode)
+<span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">or you can call M-x: oracle-complete-minor-mode</span>
+<span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">and complete command is binded on `</span><span style="color: #D8FA3C;">TAB</span><span style="color: #AEAEAE;">' .</span>
+<span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">with `</span><span style="color: #D8FA3C;">C-u</span><span style="color: #AEAEAE;">' you can complete with new connection string.</span>
 </pre>
 </div>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"> ;; there is a minor mode defined here
+<pre class="src src-emacs-lisp"> <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">there is a minor mode defined here</span>
       (sqlserver-complete-minor-mode)
-;; you can add it to sql-mode-hook
-(add-hook  'sql-mode-hook 'sqlserver-complete-minor-mode)
-;; or call M-x sqlserver-complete-minor-mode
+<span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">you can add it to sql-mode-hook</span>
+(<span style="color: #FF6400;">add-hook</span>  'sql-mode-hook 'sqlserver-complete-minor-mode)
+<span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">or call M-x sqlserver-complete-minor-mode</span>
 
- ;; and complete command is binded on `TAB' .
+ <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">and complete command is binded on `</span><span style="color: #D8FA3C;">TAB</span><span style="color: #AEAEAE;">' .</span>
 
-;; 1. you should custom these variable
-;; `sqlserver-connection-info'
- ;; `sqlserver-cmd' ;sqlcmd or osql
-;; for example
-(setq sqlserver-connection-info
-      '((username . "sa")
-        (password . "sa")
-        (server-instance . "localhost\\SQLEXPRESS")
-        (dbname . "master"))
+<span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">1. you should custom these variable</span>
+<span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">`</span><span style="color: #D8FA3C;">sqlserver-connection-info</span><span style="color: #AEAEAE;">'</span>
+ <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">`</span><span style="color: #D8FA3C;">sqlserver-cmd</span><span style="color: #AEAEAE;">' ;sqlcmd or osql</span>
+<span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">for example</span>
+(<span style="color: #FF6400;">setq</span> sqlserver-connection-info
+      '((username . <span style="color: #ffa07a;">"sa"</span>)
+        (password . <span style="color: #ffa07a;">"sa"</span>)
+        (server-instance . <span style="color: #ffa07a;">"localhost\\SQLEXPRESS"</span>)
+        (dbname . <span style="color: #ffa07a;">"master"</span>))
       )
-;; or sometimes
-(setq sqlserver-connection-info
-      '((username . "sa")
-        (password . "sa")
-        (server-instance . "localhost")
-        (dbname . "master")))
+<span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">or sometimes</span>
+(<span style="color: #FF6400;">setq</span> sqlserver-connection-info
+      '((username . <span style="color: #ffa07a;">"sa"</span>)
+        (password . <span style="color: #ffa07a;">"sa"</span>)
+        (server-instance . <span style="color: #ffa07a;">"localhost"</span>)
+        (dbname . <span style="color: #ffa07a;">"master"</span>)))
 
-(setq sqlserver-cmd' 'sqlcmd) or (setq sqlserver-cmd' 'osql)
+(<span style="color: #FF6400;">setq</span> sqlserver-cmd' 'sqlcmd) <span style="color: #FBDE2D;">or</span> (<span style="color: #FF6400;">setq</span> sqlserver-cmd' 'osql)
 
 
-;; my config file about sqlserver-complete-minor-mode looks like this .
-(require 'sql)
-(require 'sqlparser-sqlserver-complete)
-(add-hook  'sql-mode-hook 'sqlserver-complete-minor-mode)
-(add-hook  'sqlserver-complete-minor-mode-hook 'sqlserver-complete-minor-mode-setup)
-(defun sqlserver-complete-minor-mode-setup()
-  (setq sqlserver-connection-info
-    '((username . "sa")
-      (password . "sa")
-      (server-instance . "localhost")
-      (dbname . "HAIHUA"))
+<span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">my config file about sqlserver-complete-minor-mode looks like this .</span>
+(<span style="color: #FBDE2D;">require</span> '<span style="color: #D8FA3C;">sql</span>)
+(<span style="color: #FBDE2D;">require</span> '<span style="color: #D8FA3C;">sqlparser-sqlserver-complete</span>)
+(<span style="color: #FF6400;">add-hook</span>  'sql-mode-hook 'sqlserver-complete-minor-mode)
+(<span style="color: #FF6400;">add-hook</span>  'sqlserver-complete-minor-mode-hook 'sqlserver-complete-minor-mode-setup)
+(<span style="color: #FBDE2D;">defun</span> <span style="color: #FF6400;">sqlserver-complete-minor-mode-setup</span>()
+  (<span style="color: #FF6400;">setq</span> sqlserver-connection-info
+    '((username . <span style="color: #ffa07a;">"sa"</span>)
+      (password . <span style="color: #ffa07a;">"sa"</span>)
+      (server-instance . <span style="color: #ffa07a;">"localhost"</span>)
+      (dbname . <span style="color: #ffa07a;">"HAIHUA"</span>))
     )
-  (setq sqlserver-cmd 'sqlcmd)
+  (<span style="color: #FF6400;">setq</span> sqlserver-cmd 'sqlcmd)
   )
 </pre>
 </div>

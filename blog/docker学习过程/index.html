@@ -73,7 +73,7 @@ centos 7 下的安装<br  />
 sudo service start docker
 sudo chkconfig docker on
 
-# 这一部 会从网上 pull hello-world 这个镜像
+<span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">&#36825;&#19968;&#37096; &#20250;&#20174;&#32593;&#19978; pull hello-world &#36825;&#20010;&#38236;&#20687;</span>
 sudo docker run hello-world
 </pre>
 </div>
@@ -91,7 +91,7 @@ centos8 默认安装的docker是1.8 版本 ，<br  />
 
 <pre class="src src-sh">wget https://get.docker.com/builds/Linux/x86_64/docker-1.9.1
 sudo mv docker-1.9.1 /usr/local/bin/docker
- # centos7 上 作为服务启动
+ <span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">centos7 &#19978; &#20316;&#20026;&#26381;&#21153;&#21551;&#21160;</span>
 wget https://github.com/docker/docker/raw/master/contrib/init/systemd/docker.service
 wget https://raw.githubusercontent.com/docker/docker/master/contrib/init/systemd/docker.socket
 sudo mv docker.socket /etc/systemd/system
@@ -111,7 +111,7 @@ sudo mv docker.service  /etc/systemd/system
 
 <pre class="src src-sh">sudo docker pull centos
 sudo docker pull ubuntu:12.04
-如果能下载下来 则用下面这句就可run 之
+&#22914;&#26524;&#33021;&#19979;&#36733;&#19979;&#26469; &#21017;&#29992;&#19979;&#38754;&#36825;&#21477;&#23601;&#21487;run &#20043;
 docker run -t -i centos /bin/bash
 </pre>
 </div>
@@ -217,7 +217,7 @@ root@localhost ~ #<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-sh">root@localhost ~ # docker commit -m "install zsh" -p -a "jixiuf" c00aeccfb3a6 docker.io/centos:with-zsh
+<pre class="src src-sh">root@localhost ~ <span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">docker commit -m "install zsh" -p -a "jixiuf" c00aeccfb3a6 docker.io/centos:with-zsh</span>
 ab3fb905f9cfb1de43519cb5975e582761ce4a0a83facd96c786a525a40b2da4
 </pre>
 </div>
@@ -249,7 +249,7 @@ dl.dockerpool.com:5000/centos   latest              87e5b6b3ccc1        15 month
 
 <pre class="src src-sh">deployer@bogon ~ $ docker ps -l
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                     PORTS               NAMES
-2ddd2f107676        centos              "bash"              14 minutes ago      Exited (0) 3 seconds ago                       gigantic_meninsky
+2ddd2f107676        centos              <span style="color: #ffa07a;">"bash"</span>              14 minutes ago      Exited (0) 3 seconds ago                       gigantic_meninsky
 </pre>
 </div>
 </div>
@@ -313,7 +313,7 @@ cat /home/export.tar | sudo docker import - reposName:latest
 <div class="org-src-container">
 
 <pre class="src src-sh">docker build  -t tagname .
-# 不生成镜像，只根据imageid 来找对应的镜像
+<span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">&#19981;&#29983;&#25104;&#38236;&#20687;&#65292;&#21482;&#26681;&#25454;imageid &#26469;&#25214;&#23545;&#24212;&#30340;&#38236;&#20687;</span>
 docker build  .
 docker build --rm=true .
 </pre>

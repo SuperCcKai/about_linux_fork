@@ -144,42 +144,42 @@
 <div class="outline-text-2" id="text-orgheadline1">
 <div class="org-src-container">
 
-<pre class="src src-perl"># variable 
-$var="abcab";
+<pre class="src src-perl"><span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">variable </span>
+$<span style="color: #40E0D0;">var</span>=<span style="color: #ffa07a;">"abcab"</span>;
 
-#array
-@array=("a","b" );
-print($array[0]);
-$array[2]="c";
-# .数组间拷贝
- @result = @original;
+<span style="color: #AEAEAE;">#</span><span style="color: #AEAEAE;">array</span>
+@<span style="color: #40E0D0;">array</span>=(<span style="color: #ffa07a;">"a"</span>,<span style="color: #ffa07a;">"b"</span> );
+print($<span style="color: #40E0D0;">array</span>[0]);
+$<span style="color: #40E0D0;">array</span>[2]=<span style="color: #ffa07a;">"c"</span>;
+<span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">.&#25968;&#32452;&#38388;&#25335;&#36125;</span>
+ @<span style="color: #40E0D0;">result</span> = @<span style="color: #40E0D0;">original</span>;
 
-@list1 = (2, 3, 4);
-@list2 = (1, @list1, 5); # @list2 = (1, 2, 3, 4, 5);
-($v1,$v2)=@list1;
+@<span style="color: #40E0D0;">list1</span> = (2, 3, 4);
+@<span style="color: #40E0D0;">list2</span> = (1, @<span style="color: #40E0D0;">list1</span>, 5); <span style="color: #AEAEAE;"># @list2 = (1, 2, 3, 4, 5);</span>
+($<span style="color: #40E0D0;">v1</span>,$<span style="color: #40E0D0;">v2</span>)=@<span style="color: #40E0D0;">list1</span>;
 
 (1..10) = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
-("aaa".."aad") = ("aaa","aab", "aac", "aad")
+(<span style="color: #ffa07a;">"aaa"</span>..<span style="color: #ffa07a;">"aad"</span>) = (<span style="color: #ffa07a;">"aaa"</span>,<span style="color: #ffa07a;">"aab"</span>, <span style="color: #ffa07a;">"aac"</span>, <span style="color: #ffa07a;">"aad"</span>)
 </pre>
 </div>
 <div class="org-src-container">
 
-<pre class="src src-perl">#4、数组的输出：
- @array = (1, 2, 3);
-    print (@array, "\n");
-#  结果为： 123
+<pre class="src src-perl"><span style="color: #AEAEAE;">#</span><span style="color: #AEAEAE;">4&#12289;&#25968;&#32452;&#30340;&#36755;&#20986;&#65306;</span>
+ @<span style="color: #40E0D0;">array</span> = (1, 2, 3);
+    print (@<span style="color: #40E0D0;">array</span>, <span style="color: #ffa07a;">"\n"</span>);
+<span style="color: #AEAEAE;">#  </span><span style="color: #AEAEAE;">&#32467;&#26524;&#20026;&#65306; 123</span>
 
-@array = (1, 2, 3);
- print ("@array\n");
-#  结果为： 1 2 3
+@<span style="color: #40E0D0;">array</span> = (1, 2, 3);
+ print (<span style="color: #ffa07a;">"@array\n"</span>);
+<span style="color: #AEAEAE;">#  </span><span style="color: #AEAEAE;">&#32467;&#26524;&#20026;&#65306; 1 2 3</span>
 </pre>
 </div>
 </div>
 <ul class="org-ul"><li><a id="orgheadline2"></a>数组长度<br  /><div class="outline-text-4" id="text-orgheadline2">
 <div class="org-src-container">
 
-<pre class="src src-perl">@array=("a","b","c")
-$length=@array
+<pre class="src src-perl">@<span style="color: #40E0D0;">array</span>=(<span style="color: #ffa07a;">"a"</span>,<span style="color: #ffa07a;">"b"</span>,<span style="color: #ffa07a;">"c"</span>)
+$<span style="color: #40E0D0;">length</span>=@<span style="color: #40E0D0;">array</span>
 </pre>
 </div>
 </div></li>
@@ -193,24 +193,24 @@ $length=@array
 <li><a id="orgheadline4"></a>数组 函数    sort() ,reverse() join() ,split<br  /><div class="outline-text-4" id="text-orgheadline4">
 <div class="org-src-container">
 
-<pre class="src src-perl">join("," ,"a","b","c") ; #= "a,b,c"
+<pre class="src src-perl">join(<span style="color: #ffa07a;">","</span> ,<span style="color: #ffa07a;">"a"</span>,<span style="color: #ffa07a;">"b"</span>,<span style="color: #ffa07a;">"c"</span>) ; <span style="color: #AEAEAE;">#= "a,b,c"</span>
 </pre>
 </div>
 
 <div class="org-src-container">
 
-<pre class="src src-perl"># map
-%map=("key","value","key2", "value2");
- 注：用列表给关联数组赋值时，Perl5允许使用"=&gt;"或","来分隔下标与值，用"=&gt;"可读性更好些，上面语句等效于：
- %fruit = ("apples"=&gt;17,"bananas"=&gt;9,"oranges"=&gt;"none");
-##取map 的值
-$map{"key"} =value;
+<pre class="src src-perl"><span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">map</span>
+%<span style="color: #40E0D0;">map</span>=(<span style="color: #ffa07a;">"key"</span>,<span style="color: #ffa07a;">"value"</span>,<span style="color: #ffa07a;">"key2"</span>, <span style="color: #ffa07a;">"value2"</span>);
+ &#27880;&#65306;&#29992;&#21015;&#34920;&#32473;&#20851;&#32852;&#25968;&#32452;&#36171;&#20540;&#26102;&#65292;Perl5&#20801;&#35768;&#20351;&#29992;<span style="color: #ffa07a;">"=&gt;"</span>&#25110;<span style="color: #ffa07a;">","</span>&#26469;&#20998;&#38548;&#19979;&#26631;&#19982;&#20540;&#65292;&#29992;<span style="color: #ffa07a;">"=&gt;"</span>&#21487;&#35835;&#24615;&#26356;&#22909;&#20123;&#65292;&#19978;&#38754;&#35821;&#21477;&#31561;&#25928;&#20110;&#65306;
+ %<span style="color: #40E0D0;">fruit</span> = (<span style="color: #ffa07a;">"apples"</span>=&gt;17,<span style="color: #ffa07a;">"bananas"</span>=&gt;9,<span style="color: #ffa07a;">"oranges"</span>=&gt;<span style="color: #ffa07a;">"none"</span>);
+<span style="color: #AEAEAE;">##</span><span style="color: #AEAEAE;">&#21462;map &#30340;&#20540;</span>
+$<span style="color: #40E0D0;">map</span>{<span style="color: #ffa07a;">"key"</span>} =value;
 
-## add
-$map{"key3"}="v3";
+<span style="color: #AEAEAE;">## </span><span style="color: #AEAEAE;">add</span>
+$<span style="color: #40E0D0;">map</span>{<span style="color: #ffa07a;">"key3"</span>}=<span style="color: #ffa07a;">"v3"</span>;
 
-## delete
-delete ($map{"key"});
+<span style="color: #AEAEAE;">## </span><span style="color: #AEAEAE;">delete</span>
+delete ($<span style="color: #40E0D0;">map</span>{<span style="color: #ffa07a;">"key"</span>});
 </pre>
 </div>
 <p>
@@ -218,8 +218,8 @@ delete ($map{"key"});
 </p>
 <div class="org-src-container">
 
-<pre class="src src-perl">%a=@a;
-@a=%a;
+<pre class="src src-perl">%<span style="color: #40E0D0;">a</span>=@<span style="color: #40E0D0;">a</span>;
+@<span style="color: #40E0D0;">a</span>=%<span style="color: #40E0D0;">a</span>;
 </pre>
 </div>
 <p>
@@ -227,15 +227,15 @@ delete ($map{"key"});
 </p>
 <div class="org-src-container">
 
-<pre class="src src-perl">keys(%map) #取所有keys 值
+<pre class="src src-perl">keys(%<span style="color: #40E0D0;">map</span>) <span style="color: #AEAEAE;">#&#21462;&#25152;&#26377;keys &#20540;</span>
 </pre>
 </div>
 <div class="org-src-container">
 
-<pre class="src src-perl">each 取出map中每个键值对， 这种方式比foreach与keys()合作 快
-%map=("a","b", "c","d" );
-while (($k,$v) = each(%map)){
-    print("$k:$v\n");
+<pre class="src src-perl">each &#21462;&#20986;map&#20013;&#27599;&#20010;&#38190;&#20540;&#23545;&#65292; &#36825;&#31181;&#26041;&#24335;&#27604;<span style="color: #FBDE2D;">foreach</span>&#19982;keys()&#21512;&#20316; &#24555;
+%<span style="color: #40E0D0;">map</span>=(<span style="color: #ffa07a;">"a"</span>,<span style="color: #ffa07a;">"b"</span>, <span style="color: #ffa07a;">"c"</span>,<span style="color: #ffa07a;">"d"</span> );
+<span style="color: #FBDE2D;">while</span> (($<span style="color: #40E0D0;">k</span>,$<span style="color: #40E0D0;">v</span>) = each(%<span style="color: #40E0D0;">map</span>)){
+    print(<span style="color: #ffa07a;">"$k:$v\n"</span>);
 }
 </pre>
 </div>
@@ -243,13 +243,13 @@ while (($k,$v) = each(%map)){
 <ul class="org-ul"><li><a id="orgheadline5"></a>split 返回数组 与返回匹配的次数<br  /><div class="outline-text-5" id="text-orgheadline5">
 <div class="org-src-container">
 
-<pre class="src src-perl">$line='abcabcde';
-@result =split(/c/ , $line); #result= ("ab" ,"ab" ,"de")
-foreach $ele (@result){
-    print($ele ,"\n");
+<pre class="src src-perl">$<span style="color: #40E0D0;">line</span>=<span style="color: #ffa07a;">'abcabcde'</span>;
+@<span style="color: #40E0D0;">result</span> =split(<span style="color: #ffa07a;">/c/</span> , $<span style="color: #40E0D0;">line</span>); <span style="color: #AEAEAE;">#result= ("ab" ,"ab" ,"de")</span>
+<span style="color: #FBDE2D;">foreach</span> $<span style="color: #40E0D0;">ele</span> (@<span style="color: #40E0D0;">result</span>){
+    print($<span style="color: #40E0D0;">ele</span> ,<span style="color: #ffa07a;">"\n"</span>);
 }
-$result =split(/c/ , $line);
-print($result); # result =3
+$<span style="color: #40E0D0;">result</span> =split(<span style="color: #ffa07a;">/c/</span> , $<span style="color: #40E0D0;">line</span>);
+print($<span style="color: #40E0D0;">result</span>); <span style="color: #AEAEAE;"># result =3</span>
 </pre>
 </div>
 </div></li></ul></li></ul>
@@ -265,8 +265,8 @@ print($result); # result =3
 </p>
 <div class="org-src-container">
 
-<pre class="src src-perl">$pattern = "[\\t ]+";
- @words = split(/$pattern/, $line);
+<pre class="src src-perl">$<span style="color: #40E0D0;">pattern</span> = <span style="color: #ffa07a;">"[\\t ]+"</span>;
+ @<span style="color: #40E0D0;">words</span> = split(<span style="color: #ffa07a;">/$pattern/</span>, $<span style="color: #40E0D0;">line</span>);
 </pre>
 </div>
 <p>
@@ -274,11 +274,11 @@ print($result); # result =3
 </p>
 <div class="org-src-container">
 
-<pre class="src src-perl">$string = "This string contains the number 25.11.";
-$string =~ /-?(\d+)\.?(\d+)/; # 匹配结果为25.11
-$integerpart = $1; # now $integerpart = 25
-$decimalpart = $2; # now $decimalpart = 11
-$totalpart = $&amp;; # now totalpart = 25.11
+<pre class="src src-perl">$<span style="color: #40E0D0;">string</span> = <span style="color: #ffa07a;">"This string contains the number 25.11."</span>;
+$<span style="color: #40E0D0;">string</span> =~ <span style="color: #ffa07a;">/-?(\d+)\.?(\d+)/</span>; <span style="color: #AEAEAE;"># &#21305;&#37197;&#32467;&#26524;&#20026;25.11</span>
+$<span style="color: #40E0D0;">integerpart</span> = $<span style="color: #40E0D0;">1</span>; <span style="color: #AEAEAE;"># now $integerpart = 25</span>
+$<span style="color: #40E0D0;">decimalpart</span> = $<span style="color: #40E0D0;">2</span>; <span style="color: #AEAEAE;"># now $decimalpart = 11</span>
+$<span style="color: #40E0D0;">totalpart</span> = $&amp;; <span style="color: #AEAEAE;"># now totalpart = 25.11</span>
 </pre>
 </div>
 </div>
@@ -329,12 +329,12 @@ $totalpart = $&amp;; # now totalpart = 25.11
 <ul class="org-ul"><li><a id="orgheadline8"></a>g<br  /><div class="outline-text-4" id="text-orgheadline8">
 <div class="org-src-container">
 
-<pre class="src src-perl">匹配所有可能的模式(g选项)
-   @matches = "balata" =~ /.a/g; # now @matches = ("ba", "la", "ta")
-   匹配的循环：
-   while ("balata" =~ /.a/g) {
-     $match = $&amp;;
-     print ("$match\n");
+<pre class="src src-perl">&#21305;&#37197;&#25152;&#26377;&#21487;&#33021;&#30340;&#27169;&#24335;(g&#36873;&#39033;)
+   @<span style="color: #40E0D0;">matches</span> = <span style="color: #ffa07a;">"balata"</span> =~ <span style="color: #ffa07a;">/.a/</span>g; <span style="color: #AEAEAE;"># now @matches = ("ba", "la", "ta")</span>
+   &#21305;&#37197;&#30340;&#24490;&#29615;&#65306;
+   <span style="color: #FBDE2D;">while</span> (<span style="color: #ffa07a;">"balata"</span> =~ <span style="color: #ffa07a;">/.a/</span>g) {
+     $<span style="color: #40E0D0;">match</span> = $&amp;;
+     print (<span style="color: #ffa07a;">"$match\n"</span>);
    }
 </pre>
 </div>
@@ -363,9 +363,9 @@ $totalpart = $&amp;; # now totalpart = 25.11
 </p>
 <div class="org-src-container">
 
-<pre class="src src-perl">$line="abcab";
-$line =~ s/ab/d/ ;
-print($line);
+<pre class="src src-perl">$<span style="color: #40E0D0;">line</span>=<span style="color: #ffa07a;">"abcab"</span>;
+$<span style="color: #40E0D0;">line</span> =~ s<span style="color: #ffa07a;">/ab/d/</span> ;
+print($<span style="color: #40E0D0;">line</span>);
 </pre>
 </div>
 <p>
@@ -373,9 +373,9 @@ print($line);
 </p>
 <div class="org-src-container">
 
-<pre class="src src-perl">$line="abcab";
-$line =~ s/ab/d/g ;
-print($line);
+<pre class="src src-perl">$<span style="color: #40E0D0;">line</span>=<span style="color: #ffa07a;">"abcab"</span>;
+$<span style="color: #40E0D0;">line</span> =~ s<span style="color: #ffa07a;">/ab/d/</span>g ;
+print($<span style="color: #40E0D0;">line</span>);
 </pre>
 </div>
 <p>
@@ -393,9 +393,9 @@ tr/searchment/repalcement/;是把searchment的第一个字符换成replacement�
 </p>
 <div class="org-src-container">
 
-<pre class="src src-perl">$line='abcDeF';
-$line =~ tr/abc/ABC/;
-print($line);
+<pre class="src src-perl">$<span style="color: #40E0D0;">line</span>=<span style="color: #ffa07a;">'abcDeF'</span>;
+$<span style="color: #40E0D0;">line</span> =~ tr<span style="color: #ffa07a;">/abc/ABC/</span>;
+print($<span style="color: #40E0D0;">line</span>);
 </pre>
 </div>
 <p>
@@ -408,18 +408,18 @@ print($line);
 <div class="outline-text-2" id="text-orgheadline11">
 <div class="org-src-container">
 
-<pre class="src src-perl">  sub subname{
-    print("hello");
+<pre class="src src-perl">  <span style="color: #FBDE2D;">sub</span> <span style="color: #FF6400;">subname</span>{
+    print(<span style="color: #ffa07a;">"hello"</span>);
   }
-# 调用方法 ，用&amp;
-#如
-$subname;
+<span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">&#35843;&#29992;&#26041;&#27861; &#65292;&#29992;&amp;</span>
+<span style="color: #AEAEAE;">#</span><span style="color: #AEAEAE;">&#22914;</span>
+$<span style="color: #40E0D0;">subname</span>;
 
-#如果调用在子程序定义之后，可以省略&amp;
+<span style="color: #AEAEAE;">#</span><span style="color: #AEAEAE;">&#22914;&#26524;&#35843;&#29992;&#22312;&#23376;&#31243;&#24207;&#23450;&#20041;&#20043;&#21518;&#65292;&#21487;&#20197;&#30465;&#30053;&amp;</span>
 subname;
 
-# 可以用关键字do 调用
-do subname;
+<span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">&#21487;&#20197;&#29992;&#20851;&#38190;&#23383;do &#35843;&#29992;</span>
+<span style="color: #FBDE2D;">do</span> subname;
 </pre>
 </div>
 </div>
@@ -431,8 +431,8 @@ my 只在此子程序中有效，local 在子程序及此子程序所调用的�
 </p>
 <div class="org-src-container">
 
-<pre class="src src-perl">local ($localVar) =43;
-my ($my_var)="abc";
+<pre class="src src-perl"><span style="color: #8DA6CE;">local</span> ($<span style="color: #40E0D0;">localVar</span>) =43;
+<span style="color: #8DA6CE;">my</span> ($<span style="color: #40E0D0;">my_var</span>)=<span style="color: #ffa07a;">"abc"</span>;
 </pre>
 </div>
 </div>
@@ -444,9 +444,9 @@ my ($my_var)="abc";
 </div><ul class="org-ul"><li><a id="orgheadline13"></a>普通参数<br  /><div class="outline-text-4" id="text-orgheadline13">
 <div class="org-src-container">
 
-<pre class="src src-perl">&amp;subname(1 ,2 ,3 );
-sub subname{
-  my($v1 ,$v2,$v3)=@_;
+<pre class="src src-perl">&amp;<span style="color: #FF6400;">subname</span>(1 ,2 ,3 );
+<span style="color: #FBDE2D;">sub</span> <span style="color: #FF6400;">subname</span>{
+  <span style="color: #8DA6CE;">my</span>($<span style="color: #40E0D0;">v1</span> ,$<span style="color: #40E0D0;">v2</span>,$<span style="color: #40E0D0;">v3</span>)=@<span style="color: #40E0D0;">_</span>;
 }
 </pre>
 </div>
@@ -462,10 +462,10 @@ sub addlist{<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-perl">sub twolists {
-    my (@list1, @list2) = @_;
+<pre class="src src-perl"><span style="color: #FBDE2D;">sub</span> <span style="color: #FF6400;">twolists</span> {
+    <span style="color: #8DA6CE;">my</span> (@<span style="color: #40E0D0;">list1</span>, @<span style="color: #40E0D0;">list2</span>) = @<span style="color: #40E0D0;">_</span>;
   }
-# 中@list2必然为空。但简单变量和数组变量可以同时传递：
+<span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">&#20013;@list2&#24517;&#28982;&#20026;&#31354;&#12290;&#20294;&#31616;&#21333;&#21464;&#37327;&#21644;&#25968;&#32452;&#21464;&#37327;&#21487;&#20197;&#21516;&#26102;&#20256;&#36882;&#65306;</span>
 </pre>
 </div>
 </div></li></ul>
@@ -478,11 +478,11 @@ sub addlist{<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-perl">@array1 = (1, 2, 3);
-@array2 = (4, 5, 6);
-&amp;two_array_sub (*array1, *array2);
-sub two_array_sub {
-  my (*subarray1, *subarray2) = @_;
+<pre class="src src-perl">@<span style="color: #40E0D0;">array1</span> = (1, 2, 3);
+@<span style="color: #40E0D0;">array2</span> = (4, 5, 6);
+&amp;<span style="color: #FF6400;">two_array_sub</span> (*<span style="color: #40E0D0;">array1</span>, *<span style="color: #40E0D0;">array2</span>);
+<span style="color: #FBDE2D;">sub</span> <span style="color: #FF6400;">two_array_sub</span> {
+  <span style="color: #8DA6CE;">my</span> (*<span style="color: #40E0D0;">subarray1</span>, *<span style="color: #40E0D0;">subarray2</span>) = @<span style="color: #40E0D0;">_</span>;
 }
 </pre>
 </div>
@@ -497,9 +497,9 @@ sub two_array_sub {
 <div class="outline-text-3" id="text-orgheadline17">
 <div class="org-src-container">
 
-<pre class="src src-perl">open (VERSION , "/proc/version");
-while ($line = &lt;VERSION&gt;){
-    print($line ,"\n");
+<pre class="src src-perl">open (VERSION , <span style="color: #ffa07a;">"/proc/version"</span>);
+<span style="color: #FBDE2D;">while</span> ($<span style="color: #40E0D0;">line</span> = &lt;<span style="color: #D8FA3C;">VERSION</span>&gt;){
+    print($<span style="color: #40E0D0;">line</span> ,<span style="color: #ffa07a;">"\n"</span>);
 }
 </pre>
 </div>
@@ -510,12 +510,12 @@ while ($line = &lt;VERSION&gt;){
 <div class="outline-text-3" id="text-orgheadline18">
 <div class="org-src-container">
 
-<pre class="src src-perl">     open(pipo,"cat /proc/swaps |");
-     while( $line = &lt;pipo&gt; ){
-         print($line,"\n");
+<pre class="src src-perl">     open(pipo,<span style="color: #ffa07a;">"cat /proc/swaps |"</span>);
+     <span style="color: #FBDE2D;">while</span>( $<span style="color: #40E0D0;">line</span> = &lt;<span style="color: #D8FA3C;">pipo</span>&gt; ){
+         print($<span style="color: #40E0D0;">line</span>,<span style="color: #ffa07a;">"\n"</span>);
      }
-# 此处cat 读取/proc/swaps文件的内容，然后通过管道输出，open()打开这个管道里
-# 的内容
+<span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">&#27492;&#22788;cat &#35835;&#21462;/proc/swaps&#25991;&#20214;&#30340;&#20869;&#23481;&#65292;&#28982;&#21518;&#36890;&#36807;&#31649;&#36947;&#36755;&#20986;&#65292;open()&#25171;&#24320;&#36825;&#20010;&#31649;&#36947;&#37324;</span>
+<span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">&#30340;&#20869;&#23481;</span>
 </pre>
 </div>
 </div>
@@ -529,20 +529,20 @@ while ($line = &lt;VERSION&gt;){
 </p>
 <div class="org-src-container">
 
-<pre class="src src-perl">open (STDOUT, "&gt;file1") || die ("open STDOUT failed");
-open (STDERR, "&gt;&amp;STDOUT") || die ("open STDERR failed");
-print STDOUT ("line 1\n");
-print STDERR ("line 2\n");
+<pre class="src src-perl">open (STDOUT, <span style="color: #ffa07a;">"&gt;file1"</span>) || <span style="color: #FBDE2D;">die</span> (<span style="color: #ffa07a;">"open STDOUT failed"</span>);
+open (STDERR, <span style="color: #ffa07a;">"&gt;&amp;STDOUT"</span>) || <span style="color: #FBDE2D;">die</span> (<span style="color: #ffa07a;">"open STDERR failed"</span>);
+print STDOUT (<span style="color: #ffa07a;">"line 1\n"</span>);
+print STDERR (<span style="color: #ffa07a;">"line 2\n"</span>);
 close (STDOUT);
 close (STDERR);
 </pre>
 </div>
 <div class="org-src-container">
 
-<pre class="src src-perl">open (a, "&gt;file1") || die ("open STDOUT failed");
-open (b, "&gt;&amp;a") || die ("open STDERR failed");
-print a ("line 1\n");
-print b ("line 2\n");
+<pre class="src src-perl">open (a, <span style="color: #ffa07a;">"&gt;file1"</span>) || <span style="color: #FBDE2D;">die</span> (<span style="color: #ffa07a;">"open STDOUT failed"</span>);
+open (b, <span style="color: #ffa07a;">"&gt;&amp;a"</span>) || <span style="color: #FBDE2D;">die</span> (<span style="color: #ffa07a;">"open STDERR failed"</span>);
+print a (<span style="color: #ffa07a;">"line 1\n"</span>);
+print b (<span style="color: #ffa07a;">"line 2\n"</span>);
 close (a);
 close (b);
 </pre>
@@ -560,16 +560,16 @@ close (b);
 </p>
 <div class="org-src-container">
 
-<pre class="src src-perl"> open (STDOUT, "&gt;file1") || die ("open STDOUT failed");
- open (STDERR, "&gt;&amp;STDOUT") || die ("open STDERR failed");
- $| = 1; # 因未调用select（），当前的缺省文件为重定向到文件file1的STDOUT ,
-# 此将$|=1 , 意为stdout不用缓冲区
+<pre class="src src-perl"> open (STDOUT, <span style="color: #ffa07a;">"&gt;file1"</span>) || <span style="color: #FBDE2D;">die</span> (<span style="color: #ffa07a;">"open STDOUT failed"</span>);
+ open (STDERR, <span style="color: #ffa07a;">"&gt;&amp;STDOUT"</span>) || <span style="color: #FBDE2D;">die</span> (<span style="color: #ffa07a;">"open STDERR failed"</span>);
+ $| = 1; <span style="color: #AEAEAE;"># &#22240;&#26410;&#35843;&#29992;select&#65288;&#65289;&#65292;&#24403;&#21069;&#30340;&#32570;&#30465;&#25991;&#20214;&#20026;&#37325;&#23450;&#21521;&#21040;&#25991;&#20214;file1&#30340;STDOUT ,</span>
+<span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">&#27492;&#23558;$|=1 , &#24847;&#20026;stdout&#19981;&#29992;&#32531;&#20914;&#21306;</span>
 
  select (STDERR);
  $| = 1;
 
- print STDOUT ("line 1\n");
- print STDERR ("line 2\n");
+ print STDOUT (<span style="color: #ffa07a;">"line 1\n"</span>);
+ print STDERR (<span style="color: #ffa07a;">"line 2\n"</span>);
  close (STDOUT);
  close (STDERR);
 </pre>
@@ -635,20 +635,20 @@ eof()是等效的，但与&lt;&gt;操作符一起使用时，eof和eof()就不�
 </p>
 <div class="org-src-container">
 
-<pre class="src src-perl">while ($line = &lt;STDIN&gt;) {
-   print ($line);
-   if (eof) {
-     print ("-- end of current file --\n");
+<pre class="src src-perl"><span style="color: #FBDE2D;">while</span> ($<span style="color: #40E0D0;">line</span> = &lt;<span style="color: #D8FA3C;">STDIN</span>&gt;) {
+   print ($<span style="color: #40E0D0;">line</span>);
+   <span style="color: #FBDE2D;">if</span> (eof) {
+     print (<span style="color: #ffa07a;">"-- end of current file --\n"</span>);
    }
  }
 </pre>
 </div>
 <div class="org-src-container">
 
-<pre class="src src-perl">while ($line = &lt;STDIN&gt;) {
-   print ($line);
-   if (eof()) {
-     print ("-- end of current file --\n");
+<pre class="src src-perl"><span style="color: #FBDE2D;">while</span> ($<span style="color: #40E0D0;">line</span> = &lt;<span style="color: #D8FA3C;">STDIN</span>&gt;) {
+   print ($<span style="color: #40E0D0;">line</span>);
+   <span style="color: #FBDE2D;">if</span> (eof()) {
+     print (<span style="color: #ffa07a;">"-- end of current file --\n"</span>);
    }
  }
 </pre>
@@ -674,27 +674,27 @@ eof()是等效的，但与&lt;&gt;操作符一起使用时，eof和eof()就不�
 </p>
 <div class="org-src-container">
 
-<pre class="src src-perl">&amp;open_file("INFILE", "", "file1");
-&amp;open_file("OUTFILE", "&gt;", "file2");
-while ($line = &amp;read_from_file("INFILE")) {
-  &amp;print_to_file("OUTFILE", $line);
+<pre class="src src-perl">&amp;<span style="color: #FF6400;">open_file</span>(<span style="color: #ffa07a;">"INFILE"</span>, <span style="color: #ffa07a;">""</span>, <span style="color: #ffa07a;">"file1"</span>);
+&amp;<span style="color: #FF6400;">open_file</span>(<span style="color: #ffa07a;">"OUTFILE"</span>, <span style="color: #ffa07a;">"&gt;"</span>, <span style="color: #ffa07a;">"file2"</span>);
+<span style="color: #FBDE2D;">while</span> ($<span style="color: #40E0D0;">line</span> = &amp;<span style="color: #FF6400;">read_from_file</span>(<span style="color: #ffa07a;">"INFILE"</span>)) {
+  &amp;<span style="color: #FF6400;">print_to_file</span>(<span style="color: #ffa07a;">"OUTFILE"</span>, $<span style="color: #40E0D0;">line</span>);
 }
 
-sub open_file {
-   local ($filevar, $filemode, $filename) = @_;
+<span style="color: #FBDE2D;">sub</span> <span style="color: #FF6400;">open_file</span> {
+   <span style="color: #8DA6CE;">local</span> ($<span style="color: #40E0D0;">filevar</span>, $<span style="color: #40E0D0;">filemode</span>, $<span style="color: #40E0D0;">filename</span>) = @<span style="color: #40E0D0;">_</span>;
 
-   open ($filevar, $filemode . $filename) ||
-     die ("Can't open $filename");
+   open ($<span style="color: #40E0D0;">filevar</span>, $<span style="color: #40E0D0;">filemode</span> . $<span style="color: #40E0D0;">filename</span>) ||
+     <span style="color: #FBDE2D;">die</span> (<span style="color: #ffa07a;">"Can't open $filename"</span>);
  }
- sub read_from_file {
-   local ($filevar) = @_;
+ <span style="color: #FBDE2D;">sub</span> <span style="color: #FF6400;">read_from_file</span> {
+   <span style="color: #8DA6CE;">local</span> ($<span style="color: #40E0D0;">filevar</span>) = @<span style="color: #40E0D0;">_</span>;
 
-   &lt;$filevar&gt;;
+   &lt;$<span style="color: #40E0D0;">filevar</span>&gt;;
  }
- sub print_to_file {
-   local ($filevar, $line) = @_;
+ <span style="color: #FBDE2D;">sub</span> <span style="color: #FF6400;">print_to_file</span> {
+   <span style="color: #8DA6CE;">local</span> ($<span style="color: #40E0D0;">filevar</span>, $<span style="color: #40E0D0;">line</span>) = @<span style="color: #40E0D0;">_</span>;
 
-   print $filevar ($line);
+   print $<span style="color: #40E0D0;">filevar</span> ($<span style="color: #40E0D0;">line</span>);
  }
 </pre>
 </div>
@@ -812,10 +812,10 @@ sub open_file {
 </p>
 <div class="org-src-container">
 
-<pre class="src src-perl">opendir (tmpdir, "/tmp/") ||print "die";
-@fs=readdir (tmpdir);
-foreach my $f ( @fs){
-    print $f ,"\n" ;    
+<pre class="src src-perl">opendir (tmpdir, <span style="color: #ffa07a;">"/tmp/"</span>) ||print <span style="color: #ffa07a;">"die"</span>;
+@<span style="color: #40E0D0;">fs</span>=readdir (tmpdir);
+<span style="color: #FBDE2D;">foreach</span> <span style="color: #8DA6CE;">my</span> $<span style="color: #40E0D0;">f</span> ( @<span style="color: #40E0D0;">fs</span>){
+    print $<span style="color: #40E0D0;">f</span> ,<span style="color: #ffa07a;">"\n"</span> ;    
 }
 </pre>
 </div>
@@ -998,10 +998,10 @@ nlink而不叫delete是因为它实际所做的是删除文件的链接<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-perl">acctime = -A "file1";
-modtime = -M "file1";
-filelist = ("file2", "file3");
-time ($acctime, $modtime, @filelist);
+<pre class="src src-perl">acctime = -A <span style="color: #ffa07a;">"file1"</span>;
+modtime = -M <span style="color: #ffa07a;">"file1"</span>;
+filelist = (<span style="color: #ffa07a;">"file2"</span>, <span style="color: #ffa07a;">"file3"</span>);
+time ($<span style="color: #40E0D0;">acctime</span>, $<span style="color: #40E0D0;">modtime</span>, @<span style="color: #40E0D0;">filelist</span>);
 </pre>
 </div>
 </div>
@@ -1022,11 +1022,11 @@ flock (filevar, flockop);<br  />
 <div class="outline-text-3" id="text-orgheadline61">
 <div class="org-src-container">
 
-<pre class="src src-perl">$x="abc.txt";
-if(-e $x) { #abc.txt是否存在？
-    　　# 存在操作
-} else {
-    　　printf "文件不存在。\n";
+<pre class="src src-perl">$<span style="color: #40E0D0;">x</span>=<span style="color: #ffa07a;">"abc.txt"</span>;
+<span style="color: #FBDE2D;">if</span>(-e $<span style="color: #40E0D0;">x</span>) { <span style="color: #AEAEAE;">#abc.txt&#26159;&#21542;&#23384;&#22312;&#65311;</span>
+    &#12288;&#12288;<span style="color: #AEAEAE;"># &#23384;&#22312;&#25805;&#20316;</span>
+} <span style="color: #FBDE2D;">else</span> {
+    &#12288;&#12288;printf <span style="color: #ffa07a;">"&#25991;&#20214;&#19981;&#23384;&#22312;&#12290;\n"</span>;
 }
 </pre>
 </div>
@@ -1083,17 +1083,17 @@ if(-e $x) { #abc.txt是否存在？
 </p>
 <div class="org-src-container">
 
-<pre class="src src-perl">  $var="abc";
- $pointer=\$var;
- print($$pointer);
+<pre class="src src-perl">  $<span style="color: #40E0D0;">var</span>=<span style="color: #ffa07a;">"abc"</span>;
+ $<span style="color: #40E0D0;">pointer</span>=\$<span style="color: #40E0D0;">var</span>;
+ print($$<span style="color: #40E0D0;">pointer</span>);
 
-@array = ("a","b","c");
-$p =\@array;
-print(@$p);
+@<span style="color: #40E0D0;">array</span> = (<span style="color: #ffa07a;">"a"</span>,<span style="color: #ffa07a;">"b"</span>,<span style="color: #ffa07a;">"c"</span>);
+$<span style="color: #40E0D0;">p</span> =\@<span style="color: #40E0D0;">array</span>;
+print(@$<span style="color: #40E0D0;">p</span>);
 
-%map=("a","aaa","b","bbbe");
-$p=\%map;
-print(%$p);
+%<span style="color: #40E0D0;">map</span>=(<span style="color: #ffa07a;">"a"</span>,<span style="color: #ffa07a;">"aaa"</span>,<span style="color: #ffa07a;">"b"</span>,<span style="color: #ffa07a;">"bbbe"</span>);
+$<span style="color: #40E0D0;">p</span>=\%<span style="color: #40E0D0;">map</span>;
+print(%$<span style="color: #40E0D0;">p</span>);
 </pre>
 </div>
 </div>
@@ -1115,22 +1115,22 @@ $pointer<sub>to</sub><sub>sub</sub> = sub {&#x2026; declaration of sub &#x2026;}
 <div class="outline-text-3" id="text-orgheadline66">
 <div class="org-src-container">
 
-<pre class="src src-perl">sub errorMsg {
-    my $lvl = shift;
-#
-# define the subroutine to run when called.
-#
-    return sub {
-        my $msg = shift; # Define the error type now.
-        print "Err Level $lvl:$msg\n"; }; # print later.
+<pre class="src src-perl"><span style="color: #FBDE2D;">sub</span> <span style="color: #FF6400;">errorMsg</span> {
+    <span style="color: #8DA6CE;">my</span> $<span style="color: #40E0D0;">lvl</span> = shift;
+<span style="color: #AEAEAE;">#</span>
+<span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">define the subroutine to run when called.</span>
+<span style="color: #AEAEAE;">#</span>
+    <span style="color: #FBDE2D;">return</span> <span style="color: #FBDE2D;">sub</span> {
+        <span style="color: #8DA6CE;">my</span> $<span style="color: #40E0D0;">msg</span> = shift; <span style="color: #AEAEAE;"># Define the error type now.</span>
+        print <span style="color: #ffa07a;">"Err Level $lvl:$msg\n"</span>; }; <span style="color: #AEAEAE;"># print later.</span>
 }
-$severe = errorMsg("Severe");
-$fatal = errorMsg("Fatal");
-$annoy = errorMsg("Annoying");
+$<span style="color: #40E0D0;">severe</span> = errorMsg(<span style="color: #ffa07a;">"Severe"</span>);
+$<span style="color: #40E0D0;">fatal</span> = errorMsg(<span style="color: #ffa07a;">"Fatal"</span>);
+$<span style="color: #40E0D0;">annoy</span> = errorMsg(<span style="color: #ffa07a;">"Annoying"</span>);
 
-&amp;$severe("Divide by zero");
-&amp;$fatal("Did you forget to use a semi-colon?");
-&amp;$annoy("Uninitialized variable in use");
+&amp;$<span style="color: #40E0D0;">severe</span>(<span style="color: #ffa07a;">"Divide by zero"</span>);
+&amp;$<span style="color: #40E0D0;">fatal</span>(<span style="color: #ffa07a;">"Did you forget to use a semi-colon?"</span>);
+&amp;$<span style="color: #40E0D0;">annoy</span>(<span style="color: #ffa07a;">"Uninitialized variable in use"</span>);
 </pre>
 </div>
 </div>
@@ -1141,14 +1141,14 @@ $annoy = errorMsg("Annoying");
 <div class="outline-text-3" id="text-orgheadline67">
 <div class="org-src-container">
 
-<pre class="src src-perl">@a1=("a" ,"b","c");
-@a2= ("1","2","3");
-sub sub1{
-    my ($p1,$p2)=@_;
-    print(@$p1,"\n");
-    print(@$p2,"\n");
+<pre class="src src-perl">@<span style="color: #40E0D0;">a1</span>=(<span style="color: #ffa07a;">"a"</span> ,<span style="color: #ffa07a;">"b"</span>,<span style="color: #ffa07a;">"c"</span>);
+@<span style="color: #40E0D0;">a2</span>= (<span style="color: #ffa07a;">"1"</span>,<span style="color: #ffa07a;">"2"</span>,<span style="color: #ffa07a;">"3"</span>);
+<span style="color: #FBDE2D;">sub</span> <span style="color: #FF6400;">sub1</span>{
+    <span style="color: #8DA6CE;">my</span> ($<span style="color: #40E0D0;">p1</span>,$<span style="color: #40E0D0;">p2</span>)=@<span style="color: #40E0D0;">_</span>;
+    print(@$<span style="color: #40E0D0;">p1</span>,<span style="color: #ffa07a;">"\n"</span>);
+    print(@$<span style="color: #40E0D0;">p2</span>,<span style="color: #ffa07a;">"\n"</span>);
 }
-&amp;sub1(\@a1,\@a2);
+&amp;<span style="color: #FF6400;">sub1</span>(\@<span style="color: #40E0D0;">a1</span>,\@<span style="color: #40E0D0;">a2</span>);
 </pre>
 </div>
 </div>
@@ -1158,19 +1158,19 @@ sub sub1{
 <div class="outline-text-3" id="text-orgheadline68">
 <div class="org-src-container">
 
-<pre class="src src-perl"># 文件句柄的传递 \* 
-&amp;spitOut(\*STDOUT);
+<pre class="src src-perl"><span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">&#25991;&#20214;&#21477;&#26564;&#30340;&#20256;&#36882; \* </span>
+&amp;<span style="color: #FF6400;">spitOut</span>(\*<span style="color: #40E0D0;">STDOUT</span>);
 
-open(file1,"&gt;/tmp/file1");
-&amp;spitOut(\*file1);
+open(file1,<span style="color: #ffa07a;">"&gt;/tmp/file1"</span>);
+&amp;<span style="color: #FF6400;">spitOut</span>(\*<span style="color: #40E0D0;">file1</span>);
 
-#这样似乎也可以
-open($file2,"&gt;/tmp/file2");
-&amp;spitOut($file2);
+<span style="color: #AEAEAE;">#</span><span style="color: #AEAEAE;">&#36825;&#26679;&#20284;&#20046;&#20063;&#21487;&#20197;</span>
+open($<span style="color: #40E0D0;">file2</span>,<span style="color: #ffa07a;">"&gt;/tmp/file2"</span>);
+&amp;<span style="color: #FF6400;">spitOut</span>($<span style="color: #40E0D0;">file2</span>);
 
-sub spitOut {
-    my $filehandle=shift;
-    print $filehandle "Gee Wilbur, I like this lettuce\n";
+<span style="color: #FBDE2D;">sub</span> <span style="color: #FF6400;">spitOut</span> {
+    <span style="color: #8DA6CE;">my</span> $<span style="color: #40E0D0;">filehandle</span>=shift;
+    print $<span style="color: #40E0D0;">filehandle</span> <span style="color: #ffa07a;">"Gee Wilbur, I like this lettuce\n"</span>;
 }
 </pre>
 </div>
@@ -1182,9 +1182,9 @@ sub spitOut {
 <div class="outline-text-2" id="text-orgheadline69">
 <div class="org-src-container">
 
-<pre class="src src-perl">$line = ['solid', 'black', ['1','2','3'] , ['4', '5', '6']];
-print "\$line-&gt;[0] = $line-&gt;[0] \n";
-print "\$line-&gt;[2][0] = $line-&gt;[2][0] \n";
+<pre class="src src-perl">$<span style="color: #40E0D0;">line</span> = [<span style="color: #ffa07a;">'solid'</span>, <span style="color: #ffa07a;">'black'</span>, [<span style="color: #ffa07a;">'1'</span>,<span style="color: #ffa07a;">'2'</span>,<span style="color: #ffa07a;">'3'</span>] , [<span style="color: #ffa07a;">'4'</span>, <span style="color: #ffa07a;">'5'</span>, <span style="color: #ffa07a;">'6'</span>]];
+print <span style="color: #ffa07a;">"\$line-&gt;[0] = $line-&gt;[0] \n"</span>;
+print <span style="color: #ffa07a;">"\$line-&gt;[2][0] = $line-&gt;[2][0] \n"</span>;
 </pre>
 </div>
 <p>
@@ -1214,8 +1214,8 @@ Perl5中，可用双冒号替代单引号<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-perl">$class'$member
-$class::$member
+<pre class="src src-perl">$<span style="color: #40E0D0;">class</span><span style="color: #ffa07a;">'$member</span>
+<span style="color: #ffa07a;">$class::$member</span>
 </pre>
 </div>
 
@@ -1231,7 +1231,7 @@ $class::$member
 <div class="org-src-container">
 
 <pre class="src src-perl">bless YeReference [,classname]
-YeReference是对被“祝福”的对象的引用，classname是可选项，指定对象获取方法的包名，其缺省值为当前包名。
+YeReference&#26159;&#23545;&#34987;&#8220;&#31069;&#31119;&#8221;&#30340;&#23545;&#35937;&#30340;&#24341;&#29992;&#65292;classname&#26159;&#21487;&#36873;&#39033;&#65292;&#25351;&#23450;&#23545;&#35937;&#33719;&#21462;&#26041;&#27861;&#30340;&#21253;&#21517;&#65292;&#20854;&#32570;&#30465;&#20540;&#20026;&#24403;&#21069;&#21253;&#21517;&#12290;
 </pre>
 </div>
 <p>
@@ -1240,17 +1240,17 @@ YeReference是对被“祝福”的对象的引用，classname是可选项，指
 </ul>
 <div class="org-src-container">
 
-<pre class="src src-perl"># 1、一定要在构造函数中初始化变量；
-# 2、一定要用my函数在方法中创建变量；
-# 3、一定不要在方法中使用local，除非真的想把变量传递给其它子程序；
-# 4、一定不要在类模块中使用全局变量。 
-  sub new {
-      my  $this= {} Create an anonymous hash, and #self points to it.
-          bless $this  # bless($this) # Connect the hash to the package Cocoa.
-          return $this; # Return the reference to the hash.
+<pre class="src src-perl"><span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">1&#12289;&#19968;&#23450;&#35201;&#22312;&#26500;&#36896;&#20989;&#25968;&#20013;&#21021;&#22987;&#21270;&#21464;&#37327;&#65307;</span>
+<span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">2&#12289;&#19968;&#23450;&#35201;&#29992;my&#20989;&#25968;&#22312;&#26041;&#27861;&#20013;&#21019;&#24314;&#21464;&#37327;&#65307;</span>
+<span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">3&#12289;&#19968;&#23450;&#19981;&#35201;&#22312;&#26041;&#27861;&#20013;&#20351;&#29992;local&#65292;&#38500;&#38750;&#30495;&#30340;&#24819;&#25226;&#21464;&#37327;&#20256;&#36882;&#32473;&#20854;&#23427;&#23376;&#31243;&#24207;&#65307;</span>
+<span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">4&#12289;&#19968;&#23450;&#19981;&#35201;&#22312;&#31867;&#27169;&#22359;&#20013;&#20351;&#29992;&#20840;&#23616;&#21464;&#37327;&#12290; </span>
+  <span style="color: #FBDE2D;">sub</span> <span style="color: #FF6400;">new</span> {
+      <span style="color: #8DA6CE;">my</span>  $<span style="color: #40E0D0;">this</span>= {} Create an anonymous hash, and <span style="color: #AEAEAE;">#self points to it.</span>
+          bless $<span style="color: #40E0D0;">this</span>  <span style="color: #AEAEAE;"># bless($this) # Connect the hash to the package Cocoa.</span>
+          <span style="color: #FBDE2D;">return</span> $<span style="color: #40E0D0;">this</span>; <span style="color: #AEAEAE;"># Return the reference to the hash.</span>
   }
 
-    ;1 #这一行必须为放在最后一行
+    ;1 <span style="color: #AEAEAE;">#&#36825;&#19968;&#34892;&#24517;&#39035;&#20026;&#25918;&#22312;&#26368;&#21518;&#19968;&#34892;</span>
 </pre>
 </div>
 <p>
@@ -1258,12 +1258,12 @@ YeReference是对被“祝福”的对象的引用，classname是可选项，指
 </p>
 <div class="org-src-container">
 
-<pre class="src src-perl">push (@INC,'pwd'); # 将当行路径加到include 下
-use Cocoa;  #在@INC 下搜寻Cocoa.pm 并include 之
-# 三种创建对象的方法
-$cup = new Cocoa;  创建一个对象
-$cup = Cocoa-&gt;new(); 
-$cup = Cocoa::new(); #    如果你是C程序员，可以用双冒号强制使用Cocoa包中的new()函数，如：
+<pre class="src src-perl">push (@<span style="color: #40E0D0;">INC</span>,<span style="color: #ffa07a;">'pwd'</span>); <span style="color: #AEAEAE;"># &#23558;&#24403;&#34892;&#36335;&#24452;&#21152;&#21040;include &#19979;</span>
+<span style="color: #FBDE2D;">use</span> <span style="color: #D8FA3C;">Cocoa</span>;  <span style="color: #AEAEAE;">#&#22312;@INC &#19979;&#25628;&#23547;Cocoa.pm &#24182;include &#20043;</span>
+<span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">&#19977;&#31181;&#21019;&#24314;&#23545;&#35937;&#30340;&#26041;&#27861;</span>
+$<span style="color: #40E0D0;">cup</span> = new Cocoa;  &#21019;&#24314;&#19968;&#20010;&#23545;&#35937;
+$<span style="color: #40E0D0;">cup</span> = Cocoa-&gt;new(); 
+$<span style="color: #40E0D0;">cup</span> = Cocoa::new(); <span style="color: #AEAEAE;">#    &#22914;&#26524;&#20320;&#26159;C&#31243;&#24207;&#21592;&#65292;&#21487;&#20197;&#29992;&#21452;&#20882;&#21495;&#24378;&#21046;&#20351;&#29992;Cocoa&#21253;&#20013;&#30340;new()&#20989;&#25968;&#65292;&#22914;&#65306;</span>
 </pre>
 </div>
 </div>
@@ -1291,9 +1291,9 @@ q[abc'd]等<br  />
 <li><a id="orgheadline73"></a>qq<br  /><div class="outline-text-4" id="text-orgheadline73">
 <div class="org-src-container">
 
-<pre class="src src-perl">  qq{hello}
-”hello“
-# 同义 ,即相当于把一段内容引起来
+<pre class="src src-perl">  qq<span style="color: #ffa07a;">{hello}</span>
+&#8221;hello&#8220;
+<span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">&#21516;&#20041; ,&#21363;&#30456;&#24403;&#20110;&#25226;&#19968;&#27573;&#20869;&#23481;&#24341;&#36215;&#26469;</span>
 </pre>
 </div>
 </div></li></ul>
@@ -1308,10 +1308,10 @@ split(' ','foo bar') 得到的结果是'foo','bar'<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-perl">@list = ("perl","Regular","network","web");
-#可以等价于:
-@list = qw(perl Regular network web);
-@list = qw{perl Regular network web};
+<pre class="src src-perl">@<span style="color: #40E0D0;">list</span> = (<span style="color: #ffa07a;">"perl"</span>,<span style="color: #ffa07a;">"Regular"</span>,<span style="color: #ffa07a;">"network"</span>,<span style="color: #ffa07a;">"web"</span>);
+<span style="color: #AEAEAE;">#</span><span style="color: #AEAEAE;">&#21487;&#20197;&#31561;&#20215;&#20110;:</span>
+@<span style="color: #40E0D0;">list</span> = qw<span style="color: #ffa07a;">(perl Regular network web)</span>;
+@<span style="color: #40E0D0;">list</span> = qw<span style="color: #ffa07a;">{perl Regular network web}</span>;
 </pre>
 </div>
 </div>
@@ -1321,19 +1321,19 @@ split(' ','foo bar') 得到的结果是'foo','bar'<br  />
 <div class="outline-text-3" id="text-orgheadline75">
 <div class="org-src-container">
 
-<pre class="src src-perl">     $myword = "cnangel";
-     $replaceword = qr(cnangel);
-     $finalword = "ok" if ($myword =~ $replaceword);
-# qr{whatever} 与qr(whaterver) 与/whatever/同
+<pre class="src src-perl">     $<span style="color: #40E0D0;">myword</span> = <span style="color: #ffa07a;">"cnangel"</span>;
+     $<span style="color: #40E0D0;">replaceword</span> = qr<span style="color: #ffa07a;">(cnangel)</span>;
+     $<span style="color: #40E0D0;">finalword</span> = <span style="color: #ffa07a;">"ok"</span> <span style="color: #FBDE2D;">if</span> ($<span style="color: #40E0D0;">myword</span> =~ $<span style="color: #40E0D0;">replaceword</span>);
+<span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">qr{whatever} &#19982;qr(whaterver) &#19982;/whatever/&#21516;</span>
 </pre>
 </div>
 
 <div class="org-src-container">
 
-<pre class="src src-perl">$v = "abc";
-$r=  qr{b};
-$match =  $v =~ $r;
-print "match" if $match==1 ;
+<pre class="src src-perl">$<span style="color: #40E0D0;">v</span> = <span style="color: #ffa07a;">"abc"</span>;
+$<span style="color: #40E0D0;">r</span>=  qr<span style="color: #ffa07a;">{b}</span>;
+$<span style="color: #40E0D0;">match</span> =  $<span style="color: #40E0D0;">v</span> =~ $<span style="color: #40E0D0;">r</span>;
+print <span style="color: #ffa07a;">"match"</span> <span style="color: #FBDE2D;">if</span> $<span style="color: #40E0D0;">match</span>==1 ;
 </pre>
 </div>
 </div>
@@ -1343,7 +1343,7 @@ print "match" if $match==1 ;
 <div class="outline-text-3" id="text-orgheadline76">
 <div class="org-src-container">
 
-<pre class="src src-perl">qx {cat /proc/version &gt;/tmp/c}
+<pre class="src src-perl">qx <span style="color: #ffa07a;">{cat /proc/version &gt;/tmp/c}</span>
 </pre>
 </div>
 </div>
@@ -1357,13 +1357,13 @@ print "match" if $match==1 ;
 <div class="outline-text-3" id="text-orgheadline78">
 <div class="org-src-container">
 
-<pre class="src src-perl">    sub sub1{
-        my ($var1 ,$var2)=@_;
-# 也可以写成
-my var1 = $_[0];
-my var2 = $_[1];
-#可以理解为参数存放在数组@_ 中，可以
-#用$_加下标 取其中某个元素
+<pre class="src src-perl">    <span style="color: #FBDE2D;">sub</span> <span style="color: #FF6400;">sub1</span>{
+        <span style="color: #8DA6CE;">my</span> ($<span style="color: #40E0D0;">var1</span> ,$<span style="color: #40E0D0;">var2</span>)=@<span style="color: #40E0D0;">_</span>;
+<span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">&#20063;&#21487;&#20197;&#20889;&#25104;</span>
+<span style="color: #8DA6CE;">my</span> var1 = $<span style="color: #40E0D0;">_</span>[0];
+<span style="color: #8DA6CE;">my</span> var2 = $<span style="color: #40E0D0;">_</span>[1];
+<span style="color: #AEAEAE;">#</span><span style="color: #AEAEAE;">&#21487;&#20197;&#29702;&#35299;&#20026;&#21442;&#25968;&#23384;&#25918;&#22312;&#25968;&#32452;@_ &#20013;&#65292;&#21487;&#20197;</span>
+<span style="color: #AEAEAE;">#</span><span style="color: #AEAEAE;">&#29992;$_&#21152;&#19979;&#26631; &#21462;&#20854;&#20013;&#26576;&#20010;&#20803;&#32032;</span>
     }
 </pre>
 </div>
@@ -1380,12 +1380,12 @@ $' 用来存放匹配内容之后的串<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-perl">$var ="beforehelloafter";
-$var =~ /h(el)lo/ ;
-print ($&amp; ,"\n"); # print  "hello"
-print ($`, "\n"); # print "before"
-print ($', "\n"); # print 'after'
-print ($1, "\n"); # print "el"
+<pre class="src src-perl">$<span style="color: #40E0D0;">var</span> =<span style="color: #ffa07a;">"beforehelloafter"</span>;
+$<span style="color: #40E0D0;">var</span> =~ <span style="color: #ffa07a;">/h(el)lo/</span> ;
+print ($&amp; ,<span style="color: #ffa07a;">"\n"</span>); <span style="color: #AEAEAE;"># print  "hello"</span>
+print ($`, <span style="color: #ffa07a;">"\n"</span>); <span style="color: #AEAEAE;"># print "before"</span>
+print ($', <span style="color: #ffa07a;">"\n"</span>); <span style="color: #AEAEAE;"># print 'after'</span>
+print ($<span style="color: #40E0D0;">1</span>, <span style="color: #ffa07a;">"\n"</span>); <span style="color: #AEAEAE;"># print "el"</span>
 </pre>
 </div>
 </div>
@@ -1401,9 +1401,9 @@ print ($1, "\n"); # print "el"
 <div class="outline-text-3" id="text-orgheadline81">
 <div class="org-src-container">
 
-<pre class="src src-perl">open(file , "/tmp/b.pl");
-while($line = &lt;file&gt;){
-    print ( "当前是第" , $. , "行,内容是:", $line,"\n"); 
+<pre class="src src-perl">open(file , <span style="color: #ffa07a;">"/tmp/b.pl"</span>);
+<span style="color: #FBDE2D;">while</span>($<span style="color: #40E0D0;">line</span> = &lt;<span style="color: #D8FA3C;">file</span>&gt;){
+    print ( <span style="color: #ffa07a;">"&#24403;&#21069;&#26159;&#31532;"</span> , $. , <span style="color: #ffa07a;">"&#34892;,&#20869;&#23481;&#26159;:"</span>, $<span style="color: #40E0D0;">line</span>,<span style="color: #ffa07a;">"\n"</span>); 
 }
 </pre>
 </div>
@@ -1426,18 +1426,18 @@ while 或foreach 读取一行内容， 而你没用一个变量存变读取到�
 </p>
 <div class="org-src-container">
 
-<pre class="src src-perl">open(file , "/tmp/b.pl");
-while($line = &lt;file&gt;){
-    print ( "当前是第" , $. , "行,内容是:", $line,"\n"); 
+<pre class="src src-perl">open(file , <span style="color: #ffa07a;">"/tmp/b.pl"</span>);
+<span style="color: #FBDE2D;">while</span>($<span style="color: #40E0D0;">line</span> = &lt;<span style="color: #D8FA3C;">file</span>&gt;){
+    print ( <span style="color: #ffa07a;">"&#24403;&#21069;&#26159;&#31532;"</span> , $. , <span style="color: #ffa07a;">"&#34892;,&#20869;&#23481;&#26159;:"</span>, $<span style="color: #40E0D0;">line</span>,<span style="color: #ffa07a;">"\n"</span>); 
 }
 </pre>
 </div>
 
 <div class="org-src-container">
 
-<pre class="src src-perl">open(file , "/tmp/b.pl");
-while( &lt;file&gt;){
- print ( "当前是第" , $. , "行,内容是:", $_,"\n"); 
+<pre class="src src-perl">open(file , <span style="color: #ffa07a;">"/tmp/b.pl"</span>);
+<span style="color: #FBDE2D;">while</span>( &lt;<span style="color: #D8FA3C;">file</span>&gt;){
+ print ( <span style="color: #ffa07a;">"&#24403;&#21069;&#26159;&#31532;"</span> , $. , <span style="color: #ffa07a;">"&#34892;,&#20869;&#23481;&#26159;:"</span>, $<span style="color: #40E0D0;">_</span>,<span style="color: #ffa07a;">"\n"</span>); 
 }
 </pre>
 </div>
@@ -1450,8 +1450,8 @@ while( &lt;file&gt;){
 </p>
 <div class="org-src-container">
 
-<pre class="src src-perl">open(file , "/tmp/b.pl");
-while( &lt;file&gt;){
+<pre class="src src-perl">open(file , <span style="color: #ffa07a;">"/tmp/b.pl"</span>);
+<span style="color: #FBDE2D;">while</span>( &lt;<span style="color: #D8FA3C;">file</span>&gt;){
     print ; 
 }
 </pre>
@@ -1492,11 +1492,11 @@ With your favorite finger<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-perl">{ # 注意到没，可以把一段代码放在{} 块中，而其中的local变量，在外不起作用
- local $/ = "%%\n";
+<pre class="src src-perl">{ <span style="color: #AEAEAE;"># &#27880;&#24847;&#21040;&#27809;&#65292;&#21487;&#20197;&#25226;&#19968;&#27573;&#20195;&#30721;&#25918;&#22312;{} &#22359;&#20013;&#65292;&#32780;&#20854;&#20013;&#30340;local&#21464;&#37327;&#65292;&#22312;&#22806;&#19981;&#36215;&#20316;&#29992;</span>
+ <span style="color: #8DA6CE;">local</span> $/ = <span style="color: #ffa07a;">"%%\n"</span>;
 
- open(QUOTE, "/tmp/a.java");)
- while (&lt;QUOTE&gt;) {
+ open(QUOTE, <span style="color: #ffa07a;">"/tmp/a.java"</span>);)
+ <span style="color: #FBDE2D;">while</span> (&lt;<span style="color: #D8FA3C;">QUOTE</span>&gt;) {
   chomp;
   print;
  }
@@ -1508,7 +1508,7 @@ With your favorite finger<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-perl">my $file = do { local $/; &lt;FILE&gt; };
+<pre class="src src-perl"><span style="color: #8DA6CE;">my</span> $<span style="color: #40E0D0;">file</span> = <span style="color: #FBDE2D;">do</span> { <span style="color: #8DA6CE;">local</span> $/; &lt;<span style="color: #D8FA3C;">FILE</span>&gt; };
 </pre>
 </div>
 <p>
@@ -1517,10 +1517,10 @@ With your favorite finger<br  />
 <div class="org-src-container">
 
 <pre class="src src-perl"> {
-local $/ = \2048; # 一次读取2k
+<span style="color: #8DA6CE;">local</span> $/ = \2048; <span style="color: #AEAEAE;"># &#19968;&#27425;&#35835;&#21462;2k</span>
 
-while (&lt;FILE&gt;) {
- # $_ contains the next 2048 bytes from FILE
+<span style="color: #FBDE2D;">while</span> (&lt;<span style="color: #D8FA3C;">FILE</span>&gt;) {
+ <span style="color: #AEAEAE;"># $_ contains the next 2048 bytes from FILE</span>
 }
 }
 </pre>
@@ -1533,13 +1533,13 @@ $\而与输出有关，即print 打印一个字符串时默认在其末尾添加
 </p>
 <div class="org-src-container">
 
-<pre class="src src-perl">       sub println{
-       local $\="\n";
-       print @_ ;
+<pre class="src src-perl">       <span style="color: #FBDE2D;">sub</span> <span style="color: #FF6400;">println</span>{
+       <span style="color: #8DA6CE;">local</span> $\=<span style="color: #ffa07a;">"\n"</span>;
+       print @<span style="color: #40E0D0;">_</span> ;
       }
-#比如，可以定义一个println()函数
- println("hello");
- println("world");
+<span style="color: #AEAEAE;">#</span><span style="color: #AEAEAE;">&#27604;&#22914;&#65292;&#21487;&#20197;&#23450;&#20041;&#19968;&#20010;println()&#20989;&#25968;</span>
+ println(<span style="color: #ffa07a;">"hello"</span>);
+ println(<span style="color: #ffa07a;">"world"</span>);
 </pre>
 </div>
 </div></li></ul>
@@ -1551,10 +1551,10 @@ $\而与输出有关，即print 打印一个字符串时默认在其末尾添加
 <div class="outline-text-3" id="text-orgheadline87">
 <div class="org-src-container">
 
-<pre class="src src-perl">my @arr = (1, 2, 3);
+<pre class="src src-perl"><span style="color: #8DA6CE;">my</span> @<span style="color: #40E0D0;">arr</span> = (1, 2, 3);
 
- print @arr;  # 打印123 
- print "@arr"; # 打印 “1 2 3" ,分隔符默认是空格，由$, 变量指定
+ print @<span style="color: #40E0D0;">arr</span>;  <span style="color: #AEAEAE;"># &#25171;&#21360;123 </span>
+ print <span style="color: #ffa07a;">"@arr"</span>; <span style="color: #AEAEAE;"># &#25171;&#21360; &#8220;1 2 3" ,&#20998;&#38548;&#31526;&#40664;&#35748;&#26159;&#31354;&#26684;&#65292;&#30001;$, &#21464;&#37327;&#25351;&#23450;</span>
 </pre>
 </div>
 </div>
@@ -1568,9 +1568,9 @@ $\而与输出有关，即print 打印一个字符串时默认在其末尾添加
 <div class="outline-text-3" id="text-orgheadline89">
 <div class="org-src-container">
 
-<pre class="src src-perl">   @v = 1 .. 10;
-   print (@v);
-# 定义从1到10的数组
+<pre class="src src-perl">   @<span style="color: #40E0D0;">v</span> = 1 .. 10;
+   print (@<span style="color: #40E0D0;">v</span>);
+<span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">&#23450;&#20041;&#20174;1&#21040;10&#30340;&#25968;&#32452;</span>
 </pre>
 </div>
 </div>
@@ -1597,10 +1597,10 @@ $\而与输出有关，即print 打印一个字符串时默认在其末尾添加
 </p>
 <div class="org-src-container">
 
-<pre class="src src-perl">open(FILE,"/tmp/a.java");
-while (&lt;FILE&gt;) {
-    if  ( m!/\*! .. m!\*/!){
-        print  $_ ;
+<pre class="src src-perl">open(FILE,<span style="color: #ffa07a;">"/tmp/a.java"</span>);
+<span style="color: #FBDE2D;">while</span> (&lt;<span style="color: #D8FA3C;">FILE</span>&gt;) {
+    <span style="color: #FBDE2D;">if</span>  ( m<span style="color: #ffa07a;">!/\*!</span> .. m<span style="color: #ffa07a;">!\*/!</span>){
+        print  $<span style="color: #40E0D0;">_</span> ;
      }
 }
 </pre>

@@ -169,9 +169,9 @@ Options的时候，Emacs会在home路径下产生.emacs文件，并把配置信�
 <li><a id="orgheadline7"></a>配置d:\.emacs文件或d:\_emacs<br  /><div class="outline-text-4" id="text-orgheadline7">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq server-auth-dir "d:\")
-(setq server-name "emacs-server-file")
-(server-start)
+<pre class="src src-emacs-lisp">(<span style="color: #FF6400;">setq</span> server-auth-dir <span style="color: #ffa07a;">"d:\")</span>
+<span style="color: #ffa07a;">(setq server-name "</span>emacs-server-file<span style="color: #ffa07a;">")</span>
+<span style="color: #ffa07a;">(server-start)</span>
 </pre>
 </div>
 
@@ -204,7 +204,7 @@ Options的时候，Emacs会在home路径下产生.emacs文件，并把配置信�
 <div class="org-src-container">
 
 <pre class="src src-c">[HKEY_CLASSES_ROOT\*\Shell\Open With Emacs\command]
-@="D:\\emacs-23.3\\bin\\emacsclientw.exe %0"
+@=<span style="color: #ffa07a;">"D:\\emacs-23.3\\bin\\emacsclientw.exe %0"</span>
 </pre>
 </div>
 <p>

@@ -307,26 +307,26 @@ mount -o remount /<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-sh">给某个用户设置权限：
+<pre class="src src-sh">&#32473;&#26576;&#20010;&#29992;&#25143;&#35774;&#32622;&#26435;&#38480;&#65306;
 setfacl -m u:joe:rx bobdir/
-给某个组设置权限：
+&#32473;&#26576;&#20010;&#32452;&#35774;&#32622;&#26435;&#38480;&#65306;
 setfacl -m g:aclgp1:rx bobdir/
-取消某项权限
+&#21462;&#28040;&#26576;&#39033;&#26435;&#38480;
 setfacl -x g:aclgp1 bobdir/
 </pre>
 </div>
 <div class="org-src-container">
 
-<pre class="src src-sh">setfacl命令可以识别以下的规则格式。
+<pre class="src src-sh">setfacl&#21629;&#20196;&#21487;&#20197;&#35782;&#21035;&#20197;&#19979;&#30340;&#35268;&#21017;&#26684;&#24335;&#12290;
 
 [d[efault]:] [u[ser]:]uid [:perms]
-指定用户的权限，文件所有者的权限（如果uid没有指定）。
+&#25351;&#23450;&#29992;&#25143;&#30340;&#26435;&#38480;&#65292;&#25991;&#20214;&#25152;&#26377;&#32773;&#30340;&#26435;&#38480;&#65288;&#22914;&#26524;uid&#27809;&#26377;&#25351;&#23450;&#65289;&#12290;
 
 [d[efault]:] g[roup]:gid [:perms]
-指定群组的权限，文件所有群组的权限（如果gid未指定）
+&#25351;&#23450;&#32676;&#32452;&#30340;&#26435;&#38480;&#65292;&#25991;&#20214;&#25152;&#26377;&#32676;&#32452;&#30340;&#26435;&#38480;&#65288;&#22914;&#26524;gid&#26410;&#25351;&#23450;&#65289;
 
 [d[efault]:] m[ask][:] [:perms]
-有效权限掩码
+&#26377;&#25928;&#26435;&#38480;&#25513;&#30721;
 
 [d[efault]:] o[ther] [:perms]
 </pre>
@@ -335,8 +335,8 @@ setfacl -x g:aclgp1 bobdir/
 
 <pre class="src src-sh">setfacl -m d:g:groupA:rwx /path/to/perms
 
-The -m flag stands for "Modify" the existing ACL. The little d in front of g
-makes it a "Default" ACL, so that in future if any file/dir gets created under
+The -m flag stands for <span style="color: #ffa07a;">"Modify"</span> the existing ACL. The little d<span style="color: #FBDE2D;"> in</span> front of g
+makes it a <span style="color: #ffa07a;">"Default"</span> ACL, so that<span style="color: #FBDE2D;"> in</span> future if any file/dir gets created under
 perms directory, groupA will have rwx permission on them too.
 </pre>
 </div>
@@ -358,10 +358,10 @@ Partition table区（分区表），占64个字节，硬盘中分区有多少以
 
 <div class="org-src-container">
 
-<pre class="src src-sh" id="orgsrcblock1">446+64+2=512
-dd &lt;/dev/sda bs=512 count=1 &gt;mbr512.img
-dd &lt;mbr512.img bs=446 count=1 &gt;/dev/sda
-dd &lt;mbr512.img bs=1 count=64 skip=446 seek=446 &gt;/dev/sda
+<pre class="src src-sh" id="orgsrcblock1">446+64+<span style="color: #40E0D0;">2</span>=512
+dd &lt;/dev/sda <span style="color: #40E0D0;">bs</span>=512 <span style="color: #40E0D0;">count</span>=1 &gt;mbr512.img
+dd &lt;mbr512.img <span style="color: #40E0D0;">bs</span>=446 <span style="color: #40E0D0;">count</span>=1 &gt;/dev/sda
+dd &lt;mbr512.img <span style="color: #40E0D0;">bs</span>=1 <span style="color: #40E0D0;">count</span>=64 <span style="color: #40E0D0;">skip</span>=446 <span style="color: #40E0D0;">seek</span>=446 &gt;/dev/sda
 </pre>
 </div>
 </div>
@@ -434,11 +434,11 @@ nmap -sT 192.168.1.101<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-sh">我的理解就是，长1440 宽900,深75
-root@jf /home/jixiuf # cvt 1440 900 75
-生成 Modeline这一行
-# 1440x900 74.98 Hz (CVT 1.30MA) hsync: 70.64 kHz; pclk: 136.75 MHz
-Modeline "1440x900_75.00"  136.75  1440 1536 1688 1936  900 903 909 942 -hsync +vsync
+<pre class="src src-sh">&#25105;&#30340;&#29702;&#35299;&#23601;&#26159;&#65292;&#38271;1440 &#23485;900,&#28145;75
+root@jf /home/jixiuf <span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">cvt 1440 900 75</span>
+&#29983;&#25104; Modeline&#36825;&#19968;&#34892;
+<span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">1440x900 74.98 Hz (CVT 1.30MA) hsync: 70.64 kHz; pclk: 136.75 MHz</span>
+Modeline <span style="color: #ffa07a;">"1440x900_75.00"</span>  136.75  1440 1536 1688 1936  900 903 909 942 -hsync +vsync
 </pre>
 </div>
 <p>
@@ -552,14 +552,14 @@ autoconf_min=`sed -n 's/^ <b>AC_PREREQ(\([0-9\.]</b>\)).*/\1/p' configure.ac`<br
 <div class="outline-text-3" id="text-orgheadline21">
 <div class="org-src-container">
 
-<pre class="src src-sh">#!/bin/sh
-a="Hello i am pass";
-if [ `echo $a | grep -c "pass" ` -gt 0 ]
-then
-  echo "Success"
-else
-  echo "Fail";
-fi
+<pre class="src src-sh"><span style="color: #AEAEAE;">#</span><span style="color: #AEAEAE;">!/bin/</span><span style="color: #FBDE2D;">sh</span>
+<span style="color: #40E0D0;">a</span>=<span style="color: #ffa07a;">"Hello i am pass"</span>;
+<span style="color: #FBDE2D;">if</span> [ <span style="color: #fa8072;">`echo $a | grep -c "pass" `</span> -gt 0 ]
+<span style="color: #FBDE2D;">then</span>
+  <span style="color: #F8F8F8;">echo</span> <span style="color: #ffa07a;">"Success"</span>
+<span style="color: #FBDE2D;">else</span>
+  <span style="color: #F8F8F8;">echo</span> <span style="color: #ffa07a;">"Fail"</span>;
+<span style="color: #FBDE2D;">fi</span>
 </pre>
 </div>
 </div>
@@ -570,10 +570,10 @@ fi
 <div class="outline-text-2" id="text-orgheadline23">
 <div class="org-src-container">
 
-<pre class="src src-sh"># 修改时间在10天前的都删除
-find . -maxdepth 1 -mtime +10 -exec rm  -rf {} \;
-# 修改时间在10天之内的都删除
-find . -maxdepth 1 -mtime -10 -exec rm  -rf {} \;
+<pre class="src src-sh"><span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">&#20462;&#25913;&#26102;&#38388;&#22312;10&#22825;&#21069;&#30340;&#37117;&#21024;&#38500;</span>
+find . -maxdepth 1 -mtime +10 -exec rm  -rf {} <span style="color: #ffa07a;">\;</span>
+<span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">&#20462;&#25913;&#26102;&#38388;&#22312;10&#22825;&#20043;&#20869;&#30340;&#37117;&#21024;&#38500;</span>
+find . -maxdepth 1 -mtime -10 -exec rm  -rf {} <span style="color: #ffa07a;">\;</span>
 </pre>
 </div>
 </div>
@@ -596,21 +596,21 @@ sed 's/^&#x2026;..//g' file        删除文件所有行的前5列<br  />
 <div class="outline-text-2" id="text-orgheadline25">
 <div class="org-src-container">
 
-<pre class="src src-sh" id="orgsrcblock2">  # 过滤掉开头是#的注释行
-for url in  `cat $MODULE_FILE_NAME|grep -v "^[ \t]*#" ` ; do
-    mod=`echo $url|sed 's|.*/||g'|awk -F '.git$' '{print $1}'`
-    abs_mod_path=$WORD_DIR/$mod
-    if [ -d $abs_mod_path ] &amp;&amp; [ -d $abs_mod_path/.git ] ; then
-        # 如果库已经存在
-        echo $abs_mod_path
-        cd $abs_mod_path
+<pre class="src src-sh" id="orgsrcblock2">  <span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">&#36807;&#28388;&#25481;&#24320;&#22836;&#26159;#&#30340;&#27880;&#37322;&#34892;</span>
+<span style="color: #FBDE2D;">for</span> url<span style="color: #FBDE2D;"> in</span>  <span style="color: #fa8072;">`cat $MODULE_FILE_NAME|grep -v "^[ \t]*#" `</span> ; <span style="color: #FBDE2D;">do</span>
+    <span style="color: #40E0D0;">mod</span>=<span style="color: #fa8072;">`echo $url|sed 's|.*/||g'|awk -F '.git$' '{print $1}'`</span>
+    <span style="color: #40E0D0;">abs_mod_path</span>=$<span style="color: #40E0D0;">WORD_DIR</span>/$<span style="color: #40E0D0;">mod</span>
+    <span style="color: #FBDE2D;">if</span> [ -d $<span style="color: #40E0D0;">abs_mod_path</span> ] &amp;&amp; [ -d $<span style="color: #40E0D0;">abs_mod_path</span>/.git ] ; <span style="color: #FBDE2D;">then</span>
+        <span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">&#22914;&#26524;&#24211;&#24050;&#32463;&#23384;&#22312;</span>
+        <span style="color: #F8F8F8;">echo</span> $<span style="color: #40E0D0;">abs_mod_path</span>
+        <span style="color: #F8F8F8;">cd</span> $<span style="color: #40E0D0;">abs_mod_path</span>
         git checkout master
         git pull
-    else
-        cd $WORD_DIR
-        git clone $url
-    fi
-done
+    <span style="color: #FBDE2D;">else</span>
+        <span style="color: #F8F8F8;">cd</span> $<span style="color: #40E0D0;">WORD_DIR</span>
+        git clone $<span style="color: #40E0D0;">url</span>
+    <span style="color: #FBDE2D;">fi</span>
+<span style="color: #FBDE2D;">done</span>
 </pre>
 </div>
 </div>

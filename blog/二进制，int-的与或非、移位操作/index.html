@@ -43,19 +43,19 @@
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c">  #include &lt;stdio.h&gt;
-  #include &lt;stdlib.h&gt;
-  #include &lt;malloc.h&gt;
-  #include &lt;string.h&gt;
+<pre class="src src-c"><span style="color: #7fffd4;">  #include</span> <span style="color: #ffa07a;">&lt;stdio.h&gt;</span>
+<span style="color: #7fffd4;">  #include</span> <span style="color: #ffa07a;">&lt;stdlib.h&gt;</span>
+<span style="color: #7fffd4;">  #include</span> <span style="color: #ffa07a;">&lt;malloc.h&gt;</span>
+<span style="color: #7fffd4;">  #include</span> <span style="color: #ffa07a;">&lt;string.h&gt;</span>
 
-/* 2、从异或的真值表可以看出，不管是0还是1，和0做异或保持原值不变，和1做异或得到原值的相反值。可以利用这个特性配合掩码实现某些位的翻转，例如 */
-  int main(int argc, char *argv[]){
-    unsigned int a, b, mask = 1U ; /* 1U=2#00000000 00000000 00000000 00000001 */
-    a = 0x12345678;                 /*  2#10010 00110100 01010110 01111000 */
-    b = a ^ mask; /*                    2#10010 00110100 01010110 01111001*/
-    printf ("%x\n",b);
-    printf ("%x\n",1U);
-    return 0;
+<span style="color: #AEAEAE;">/* </span><span style="color: #AEAEAE;">2&#12289;&#20174;&#24322;&#25110;&#30340;&#30495;&#20540;&#34920;&#21487;&#20197;&#30475;&#20986;&#65292;&#19981;&#31649;&#26159;0&#36824;&#26159;1&#65292;&#21644;0&#20570;&#24322;&#25110;&#20445;&#25345;&#21407;&#20540;&#19981;&#21464;&#65292;&#21644;1&#20570;&#24322;&#25110;&#24471;&#21040;&#21407;&#20540;&#30340;&#30456;&#21453;&#20540;&#12290;&#21487;&#20197;&#21033;&#29992;&#36825;&#20010;&#29305;&#24615;&#37197;&#21512;&#25513;&#30721;&#23454;&#29616;&#26576;&#20123;&#20301;&#30340;&#32763;&#36716;&#65292;&#20363;&#22914; </span><span style="color: #AEAEAE;">*/</span>
+  <span style="color: #8DA6CE;">int</span> <span style="color: #FF6400;">main</span>(<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">argc</span>, <span style="color: #8DA6CE;">char</span> *<span style="color: #40E0D0;">argv</span>[]){
+    <span style="color: #8DA6CE;">unsigned</span> <span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">a</span>, <span style="color: #40E0D0;">b</span>, <span style="color: #40E0D0;">mask</span> = 1U ; <span style="color: #AEAEAE;">/* </span><span style="color: #AEAEAE;">1U=2#00000000 00000000 00000000 00000001 </span><span style="color: #AEAEAE;">*/</span>
+    a = 0x12345678;                 <span style="color: #AEAEAE;">/*  </span><span style="color: #AEAEAE;">2#10010 00110100 01010110 01111000 </span><span style="color: #AEAEAE;">*/</span>
+    b = a ^ mask; <span style="color: #AEAEAE;">/*                    </span><span style="color: #AEAEAE;">2#10010 00110100 01010110 01111001</span><span style="color: #AEAEAE;">*/</span>
+    printf (<span style="color: #ffa07a;">"%x\n"</span>,b);
+    printf (<span style="color: #ffa07a;">"%x\n"</span>,1U);
+    <span style="color: #FBDE2D;">return</span> 0;
   }
 </pre>
 </div>
@@ -70,20 +70,20 @@
 
 <div class="org-src-container">
 
-<pre class="src src-c">#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
-#include &lt;malloc.h&gt;
-#include &lt;string.h&gt;
-int main(int argc, char *argv[]){
-  unsigned int a, b, mask = 0x0000ff00;
-  a = 0x12345678;               /* 针对a的对8～15位进行操作， */
-  b = (a &amp; mask) &gt;&gt; 8; /* 0x00000056 */
-  printf ("%x\n",b);
+<pre class="src src-c"><span style="color: #7fffd4;">#include</span> <span style="color: #ffa07a;">&lt;stdio.h&gt;</span>
+<span style="color: #7fffd4;">#include</span> <span style="color: #ffa07a;">&lt;stdlib.h&gt;</span>
+<span style="color: #7fffd4;">#include</span> <span style="color: #ffa07a;">&lt;malloc.h&gt;</span>
+<span style="color: #7fffd4;">#include</span> <span style="color: #ffa07a;">&lt;string.h&gt;</span>
+<span style="color: #8DA6CE;">int</span> <span style="color: #FF6400;">main</span>(<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">argc</span>, <span style="color: #8DA6CE;">char</span> *<span style="color: #40E0D0;">argv</span>[]){
+  <span style="color: #8DA6CE;">unsigned</span> <span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">a</span>, <span style="color: #40E0D0;">b</span>, <span style="color: #40E0D0;">mask</span> = 0x0000ff00;
+  a = 0x12345678;               <span style="color: #AEAEAE;">/* </span><span style="color: #AEAEAE;">&#38024;&#23545;a&#30340;&#23545;8&#65374;15&#20301;&#36827;&#34892;&#25805;&#20316;&#65292; </span><span style="color: #AEAEAE;">*/</span>
+  b = (a &amp; mask) &gt;&gt; 8; <span style="color: #AEAEAE;">/* </span><span style="color: #AEAEAE;">0x00000056 </span><span style="color: #AEAEAE;">*/</span>
+  printf (<span style="color: #ffa07a;">"%x\n"</span>,b);
 
-  b =( a&gt;&gt;8) &amp;(~((~0 )&lt;&lt;8 ));   /* ~0== ffffffff , (~0)&lt;&lt;8 == ffffff00 */
-  printf ("%x\n",b);
+  b =( a&gt;&gt;8) &amp;(~((~0 )&lt;&lt;8 ));   <span style="color: #AEAEAE;">/* </span><span style="color: #AEAEAE;">~0== ffffffff , (~0)&lt;&lt;8 == ffffff00 </span><span style="color: #AEAEAE;">*/</span>
+  printf (<span style="color: #ffa07a;">"%x\n"</span>,b);
 
-  return 0;
+  <span style="color: #FBDE2D;">return</span> 0;
 }
 </pre>
 </div>

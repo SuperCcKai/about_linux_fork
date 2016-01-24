@@ -103,13 +103,13 @@ Edit multiple regions in the same way simultaneously<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">;; 把下载的iedit.el 所在目录加到load-path 下
-;; 如 (add-to-list 'load-path "~/.emacs.d/site-lisp/iedit/")
-(require 'iedit)
-(setq-default iedit-toggle-key-default (kbd "C-;"))
-(autoload 'iedit-mode-from-isearch "iedit" "enable iedit-mode when in isearch mode")
-(define-key global-map iedit-toggle-key-default 'iedit-mode)
-(define-key global-map (kbd "C-[ [ a f") 'iedit-mode) ;iterm map C-; to this
+<pre class="src src-emacs-lisp"><span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">&#25226;&#19979;&#36733;&#30340;iedit.el &#25152;&#22312;&#30446;&#24405;&#21152;&#21040;load-path &#19979;</span>
+<span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">&#22914; (add-to-list 'load-path "~/.emacs.d/site-lisp/iedit/")</span>
+(<span style="color: #FBDE2D;">require</span> '<span style="color: #D8FA3C;">iedit</span>)
+(<span style="color: #FF6400;">setq-default</span> iedit-toggle-key-default (kbd <span style="color: #ffa07a;">"C-;"</span>))
+(<span style="color: #FF6400;">autoload</span> 'iedit-mode-from-isearch <span style="color: #ffa07a;">"iedit"</span> <span style="color: #ffa07a;">"enable iedit-mode when in isearch mode"</span>)
+(<span style="color: #FF6400;">define-key</span> global-map iedit-toggle-key-default 'iedit-mode)
+(<span style="color: #FF6400;">define-key</span> global-map (kbd <span style="color: #ffa07a;">"C-[ [ a f"</span>) 'iedit-mode) <span style="color: #AEAEAE;">;</span><span style="color: #AEAEAE;">iterm map C-; to this</span>
 (d'efine-key isearch-mode-map iedit-toggle-key-default 'iedit-mode-from-isearch)
 </pre>
 </div>

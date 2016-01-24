@@ -102,7 +102,7 @@ brew install emacs
 </p>
 <div class="org-src-container">
 
-<pre class="src src-sh">alias e='emacs -nw'
+<pre class="src src-sh"><span style="color: #F8F8F8;">alias</span> <span style="color: #40E0D0;">e</span>=<span style="color: #ffa07a;">'emacs -nw'</span>
 </pre>
 </div>
 </div>
@@ -118,7 +118,7 @@ brew install emacs
 <div class="org-src-container">
 
 <pre class="src src-sh">git clone  git://git.sv.gnu.org/emacs.git
-或者
+&#25110;&#32773;
 git clone  git://git.sv.gnu.org/emacs.git --depth=1
 </pre>
 </div>
@@ -129,18 +129,18 @@ git clone  git://git.sv.gnu.org/emacs.git --depth=1
 <div class="outline-text-3" id="text-orgheadline6">
 <div class="org-src-container">
 
-<pre class="src src-sh">  cd emacs
+<pre class="src src-sh">  <span style="color: #F8F8F8;">cd</span> emacs
   ./configure --without-ns
-  or
+  <span style="color: #FBDE2D;">or</span>
   ./configure --disable-ns-self-contained
   make
   make install
-#+BEGIN_QUOTE
+<span style="color: #AEAEAE;">#</span><span style="color: #AEAEAE;">+BEGIN_QUOTE</span>
     If you pass the --disable-ns-self-contained option to configure, the lisp
-    files will be installed under whatever 'prefix' is set to (defaults to
+    files will be installed under whatever <span style="color: #ffa07a;">'prefix'</span> is set to (defaults to
     /usr/local).  The bundle will be smaller, but depend on these resources (may
-    require 'sudo' for "make install").
-#+END_QUOTE
+    require <span style="color: #ffa07a;">'sudo'</span> for <span style="color: #ffa07a;">"make install"</span>).
+<span style="color: #AEAEAE;">#</span><span style="color: #AEAEAE;">+END_QUOTE</span>
 </pre>
 </div>
 </div>
@@ -150,7 +150,7 @@ git clone  git://git.sv.gnu.org/emacs.git --depth=1
 <div class="outline-text-3" id="text-orgheadline7">
 <div class="org-src-container">
 
-<pre class="src src-sh">cd emacs
+<pre class="src src-sh"><span style="color: #F8F8F8;">cd</span> emacs
  ./configure
  make
  make install
@@ -179,27 +179,27 @@ git clone  git://git.sv.gnu.org/emacs.git --depth=1
 </div>
 <div class="org-src-container">
 
-<pre class="src src-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;
-&lt;plist version="1.0"&gt;
-&lt;dict&gt;
-    &lt;key&gt;EnableGlobbing&lt;/key&gt;
-    &lt;true/&gt;
-    &lt;key&gt;KeepAlive&lt;/key&gt;
-    &lt;true/&gt;
-    &lt;key&gt;Label&lt;/key&gt;
-    &lt;string&gt;emacs-daemon&lt;/string&gt;
-    &lt;key&gt;ProgramArguments&lt;/key&gt;
-    &lt;array&gt;
-        &lt;string&gt;/usr/local/bin/emacs&lt;/string&gt;
-        &lt;string&gt;--daemon&lt;/string&gt;
-    &lt;/array&gt;
-    &lt;key&gt;RunAtLoad&lt;/key&gt;
-    &lt;true/&gt;
-    &lt;key&gt;WorkingDirectory&lt;/key&gt;
-    &lt;string&gt;/Users/&lt;/string&gt;
-&lt;/dict&gt;
-&lt;/plist&gt;
+<pre class="src src-xml">&lt;?<span style="color: #FBDE2D;">xml</span> <span style="color: #40E0D0;">version</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">1.0</span><span style="color: #ffa07a;">"</span> <span style="color: #40E0D0;">encoding</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">UTF-8</span><span style="color: #ffa07a;">"</span>?&gt;
+&lt;!<span style="color: #FBDE2D;">DOCTYPE</span> plist <span style="color: #FBDE2D;">PUBLIC</span> <span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">-//Apple//DTD PLIST 1.0//EN</span><span style="color: #ffa07a;">"</span> <span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">http://www.apple.com/DTDs/PropertyList-1.0.dtd</span><span style="color: #ffa07a;">"</span>&gt;
+&lt;<span style="color: #FF6400;">plist</span> <span style="color: #40E0D0;">version</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">1.0</span><span style="color: #ffa07a;">"</span>&gt;
+&lt;<span style="color: #FF6400;">dict</span>&gt;
+    &lt;<span style="color: #FF6400;">key</span>&gt;EnableGlobbing&lt;/<span style="color: #FF6400;">key</span>&gt;
+    &lt;<span style="color: #FF6400;">true</span>/&gt;
+    &lt;<span style="color: #FF6400;">key</span>&gt;KeepAlive&lt;/<span style="color: #FF6400;">key</span>&gt;
+    &lt;<span style="color: #FF6400;">true</span>/&gt;
+    &lt;<span style="color: #FF6400;">key</span>&gt;Label&lt;/<span style="color: #FF6400;">key</span>&gt;
+    &lt;<span style="color: #FF6400;">string</span>&gt;emacs-daemon&lt;/<span style="color: #FF6400;">string</span>&gt;
+    &lt;<span style="color: #FF6400;">key</span>&gt;ProgramArguments&lt;/<span style="color: #FF6400;">key</span>&gt;
+    &lt;<span style="color: #FF6400;">array</span>&gt;
+        &lt;<span style="color: #FF6400;">string</span>&gt;/usr/local/bin/emacs&lt;/<span style="color: #FF6400;">string</span>&gt;
+        &lt;<span style="color: #FF6400;">string</span>&gt;--daemon&lt;/<span style="color: #FF6400;">string</span>&gt;
+    &lt;/<span style="color: #FF6400;">array</span>&gt;
+    &lt;<span style="color: #FF6400;">key</span>&gt;RunAtLoad&lt;/<span style="color: #FF6400;">key</span>&gt;
+    &lt;<span style="color: #FF6400;">true</span>/&gt;
+    &lt;<span style="color: #FF6400;">key</span>&gt;WorkingDirectory&lt;/<span style="color: #FF6400;">key</span>&gt;
+    &lt;<span style="color: #FF6400;">string</span>&gt;/Users/&lt;/<span style="color: #FF6400;">string</span>&gt;
+&lt;/<span style="color: #FF6400;">dict</span>&gt;
+&lt;/<span style="color: #FF6400;">plist</span>&gt;
 </pre>
 </div>
 </div>
@@ -212,42 +212,42 @@ git clone  git://git.sv.gnu.org/emacs.git --depth=1
 </p>
 <div class="org-src-container">
 
-<pre class="src src-sh">#!/bin/sh
-# use default emacsclient in $PATH
-EMACSCLIENT=`command -v emacsclient`
-# if emacsclient major version ==22
-if [ ! -z $EMACSCLIENT ] &amp;&amp; [ `$EMACSCLIENT --version 2&gt;&amp;1| awk -F ' ' '/emacsclient/ {print $2}'|awk -F '.' '{print $1}'` = "22" ] ; then
-    EMACSCLIENT=""
-fi
-#  if EMACSCLIENT is empty
-if [  -z $EMACSCLIENT ] &amp;&amp; [ -x "~/bin/emacsclient"  ] &amp;&amp; [ `~/bin/emacsclient --version 2&gt;&amp;1| awk -F ' ' '/emacsclient/ {print $2}'|awk -F '.' '{print $1}'` != "22" ]; then
-    EMACSCLIENT="~/bin/emacsclient"
-fi
+<pre class="src src-sh"><span style="color: #AEAEAE;">#</span><span style="color: #AEAEAE;">!/bin/</span><span style="color: #FBDE2D;">sh</span>
+<span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">use default emacsclient in $PATH</span>
+<span style="color: #40E0D0;">EMACSCLIENT</span>=<span style="color: #fa8072;">`command -v emacsclient`</span>
+<span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">if emacsclient major version ==22</span>
+<span style="color: #FBDE2D;">if</span> [ ! -z $<span style="color: #40E0D0;">EMACSCLIENT</span> ] &amp;&amp; [ <span style="color: #fa8072;">`$EMACSCLIENT --version 2&gt;&amp;1| awk -F ' ' '/emacsclient/ {print $2}'|awk -F '.' '{print $1}'`</span> = <span style="color: #ffa07a;">"22"</span> ] ; <span style="color: #FBDE2D;">then</span>
+    <span style="color: #40E0D0;">EMACSCLIENT</span>=<span style="color: #ffa07a;">""</span>
+<span style="color: #FBDE2D;">fi</span>
+<span style="color: #AEAEAE;">#  </span><span style="color: #AEAEAE;">if EMACSCLIENT is empty</span>
+<span style="color: #FBDE2D;">if</span> [  -z $<span style="color: #40E0D0;">EMACSCLIENT</span> ] &amp;&amp; [ -x <span style="color: #ffa07a;">"~/bin/emacsclient"</span>  ] &amp;&amp; [ <span style="color: #fa8072;">`~/bin/emacsclient --version 2&gt;&amp;1| awk -F ' ' '/emacsclient/ {print $2}'|awk -F '.' '{print $1}'`</span> != <span style="color: #ffa07a;">"22"</span> ]; <span style="color: #FBDE2D;">then</span>
+    <span style="color: #40E0D0;">EMACSCLIENT</span>=<span style="color: #ffa07a;">"~/bin/emacsclient"</span>
+<span style="color: #FBDE2D;">fi</span>
 
-if [  -z $EMACSCLIENT ] &amp;&amp; [ -x "/usr/local/bin/emacsclient"  ] &amp;&amp; [ `/usr/local/bin/emacsclient --version 2&gt;&amp;1| awk -F ' ' '/emacsclient/ {print $2}'|awk -F '.' '{print $1}'` != "22" ]; then
-    EMACSCLIENT="/usr/local/bin/emacsclient"
-fi
-if [  -z $EMACSCLIENT ] &amp;&amp; [ -x "/usr/bin/emacsclient"  ] &amp;&amp; [ `/usr/bin/emacsclient --version 2&gt;&amp;1| awk -F ' ' '/emacsclient/ {print $2}'|awk -F '.' '{print $1}'` != "22" ]; then
-    EMACSCLIENT="/usr/bin/emacsclient"
-fi
+<span style="color: #FBDE2D;">if</span> [  -z $<span style="color: #40E0D0;">EMACSCLIENT</span> ] &amp;&amp; [ -x <span style="color: #ffa07a;">"/usr/local/bin/emacsclient"</span>  ] &amp;&amp; [ <span style="color: #fa8072;">`/usr/local/bin/emacsclient --version 2&gt;&amp;1| awk -F ' ' '/emacsclient/ {print $2}'|awk -F '.' '{print $1}'`</span> != <span style="color: #ffa07a;">"22"</span> ]; <span style="color: #FBDE2D;">then</span>
+    <span style="color: #40E0D0;">EMACSCLIENT</span>=<span style="color: #ffa07a;">"/usr/local/bin/emacsclient"</span>
+<span style="color: #FBDE2D;">fi</span>
+<span style="color: #FBDE2D;">if</span> [  -z $<span style="color: #40E0D0;">EMACSCLIENT</span> ] &amp;&amp; [ -x <span style="color: #ffa07a;">"/usr/bin/emacsclient"</span>  ] &amp;&amp; [ <span style="color: #fa8072;">`/usr/bin/emacsclient --version 2&gt;&amp;1| awk -F ' ' '/emacsclient/ {print $2}'|awk -F '.' '{print $1}'`</span> != <span style="color: #ffa07a;">"22"</span> ]; <span style="color: #FBDE2D;">then</span>
+    <span style="color: #40E0D0;">EMACSCLIENT</span>=<span style="color: #ffa07a;">"/usr/bin/emacsclient"</span>
+<span style="color: #FBDE2D;">fi</span>
 
-if [  -z $EMACSCLIENT ] &amp;&amp; [ -x "/Applications/Emacs.app/Contents/MacOS/bin/emacsclient"  ]; then
-    EMACSCLIENT="/Applications/Emacs.app/Contents/MacOS/bin/emacsclient"
-fi
+<span style="color: #FBDE2D;">if</span> [  -z $<span style="color: #40E0D0;">EMACSCLIENT</span> ] &amp;&amp; [ -x <span style="color: #ffa07a;">"/Applications/Emacs.app/Contents/MacOS/bin/emacsclient"</span>  ]; <span style="color: #FBDE2D;">then</span>
+    <span style="color: #40E0D0;">EMACSCLIENT</span>=<span style="color: #ffa07a;">"/Applications/Emacs.app/Contents/MacOS/bin/emacsclient"</span>
+<span style="color: #FBDE2D;">fi</span>
 
-if [  -z $EMACSCLIENT ] ; then
-    echo "can not find emacsclient exit"
-    exit 1
-fi
+<span style="color: #FBDE2D;">if</span> [  -z $<span style="color: #40E0D0;">EMACSCLIENT</span> ] ; <span style="color: #FBDE2D;">then</span>
+    <span style="color: #F8F8F8;">echo</span> <span style="color: #ffa07a;">"can not find emacsclient exit"</span>
+    <span style="color: #FBDE2D;">exit</span> 1
+<span style="color: #FBDE2D;">fi</span>
 
-if [ -z "$1" ]
-then
-    #/usr/bin/emacsclient -t  --socket-name=$HOME/.emacs.d/cache/emacs-server-file
-    $EMACSCLIENT -t  -nw
-else
-    #/usr/bin/emacsclient -t  --socket-name=$HOME/.emacs.d/cache/emacs-server-file "$@"
-    $EMACSCLIENT -t   -nw "$@"
-fi
+<span style="color: #FBDE2D;">if</span> [ -z <span style="color: #ffa07a;">"$1"</span> ]
+<span style="color: #FBDE2D;">then</span>
+    <span style="color: #AEAEAE;">#</span><span style="color: #AEAEAE;">/usr/bin/emacsclient -t  --socket-name=$HOME/.emacs.d/cache/emacs-server-file</span>
+    $<span style="color: #40E0D0;">EMACSCLIENT</span> -t  -nw
+<span style="color: #FBDE2D;">else</span>
+    <span style="color: #AEAEAE;">#</span><span style="color: #AEAEAE;">/usr/bin/emacsclient -t  --socket-name=$HOME/.emacs.d/cache/emacs-server-file "$@"</span>
+    $<span style="color: #40E0D0;">EMACSCLIENT</span> -t   -nw <span style="color: #ffa07a;">"$@"</span>
+<span style="color: #FBDE2D;">fi</span>
 </pre>
 </div>
 <p>
@@ -255,12 +255,12 @@ fi
 </p>
 <div class="org-src-container">
 
-<pre class="src src-sh">if [ -f /Applications/Emacs.app/Contents/MacOS/Emacs ]; then
-    export  ALTERNATE_EDITOR=/Applications/Emacs.app/Contents/MacOS/Emacs
-fi
-if [ -f /usr/local/bin/emacs ]; then
-    export  ALTERNATE_EDITOR=/usr/local/bin/emacs
-fi
+<pre class="src src-sh"><span style="color: #FBDE2D;">if</span> [ -f /Applications/Emacs.app/Contents/MacOS/Emacs ]; <span style="color: #FBDE2D;">then</span>
+    <span style="color: #F8F8F8;">export</span>  <span style="color: #40E0D0;">ALTERNATE_EDITOR</span>=/Applications/Emacs.app/Contents/MacOS/Emacs
+<span style="color: #FBDE2D;">fi</span>
+<span style="color: #FBDE2D;">if</span> [ -f /usr/local/bin/emacs ]; <span style="color: #FBDE2D;">then</span>
+    <span style="color: #F8F8F8;">export</span>  <span style="color: #40E0D0;">ALTERNATE_EDITOR</span>=/usr/local/bin/emacs
+<span style="color: #FBDE2D;">fi</span>
 </pre>
 </div>
 </div>
@@ -272,14 +272,14 @@ fi
 <div class="org-src-container">
 
 <pre class="src src-emacs-lisp">(add-to-list 'jka-compr-compression-info-list
-             ["\\.plist$"
-              "converting text XML to binary plist"
-              "plutil"
-              ("-convert" "binary1" "-o" "-" "-")
-              "converting binary plist to text XML"
-              "plutil"
-              ("-convert" "xml1" "-o" "-" "-")
-              nil nil "bplist"])
+             [<span style="color: #ffa07a;">"\\.plist$"</span>
+              <span style="color: #ffa07a;">"converting text XML to binary plist"</span>
+              <span style="color: #ffa07a;">"plutil"</span>
+              (<span style="color: #ffa07a;">"-convert"</span> <span style="color: #ffa07a;">"binary1"</span> <span style="color: #ffa07a;">"-o"</span> <span style="color: #ffa07a;">"-"</span> <span style="color: #ffa07a;">"-"</span>)
+              <span style="color: #ffa07a;">"converting binary plist to text XML"</span>
+              <span style="color: #ffa07a;">"plutil"</span>
+              (<span style="color: #ffa07a;">"-convert"</span> <span style="color: #ffa07a;">"xml1"</span> <span style="color: #ffa07a;">"-o"</span> <span style="color: #ffa07a;">"-"</span> <span style="color: #ffa07a;">"-"</span>)
+              <span style="color: #D8FA3C;">nil</span> <span style="color: #D8FA3C;">nil</span> <span style="color: #ffa07a;">"bplist"</span>])
 </pre>
 </div>
 </div>
@@ -292,29 +292,29 @@ fi
 </p>
 <div class="org-src-container">
 
-<pre class="src src-sh">#/bin/sh
-# mac 上 emacs 直接编辑二进制applescript
-if [ "$1" = "-d" ]; then
-    RANDOMFILE="applescript${RANDOM}.scpt"
-    cat /dev/stdin &gt;"/tmp/$RANDOMFILE"
-    osadecompile "/tmp/$RANDOMFILE"
-    rm "/tmp/$RANDOMFILE"
-else
-    RANDOMFILE="applescript${RANDOM}.scpt"
-    osacompile -o "/tmp/$RANDOMFILE"
-    cat "/tmp/$RANDOMFILE"
-    rm "/tmp/$RANDOMFILE"
-fi
+<pre class="src src-sh"><span style="color: #AEAEAE;">#</span><span style="color: #AEAEAE;">/bin/sh</span>
+<span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">mac &#19978; emacs &#30452;&#25509;&#32534;&#36753;&#20108;&#36827;&#21046;applescript</span>
+<span style="color: #FBDE2D;">if</span> [ <span style="color: #ffa07a;">"$1"</span> = <span style="color: #ffa07a;">"-d"</span> ]; <span style="color: #FBDE2D;">then</span>
+    <span style="color: #40E0D0;">RANDOMFILE</span>=<span style="color: #ffa07a;">"applescript${RANDOM}.scpt"</span>
+    cat /dev/stdin &gt;<span style="color: #ffa07a;">"/tmp/$RANDOMFILE"</span>
+    osadecompile <span style="color: #ffa07a;">"/tmp/$RANDOMFILE"</span>
+    rm <span style="color: #ffa07a;">"/tmp/$RANDOMFILE"</span>
+<span style="color: #FBDE2D;">else</span>
+    <span style="color: #40E0D0;">RANDOMFILE</span>=<span style="color: #ffa07a;">"applescript${RANDOM}.scpt"</span>
+    osacompile -o <span style="color: #ffa07a;">"/tmp/$RANDOMFILE"</span>
+    cat <span style="color: #ffa07a;">"/tmp/$RANDOMFILE"</span>
+    rm <span style="color: #ffa07a;">"/tmp/$RANDOMFILE"</span>
+<span style="color: #FBDE2D;">fi</span>
 </pre>
 </div>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">;; # mac 上 emacs 直接编辑二进制applescript
+<pre class="src src-emacs-lisp"><span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;"># mac &#19978; emacs &#30452;&#25509;&#32534;&#36753;&#20108;&#36827;&#21046;applescript</span>
 (add-to-list 'jka-compr-compression-info-list
-             `["\\.scpt\\'"
-               "converting text applescript to binary applescprit " ,(expand-file-name "applescript-helper.sh" "~/.emacs.d/bin/") nil
-               "converting binary applescript to text applescprit " ,(expand-file-name "applescript-helper.sh" "~/.emacs.d/bin/") ("-d")
-               nil t "FasdUAS"])
+             `[<span style="color: #ffa07a;">"\\.scpt\\'"</span>
+               <span style="color: #ffa07a;">"converting text applescript to binary applescprit "</span> ,(expand-file-name <span style="color: #ffa07a;">"applescript-helper.sh"</span> <span style="color: #ffa07a;">"~/.emacs.d/bin/"</span>) <span style="color: #D8FA3C;">nil</span>
+               <span style="color: #ffa07a;">"converting binary applescript to text applescprit "</span> ,(expand-file-name <span style="color: #ffa07a;">"applescript-helper.sh"</span> <span style="color: #ffa07a;">"~/.emacs.d/bin/"</span>) (<span style="color: #ffa07a;">"-d"</span>)
+               <span style="color: #D8FA3C;">nil</span> <span style="color: #D8FA3C;">t</span> <span style="color: #ffa07a;">"FasdUAS"</span>])
 </pre>
 </div>
 </div>
@@ -334,14 +334,14 @@ fi
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(global-set-key (kbd "C-[ [ a f") 'backward-kill-word) ;== "M-[ a f" iterm2 map to ctrl-;
+<pre class="src src-emacs-lisp">(<span style="color: #FF6400;">global-set-key</span> (kbd <span style="color: #ffa07a;">"C-[ [ a f"</span>) 'backward-kill-word) <span style="color: #AEAEAE;">;</span><span style="color: #AEAEAE;">== "M-[ a f" iterm2 map to ctrl-;</span>
 
-也可以对其他键进行绑定
-(global-set-key (kbd "C-[ [ a a") 'backward-kill-word) ;== "M-[ a a" iterm2 map to ctrl-backspace
-(global-set-key (kbd "C-[ [ a b") 'toggle-eshell-cd)   ;iterm2 map to ctrl-f2
-(global-set-key (kbd "C-[ [ a c") 'hippie-expand)   ; iterm map to ctrl-return
-(global-set-key (kbd "C-[ [ a d") 'bm-previous)   ; iterm map to ctrl-,
-(global-set-key (kbd "C-[ [ a e") 'goto-definition)   ; iterm map to ctrl-.
+&#20063;&#21487;&#20197;&#23545;&#20854;&#20182;&#38190;&#36827;&#34892;&#32465;&#23450;
+(<span style="color: #FF6400;">global-set-key</span> (kbd <span style="color: #ffa07a;">"C-[ [ a a"</span>) 'backward-kill-word) <span style="color: #AEAEAE;">;</span><span style="color: #AEAEAE;">== "M-[ a a" iterm2 map to ctrl-backspace</span>
+(<span style="color: #FF6400;">global-set-key</span> (kbd <span style="color: #ffa07a;">"C-[ [ a b"</span>) 'toggle-eshell-cd)   <span style="color: #AEAEAE;">;</span><span style="color: #AEAEAE;">iterm2 map to ctrl-f2</span>
+(<span style="color: #FF6400;">global-set-key</span> (kbd <span style="color: #ffa07a;">"C-[ [ a c"</span>) 'hippie-expand)   <span style="color: #AEAEAE;">; </span><span style="color: #AEAEAE;">iterm map to ctrl-return</span>
+(<span style="color: #FF6400;">global-set-key</span> (kbd <span style="color: #ffa07a;">"C-[ [ a d"</span>) 'bm-previous)   <span style="color: #AEAEAE;">; </span><span style="color: #AEAEAE;">iterm map to ctrl-,</span>
+(<span style="color: #FF6400;">global-set-key</span> (kbd <span style="color: #ffa07a;">"C-[ [ a e"</span>) 'goto-definition)   <span style="color: #AEAEAE;">; </span><span style="color: #AEAEAE;">iterm map to ctrl-.</span>
 </pre>
 </div>
 <p>
@@ -363,45 +363,45 @@ fi
 </p>
 <div class="org-src-container">
 
-<pre class="src src-applescript">-- -*- coding:utf-8 mode:applescript-*-
--- 打开 automator.app ，然后 文件  选择本目录下的EmcacClientOpenWith-InIterm2.app
--- 本文件只是其txt 格式的备份
--- http://superuser.com/questions/457484/how-to-open-emacs-from-macs-finder
--- https://gist.github.com/ambethia/304964#comment-799519
--- http://superuser.com/questions/662815/how-to-exec-command-in-iterm-2-from-applescript
--- 在Finder 中右键使用emacsclient 打开文件
---  这个需要用automator.app 存成app  ,用applescript.app 存成的app 不行
+<pre class="src src-applescript"><span style="color: #AEAEAE;">-- </span><span style="color: #AEAEAE;">-*- coding:utf-8 mode:applescript-*-</span>
+<span style="color: #AEAEAE;">-- </span><span style="color: #AEAEAE;">&#25171;&#24320; automator.app &#65292;&#28982;&#21518; &#25991;&#20214;  &#36873;&#25321;&#26412;&#30446;&#24405;&#19979;&#30340;EmcacClientOpenWith-InIterm2.app</span>
+<span style="color: #AEAEAE;">-- </span><span style="color: #AEAEAE;">&#26412;&#25991;&#20214;&#21482;&#26159;&#20854;txt &#26684;&#24335;&#30340;&#22791;&#20221;</span>
+<span style="color: #AEAEAE;">-- </span><span style="color: #AEAEAE;">http://superuser.com/questions/457484/how-to-open-emacs-from-macs-finder</span>
+<span style="color: #AEAEAE;">-- </span><span style="color: #AEAEAE;">https://gist.github.com/ambethia/304964#comment-799519</span>
+<span style="color: #AEAEAE;">-- </span><span style="color: #AEAEAE;">http://superuser.com/questions/662815/how-to-exec-command-in-iterm-2-from-applescript</span>
+<span style="color: #AEAEAE;">-- </span><span style="color: #AEAEAE;">&#22312;Finder &#20013;&#21491;&#38190;&#20351;&#29992;emacsclient &#25171;&#24320;&#25991;&#20214;</span>
+<span style="color: #AEAEAE;">--  </span><span style="color: #AEAEAE;">&#36825;&#20010;&#38656;&#35201;&#29992;automator.app &#23384;&#25104;app  ,&#29992;applescript.app &#23384;&#25104;&#30340;app &#19981;&#34892;</span>
 
--- em is my script wrapper for emacsclient
+<span style="color: #AEAEAE;">-- </span><span style="color: #AEAEAE;">em is my script wrapper for emacsclient</span>
 
--- #!/bin/sh
--- if [ -z "$1" ]
--- then
---     emacsclient -t
--- else
---     emacsclient -t   "$@"
--- fi
+<span style="color: #AEAEAE;">-- </span><span style="color: #AEAEAE;">#!/bin/sh</span>
+<span style="color: #AEAEAE;">-- </span><span style="color: #AEAEAE;">if [ -z "$1" ]</span>
+<span style="color: #AEAEAE;">-- </span><span style="color: #AEAEAE;">then</span>
+<span style="color: #AEAEAE;">--     </span><span style="color: #AEAEAE;">emacsclient -t</span>
+<span style="color: #AEAEAE;">-- </span><span style="color: #AEAEAE;">else</span>
+<span style="color: #AEAEAE;">--     </span><span style="color: #AEAEAE;">emacsclient -t   "$@"</span>
+<span style="color: #AEAEAE;">-- </span><span style="color: #AEAEAE;">fi</span>
 
 
-on run {input, parameters}
-    tell application "iTerm"
-        activate
-        if (count of terminals) = 0 then
-            set t to (make new terminal)
-        else
-            set t to current terminal
+<span style="color: #FBDE2D;">on</span> <span style="color: #FBDE2D;">run</span> {input, parameters}
+    <span style="color: #FBDE2D;">tell</span> <span style="color: #FBDE2D;">application</span> <span style="color: #ffa07a;">"iTerm"</span>
+        <span style="color: #FBDE2D;">activate</span>
+        <span style="color: #FBDE2D;">if</span> (<span style="color: #FBDE2D;">count</span> of terminals) = 0 <span style="color: #FBDE2D;">then</span>
+            <span style="color: #FBDE2D;">set</span> t <span style="color: #FBDE2D;">to</span> (make new terminal)
+        <span style="color: #FBDE2D;">else</span>
+            <span style="color: #FBDE2D;">set</span> t <span style="color: #FBDE2D;">to</span> <span style="color: #FF6400;">current</span> terminal
 
-        end if
-        tell t
-            set s to (make new session at the end of sessions)
-            tell s
-                -- em 命令是 上面注释的emacsclient 脚本，
-                -- exec command (("emacs \"" &amp; POSIX path of first item of input as text) &amp; "\"")
-                exec command (("em \"" &amp; POSIX path of first item of input as text) &amp; "\"")
-            end tell
-        end tell
-    end tell
-end run
+        <span style="color: #FBDE2D;">end</span> <span style="color: #FBDE2D;">if</span>
+        <span style="color: #FBDE2D;">tell</span> t
+            <span style="color: #FBDE2D;">set</span> s <span style="color: #FBDE2D;">to</span> (make new session at the <span style="color: #FBDE2D;">end</span> of sessions)
+            <span style="color: #FBDE2D;">tell</span> s
+                <span style="color: #AEAEAE;">-- </span><span style="color: #AEAEAE;">em &#21629;&#20196;&#26159; &#19978;&#38754;&#27880;&#37322;&#30340;emacsclient &#33050;&#26412;&#65292;</span>
+                <span style="color: #AEAEAE;">-- </span><span style="color: #AEAEAE;">exec command (("emacs \"" &amp; POSIX path of first item of input as text) &amp; "\"")</span>
+                exec command ((<span style="color: #ffa07a;">"em \"" &amp; POSIX path of first item of input as text) &amp; "</span>\<span style="color: #ffa07a;">""</span>)
+            <span style="color: #FBDE2D;">end</span> <span style="color: #FBDE2D;">tell</span>
+        <span style="color: #FBDE2D;">end</span> <span style="color: #FBDE2D;">tell</span>
+    <span style="color: #FBDE2D;">end</span> <span style="color: #FBDE2D;">tell</span>
+<span style="color: #FBDE2D;">end</span> <span style="color: #FBDE2D;">run</span>
 </pre>
 </div>
 <p>

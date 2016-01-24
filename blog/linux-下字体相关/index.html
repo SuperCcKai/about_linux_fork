@@ -65,7 +65,7 @@ fc-cache<br  />
 <div class="outline-text-2" id="text-orgheadline2">
 <div class="org-src-container">
 
-<pre class="src src-sh">cd /usr/share/fonts/windows_fonts/
+<pre class="src src-sh"><span style="color: #F8F8F8;">cd</span> /usr/share/fonts/windows_fonts/
 mkfontscale .
 mkfontdir .
 </pre>
@@ -91,18 +91,18 @@ dejavu的好处是 可以很容易的区分 0与o l与1<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq-default window-system-default-frame-alist
-              '( (x ;; if frame created on x display
-                  (background-color . "#0C1021")
+<pre class="src src-emacs-lisp">(<span style="color: #FF6400;">setq-default</span> window-system-default-frame-alist
+              '( (x <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">if frame created on x display</span>
+                  (background-color . <span style="color: #ffa07a;">"#0C1021"</span>)
                   (background-mode . dark)
-                  (border-color . "black")
-                  (cursor-color . "green")
-                  (foreground-color . "#F8F8F8")
-                  (mouse-color . "sienna1")
-                  (font . "DejaVu Sans Mono:pixelsize=15"))
-                 (nil ;; if on term
-                  (background-color . "black")
-                  (foreground-color . "green")
+                  (border-color . <span style="color: #ffa07a;">"black"</span>)
+                  (cursor-color . <span style="color: #ffa07a;">"green"</span>)
+                  (foreground-color . <span style="color: #ffa07a;">"#F8F8F8"</span>)
+                  (mouse-color . <span style="color: #ffa07a;">"sienna1"</span>)
+                  (font . <span style="color: #ffa07a;">"DejaVu Sans Mono:pixelsize=15"</span>))
+                 (<span style="color: #D8FA3C;">nil</span> <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">if on term</span>
+                  (background-color . <span style="color: #ffa07a;">"black"</span>)
+                  (foreground-color . <span style="color: #ffa07a;">"green"</span>)
                   )))
 </pre>
 </div>
@@ -114,16 +114,16 @@ dejavu的好处是 可以很容易的区分 0与o l与1<br  />
 <div class="org-src-container">
 
 <pre class="src src-sh">cat ~/.Xdefaults
-URxvt.font:xft:Courier New:pixelsize=18:antialias=false,xft:WenQuanYi Bitmap Song:pixelsize=16
+URxvt.font:xft:Courier New:<span style="color: #40E0D0;">pixelsize</span>=18:<span style="color: #40E0D0;">antialias</span>=false,xft:WenQuanYi Bitmap Song:<span style="color: #40E0D0;">pixelsize</span>=16
 </pre>
 </div>
 <div class="org-src-container">
 
 <pre class="src src-sh">cat /etx/X11/xorg.conf
-Section "Files"
-        FontPath "/usr/share/fonts/truetype/dejavu"
-        FontPath "/usr/share/fonts/truetype/corefonts"
-        FontPath "/usr/share/fonts/wqy-bitmapfont"
+Section <span style="color: #ffa07a;">"Files"</span>
+        FontPath <span style="color: #ffa07a;">"/usr/share/fonts/truetype/dejavu"</span>
+        FontPath <span style="color: #ffa07a;">"/usr/share/fonts/truetype/corefonts"</span>
+        FontPath <span style="color: #ffa07a;">"/usr/share/fonts/wqy-bitmapfont"</span>
 EndSection%
 </pre>
 </div>

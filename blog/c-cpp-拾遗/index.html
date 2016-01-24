@@ -221,8 +221,8 @@
 <div class="outline-text-2" id="text-orgheadline1">
 <div class="org-src-container">
 
-<pre class="src src-c">比如MAKE_MASK(3 )会生成  二进制的 00000111
-#define MAKE_MASK(n)  ((((int)1) &lt;&lt; (n)) -1)
+<pre class="src src-c">&#27604;&#22914;MAKE_MASK(3 )<span style="color: #8DA6CE;">&#20250;&#29983;&#25104;</span>  <span style="color: #40E0D0;">&#20108;&#36827;&#21046;&#30340;</span> 00000111
+<span style="color: #7fffd4;">#define</span> <span style="color: #FF6400;">MAKE_MASK</span>(<span style="color: #40E0D0;">n</span>)  ((((<span style="color: #8DA6CE;">int</span>)1) &lt;&lt; (n)) -1)
 </pre>
 </div>
 </div>
@@ -232,16 +232,16 @@
 <div class="outline-text-2" id="text-orgheadline2">
 <div class="org-src-container">
 
-<pre class="src src-c">if(flag)
-if(!flag)
-而非
-if(0==flag)
+<pre class="src src-c"><span style="color: #FBDE2D;">if</span>(flag)
+<span style="color: #FBDE2D;">if</span>(!flag)
+&#32780;&#38750;
+<span style="color: #FBDE2D;">if</span>(0==flag)
 
-判断指针非空用
-if(p==NULL) // NULL 定义的 #include&lt;cstdlib&gt;  或c的stdlib.h
-尽量少用:
-if(p)
-if(p==0)
+&#21028;&#26029;&#25351;&#38024;&#38750;&#31354;&#29992;
+<span style="color: #FBDE2D;">if</span>(p==<span style="color: #D8FA3C;">NULL</span>) <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">NULL &#23450;&#20041;&#30340; #include&lt;cstdlib&gt;  &#25110;c&#30340;stdlib.h</span>
+<span style="color: #D8FA3C;">&#23613;&#37327;&#23569;&#29992;</span>:
+<span style="color: #FBDE2D;">if</span>(p)
+<span style="color: #FBDE2D;">if</span>(p==0)
 </pre>
 </div>
 </div>
@@ -261,12 +261,12 @@ if(p==0)
 <div class="outline-text-2" id="text-orgheadline4">
 <div class="org-src-container">
 
-<pre class="src src-c++">   int i(1024);// 直接初始化
-   int i=1024; //复制初始化
+<pre class="src src-c++">   <span style="color: #8DA6CE;">int</span> <span style="color: #FF6400;">i</span>(1024);<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#30452;&#25509;&#21021;&#22987;&#21270;</span>
+   <span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">i</span>=1024; <span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#22797;&#21046;&#21021;&#22987;&#21270;</span>
 
-#include&lt;string&gt;
-std:string str="asfdasd";
-std:string str("asfdasd");
+<span style="color: #7fffd4;">#include</span><span style="color: #ffa07a;">&lt;string&gt;</span>
+<span style="color: #D8FA3C;">std</span>:<span style="color: #8DA6CE;">string</span> <span style="color: #40E0D0;">str</span>=<span style="color: #ffa07a;">"asfdasd"</span>;
+<span style="color: #D8FA3C;">std</span>:<span style="color: #8DA6CE;">string</span> <span style="color: #FF6400;">str</span>(<span style="color: #ffa07a;">"asfdasd"</span>);
 </pre>
 </div>
 </div>
@@ -280,19 +280,19 @@ std:string str("asfdasd");
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c++"> extern int i ;//声明i
- int i ;//声明 并定义,所以这是定义 ，不可以出现多次
- int i=2 ;//声明 并定义,并初始值
- 因为声明 不分配内存 所以不可以初始化，一旦有初始化的行为，则认为是定义，即便使用了ertern 也认为是定义而非声明
- extern int i =3; // 声明 定义 并初始化， 这里的extern 几乎无意义.
-定义之后可以再次出现 单独声明的语句， 但是不能出现
+<pre class="src src-c++"> <span style="color: #FBDE2D;">extern</span> <span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">i</span> ;<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#22768;&#26126;i</span>
+ <span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">i</span> ;<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#22768;&#26126; &#24182;&#23450;&#20041;,&#25152;&#20197;&#36825;&#26159;&#23450;&#20041; &#65292;&#19981;&#21487;&#20197;&#20986;&#29616;&#22810;&#27425;</span>
+ <span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">i</span>=2 ;<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#22768;&#26126; &#24182;&#23450;&#20041;,&#24182;&#21021;&#22987;&#20540;</span>
+ &#22240;&#20026;&#22768;&#26126; <span style="color: #8DA6CE;">&#19981;&#20998;&#37197;&#20869;&#23384;</span> <span style="color: #40E0D0;">&#25152;&#20197;&#19981;&#21487;&#20197;&#21021;&#22987;&#21270;</span>&#65292;&#19968;&#26086;&#26377;&#21021;&#22987;&#21270;&#30340;&#34892;&#20026;&#65292;&#21017;&#35748;&#20026;&#26159;&#23450;&#20041;&#65292;&#21363;&#20415;&#20351;&#29992;&#20102;ertern &#20063;&#35748;&#20026;&#26159;&#23450;&#20041;&#32780;&#38750;&#22768;&#26126;
+ <span style="color: #FBDE2D;">extern</span> <span style="color: #8DA6CE;">int</span> i =3; <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#22768;&#26126; &#23450;&#20041; &#24182;&#21021;&#22987;&#21270;&#65292; &#36825;&#37324;&#30340;extern &#20960;&#20046;&#26080;&#24847;&#20041;.</span>
+<span style="color: #8DA6CE;">&#23450;&#20041;&#20043;&#21518;&#21487;&#20197;&#20877;&#27425;&#20986;&#29616;</span> <span style="color: #40E0D0;">&#21333;&#29420;&#22768;&#26126;&#30340;&#35821;&#21477;</span>&#65292; &#20294;&#26159;&#19981;&#33021;&#20986;&#29616;
 </pre>
 </div>
 <div class="org-src-container">
 
-<pre class="src src-c++">int main(int argc, char *argv[]){
-  extern  string s;// 只是声明 ，编译会报错
-  std::cout &lt;&lt; s &lt;&lt; std::endl;
+<pre class="src src-c++"><span style="color: #8DA6CE;">int</span> <span style="color: #FF6400;">main</span>(<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">argc</span>, <span style="color: #8DA6CE;">char</span> *<span style="color: #40E0D0;">argv</span>[]){
+  <span style="color: #FBDE2D;">extern</span>  <span style="color: #8DA6CE;">string</span> <span style="color: #40E0D0;">s</span>;<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#21482;&#26159;&#22768;&#26126; &#65292;&#32534;&#35793;&#20250;&#25253;&#38169;</span>
+  <span style="color: #D8FA3C;">std</span>::cout &lt;&lt; s &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
 }
 </pre>
 </div>
@@ -334,16 +334,16 @@ const 引用 是指向 const对象的 引用 both ref and object are const<br  /
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c++">int i =1;
-int &amp;iRef=i;//正确
-int &amp;iRef2; //错
-int &amp;iref3=10;//错  10是常量
+<pre class="src src-c++"><span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">i</span> =1;
+<span style="color: #8DA6CE;">int</span> &amp;<span style="color: #40E0D0;">iRef</span>=i;<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#27491;&#30830;</span>
+<span style="color: #8DA6CE;">int</span> &amp;<span style="color: #40E0D0;">iRef2</span>; <span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#38169;</span>
+<span style="color: #8DA6CE;">int</span> &amp;<span style="color: #40E0D0;">iref3</span>=10;<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#38169;  10&#26159;&#24120;&#37327;</span>
 
-const  int i3=10;
-const  int &amp;i3ref=i3;//对
-int &amp;i3ref2=i3;//错 必须 加 const
+<span style="color: #FBDE2D;">const</span>  <span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">i3</span>=10;
+<span style="color: #FBDE2D;">const</span>  <span style="color: #8DA6CE;">int</span> &amp;<span style="color: #40E0D0;">i3ref</span>=i3;<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#23545;</span>
+<span style="color: #8DA6CE;">int</span> &amp;<span style="color: #40E0D0;">i3ref2</span>=i3;<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#38169; &#24517;&#39035; &#21152; const</span>
 
-const int &amp;i4=111;//对 ，const引用可以指向常量
+<span style="color: #FBDE2D;">const</span> <span style="color: #8DA6CE;">int</span> &amp;<span style="color: #40E0D0;">i4</span>=111;<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#23545; &#65292;const&#24341;&#29992;&#21487;&#20197;&#25351;&#21521;&#24120;&#37327;</span>
 </pre>
 </div>
 </div>
@@ -353,17 +353,17 @@ const int &amp;i4=111;//对 ，const引用可以指向常量
 <div class="outline-text-2" id="text-orgheadline8">
 <div class="org-src-container">
 
-<pre class="src src-c++">  enum Forms{shape=1,sphere,cylinder,polygon}
-  枚举的值后一个比前一个加1,除非显示初始化
-  shape=1 , sphere=2,cylinder=3,
+<pre class="src src-c++">  <span style="color: #FBDE2D;">enum</span> <span style="color: #8DA6CE;">Forms</span>{<span style="color: #40E0D0;">shape</span>=1,<span style="color: #40E0D0;">sphere</span>,<span style="color: #40E0D0;">cylinder</span>,<span style="color: #40E0D0;">polygon</span>}
+  <span style="color: #40E0D0;">&#26522;&#20030;&#30340;&#20540;&#21518;&#19968;&#20010;&#27604;&#21069;&#19968;&#20010;&#21152;1</span>,<span style="color: #40E0D0;">&#38500;&#38750;&#26174;&#31034;&#21021;&#22987;&#21270;</span>
+  shape=1 , <span style="color: #40E0D0;">sphere</span>=2,<span style="color: #40E0D0;">cylinder</span>=3,
 
-  枚举的值可以重复
-  enum Forms{shape=1,sphere,cylinder=2,polygon}
-  则shape=1 sphere=2 cylinder=2 polygon=3
- 定义成枚举后， 枚举跟int是不同类型
- 如
-Froms f1=shape; //ok
-Froms f2=2 ; // error
+  <span style="color: #40E0D0;">&#26522;&#20030;&#30340;&#20540;&#21487;&#20197;&#37325;&#22797;</span>
+  <span style="color: #FBDE2D;">enum</span> <span style="color: #8DA6CE;">Forms</span>{<span style="color: #40E0D0;">shape</span>=1,<span style="color: #40E0D0;">sphere</span>,<span style="color: #40E0D0;">cylinder</span>=2,<span style="color: #40E0D0;">polygon</span>}
+  &#21017;shape=1 sphere=2 cylinder=2 polygon=3
+ &#23450;&#20041;&#25104;&#26522;&#20030;&#21518;&#65292; &#26522;&#20030;&#36319;<span style="color: #8DA6CE;">int</span>&#26159;&#19981;&#21516;&#31867;&#22411;
+ &#22914;
+Froms f1=shape; <span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">ok</span>
+<span style="color: #8DA6CE;">Froms</span> <span style="color: #40E0D0;">f2</span>=2 ; <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">error</span>
 </pre>
 </div>
 </div>
@@ -376,8 +376,8 @@ Froms f2=2 ; // error
 <div class="outline-text-3" id="text-orgheadline9">
 <div class="org-src-container">
 
-<pre class="src src-c++">string::size_type len=  s.size();//ok
-int len=  s.size();//error, 但是我试了 编译运行都 可过， 但是不推荐
+<pre class="src src-c++"><span style="color: #D8FA3C;">string</span>::<span style="color: #8DA6CE;">size_type</span> <span style="color: #40E0D0;">len</span>=  s.size();<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">ok</span>
+<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">len</span>=  s.size();<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">error, &#20294;&#26159;&#25105;&#35797;&#20102; &#32534;&#35793;&#36816;&#34892;&#37117; &#21487;&#36807;&#65292; &#20294;&#26159;&#19981;&#25512;&#33616;</span>
 </pre>
 </div>
 </div>
@@ -390,18 +390,18 @@ int len=  s.size();//error, 但是我试了 编译运行都 可过， 但是不�
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c++">string str("hello");
-char c=str [1];
-std::cout &lt;&lt; c &lt;&lt; std::endl;
-str[1]='E';
-std::cout &lt;&lt; str &lt;&lt; std::endl;  // "hEllo"
+<pre class="src src-c++"><span style="color: #8DA6CE;">string</span> <span style="color: #FF6400;">str</span>(<span style="color: #ffa07a;">"hello"</span>);
+<span style="color: #8DA6CE;">char</span> <span style="color: #40E0D0;">c</span>=str [1];
+<span style="color: #D8FA3C;">std</span>::cout &lt;&lt; c &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
+str[1]=<span style="color: #ffa07a;">'E'</span>;
+<span style="color: #D8FA3C;">std</span>::cout &lt;&lt; str &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;  <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">"hEllo"</span>
 </pre>
 </div>
 <div class="org-src-container">
 
-<pre class="src src-c++">遍历
-for (string::size_type  i= 0; i &lt; str.size(); i++){
-  std::cout &lt;&lt; str[i] &lt;&lt; std::endl;
+<pre class="src src-c++">&#36941;&#21382;
+<span style="color: #FBDE2D;">for</span> (<span style="color: #D8FA3C;">string</span>::<span style="color: #8DA6CE;">size_type</span>  <span style="color: #40E0D0;">i</span>= 0; i &lt; str.size(); i++){
+  <span style="color: #D8FA3C;">std</span>::cout &lt;&lt; str[i] &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
  }
 </pre>
 </div>
@@ -412,14 +412,14 @@ for (string::size_type  i= 0; i &lt; str.size(); i++){
 <div class="outline-text-3" id="text-orgheadline11">
 <div class="org-src-container">
 
-<pre class="src src-c++">#include &lt;cctype&gt;
-// isdigit(int)
-// islower(int)
-// isupper
-// isalnum
-// isspace 这些函数也是在std::下的
-char c='d';
-std::cout &lt;&lt; isupper(c) &lt;&lt; std::endl;
+<pre class="src src-c++"><span style="color: #7fffd4;">#include</span> <span style="color: #ffa07a;">&lt;cctype&gt;</span>
+<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">isdigit(int)</span>
+<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">islower(int)</span>
+<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">isupper</span>
+<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">isalnum</span>
+<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">isspace &#36825;&#20123;&#20989;&#25968;&#20063;&#26159;&#22312;std::&#19979;&#30340;</span>
+<span style="color: #8DA6CE;">char</span> <span style="color: #40E0D0;">c</span>=<span style="color: #ffa07a;">'d'</span>;
+<span style="color: #D8FA3C;">std</span>::cout &lt;&lt; isupper(c) &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
 </pre>
 </div>
 </div>
@@ -435,25 +435,25 @@ vector&lt;int&gt; vector&lt;string&gt;则是数据类型<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c++">vector&lt;string&gt; v1;
-string s1("aaa");
-string s2("bbb");
+<pre class="src src-c++"><span style="color: #8DA6CE;">vector</span>&lt;<span style="color: #8DA6CE;">string</span>&gt; <span style="color: #40E0D0;">v1</span>;
+<span style="color: #8DA6CE;">string</span> <span style="color: #FF6400;">s1</span>(<span style="color: #ffa07a;">"aaa"</span>);
+<span style="color: #8DA6CE;">string</span> <span style="color: #FF6400;">s2</span>(<span style="color: #ffa07a;">"bbb"</span>);
 
 v1.push_back(s1);
 v1.push_back(s2);
-vector&lt;string&gt; v2(v1);
+<span style="color: #8DA6CE;">vector</span>&lt;<span style="color: #8DA6CE;">string</span>&gt; <span style="color: #FF6400;">v2</span>(v1);
 
-s1="ccc";//对s1的改变 变不会影响v1 v2中的元素
+s1=<span style="color: #ffa07a;">"ccc"</span>;<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#23545;s1&#30340;&#25913;&#21464; &#21464;&#19981;&#20250;&#24433;&#21709;v1 v2&#20013;&#30340;&#20803;&#32032;</span>
 
-// size_type类型的写法,不可以写成vector::size_type
-for (vector&lt;string&gt;::size_type i = 0; i&lt;v1.size(); i++) {
-  std::cout &lt;&lt; v1.at(i) &lt;&lt; std::endl;
- } // 打印后的是"aaa" "bbb",
-std::cout &lt;&lt; "" &lt;&lt; std::endl;
+<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">size_type&#31867;&#22411;&#30340;&#20889;&#27861;,&#19981;&#21487;&#20197;&#20889;&#25104;vector::size_type</span>
+<span style="color: #FBDE2D;">for</span> (<span style="color: #D8FA3C;">vector</span>&lt;<span style="color: #8DA6CE;">string</span>&gt;::<span style="color: #8DA6CE;">size_type</span> <span style="color: #40E0D0;">i</span> = 0; i&lt;v1.size(); i++) {
+  <span style="color: #D8FA3C;">std</span>::cout &lt;&lt; v1.at(i) &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
+ } <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#25171;&#21360;&#21518;&#30340;&#26159;"aaa" "bbb",</span>
+<span style="color: #D8FA3C;">std</span>::cout &lt;&lt; <span style="color: #ffa07a;">""</span> &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
 
-for (vector&lt;string&gt;::size_type i = 0; i&lt;v2.size(); i++) {
-  std::cout &lt;&lt; v2.at(i) &lt;&lt; std::endl;
- }// 打印后的是"aaa" "bbb",
+<span style="color: #FBDE2D;">for</span> (<span style="color: #D8FA3C;">vector</span>&lt;<span style="color: #8DA6CE;">string</span>&gt;::<span style="color: #8DA6CE;">size_type</span> <span style="color: #40E0D0;">i</span> = 0; i&lt;v2.size(); i++) {
+  <span style="color: #D8FA3C;">std</span>::cout &lt;&lt; v2.at(i) &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
+ }<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#25171;&#21360;&#21518;&#30340;&#26159;"aaa" "bbb",</span>
 </pre>
 </div>
 </div>
@@ -465,12 +465,12 @@ for (vector&lt;string&gt;::size_type i = 0; i&lt;v2.size(); i++) {
 <div class="outline-text-3" id="text-orgheadline15">
 <div class="org-src-container">
 
-<pre class="src src-c++"># vector1.begin()指向首元素，
-#vector1.end()指向尾元素的下一个位置
-iterator的解引用操作(*it)，取得指向元素的对象 如元素类型是string ,则返回的是string对象
-for (vector&lt;string&gt;::iterator it =  v1.begin();it!= v1.end() ; it++){
-  std::cout &lt;&lt; *it &lt;&lt; std::endl;
-  *it= *it+"hello";  //可以改变元素的值
+<pre class="src src-c++"><span style="color: #7fffd4;"># vector1</span>.begin()&#25351;&#21521;&#39318;&#20803;&#32032;&#65292;
+<span style="color: #7fffd4;">#vector1</span>.end()&#25351;&#21521;&#23614;&#20803;&#32032;&#30340;&#19979;&#19968;&#20010;&#20301;&#32622;
+iterator&#30340;&#35299;&#24341;&#29992;&#25805;&#20316;(*it)&#65292;&#21462;&#24471;&#25351;&#21521;&#20803;&#32032;&#30340;&#23545;&#35937; &#22914;&#20803;&#32032;&#31867;&#22411;&#26159;string ,&#21017;&#36820;&#22238;&#30340;&#26159;string&#23545;&#35937;
+<span style="color: #FBDE2D;">for</span> (<span style="color: #D8FA3C;">vector</span>&lt;<span style="color: #8DA6CE;">string</span>&gt;::<span style="color: #8DA6CE;">iterator</span> <span style="color: #40E0D0;">it</span> =  v1.begin();it!= v1.end() ; it++){
+  <span style="color: #D8FA3C;">std</span>::cout &lt;&lt; *it &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
+  *it= *it+<span style="color: #ffa07a;">"hello"</span>;  <span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#21487;&#20197;&#25913;&#21464;&#20803;&#32032;&#30340;&#20540;</span>
 }
 </pre>
 </div>
@@ -519,18 +519,18 @@ bitset 是模版， 不同的是区别只在长度 ，不在类型<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c++"> #include&lt;bitset&gt;
- using std::bitset;
- bitset&lt;32&gt; bs; //32 bits all 0
- bitset&lt;16&gt; bs2(0xffff);// 用0xffff的低16位填充
- bs[0]  指的是低位第一位
- bitset&lt;16&gt; bs2("11110001");
+<pre class="src src-c++"><span style="color: #7fffd4;"> #include</span><span style="color: #ffa07a;">&lt;bitset&gt;</span>
+ <span style="color: #FBDE2D;">using</span> <span style="color: #D8FA3C;">std</span>::<span style="color: #8DA6CE;">bitset</span>;
+ <span style="color: #8DA6CE;">bitset</span>&lt;32&gt; <span style="color: #40E0D0;">bs</span>; <span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">32 bits all 0</span>
+ <span style="color: #8DA6CE;">bitset</span>&lt;16&gt; <span style="color: #FF6400;">bs2</span>(0xffff);<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#29992;0xffff&#30340;&#20302;16&#20301;&#22635;&#20805;</span>
+ bs[0]  &#25351;&#30340;&#26159;&#20302;&#20301;&#31532;&#19968;&#20301;
+ <span style="color: #8DA6CE;">bitset</span>&lt;16&gt; bs2(<span style="color: #ffa07a;">"11110001"</span>);
 
-// bitset 提供 了 set all() any() ,count() test(pos)
-//  flip()  flip(pos) 按位取反
-// to_string to_ulong()
-//  std::cout &lt;&lt; bs &lt;&lt; std::endl; //可以直接 入 流
-// count() 返回有多少位是1，类型是size_t,在 #include&lt;cstddef&gt;中定义
+<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">bitset &#25552;&#20379; &#20102; set all() any() ,count() test(pos)</span>
+<span style="color: #AEAEAE;">//  </span><span style="color: #AEAEAE;">flip()  flip(pos) &#25353;&#20301;&#21462;&#21453;</span>
+<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">to_string to_ulong()</span>
+<span style="color: #AEAEAE;">//  </span><span style="color: #AEAEAE;">std::cout &lt;&lt; bs &lt;&lt; std::endl; //&#21487;&#20197;&#30452;&#25509; &#20837; &#27969;</span>
+<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">count() &#36820;&#22238;&#26377;&#22810;&#23569;&#20301;&#26159;1&#65292;&#31867;&#22411;&#26159;size_t,&#22312; #include&lt;cstddef&gt;&#20013;&#23450;&#20041;</span>
 </pre>
 </div>
 </div>
@@ -544,10 +544,10 @@ const对象 ,非const变量， 以及到运行时才知道其值的const变量�
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c++">const int i=10;
-int j=10;
-int arr[i+1];                   // 合法的 常量表达式(i是const变量， 编译其就知道其大小)
-int arr2[j];                   // 不合法的 (j不是const变量， 编译其不知道其大小)
+<pre class="src src-c++"><span style="color: #FBDE2D;">const</span> <span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">i</span>=10;
+<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">j</span>=10;
+<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">arr</span>[i+1];                   <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#21512;&#27861;&#30340; &#24120;&#37327;&#34920;&#36798;&#24335;(i&#26159;const&#21464;&#37327;&#65292; &#32534;&#35793;&#20854;&#23601;&#30693;&#36947;&#20854;&#22823;&#23567;)</span>
+<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">arr2</span>[j];                   <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#19981;&#21512;&#27861;&#30340; (j&#19981;&#26159;const&#21464;&#37327;&#65292; &#32534;&#35793;&#20854;&#19981;&#30693;&#36947;&#20854;&#22823;&#23567;)</span>
 </pre>
 </div>
 </div>
@@ -556,12 +556,12 @@ int arr2[j];                   // 不合法的 (j不是const变量， 编译其�
 <div class="outline-text-3" id="text-orgheadline21">
 <div class="org-src-container">
 
-<pre class="src src-c++">//数组初始化
-int array[3] = {1,2,3};
-int array[] = {1,2,3};//不指定数据长度也可，此时
-char array[] = "c";//等同于 char array[]= {'c','\0'}
-// 可以用sizeof(array) 取数组的长度(数组的长度编译期就确定了，所以sizeof可以做到, c语言里也一样)
-// 但是 数组作为参数传递时会自动转化成char* 指针， 它是没法取到数组的长度的
+<pre class="src src-c++"><span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#25968;&#32452;&#21021;&#22987;&#21270;</span>
+<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">array</span>[3] = {1,2,3};
+<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">array</span>[] = {1,2,3};<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#19981;&#25351;&#23450;&#25968;&#25454;&#38271;&#24230;&#20063;&#21487;&#65292;&#27492;&#26102;</span>
+<span style="color: #8DA6CE;">char</span> <span style="color: #40E0D0;">array</span>[] = <span style="color: #ffa07a;">"c"</span>;<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#31561;&#21516;&#20110; char array[]= {'c','\0'}</span>
+<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#21487;&#20197;&#29992;sizeof(array) &#21462;&#25968;&#32452;&#30340;&#38271;&#24230;(&#25968;&#32452;&#30340;&#38271;&#24230;&#32534;&#35793;&#26399;&#23601;&#30830;&#23450;&#20102;&#65292;&#25152;&#20197;sizeof&#21487;&#20197;&#20570;&#21040;, c&#35821;&#35328;&#37324;&#20063;&#19968;&#26679;)</span>
+<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#20294;&#26159; &#25968;&#32452;&#20316;&#20026;&#21442;&#25968;&#20256;&#36882;&#26102;&#20250;&#33258;&#21160;&#36716;&#21270;&#25104;char* &#25351;&#38024;&#65292; &#23427;&#26159;&#27809;&#27861;&#21462;&#21040;&#25968;&#32452;&#30340;&#38271;&#24230;&#30340;</span>
 </pre>
 </div>
 </div>
@@ -579,11 +579,11 @@ char array[] = "c";//等同于 char array[]= {'c','\0'}
 <div class="outline-text-3" id="text-orgheadline25">
 <div class="org-src-container">
 
-<pre class="src src-c++"> char *p1 ,*p2; //p1 p2 都是指针
+<pre class="src src-c++"> <span style="color: #8DA6CE;">char</span> *<span style="color: #40E0D0;">p1</span> ,*<span style="color: #40E0D0;">p2</span>; <span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">p1 p2 &#37117;&#26159;&#25351;&#38024;</span>
 
-//p1 是指针 ，p2是char ,//跟 char *p1 p2;写法一样
-// 建议使用 char *p1 ,而非 char* p1;
- char* p1 p2 ;
+<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">p1 &#26159;&#25351;&#38024; &#65292;p2&#26159;char ,//&#36319; char *p1 p2;&#20889;&#27861;&#19968;&#26679;</span>
+<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#24314;&#35758;&#20351;&#29992; char *p1 ,&#32780;&#38750; char* p1;</span>
+ <span style="color: #8DA6CE;">char</span>* <span style="color: #40E0D0;">p1</span> p2 ;
 </pre>
 </div>
 </div>
@@ -593,14 +593,14 @@ char array[] = "c";//等同于 char array[]= {'c','\0'}
 <div class="outline-text-3" id="text-orgheadline26">
 <div class="org-src-container">
 
-<pre class="src src-c++">//指针不可以用int类型的变量来赋值,
- //但可以用值为0 的const 变量来初始化
-int a =0;
-const b=0;
-int *p =a;//错误
-int *p2=b;// ok,
-int *p2=0;// ok,
-int *p2=NULL;// ok, #include&lt;cstdlib&gt;
+<pre class="src src-c++"><span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#25351;&#38024;&#19981;&#21487;&#20197;&#29992;int&#31867;&#22411;&#30340;&#21464;&#37327;&#26469;&#36171;&#20540;,</span>
+ <span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#20294;&#21487;&#20197;&#29992;&#20540;&#20026;0 &#30340;const &#21464;&#37327;&#26469;&#21021;&#22987;&#21270;</span>
+<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">a</span> =0;
+<span style="color: #FBDE2D;">const</span> <span style="color: #8DA6CE;">b</span>=0;
+<span style="color: #8DA6CE;">int</span> *<span style="color: #40E0D0;">p</span> =a;<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#38169;&#35823;</span>
+<span style="color: #8DA6CE;">int</span> *<span style="color: #40E0D0;">p2</span>=b;<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">ok,</span>
+<span style="color: #8DA6CE;">int</span> *<span style="color: #40E0D0;">p2</span>=0;<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">ok,</span>
+<span style="color: #8DA6CE;">int</span> *<span style="color: #40E0D0;">p2</span>=<span style="color: #D8FA3C;">NULL</span>;<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">ok, #include&lt;cstdlib&gt;</span>
 </pre>
 </div>
 </div>
@@ -610,9 +610,9 @@ int *p2=NULL;// ok, #include&lt;cstdlib&gt;
 <div class="outline-text-3" id="text-orgheadline27">
 <div class="org-src-container">
 
-<pre class="src src-c++">double d =10;
-double *pd=&amp;d;
-int *pi =pd;//error
+<pre class="src src-c++"><span style="color: #8DA6CE;">double</span> <span style="color: #40E0D0;">d</span> =10;
+<span style="color: #8DA6CE;">double</span> *<span style="color: #40E0D0;">pd</span>=&amp;d;
+<span style="color: #8DA6CE;">int</span> *<span style="color: #40E0D0;">pi</span> =pd;<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">error</span>
 </pre>
 </div>
 </div>
@@ -637,10 +637,10 @@ int *pi =pd;//error
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c++"> int i=1;
- int *p =&amp;i;
- p++; //往后移动一个int单位,指向下一个int
-*(p+4) ;//可以这样取p往后挪4个 int后所指对象的值
+<pre class="src src-c++"> <span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">i</span>=1;
+ <span style="color: #8DA6CE;">int</span> *<span style="color: #40E0D0;">p</span> =&amp;i;
+ p++; <span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#24448;&#21518;&#31227;&#21160;&#19968;&#20010;int&#21333;&#20301;,&#25351;&#21521;&#19979;&#19968;&#20010;int</span>
+*(p+4) ;<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#21487;&#20197;&#36825;&#26679;&#21462;p&#24448;&#21518;&#25386;4&#20010; int&#21518;&#25152;&#25351;&#23545;&#35937;&#30340;&#20540;</span>
 </pre>
 </div>
 </div>
@@ -651,39 +651,39 @@ int *pi =pd;//error
 </div><ul class="org-ul"><li><a id="orgheadline30"></a>指向const对象的指针<br  /><div class="outline-text-4" id="text-orgheadline30">
 <div class="org-src-container">
 
-<pre class="src src-c++">const double d=1;
-const double *p=&amp;d;//ok, 指向const 对象的指针 ,p 并不是const的
-double *p2 = &amp;d;//error ,普通的指针 不可以指向const对象
-void *p3 = &amp;d ;//错
-const void *p4=&amp;d;//ok
+<pre class="src src-c++"><span style="color: #FBDE2D;">const</span> <span style="color: #8DA6CE;">double</span> <span style="color: #40E0D0;">d</span>=1;
+<span style="color: #FBDE2D;">const</span> <span style="color: #8DA6CE;">double</span> *<span style="color: #40E0D0;">p</span>=&amp;d;<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">ok, &#25351;&#21521;const &#23545;&#35937;&#30340;&#25351;&#38024; ,p &#24182;&#19981;&#26159;const&#30340;</span>
+<span style="color: #8DA6CE;">double</span> *<span style="color: #40E0D0;">p2</span> = &amp;d;<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">error ,&#26222;&#36890;&#30340;&#25351;&#38024; &#19981;&#21487;&#20197;&#25351;&#21521;const&#23545;&#35937;</span>
+<span style="color: #8DA6CE;">void</span> *<span style="color: #40E0D0;">p3</span> = &amp;d ;<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#38169;</span>
+<span style="color: #FBDE2D;">const</span> <span style="color: #8DA6CE;">void</span> *<span style="color: #40E0D0;">p4</span>=&amp;d;<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">ok</span>
 
-允许 把非const对象的地址赋值给 指向const对象的指针
- double d2=2;
+&#20801;&#35768; &#25226;&#38750;const&#23545;&#35937;&#30340;&#22320;&#22336;&#36171;&#20540;&#32473; &#25351;&#21521;const&#23545;&#35937;&#30340;&#25351;&#38024;
+ <span style="color: #8DA6CE;">double</span> <span style="color: #40E0D0;">d2</span>=2;
 
-// 自以为指向const对象的指针
- const double *p5 =&amp;d2;     //ok, 但是不能通过*p5来改变 d2的值,虽然可以通过其他方法改d2的值
+<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#33258;&#20197;&#20026;&#25351;&#21521;const&#23545;&#35937;&#30340;&#25351;&#38024;</span>
+ <span style="color: #FBDE2D;">const</span> <span style="color: #8DA6CE;">double</span> *<span style="color: #40E0D0;">p5</span> =&amp;d2;     <span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">ok, &#20294;&#26159;&#19981;&#33021;&#36890;&#36807;*p5&#26469;&#25913;&#21464; d2&#30340;&#20540;,&#34429;&#28982;&#21487;&#20197;&#36890;&#36807;&#20854;&#20182;&#26041;&#27861;&#25913;d2&#30340;&#20540;</span>
 </pre>
 </div>
 </div></li>
 <li><a id="orgheadline31"></a>const 指针(本身的值不可变),即定义时必须初始化<br  /><div class="outline-text-4" id="text-orgheadline31">
 <div class="org-src-container">
 
-<pre class="src src-c++">int i=1;
-int *const p = &amp;i;// p 只能指向i , 不可以指向其他值了
+<pre class="src src-c++"><span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">i</span>=1;
+<span style="color: #8DA6CE;">int</span> *<span style="color: #FBDE2D;">const</span> <span style="color: #40E0D0;">p</span> = &amp;i;<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">p &#21482;&#33021;&#25351;&#21521;i , &#19981;&#21487;&#20197;&#25351;&#21521;&#20854;&#20182;&#20540;&#20102;</span>
 </pre>
 </div>
 </div></li>
 <li><a id="orgheadline32"></a>typedef 与const易引起歧义<br  /><div class="outline-text-4" id="text-orgheadline32">
 <div class="org-src-container">
 
-<pre class="src src-c++"> typedef string *pstring;
- const pstring ctr;
- 并不能简单的将 上述两句像宏一样 扩展成 const  *pstring ctr; ,这则说明ctr是指向const对象的指针
- 而实际 ctr 是const 指针 ,即， 不可以将ctr再指向其他对象 ，但可以改变当前所指对象的值
+<pre class="src src-c++"> <span style="color: #FBDE2D;">typedef</span> <span style="color: #8DA6CE;">string</span> *<span style="color: #8DA6CE;">pstring</span>;
+ <span style="color: #FBDE2D;">const</span> <span style="color: #8DA6CE;">pstring</span> <span style="color: #40E0D0;">ctr</span>;
+ &#24182;&#19981;&#33021;&#31616;&#21333;&#30340;&#23558; &#19978;&#36848;&#20004;&#21477;&#20687;&#23439;&#19968;&#26679; <span style="color: #8DA6CE;">&#25193;&#23637;&#25104;</span> <span style="color: #FBDE2D;">const</span>  *<span style="color: #40E0D0;">pstring</span> ctr; ,&#36825;&#21017;&#35828;&#26126;ctr&#26159;&#25351;&#21521;const&#23545;&#35937;&#30340;&#25351;&#38024;
+ &#32780;&#23454;&#38469; ctr <span style="color: #8DA6CE;">&#26159;const</span> <span style="color: #40E0D0;">&#25351;&#38024;</span> ,&#21363;&#65292; &#19981;&#21487;&#20197;&#23558;ctr&#20877;&#25351;&#21521;&#20854;&#20182;&#23545;&#35937; &#65292;&#20294;&#21487;&#20197;&#25913;&#21464;&#24403;&#21069;&#25152;&#25351;&#23545;&#35937;&#30340;&#20540;
 
-可以这样理解， typedef string *pstring ; 说明 这种类型的指向string的指针， 并没有const限定,
-const pstring ctr; 这里const只是限定ctr这个变量，  而非pstring这种类型， 这种类型在typedef时就已经确定了
-并不会因为在它前面加一个const 就改变
+&#21487;&#20197;&#36825;&#26679;&#29702;&#35299;&#65292; <span style="color: #FBDE2D;">typedef</span> string *pstring ; <span style="color: #8DA6CE;">&#35828;&#26126;</span> <span style="color: #40E0D0;">&#36825;&#31181;&#31867;&#22411;&#30340;&#25351;&#21521;string&#30340;&#25351;&#38024;</span>&#65292; &#24182;&#27809;&#26377;const&#38480;&#23450;,
+<span style="color: #FBDE2D;">const</span> <span style="color: #8DA6CE;">pstring</span> <span style="color: #40E0D0;">ctr</span>; &#36825;&#37324;const&#21482;&#26159;&#38480;&#23450;ctr&#36825;&#20010;&#21464;&#37327;&#65292;  &#32780;&#38750;pstring&#36825;&#31181;&#31867;&#22411;&#65292; &#36825;&#31181;&#31867;&#22411;&#22312;typedef&#26102;&#23601;&#24050;&#32463;&#30830;&#23450;&#20102;
+&#24182;&#19981;&#20250;&#22240;&#20026;&#22312;&#23427;&#21069;&#38754;&#21152;&#19968;&#20010;<span style="color: #FBDE2D;">const</span> &#23601;&#25913;&#21464;
 </pre>
 </div>
 </div></li></ul>
@@ -697,13 +697,13 @@ const pstring ctr; 这里const只是限定ctr这个变量，  而非pstring这�
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c++"> int *p = new int[10];//返回指向第一个元素的指针
+<pre class="src src-c++"> <span style="color: #8DA6CE;">int</span> *<span style="color: #40E0D0;">p</span> = <span style="color: #FBDE2D;">new</span> <span style="color: #8DA6CE;">int</span>[10];<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#36820;&#22238;&#25351;&#21521;&#31532;&#19968;&#20010;&#20803;&#32032;&#30340;&#25351;&#38024;</span>
 
-  动态数据允许长度为0
-int *p = new int[0];//ok, 返回不是空， 但是不能进行解引用操作， 似类于vector.end()的返回值
- int i[0]; //error
+  &#21160;&#24577;&#25968;&#25454;&#20801;&#35768;&#38271;&#24230;&#20026;0
+<span style="color: #8DA6CE;">int</span> *<span style="color: #40E0D0;">p</span> = <span style="color: #FBDE2D;">new</span> <span style="color: #8DA6CE;">int</span>[0];<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">ok, &#36820;&#22238;&#19981;&#26159;&#31354;&#65292; &#20294;&#26159;&#19981;&#33021;&#36827;&#34892;&#35299;&#24341;&#29992;&#25805;&#20316;&#65292; &#20284;&#31867;&#20110;vector.end()&#30340;&#36820;&#22238;&#20540;</span>
+ <span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">i</span>[0]; <span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">error</span>
 
- delete[] p; //释放
+ <span style="color: #FBDE2D;">delete</span>[] p; <span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#37322;&#25918;</span>
 </pre>
 </div>
 </div>
@@ -713,10 +713,10 @@ int *p = new int[0];//ok, 返回不是空， 但是不能进行解引用操作�
 <div class="outline-text-2" id="text-orgheadline36">
 <div class="org-src-container">
 
-<pre class="src src-c++">Item item;
-Item *p=&amp;item;
+<pre class="src src-c++"><span style="color: #8DA6CE;">Item</span> <span style="color: #40E0D0;">item</span>;
+<span style="color: #8DA6CE;">Item</span> *<span style="color: #40E0D0;">p</span>=&amp;item;
 item.sth().
-// 下面这两个操作同义
+<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#19979;&#38754;&#36825;&#20004;&#20010;&#25805;&#20316;&#21516;&#20041;</span>
 (*p).sth().
  p-&gt;sth().
 </pre>
@@ -728,18 +728,18 @@ item.sth().
 <div class="outline-text-2" id="text-orgheadline37">
 <div class="org-src-container">
 
-<pre class="src src-c++">int array[3]={1,2,3};
-sizeof(array); //12  3*sizeof(int)
+<pre class="src src-c++"><span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">array</span>[3]={1,2,3};
+<span style="color: #FBDE2D;">sizeof</span>(array); <span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">12  3*sizeof(int)</span>
 </pre>
 </div>
 
 <div class="org-src-container">
 
-<pre class="src src-c++">char *c=(char*) malloc(sizeof(char)*3);
-strcpy(c, "ab");
-std::cout &lt;&lt; sizeof(c) &lt;&lt; std::endl; // 4 返回指针的大小
-std::cout &lt;&lt; sizeof(*c) &lt;&lt; std::endl; //1 返回指针所指对象的大小
-// 上面两个都没有返回"ab"长度相关的内容
+<pre class="src src-c++"><span style="color: #8DA6CE;">char</span> *<span style="color: #40E0D0;">c</span>=(<span style="color: #8DA6CE;">char</span>*) malloc(<span style="color: #FBDE2D;">sizeof</span>(<span style="color: #8DA6CE;">char</span>)*3);
+strcpy(c, <span style="color: #ffa07a;">"ab"</span>);
+<span style="color: #D8FA3C;">std</span>::cout &lt;&lt; <span style="color: #FBDE2D;">sizeof</span>(c) &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl; <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">4 &#36820;&#22238;&#25351;&#38024;&#30340;&#22823;&#23567;</span>
+<span style="color: #D8FA3C;">std</span>::cout &lt;&lt; <span style="color: #FBDE2D;">sizeof</span>(*c) &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl; <span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">1 &#36820;&#22238;&#25351;&#38024;&#25152;&#25351;&#23545;&#35937;&#30340;&#22823;&#23567;</span>
+<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#19978;&#38754;&#20004;&#20010;&#37117;&#27809;&#26377;&#36820;&#22238;"ab"&#38271;&#24230;&#30456;&#20851;&#30340;&#20869;&#23481;</span>
 </pre>
 </div>
 </div>
@@ -749,11 +749,11 @@ std::cout &lt;&lt; sizeof(*c) &lt;&lt; std::endl; //1 返回指针所指对象�
 <div class="outline-text-2" id="text-orgheadline38">
 <div class="org-src-container">
 
-<pre class="src src-c++"> string *str= new string; //初始化为空串
- int *i = new int;   //内建类型 则未初始化
+<pre class="src src-c++"> <span style="color: #8DA6CE;">string</span> *<span style="color: #40E0D0;">str</span>= <span style="color: #FBDE2D;">new</span> <span style="color: #8DA6CE;">string</span>; <span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#21021;&#22987;&#21270;&#20026;&#31354;&#20018;</span>
+ <span style="color: #8DA6CE;">int</span> *<span style="color: #40E0D0;">i</span> = <span style="color: #FBDE2D;">new</span> <span style="color: #8DA6CE;">int</span>;   <span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#20869;&#24314;&#31867;&#22411; &#21017;&#26410;&#21021;&#22987;&#21270;</span>
 
 *
- int *j  = new int(); // 初始化为0
+ <span style="color: #8DA6CE;">int</span> *j  = <span style="color: #FBDE2D;">new</span> <span style="color: #8DA6CE;">int</span>(); <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#21021;&#22987;&#21270;&#20026;0</span>
 </pre>
 </div>
 </div>
@@ -766,12 +766,12 @@ std::cout &lt;&lt; sizeof(*c) &lt;&lt; std::endl; //1 返回指针所指对象�
 <div class="outline-text-3" id="text-orgheadline39">
 <div class="org-src-container">
 
-<pre class="src src-c++">double d =1;
-int i =2;
-i *= static_cast&lt;int&gt;(d) ;// 将d 强制转化成int ,然后与 int i相乘
+<pre class="src src-c++"><span style="color: #8DA6CE;">double</span> <span style="color: #40E0D0;">d</span> =1;
+<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">i</span> =2;
+i *= <span style="color: #FBDE2D;">static_cast</span>&lt;<span style="color: #8DA6CE;">int</span>&gt;(d) ;<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#23558;d &#24378;&#21046;&#36716;&#21270;&#25104;int ,&#28982;&#21518;&#19982; int i&#30456;&#20056;</span>
 
-void *p = &amp;d;
-double *pd= static_const&lt;double*&gt; (p);
+<span style="color: #8DA6CE;">void</span> *<span style="color: #40E0D0;">p</span> = &amp;d;
+<span style="color: #8DA6CE;">double</span> *<span style="color: #40E0D0;">pd</span>= <span style="color: #8DA6CE;">static_const</span>&lt;<span style="color: #8DA6CE;">double</span>*&gt; (p);
 </pre>
 </div>
 </div>
@@ -781,11 +781,11 @@ double *pd= static_const&lt;double*&gt; (p);
 <div class="outline-text-3" id="text-orgheadline40">
 <div class="org-src-container">
 
-<pre class="src src-c++">void test(char* c){}
-int main(){
-  const char* c;
-  test(c);// error
-  test(const_cast&lt;char*&gt;(c)); //ok
+<pre class="src src-c++"><span style="color: #8DA6CE;">void</span> <span style="color: #FF6400;">test</span>(<span style="color: #8DA6CE;">char</span>* <span style="color: #40E0D0;">c</span>){}
+<span style="color: #8DA6CE;">int</span> <span style="color: #FF6400;">main</span>(){
+  <span style="color: #FBDE2D;">const</span> <span style="color: #8DA6CE;">char</span>* <span style="color: #40E0D0;">c</span>;
+  test(c);<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">error</span>
+  test(<span style="color: #FBDE2D;">const_cast</span>&lt;<span style="color: #8DA6CE;">char</span>*&gt;(c)); <span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">ok</span>
 }
 </pre>
 </div>
@@ -796,19 +796,19 @@ int main(){
 <div class="outline-text-3" id="text-orgheadline41">
 <div class="org-src-container">
 
-<pre class="src src-c++">  int i =1;
- int *ip=&amp;i;
- //  转化之后， pc 依然是int* 类型的指针
- char *pc = reinterpret_cast&lt;char*&gt;(ip);
- string str(pc);////导致运行时error, 但是编译时不会出警告
-//用int 来初始化string
+<pre class="src src-c++">  <span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">i</span> =1;
+ <span style="color: #8DA6CE;">int</span> *<span style="color: #40E0D0;">ip</span>=&amp;i;
+ <span style="color: #AEAEAE;">//  </span><span style="color: #AEAEAE;">&#36716;&#21270;&#20043;&#21518;&#65292; pc &#20381;&#28982;&#26159;int* &#31867;&#22411;&#30340;&#25351;&#38024;</span>
+ <span style="color: #8DA6CE;">char</span> *<span style="color: #40E0D0;">pc</span> = <span style="color: #FBDE2D;">reinterpret_cast</span>&lt;<span style="color: #8DA6CE;">char</span>*&gt;(ip);
+ <span style="color: #8DA6CE;">string</span> <span style="color: #FF6400;">str</span>(pc);<span style="color: #AEAEAE;">////</span><span style="color: #AEAEAE;">&#23548;&#33268;&#36816;&#34892;&#26102;error, &#20294;&#26159;&#32534;&#35793;&#26102;&#19981;&#20250;&#20986;&#35686;&#21578;</span>
+<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#29992;int &#26469;&#21021;&#22987;&#21270;string</span>
 </pre>
 </div>
 <div class="org-src-container">
 
-<pre class="src src-c++">char* pc=(char*)ip;//  c++ 似乎不建议使用 这种c里使用的强转
-//效果与使用 reinterpret_cast一样
-//这种强转 具有 static_cast const_cast  reinterpret_cast 相同的功能,更笼统
+<pre class="src src-c++"><span style="color: #8DA6CE;">char</span>* <span style="color: #40E0D0;">pc</span>=(<span style="color: #8DA6CE;">char</span>*)ip;<span style="color: #AEAEAE;">//  </span><span style="color: #AEAEAE;">c++ &#20284;&#20046;&#19981;&#24314;&#35758;&#20351;&#29992; &#36825;&#31181;c&#37324;&#20351;&#29992;&#30340;&#24378;&#36716;</span>
+<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#25928;&#26524;&#19982;&#20351;&#29992; reinterpret_cast&#19968;&#26679;</span>
+<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#36825;&#31181;&#24378;&#36716; &#20855;&#26377; static_cast const_cast  reinterpret_cast &#30456;&#21516;&#30340;&#21151;&#33021;,&#26356;&#31548;&#32479;</span>
 </pre>
 </div>
 </div>
@@ -828,14 +828,14 @@ int main(){
 
 <div class="org-src-container">
 
-<pre class="src src-c++">int i=1;
-switch (i) {
-case 1:
-  int j =0; // 这句出错，
-  break;
-case 2:
-  int j =0;
-  break;
+<pre class="src src-c++"><span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">i</span>=1;
+<span style="color: #FBDE2D;">switch</span> (i) {
+<span style="color: #FBDE2D;">case</span> 1:
+  <span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">j</span> =0; <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#36825;&#21477;&#20986;&#38169;&#65292;</span>
+  <span style="color: #FBDE2D;">break</span>;
+<span style="color: #FBDE2D;">case</span> 2:
+  <span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">j</span> =0;
+  <span style="color: #FBDE2D;">break</span>;
 }
 </pre>
 </div>
@@ -859,21 +859,21 @@ case 2:
 <div class="outline-text-3" id="text-orgheadline47">
 <div class="org-src-container">
 
-<pre class="src src-c++">class Test
+<pre class="src src-c++"><span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">Test</span>
 {
-public:
-  Test(int parmI){
+<span style="color: #FBDE2D;">public</span>:
+  <span style="color: #FF6400;">Test</span>(<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">parmI</span>){
     i=parmI;
   }
-  bool test(int j) const{// const 是对this 对象的限制,意思是说此函数内不可以改变this对象的属性
-    // this-&gt;i=3; // 这种编译出错，尝试对const this对象进行修改
+  <span style="color: #8DA6CE;">bool</span> <span style="color: #FF6400;">test</span>(<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">j</span>) <span style="color: #FBDE2D;">const</span>{<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">const &#26159;&#23545;this &#23545;&#35937;&#30340;&#38480;&#21046;,&#24847;&#24605;&#26159;&#35828;&#27492;&#20989;&#25968;&#20869;&#19981;&#21487;&#20197;&#25913;&#21464;this&#23545;&#35937;&#30340;&#23646;&#24615;</span>
+    <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">this-&gt;i=3; // &#36825;&#31181;&#32534;&#35793;&#20986;&#38169;&#65292;&#23581;&#35797;&#23545;const this&#23545;&#35937;&#36827;&#34892;&#20462;&#25913;</span>
 
-    //  这两种方式是一样的
-    // return i==j;
-    return this-&gt;i==j;
+    <span style="color: #AEAEAE;">//  </span><span style="color: #AEAEAE;">&#36825;&#20004;&#31181;&#26041;&#24335;&#26159;&#19968;&#26679;&#30340;</span>
+    <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">return i==j;</span>
+    <span style="color: #FBDE2D;">return</span> <span style="color: #FBDE2D;">this</span>-&gt;i==j;
   }
-private:
-  int i;
+<span style="color: #FBDE2D;">private</span>:
+  <span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">i</span>;
 };
 </pre>
 </div>
@@ -891,13 +891,13 @@ private:
 <div class="outline-text-3" id="text-orgheadline50">
 <div class="org-src-container">
 
-<pre class="src src-c++">class Test
+<pre class="src src-c++"><span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">Test</span>
 {
-public:
-  Test(int parmI):i(parmI){
+<span style="color: #FBDE2D;">public</span>:
+  <span style="color: #FF6400;">Test</span>(<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">parmI</span>):<span style="color: #FF6400;">i</span>(parmI){
   }
-private:
-  int i;
+<span style="color: #FBDE2D;">private</span>:
+  <span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">i</span>;
 };
 </pre>
 </div>
@@ -911,23 +911,23 @@ private:
 <div class="outline-text-3" id="text-orgheadline52">
 <div class="org-src-container">
 
-<pre class="src src-c++">class Name
+<pre class="src src-c++"><span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">Name</span>
 {
-public:
-  Name(string &amp;str){
+<span style="color: #FBDE2D;">public</span>:
+  <span style="color: #FF6400;">Name</span>(<span style="color: #8DA6CE;">string</span> &amp;<span style="color: #40E0D0;">str</span>){
 
   }
-  void copy(Name n){           // 接受一个Name类型
-    std::cout &lt;&lt; "it works" &lt;&lt; std::endl;
+  <span style="color: #8DA6CE;">void</span> <span style="color: #FF6400;">copy</span>(<span style="color: #8DA6CE;">Name</span> <span style="color: #40E0D0;">n</span>){           <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#25509;&#21463;&#19968;&#20010;Name&#31867;&#22411;</span>
+    <span style="color: #D8FA3C;">std</span>::cout &lt;&lt; <span style="color: #ffa07a;">"it works"</span> &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
   }
 };
- int main(int argc, char *argv[])
+ <span style="color: #8DA6CE;">int</span> <span style="color: #FF6400;">main</span>(<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">argc</span>, <span style="color: #8DA6CE;">char</span> *<span style="color: #40E0D0;">argv</span>[])
  {
-   string str=string("hello");
-   string world=string("world");
-   Name name(str);
-   name.copy(world);  // 传过来的是string 类型， 但是copy()接受的是Name,编译器会自动用string调用Name的相应构造函数
-   return 0;
+   <span style="color: #8DA6CE;">string</span> <span style="color: #40E0D0;">str</span>=string(<span style="color: #ffa07a;">"hello"</span>);
+   <span style="color: #8DA6CE;">string</span> <span style="color: #40E0D0;">world</span>=string(<span style="color: #ffa07a;">"world"</span>);
+   <span style="color: #8DA6CE;">Name</span> <span style="color: #FF6400;">name</span>(str);
+   name.copy(world);  <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#20256;&#36807;&#26469;&#30340;&#26159;string &#31867;&#22411;&#65292; &#20294;&#26159;copy()&#25509;&#21463;&#30340;&#26159;Name,&#32534;&#35793;&#22120;&#20250;&#33258;&#21160;&#29992;string&#35843;&#29992;Name&#30340;&#30456;&#24212;&#26500;&#36896;&#20989;&#25968;</span>
+   <span style="color: #FBDE2D;">return</span> 0;
  }
 </pre>
 </div>
@@ -935,10 +935,10 @@ public:
 <ul class="org-ul"><li><a id="orgheadline53"></a>抑制构造函数隐匿转换<br  /><div class="outline-text-4" id="text-orgheadline53">
 <div class="org-src-container">
 
-<pre class="src src-c++">class Name
+<pre class="src src-c++"><span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">Name</span>
 {
-public:
-  explicit Name(string &amp;str){
+<span style="color: #FBDE2D;">public</span>:
+  <span style="color: #FBDE2D;">explicit</span> <span style="color: #FF6400;">Name</span>(<span style="color: #8DA6CE;">string</span> &amp;<span style="color: #40E0D0;">str</span>){
   }
 };
 </pre>
@@ -961,15 +961,15 @@ public:
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c++"> 以下两种重载是  不 允许的
-string getj(const int pi){
+<pre class="src src-c++"> &#20197;&#19979;&#20004;&#31181;&#37325;&#36733;&#26159;  &#19981; &#20801;&#35768;&#30340;
+<span style="color: #8DA6CE;">string</span> <span style="color: #FF6400;">getj</span>(<span style="color: #FBDE2D;">const</span> <span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">pi</span>){
 }
-string getj(int pi){
+<span style="color: #8DA6CE;">string</span> <span style="color: #FF6400;">getj</span>(<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">pi</span>){
 }
 
-string getj(const Test pi){
+<span style="color: #8DA6CE;">string</span> <span style="color: #FF6400;">getj</span>(<span style="color: #FBDE2D;">const</span> <span style="color: #8DA6CE;">Test</span> <span style="color: #40E0D0;">pi</span>){
 }
-string getj(Test pi){
+<span style="color: #8DA6CE;">string</span> <span style="color: #FF6400;">getj</span>(<span style="color: #8DA6CE;">Test</span> <span style="color: #40E0D0;">pi</span>){
 }
 </pre>
 </div>
@@ -977,19 +977,19 @@ string getj(Test pi){
 <li><a id="orgheadline57"></a>对于引用形参和指针形参 可以根据 是否const 来区分两个函数<br  /><div class="outline-text-4" id="text-orgheadline57">
 <div class="org-src-container">
 
-<pre class="src src-c++">// 以下两种重载是允许的
- string getj(const int *pi){
-   return str;
+<pre class="src src-c++"><span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#20197;&#19979;&#20004;&#31181;&#37325;&#36733;&#26159;&#20801;&#35768;&#30340;</span>
+ <span style="color: #8DA6CE;">string</span> <span style="color: #FF6400;">getj</span>(<span style="color: #FBDE2D;">const</span> <span style="color: #8DA6CE;">int</span> *<span style="color: #40E0D0;">pi</span>){
+   <span style="color: #FBDE2D;">return</span> str;
  }
- string getj(int *pi){
-   return str;
+ <span style="color: #8DA6CE;">string</span> <span style="color: #FF6400;">getj</span>(<span style="color: #8DA6CE;">int</span> *<span style="color: #40E0D0;">pi</span>){
+   <span style="color: #FBDE2D;">return</span> str;
  }
 
- string getj(const int &amp;pi){
-   return str;
+ <span style="color: #8DA6CE;">string</span> <span style="color: #FF6400;">getj</span>(<span style="color: #FBDE2D;">const</span> <span style="color: #8DA6CE;">int</span> &amp;<span style="color: #40E0D0;">pi</span>){
+   <span style="color: #FBDE2D;">return</span> str;
  }
- string getj(int &amp;pi){
-   return str;
+ <span style="color: #8DA6CE;">string</span> <span style="color: #FF6400;">getj</span>(<span style="color: #8DA6CE;">int</span> &amp;<span style="color: #40E0D0;">pi</span>){
+   <span style="color: #FBDE2D;">return</span> str;
  }
 </pre>
 </div>
@@ -1004,12 +1004,12 @@ string getj(Test pi){
 <div class="outline-text-2" id="text-orgheadline61">
 <div class="org-src-container">
 
-<pre class="src src-c++">typedef bool (*compFun) (const string &amp;,const string);
- // 以下两种方式 效果相同
- compFun comF1= lengComp;
- compFun comF2= &amp;lengComp;
+<pre class="src src-c++"><span style="color: #FBDE2D;">typedef</span> <span style="color: #8DA6CE;">bool</span> (*<span style="color: #8DA6CE;">compFun</span>) (<span style="color: #FBDE2D;">const</span> <span style="color: #8DA6CE;">string</span> &amp;,<span style="color: #FBDE2D;">const</span> <span style="color: #8DA6CE;">string</span>);
+ <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#20197;&#19979;&#20004;&#31181;&#26041;&#24335; &#25928;&#26524;&#30456;&#21516;</span>
+ <span style="color: #8DA6CE;">compFun</span> <span style="color: #40E0D0;">comF1</span>= lengComp;
+ <span style="color: #8DA6CE;">compFun</span> <span style="color: #40E0D0;">comF2</span>= &amp;lengComp;
 
-//调用 的时候 以下效果也相同
+<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#35843;&#29992; &#30340;&#26102;&#20505; &#20197;&#19979;&#25928;&#26524;&#20063;&#30456;&#21516;</span>
 compF1(str1,str2);
 (*compF1)(str1,str2);
 </pre>
@@ -1137,46 +1137,46 @@ fstream sstring中定义的类型都是从iostream中定义的类型继承而来
 </table>
 <div class="org-src-container">
 
-<pre class="src src-c++">int i;
+<pre class="src src-c++"><span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">i</span>;
 cin&gt;&gt;i;
-if(cin){// 这里是判断 cin是处于有效状态，cin跟据当前条件状态 自动转换 成bool
+<span style="color: #FBDE2D;">if</span>(cin){<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#36825;&#37324;&#26159;&#21028;&#26029; cin&#26159;&#22788;&#20110;&#26377;&#25928;&#29366;&#24577;&#65292;cin&#36319;&#25454;&#24403;&#21069;&#26465;&#20214;&#29366;&#24577; &#33258;&#21160;&#36716;&#25442; &#25104;bool</span>
 }
 </pre>
 </div>
 <div class="org-src-container">
 
-<pre class="src src-c++">#include &lt;iostream&gt;
-#include &lt;string&gt;
-#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
-using std::cin;
-using std::cout;
-using std::cerr;
-using std::endl;
-using std::string;
-using std::istream;
-int read_int(istream &amp;in){
-  int i =0;
-  while(in&gt;&gt;i , !in.eof()){// 读取一个int ,然后判断是否读到结尾
-    if(in.bad()){
+<pre class="src src-c++"><span style="color: #7fffd4;">#include</span> <span style="color: #ffa07a;">&lt;iostream&gt;</span>
+<span style="color: #7fffd4;">#include</span> <span style="color: #ffa07a;">&lt;string&gt;</span>
+<span style="color: #7fffd4;">#include</span> <span style="color: #ffa07a;">&lt;stdio.h&gt;</span>
+<span style="color: #7fffd4;">#include</span> <span style="color: #ffa07a;">&lt;stdlib.h&gt;</span>
+<span style="color: #FBDE2D;">using</span> <span style="color: #D8FA3C;">std</span>::<span style="color: #8DA6CE;">cin</span>;
+<span style="color: #FBDE2D;">using</span> <span style="color: #D8FA3C;">std</span>::<span style="color: #8DA6CE;">cout</span>;
+<span style="color: #FBDE2D;">using</span> <span style="color: #D8FA3C;">std</span>::<span style="color: #8DA6CE;">cerr</span>;
+<span style="color: #FBDE2D;">using</span> <span style="color: #D8FA3C;">std</span>::<span style="color: #8DA6CE;">endl</span>;
+<span style="color: #FBDE2D;">using</span> <span style="color: #D8FA3C;">std</span>::<span style="color: #8DA6CE;">string</span>;
+<span style="color: #FBDE2D;">using</span> <span style="color: #D8FA3C;">std</span>::<span style="color: #8DA6CE;">istream</span>;
+<span style="color: #8DA6CE;">int</span> <span style="color: #FF6400;">read_int</span>(<span style="color: #8DA6CE;">istream</span> &amp;<span style="color: #40E0D0;">in</span>){
+  <span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">i</span> =0;
+  <span style="color: #FBDE2D;">while</span>(in&gt;&gt;i , !in.eof()){<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#35835;&#21462;&#19968;&#20010;int ,&#28982;&#21518;&#21028;&#26029;&#26159;&#21542;&#35835;&#21040;&#32467;&#23614;</span>
+    <span style="color: #FBDE2D;">if</span>(in.bad()){
       exit(1);
-    }else if (in.fail()){
-      cerr&lt;&lt;"bad data,not int ,try again " &lt;&lt;std::endl;
-      in.clear(istream::failbit); // reset failbit
-      std::cerr&lt;&lt; "failbit flag after in.clear(istream::failbit) "&lt;&lt; in.fail() &lt;&lt; std::endl;
+    }<span style="color: #FBDE2D;">else</span> <span style="color: #FBDE2D;">if</span> (in.fail()){
+      cerr&lt;&lt;<span style="color: #ffa07a;">"bad data,not int ,try again "</span> &lt;&lt;<span style="color: #D8FA3C;">std</span>::endl;
+      in.clear(<span style="color: #D8FA3C;">istream</span>::failbit); <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">reset failbit</span>
+      <span style="color: #D8FA3C;">std</span>::cerr&lt;&lt; <span style="color: #ffa07a;">"failbit flag after in.clear(istream::failbit) "</span>&lt;&lt; in.fail() &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
       in.clear();
-      std::cerr &lt;&lt; "failbit flag after in.clear() "&lt;&lt; in.fail() &lt;&lt; std::endl;
-      cin.ignore();// 忽略掉上次读取失败的字符，以便继续读下一个
-      continue;
-    }else{//成功读取一个int后退出循环
-      break;
+      <span style="color: #D8FA3C;">std</span>::cerr &lt;&lt; <span style="color: #ffa07a;">"failbit flag after in.clear() "</span>&lt;&lt; in.fail() &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
+      cin.ignore();<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#24573;&#30053;&#25481;&#19978;&#27425;&#35835;&#21462;&#22833;&#36133;&#30340;&#23383;&#31526;&#65292;&#20197;&#20415;&#32487;&#32493;&#35835;&#19979;&#19968;&#20010;</span>
+      <span style="color: #FBDE2D;">continue</span>;
+    }<span style="color: #FBDE2D;">else</span>{<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#25104;&#21151;&#35835;&#21462;&#19968;&#20010;int&#21518;&#36864;&#20986;&#24490;&#29615;</span>
+      <span style="color: #FBDE2D;">break</span>;
     }
   }
-  return i;
+  <span style="color: #FBDE2D;">return</span> i;
 }
-main(int argc, char *argv[]){
-  int i =read_int(cin);
-  std::cout &lt;&lt; i &lt;&lt; std::endl;
+<span style="color: #FF6400;">main</span>(<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">argc</span>, <span style="color: #8DA6CE;">char</span> *<span style="color: #40E0D0;">argv</span>[]){
+  <span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">i</span> =read_int(cin);
+  <span style="color: #D8FA3C;">std</span>::cout &lt;&lt; i &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
 }
 </pre>
 </div>
@@ -1187,14 +1187,14 @@ main(int argc, char *argv[]){
 <div class="outline-text-3" id="text-orgheadline66">
 <div class="org-src-container">
 
-<pre class="src src-c++">//一行行读取一个文件， 写到另一个文件
-main(int argc, char *argv[]){
-  ifstream fin("c.cpp");
-  ofstream fout("c.cpp2");
-  string buf;
-  if (fin ){
-    while(std::getline(fin, buf)){
-      fout&lt;&lt; buf &lt;&lt;std::endl ;
+<pre class="src src-c++"><span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#19968;&#34892;&#34892;&#35835;&#21462;&#19968;&#20010;&#25991;&#20214;&#65292; &#20889;&#21040;&#21478;&#19968;&#20010;&#25991;&#20214;</span>
+<span style="color: #FF6400;">main</span>(<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">argc</span>, <span style="color: #8DA6CE;">char</span> *<span style="color: #40E0D0;">argv</span>[]){
+  <span style="color: #8DA6CE;">ifstream</span> <span style="color: #FF6400;">fin</span>(<span style="color: #ffa07a;">"c.cpp"</span>);
+  <span style="color: #8DA6CE;">ofstream</span> <span style="color: #FF6400;">fout</span>(<span style="color: #ffa07a;">"c.cpp2"</span>);
+  <span style="color: #8DA6CE;">string</span> <span style="color: #40E0D0;">buf</span>;
+  <span style="color: #FBDE2D;">if</span> (fin ){
+    <span style="color: #FBDE2D;">while</span>(<span style="color: #D8FA3C;">std</span>::getline(fin, buf)){
+      fout&lt;&lt; buf &lt;&lt;<span style="color: #D8FA3C;">std</span>::endl ;
     }
   }
   fout.close();
@@ -1206,8 +1206,8 @@ main(int argc, char *argv[]){
 <ul class="org-ul"><li><a id="orgheadline67"></a>open close<br  /><div class="outline-text-4" id="text-orgheadline67">
 <div class="org-src-container">
 
-<pre class="src src-c++">ifstream fin;
-fin.open("filename");
+<pre class="src src-c++"><span style="color: #8DA6CE;">ifstream</span> <span style="color: #40E0D0;">fin</span>;
+fin.open(<span style="color: #ffa07a;">"filename"</span>);
 fin.close();
 </pre>
 </div>
@@ -1218,14 +1218,14 @@ fin.close();
 <div class="outline-text-3" id="text-orgheadline68">
 <div class="org-src-container">
 
-<pre class="src src-c++">#include &lt;sstream&gt;
-using std::stringstream;
+<pre class="src src-c++"><span style="color: #7fffd4;">#include</span> <span style="color: #ffa07a;">&lt;sstream&gt;</span>
+<span style="color: #FBDE2D;">using</span> <span style="color: #D8FA3C;">std</span>::<span style="color: #8DA6CE;">stringstream</span>;
 
-stringstream ss("hello");
-std::cout &lt;&lt; ss.str() &lt;&lt; std::endl;
+<span style="color: #8DA6CE;">stringstream</span> <span style="color: #FF6400;">ss</span>(<span style="color: #ffa07a;">"hello"</span>);
+<span style="color: #D8FA3C;">std</span>::cout &lt;&lt; ss.str() &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
 
-ss&lt;&lt; "hello" &lt;&lt; 1&lt;&lt; "world";
-std::cout &lt;&lt; ss.str() &lt;&lt; std::endl;
+ss&lt;&lt; <span style="color: #ffa07a;">"hello"</span> &lt;&lt; 1&lt;&lt; <span style="color: #ffa07a;">"world"</span>;
+<span style="color: #D8FA3C;">std</span>::cout &lt;&lt; ss.str() &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
 </pre>
 </div>
 </div>
@@ -1293,9 +1293,9 @@ std::cout &lt;&lt; ss.str() &lt;&lt; std::endl;
 </table>
 <div class="org-src-container">
 
-<pre class="src src-c++">#include&lt;vector&gt;
-#include&lt;list&gt;
-#include&lt;deque&gt;
+<pre class="src src-c++"><span style="color: #7fffd4;">#include</span><span style="color: #ffa07a;">&lt;vector&gt;</span>
+<span style="color: #7fffd4;">#include</span><span style="color: #ffa07a;">&lt;list&gt;</span>
+<span style="color: #7fffd4;">#include</span><span style="color: #ffa07a;">&lt;deque&gt;</span>
 </pre>
 </div>
 </div>
@@ -1313,7 +1313,7 @@ std::cout &lt;&lt; ss.str() &lt;&lt; std::endl;
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c++">vector&lt; vector&lt;string&gt; &gt; lol;//中间需要有空格 ，否则 误解为&gt;&gt; &lt;&lt;
+<pre class="src src-c++"><span style="color: #8DA6CE;">vector</span>&lt; <span style="color: #8DA6CE;">vector</span>&lt;<span style="color: #8DA6CE;">string</span>&gt; &gt; <span style="color: #40E0D0;">lol</span>;<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#20013;&#38388;&#38656;&#35201;&#26377;&#31354;&#26684; &#65292;&#21542;&#21017; &#35823;&#35299;&#20026;&gt;&gt; &lt;&lt;</span>
 </pre>
 </div>
 </div>
@@ -1363,16 +1363,16 @@ std::cout &lt;&lt; ss.str() &lt;&lt; std::endl;
 </table>
 <div class="org-src-container">
 
-<pre class="src src-c++">vector&lt;int&gt; v1;
+<pre class="src src-c++"><span style="color: #8DA6CE;">vector</span>&lt;<span style="color: #8DA6CE;">int</span>&gt; <span style="color: #40E0D0;">v1</span>;
 v1.push_back(1);
 v1.push_back(2);
 v1.push_back(3);
-vector&lt;int&gt;::iterator it = v1.begin()+ v1.size()/2;
-std::cout &lt;&lt; *it &lt;&lt; std::endl;
+<span style="color: #D8FA3C;">vector</span>&lt;<span style="color: #8DA6CE;">int</span>&gt;::<span style="color: #8DA6CE;">iterator</span> <span style="color: #40E0D0;">it</span> = v1.begin()+ v1.size()/2;
+<span style="color: #D8FA3C;">std</span>::cout &lt;&lt; *it &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
 
-list&lt;int&gt; il(v1.begin(),v1.end());
+<span style="color: #8DA6CE;">list</span>&lt;<span style="color: #8DA6CE;">int</span>&gt; <span style="color: #FF6400;">il</span>(v1.begin(),v1.end());
 
-// list&lt;int&gt;::iterator it = il.begin()+il.size()/2; //error  list doesnot support
+<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">list&lt;int&gt;::iterator it = il.begin()+il.size()/2; //error  list doesnot support</span>
 </pre>
 </div>
 </div>
@@ -1542,12 +1542,12 @@ list&lt;int&gt; il(v1.begin(),v1.end());
 <ul class="org-ul"><li><a id="orgheadline76"></a>插入元素会使iterator失效<br  /><div class="outline-text-4" id="text-orgheadline76">
 <div class="org-src-container">
 
-<pre class="src src-c++">vector&lt;int&gt;::iterator first= v1.begin();
+<pre class="src src-c++"><span style="color: #D8FA3C;">vector</span>&lt;<span style="color: #8DA6CE;">int</span>&gt;::<span style="color: #8DA6CE;">iterator</span> <span style="color: #40E0D0;">first</span>= v1.begin();
 v1.push_back(3);
-vector&lt;int&gt;::iterator first2= v1.begin();
-std::cout &lt;&lt; first==first2 &lt;&lt; std::endl;
-两次返回的begin()是不同的，如果下面的处理，使用到了first局部变量，
-后果不可预知
+<span style="color: #D8FA3C;">vector</span>&lt;<span style="color: #8DA6CE;">int</span>&gt;::<span style="color: #8DA6CE;">iterator</span> <span style="color: #40E0D0;">first2</span>= v1.begin();
+<span style="color: #D8FA3C;">std</span>::cout &lt;&lt; first==first2 &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
+&#20004;&#27425;&#36820;&#22238;&#30340;begin()&#26159;&#19981;&#21516;&#30340;&#65292;&#22914;&#26524;&#19979;&#38754;&#30340;&#22788;&#29702;&#65292;&#20351;&#29992;&#21040;&#20102;first&#23616;&#37096;&#21464;&#37327;&#65292;
+&#21518;&#26524;&#19981;&#21487;&#39044;&#30693;
 </pre>
 </div>
 </div></li></ul>
@@ -1633,10 +1633,10 @@ std::cout &lt;&lt; first==first2 &lt;&lt; std::endl;
 <div class="outline-text-3" id="text-orgheadline80">
 <div class="org-src-container">
 
-<pre class="src src-c++">#include &lt;utility&gt;
-pair&lt;string ,int&gt; p("v1" ,100);
-std::cout &lt;&lt; p.first &lt;&lt; " "&lt;&lt; p.second&lt;&lt; std::endl;
-p=make_pair("hello", 300);
+<pre class="src src-c++"><span style="color: #7fffd4;">#include</span> <span style="color: #ffa07a;">&lt;utility&gt;</span>
+<span style="color: #8DA6CE;">pair</span>&lt;<span style="color: #8DA6CE;">string</span> ,<span style="color: #8DA6CE;">int</span>&gt; <span style="color: #FF6400;">p</span>(<span style="color: #ffa07a;">"v1"</span> ,100);
+<span style="color: #D8FA3C;">std</span>::cout &lt;&lt; p.first &lt;&lt; <span style="color: #ffa07a;">" "</span>&lt;&lt; p.second&lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
+p=make_pair(<span style="color: #ffa07a;">"hello"</span>, 300);
 </pre>
 </div>
 </div>
@@ -1646,21 +1646,21 @@ p=make_pair("hello", 300);
 <div class="outline-text-3" id="text-orgheadline81">
 <div class="org-src-container">
 
-<pre class="src src-c++">   map&lt;string,int&gt; m;
-   m["3"]=3;
-   // 使用下标访问元素，如果key不存在， 则自动创建一个，value为相应类型的默认值
-   std::cout &lt;&lt;m["3"]&lt;&lt; std::endl;
-// 如果不想自动插入，则用map.count() ,map.find() ,来处理
-if(m.count("3")){
-  map&lt;string,int&gt;::iterator it=m.find("3");
-    pair&lt;string,int&gt; p = *it;
-    std::cout &lt;&lt; p.second &lt;&lt; std::endl;
+<pre class="src src-c++">   <span style="color: #8DA6CE;">map</span>&lt;<span style="color: #8DA6CE;">string</span>,<span style="color: #8DA6CE;">int</span>&gt; <span style="color: #40E0D0;">m</span>;
+   m[<span style="color: #ffa07a;">"3"</span>]=3;
+   <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#20351;&#29992;&#19979;&#26631;&#35775;&#38382;&#20803;&#32032;&#65292;&#22914;&#26524;key&#19981;&#23384;&#22312;&#65292; &#21017;&#33258;&#21160;&#21019;&#24314;&#19968;&#20010;&#65292;value&#20026;&#30456;&#24212;&#31867;&#22411;&#30340;&#40664;&#35748;&#20540;</span>
+   <span style="color: #D8FA3C;">std</span>::cout &lt;&lt;m[<span style="color: #ffa07a;">"3"</span>]&lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
+<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#22914;&#26524;&#19981;&#24819;&#33258;&#21160;&#25554;&#20837;&#65292;&#21017;&#29992;map.count() ,map.find() ,&#26469;&#22788;&#29702;</span>
+<span style="color: #FBDE2D;">if</span>(m.count(<span style="color: #ffa07a;">"3"</span>)){
+  <span style="color: #D8FA3C;">map</span>&lt;<span style="color: #8DA6CE;">string</span>,<span style="color: #8DA6CE;">int</span>&gt;::<span style="color: #8DA6CE;">iterator</span> <span style="color: #40E0D0;">it</span>=m.find(<span style="color: #ffa07a;">"3"</span>);
+    <span style="color: #8DA6CE;">pair</span>&lt;<span style="color: #8DA6CE;">string</span>,<span style="color: #8DA6CE;">int</span>&gt; <span style="color: #40E0D0;">p</span> = *it;
+    <span style="color: #D8FA3C;">std</span>::cout &lt;&lt; p.second &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
 }
 
 
-   for (map&lt;string,int&gt;::iterator it=m.begin(); it!=m.end(); it++) {
-     pair&lt;string,int&gt; p = *it;
-     std::cout &lt;&lt; p.first &lt;&lt;"="&lt;&lt;p.second &lt;&lt; std::endl;
+   <span style="color: #FBDE2D;">for</span> (map&lt;string,<span style="color: #8DA6CE;">int</span>&gt;::<span style="color: #8DA6CE;">iterator</span> <span style="color: #40E0D0;">it</span>=m.begin(); it!=m.end(); it++) {
+     <span style="color: #8DA6CE;">pair</span>&lt;<span style="color: #8DA6CE;">string</span>,<span style="color: #8DA6CE;">int</span>&gt; <span style="color: #40E0D0;">p</span> = *it;
+     <span style="color: #D8FA3C;">std</span>::cout &lt;&lt; p.first &lt;&lt;<span style="color: #ffa07a;">"="</span>&lt;&lt;p.second &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
     }
 </pre>
 </div>
@@ -1670,15 +1670,15 @@ if(m.count("3")){
 <li><a id="orgheadline83"></a>map 插入<br  /><div class="outline-text-4" id="text-orgheadline83">
 <div class="org-src-container">
 
-<pre class="src src-c++">map&lt;string,string&gt; m;
-m.insert(make_pair("3", "111"));
-pair&lt;map&lt;string,string&gt;::iterator,bool&gt; ret=
-  m.insert(make_pair("3", "222"));//重复则什么都不做, 返回值是一个pair&lt;iterator,boolInsertSuccessful&gt;
-std::cout &lt;&lt; m["3"] &lt;&lt; std::endl;//m["3"] 的值 是"111" ,而不是"222"
+<pre class="src src-c++"><span style="color: #8DA6CE;">map</span>&lt;<span style="color: #8DA6CE;">string</span>,<span style="color: #8DA6CE;">string</span>&gt; <span style="color: #40E0D0;">m</span>;
+m.insert(make_pair(<span style="color: #ffa07a;">"3"</span>, <span style="color: #ffa07a;">"111"</span>));
+<span style="color: #8DA6CE;">pair</span>&lt;<span style="color: #D8FA3C;">map</span>&lt;<span style="color: #8DA6CE;">string</span>,<span style="color: #8DA6CE;">string</span>&gt;::iterator,<span style="color: #8DA6CE;">bool</span>&gt; <span style="color: #40E0D0;">ret</span>=
+  m.insert(make_pair(<span style="color: #ffa07a;">"3"</span>, <span style="color: #ffa07a;">"222"</span>));<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#37325;&#22797;&#21017;&#20160;&#20040;&#37117;&#19981;&#20570;, &#36820;&#22238;&#20540;&#26159;&#19968;&#20010;pair&lt;iterator,boolInsertSuccessful&gt;</span>
+<span style="color: #D8FA3C;">std</span>::cout &lt;&lt; m[<span style="color: #ffa07a;">"3"</span>] &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">m["3"] &#30340;&#20540; &#26159;"111" ,&#32780;&#19981;&#26159;"222"</span>
 
-m["4"]="111";
-m["4"]="222"; //覆盖
-std::cout &lt;&lt; m["4"] &lt;&lt; std::endl;//m["4"] 的值 是"222" ,而不是"111"
+m[<span style="color: #ffa07a;">"4"</span>]=<span style="color: #ffa07a;">"111"</span>;
+m[<span style="color: #ffa07a;">"4"</span>]=<span style="color: #ffa07a;">"222"</span>; <span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#35206;&#30422;</span>
+<span style="color: #D8FA3C;">std</span>::cout &lt;&lt; m[<span style="color: #ffa07a;">"4"</span>] &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">m["4"] &#30340;&#20540; &#26159;"222" ,&#32780;&#19981;&#26159;"111"</span>
 </pre>
 </div>
 </div></li>
@@ -1710,7 +1710,7 @@ std::cout &lt;&lt; m["4"] &lt;&lt; std::endl;//m["4"] 的值 是"222" ,而不是
 <div class="outline-text-3" id="text-orgheadline85">
 <div class="org-src-container">
 
-<pre class="src src-c++">//count(Key) 返回0 1 是否含有此key
+<pre class="src src-c++"><span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">count(Key) &#36820;&#22238;0 1 &#26159;&#21542;&#21547;&#26377;&#27492;key</span>
 </pre>
 </div>
 </div>
@@ -1724,8 +1724,8 @@ std::cout &lt;&lt; m["4"] &lt;&lt; std::endl;//m["4"] 的值 是"222" ,而不是
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c++">#include &lt;algorithm&gt;
-#include &lt;numeric&gt;
+<pre class="src src-c++"><span style="color: #7fffd4;">#include</span> <span style="color: #ffa07a;">&lt;algorithm&gt;</span>
+<span style="color: #7fffd4;">#include</span> <span style="color: #ffa07a;">&lt;numeric&gt;</span>
 </pre>
 </div>
 </div>
@@ -1737,21 +1737,21 @@ std::cout &lt;&lt; m["4"] &lt;&lt; std::endl;//m["4"] 的值 是"222" ,而不是
 <div class="outline-text-3" id="text-orgheadline89">
 <div class="org-src-container">
 
-<pre class="src src-c++">vector&lt;int&gt; v;
-vector&lt;int&gt; v;
+<pre class="src src-c++"><span style="color: #8DA6CE;">vector</span>&lt;<span style="color: #8DA6CE;">int</span>&gt; <span style="color: #40E0D0;">v</span>;
+<span style="color: #8DA6CE;">vector</span>&lt;<span style="color: #8DA6CE;">int</span>&gt; <span style="color: #40E0D0;">v</span>;
 v.push_back(1);
 v.push_back(2);
 v.push_back(3);
-int value=accumulate(v.begin(),v.end(),0);
-std::cout &lt;&lt; value &lt;&lt; std::endl;
+<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">value</span>=accumulate(v.begin(),v.end(),0);
+<span style="color: #D8FA3C;">std</span>::cout &lt;&lt; value &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
 
-//字符串连接
-vector&lt;string&gt; v;
-v.push_back("1");
-v.push_back("2");
-v.push_back("3");
-string value=accumulate(v.begin(),v.end(),string(""));
-std::cout &lt;&lt; value &lt;&lt; std::endl;
+<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#23383;&#31526;&#20018;&#36830;&#25509;</span>
+<span style="color: #8DA6CE;">vector</span>&lt;<span style="color: #8DA6CE;">string</span>&gt; <span style="color: #40E0D0;">v</span>;
+v.push_back(<span style="color: #ffa07a;">"1"</span>);
+v.push_back(<span style="color: #ffa07a;">"2"</span>);
+v.push_back(<span style="color: #ffa07a;">"3"</span>);
+<span style="color: #8DA6CE;">string</span> <span style="color: #40E0D0;">value</span>=accumulate(v.begin(),v.end(),string(<span style="color: #ffa07a;">""</span>));
+<span style="color: #D8FA3C;">std</span>::cout &lt;&lt; value &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
 </pre>
 </div>
 </div>
@@ -1764,18 +1764,18 @@ std::cout &lt;&lt; value &lt;&lt; std::endl;
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c++">vector&lt;string&gt; v;
-v.push_back("1");
-v.push_back("2");
-v.push_back("3");
+<pre class="src src-c++"><span style="color: #8DA6CE;">vector</span>&lt;<span style="color: #8DA6CE;">string</span>&gt; <span style="color: #40E0D0;">v</span>;
+v.push_back(<span style="color: #ffa07a;">"1"</span>);
+v.push_back(<span style="color: #ffa07a;">"2"</span>);
+v.push_back(<span style="color: #ffa07a;">"3"</span>);
 
-list&lt;string&gt; l;
-l.push_back("2");
-l.push_back("4");
+<span style="color: #8DA6CE;">list</span>&lt;<span style="color: #8DA6CE;">string</span>&gt; <span style="color: #40E0D0;">l</span>;
+l.push_back(<span style="color: #ffa07a;">"2"</span>);
+l.push_back(<span style="color: #ffa07a;">"4"</span>);
 
-vector&lt;string&gt;::iterator it=find_first_of(v.begin(), v.end(), l.begin(), l.end());
-if(it!=v.end()){
-  std::cout &lt;&lt; *it &lt;&lt; std::endl;
+<span style="color: #D8FA3C;">vector</span>&lt;<span style="color: #8DA6CE;">string</span>&gt;::<span style="color: #8DA6CE;">iterator</span> <span style="color: #40E0D0;">it</span>=find_first_of(v.begin(), v.end(), l.begin(), l.end());
+<span style="color: #FBDE2D;">if</span>(it!=v.end()){
+  <span style="color: #D8FA3C;">std</span>::cout &lt;&lt; *it &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
 }
 </pre>
 </div>
@@ -1786,11 +1786,11 @@ if(it!=v.end()){
 <div class="outline-text-3" id="text-orgheadline91">
 <div class="org-src-container">
 
-<pre class="src src-c++">vector&lt;string&gt; v;
-v.push_back("1");
-v.push_back("2");
-v.push_back("3");
-fill(v.begin(),v.end(),"test");
+<pre class="src src-c++"><span style="color: #8DA6CE;">vector</span>&lt;<span style="color: #8DA6CE;">string</span>&gt; <span style="color: #40E0D0;">v</span>;
+v.push_back(<span style="color: #ffa07a;">"1"</span>);
+v.push_back(<span style="color: #ffa07a;">"2"</span>);
+v.push_back(<span style="color: #ffa07a;">"3"</span>);
+fill(v.begin(),v.end(),<span style="color: #ffa07a;">"test"</span>);
 </pre>
 </div>
 </div>
@@ -1800,12 +1800,12 @@ fill(v.begin(),v.end(),"test");
 <div class="outline-text-3" id="text-orgheadline92">
 <div class="org-src-container">
 
-<pre class="src src-c++">vector&lt;string&gt; v;
-v.push_back("1");
-v.push_back("2");
-v.push_back("3");
-fill_n(v.begin(),2,"test");// 填充2个test
-fill_n(v.begin(),4,"test");// error,长度不够4 个
+<pre class="src src-c++"><span style="color: #8DA6CE;">vector</span>&lt;<span style="color: #8DA6CE;">string</span>&gt; <span style="color: #40E0D0;">v</span>;
+v.push_back(<span style="color: #ffa07a;">"1"</span>);
+v.push_back(<span style="color: #ffa07a;">"2"</span>);
+v.push_back(<span style="color: #ffa07a;">"3"</span>);
+fill_n(v.begin(),2,<span style="color: #ffa07a;">"test"</span>);<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#22635;&#20805;2&#20010;test</span>
+fill_n(v.begin(),4,<span style="color: #ffa07a;">"test"</span>);<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">error,&#38271;&#24230;&#19981;&#22815;4 &#20010;</span>
 </pre>
 </div>
 <p>
@@ -1813,11 +1813,11 @@ fill_n(v.begin(),4,"test");// error,长度不够4 个
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c++">vector&lt;string&gt; v;
-v.push_back("1");
-v.push_back("2");
-v.push_back("3");
-fill_n(back_inserter(v),4,"test");
+<pre class="src src-c++"><span style="color: #8DA6CE;">vector</span>&lt;<span style="color: #8DA6CE;">string</span>&gt; <span style="color: #40E0D0;">v</span>;
+v.push_back(<span style="color: #ffa07a;">"1"</span>);
+v.push_back(<span style="color: #ffa07a;">"2"</span>);
+v.push_back(<span style="color: #ffa07a;">"3"</span>);
+fill_n(back_inserter(v),4,<span style="color: #ffa07a;">"test"</span>);
 </pre>
 </div>
 </div>
@@ -1830,16 +1830,16 @@ fill_n(back_inserter(v),4,"test");
 <div class="outline-text-3" id="text-orgheadline94">
 <div class="org-src-container">
 
-<pre class="src src-c++">vector&lt;string&gt; v;
-v.push_back(string("1"));
-v.push_back(string("2"));
-v.push_back(string("3"));
+<pre class="src src-c++"><span style="color: #8DA6CE;">vector</span>&lt;<span style="color: #8DA6CE;">string</span>&gt; <span style="color: #40E0D0;">v</span>;
+v.push_back(string(<span style="color: #ffa07a;">"1"</span>));
+v.push_back(string(<span style="color: #ffa07a;">"2"</span>));
+v.push_back(string(<span style="color: #ffa07a;">"3"</span>));
 
-vector&lt;string&gt; v2;
+<span style="color: #8DA6CE;">vector</span>&lt;<span style="color: #8DA6CE;">string</span>&gt; <span style="color: #40E0D0;">v2</span>;
 
-replace_copy(v.begin(),v.end(),back_inserter(v2),string("2"),string("222"));
-for (vector&lt;string&gt;::iterator it=v2.begin();it!= v2.end(); it++) {
-  std::cout &lt;&lt; *it &lt;&lt; std::endl;
+replace_copy(v.begin(),v.end(),back_inserter(v2),string(<span style="color: #ffa07a;">"2"</span>),string(<span style="color: #ffa07a;">"222"</span>));
+<span style="color: #FBDE2D;">for</span> (<span style="color: #D8FA3C;">vector</span>&lt;<span style="color: #8DA6CE;">string</span>&gt;::<span style="color: #8DA6CE;">iterator</span> <span style="color: #40E0D0;">it</span>=v2.begin();it!= v2.end(); it++) {
+  <span style="color: #D8FA3C;">std</span>::cout &lt;&lt; *it &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
 }
 </pre>
 </div>
@@ -1850,22 +1850,22 @@ for (vector&lt;string&gt;::iterator it=v2.begin();it!= v2.end(); it++) {
 <div class="outline-text-3" id="text-orgheadline95">
 <div class="org-src-container">
 
-<pre class="src src-c++"> vector&lt;string&gt; v;
- v.push_back(string("2"));
- v.push_back(string("2"));
- v.push_back(string("1"));
- v.push_back(string("1"));
- v.push_back(string("3"));
+<pre class="src src-c++"> <span style="color: #8DA6CE;">vector</span>&lt;<span style="color: #8DA6CE;">string</span>&gt; <span style="color: #40E0D0;">v</span>;
+ v.push_back(string(<span style="color: #ffa07a;">"2"</span>));
+ v.push_back(string(<span style="color: #ffa07a;">"2"</span>));
+ v.push_back(string(<span style="color: #ffa07a;">"1"</span>));
+ v.push_back(string(<span style="color: #ffa07a;">"1"</span>));
+ v.push_back(string(<span style="color: #ffa07a;">"3"</span>));
 
- sort(v.begin(),v.end());//排序
- //把不重复的元素移动到容器的前面，返回多余的重复元素的首地址
- // unique 并没有真正的去重， 只是把重复 的移动容器尾部 以便删除
-//算法并不删除或添加元素，若需要 ，则要则使用容器删除
- vector&lt;string&gt;::iterator it=unique(v.begin(), v.end());
- v.erase(it,v.end());//删除那些重复的元素 ,从it所指位置到 end()
+ sort(v.begin(),v.end());<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#25490;&#24207;</span>
+ <span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#25226;&#19981;&#37325;&#22797;&#30340;&#20803;&#32032;&#31227;&#21160;&#21040;&#23481;&#22120;&#30340;&#21069;&#38754;&#65292;&#36820;&#22238;&#22810;&#20313;&#30340;&#37325;&#22797;&#20803;&#32032;&#30340;&#39318;&#22320;&#22336;</span>
+ <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">unique &#24182;&#27809;&#26377;&#30495;&#27491;&#30340;&#21435;&#37325;&#65292; &#21482;&#26159;&#25226;&#37325;&#22797; &#30340;&#31227;&#21160;&#23481;&#22120;&#23614;&#37096; &#20197;&#20415;&#21024;&#38500;</span>
+<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#31639;&#27861;&#24182;&#19981;&#21024;&#38500;&#25110;&#28155;&#21152;&#20803;&#32032;&#65292;&#33509;&#38656;&#35201; &#65292;&#21017;&#35201;&#21017;&#20351;&#29992;&#23481;&#22120;&#21024;&#38500;</span>
+ <span style="color: #D8FA3C;">vector</span>&lt;<span style="color: #8DA6CE;">string</span>&gt;::<span style="color: #8DA6CE;">iterator</span> <span style="color: #40E0D0;">it</span>=unique(v.begin(), v.end());
+ v.erase(it,v.end());<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#21024;&#38500;&#37027;&#20123;&#37325;&#22797;&#30340;&#20803;&#32032; ,&#20174;it&#25152;&#25351;&#20301;&#32622;&#21040; end()</span>
 
- for (vector&lt;string&gt;::iterator it=v.begin(); it!=v.end(); it++) {
-   std::cout &lt;&lt; *it &lt;&lt; std::endl;
+ <span style="color: #FBDE2D;">for</span> (<span style="color: #D8FA3C;">vector</span>&lt;<span style="color: #8DA6CE;">string</span>&gt;::<span style="color: #8DA6CE;">iterator</span> <span style="color: #40E0D0;">it</span>=v.begin(); it!=v.end(); it++) {
+   <span style="color: #D8FA3C;">std</span>::cout &lt;&lt; *it &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
  }
 </pre>
 </div>
@@ -1876,18 +1876,18 @@ for (vector&lt;string&gt;::iterator it=v2.begin();it!= v2.end(); it++) {
 <div class="outline-text-3" id="text-orgheadline96">
 <div class="org-src-container">
 
-<pre class="src src-c++">bool is_2(string str){
-  str=="2";
+<pre class="src src-c++"><span style="color: #8DA6CE;">bool</span> <span style="color: #FF6400;">is_2</span>(<span style="color: #8DA6CE;">string</span> <span style="color: #40E0D0;">str</span>){
+  str==<span style="color: #ffa07a;">"2"</span>;
 }
 
-vector&lt;string&gt; v;
-v.push_back(string("2"));
-v.push_back(string("2"));
-v.push_back(string("1"));
-v.push_back(string("1"));
-v.push_back(string("3"));
-vector&lt;string&gt;::size_type cnt=count_if(v.begin(),v.end(),is_2);
-std::cout &lt;&lt; cnt &lt;&lt; std::endl;
+<span style="color: #8DA6CE;">vector</span>&lt;<span style="color: #8DA6CE;">string</span>&gt; <span style="color: #40E0D0;">v</span>;
+v.push_back(string(<span style="color: #ffa07a;">"2"</span>));
+v.push_back(string(<span style="color: #ffa07a;">"2"</span>));
+v.push_back(string(<span style="color: #ffa07a;">"1"</span>));
+v.push_back(string(<span style="color: #ffa07a;">"1"</span>));
+v.push_back(string(<span style="color: #ffa07a;">"3"</span>));
+<span style="color: #D8FA3C;">vector</span>&lt;<span style="color: #8DA6CE;">string</span>&gt;::<span style="color: #8DA6CE;">size_type</span> <span style="color: #40E0D0;">cnt</span>=count_if(v.begin(),v.end(),is_2);
+<span style="color: #D8FA3C;">std</span>::cout &lt;&lt; cnt &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
 </pre>
 </div>
 </div>
@@ -1915,9 +1915,9 @@ std::cout &lt;&lt; cnt &lt;&lt; std::endl;
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c++">class Name
+<pre class="src src-c++"><span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">Name</span>
 {
-} name1, name2;
+} <span style="color: #40E0D0;">name1</span>, <span style="color: #40E0D0;">name2</span>;
 </pre>
 </div></li>
 </ol>
@@ -1928,29 +1928,29 @@ std::cout &lt;&lt; cnt &lt;&lt; std::endl;
 <div class="outline-text-2" id="text-orgheadline102">
 <div class="org-src-container">
 
-<pre class="src src-c++">//this 是指针
-class Name
+<pre class="src src-c++"><span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">this &#26159;&#25351;&#38024;</span>
+<span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">Name</span>
 {
-public:
-  int i;
-  Name&amp; get(){
-    return *this;//this指针   转成对象的引用
+<span style="color: #FBDE2D;">public</span>:
+  <span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">i</span>;
+  <span style="color: #8DA6CE;">Name</span>&amp; <span style="color: #FF6400;">get</span>(){
+    <span style="color: #FBDE2D;">return</span> *<span style="color: #FBDE2D;">this</span>;<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">this&#25351;&#38024;   &#36716;&#25104;&#23545;&#35937;&#30340;&#24341;&#29992;</span>
   }
-  Name get2(){                  // // 转成对象
-    return *this;
+  <span style="color: #8DA6CE;">Name</span> <span style="color: #FF6400;">get2</span>(){                  <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">// &#36716;&#25104;&#23545;&#35937;</span>
+    <span style="color: #FBDE2D;">return</span> *<span style="color: #FBDE2D;">this</span>;
   }
 
 };
 
-int main(int argc, char *argv[]){
-  Name n;
+<span style="color: #8DA6CE;">int</span> <span style="color: #FF6400;">main</span>(<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">argc</span>, <span style="color: #8DA6CE;">char</span> *<span style="color: #40E0D0;">argv</span>[]){
+  <span style="color: #8DA6CE;">Name</span> <span style="color: #40E0D0;">n</span>;
   n.i=3;
-  Name &amp;p = n.get();
-  Name same = n.get2();
-  // 打印结果都是3
-  std::cout &lt;&lt; p.i &lt;&lt; std::endl;
-  std::cout &lt;&lt; same.i &lt;&lt; std::endl;
-  return 0;
+  <span style="color: #8DA6CE;">Name</span> &amp;<span style="color: #40E0D0;">p</span> = n.get();
+  <span style="color: #8DA6CE;">Name</span> <span style="color: #40E0D0;">same</span> = n.get2();
+  <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#25171;&#21360;&#32467;&#26524;&#37117;&#26159;3</span>
+  <span style="color: #D8FA3C;">std</span>::cout &lt;&lt; p.i &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
+  <span style="color: #D8FA3C;">std</span>::cout &lt;&lt; same.i &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
+  <span style="color: #FBDE2D;">return</span> 0;
 }
 </pre>
 </div>
@@ -1968,16 +1968,16 @@ int main(int argc, char *argv[]){
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c++">class Name
+<pre class="src src-c++"><span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">Name</span>
 {
-public:
-  int i;
-  Name&amp; get() const{// 编译是通不过的(这里的const 是对this的限制)
-    //因为*this 的类型是const的
-    return *this;
+<span style="color: #FBDE2D;">public</span>:
+  <span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">i</span>;
+  <span style="color: #8DA6CE;">Name</span>&amp; <span style="color: #FF6400;">get</span>() <span style="color: #FBDE2D;">const</span>{<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#32534;&#35793;&#26159;&#36890;&#19981;&#36807;&#30340;(&#36825;&#37324;&#30340;const &#26159;&#23545;this&#30340;&#38480;&#21046;)</span>
+    <span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#22240;&#20026;*this &#30340;&#31867;&#22411;&#26159;const&#30340;</span>
+    <span style="color: #FBDE2D;">return</span> *<span style="color: #FBDE2D;">this</span>;
   }
-  const Name&amp; get2() const{      //这样是允许的
-    return *this;
+  <span style="color: #FBDE2D;">const</span> <span style="color: #8DA6CE;">Name</span>&amp; <span style="color: #FF6400;">get2</span>() <span style="color: #FBDE2D;">const</span>{      <span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#36825;&#26679;&#26159;&#20801;&#35768;&#30340;</span>
+    <span style="color: #FBDE2D;">return</span> *<span style="color: #FBDE2D;">this</span>;
   }
 };
 </pre>
@@ -1994,12 +1994,12 @@ public:
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c++">class Name
+<pre class="src src-c++"><span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">Name</span>
 {
-public:
-  mutable int i;
-  Name&amp; set() const{
-    i=3;//this 是const的， 但是依然可以对this-&gt;i 进行更改
+<span style="color: #FBDE2D;">public</span>:
+  <span style="color: #FBDE2D;">mutable</span> <span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">i</span>;
+  <span style="color: #8DA6CE;">Name</span>&amp; <span style="color: #FF6400;">set</span>() <span style="color: #FBDE2D;">const</span>{
+    i=3;<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">this &#26159;const&#30340;&#65292; &#20294;&#26159;&#20381;&#28982;&#21487;&#20197;&#23545;this-&gt;i &#36827;&#34892;&#26356;&#25913;</span>
   }
 };
 </pre>
@@ -2018,32 +2018,32 @@ public:
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c++">  class Name
+<pre class="src src-c++">  <span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">Name</span>
   {
-// 声明， NameF 类，可以访问我的么有成员
-    friend class NameF;//只是一个声明， 不是定义
-  private :
-    string name;
-  public:
-    Name(string n){
+<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#22768;&#26126;&#65292; NameF &#31867;&#65292;&#21487;&#20197;&#35775;&#38382;&#25105;&#30340;&#20040;&#26377;&#25104;&#21592;</span>
+    <span style="color: #FBDE2D;">friend</span> <span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">NameF</span>;<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#21482;&#26159;&#19968;&#20010;&#22768;&#26126;&#65292; &#19981;&#26159;&#23450;&#20041;</span>
+  <span style="color: #FBDE2D;">private</span> :
+    <span style="color: #8DA6CE;">string</span> <span style="color: #40E0D0;">name</span>;
+  <span style="color: #FBDE2D;">public</span>:
+    <span style="color: #FF6400;">Name</span>(<span style="color: #8DA6CE;">string</span> <span style="color: #40E0D0;">n</span>){
       name=n;
     }
   };
-  class NameF
+  <span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">NameF</span>
   {
-  public:
-    void print(Name n){
-      //访问n 的private成员 name
-      std::cout &lt;&lt; n.name &lt;&lt; std::endl;
+  <span style="color: #FBDE2D;">public</span>:
+    <span style="color: #8DA6CE;">void</span> <span style="color: #FF6400;">print</span>(<span style="color: #8DA6CE;">Name</span> <span style="color: #40E0D0;">n</span>){
+      <span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#35775;&#38382;n &#30340;private&#25104;&#21592; name</span>
+      <span style="color: #D8FA3C;">std</span>::cout &lt;&lt; n.name &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
     }
   };
 
-  int main(int argc, char *argv[])
+  <span style="color: #8DA6CE;">int</span> <span style="color: #FF6400;">main</span>(<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">argc</span>, <span style="color: #8DA6CE;">char</span> *<span style="color: #40E0D0;">argv</span>[])
   {
-    Name n("hello");
-    NameF f;
+    <span style="color: #8DA6CE;">Name</span> <span style="color: #FF6400;">n</span>(<span style="color: #ffa07a;">"hello"</span>);
+    <span style="color: #8DA6CE;">NameF</span> <span style="color: #40E0D0;">f</span>;
     f.print(n);
-    return 0;
+    <span style="color: #FBDE2D;">return</span> 0;
   }
 </pre>
 </div>
@@ -2054,42 +2054,42 @@ public:
 <div class="outline-text-3" id="text-orgheadline106">
 <div class="org-src-container">
 
-<pre class="src src-c++">class Name; // 前向声明，因为NameF依赖Name , Name也依赖NameF
+<pre class="src src-c++"><span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">Name</span>; <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#21069;&#21521;&#22768;&#26126;&#65292;&#22240;&#20026;NameF&#20381;&#36182;Name , Name&#20063;&#20381;&#36182;NameF</span>
 
-class NameF{
-public:
-  void print(Name n);
-  void print2(Name n);
+<span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">NameF</span>{
+<span style="color: #FBDE2D;">public</span>:
+  <span style="color: #8DA6CE;">void</span> <span style="color: #FF6400;">print</span>(<span style="color: #8DA6CE;">Name</span> <span style="color: #40E0D0;">n</span>);
+  <span style="color: #8DA6CE;">void</span> <span style="color: #FF6400;">print2</span>(<span style="color: #8DA6CE;">Name</span> <span style="color: #40E0D0;">n</span>);
 };
 
-class Name
+<span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">Name</span>
 {
-  // 声明， NameF.print，可以访问我的私有成员
-  friend void NameF::print(Name n);//只是一个声明， 不是定义
-private :
-  string name;
-public:
-  Name(string n){
+  <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#22768;&#26126;&#65292; NameF.print&#65292;&#21487;&#20197;&#35775;&#38382;&#25105;&#30340;&#31169;&#26377;&#25104;&#21592;</span>
+  <span style="color: #FBDE2D;">friend</span> <span style="color: #8DA6CE;">void</span> <span style="color: #D8FA3C;">NameF</span>::<span style="color: #FF6400;">print</span>(<span style="color: #8DA6CE;">Name</span> <span style="color: #40E0D0;">n</span>);<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#21482;&#26159;&#19968;&#20010;&#22768;&#26126;&#65292; &#19981;&#26159;&#23450;&#20041;</span>
+<span style="color: #FBDE2D;">private</span> :
+  <span style="color: #8DA6CE;">string</span> <span style="color: #40E0D0;">name</span>;
+<span style="color: #FBDE2D;">public</span>:
+  <span style="color: #FF6400;">Name</span>(<span style="color: #8DA6CE;">string</span> <span style="color: #40E0D0;">n</span>){
     name=n;
   }
 };
 
-void NameF::print(Name n)
+<span style="color: #8DA6CE;">void</span> <span style="color: #D8FA3C;">NameF</span>::<span style="color: #FF6400;">print</span>(<span style="color: #8DA6CE;">Name</span> <span style="color: #40E0D0;">n</span>)
 {
-  //访问n 的private成员 name
-  std::cout &lt;&lt; n.name &lt;&lt; std::endl;
+  <span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#35775;&#38382;n &#30340;private&#25104;&#21592; name</span>
+  <span style="color: #D8FA3C;">std</span>::cout &lt;&lt; n.name &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
 }
 
-void NameF::print2(Name n){
-  // 在这里访问n.name是不允许 的，print2不是friend
-  // std::cout &lt;&lt; n.name &lt;&lt; std::endl;
+<span style="color: #8DA6CE;">void</span> <span style="color: #D8FA3C;">NameF</span>::<span style="color: #FF6400;">print2</span>(<span style="color: #8DA6CE;">Name</span> <span style="color: #40E0D0;">n</span>){
+  <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#22312;&#36825;&#37324;&#35775;&#38382;n.name&#26159;&#19981;&#20801;&#35768; &#30340;&#65292;print2&#19981;&#26159;friend</span>
+  <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">std::cout &lt;&lt; n.name &lt;&lt; std::endl;</span>
 }
-int main(int argc, char *argv[])
+<span style="color: #8DA6CE;">int</span> <span style="color: #FF6400;">main</span>(<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">argc</span>, <span style="color: #8DA6CE;">char</span> *<span style="color: #40E0D0;">argv</span>[])
 {
-  Name n("hello");
-  NameF f;
+  <span style="color: #8DA6CE;">Name</span> <span style="color: #FF6400;">n</span>(<span style="color: #ffa07a;">"hello"</span>);
+  <span style="color: #8DA6CE;">NameF</span> <span style="color: #40E0D0;">f</span>;
   f.print(n);
-  return 0;
+  <span style="color: #FBDE2D;">return</span> 0;
 }
 </pre>
 </div>
@@ -2104,26 +2104,26 @@ int main(int argc, char *argv[])
 <div class="outline-text-3" id="text-orgheadline108">
 <div class="org-src-container">
 
-<pre class="src src-c++">class Name
+<pre class="src src-c++"><span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">Name</span>
 {
-private:
-  static int init_i(int iParm){
-    return iParm;
+<span style="color: #FBDE2D;">private</span>:
+  <span style="color: #FBDE2D;">static</span> <span style="color: #8DA6CE;">int</span> <span style="color: #FF6400;">init_i</span>(<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">iParm</span>){
+    <span style="color: #FBDE2D;">return</span> iParm;
   }
 
-public:
-  // static int i=3; // error 不允许在类内初始化 static 数据成员
-  //static const int i=4;  //ok 例外是 static const类型的常量，则可以在类体用常量表达式初始化，
+<span style="color: #FBDE2D;">public</span>:
+  <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">static int i=3; // error &#19981;&#20801;&#35768;&#22312;&#31867;&#20869;&#21021;&#22987;&#21270; static &#25968;&#25454;&#25104;&#21592;</span>
+  <span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">static const int i=4;  //ok &#20363;&#22806;&#26159; static const&#31867;&#22411;&#30340;&#24120;&#37327;&#65292;&#21017;&#21487;&#20197;&#22312;&#31867;&#20307;&#29992;&#24120;&#37327;&#34920;&#36798;&#24335;&#21021;&#22987;&#21270;&#65292;</span>
 
-  static int i;
+  <span style="color: #FBDE2D;">static</span> <span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">i</span>;
 };
-// 在类外定义  初始化 ,初始化的时候 不能加static 关键字
-//init_i() 是Name类private static 成员， 此处也可以直接这样调
-int Name::i =init_i(3);
+<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#22312;&#31867;&#22806;&#23450;&#20041;  &#21021;&#22987;&#21270; ,&#21021;&#22987;&#21270;&#30340;&#26102;&#20505; &#19981;&#33021;&#21152;static &#20851;&#38190;&#23383;</span>
+<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">init_i() &#26159;Name&#31867;private static &#25104;&#21592;&#65292; &#27492;&#22788;&#20063;&#21487;&#20197;&#30452;&#25509;&#36825;&#26679;&#35843;</span>
+<span style="color: #8DA6CE;">int</span> <span style="color: #D8FA3C;">Name</span>::<span style="color: #40E0D0;">i</span> =init_i(3);
 
-int main(int argc, char *argv[])
+<span style="color: #8DA6CE;">int</span> <span style="color: #FF6400;">main</span>(<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">argc</span>, <span style="color: #8DA6CE;">char</span> *<span style="color: #40E0D0;">argv</span>[])
 {
-  return 0;
+  <span style="color: #FBDE2D;">return</span> 0;
 }
 </pre>
 </div>
@@ -2136,13 +2136,13 @@ int main(int argc, char *argv[])
 <div class="outline-text-2" id="text-orgheadline110">
 <div class="org-src-container">
 
-<pre class="src src-c++">class MyClass
+<pre class="src src-c++"><span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">MyClass</span>
 {
-public:
- //用另一个MyClass  初始化
- //若要禁止复制 ， 则声明为private
-//若要连自身的成员函数 或友元函数也不能访问， 则只声明 不定义
-  MyClass(const MyClass &amp;cls);
+<span style="color: #FBDE2D;">public</span>:
+ <span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#29992;&#21478;&#19968;&#20010;MyClass  &#21021;&#22987;&#21270;</span>
+ <span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#33509;&#35201;&#31105;&#27490;&#22797;&#21046; &#65292; &#21017;&#22768;&#26126;&#20026;private</span>
+<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#33509;&#35201;&#36830;&#33258;&#36523;&#30340;&#25104;&#21592;&#20989;&#25968; &#25110;&#21451;&#20803;&#20989;&#25968;&#20063;&#19981;&#33021;&#35775;&#38382;&#65292; &#21017;&#21482;&#22768;&#26126; &#19981;&#23450;&#20041;</span>
+  <span style="color: #FF6400;">MyClass</span>(<span style="color: #FBDE2D;">const</span> <span style="color: #8DA6CE;">MyClass</span> &amp;<span style="color: #40E0D0;">cls</span>);
 };
 </pre>
 </div>
@@ -2153,11 +2153,11 @@ public:
 <div class="outline-text-2" id="text-orgheadline111">
 <div class="org-src-container">
 
-<pre class="src src-c++">MyClass&amp; MyClass::operator=(const MyClass &amp;rhs) {
-  // Check for self-assignment!
-  if (this == &amp;rhs)
-    return *this;
-  return *this;
+<pre class="src src-c++"><span style="color: #8DA6CE;">MyClass</span>&amp; <span style="color: #D8FA3C;">MyClass</span>::<span style="color: #FBDE2D;">operator</span><span style="color: #FF6400;">=</span>(<span style="color: #FBDE2D;">const</span> <span style="color: #8DA6CE;">MyClass</span> &amp;<span style="color: #40E0D0;">rhs</span>) {
+  <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">Check for self-assignment!</span>
+  <span style="color: #FBDE2D;">if</span> (<span style="color: #FBDE2D;">this</span> == &amp;rhs)
+    <span style="color: #FBDE2D;">return</span> *<span style="color: #FBDE2D;">this</span>;
+  <span style="color: #FBDE2D;">return</span> *<span style="color: #FBDE2D;">this</span>;
 }
 </pre>
 </div>
@@ -2168,23 +2168,23 @@ public:
 <div class="outline-text-2" id="text-orgheadline112">
 <div class="org-src-container">
 
-<pre class="src src-c++">class Name
+<pre class="src src-c++"><span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">Name</span>
 {
-private :
-  string name;
-public:
-  Name(string &amp;n){name=n;}
-  virtual ~Name(){
-    std::cout &lt;&lt; "deleted Name class:" &lt;&lt;name &lt;&lt; std::endl;
+<span style="color: #FBDE2D;">private</span> :
+  <span style="color: #8DA6CE;">string</span> <span style="color: #40E0D0;">name</span>;
+<span style="color: #FBDE2D;">public</span>:
+  <span style="color: #FF6400;">Name</span>(<span style="color: #8DA6CE;">string</span> &amp;<span style="color: #40E0D0;">n</span>){name=n;}
+  <span style="color: #FBDE2D;">virtual</span> ~<span style="color: #FF6400;">Name</span>(){
+    <span style="color: #D8FA3C;">std</span>::cout &lt;&lt; <span style="color: #ffa07a;">"deleted Name class:"</span> &lt;&lt;name &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
   }
 };
 
-int main(int argc, char *argv[])
+<span style="color: #8DA6CE;">int</span> <span style="color: #FF6400;">main</span>(<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">argc</span>, <span style="color: #8DA6CE;">char</span> *<span style="color: #40E0D0;">argv</span>[])
 {
-  string hello= "hello";
-  Name *n  = new Name(hello);
-  delete n;
-  return 0;
+  <span style="color: #8DA6CE;">string</span> <span style="color: #40E0D0;">hello</span>= <span style="color: #ffa07a;">"hello"</span>;
+  <span style="color: #8DA6CE;">Name</span> *<span style="color: #40E0D0;">n</span>  = <span style="color: #FBDE2D;">new</span> <span style="color: #8DA6CE;">Name</span>(hello);
+  <span style="color: #FBDE2D;">delete</span> n;
+  <span style="color: #FBDE2D;">return</span> 0;
 }
 </pre>
 </div>
@@ -2198,70 +2198,70 @@ int main(int argc, char *argv[])
 <div class="outline-text-2" id="text-orgheadline113">
 <div class="org-src-container">
 
-<pre class="src src-c++">#include &lt;iostream&gt;
-#include &lt;string&gt;
-#include &lt;vector&gt;
+<pre class="src src-c++"><span style="color: #7fffd4;">#include</span> <span style="color: #ffa07a;">&lt;iostream&gt;</span>
+<span style="color: #7fffd4;">#include</span> <span style="color: #ffa07a;">&lt;string&gt;</span>
+<span style="color: #7fffd4;">#include</span> <span style="color: #ffa07a;">&lt;vector&gt;</span>
 
-using namespace std;
-class Nptr
+<span style="color: #FBDE2D;">using</span> <span style="color: #FBDE2D;">namespace</span> <span style="color: #D8FA3C;">std</span>;
+<span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">Nptr</span>
 {
-  friend class Obj;
-private:
-  size_t cnt;
-  int *p;
-public:
-  Nptr(size_t c,int *pr):cnt(c), p(pr)  {}
-  ~Nptr(){
-    std::cout &lt;&lt; "~Nptr() is called" &lt;&lt; std::endl;
-    delete p;
+  <span style="color: #FBDE2D;">friend</span> <span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">Obj</span>;
+<span style="color: #FBDE2D;">private</span>:
+  <span style="color: #8DA6CE;">size_t</span> <span style="color: #40E0D0;">cnt</span>;
+  <span style="color: #8DA6CE;">int</span> *<span style="color: #40E0D0;">p</span>;
+<span style="color: #FBDE2D;">public</span>:
+  <span style="color: #FF6400;">Nptr</span>(<span style="color: #8DA6CE;">size_t</span> <span style="color: #40E0D0;">c</span>,<span style="color: #8DA6CE;">int</span> *<span style="color: #40E0D0;">pr</span>):cnt(c), <span style="color: #8DA6CE;">p</span>(<span style="color: #40E0D0;">pr</span>)  {}
+  ~<span style="color: #FF6400;">Nptr</span>(){
+    <span style="color: #D8FA3C;">std</span>::cout &lt;&lt; <span style="color: #ffa07a;">"~Nptr() is called"</span> &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
+    <span style="color: #FBDE2D;">delete</span> p;
   }
-  int * get_value(){
-    return p;
+  <span style="color: #8DA6CE;">int</span> * <span style="color: #FF6400;">get_value</span>(){
+    <span style="color: #FBDE2D;">return</span> p;
   }
-  size_t  get_cnt(){
-    return cnt;
+  <span style="color: #8DA6CE;">size_t</span>  <span style="color: #FF6400;">get_cnt</span>(){
+    <span style="color: #FBDE2D;">return</span> cnt;
   }
 
 };
-class Obj
+<span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">Obj</span>
 {
-public:
-  Nptr *nptr;
-  Obj(int *i ):nptr( new Nptr(1,i)) {}
-  virtual ~Obj(){
-    std::cout &lt;&lt; "nptr.cnt--" &lt;&lt; std::endl;
-    if (--nptr-&gt;cnt==0){
-          delete nptr;
-      std::cout &lt;&lt; "nptr cnt =0 ,deleted" &lt;&lt; std::endl;
+<span style="color: #FBDE2D;">public</span>:
+  <span style="color: #8DA6CE;">Nptr</span> *<span style="color: #40E0D0;">nptr</span>;
+  <span style="color: #FF6400;">Obj</span>(<span style="color: #8DA6CE;">int</span> *<span style="color: #40E0D0;">i</span> ):<span style="color: #FF6400;">nptr</span>( <span style="color: #FBDE2D;">new</span> <span style="color: #8DA6CE;">Nptr</span>(1,i)) {}
+  <span style="color: #FBDE2D;">virtual</span> ~<span style="color: #FF6400;">Obj</span>(){
+    <span style="color: #D8FA3C;">std</span>::cout &lt;&lt; <span style="color: #ffa07a;">"nptr.cnt--"</span> &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
+    <span style="color: #FBDE2D;">if</span> (--nptr-&gt;cnt==0){
+          <span style="color: #FBDE2D;">delete</span> nptr;
+      <span style="color: #D8FA3C;">std</span>::cout &lt;&lt; <span style="color: #ffa07a;">"nptr cnt =0 ,deleted"</span> &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
     }
   }
-  Obj(Obj &amp;another): nptr(another.nptr)
+  <span style="color: #FF6400;">Obj</span>(<span style="color: #8DA6CE;">Obj</span> &amp;<span style="color: #40E0D0;">another</span>): <span style="color: #FF6400;">nptr</span>(another.nptr)
   {
     another.nptr-&gt;cnt++;
   }
-  Obj&amp; operator=(const Obj &amp;rhs) {
-    // Check for self-assignment!
-    if (this == &amp;rhs)
-      return *this;
-    if ((--nptr-&gt;cnt)==0){
-      delete nptr;
+  <span style="color: #8DA6CE;">Obj</span>&amp; <span style="color: #FBDE2D;">operator</span><span style="color: #FF6400;">=</span>(<span style="color: #FBDE2D;">const</span> <span style="color: #8DA6CE;">Obj</span> &amp;<span style="color: #40E0D0;">rhs</span>) {
+    <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">Check for self-assignment!</span>
+    <span style="color: #FBDE2D;">if</span> (<span style="color: #FBDE2D;">this</span> == &amp;rhs)
+      <span style="color: #FBDE2D;">return</span> *<span style="color: #FBDE2D;">this</span>;
+    <span style="color: #FBDE2D;">if</span> ((--nptr-&gt;cnt)==0){
+      <span style="color: #FBDE2D;">delete</span> nptr;
     }
     nptr=rhs.nptr;
     rhs.nptr-&gt;cnt++;
-    return *this;
+    <span style="color: #FBDE2D;">return</span> *<span style="color: #FBDE2D;">this</span>;
   }
 };
 
-int main(int argc, char *argv[]){
-  int *i   = new int(3) ;
-  Obj obj(i);
-  std::cout &lt;&lt; obj.nptr-&gt;get_cnt()&lt;&lt; std::endl;
-  Obj obj2(obj);
-  std::cout &lt;&lt; obj.nptr-&gt;get_cnt()&lt;&lt; std::endl;
-  Obj obj3=obj2;
+<span style="color: #8DA6CE;">int</span> <span style="color: #FF6400;">main</span>(<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">argc</span>, <span style="color: #8DA6CE;">char</span> *<span style="color: #40E0D0;">argv</span>[]){
+  <span style="color: #8DA6CE;">int</span> *<span style="color: #40E0D0;">i</span>   = <span style="color: #FBDE2D;">new</span> <span style="color: #8DA6CE;">int</span>(3) ;
+  <span style="color: #8DA6CE;">Obj</span> <span style="color: #FF6400;">obj</span>(i);
+  <span style="color: #D8FA3C;">std</span>::cout &lt;&lt; obj.nptr-&gt;get_cnt()&lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
+  <span style="color: #8DA6CE;">Obj</span> <span style="color: #FF6400;">obj2</span>(obj);
+  <span style="color: #D8FA3C;">std</span>::cout &lt;&lt; obj.nptr-&gt;get_cnt()&lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
+  <span style="color: #8DA6CE;">Obj</span> <span style="color: #40E0D0;">obj3</span>=obj2;
 
-  std::cout &lt;&lt; obj.nptr-&gt;get_cnt()&lt;&lt; std::endl;
-  return 0;
+  <span style="color: #D8FA3C;">std</span>::cout &lt;&lt; obj.nptr-&gt;get_cnt()&lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
+  <span style="color: #FBDE2D;">return</span> 0;
 }
 </pre>
 </div>
@@ -2276,7 +2276,7 @@ int main(int argc, char *argv[]){
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c++">int  operator+(int ,int )//eror , int int 都是内转类型
+<pre class="src src-c++"><span style="color: #8DA6CE;">int</span>  <span style="color: #FBDE2D;">operator</span><span style="color: #FF6400;">+</span>(<span style="color: #8DA6CE;">int</span> ,<span style="color: #8DA6CE;">int</span> )<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">eror , int int &#37117;&#26159;&#20869;&#36716;&#31867;&#22411;</span>
 </pre>
 </div></li>
 <li>优先级 结合性是固定的<br  /></li>
@@ -2287,18 +2287,18 @@ int main(int argc, char *argv[]){
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c++">MyClass&amp; MyClass::operator=(const MyClass &amp;rhs) { //赋值= 与+=  返回 引用
-  // Check for self-assignment!
-  if (this == &amp;rhs)
-    return *this;
-  return *this;
+<pre class="src src-c++"><span style="color: #8DA6CE;">MyClass</span>&amp; <span style="color: #D8FA3C;">MyClass</span>::<span style="color: #FBDE2D;">operator</span><span style="color: #FF6400;">=</span>(<span style="color: #FBDE2D;">const</span> <span style="color: #8DA6CE;">MyClass</span> &amp;<span style="color: #40E0D0;">rhs</span>) { <span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#36171;&#20540;= &#19982;+=  &#36820;&#22238; &#24341;&#29992;</span>
+  <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">Check for self-assignment!</span>
+  <span style="color: #FBDE2D;">if</span> (<span style="color: #FBDE2D;">this</span> == &amp;rhs)
+    <span style="color: #FBDE2D;">return</span> *<span style="color: #FBDE2D;">this</span>;
+  <span style="color: #FBDE2D;">return</span> *<span style="color: #FBDE2D;">this</span>;
 }
 
-MyClass operator+(const MyClass &amp;me const MyClass &amp;other) //返回 不是引用
+<span style="color: #8DA6CE;">MyClass</span> <span style="color: #FBDE2D;">operator</span><span style="color: #FF6400;">+</span>(<span style="color: #FBDE2D;">const</span> <span style="color: #8DA6CE;">MyClass</span> &amp;<span style="color: #40E0D0;">me</span> <span style="color: #FBDE2D;">const</span> MyClass &amp;other) <span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#36820;&#22238; &#19981;&#26159;&#24341;&#29992;</span>
 {
-  MyClass result = *this;
+  <span style="color: #8DA6CE;">MyClass</span> <span style="color: #40E0D0;">result</span> = *<span style="color: #FBDE2D;">this</span>;
   result += other;
-  return result;
+  <span style="color: #FBDE2D;">return</span> result;
 }
 </pre>
 </div></li>
@@ -2307,17 +2307,17 @@ MyClass operator+(const MyClass &amp;me const MyClass &amp;other) //返回 不�
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c++">class A
+<pre class="src src-c++"><span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">A</span>
 {
-  friend A operator+(const A &amp;a, const A &amp;a2);// 声明为A的码元函数,这样 ，可以访问A的private member
+  <span style="color: #FBDE2D;">friend</span> <span style="color: #8DA6CE;">A</span> <span style="color: #FBDE2D;">operator</span><span style="color: #FF6400;">+</span>(<span style="color: #FBDE2D;">const</span> <span style="color: #8DA6CE;">A</span> &amp;<span style="color: #40E0D0;">a</span>, <span style="color: #FBDE2D;">const</span> <span style="color: #8DA6CE;">A</span> &amp;<span style="color: #40E0D0;">a2</span>);<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#22768;&#26126;&#20026;A&#30340;&#30721;&#20803;&#20989;&#25968;,&#36825;&#26679; &#65292;&#21487;&#20197;&#35775;&#38382;A&#30340;private member</span>
 
 };
 
-A operator+(const A &amp;self,const A &amp;other)
+<span style="color: #8DA6CE;">A</span> <span style="color: #FBDE2D;">operator</span><span style="color: #FF6400;">+</span>(<span style="color: #FBDE2D;">const</span> <span style="color: #8DA6CE;">A</span> &amp;<span style="color: #40E0D0;">self</span>,<span style="color: #FBDE2D;">const</span> <span style="color: #8DA6CE;">A</span> &amp;<span style="color: #40E0D0;">other</span>)
 {
-  A result =*self +*other;
+  <span style="color: #8DA6CE;">A</span> <span style="color: #40E0D0;">result</span> =*self +*other;
 
-  return result;
+  <span style="color: #FBDE2D;">return</span> result;
 }
 </pre>
 </div></li>
@@ -2333,15 +2333,15 @@ A operator+(const A &amp;self,const A &amp;other)
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c++">std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const MyClass&amp; c)
+<pre class="src src-c++"><span style="color: #D8FA3C;">std</span>::<span style="color: #8DA6CE;">ostream</span>&amp; <span style="color: #FBDE2D;">operator</span><span style="color: #FF6400;">&lt;&lt;</span>(<span style="color: #D8FA3C;">std</span>::<span style="color: #8DA6CE;">ostream</span>&amp; <span style="color: #40E0D0;">s</span>, <span style="color: #FBDE2D;">const</span> <span style="color: #8DA6CE;">MyClass</span>&amp; <span style="color: #40E0D0;">c</span>)
 {
-  return s;
+  <span style="color: #FBDE2D;">return</span> s;
 }
 
-istream&amp; operator&gt;&gt;(istream&amp; s, const MyClass&amp; c)
+<span style="color: #8DA6CE;">istream</span>&amp; <span style="color: #FBDE2D;">operator</span><span style="color: #FF6400;">&gt;&gt;</span>(<span style="color: #8DA6CE;">istream</span>&amp; <span style="color: #40E0D0;">s</span>, <span style="color: #FBDE2D;">const</span> <span style="color: #8DA6CE;">MyClass</span>&amp; <span style="color: #40E0D0;">c</span>)
 {
- //要处理 错误 ，与eof
-  return s;
+ <span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#35201;&#22788;&#29702; &#38169;&#35823; &#65292;&#19982;eof</span>
+  <span style="color: #FBDE2D;">return</span> s;
 }
 </pre>
 </div></li>
@@ -2351,7 +2351,7 @@ istream&amp; operator&gt;&gt;(istream&amp; s, const MyClass&amp; c)
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c++">Class&amp; operator[](int index);
+<pre class="src src-c++">Class&amp; <span style="color: #FBDE2D;">operator</span>[](<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">index</span>);
 </pre>
 </div></li>
 <li><p>
@@ -2359,13 +2359,13 @@ istream&amp; operator&gt;&gt;(istream&amp; s, const MyClass&amp; c)
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c++">//* 必须定义为成员
-MyClass&amp; MyClass::operator*() {
-  return *ptr-&gt;sp;  //return ref
+<pre class="src src-c++"><span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">* &#24517;&#39035;&#23450;&#20041;&#20026;&#25104;&#21592;</span>
+<span style="color: #8DA6CE;">MyClass</span>&amp; <span style="color: #D8FA3C;">MyClass</span>::<span style="color: #FBDE2D;">operator</span><span style="color: #FF6400;">*</span>() {
+  <span style="color: #FBDE2D;">return</span> *ptr-&gt;sp;  <span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">return ref</span>
 }
 
-MyClass* MyClass::operator-&gt;():const { //const or not
-  return ptr-&gt;sp;  //return pointer
+<span style="color: #8DA6CE;">MyClass</span>* <span style="color: #D8FA3C;">MyClass</span>::<span style="color: #FBDE2D;">operator</span><span style="color: #FF6400;">-&gt;</span>():<span style="color: #FBDE2D;">const</span> { <span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">const or not</span>
+  <span style="color: #FBDE2D;">return</span> ptr-&gt;sp;  <span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">return pointer</span>
 }
 </pre>
 </div></li>
@@ -2374,11 +2374,11 @@ MyClass* MyClass::operator-&gt;():const { //const or not
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c++">MyClass&amp; MyClass::operator++() { //++i
-  return *this;
+<pre class="src src-c++"><span style="color: #8DA6CE;">MyClass</span>&amp; <span style="color: #D8FA3C;">MyClass</span>::<span style="color: #FBDE2D;">operator</span><span style="color: #FF6400;">++</span>() { <span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">++i</span>
+  <span style="color: #FBDE2D;">return</span> *<span style="color: #FBDE2D;">this</span>;
 }
-MyClass&amp; MyClass::operator++(int) {//i++ ,参数int 无意义 ，只是为了区分i++ ++i
-  return *this;
+<span style="color: #8DA6CE;">MyClass</span>&amp; <span style="color: #D8FA3C;">MyClass</span>::<span style="color: #FBDE2D;">operator</span><span style="color: #FF6400;">++</span>(<span style="color: #8DA6CE;">int</span>) {<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">i++ ,&#21442;&#25968;int &#26080;&#24847;&#20041; &#65292;&#21482;&#26159;&#20026;&#20102;&#21306;&#20998;i++ ++i</span>
+  <span style="color: #FBDE2D;">return</span> *<span style="color: #FBDE2D;">this</span>;
 }
 </pre>
 </div></li>
@@ -2386,54 +2386,54 @@ MyClass&amp; MyClass::operator++(int) {//i++ ,参数int 无意义 ，只是为�
 </ol>
 <div class="org-src-container">
 
-<pre class="src src-c++">class MyClass
+<pre class="src src-c++"><span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">MyClass</span>
 {
-public:
-  int operator() (int i) {
-    return i+1;
+<span style="color: #FBDE2D;">public</span>:
+  <span style="color: #8DA6CE;">int</span> <span style="color: #FBDE2D;">operator</span><span style="color: #FF6400;">()</span> (<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">i</span>) {
+    <span style="color: #FBDE2D;">return</span> i+1;
   }
 };
-int main(int argc, char *argv[])
+<span style="color: #8DA6CE;">int</span> <span style="color: #FF6400;">main</span>(<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">argc</span>, <span style="color: #8DA6CE;">char</span> *<span style="color: #40E0D0;">argv</span>[])
 {
-  MyClass c;//c is object
-  int ret=c(1);                 // 调用操作符,定义了调用操作符的类，的对象 常称为函数对象 ，
-  return 0;
+  <span style="color: #8DA6CE;">MyClass</span> <span style="color: #40E0D0;">c</span>;<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">c is object</span>
+  <span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">ret</span>=c(1);                 <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#35843;&#29992;&#25805;&#20316;&#31526;,&#23450;&#20041;&#20102;&#35843;&#29992;&#25805;&#20316;&#31526;&#30340;&#31867;&#65292;&#30340;&#23545;&#35937; &#24120;&#31216;&#20026;&#20989;&#25968;&#23545;&#35937; &#65292;</span>
+  <span style="color: #FBDE2D;">return</span> 0;
 }
 </pre>
 </div>
 <div class="org-src-container">
 
-<pre class="src src-c++"> //函数对象在 算法库中的应用
-#include &lt;iostream&gt;
-#include &lt;string&gt;
-#include &lt;cstdlib&gt;
-#include &lt;vector&gt;
-#include &lt;algorithm&gt;
-using namespace std;
+<pre class="src src-c++"> <span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#20989;&#25968;&#23545;&#35937;&#22312; &#31639;&#27861;&#24211;&#20013;&#30340;&#24212;&#29992;</span>
+<span style="color: #7fffd4;">#include</span> <span style="color: #ffa07a;">&lt;iostream&gt;</span>
+<span style="color: #7fffd4;">#include</span> <span style="color: #ffa07a;">&lt;string&gt;</span>
+<span style="color: #7fffd4;">#include</span> <span style="color: #ffa07a;">&lt;cstdlib&gt;</span>
+<span style="color: #7fffd4;">#include</span> <span style="color: #ffa07a;">&lt;vector&gt;</span>
+<span style="color: #7fffd4;">#include</span> <span style="color: #ffa07a;">&lt;algorithm&gt;</span>
+<span style="color: #FBDE2D;">using</span> <span style="color: #FBDE2D;">namespace</span> <span style="color: #D8FA3C;">std</span>;
 
-class IsGreatThanN
+<span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">IsGreatThanN</span>
 {
-private:
-  size_t n;
-public:
-IsGreatThanN(size_t N){
-    this-&gt;n=N;
+<span style="color: #FBDE2D;">private</span>:
+  <span style="color: #8DA6CE;">size_t</span> <span style="color: #40E0D0;">n</span>;
+<span style="color: #FBDE2D;">public</span>:
+<span style="color: #FF6400;">IsGreatThanN</span>(<span style="color: #8DA6CE;">size_t</span> <span style="color: #40E0D0;">N</span>){
+    <span style="color: #FBDE2D;">this</span>-&gt;n=N;
   }
 
-  bool operator() (const string &amp; str) { //定义了 调用操作符()
-    return str.size()&gt;n;
+  <span style="color: #8DA6CE;">bool</span> <span style="color: #FBDE2D;">operator</span><span style="color: #FF6400;">()</span> (<span style="color: #FBDE2D;">const</span> <span style="color: #8DA6CE;">string</span> &amp; <span style="color: #40E0D0;">str</span>) { <span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#23450;&#20041;&#20102; &#35843;&#29992;&#25805;&#20316;&#31526;()</span>
+    <span style="color: #FBDE2D;">return</span> str.size()&gt;n;
   }
 };
 
-int main(int argc, char *argv[])
+<span style="color: #8DA6CE;">int</span> <span style="color: #FF6400;">main</span>(<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">argc</span>, <span style="color: #8DA6CE;">char</span> *<span style="color: #40E0D0;">argv</span>[])
 {
-  vector&lt;string&gt; v;
-  v.push_back(string("abc"));
-  v.push_back(string("abcccccc"));
-  v.push_back(string("dddddabc"));
-  int cnt=count_if(v.begin(),v.end(),IsGreatThanN(5)); // 这里利用函数对像 ，在初始化时，将参数5传过去 ，count_if 其实是利用了 IsGreatThanN 对象的() 操作符来完成bool的判断的
-  std::cout &lt;&lt; cnt &lt;&lt; std::endl;
-  return 0;
+  <span style="color: #8DA6CE;">vector</span>&lt;<span style="color: #8DA6CE;">string</span>&gt; <span style="color: #40E0D0;">v</span>;
+  v.push_back(string(<span style="color: #ffa07a;">"abc"</span>));
+  v.push_back(string(<span style="color: #ffa07a;">"abcccccc"</span>));
+  v.push_back(string(<span style="color: #ffa07a;">"dddddabc"</span>));
+  <span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">cnt</span>=count_if(v.begin(),v.end(),IsGreatThanN(5)); <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#36825;&#37324;&#21033;&#29992;&#20989;&#25968;&#23545;&#20687; &#65292;&#22312;&#21021;&#22987;&#21270;&#26102;&#65292;&#23558;&#21442;&#25968;5&#20256;&#36807;&#21435; &#65292;count_if &#20854;&#23454;&#26159;&#21033;&#29992;&#20102; IsGreatThanN &#23545;&#35937;&#30340;() &#25805;&#20316;&#31526;&#26469;&#23436;&#25104;bool&#30340;&#21028;&#26029;&#30340;</span>
+  <span style="color: #D8FA3C;">std</span>::cout &lt;&lt; cnt &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
+  <span style="color: #FBDE2D;">return</span> 0;
 }
 </pre>
 </div>
@@ -2442,11 +2442,11 @@ int main(int argc, char *argv[])
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c++">class SmallInt
+<pre class="src src-c++"><span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">SmallInt</span>
 {
-public:
-  //转换成int 的转换操作符
-  operator int() const{ return 0}
+<span style="color: #FBDE2D;">public</span>:
+  <span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#36716;&#25442;&#25104;int &#30340;&#36716;&#25442;&#25805;&#20316;&#31526;</span>
+  <span style="color: #FBDE2D;">operator</span> <span style="color: #8DA6CE;">int</span>() <span style="color: #FBDE2D;">const</span>{ <span style="color: #FBDE2D;">return</span> 0}
 };
 </pre>
 </div>
@@ -2473,9 +2473,9 @@ public 的,可以继承Parent继承的接口,private protected 不行<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c++">class Base{};
- struct D1: Base{}  ;;默认是public
- class D2:Base{}  默认是protected
+<pre class="src src-c++"><span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">Base</span>{};
+ <span style="color: #FBDE2D;">struct</span> <span style="color: #8DA6CE;">D1</span>: <span style="color: #8DA6CE;">Base</span>{}  ;;&#40664;&#35748;&#26159;<span style="color: #FBDE2D;">public</span>
+ <span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">D2</span>:<span style="color: #8DA6CE;">Base</span>{}  &#40664;&#35748;&#26159;<span style="color: #FBDE2D;">protected</span>
 </pre>
 </div>
 </div></li></ul>
@@ -2487,15 +2487,15 @@ public 的,可以继承Parent继承的接口,private protected 不行<br  />
 <div class="outline-text-3" id="text-orgheadline120">
 <div class="org-src-container">
 
-<pre class="src src-c++"> class Parent
+<pre class="src src-c++"> <span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">Parent</span>
  {
- public:
-   virtaul void test();
+ <span style="color: #FBDE2D;">public</span>:
+   virtaul <span style="color: #8DA6CE;">void</span> <span style="color: #FF6400;">test</span>();
  };
-class Child:public Parent
+<span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">Child</span>:<span style="color: #FBDE2D;">public</span> <span style="color: #8DA6CE;">Parent</span>
 {
-public:
-  void test();
+<span style="color: #FBDE2D;">public</span>:
+  <span style="color: #8DA6CE;">void</span> <span style="color: #FF6400;">test</span>();
 };
 </pre>
 </div>
@@ -2506,15 +2506,15 @@ public:
 <div class="outline-text-3" id="text-orgheadline121">
 <div class="org-src-container">
 
-<pre class="src src-c++">//正确
-class Child;
-class Parent;
+<pre class="src src-c++"><span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#27491;&#30830;</span>
+<span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">Child</span>;
+<span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">Parent</span>;
 </pre>
 </div>
 <div class="org-src-container">
 
-<pre class="src src-c++">//错误
-class Child :Parent
+<pre class="src src-c++"><span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#38169;&#35823;</span>
+<span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">Child</span> :<span style="color: #8DA6CE;">Parent</span>
 </pre>
 </div>
 </div>
@@ -2524,38 +2524,38 @@ class Child :Parent
 <div class="outline-text-3" id="text-orgheadline122">
 <div class="org-src-container">
 
-<pre class="src src-c++">#include &lt;iostream&gt;
-#include &lt;string&gt;
-#include &lt;vector&gt;
+<pre class="src src-c++"><span style="color: #7fffd4;">#include</span> <span style="color: #ffa07a;">&lt;iostream&gt;</span>
+<span style="color: #7fffd4;">#include</span> <span style="color: #ffa07a;">&lt;string&gt;</span>
+<span style="color: #7fffd4;">#include</span> <span style="color: #ffa07a;">&lt;vector&gt;</span>
 
-using namespace std;
+<span style="color: #FBDE2D;">using</span> <span style="color: #FBDE2D;">namespace</span> <span style="color: #D8FA3C;">std</span>;
 
-class Parent
+<span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">Parent</span>
 {
-public:
-  virtual void test(){
-    std::cout &lt;&lt; "pppp" &lt;&lt; std::endl;
+<span style="color: #FBDE2D;">public</span>:
+  <span style="color: #FBDE2D;">virtual</span> <span style="color: #8DA6CE;">void</span> <span style="color: #FF6400;">test</span>(){
+    <span style="color: #D8FA3C;">std</span>::cout &lt;&lt; <span style="color: #ffa07a;">"pppp"</span> &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
   }
 };
-class Child:public Parent
+<span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">Child</span>:<span style="color: #FBDE2D;">public</span> <span style="color: #8DA6CE;">Parent</span>
 {
-public:
-  virtual void test(){
-    std::cout &lt;&lt; "childdddd" &lt;&lt; std::endl;
+<span style="color: #FBDE2D;">public</span>:
+  <span style="color: #FBDE2D;">virtual</span> <span style="color: #8DA6CE;">void</span> <span style="color: #FF6400;">test</span>(){
+    <span style="color: #D8FA3C;">std</span>::cout &lt;&lt; <span style="color: #ffa07a;">"childdddd"</span> &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
   }
 };
 
-void call_test(Parent *p){// 这里声明为Parent* 类型,
-  p-&gt;test(); // 因为Parent 将test()函数 声明为 virtaul
+<span style="color: #8DA6CE;">void</span> <span style="color: #FF6400;">call_test</span>(<span style="color: #8DA6CE;">Parent</span> *<span style="color: #40E0D0;">p</span>){<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#36825;&#37324;&#22768;&#26126;&#20026;Parent* &#31867;&#22411;,</span>
+  p-&gt;test(); <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#22240;&#20026;Parent &#23558;test()&#20989;&#25968; &#22768;&#26126;&#20026; virtaul</span>
 };
 
-int main(int argc, char *argv[]){
-  Parent p  ;
-  Child c;
+<span style="color: #8DA6CE;">int</span> <span style="color: #FF6400;">main</span>(<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">argc</span>, <span style="color: #8DA6CE;">char</span> *<span style="color: #40E0D0;">argv</span>[]){
+  <span style="color: #8DA6CE;">Parent</span> <span style="color: #40E0D0;">p</span>  ;
+  <span style="color: #8DA6CE;">Child</span> <span style="color: #40E0D0;">c</span>;
   call_test(&amp;p);
   call_test(&amp;c);
-  c.Parent::test();// 强制使用 parent版 的test
-  return 0;
+  c.<span style="color: #D8FA3C;">Parent</span>::test();<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#24378;&#21046;&#20351;&#29992; parent&#29256; &#30340;test</span>
+  <span style="color: #FBDE2D;">return</span> 0;
 }
 </pre>
 </div>
@@ -2570,39 +2570,39 @@ int main(int argc, char *argv[]){
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c++">#include &lt;iostream&gt;
-#include &lt;string&gt;
-#include &lt;vector&gt;
+<pre class="src src-c++"><span style="color: #7fffd4;">#include</span> <span style="color: #ffa07a;">&lt;iostream&gt;</span>
+<span style="color: #7fffd4;">#include</span> <span style="color: #ffa07a;">&lt;string&gt;</span>
+<span style="color: #7fffd4;">#include</span> <span style="color: #ffa07a;">&lt;vector&gt;</span>
 
-using namespace std;
+<span style="color: #FBDE2D;">using</span> <span style="color: #FBDE2D;">namespace</span> <span style="color: #D8FA3C;">std</span>;
 
-class Parent
+<span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">Parent</span>
 {
-public:
-  virtual void test(int i=1 ){
-    std::cout &lt;&lt; "pppp"&lt;&lt; i &lt;&lt; std::endl;
+<span style="color: #FBDE2D;">public</span>:
+  <span style="color: #FBDE2D;">virtual</span> <span style="color: #8DA6CE;">void</span> <span style="color: #FF6400;">test</span>(<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">i</span>=1 ){
+    <span style="color: #D8FA3C;">std</span>::cout &lt;&lt; <span style="color: #ffa07a;">"pppp"</span>&lt;&lt; i &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
   }
 };
-class Child:public Parent
+<span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">Child</span>:<span style="color: #FBDE2D;">public</span> <span style="color: #8DA6CE;">Parent</span>
 {
-public:
-  virtual void test(int i=2){
-    std::cout &lt;&lt; "childdddd"&lt;&lt;i &lt;&lt; std::endl;
+<span style="color: #FBDE2D;">public</span>:
+  <span style="color: #FBDE2D;">virtual</span> <span style="color: #8DA6CE;">void</span> <span style="color: #FF6400;">test</span>(<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">i</span>=2){
+    <span style="color: #D8FA3C;">std</span>::cout &lt;&lt; <span style="color: #ffa07a;">"childdddd"</span>&lt;&lt;i &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
   }
 };
 
-void call_test(Parent *p){
+<span style="color: #8DA6CE;">void</span> <span style="color: #FF6400;">call_test</span>(<span style="color: #8DA6CE;">Parent</span> *<span style="color: #40E0D0;">p</span>){
   p-&gt;test();
 };
 
-int main(int argc, char *argv[]){
-  Parent p  ;
-  Child c;
-  call_test(&amp;p); //打印的int 是 1
-  call_test(&amp;c);//打印的int 是 1 ,因为 call_test()里调用的时候 , 指针的类型是Parent* 类型的
-  c.Parent::test();
-  // 最佳实践,默认参数 要一致
-  return 0;
+<span style="color: #8DA6CE;">int</span> <span style="color: #FF6400;">main</span>(<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">argc</span>, <span style="color: #8DA6CE;">char</span> *<span style="color: #40E0D0;">argv</span>[]){
+  <span style="color: #8DA6CE;">Parent</span> <span style="color: #40E0D0;">p</span>  ;
+  <span style="color: #8DA6CE;">Child</span> <span style="color: #40E0D0;">c</span>;
+  call_test(&amp;p); <span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#25171;&#21360;&#30340;int &#26159; 1</span>
+  call_test(&amp;c);<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#25171;&#21360;&#30340;int &#26159; 1 ,&#22240;&#20026; call_test()&#37324;&#35843;&#29992;&#30340;&#26102;&#20505; , &#25351;&#38024;&#30340;&#31867;&#22411;&#26159;Parent* &#31867;&#22411;&#30340;</span>
+  c.<span style="color: #D8FA3C;">Parent</span>::test();
+  <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#26368;&#20339;&#23454;&#36341;,&#40664;&#35748;&#21442;&#25968; &#35201;&#19968;&#33268;</span>
+  <span style="color: #FBDE2D;">return</span> 0;
 }
 </pre>
 </div>
@@ -2613,33 +2613,33 @@ int main(int argc, char *argv[]){
 <div class="outline-text-3" id="text-orgheadline124">
 <div class="org-src-container">
 
-<pre class="src src-c++">#include &lt;iostream&gt;
-#include &lt;string&gt;
-#include &lt;vector&gt;
+<pre class="src src-c++"><span style="color: #7fffd4;">#include</span> <span style="color: #ffa07a;">&lt;iostream&gt;</span>
+<span style="color: #7fffd4;">#include</span> <span style="color: #ffa07a;">&lt;string&gt;</span>
+<span style="color: #7fffd4;">#include</span> <span style="color: #ffa07a;">&lt;vector&gt;</span>
 
-using namespace std;
-class Parent
+<span style="color: #FBDE2D;">using</span> <span style="color: #FBDE2D;">namespace</span> <span style="color: #D8FA3C;">std</span>;
+<span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">Parent</span>
 {
-  friend class Friend;
-protected:
-  int i;
+  <span style="color: #FBDE2D;">friend</span> <span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">Friend</span>;
+<span style="color: #FBDE2D;">protected</span>:
+  <span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">i</span>;
 };
 
-class Child:public Parent
+<span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">Child</span>:<span style="color: #FBDE2D;">public</span> <span style="color: #8DA6CE;">Parent</span>
 {
-protected:
-  int j;
+<span style="color: #FBDE2D;">protected</span>:
+  <span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">j</span>;
 };
-class Friend
+<span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">Friend</span>
 {
-public:
-  void test(Parent p){p.i=3;}           // ok
-  // void test(Child c){c.j=3;}            // errro
+<span style="color: #FBDE2D;">public</span>:
+  <span style="color: #8DA6CE;">void</span> <span style="color: #FF6400;">test</span>(<span style="color: #8DA6CE;">Parent</span> <span style="color: #40E0D0;">p</span>){p.i=3;}           <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">ok</span>
+  <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">void test(Child c){c.j=3;}            // errro</span>
 };
-class FriendChild:public Friend
+<span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">FriendChild</span>:<span style="color: #FBDE2D;">public</span> <span style="color: #8DA6CE;">Friend</span>
 {
-public:
-  // void test(Parent p){p.i=3;};   // error
+<span style="color: #FBDE2D;">public</span>:
+  <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">void test(Parent p){p.i=3;};   // error</span>
 };
 </pre>
 </div>
@@ -2668,10 +2668,10 @@ public:
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c++">Child c;
-Parent *p =&amp;c;                  // ok
-Child *cp =p;                   //  error ,虽然p所指向的是个Child,但,p是 Parent* 类型的指针, 转化失败,
-// 不过可以用static_cast 或dynamic_cast 进行转换
+<pre class="src src-c++"><span style="color: #8DA6CE;">Child</span> <span style="color: #40E0D0;">c</span>;
+<span style="color: #8DA6CE;">Parent</span> *<span style="color: #40E0D0;">p</span> =&amp;c;                  <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">ok</span>
+<span style="color: #8DA6CE;">Child</span> *<span style="color: #40E0D0;">cp</span> =p;                   <span style="color: #AEAEAE;">//  </span><span style="color: #AEAEAE;">error ,&#34429;&#28982;p&#25152;&#25351;&#21521;&#30340;&#26159;&#20010;Child,&#20294;,p&#26159; Parent* &#31867;&#22411;&#30340;&#25351;&#38024;, &#36716;&#21270;&#22833;&#36133;,</span>
+<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#19981;&#36807;&#21487;&#20197;&#29992;static_cast &#25110;dynamic_cast &#36827;&#34892;&#36716;&#25442;</span>
 </pre>
 </div></li>
 </ol>
@@ -2682,19 +2682,19 @@ Child *cp =p;                   //  error ,虽然p所指向的是个Child,但,p�
 <div class="outline-text-3" id="text-orgheadline127">
 <div class="org-src-container">
 
-<pre class="src src-c++">class Parent
+<pre class="src src-c++"><span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">Parent</span>
 {
-public:
-  Parent(int i){}
+<span style="color: #FBDE2D;">public</span>:
+  <span style="color: #FF6400;">Parent</span>(<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">i</span>){}
 };
 
-class Child:public Parent
+<span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">Child</span>:<span style="color: #FBDE2D;">public</span> <span style="color: #8DA6CE;">Parent</span>
 {
-private:
-  int member_j;
-public:
-// 先初始化父类, 然后按照 声明的顺序 初始化自己的成员,
-  Child(int i ,int j) :Parent(i),member_j(j){}
+<span style="color: #FBDE2D;">private</span>:
+  <span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">member_j</span>;
+<span style="color: #FBDE2D;">public</span>:
+<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#20808;&#21021;&#22987;&#21270;&#29238;&#31867;, &#28982;&#21518;&#25353;&#29031; &#22768;&#26126;&#30340;&#39034;&#24207; &#21021;&#22987;&#21270;&#33258;&#24049;&#30340;&#25104;&#21592;,</span>
+  <span style="color: #FF6400;">Child</span>(<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">i</span> ,<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">j</span>) :Parent(i),member_j(j){}
 };
 </pre>
 </div>
@@ -2708,12 +2708,12 @@ public:
 <div class="outline-text-3" id="text-orgheadline128">
 <div class="org-src-container">
 
-<pre class="src src-c++">class Child
+<pre class="src src-c++"><span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">Child</span>
 {
-public:
-  Child(Child c ){
-    Parent(c); //先调用父类的复制构造函数 ,
-    //然后对自己的部分进行处理
+<span style="color: #FBDE2D;">public</span>:
+  <span style="color: #FF6400;">Child</span>(<span style="color: #8DA6CE;">Child</span> <span style="color: #40E0D0;">c</span> ){
+    Parent(c); <span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#20808;&#35843;&#29992;&#29238;&#31867;&#30340;&#22797;&#21046;&#26500;&#36896;&#20989;&#25968; ,</span>
+    <span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#28982;&#21518;&#23545;&#33258;&#24049;&#30340;&#37096;&#20998;&#36827;&#34892;&#22788;&#29702;</span>
   }
 };
 </pre>
@@ -2725,13 +2725,13 @@ public:
 <div class="outline-text-3" id="text-orgheadline129">
 <div class="org-src-container">
 
-<pre class="src src-c++">Child&amp; Child::operator=(const Child &amp;rhs) {
-  // Check for self-assignment!
-  if (this == &amp;rhs)
-    return *this;
-  Parent::operator=(rhs);//先初始化父类部分
-  // ...
-  return *this;
+<pre class="src src-c++"><span style="color: #8DA6CE;">Child</span>&amp; <span style="color: #D8FA3C;">Child</span>::<span style="color: #FBDE2D;">operator</span><span style="color: #FF6400;">=</span>(<span style="color: #FBDE2D;">const</span> <span style="color: #8DA6CE;">Child</span> &amp;<span style="color: #40E0D0;">rhs</span>) {
+  <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">Check for self-assignment!</span>
+  <span style="color: #FBDE2D;">if</span> (<span style="color: #FBDE2D;">this</span> == &amp;rhs)
+    <span style="color: #FBDE2D;">return</span> *<span style="color: #FBDE2D;">this</span>;
+  <span style="color: #D8FA3C;">Parent</span>::<span style="color: #FBDE2D;">operator</span>=(rhs);<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#20808;&#21021;&#22987;&#21270;&#29238;&#31867;&#37096;&#20998;</span>
+  <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">...</span>
+  <span style="color: #FBDE2D;">return</span> *<span style="color: #FBDE2D;">this</span>;
 }
 </pre>
 </div>
@@ -2757,25 +2757,25 @@ Base::i ,这样可以访问 父类的,函数也一样 ,<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c++">class Parent
+<pre class="src src-c++"><span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">Parent</span>
 {
-public:
-  void test(){}
+<span style="color: #FBDE2D;">public</span>:
+  <span style="color: #8DA6CE;">void</span> <span style="color: #FF6400;">test</span>(){}
 };
-class Child:public Parent
+<span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">Child</span>:<span style="color: #FBDE2D;">public</span> <span style="color: #8DA6CE;">Parent</span>
 {
-public:
-  void test(int i){} //隐藏了 父类中的同名函数,虽然 参数不同
+<span style="color: #FBDE2D;">public</span>:
+  <span style="color: #8DA6CE;">void</span> <span style="color: #FF6400;">test</span>(<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">i</span>){} <span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#38544;&#34255;&#20102; &#29238;&#31867;&#20013;&#30340;&#21516;&#21517;&#20989;&#25968;,&#34429;&#28982; &#21442;&#25968;&#19981;&#21516;</span>
 };
-int main(int argc, char *argv[])
+<span style="color: #8DA6CE;">int</span> <span style="color: #FF6400;">main</span>(<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">argc</span>, <span style="color: #8DA6CE;">char</span> *<span style="color: #40E0D0;">argv</span>[])
 {
-  Parent p;
-  Child c;
-  p.test();                     // ok
-  c.test(1);                    // ok
-  c.Parent::test();             // ok
-  // c.test();                     // error
-  return 0;
+  <span style="color: #8DA6CE;">Parent</span> <span style="color: #40E0D0;">p</span>;
+  <span style="color: #8DA6CE;">Child</span> <span style="color: #40E0D0;">c</span>;
+  p.test();                     <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">ok</span>
+  c.test(1);                    <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">ok</span>
+  c.<span style="color: #D8FA3C;">Parent</span>::test();             <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">ok</span>
+  <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">c.test();                     // error</span>
+  <span style="color: #FBDE2D;">return</span> 0;
 }
 </pre>
 </div>
@@ -2792,33 +2792,33 @@ int main(int argc, char *argv[])
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c++">using namespace std;
-class Parent
+<pre class="src src-c++"><span style="color: #FBDE2D;">using</span> <span style="color: #FBDE2D;">namespace</span> <span style="color: #D8FA3C;">std</span>;
+<span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">Parent</span>
 {
-public:
-  void test(){
-    std::cout &lt;&lt; "parent test()" &lt;&lt; std::endl;
+<span style="color: #FBDE2D;">public</span>:
+  <span style="color: #8DA6CE;">void</span> <span style="color: #FF6400;">test</span>(){
+    <span style="color: #D8FA3C;">std</span>::cout &lt;&lt; <span style="color: #ffa07a;">"parent test()"</span> &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
   }
-  void test(int i){
-    std::cout &lt;&lt; "parent test(int)" &lt;&lt; std::endl;
-  }
-};
-class Child:public Parent
-{
-public:
-  using Parent::test;// 使用 using声明
-  void test(int i){//只重载需要重载的部分
-    std::cout &lt;&lt; "child test(int)" &lt;&lt; std::endl;
+  <span style="color: #8DA6CE;">void</span> <span style="color: #FF6400;">test</span>(<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">i</span>){
+    <span style="color: #D8FA3C;">std</span>::cout &lt;&lt; <span style="color: #ffa07a;">"parent test(int)"</span> &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
   }
 };
-int main(int argc, char *argv[])
+<span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">Child</span>:<span style="color: #FBDE2D;">public</span> <span style="color: #8DA6CE;">Parent</span>
 {
-  Parent p;
-  Child c;
-  p.test();                     // ok
-  c.test(1);                    // ok
-  c.test();                     // ok 这里不在报错
-  return 0;
+<span style="color: #FBDE2D;">public</span>:
+  <span style="color: #FBDE2D;">using</span> <span style="color: #D8FA3C;">Parent</span>::<span style="color: #8DA6CE;">test</span>;<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#20351;&#29992; using&#22768;&#26126;</span>
+  <span style="color: #8DA6CE;">void</span> <span style="color: #FF6400;">test</span>(<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">i</span>){<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#21482;&#37325;&#36733;&#38656;&#35201;&#37325;&#36733;&#30340;&#37096;&#20998;</span>
+    <span style="color: #D8FA3C;">std</span>::cout &lt;&lt; <span style="color: #ffa07a;">"child test(int)"</span> &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
+  }
+};
+<span style="color: #8DA6CE;">int</span> <span style="color: #FF6400;">main</span>(<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">argc</span>, <span style="color: #8DA6CE;">char</span> *<span style="color: #40E0D0;">argv</span>[])
+{
+  <span style="color: #8DA6CE;">Parent</span> <span style="color: #40E0D0;">p</span>;
+  <span style="color: #8DA6CE;">Child</span> <span style="color: #40E0D0;">c</span>;
+  p.test();                     <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">ok</span>
+  c.test(1);                    <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">ok</span>
+  c.test();                     <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">ok &#36825;&#37324;&#19981;&#22312;&#25253;&#38169;</span>
+  <span style="color: #FBDE2D;">return</span> 0;
 }
 </pre>
 </div>
@@ -2832,10 +2832,10 @@ int main(int argc, char *argv[])
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c++">class AbClass
+<pre class="src src-c++"><span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">AbClass</span>
 {
-public:
-    public void test():const =0; //=0 定义 为纯虚函数
+<span style="color: #FBDE2D;">public</span>:
+    <span style="color: #FBDE2D;">public</span> <span style="color: #8DA6CE;">void</span> test():<span style="color: #FBDE2D;">const</span> =0; <span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">=0 &#23450;&#20041; &#20026;&#32431;&#34394;&#20989;&#25968;</span>
 };
 </pre>
 </div>
@@ -2863,21 +2863,21 @@ public:
 <div class="outline-text-2" id="text-orgheadline136">
 <div class="org-src-container">
 
-<pre class="src src-c++"> template&lt;typename T&gt; compare(const T &amp;v1,const &amp;v2){
-   if (v1 &lt;v2)return 1;
-   if (v1 &gt;v2)return -1;
-   return 0;
+<pre class="src src-c++"> <span style="color: #FBDE2D;">template</span>&lt;<span style="color: #FBDE2D;">typename</span> <span style="color: #8DA6CE;">T</span>&gt; <span style="color: #FF6400;">compare</span>(<span style="color: #FBDE2D;">const</span> <span style="color: #8DA6CE;">T</span> &amp;<span style="color: #40E0D0;">v1</span>,<span style="color: #FBDE2D;">const</span> &amp;<span style="color: #40E0D0;">v2</span>){
+   <span style="color: #FBDE2D;">if</span> (v1 &lt;v2)<span style="color: #FBDE2D;">return</span> 1;
+   <span style="color: #FBDE2D;">if</span> (v1 &gt;v2)<span style="color: #FBDE2D;">return</span> -1;
+   <span style="color: #FBDE2D;">return</span> 0;
  }
 
- template&lt;class T&gt; class List{
- public:
-   List();
-   T&amp; first();
-   void add(T &amp;t);
-   void del(T &amp;t);
+ <span style="color: #FBDE2D;">template</span>&lt;<span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">T</span>&gt; <span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">List</span>{
+ <span style="color: #FBDE2D;">public</span>:
+   <span style="color: #FF6400;">List</span>();
+   <span style="color: #8DA6CE;">T</span>&amp; <span style="color: #FF6400;">first</span>();
+   <span style="color: #8DA6CE;">void</span> <span style="color: #FF6400;">add</span>(<span style="color: #8DA6CE;">T</span> &amp;<span style="color: #40E0D0;">t</span>);
+   <span style="color: #8DA6CE;">void</span> <span style="color: #FF6400;">del</span>(<span style="color: #8DA6CE;">T</span> &amp;<span style="color: #40E0D0;">t</span>);
 
  }
-//关键字 class typename 完全相同 , 只是给程序员 直观的感受来区分 T的可能类型
+<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#20851;&#38190;&#23383; class typename &#23436;&#20840;&#30456;&#21516; , &#21482;&#26159;&#32473;&#31243;&#24207;&#21592; &#30452;&#35266;&#30340;&#24863;&#21463;&#26469;&#21306;&#20998; T&#30340;&#21487;&#33021;&#31867;&#22411;</span>
 </pre>
 </div>
 </div>
@@ -2976,16 +2976,16 @@ new (ptr) T(param);<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c++">allocator&lt;string&gt; a;
-string* str=a.allocate(2) ;//分配空间 hold  2 strings
-new (str)string("he");
-a.construct((str+1),string("llo"));
-std::cout &lt;&lt; *str &lt;&lt; std::endl;
-std::cout &lt;&lt; *(str+1) &lt;&lt; std::endl;
+<pre class="src src-c++"><span style="color: #8DA6CE;">allocator</span>&lt;<span style="color: #8DA6CE;">string</span>&gt; <span style="color: #40E0D0;">a</span>;
+<span style="color: #8DA6CE;">string</span>* <span style="color: #40E0D0;">str</span>=a.allocate(2) ;<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#20998;&#37197;&#31354;&#38388; hold  2 strings</span>
+<span style="color: #FBDE2D;">new</span> (str)<span style="color: #8DA6CE;">string</span>(<span style="color: #ffa07a;">"he"</span>);
+a.construct((str+1),string(<span style="color: #ffa07a;">"llo"</span>));
+<span style="color: #D8FA3C;">std</span>::cout &lt;&lt; *str &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
+<span style="color: #D8FA3C;">std</span>::cout &lt;&lt; *(str+1) &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
 
-str-&gt;~string(); //调用析构函数
-a.destroy(str+1);//调用析构函数
-a.deallocate(str,2);//释放内存
+str-&gt;~string(); <span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#35843;&#29992;&#26512;&#26500;&#20989;&#25968;</span>
+a.destroy(str+1);<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#35843;&#29992;&#26512;&#26500;&#20989;&#25968;</span>
+a.deallocate(str,2);<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#37322;&#25918;&#20869;&#23384;</span>
 </pre>
 </div>
 <p>
@@ -3002,18 +3002,18 @@ a.deallocate(str,2);//释放内存
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c++">allocator&lt;string&gt; a;
-string* str=a.allocate(1) ;//分配空间 hold  1 string
-new (str)string("hell");
-std::cout &lt;&lt; *str &lt;&lt; std::endl;
+<pre class="src src-c++"><span style="color: #8DA6CE;">allocator</span>&lt;<span style="color: #8DA6CE;">string</span>&gt; <span style="color: #40E0D0;">a</span>;
+<span style="color: #8DA6CE;">string</span>* <span style="color: #40E0D0;">str</span>=a.allocate(1) ;<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#20998;&#37197;&#31354;&#38388; hold  1 string</span>
+<span style="color: #FBDE2D;">new</span> (str)<span style="color: #8DA6CE;">string</span>(<span style="color: #ffa07a;">"hell"</span>);
+<span style="color: #D8FA3C;">std</span>::cout &lt;&lt; *str &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
 </pre>
 </div>
 
 <div class="org-src-container">
 
-<pre class="src src-c++">string *str = static_cast&lt;string*&gt; (operator new (sizeof(string)));
-new (str)string("hell");
-std::cout &lt;&lt; *str &lt;&lt; std::endl;
+<pre class="src src-c++"><span style="color: #8DA6CE;">string</span> *<span style="color: #40E0D0;">str</span> = <span style="color: #FBDE2D;">static_cast</span>&lt;string*&gt; (<span style="color: #FBDE2D;">operator</span> <span style="color: #FBDE2D;">new</span> (<span style="color: #FBDE2D;">sizeof</span>(string)));
+<span style="color: #FBDE2D;">new</span> (str)<span style="color: #8DA6CE;">string</span>(<span style="color: #ffa07a;">"hell"</span>);
+<span style="color: #D8FA3C;">std</span>::cout &lt;&lt; *str &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
 </pre>
 </div>
 </div>
@@ -3024,91 +3024,91 @@ std::cout &lt;&lt; *str &lt;&lt; std::endl;
 <div class="outline-text-3" id="text-orgheadline141">
 <div class="org-src-container">
 
-<pre class="src src-c++">#include &lt;iostream&gt;
-#include &lt;string&gt;
-#include &lt;vector&gt;
-#include &lt;stdexcept&gt;
-#include &lt;memory&gt;
+<pre class="src src-c++"><span style="color: #7fffd4;">#include</span> <span style="color: #ffa07a;">&lt;iostream&gt;</span>
+<span style="color: #7fffd4;">#include</span> <span style="color: #ffa07a;">&lt;string&gt;</span>
+<span style="color: #7fffd4;">#include</span> <span style="color: #ffa07a;">&lt;vector&gt;</span>
+<span style="color: #7fffd4;">#include</span> <span style="color: #ffa07a;">&lt;stdexcept&gt;</span>
+<span style="color: #7fffd4;">#include</span> <span style="color: #ffa07a;">&lt;memory&gt;</span>
 
-using namespace std;
-template&lt;class T&gt; class CacheObj
+<span style="color: #FBDE2D;">using</span> <span style="color: #FBDE2D;">namespace</span> <span style="color: #D8FA3C;">std</span>;
+<span style="color: #FBDE2D;">template</span>&lt;<span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">T</span>&gt; <span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">CacheObj</span>
 {
-public:
-  static size_t sz;// debug用，记录 当前早请了多少个T了
-protected:
-  T *next;//指向下一个
-private:
-  static allocator&lt;T&gt; t_allocator;
-  static T *free_list;                 // 申请到的内存里，尚未被使用的
-  static const std::size_t incr_size;      // 每次内存不足时 扩容那么大
-  static void add_to_free_list(T *t);
+<span style="color: #FBDE2D;">public</span>:
+  <span style="color: #FBDE2D;">static</span> <span style="color: #8DA6CE;">size_t</span> <span style="color: #40E0D0;">sz</span>;<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">debug&#29992;&#65292;&#35760;&#24405; &#24403;&#21069;&#26089;&#35831;&#20102;&#22810;&#23569;&#20010;T&#20102;</span>
+<span style="color: #FBDE2D;">protected</span>:
+  <span style="color: #8DA6CE;">T</span> *<span style="color: #40E0D0;">next</span>;<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#25351;&#21521;&#19979;&#19968;&#20010;</span>
+<span style="color: #FBDE2D;">private</span>:
+  <span style="color: #FBDE2D;">static</span> <span style="color: #8DA6CE;">allocator</span>&lt;<span style="color: #8DA6CE;">T</span>&gt; <span style="color: #40E0D0;">t_allocator</span>;
+  <span style="color: #FBDE2D;">static</span> <span style="color: #8DA6CE;">T</span> *<span style="color: #40E0D0;">free_list</span>;                 <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#30003;&#35831;&#21040;&#30340;&#20869;&#23384;&#37324;&#65292;&#23578;&#26410;&#34987;&#20351;&#29992;&#30340;</span>
+  <span style="color: #FBDE2D;">static</span> <span style="color: #FBDE2D;">const</span> <span style="color: #D8FA3C;">std</span>::<span style="color: #8DA6CE;">size_t</span> <span style="color: #40E0D0;">incr_size</span>;      <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#27599;&#27425;&#20869;&#23384;&#19981;&#36275;&#26102; &#25193;&#23481;&#37027;&#20040;&#22823;</span>
+  <span style="color: #FBDE2D;">static</span> <span style="color: #8DA6CE;">void</span> <span style="color: #FF6400;">add_to_free_list</span>(<span style="color: #8DA6CE;">T</span> *<span style="color: #40E0D0;">t</span>);
 
-public:
-  virtual ~CacheObj(){};
-  void* operator new (size_t sz);
-  void operator delete (void* ptr,size_t sz);
+<span style="color: #FBDE2D;">public</span>:
+  <span style="color: #FBDE2D;">virtual</span> ~<span style="color: #FF6400;">CacheObj</span>(){};
+  <span style="color: #8DA6CE;">void</span>* <span style="color: #FBDE2D;">operator</span> <span style="color: #FBDE2D;">new</span> (<span style="color: #8DA6CE;">size_t</span> <span style="color: #40E0D0;">sz</span>);
+  <span style="color: #8DA6CE;">void</span> <span style="color: #FBDE2D;">operator</span> <span style="color: #FBDE2D;">delete</span> (<span style="color: #8DA6CE;">void</span>* <span style="color: #40E0D0;">ptr</span>,<span style="color: #8DA6CE;">size_t</span> <span style="color: #40E0D0;">sz</span>);
 };
 
-template&lt;class T&gt;  allocator&lt;T&gt; CacheObj&lt;T&gt;::t_allocator;
-template&lt;class T&gt;  T* CacheObj&lt;T&gt;::free_list=NULL;
-template&lt;class T&gt;  const size_t CacheObj&lt;T&gt;::incr_size=2;
-template&lt;class T&gt;  size_t CacheObj&lt;T&gt;::sz=0;
+<span style="color: #FBDE2D;">template</span>&lt;<span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">T</span>&gt;  <span style="color: #8DA6CE;">allocator</span>&lt;<span style="color: #8DA6CE;">T</span>&gt; <span style="color: #D8FA3C;">CacheObj</span>&lt;<span style="color: #8DA6CE;">T</span>&gt;::<span style="color: #40E0D0;">t_allocator</span>;
+<span style="color: #FBDE2D;">template</span>&lt;<span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">T</span>&gt;  <span style="color: #8DA6CE;">T</span>* <span style="color: #D8FA3C;">CacheObj</span>&lt;<span style="color: #8DA6CE;">T</span>&gt;::<span style="color: #40E0D0;">free_list</span>=<span style="color: #D8FA3C;">NULL</span>;
+<span style="color: #FBDE2D;">template</span>&lt;<span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">T</span>&gt;  <span style="color: #FBDE2D;">const</span> <span style="color: #8DA6CE;">size_t</span> <span style="color: #D8FA3C;">CacheObj</span>&lt;<span style="color: #8DA6CE;">T</span>&gt;::<span style="color: #40E0D0;">incr_size</span>=2;
+<span style="color: #FBDE2D;">template</span>&lt;<span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">T</span>&gt;  <span style="color: #8DA6CE;">size_t</span> <span style="color: #D8FA3C;">CacheObj</span>&lt;<span style="color: #8DA6CE;">T</span>&gt;::<span style="color: #40E0D0;">sz</span>=0;
 
-template&lt;class T&gt; void* CacheObj&lt;T&gt;::operator new (size_t sz){
+<span style="color: #FBDE2D;">template</span>&lt;<span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">T</span>&gt; <span style="color: #8DA6CE;">void</span>* <span style="color: #D8FA3C;">CacheObj</span>&lt;<span style="color: #8DA6CE;">T</span>&gt;::<span style="color: #FBDE2D;">operator</span> <span style="color: #FBDE2D;">new</span> (<span style="color: #8DA6CE;">size_t</span> <span style="color: #40E0D0;">sz</span>){
 
-  std::cout &lt;&lt; "new called" &lt;&lt; std::endl;
-  if (sizeof(T)!= sz){//这里做检查 ，保证传过来是T本身， 而非其子类
-    throw std::runtime_error("CacheObj wrong size");
+  <span style="color: #D8FA3C;">std</span>::cout &lt;&lt; <span style="color: #ffa07a;">"new called"</span> &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
+  <span style="color: #FBDE2D;">if</span> (<span style="color: #FBDE2D;">sizeof</span>(T)!= sz){<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#36825;&#37324;&#20570;&#26816;&#26597; &#65292;&#20445;&#35777;&#20256;&#36807;&#26469;&#26159;T&#26412;&#36523;&#65292; &#32780;&#38750;&#20854;&#23376;&#31867;</span>
+    <span style="color: #FBDE2D;">throw</span> <span style="color: #D8FA3C;">std</span>::<span style="color: #8DA6CE;">runtime_error</span>(<span style="color: #ffa07a;">"CacheObj wrong size"</span>);
   }
-  if(!free_list){               // 如果free_list null
-    T* array=t_allocator.allocate(incr_size);
-    CacheObj&lt;T&gt;::sz= CacheObj&lt;T&gt;::sz+incr_size;
-    for (int i = 0; i !=incr_size ; i++){
+  <span style="color: #FBDE2D;">if</span>(!free_list){               <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#22914;&#26524;free_list null</span>
+    <span style="color: #8DA6CE;">T</span>* <span style="color: #40E0D0;">array</span>=t_allocator.allocate(incr_size);
+    <span style="color: #D8FA3C;">CacheObj</span>&lt;<span style="color: #8DA6CE;">T</span>&gt;::sz= <span style="color: #D8FA3C;">CacheObj</span>&lt;T&gt;::sz+incr_size;
+    <span style="color: #FBDE2D;">for</span> (<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">i</span> = 0; i !=incr_size ; i++){
       add_to_free_list(&amp;array[0]);
     }
   }
-  T* tmp = free_list;
-  free_list=free_list-&gt;CacheObj&lt;T&gt;::next;
-  return tmp;
+  <span style="color: #8DA6CE;">T</span>* <span style="color: #40E0D0;">tmp</span> = free_list;
+  free_list=free_list-&gt;<span style="color: #D8FA3C;">CacheObj</span>&lt;T&gt;::next;
+  <span style="color: #FBDE2D;">return</span> tmp;
 }
 
-template&lt;class T&gt; void CacheObj&lt;T&gt;::operator delete(void* ptr,size_t sz){
-  std::cout &lt;&lt; "delted called" &lt;&lt; std::endl;
-  if(ptr){
-    add_to_free_list(static_cast&lt;T*&gt; (ptr));
+<span style="color: #FBDE2D;">template</span>&lt;<span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">T</span>&gt; <span style="color: #8DA6CE;">void</span> <span style="color: #D8FA3C;">CacheObj</span>&lt;<span style="color: #8DA6CE;">T</span>&gt;::<span style="color: #FBDE2D;">operator</span> <span style="color: #FBDE2D;">delete</span>(<span style="color: #8DA6CE;">void</span>* <span style="color: #40E0D0;">ptr</span>,<span style="color: #8DA6CE;">size_t</span> <span style="color: #40E0D0;">sz</span>){
+  <span style="color: #D8FA3C;">std</span>::cout &lt;&lt; <span style="color: #ffa07a;">"delted called"</span> &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
+  <span style="color: #FBDE2D;">if</span>(ptr){
+    add_to_free_list(<span style="color: #FBDE2D;">static_cast</span>&lt;T*&gt; (ptr));
   }
 }
 
-template&lt;class T&gt; void CacheObj&lt;T&gt;::add_to_free_list(T* t){
-  t-&gt;CacheObj&lt;T&gt;::next=free_list;
+<span style="color: #FBDE2D;">template</span>&lt;<span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">T</span>&gt; <span style="color: #8DA6CE;">void</span> <span style="color: #D8FA3C;">CacheObj</span>&lt;<span style="color: #8DA6CE;">T</span>&gt;::<span style="color: #FF6400;">add_to_free_list</span>(<span style="color: #8DA6CE;">T</span>* <span style="color: #40E0D0;">t</span>){
+  t-&gt;<span style="color: #D8FA3C;">CacheObj</span>&lt;T&gt;::next=free_list;
   free_list=t;
 }
-class Item: public CacheObj&lt;Item&gt;
+<span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">Item</span>: <span style="color: #FBDE2D;">public</span> <span style="color: #8DA6CE;">CacheObj</span>&lt;<span style="color: #8DA6CE;">Item</span>&gt;
 {
-public:
-  int value;
+<span style="color: #FBDE2D;">public</span>:
+  <span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">value</span>;
 };
 
-// 实现了为 Item new 新对象时 ，提前分配好CacheObj&lt;T&gt;::incr_size 大小的空间
-//限制是Item 不可以有子类， 或者说 不可以将Item的子类对象放进去
-//哪个类继承了CacheObj&lt;T&gt; ,哪个类可以放
-// 因为提前分配内存时 是按照T的大小来分配的，而其子类的大小必然比其本身大
+<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#23454;&#29616;&#20102;&#20026; Item new &#26032;&#23545;&#35937;&#26102; &#65292;&#25552;&#21069;&#20998;&#37197;&#22909;CacheObj&lt;T&gt;::incr_size &#22823;&#23567;&#30340;&#31354;&#38388;</span>
+<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#38480;&#21046;&#26159;Item &#19981;&#21487;&#20197;&#26377;&#23376;&#31867;&#65292; &#25110;&#32773;&#35828; &#19981;&#21487;&#20197;&#23558;Item&#30340;&#23376;&#31867;&#23545;&#35937;&#25918;&#36827;&#21435;</span>
+<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#21738;&#20010;&#31867;&#32487;&#25215;&#20102;CacheObj&lt;T&gt; ,&#21738;&#20010;&#31867;&#21487;&#20197;&#25918;</span>
+<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#22240;&#20026;&#25552;&#21069;&#20998;&#37197;&#20869;&#23384;&#26102; &#26159;&#25353;&#29031;T&#30340;&#22823;&#23567;&#26469;&#20998;&#37197;&#30340;&#65292;&#32780;&#20854;&#23376;&#31867;&#30340;&#22823;&#23567;&#24517;&#28982;&#27604;&#20854;&#26412;&#36523;&#22823;</span>
 
-int main(int argc, char *argv[]){
+<span style="color: #8DA6CE;">int</span> <span style="color: #FF6400;">main</span>(<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">argc</span>, <span style="color: #8DA6CE;">char</span> *<span style="color: #40E0D0;">argv</span>[]){
 
-  Item *item = new Item();
-  std::cout &lt;&lt; item-&gt;sz &lt;&lt; std::endl;
+  <span style="color: #8DA6CE;">Item</span> *<span style="color: #40E0D0;">item</span> = <span style="color: #FBDE2D;">new</span> <span style="color: #8DA6CE;">Item</span>();
+  <span style="color: #D8FA3C;">std</span>::cout &lt;&lt; item-&gt;sz &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
 
-  Item *item2 = new Item();
-  std::cout &lt;&lt; item2-&gt;sz &lt;&lt; std::endl;
+  <span style="color: #8DA6CE;">Item</span> *<span style="color: #40E0D0;">item2</span> = <span style="color: #FBDE2D;">new</span> <span style="color: #8DA6CE;">Item</span>();
+  <span style="color: #D8FA3C;">std</span>::cout &lt;&lt; item2-&gt;sz &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
 
-  Item *item3 = new Item();
-  std::cout &lt;&lt; item3-&gt;sz &lt;&lt; std::endl;
+  <span style="color: #8DA6CE;">Item</span> *<span style="color: #40E0D0;">item3</span> = <span style="color: #FBDE2D;">new</span> <span style="color: #8DA6CE;">Item</span>();
+  <span style="color: #D8FA3C;">std</span>::cout &lt;&lt; item3-&gt;sz &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
 
-  delete item;
-  delete item2;
-  delete item3;
-  return 0;
+  <span style="color: #FBDE2D;">delete</span> item;
+  <span style="color: #FBDE2D;">delete</span> item2;
+  <span style="color: #FBDE2D;">delete</span> item3;
+  <span style="color: #FBDE2D;">return</span> 0;
 }
 </pre>
 </div>

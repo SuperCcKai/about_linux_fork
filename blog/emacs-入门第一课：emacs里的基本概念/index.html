@@ -161,7 +161,7 @@ Lisp(elisp)。只要这门编程语言能做，你就能让你的Emacs实现特�
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq a (* (+ c d) e))
+<pre class="src src-emacs-lisp">(<span style="color: #FF6400;">setq</span> a (* (+ c d) e))
 </pre>
 </div>
 <p>
@@ -205,14 +205,14 @@ major mode的keymap. 另外在Emacs中的每个操作都对应一个命令，包
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(defun my-kill-whole-line()
-  (interactive) ;;这个是命令必须要调用一个函数，表示我是一个命令，而不仅仅是普通的函数
-  (beginning-of-line)  ;; 跳到行首，，默认C-a 绑定的函数
-  (kill-line)  ;;这个是删除光标到行末之间内容的函数，默认绑定为C-k
+<pre class="src src-emacs-lisp">(<span style="color: #FBDE2D;">defun</span> <span style="color: #FF6400;">my-kill-whole-line</span>()
+  (<span style="color: #FBDE2D;">interactive</span>) <span style="color: #AEAEAE;">;;</span><span style="color: #AEAEAE;">&#36825;&#20010;&#26159;&#21629;&#20196;&#24517;&#39035;&#35201;&#35843;&#29992;&#19968;&#20010;&#20989;&#25968;&#65292;&#34920;&#31034;&#25105;&#26159;&#19968;&#20010;&#21629;&#20196;&#65292;&#32780;&#19981;&#20165;&#20165;&#26159;&#26222;&#36890;&#30340;&#20989;&#25968;</span>
+  (beginning-of-line)  <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">&#36339;&#21040;&#34892;&#39318;&#65292;&#65292;&#40664;&#35748;C-a &#32465;&#23450;&#30340;&#20989;&#25968;</span>
+  (kill-line)  <span style="color: #AEAEAE;">;;</span><span style="color: #AEAEAE;">&#36825;&#20010;&#26159;&#21024;&#38500;&#20809;&#26631;&#21040;&#34892;&#26411;&#20043;&#38388;&#20869;&#23481;&#30340;&#20989;&#25968;&#65292;&#40664;&#35748;&#32465;&#23450;&#20026;C-k</span>
   )
 
-(global-set-key (kbd "C-k") 'my-kill-whole-line)  ;;这个将my-kill-whole-line重新绑定到C-k
-上
+(<span style="color: #FF6400;">global-set-key</span> (kbd <span style="color: #ffa07a;">"C-k"</span>) 'my-kill-whole-line)  <span style="color: #AEAEAE;">;;</span><span style="color: #AEAEAE;">&#36825;&#20010;&#23558;my-kill-whole-line&#37325;&#26032;&#32465;&#23450;&#21040;C-k</span>
+&#19978;
 </pre>
 </div>
 <p>

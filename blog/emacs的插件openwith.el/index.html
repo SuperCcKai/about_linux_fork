@@ -41,102 +41,102 @@ emacswiki上有人提供了openwith.el 插件。用来实现对于不同后缀�
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">;;  openwith ,外部程序
+<pre class="src src-emacs-lisp"><span style="color: #AEAEAE;">;;  </span><span style="color: #AEAEAE;">openwith ,&#22806;&#37096;&#31243;&#24207;</span>
 
-;;直接用正常的方式打开相应的文件,openwith会自动做处理
-;;`C-xC-f'即可
-(when (eq system-type 'windows-nt)
-  (require'w32-shell-execute)
+<span style="color: #AEAEAE;">;;</span><span style="color: #AEAEAE;">&#30452;&#25509;&#29992;&#27491;&#24120;&#30340;&#26041;&#24335;&#25171;&#24320;&#30456;&#24212;&#30340;&#25991;&#20214;,openwith&#20250;&#33258;&#21160;&#20570;&#22788;&#29702;</span>
+<span style="color: #AEAEAE;">;;</span><span style="color: #AEAEAE;">`</span><span style="color: #D8FA3C;">C-xC-f</span><span style="color: #AEAEAE;">'&#21363;&#21487;</span>
+(<span style="color: #FBDE2D;">when</span> (eq system-type 'windows-nt)
+  (<span style="color: #FBDE2D;">require</span>'<span style="color: #D8FA3C;">w32-shell-execute</span>)
   )
-(require 'openwith)
-(openwith-mode t)
-(when (eq system-type 'gnu/linux)
-  (setq openwith-associations
-        '(("\\.pdf$" "acroread" (file)) ("\\.mp3$" "mplayer" (file) )
-          ("\\.mov\\|\\.RM$\\|\\.RMVB$\\|\\.avi$\\|\\.AVI$\\|\\.flv$\\|\\.mp4\\|\\.mkv$\\|\\.rmvb$" "mplayer" (file) )
-;;          ("\\.jpe?g$\\|\\.png$\\|\\.bmp\\|\\.gif$" "gpicview" (file))
-          ("\\.CHM$\\|\\.chm$" "chmsee"  (file) )
+(<span style="color: #FBDE2D;">require</span> '<span style="color: #D8FA3C;">openwith</span>)
+(openwith-mode <span style="color: #D8FA3C;">t</span>)
+(<span style="color: #FBDE2D;">when</span> (eq system-type 'gnu/linux)
+  (<span style="color: #FF6400;">setq</span> openwith-associations
+        '((<span style="color: #ffa07a;">"\\.pdf$"</span> <span style="color: #ffa07a;">"acroread"</span> (file)) (<span style="color: #ffa07a;">"\\.mp3$"</span> <span style="color: #ffa07a;">"mplayer"</span> (file) )
+          (<span style="color: #ffa07a;">"\\.mov</span><span style="color: #E9C062;">\\</span><span style="color: #ff0000;">|</span><span style="color: #ffa07a;">\\.RM$</span><span style="color: #E9C062;">\\</span><span style="color: #ff0000;">|</span><span style="color: #ffa07a;">\\.RMVB$</span><span style="color: #E9C062;">\\</span><span style="color: #ff0000;">|</span><span style="color: #ffa07a;">\\.avi$</span><span style="color: #E9C062;">\\</span><span style="color: #ff0000;">|</span><span style="color: #ffa07a;">\\.AVI$</span><span style="color: #E9C062;">\\</span><span style="color: #ff0000;">|</span><span style="color: #ffa07a;">\\.flv$</span><span style="color: #E9C062;">\\</span><span style="color: #ff0000;">|</span><span style="color: #ffa07a;">\\.mp4</span><span style="color: #E9C062;">\\</span><span style="color: #ff0000;">|</span><span style="color: #ffa07a;">\\.mkv$</span><span style="color: #E9C062;">\\</span><span style="color: #ff0000;">|</span><span style="color: #ffa07a;">\\.rmvb$"</span> <span style="color: #ffa07a;">"mplayer"</span> (file) )
+<span style="color: #AEAEAE;">;;          </span><span style="color: #AEAEAE;">("\\.jpe?g$\\|\\.png$\\|\\.bmp\\|\\.gif$" "gpicview" (file))</span>
+          (<span style="color: #ffa07a;">"\\.CHM$</span><span style="color: #E9C062;">\\</span><span style="color: #ff0000;">|</span><span style="color: #ffa07a;">\\.chm$"</span> <span style="color: #ffa07a;">"chmsee"</span>  (file) )
           )
         )
   )
-(when (eq system-type 'windows-nt)
-  ;;windows 上使用w32-shell-execute 调用系统的相应程序打开
-  (setq openwith-associations
-        '(("\\.pdf$" "open" (file)) ("\\.mp3$" "open" (file) )
-          ("\\.mov\\|\\.RM$\\|\\.RMVB$\\|\\.avi$\\|\\.AVI$\\|\\.flv$\\|\\.mp4\\|\\.mkv$\\|\\.rmvb$" "open" (file) )
-          ("\\.jpe?g$\\|\\.png$\\|\\.bmp\\|\\.gif$" "open" (file))
-          ("\\.CHM$\\|\\.chm$" "open"  (file) )
+(<span style="color: #FBDE2D;">when</span> (eq system-type 'windows-nt)
+  <span style="color: #AEAEAE;">;;</span><span style="color: #AEAEAE;">windows &#19978;&#20351;&#29992;w32-shell-execute &#35843;&#29992;&#31995;&#32479;&#30340;&#30456;&#24212;&#31243;&#24207;&#25171;&#24320;</span>
+  (<span style="color: #FF6400;">setq</span> openwith-associations
+        '((<span style="color: #ffa07a;">"\\.pdf$"</span> <span style="color: #ffa07a;">"open"</span> (file)) (<span style="color: #ffa07a;">"\\.mp3$"</span> <span style="color: #ffa07a;">"open"</span> (file) )
+          (<span style="color: #ffa07a;">"\\.mov</span><span style="color: #E9C062;">\\</span><span style="color: #ff0000;">|</span><span style="color: #ffa07a;">\\.RM$</span><span style="color: #E9C062;">\\</span><span style="color: #ff0000;">|</span><span style="color: #ffa07a;">\\.RMVB$</span><span style="color: #E9C062;">\\</span><span style="color: #ff0000;">|</span><span style="color: #ffa07a;">\\.avi$</span><span style="color: #E9C062;">\\</span><span style="color: #ff0000;">|</span><span style="color: #ffa07a;">\\.AVI$</span><span style="color: #E9C062;">\\</span><span style="color: #ff0000;">|</span><span style="color: #ffa07a;">\\.flv$</span><span style="color: #E9C062;">\\</span><span style="color: #ff0000;">|</span><span style="color: #ffa07a;">\\.mp4</span><span style="color: #E9C062;">\\</span><span style="color: #ff0000;">|</span><span style="color: #ffa07a;">\\.mkv$</span><span style="color: #E9C062;">\\</span><span style="color: #ff0000;">|</span><span style="color: #ffa07a;">\\.rmvb$"</span> <span style="color: #ffa07a;">"open"</span> (file) )
+          (<span style="color: #ffa07a;">"\\.jpe?g$</span><span style="color: #E9C062;">\\</span><span style="color: #ff0000;">|</span><span style="color: #ffa07a;">\\.png$</span><span style="color: #E9C062;">\\</span><span style="color: #ff0000;">|</span><span style="color: #ffa07a;">\\.bmp</span><span style="color: #E9C062;">\\</span><span style="color: #ff0000;">|</span><span style="color: #ffa07a;">\\.gif$"</span> <span style="color: #ffa07a;">"open"</span> (file))
+          (<span style="color: #ffa07a;">"\\.CHM$</span><span style="color: #E9C062;">\\</span><span style="color: #ff0000;">|</span><span style="color: #ffa07a;">\\.chm$"</span> <span style="color: #ffa07a;">"open"</span>  (file) )
           )
         )
   )
 
-;;默认情况下，return 即可以用`open-with'对特定后缀的文件使用相应的程序或
-;;emacs mode打开，但有时候想提供第二种打开的方式 。比如默认对于html文件，我
-;;会用emacs中的nxml-mode打开，但有时也想在firefox中浏览它，于是return 使用
-;;nxml-mode，而C-RET则使用firefox进行打开
-;;注意，我这里对html做了特殊处理，当打开html时，焦点自动切换到firefox上。使用了
-;; Awesome 窗口管理器的特性。所以未必适合你，仅做参考。
-(defun open-with-C-RET-on-linux()
-  "in dired mode ,`C-RET' open file with ..."
-  (interactive)
-  (let ((file-name (dired-get-filename))
+<span style="color: #AEAEAE;">;;</span><span style="color: #AEAEAE;">&#40664;&#35748;&#24773;&#20917;&#19979;&#65292;return &#21363;&#21487;&#20197;&#29992;`</span><span style="color: #D8FA3C;">open-with</span><span style="color: #AEAEAE;">'&#23545;&#29305;&#23450;&#21518;&#32512;&#30340;&#25991;&#20214;&#20351;&#29992;&#30456;&#24212;&#30340;&#31243;&#24207;&#25110;</span>
+<span style="color: #AEAEAE;">;;</span><span style="color: #AEAEAE;">emacs mode&#25171;&#24320;&#65292;&#20294;&#26377;&#26102;&#20505;&#24819;&#25552;&#20379;&#31532;&#20108;&#31181;&#25171;&#24320;&#30340;&#26041;&#24335; &#12290;&#27604;&#22914;&#40664;&#35748;&#23545;&#20110;html&#25991;&#20214;&#65292;&#25105;</span>
+<span style="color: #AEAEAE;">;;</span><span style="color: #AEAEAE;">&#20250;&#29992;emacs&#20013;&#30340;nxml-mode&#25171;&#24320;&#65292;&#20294;&#26377;&#26102;&#20063;&#24819;&#22312;firefox&#20013;&#27983;&#35272;&#23427;&#65292;&#20110;&#26159;return &#20351;&#29992;</span>
+<span style="color: #AEAEAE;">;;</span><span style="color: #AEAEAE;">nxml-mode&#65292;&#32780;C-RET&#21017;&#20351;&#29992;firefox&#36827;&#34892;&#25171;&#24320;</span>
+<span style="color: #AEAEAE;">;;</span><span style="color: #AEAEAE;">&#27880;&#24847;&#65292;&#25105;&#36825;&#37324;&#23545;html&#20570;&#20102;&#29305;&#27530;&#22788;&#29702;&#65292;&#24403;&#25171;&#24320;html&#26102;&#65292;&#28966;&#28857;&#33258;&#21160;&#20999;&#25442;&#21040;firefox&#19978;&#12290;&#20351;&#29992;&#20102;</span>
+<span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">Awesome &#31383;&#21475;&#31649;&#29702;&#22120;&#30340;&#29305;&#24615;&#12290;&#25152;&#20197;&#26410;&#24517;&#36866;&#21512;&#20320;&#65292;&#20165;&#20570;&#21442;&#32771;&#12290;</span>
+(<span style="color: #FBDE2D;">defun</span> <span style="color: #FF6400;">open-with-C-RET-on-linux</span>()
+  <span style="color: #ffa07a;">"in dired mode ,`</span><span style="color: #D8FA3C;">C-RET</span><span style="color: #ffa07a;">' open file with ..."</span>
+  (<span style="color: #FBDE2D;">interactive</span>)
+  (<span style="color: #FBDE2D;">let</span> ((file-name (dired-get-filename))
         (openwith-associations
-        '(("\\.pdf$" "acroread" (file)) ("\\.mp3$" "mplayer" (file) )
-          ("\\.RM$\\|\\.RMVB$\\|\\.avi$\\|\\.AVI$\\|\\.flv$\\|\\.mp4\\|\\.mkv$\\|\\.rmvb$" "mplayer" (file) )
-          ("\\.jpe?g$\\|\\.png$\\|\\.bmp\\|\\.gif$" "gpicview" (file))
-          ("\\.CHM$\\|\\.chm$" "chmsee"  (file) ))))
-    (if (string-match "\\.html?$" file-name)
-          (if (&gt; (string-to-number (shell-command-to-string "pgrep firefox | wc -l")) 0)
-              (progn
-                (start-process-shell-command "firefox" nil (format "echo ' show_matched_client({class=\"Firefox\" ,instance=\"Navigator\"},\"www\",\"/usr/bin/firefox %s  \" ,nil)' |awesome-client " file-name))
-                (start-process "firefox-file" nil "firefox" file-name))
-            (start-process-shell-command "firefox" nil (format "echo ' show_matched_client({class=\"Firefox\" ,instance=\"Navigator\"},\"www\",\"/usr/bin/firefox %s  \" ,nil)' |awesome-client " file-name))
+        '((<span style="color: #ffa07a;">"\\.pdf$"</span> <span style="color: #ffa07a;">"acroread"</span> (file)) (<span style="color: #ffa07a;">"\\.mp3$"</span> <span style="color: #ffa07a;">"mplayer"</span> (file) )
+          (<span style="color: #ffa07a;">"\\.RM$</span><span style="color: #E9C062;">\\</span><span style="color: #ff0000;">|</span><span style="color: #ffa07a;">\\.RMVB$</span><span style="color: #E9C062;">\\</span><span style="color: #ff0000;">|</span><span style="color: #ffa07a;">\\.avi$</span><span style="color: #E9C062;">\\</span><span style="color: #ff0000;">|</span><span style="color: #ffa07a;">\\.AVI$</span><span style="color: #E9C062;">\\</span><span style="color: #ff0000;">|</span><span style="color: #ffa07a;">\\.flv$</span><span style="color: #E9C062;">\\</span><span style="color: #ff0000;">|</span><span style="color: #ffa07a;">\\.mp4</span><span style="color: #E9C062;">\\</span><span style="color: #ff0000;">|</span><span style="color: #ffa07a;">\\.mkv$</span><span style="color: #E9C062;">\\</span><span style="color: #ff0000;">|</span><span style="color: #ffa07a;">\\.rmvb$"</span> <span style="color: #ffa07a;">"mplayer"</span> (file) )
+          (<span style="color: #ffa07a;">"\\.jpe?g$</span><span style="color: #E9C062;">\\</span><span style="color: #ff0000;">|</span><span style="color: #ffa07a;">\\.png$</span><span style="color: #E9C062;">\\</span><span style="color: #ff0000;">|</span><span style="color: #ffa07a;">\\.bmp</span><span style="color: #E9C062;">\\</span><span style="color: #ff0000;">|</span><span style="color: #ffa07a;">\\.gif$"</span> <span style="color: #ffa07a;">"gpicview"</span> (file))
+          (<span style="color: #ffa07a;">"\\.CHM$</span><span style="color: #E9C062;">\\</span><span style="color: #ff0000;">|</span><span style="color: #ffa07a;">\\.chm$"</span> <span style="color: #ffa07a;">"chmsee"</span>  (file) ))))
+    (<span style="color: #FBDE2D;">if</span> (string-match <span style="color: #ffa07a;">"\\.html?$"</span> file-name)
+          (<span style="color: #FBDE2D;">if</span> (&gt; (string-to-number (shell-command-to-string <span style="color: #ffa07a;">"pgrep firefox | wc -l"</span>)) 0)
+              (<span style="color: #FBDE2D;">progn</span>
+                (start-process-shell-command <span style="color: #ffa07a;">"firefox"</span> <span style="color: #D8FA3C;">nil</span> (format <span style="color: #ffa07a;">"echo ' show_matched_client({class=\"Firefox\" ,instance=\"Navigator\"},\"www\",\"/usr/bin/firefox %s  \" ,nil)' |awesome-client "</span> file-name))
+                (start-process <span style="color: #ffa07a;">"firefox-file"</span> <span style="color: #D8FA3C;">nil</span> <span style="color: #ffa07a;">"firefox"</span> file-name))
+            (start-process-shell-command <span style="color: #ffa07a;">"firefox"</span> <span style="color: #D8FA3C;">nil</span> (format <span style="color: #ffa07a;">"echo ' show_matched_client({class=\"Firefox\" ,instance=\"Navigator\"},\"www\",\"/usr/bin/firefox %s  \" ,nil)' |awesome-client "</span> file-name))
             )
       (dired-find-file)
       )
     )
   )
-(when (equal system-type 'gnu/linux)
+(<span style="color: #FBDE2D;">when</span> (<span style="color: #FBDE2D;">equal</span> system-type 'gnu/linux)
   (eval-after-load 'dired
-  '(define-key dired-mode-map [(control return)] 'open-with-C-RET-on-linux)))
+  '(<span style="color: #FF6400;">define-key</span> dired-mode-map [(control return)] 'open-with-C-RET-on-linux)))
 
-;; 使用外部 文件管理器 打开选中文件所在文件夹
-(when (eq system-type 'windows-nt)
-  ;;on windows
-  ;;  C-RET  用系统默认程序打开选中文件
-  ;; M-RET  open Windows Explorer
-  ;; ^ 我改成了u ,可以列出根盘符
-  ;;
-  (require 'w32-browser)
-  ;; (define-key diredp-w32-drives-mode-map "n" 'next-line)
-  ;; (define-key diredp-w32-drives-mode-map "p" 'previous-line)
+<span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">&#20351;&#29992;&#22806;&#37096; &#25991;&#20214;&#31649;&#29702;&#22120; &#25171;&#24320;&#36873;&#20013;&#25991;&#20214;&#25152;&#22312;&#25991;&#20214;&#22841;</span>
+(<span style="color: #FBDE2D;">when</span> (eq system-type 'windows-nt)
+  <span style="color: #AEAEAE;">;;</span><span style="color: #AEAEAE;">on windows</span>
+  <span style="color: #AEAEAE;">;;  </span><span style="color: #AEAEAE;">C-RET  &#29992;&#31995;&#32479;&#40664;&#35748;&#31243;&#24207;&#25171;&#24320;&#36873;&#20013;&#25991;&#20214;</span>
+  <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">M-RET  open Windows Explorer</span>
+  <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">^ &#25105;&#25913;&#25104;&#20102;u ,&#21487;&#20197;&#21015;&#20986;&#26681;&#30424;&#31526;</span>
+  <span style="color: #AEAEAE;">;;</span>
+  (<span style="color: #FBDE2D;">require</span> '<span style="color: #D8FA3C;">w32-browser</span>)
+  <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">(define-key diredp-w32-drives-mode-map "n" 'next-line)</span>
+  <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">(define-key diredp-w32-drives-mode-map "p" 'previous-line)</span>
 
-  ;;C-M-&lt;RET&gt; 用资源管理器打开当前文件所处目录
-  (defun explorer-open()
-"用windows 上的explorer.exe打开此文件夹."
-    (interactive)
-    (if (equal major-mode 'dired-mode)
+  <span style="color: #AEAEAE;">;;</span><span style="color: #AEAEAE;">C-M-&lt;RET&gt; &#29992;&#36164;&#28304;&#31649;&#29702;&#22120;&#25171;&#24320;&#24403;&#21069;&#25991;&#20214;&#25152;&#22788;&#30446;&#24405;</span>
+  (<span style="color: #FBDE2D;">defun</span> <span style="color: #FF6400;">explorer-open</span>()
+<span style="color: #ffa07a;">"&#29992;windows &#19978;&#30340;explorer.exe&#25171;&#24320;&#27492;&#25991;&#20214;&#22841;."</span>
+    (<span style="color: #FBDE2D;">interactive</span>)
+    (<span style="color: #FBDE2D;">if</span> (<span style="color: #FBDE2D;">equal</span> major-mode 'dired-mode)
         (w32explore (expand-file-name (dired-get-filename)))
       (w32explore (expand-file-name (buffer-file-name)))
        )
     )
   (eval-after-load 'dired
-    '(define-key dired-mode-map (quote [C-M-return]) 'explorer-open))
-  (global-set-key (quote [C-M-return]) 'explorer-open)
-;;  (lambda () (interactive ) (w32explore (expand-file-name default-directory)))
+    '(<span style="color: #FF6400;">define-key</span> dired-mode-map (<span style="color: #FBDE2D;">quote</span> [C-M-return]) 'explorer-open))
+  (<span style="color: #FF6400;">global-set-key</span> (<span style="color: #FBDE2D;">quote</span> [C-M-return]) 'explorer-open)
+<span style="color: #AEAEAE;">;;  </span><span style="color: #AEAEAE;">(lambda () (interactive ) (w32explore (expand-file-name default-directory)))</span>
   )
 
-;; linux `C-M-RET' 用pcmanfm文件管理器打开当前目录
-(when (eq system-type 'gnu/linux)
-  (defun open-directory-with-pcmanfm()
-    (interactive)
-    (start-process "pcmanfm"  nil "pcmanfm" (expand-file-name  default-directory)))
+<span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">linux `</span><span style="color: #D8FA3C;">C-M-RET</span><span style="color: #AEAEAE;">' &#29992;pcmanfm&#25991;&#20214;&#31649;&#29702;&#22120;&#25171;&#24320;&#24403;&#21069;&#30446;&#24405;</span>
+(<span style="color: #FBDE2D;">when</span> (eq system-type 'gnu/linux)
+  (<span style="color: #FBDE2D;">defun</span> <span style="color: #FF6400;">open-directory-with-pcmanfm</span>()
+    (<span style="color: #FBDE2D;">interactive</span>)
+    (start-process <span style="color: #ffa07a;">"pcmanfm"</span>  <span style="color: #D8FA3C;">nil</span> <span style="color: #ffa07a;">"pcmanfm"</span> (expand-file-name  default-directory)))
   (eval-after-load 'dired
-    '(define-key dired-mode-map (quote [C-M-return]) 'open-directory-with-pcmanfm))
-  (global-set-key (quote [C-M-return]) (quote open-directory-with-pcmanfm))
+    '(<span style="color: #FF6400;">define-key</span> dired-mode-map (<span style="color: #FBDE2D;">quote</span> [C-M-return]) 'open-directory-with-pcmanfm))
+  (<span style="color: #FF6400;">global-set-key</span> (<span style="color: #FBDE2D;">quote</span> [C-M-return]) (<span style="color: #FBDE2D;">quote</span> open-directory-with-pcmanfm))
     )
 
-(provide 'joseph-openwith)
+(<span style="color: #FBDE2D;">provide</span> '<span style="color: #D8FA3C;">joseph-openwith</span>)
 </pre>
 </div>
 

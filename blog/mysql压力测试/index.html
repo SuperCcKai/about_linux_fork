@@ -38,7 +38,7 @@ mysql来执行测试。 "man mysqlslap" 可以看到有下面一条示例<br  />
 
 <div class="org-src-container">
 
-<pre class="src src-sh">mysqlslap --delimiter=";" --create="CREATE TABLE a (b int);INSERT INTO a VALUES (23)"  --query="SELECT * FROM a" --concurrency=50 --iterations=200 -uroot -p
+<pre class="src src-sh">mysqlslap --delimiter=<span style="color: #ffa07a;">";"</span> --create=<span style="color: #ffa07a;">"CREATE TABLE a (b int);INSERT INTO a VALUES (23)"</span>  --query=<span style="color: #ffa07a;">"SELECT * FROM a"</span> --concurrency=50 --iterations=200 -uroot -p
 </pre>
 </div>
 <p>
@@ -65,7 +65,7 @@ mysql来执行测试。 "man mysqlslap" 可以看到有下面一条示例<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-sh">进行5 次测试 可显示为最大 最小 平均值
+<pre class="src src-sh">&#36827;&#34892;5 &#27425;&#27979;&#35797; &#21487;&#26174;&#31034;&#20026;&#26368;&#22823; &#26368;&#23567; &#24179;&#22343;&#20540;
 mysqlslap -a --concurrency=50,100 --number-of-queries 1000 --iterations=5 --debug-info  -uroot -proot
 </pre>
 </div>
@@ -112,19 +112,19 @@ Voluntary context switches 8661, Involuntary context switches 19<br  />
 <div class="org-src-container">
 
 <pre class="src src-sh">-auto-generate-sql, -a
-自动生成测试表和数据（用系统自己生成的SQL语句来测试）
+&#33258;&#21160;&#29983;&#25104;&#27979;&#35797;&#34920;&#21644;&#25968;&#25454;&#65288;&#29992;&#31995;&#32479;&#33258;&#24049;&#29983;&#25104;&#30340;SQL&#35821;&#21477;&#26469;&#27979;&#35797;&#65289;
 
 -auto-generate-sql-load-type=type
-测试语句的类型。取值包括：read，key，write，update和mixed(多种混合，默认)。
+&#27979;&#35797;&#35821;&#21477;&#30340;&#31867;&#22411;&#12290;&#21462;&#20540;&#21253;&#25324;&#65306;read&#65292;key&#65292;write&#65292;update&#21644;mixed(&#22810;&#31181;&#28151;&#21512;&#65292;&#40664;&#35748;)&#12290;
 
 -number-char-cols=N, -x N
-自动生成的测试表中包含多少个字符类型的列，默认1
+&#33258;&#21160;&#29983;&#25104;&#30340;&#27979;&#35797;&#34920;&#20013;&#21253;&#21547;&#22810;&#23569;&#20010;&#23383;&#31526;&#31867;&#22411;&#30340;&#21015;&#65292;&#40664;&#35748;1
 
 -number-int-cols=N, -y N
-自动生成的测试表中包含多少个数字类型的列，默认1
+&#33258;&#21160;&#29983;&#25104;&#30340;&#27979;&#35797;&#34920;&#20013;&#21253;&#21547;&#22810;&#23569;&#20010;&#25968;&#23383;&#31867;&#22411;&#30340;&#21015;&#65292;&#40664;&#35748;1
 
 -number-of-queries=N
-总的测试查询次数(并发客户数×每客户查询次数)
+<span style="color: #FF6400;">&#24635;&#30340;&#27979;&#35797;&#26597;&#35810;&#27425;&#25968;</span>(&#24182;&#21457;&#23458;&#25143;&#25968;&#215;&#27599;&#23458;&#25143;&#26597;&#35810;&#27425;&#25968;)
 </pre>
 </div>
 

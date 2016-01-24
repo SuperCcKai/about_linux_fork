@@ -37,21 +37,21 @@
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">;;;###autoload
-(defun joseph-jump-to-space-forward()
-  (interactive)
-  (let ((old-pos (point))
+<pre class="src src-emacs-lisp"><span style="color: #AEAEAE;">;;;</span><span style="color: #AEAEAE;">###</span><span style="color: #ffc0cb;">autoload</span>
+(<span style="color: #FBDE2D;">defun</span> <span style="color: #FF6400;">joseph-jump-to-space-forward</span>()
+  (<span style="color: #FBDE2D;">interactive</span>)
+  (<span style="color: #FBDE2D;">let</span> ((old-pos (point))
         m-end m-begin
         )
-    (when (re-search-forward "[ \t]+"  nil t)
-      (setq m-begin (match-beginning 0))
-      (setq m-end (match-end 0))
+    (<span style="color: #FBDE2D;">when</span> (re-search-forward <span style="color: #ffa07a;">"[ \t]+"</span>  <span style="color: #D8FA3C;">nil</span> <span style="color: #D8FA3C;">t</span>)
+      (<span style="color: #FF6400;">setq</span> m-begin (match-beginning 0))
+      (<span style="color: #FF6400;">setq</span> m-end (match-end 0))
       (goto-char m-begin)
-      (if (equal old-pos m-end)
-          (progn
-            (re-search-forward "[ \t]+"  nil t)
+      (<span style="color: #FBDE2D;">if</span> (<span style="color: #FBDE2D;">equal</span> old-pos m-end)
+          (<span style="color: #FBDE2D;">progn</span>
+            (re-search-forward <span style="color: #ffa07a;">"[ \t]+"</span>  <span style="color: #D8FA3C;">nil</span> <span style="color: #D8FA3C;">t</span>)
             (goto-char (match-beginning 0)))
-        (if (equal m-begin old-pos)
+        (<span style="color: #FBDE2D;">if</span> (<span style="color: #FBDE2D;">equal</span> m-begin old-pos)
             (goto-char m-end)
             )))))
 </pre>
@@ -66,18 +66,18 @@
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">;;代码注释工作，如果有选中区域，则注释或者反注释这个区域
-;;如果，没选中区域，则注释或者注释当前行，如果光标在行末，则在行末添加或删除注释
-;;;###autoload
-(defun joseph-comment-dwim-line (&amp;optional arg)
-  "Replacement for the comment-dwim command.
-If no region is selected and current line is not blank and we are not at the end of the line,
-then comment current line.
-Replaces default behaviour of comment-dwim, when it inserts comment at the end of the line."
-  (interactive "*P")
+<pre class="src src-emacs-lisp"><span style="color: #AEAEAE;">;;</span><span style="color: #AEAEAE;">&#20195;&#30721;&#27880;&#37322;&#24037;&#20316;&#65292;&#22914;&#26524;&#26377;&#36873;&#20013;&#21306;&#22495;&#65292;&#21017;&#27880;&#37322;&#25110;&#32773;&#21453;&#27880;&#37322;&#36825;&#20010;&#21306;&#22495;</span>
+<span style="color: #AEAEAE;">;;</span><span style="color: #AEAEAE;">&#22914;&#26524;&#65292;&#27809;&#36873;&#20013;&#21306;&#22495;&#65292;&#21017;&#27880;&#37322;&#25110;&#32773;&#27880;&#37322;&#24403;&#21069;&#34892;&#65292;&#22914;&#26524;&#20809;&#26631;&#22312;&#34892;&#26411;&#65292;&#21017;&#22312;&#34892;&#26411;&#28155;&#21152;&#25110;&#21024;&#38500;&#27880;&#37322;</span>
+<span style="color: #AEAEAE;">;;;</span><span style="color: #AEAEAE;">###</span><span style="color: #ffc0cb;">autoload</span>
+(<span style="color: #FBDE2D;">defun</span> <span style="color: #FF6400;">joseph-comment-dwim-line</span> (<span style="color: #8DA6CE;">&amp;optional</span> arg)
+  <span style="color: #ffa07a;">"Replacement for the comment-dwim command.</span>
+<span style="color: #ffa07a;">If no region is selected and current line is not blank and we are not at the end of the line,</span>
+<span style="color: #ffa07a;">then comment current line.</span>
+<span style="color: #ffa07a;">Replaces default behaviour of comment-dwim, when it inserts comment at the end of the line."</span>
+  (<span style="color: #FBDE2D;">interactive</span> <span style="color: #ffa07a;">"*P"</span>)
   (comment-normalize-vars)
-  (if (and (not (region-active-p)) (not (looking-at "[ \t]*$")))
-      (comment-or-uncomment-region (line-beginning-position) (line-end-position))
+  (<span style="color: #FBDE2D;">if</span> (<span style="color: #FBDE2D;">and</span> (<span style="color: #FBDE2D;">not</span> (region-active-p)) (<span style="color: #FBDE2D;">not</span> (looking-at <span style="color: #ffa07a;">"[ \t]*$"</span>)))
+      (comment-<span style="color: #FBDE2D;">or</span>-uncomment-region (line-beginning-position) (line-end-position))
     (comment-dwim arg)))
 </pre>
 </div>
@@ -87,33 +87,33 @@ Replaces default behaviour of comment-dwim, when it inserts comment at the end o
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(define-key java-mode-map ";"  'joseph-append-semicolon-at-eol)
+<pre class="src src-emacs-lisp">(<span style="color: #FF6400;">define-key</span> java-mode-map <span style="color: #ffa07a;">";"</span>  'joseph-append-semicolon-at-eol)
 
-;;;###autoload
-(defun joseph-append-semicolon-at-eol(&amp;optional arg)
-  "在当前行任何位置输入分号都在行尾添加分号，除非本行有for 这个关键字，
-如果行尾已经有分号则删除行尾的分号，将其插入到当前位置,就是说输入两次分号则不在行尾插入而是像正常情况一样."
-  (interactive "*p")
-  (let* ( ( init_position (point))
+<span style="color: #AEAEAE;">;;;</span><span style="color: #AEAEAE;">###</span><span style="color: #ffc0cb;">autoload</span>
+(<span style="color: #FBDE2D;">defun</span> <span style="color: #FF6400;">joseph-append-semicolon-at-eol</span>(<span style="color: #8DA6CE;">&amp;optional</span> arg)
+  <span style="color: #ffa07a;">"&#22312;&#24403;&#21069;&#34892;&#20219;&#20309;&#20301;&#32622;&#36755;&#20837;&#20998;&#21495;&#37117;&#22312;&#34892;&#23614;&#28155;&#21152;&#20998;&#21495;&#65292;&#38500;&#38750;&#26412;&#34892;&#26377;for &#36825;&#20010;&#20851;&#38190;&#23383;&#65292;</span>
+<span style="color: #ffa07a;">&#22914;&#26524;&#34892;&#23614;&#24050;&#32463;&#26377;&#20998;&#21495;&#21017;&#21024;&#38500;&#34892;&#23614;&#30340;&#20998;&#21495;&#65292;&#23558;&#20854;&#25554;&#20837;&#21040;&#24403;&#21069;&#20301;&#32622;,&#23601;&#26159;&#35828;&#36755;&#20837;&#20004;&#27425;&#20998;&#21495;&#21017;&#19981;&#22312;&#34892;&#23614;&#25554;&#20837;&#32780;&#26159;&#20687;&#27491;&#24120;&#24773;&#20917;&#19968;&#26679;."</span>
+  (<span style="color: #FBDE2D;">interactive</span> <span style="color: #ffa07a;">"*p"</span>)
+  (<span style="color: #FBDE2D;">let*</span> ( ( init_position (point))
           (b (line-beginning-position))
           (e (line-end-position))
           (line_str (buffer-substring b e))
-          (semicolon_end_of_line (string-match ";[ \t]*$" line_str ))
+          (semicolon_end_of_line (string-match <span style="color: #ffa07a;">";[ \t]*$"</span> line_str ))
           )
-    (if semicolon_end_of_line ;;;;如果行尾已经有分号，则删除行尾的分号，并在当前位置输入分号;;;;;;
-        (progn
-          (save-excursion
+    (<span style="color: #FBDE2D;">if</span> semicolon_end_of_line <span style="color: #AEAEAE;">;;;;</span><span style="color: #AEAEAE;">&#22914;&#26524;&#34892;&#23614;&#24050;&#32463;&#26377;&#20998;&#21495;&#65292;&#21017;&#21024;&#38500;&#34892;&#23614;&#30340;&#20998;&#21495;&#65292;&#24182;&#22312;&#24403;&#21069;&#20301;&#32622;&#36755;&#20837;&#20998;&#21495;;;;;;;</span>
+        (<span style="color: #FBDE2D;">progn</span>
+          (<span style="color: #FBDE2D;">save-excursion</span>
             (goto-char (+ semicolon_end_of_line b))
             (delete-char 1) )
-          (insert ";") )
-      ;;在整行内容中搜索有没有关键字for的存在,或者当前位置已经是行尾,直接插入分号
-      (if   (or (string-match "^[ \t]*$" (buffer-substring init_position e))
-                (string-match "\\bfor\\b" line_str))
-          (insert ";")
-        (save-excursion ;;如果搜索不到 for 则在行尾插入分号;
+          (insert <span style="color: #ffa07a;">";"</span>) )
+      <span style="color: #AEAEAE;">;;</span><span style="color: #AEAEAE;">&#22312;&#25972;&#34892;&#20869;&#23481;&#20013;&#25628;&#32034;&#26377;&#27809;&#26377;&#20851;&#38190;&#23383;for&#30340;&#23384;&#22312;,&#25110;&#32773;&#24403;&#21069;&#20301;&#32622;&#24050;&#32463;&#26159;&#34892;&#23614;,&#30452;&#25509;&#25554;&#20837;&#20998;&#21495;</span>
+      (<span style="color: #FBDE2D;">if</span>   (<span style="color: #FBDE2D;">or</span> (string-match <span style="color: #ffa07a;">"^[ \t]*$"</span> (buffer-substring init_position e))
+                (string-match <span style="color: #ffa07a;">"\\bfor\\b"</span> line_str))
+          (insert <span style="color: #ffa07a;">";"</span>)
+        (<span style="color: #FBDE2D;">save-excursion</span> <span style="color: #AEAEAE;">;;</span><span style="color: #AEAEAE;">&#22914;&#26524;&#25628;&#32034;&#19981;&#21040; for &#21017;&#22312;&#34892;&#23614;&#25554;&#20837;&#20998;&#21495;;</span>
           (end-of-line)
           (delete-trailing-whitespace)
-          (insert ";")
+          (insert <span style="color: #ffa07a;">";"</span>)
           )))))
 </pre>
 </div>
@@ -125,17 +125,17 @@ Replaces default behaviour of comment-dwim, when it inserts comment at the end o
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">;;;###autoload
-(defun open-line-or-new-line-dep-pos()
-  "if point is in head of line then open-line
-if point is at end of line , new-line-and-indent"
-  (interactive)
-  (if (and (= (point) (point-at-bol))
-           (not (looking-at "^[ \t]*$")))
-      (progn
+<pre class="src src-emacs-lisp"><span style="color: #AEAEAE;">;;;</span><span style="color: #AEAEAE;">###</span><span style="color: #ffc0cb;">autoload</span>
+(<span style="color: #FBDE2D;">defun</span> open-line-<span style="color: #FBDE2D;">or</span>-new-line-dep-pos()
+  <span style="color: #ffa07a;">"if point is in head of line then open-line</span>
+<span style="color: #ffa07a;">if point is at end of line , new-line-and-indent"</span>
+  (<span style="color: #FBDE2D;">interactive</span>)
+  (<span style="color: #FBDE2D;">if</span> (<span style="color: #FBDE2D;">and</span> (= (point) (point-at-bol))
+           (<span style="color: #FBDE2D;">not</span> (looking-at <span style="color: #ffa07a;">"^[ \t]*$"</span>)))
+      (<span style="color: #FBDE2D;">progn</span>
         (open-line 1)
         (indent-for-tab-command))
-    (newline-and-indent)))
+    (newline-<span style="color: #FBDE2D;">and</span>-indent)))
 </pre>
 </div>
 

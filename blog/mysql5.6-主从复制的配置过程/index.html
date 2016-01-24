@@ -100,9 +100,9 @@ slave-skip-errors=true<br  />
 <div class="outline-text-3" id="text-orgheadline3">
 <div class="org-src-container">
 
-<pre class="src src-sh">#master 上创建用于同步数据的账户
-grant replication slave on *.* to slave@'192.168.1.137' identified by 'slave';
-# 锁表
+<pre class="src src-sh"><span style="color: #AEAEAE;">#</span><span style="color: #AEAEAE;">master &#19978;&#21019;&#24314;&#29992;&#20110;&#21516;&#27493;&#25968;&#25454;&#30340;&#36134;&#25143;</span>
+grant replication slave on *.* to slave@<span style="color: #ffa07a;">'192.168.1.137'</span> identified by <span style="color: #ffa07a;">'slave'</span>;
+<span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">&#38145;&#34920;</span>
 flush tables with read lock;
 show master status;
 </pre>
@@ -154,14 +154,14 @@ mysql-bin.000005   和     2147  这两个数据 会在从库上用到<br  />
 </blockquote>
 <div class="org-src-container">
 
-<pre class="src src-sh"> # 将 t1,t2 库的数据导出到sql 文件 ，然后在从库192.168.1.137 上 建立t1,t2 库， 把数据分别导入
+<pre class="src src-sh"> <span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">&#23558; t1,t2 &#24211;&#30340;&#25968;&#25454;&#23548;&#20986;&#21040;sql &#25991;&#20214; &#65292;&#28982;&#21518;&#22312;&#20174;&#24211;192.168.1.137 &#19978; &#24314;&#31435;t1,t2 &#24211;&#65292; &#25226;&#25968;&#25454;&#20998;&#21035;&#23548;&#20837;</span>
 /usr/bin/mysqldump t1 -uroot -padmin &gt;t1.sql
 /usr/bin/mysqldump t2 -uroot -padmin &gt;t2.sql
- #或者 从库上加立空库t1,t2后， 直接这样将主库数据导入到从库中
-# /usr/bin/mysqldump t1 -uroot -padmin --opt | mysql t1 -uroot -padmin -h 192.168.1.37
-# /usr/bin/mysqldump t2 -uroot -padmin --opt | mysql t2 -uroot -padmin -h 192.168.1.37
-#dump to slave ,(需要提前在slave 上建上空库t1,t2)
- # 导完数据之后 解锁表
+ <span style="color: #AEAEAE;">#</span><span style="color: #AEAEAE;">&#25110;&#32773; &#20174;&#24211;&#19978;&#21152;&#31435;&#31354;&#24211;t1,t2&#21518;&#65292; &#30452;&#25509;&#36825;&#26679;&#23558;&#20027;&#24211;&#25968;&#25454;&#23548;&#20837;&#21040;&#20174;&#24211;&#20013;</span>
+<span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">/usr/bin/mysqldump t1 -uroot -padmin --opt | mysql t1 -uroot -padmin -h 192.168.1.37</span>
+<span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">/usr/bin/mysqldump t2 -uroot -padmin --opt | mysql t2 -uroot -padmin -h 192.168.1.37</span>
+<span style="color: #AEAEAE;">#</span><span style="color: #AEAEAE;">dump to slave ,(&#38656;&#35201;&#25552;&#21069;&#22312;slave &#19978;&#24314;&#19978;&#31354;&#24211;t1,t2)</span>
+ <span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">&#23548;&#23436;&#25968;&#25454;&#20043;&#21518; &#35299;&#38145;&#34920;</span>
 unlock tables;
 </pre>
 </div>
@@ -177,11 +177,11 @@ unlock tables;
 
 <pre class="src src-sh">create database t1;
 use t1;
-source t1.sql
+<span style="color: #F8F8F8;">source</span> t1.sql
 
 create database t2;
 use t2;
-source t2.sql
+<span style="color: #F8F8F8;">source</span> t2.sql
 </pre>
 </div>
 <p>
@@ -189,8 +189,8 @@ source t2.sql
 </p>
 <div class="org-src-container">
 
-<pre class="src src-sh">change master to master_host='192.168.1.132',master_user='slave',master_password='slave',master_log_file='mysql-bin.000005',master_log_pos=2147;
-start slave;  # 开始保持同步
+<pre class="src src-sh">change master to <span style="color: #40E0D0;">master_host</span>=<span style="color: #ffa07a;">'192.168.1.132'</span>,<span style="color: #40E0D0;">master_user</span>=<span style="color: #ffa07a;">'slave'</span>,<span style="color: #40E0D0;">master_password</span>=<span style="color: #ffa07a;">'slave'</span>,<span style="color: #40E0D0;">master_log_file</span>=<span style="color: #ffa07a;">'mysql-bin.000005'</span>,<span style="color: #40E0D0;">master_log_pos</span>=2147;
+start slave;  <span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">&#24320;&#22987;&#20445;&#25345;&#21516;&#27493;</span>
 </pre>
 </div>
 <p>

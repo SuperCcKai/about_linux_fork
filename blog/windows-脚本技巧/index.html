@@ -34,7 +34,7 @@
 <div class="org-src-container">
 
 <pre class="src src-sh">md5sum.exe md5sum.exe
-输出格式为 md5value filename
+&#36755;&#20986;&#26684;&#24335;&#20026; md5value filename
 </pre>
 </div>
 <p>
@@ -42,9 +42,9 @@
 </p>
 <div class="org-src-container">
 
-<pre class="src src-sh">for /f "tokens=1" %%i in ('"md5sum file1"') do set old_md5=%%i
-for /f "tokens=1" %%i in ('"md5sum file2"') do set new_md5=%%i
-if %old_md5% == %new_md5% echo same md5
+<pre class="src src-sh"><span style="color: #FBDE2D;">for</span> /f <span style="color: #ffa07a;">"tokens=1"</span> %%i<span style="color: #FBDE2D;"> in</span> (<span style="color: #ffa07a;">'"md5sum file1"'</span>) <span style="color: #FBDE2D;">do </span><span style="color: #F8F8F8;">set</span> <span style="color: #40E0D0;">old_md5</span>=%%i
+<span style="color: #FBDE2D;">for</span> /f <span style="color: #ffa07a;">"tokens=1"</span> %%i<span style="color: #FBDE2D;"> in</span> (<span style="color: #ffa07a;">'"md5sum file2"'</span>) <span style="color: #FBDE2D;">do </span><span style="color: #F8F8F8;">set</span> <span style="color: #40E0D0;">new_md5</span>=%%i
+<span style="color: #FBDE2D;">if</span> %old_md5% == %new_md5% echo same md5
 </pre>
 </div>
 

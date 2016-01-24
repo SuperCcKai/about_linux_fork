@@ -51,7 +51,7 @@
 </p>
 <div class="org-src-container">
 
-<pre class="src src-erlang">{'EXIT', Exiting_Process_Id, Reason}
+<pre class="src src-erlang">{<span style="color: #ffa07a;">'EXIT'</span>, <span style="color: #40E0D0;">Exiting_Process_Id</span>, <span style="color: #40E0D0;">Reason</span>}
 </pre>
 </div>
 
@@ -91,42 +91,42 @@ BIF spawn_link/3在创建新进程的同时还会在调用进程和新进程间�
 </p>
 <div class="org-src-container">
 
-<pre class="src src-erlang">spawn_link(Module, Function, ArgumentList) -&gt;
-    link(Id = spawn(Module, Function, ArgumentList)),
-    Id.
+<pre class="src src-erlang"><span style="color: #FF6400;">spawn_link</span>(<span style="color: #40E0D0;">Module</span>, <span style="color: #40E0D0;">Function</span>, <span style="color: #40E0D0;">ArgumentList</span>) -&gt;
+    <span style="color: #F8F8F8;">link</span>(<span style="color: #40E0D0;">Id</span> = <span style="color: #F8F8F8;">spawn</span>(<span style="color: #40E0D0;">Module</span>, <span style="color: #40E0D0;">Function</span>, <span style="color: #40E0D0;">ArgumentList</span>)),
+    <span style="color: #40E0D0;">Id</span>.
 </pre>
 </div>
 
 <div class="org-src-container">
 
-<pre class="src src-erlang">-module(lk).
--export([start/0,start2/0,hello/0,sleep/1]).
+<pre class="src src-erlang"><span style="color: #7fffd4;">-module</span>(lk).
+<span style="color: #7fffd4;">-export</span>([<span style="color: #8DA6CE;">start/0</span>,<span style="color: #8DA6CE;">start2/0</span>,<span style="color: #8DA6CE;">hello/0</span>,<span style="color: #8DA6CE;">sleep/1</span>]).
 
 
-start()-&gt;
-    spawn(lk,hello,[]),
-    sleep(5000).
+<span style="color: #FF6400;">start</span>()-&gt;
+    <span style="color: #F8F8F8;">spawn</span>(lk,hello,[]),
+    <span style="color: #8DA6CE;">sleep</span>(5000).
 
-start2()-&gt;
-    spawn_link(lk,hello,[]),
-    sleep(5000).
+<span style="color: #FF6400;">start2</span>()-&gt;
+    <span style="color: #F8F8F8;">spawn_link</span>(lk,hello,[]),
+    <span style="color: #8DA6CE;">sleep</span>(5000).
 
-hello()-&gt;
-    sleep(1000) ,                                %1后秒退出.
-    exit(abc)
+<span style="color: #FF6400;">hello</span>()-&gt;
+    <span style="color: #8DA6CE;">sleep</span>(1000) ,                                <span style="color: #AEAEAE;">%</span><span style="color: #AEAEAE;">1&#21518;&#31186;&#36864;&#20986;.</span>
+    <span style="color: #F8F8F8;">exit</span>(abc)
         .
 
-sleep(ms)-&gt;
-    receive
-    after ms -&gt;
+<span style="color: #FF6400;">sleep</span>(ms)-&gt;
+    <span style="color: #FBDE2D;">receive</span>
+    <span style="color: #FBDE2D;">after</span> ms -&gt;
             true
-    end.
+    <span style="color: #FBDE2D;">end</span>.
 
-%% 40&gt; lk:start(). 5 秒钟后才退出
-%% true
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">40&gt; lk:start(). 5 &#31186;&#38047;&#21518;&#25165;&#36864;&#20986;</span>
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">true</span>
 
-%% 41&gt; lk:start2(). 1秒钟后即一起退出
-%% ** exception exit: abc
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">41&gt; lk:start2(). 1&#31186;&#38047;&#21518;&#21363;&#19968;&#36215;&#36864;&#20986;</span>
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">** exception exit: abc</span>
 </pre>
 </div>
 </div>
@@ -137,50 +137,50 @@ sleep(ms)-&gt;
 <div class="outline-text-2" id="text-orgheadline4">
 <div class="org-src-container">
 
-<pre class="src src-erlang">-module(ping).
--compile([export_all]).
+<pre class="src src-erlang"><span style="color: #7fffd4;">-module</span>(ping).
+<span style="color: #7fffd4;">-compile</span>([export_all]).
 
-ping (0)-&gt;
-    link(whereis(pongRegName)),
-    exit(ping_exit);                            %此时会向与此进程进行关联的进程发出'EXIT'信号,{'EXIT',self(),Reason}
-ping (N) -&gt;
-    link(whereis(pongRegName)),
-    pongRegName ! {ping,self()},
-    receive
-        _ -&gt;
-            io:format("pong~n" ,[])
-    end,
-    ping(N-1).
-pong()-&gt;
-    process_flag(trap_exit,true),
-    pong1().
+<span style="color: #FF6400;">ping</span> (0)-&gt;
+    <span style="color: #F8F8F8;">link</span>(<span style="color: #F8F8F8;">whereis</span>(pongRegName)),
+    <span style="color: #F8F8F8;">exit</span>(ping_exit);                            <span style="color: #AEAEAE;">%</span><span style="color: #AEAEAE;">&#27492;&#26102;&#20250;&#21521;&#19982;&#27492;&#36827;&#31243;&#36827;&#34892;&#20851;&#32852;&#30340;&#36827;&#31243;&#21457;&#20986;'EXIT'&#20449;&#21495;,{'EXIT',self(),Reason}</span>
+<span style="color: #FF6400;">ping</span> (<span style="color: #40E0D0;">N</span>) -&gt;
+    <span style="color: #F8F8F8;">link</span>(<span style="color: #F8F8F8;">whereis</span>(pongRegName)),
+    pongRegName ! {ping,<span style="color: #F8F8F8;">self</span>()},
+    <span style="color: #FBDE2D;">receive</span>
+        <span style="color: #40E0D0;">_</span> -&gt;
+            <span style="color: #8DA6CE;">io</span>:<span style="color: #8DA6CE;">format</span>(<span style="color: #ffa07a;">"pong~n"</span> ,[])
+    <span style="color: #FBDE2D;">end</span>,
+    <span style="color: #8DA6CE;">ping</span>(<span style="color: #40E0D0;">N</span>-1).
+<span style="color: #FF6400;">pong</span>()-&gt;
+    <span style="color: #F8F8F8;">process_flag</span>(trap_exit,true),
+    <span style="color: #8DA6CE;">pong1</span>().
 
-pong1()-&gt;
-    receive
-        {ping,F} -&gt;
-            F! pong;
-        {'EXIT',F,Reason} -&gt;                    %注意是单引号,一个atom一般是小写的,但也可以是单引号引起来的任意字符,如大写字母
-            io:format("pong found ping exited:~p,[~p].~n" ,[F,Reason]);
-        O -&gt;
-            io:format("other msg in pong process:~p~n" ,[O])
-    end        ,
-    pong1().
+<span style="color: #FF6400;">pong1</span>()-&gt;
+    <span style="color: #FBDE2D;">receive</span>
+        {ping,<span style="color: #40E0D0;">F</span>} -&gt;
+            <span style="color: #40E0D0;">F</span>! pong;
+        {<span style="color: #ffa07a;">'EXIT'</span>,<span style="color: #40E0D0;">F</span>,<span style="color: #40E0D0;">Reason</span>} -&gt;<span style="color: #FF6400;"> </span>                   <span style="color: #AEAEAE;">%</span><span style="color: #AEAEAE;">&#27880;&#24847;&#26159;&#21333;&#24341;&#21495;,&#19968;&#20010;atom&#19968;&#33324;&#26159;&#23567;&#20889;&#30340;,&#20294;&#20063;&#21487;&#20197;&#26159;&#21333;&#24341;&#21495;&#24341;&#36215;&#26469;&#30340;&#20219;&#24847;&#23383;&#31526;,&#22914;&#22823;&#20889;&#23383;&#27597;</span>
+            <span style="color: #8DA6CE;">io</span>:<span style="color: #8DA6CE;">format</span>(<span style="color: #ffa07a;">"pong found ping exited:~p,[~p].~n"</span> ,[<span style="color: #40E0D0;">F</span>,<span style="color: #40E0D0;">Reason</span>]);
+        <span style="color: #40E0D0;">O</span> -&gt;
+            <span style="color: #8DA6CE;">io</span>:<span style="color: #8DA6CE;">format</span>(<span style="color: #ffa07a;">"other msg in pong process:~p~n"</span> ,[<span style="color: #40E0D0;">O</span>])
+    <span style="color: #FBDE2D;">end</span>        ,
+    <span style="color: #8DA6CE;">pong1</span>().
 
-start()-&gt;
-    process_flag(trap_exit,true),               %主进程也对exit信息进行处理
-    register(pongRegName,spawn(ping,pong,[])),
-    register(pingRegName,spawn(ping,ping,[3])),
+<span style="color: #FF6400;">start</span>()-&gt;
+    <span style="color: #F8F8F8;">process_flag</span>(trap_exit,true),               <span style="color: #AEAEAE;">%</span><span style="color: #AEAEAE;">&#20027;&#36827;&#31243;&#20063;&#23545;exit&#20449;&#24687;&#36827;&#34892;&#22788;&#29702;</span>
+    <span style="color: #F8F8F8;">register</span>(pongRegName,<span style="color: #F8F8F8;">spawn</span>(ping,pong,[])),
+    <span style="color: #F8F8F8;">register</span>(pingRegName,<span style="color: #F8F8F8;">spawn</span>(ping,ping,[3])),
 
-    link(whereis(pingRegName)),                 %将主进程与ping 进程关联,ping 进程退出时,主信息要收到其信号
-    receive
-        {'EXIT',F,Reason} -&gt;
-            io:format("main process found ping exit:~p,[~p].~n" ,[F,Reason]);
-        O -&gt;
-            io:format("other msg in main process:~p~n" ,[O])
-    end        .
-%% 知识点whereis(RegName) -&gt;processId
-%% link(pid) 将当前进程与pid 进行关联
-%% process_flag(trap_exit,true),当前进程收到与当前进程进行关联的进程发出的EXIT信号时,当前进程并不自动退出,而是自行处理此信号
+    <span style="color: #F8F8F8;">link</span>(<span style="color: #F8F8F8;">whereis</span>(pingRegName)),                 <span style="color: #AEAEAE;">%</span><span style="color: #AEAEAE;">&#23558;&#20027;&#36827;&#31243;&#19982;ping &#36827;&#31243;&#20851;&#32852;,ping &#36827;&#31243;&#36864;&#20986;&#26102;,&#20027;&#20449;&#24687;&#35201;&#25910;&#21040;&#20854;&#20449;&#21495;</span>
+    <span style="color: #FBDE2D;">receive</span>
+        {<span style="color: #ffa07a;">'EXIT'</span>,<span style="color: #40E0D0;">F</span>,<span style="color: #40E0D0;">Reason</span>} -&gt;
+            <span style="color: #8DA6CE;">io</span>:<span style="color: #8DA6CE;">format</span>(<span style="color: #ffa07a;">"main process found ping exit:~p,[~p].~n"</span> ,[<span style="color: #40E0D0;">F</span>,<span style="color: #40E0D0;">Reason</span>]);
+        <span style="color: #40E0D0;">O</span> -&gt;
+            <span style="color: #8DA6CE;">io</span>:<span style="color: #8DA6CE;">format</span>(<span style="color: #ffa07a;">"other msg in main process:~p~n"</span> ,[<span style="color: #40E0D0;">O</span>])
+    <span style="color: #FBDE2D;">end</span>        .
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">&#30693;&#35782;&#28857;whereis(RegName) -&gt;processId</span>
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">link(pid) &#23558;&#24403;&#21069;&#36827;&#31243;&#19982;pid &#36827;&#34892;&#20851;&#32852;</span>
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">process_flag(trap_exit,true),&#24403;&#21069;&#36827;&#31243;&#25910;&#21040;&#19982;&#24403;&#21069;&#36827;&#31243;&#36827;&#34892;&#20851;&#32852;&#30340;&#36827;&#31243;&#21457;&#20986;&#30340;EXIT&#20449;&#21495;&#26102;,&#24403;&#21069;&#36827;&#31243;&#24182;&#19981;&#33258;&#21160;&#36864;&#20986;,&#32780;&#26159;&#33258;&#34892;&#22788;&#29702;&#27492;&#20449;&#21495;</span>
 </pre>
 </div>
 </div>

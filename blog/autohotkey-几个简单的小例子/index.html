@@ -65,7 +65,7 @@ AutoHotKey 称之为<a href="http://www.autohotkey.com/docs/Hotstrings.htm">hotS
 ::lihts::\\172.20.68.55   
 ::wanglins::\\172.20.68.51
 ::wangls::\\172.20.68.51
-::kanban::http://172.20.68.243:8080
+::kanban::http:<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">172.20.68.243:8080</span>
 </pre>
 </div>
 </div>
@@ -116,7 +116,7 @@ AutoHotKey 称之为<a href="http://www.autohotkey.com/docs/Hotstrings.htm">hotS
 <div class="org-src-container">
 
 <pre class="src src-c">^MButton::
-    SendInput {Alt Down}{F4}{Alt Up}
+    SendInput {<span style="color: #8DA6CE;">Alt</span> <span style="color: #40E0D0;">Down</span>}{F4}{<span style="color: #8DA6CE;">Alt</span> <span style="color: #40E0D0;">Up</span>}
 Return
 </pre>
 </div>
@@ -142,8 +142,8 @@ Return
 <div class="outline-text-3" id="text-orgheadline4">
 <div class="org-src-container">
 
-<pre class="src src-c">;;我习惯于Win+Esc 关闭窗口,而不是Alt+F4
-#Esc::Send !{F4}
+<pre class="src src-c">;;&#25105;&#20064;&#24815;&#20110;Win+Esc &#20851;&#38381;&#31383;&#21475;,&#32780;&#19981;&#26159;Alt+F4
+<span style="color: #7fffd4;">#Esc</span>::Send !{F4}
 </pre>
 </div>
 <p>
@@ -161,27 +161,27 @@ Return
 <div class="org-src-container">
 
 <pre class="src src-c">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;在资源管理器中，在隐与不隐间切换（隐藏文件）
-;;主要通过修改注册表 
-(这一个在Xp下有用，在其他版的可能无用,这个功能网上流传的很广泛)
-这里只是定义一个函数，将它与按键绑定即可。
+;;&#22312;&#36164;&#28304;&#31649;&#29702;&#22120;&#20013;&#65292;&#22312;&#38544;&#19982;&#19981;&#38544;&#38388;&#20999;&#25442;&#65288;&#38544;&#34255;&#25991;&#20214;&#65289;
+;;&#20027;&#35201;&#36890;&#36807;&#20462;&#25913;&#27880;&#20876;&#34920; 
+(&#36825;&#19968;&#20010;&#22312;Xp&#19979;&#26377;&#29992;&#65292;&#22312;&#20854;&#20182;&#29256;&#30340;&#21487;&#33021;&#26080;&#29992;,&#36825;&#20010;&#21151;&#33021;&#32593;&#19978;&#27969;&#20256;&#30340;&#24456;&#24191;&#27867;)
+&#36825;&#37324;&#21482;&#26159;&#23450;&#20041;&#19968;&#20010;&#20989;&#25968;&#65292;&#23558;&#23427;&#19982;&#25353;&#38190;&#32465;&#23450;&#21363;&#21487;&#12290;
 toggle_hide_file_in_explore(){
 
 ;------------------------------------------------------------------------
-; Show hidden folders and files in Windows XP
+; Show hidden folders <span style="color: #FBDE2D;">and</span> files in <span style="color: #8DA6CE;">Windows</span> <span style="color: #40E0D0;">XP</span>
 ;------------------------------------------------------------------------
-; User Key: [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
-; Value Name: Hidden
-; Data Type: REG_DWORD (DWORD Value)
-; Value Data: (1 = show hidden, 2 = do not show)
+; <span style="color: #8DA6CE;">User</span> <span style="color: #40E0D0;">Key</span>: [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+; <span style="color: #8DA6CE;">Value</span> <span style="color: #40E0D0;">Name</span>: Hidden
+; <span style="color: #8DA6CE;">Data</span> <span style="color: #FF6400;">Type</span>: REG_DWORD (<span style="color: #8DA6CE;">DWORD</span> <span style="color: #40E0D0;">Value</span>)
+; <span style="color: #8DA6CE;">Value</span> <span style="color: #FF6400;">Data</span>: (1 = show hidden, 2 = <span style="color: #FBDE2D;">do</span> <span style="color: #FBDE2D;">not</span> show)
 RegRead, ShowHidden_Status, HKEY_CURRENT_USER, Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced, Hidden
-if ShowHidden_Status = 2
+<span style="color: #FBDE2D;">if</span> ShowHidden_Status = 2
   RegWrite, REG_DWORD, HKEY_CURRENT_USER, Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced, Hidden, 1
 Else
   RegWrite, REG_DWORD, HKEY_CURRENT_USER, Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced, Hidden, 2
-WinGetClass, CabinetWClass
-PostMessage, 0x111, 28931,,, A
-Return
+WinGetClass, <span style="color: #8DA6CE;">CabinetWClass</span>
+<span style="color: #40E0D0;">PostMessage</span>, 0x111, 28931,,, <span style="color: #8DA6CE;">A</span>
+<span style="color: #40E0D0;">Return</span>
 }
 </pre>
 </div>
@@ -202,11 +202,11 @@ Return
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c">代码如下
-SetTitleMatchMode Regex ;可以使用正则表达式对标题进行匹配
-#IfWinActive ahk_class ExploreWClass|CabinetWClass
+<pre class="src src-c">&#20195;&#30721;&#22914;&#19979;
+<span style="color: #8DA6CE;">SetTitleMatchMode</span> <span style="color: #40E0D0;">Regex</span> ;&#21487;&#20197;&#20351;&#29992;&#27491;&#21017;&#34920;&#36798;&#24335;&#23545;&#26631;&#39064;&#36827;&#34892;&#21305;&#37197;
+<span style="color: #7fffd4;">#IfWinActive</span> ahk_class ExploreWClass|CabinetWClass
 ^!h::toggle_hide_file_in_explore()
-#IfWinActive
+<span style="color: #7fffd4;">#IfWinActive</span>
 </pre>
 </div>
 <p>
@@ -220,9 +220,9 @@ SetTitleMatchMode Regex ;可以使用正则表达式对标题进行匹配
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c">IfWinExist Untitled - Notepad
-^h::Send , hello 
-#IfWinActive
+<pre class="src src-c"><span style="color: #8DA6CE;">IfWinExist</span> <span style="color: #40E0D0;">Untitled</span> - Notepad
+^h::Send , <span style="color: #40E0D0;">hello</span> 
+<span style="color: #7fffd4;">#IfWinActive</span>
 </pre>
 </div>
 <p>
@@ -232,9 +232,9 @@ SetTitleMatchMode Regex ;可以使用正则表达式对标题进行匹配
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c">IfWinExist 无标题 - 记事本
-^h::Send , hello 
-#IfWinActive
+<pre class="src src-c"><span style="color: #8DA6CE;">IfWinExist</span> <span style="color: #40E0D0;">&#26080;&#26631;&#39064;</span> - &#35760;&#20107;&#26412;
+^h::Send , <span style="color: #40E0D0;">hello</span> 
+<span style="color: #7fffd4;">#IfWinActive</span>
 </pre>
 </div>
 <p>
@@ -247,8 +247,8 @@ SetTitleMatchMode Regex ;可以使用正则表达式对标题进行匹配
 <div class="org-src-container">
 
 <pre class="src src-c">SetTitleMatchMode 2
-; OR:
-SetTitleMatchMode RegEx
+; <span style="color: #D8FA3C;">OR</span>:
+<span style="color: #8DA6CE;">SetTitleMatchMode</span> <span style="color: #40E0D0;">RegEx</span>
 </pre>
 </div>
 <p>
@@ -265,7 +265,7 @@ SetTitleMatchMode RegEx
 <pre class="src src-c">SetTitleMatchMode 2
 IfWinExist  Notepad
 ^h::Send , hello 
-#IfWinActive
+<span style="color: #7fffd4;">#IfWinActive</span>
 </pre>
 </div>
 <p>
@@ -280,14 +280,14 @@ IfWinExist  Notepad
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c">#IfWinActive ahk_class ExploreWClass
-只在"我的电脑"中起作用的代码写在这里
-#IfWinActive
+<pre class="src src-c"><span style="color: #7fffd4;">#IfWinActive</span> ahk_class ExploreWClass
+&#21482;&#22312;<span style="color: #ffa07a;">"&#25105;&#30340;&#30005;&#33041;"</span>&#20013;&#36215;&#20316;&#29992;&#30340;&#20195;&#30721;&#20889;&#22312;&#36825;&#37324;
+<span style="color: #7fffd4;">#IfWinActive</span>
 
-SetTitleMatchMode Regex ;可以使用正则表达式对标题进行匹配
-#IfWinActive ahk_class ExploreWClass|CabinetWClass
-  在"我的电脑" 有“我的文档” 中起作用的代码写在这里
-#IfWinActive
+SetTitleMatchMode Regex ;<span style="color: #8DA6CE;">&#21487;&#20197;&#20351;&#29992;&#27491;&#21017;&#34920;&#36798;&#24335;&#23545;&#26631;&#39064;&#36827;&#34892;&#21305;&#37197;</span>
+<span style="color: #7fffd4;">#IfWinActive</span> ahk_class ExploreWClass|CabinetWClass
+  <span style="color: #40E0D0;">&#22312;</span><span style="color: #ffa07a;">"&#25105;&#30340;&#30005;&#33041;"</span> &#26377;&#8220;&#25105;&#30340;&#25991;&#26723;&#8221; &#20013;&#36215;&#20316;&#29992;&#30340;&#20195;&#30721;&#20889;&#22312;&#36825;&#37324;
+<span style="color: #7fffd4;">#IfWinActive</span>
 </pre>
 </div>
 </div>

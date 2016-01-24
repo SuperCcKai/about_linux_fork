@@ -60,7 +60,7 @@ Cedet最简单的配置就是加载cedet.el
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(load-file "~/emacs/cedet/common/cedet.el")
+<pre class="src src-emacs-lisp">(load-file <span style="color: #ffa07a;">"~/emacs/cedet/common/cedet.el"</span>)
 </pre>
 </div>
 <p>
@@ -69,7 +69,7 @@ Cedet最简单的配置就是加载cedet.el
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(global-ede-mode t)
+<pre class="src src-emacs-lisp">(global-ede-mode <span style="color: #D8FA3C;">t</span>)
 </pre>
 </div>
 </div>
@@ -133,7 +133,7 @@ semantic-idle-summary-mode显示光标下所处的tag的相应信息.
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(require 'semantic-ia)
+<pre class="src src-emacs-lisp">(<span style="color: #FBDE2D;">require</span> '<span style="color: #D8FA3C;">semantic-ia</span>)
 </pre>
 </div>
 <p>
@@ -145,7 +145,7 @@ semantic-idle-summary-mode显示光标下所处的tag的相应信息.
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(require 'semantic-gcc)
+<pre class="src src-emacs-lisp">(<span style="color: #FBDE2D;">require</span> '<span style="color: #D8FA3C;">semantic-gcc</span>)
 </pre>
 </div>
 <p>
@@ -158,7 +158,7 @@ semantic-add-system-include函数可以实现这个功能
 </ol>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(semantic-add-system-include "~/exp/include/boost_1_37" 'c++-mode)
+<pre class="src src-emacs-lisp">(semantic-add-system-include <span style="color: #ffa07a;">"~/exp/include/boost_1_37"</span> 'c++-mode)
 </pre>
 </div>
 </div>
@@ -197,9 +197,9 @@ Integration with imenu
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(defun my-semantic-hook ()
-  (imenu-add-to-menubar "TAGS"))
-(add-hook 'semantic-init-hooks 'my-semantic-hook)
+<pre class="src src-emacs-lisp">(<span style="color: #FBDE2D;">defun</span> <span style="color: #FF6400;">my-semantic-hook</span> ()
+  (imenu-add-to-menubar <span style="color: #ffa07a;">"TAGS"</span>))
+(<span style="color: #FF6400;">add-hook</span> 'semantic-init-hooks 'my-semantic-hook)
 </pre>
 </div>
 </div>
@@ -214,7 +214,7 @@ Integration with imenu
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(require 'semanticdb)
+<pre class="src src-emacs-lisp">(<span style="color: #FBDE2D;">require</span> '<span style="color: #D8FA3C;">semanticdb</span>)
 (global-semanticdb-minor-mode 1)
 </pre>
 </div>
@@ -230,7 +230,7 @@ Integration with imenu
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(require 'semanticdb-global)
+<pre class="src src-emacs-lisp">(<span style="color: #FBDE2D;">require</span> '<span style="color: #D8FA3C;">semanticdb-global</span>)
 (semanticdb-enable-gnu-global-databases 'c-mode)
 (semanticdb-enable-gnu-global-databases 'c++-mode)
 </pre>
@@ -300,12 +300,12 @@ semantic-lex-c-preprocessor-symbol-map变量.
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq qt4-base-dir "/usr/include/qt4")
+<pre class="src src-emacs-lisp">(<span style="color: #FF6400;">setq</span> qt4-base-dir <span style="color: #ffa07a;">"/usr/include/qt4"</span>)
 (semantic-add-system-include qt4-base-dir 'c++-mode)
 (add-to-list 'auto-mode-alist (cons qt4-base-dir 'c++-mode))
-(add-to-list 'semantic-lex-c-preprocessor-symbol-file (concat qt4-base-dir "/Qt/qconfig.h"))
-(add-to-list 'semantic-lex-c-preprocessor-symbol-file (concat qt4-base-dir "/Qt/qconfig-dist.h"))
-(add-to-list 'semantic-lex-c-preprocessor-symbol-file (concat qt4-base-dir "/Qt/qglobal.h"))
+(add-to-list 'semantic-lex-c-preprocessor-symbol-file (concat qt4-base-dir <span style="color: #ffa07a;">"/Qt/qconfig.h"</span>))
+(add-to-list 'semantic-lex-c-preprocessor-symbol-file (concat qt4-base-dir <span style="color: #ffa07a;">"/Qt/qconfig-dist.h"</span>))
+(add-to-list 'semantic-lex-c-preprocessor-symbol-file (concat qt4-base-dir <span style="color: #ffa07a;">"/Qt/qglobal.h"</span>))
 </pre>
 </div>
 
@@ -329,12 +329,12 @@ Semantic内核实现的了.
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(defun my-cedet-hook ()
+<pre class="src src-emacs-lisp">(<span style="color: #FBDE2D;">defun</span> <span style="color: #FF6400;">my-cedet-hook</span> ()
   (local-set-key [(control return)] 'semantic-ia-complete-symbol)
-  (local-set-key "\C-c?" 'semantic-ia-complete-symbol-menu)
-  (local-set-key "\C-c&gt;" 'semantic-complete-analyze-inline)
-  (local-set-key "\C-cp" 'semantic-analyze-proto-impl-toggle))
-(add-hook 'c-mode-common-hook 'my-cedet-hook)
+  (local-set-key <span style="color: #ffa07a;">"\C-c?"</span> 'semantic-ia-complete-symbol-menu)
+  (local-set-key <span style="color: #ffa07a;">"\C-c&gt;"</span> 'semantic-complete-analyze-inline)
+  (local-set-key <span style="color: #ffa07a;">"\C-cp"</span> 'semantic-analyze-proto-impl-toggle))
+(<span style="color: #FF6400;">add-hook</span> 'c-mode-common-hook 'my-cedet-hook)
 </pre>
 </div>
 

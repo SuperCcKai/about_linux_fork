@@ -54,7 +54,7 @@
 </p>
 <div class="org-src-container">
 
-<pre class="src src-sh">ADDRESS_OR_OFFSET(%BASE_OR_OFFSET,%INDEX,MULTIPLIER)
+<pre class="src src-sh"><span style="color: #FF6400;">ADDRESS_OR_OFFSET</span>(%BASE_OR_OFFSET,%INDEX,MULTIPLIER)
 </pre>
 </div>
 <p>
@@ -62,7 +62,7 @@
 </p>
 <div class="org-src-container">
 
-<pre class="src src-sh">FINAL ADDRESS = ADDRESS_OR_OFFSET + BASE_OR_OFFSET + MULTIPLIER * INDEX
+<pre class="src src-sh">FINAL <span style="color: #40E0D0;">ADDRESS</span> = ADDRESS_OR_OFFSET + BASE_OR_OFFSET + MULTIPLIER * INDEX
 </pre>
 </div>
 <p>
@@ -75,7 +75,7 @@
 </p>
 <div class="org-src-container">
 
-<pre class="src src-asm">data_items(,%edi,4)
+<pre class="src src-asm"><span style="color: #FF6400;">data_items</span>(,<span style="color: #40E0D0;">%edi</span>,4)
 </pre>
 </div>
 <p>
@@ -107,53 +107,53 @@ data_items表示数组的基地址ADDRESS_OR_OFFSET<br  />
 #
 #VARIABLES: The registers have the following uses:
 #
-# %edi - Holds the index of the data item being examined
-# %ebx - Largest data item found
-# %eax - Current data item
+# <span style="color: #40E0D0;">%edi</span> - Holds the index of the data item being examined
+# <span style="color: #40E0D0;">%ebx</span> - Largest data item found
+# <span style="color: #40E0D0;">%eax</span> - Current data item
 #
 # The following memory locations are used:
 #
 # data_items - contains the item data. A 0 is used
 # to terminate the data
 #
- .section .data
-data_items:         #These are the data items
- .long 3,67,34,222,45,75,54,34,44,33,22,11,66,0
+ <span style="color: #FBDE2D;">.section</span> .data
+<span style="color: #FF6400;">data_items</span>:         #These are the data items
+ <span style="color: #FBDE2D;">.long</span> 3,67,34,222,45,75,54,34,44,33,22,11,66,0
 
- .section .text
- .globl _start
-_start:
- movl $0, %edi      # move 0 into the index register
- movl data_items(,%edi,4), %eax # load the first byte of data
- movl %eax, %ebx    # since this is the first item, %eax is
+ <span style="color: #FBDE2D;">.section</span> .text
+ <span style="color: #FBDE2D;">.globl</span> _start
+<span style="color: #FF6400;">_start</span>:
+ <span style="color: #FBDE2D;">movl</span> $0, <span style="color: #40E0D0;">%edi</span>      # move 0 into the index register
+ <span style="color: #FBDE2D;">movl</span> data_items(,<span style="color: #40E0D0;">%edi</span>,4), <span style="color: #40E0D0;">%eax</span> # load the first byte of data
+ <span style="color: #FBDE2D;">movl</span> <span style="color: #40E0D0;">%eax</span>, <span style="color: #40E0D0;">%ebx</span>    # since this is the first item, <span style="color: #40E0D0;">%eax</span> is
             # the biggest
 
-start_loop:         # start loop
- cmpl $0, %eax      # check to see if we've hit the end
- je loop_exit
- incl %edi      # load next value
- movl data_items(,%edi,4), %eax
- cmpl %ebx, %eax    # compare values
- jle start_loop     # jump to loop beginning if the new
+<span style="color: #FF6400;">start_loop</span>:         # start loop
+ <span style="color: #FBDE2D;">cmpl</span> $0, <span style="color: #40E0D0;">%eax</span>      # check to see if we've hit the end
+ <span style="color: #FBDE2D;">je</span> loop_exit
+ <span style="color: #FBDE2D;">incl</span> <span style="color: #40E0D0;">%edi</span>      # load next value
+ <span style="color: #FBDE2D;">movl</span> data_items(,<span style="color: #40E0D0;">%edi</span>,4), <span style="color: #40E0D0;">%eax</span>
+ <span style="color: #FBDE2D;">cmpl</span> <span style="color: #40E0D0;">%ebx</span>, <span style="color: #40E0D0;">%eax</span>    # compare values
+ <span style="color: #FBDE2D;">jle</span> start_loop     # jump to loop beginning if the new
             # one isn't bigger
- movl %eax, %ebx    # move the value as the largest
- jmp start_loop     # jump to loop beginning
+ <span style="color: #FBDE2D;">movl</span> <span style="color: #40E0D0;">%eax</span>, <span style="color: #40E0D0;">%ebx</span>    # move the value as the largest
+ <span style="color: #FBDE2D;">jmp</span> start_loop     # jump to loop beginning
 
-loop_exit:
- # %ebx is the status code for the _exit system call
+<span style="color: #FF6400;">loop_exit</span>:
+ # <span style="color: #40E0D0;">%ebx</span> is the status code for the _exit system call
  # and it already has the maximum number
- movl $1, %eax      #1 is the _exit() syscall
- int $0x80
+ <span style="color: #FBDE2D;">movl</span> $1, <span style="color: #40E0D0;">%eax</span>      #1 is the _exit() syscall
+ <span style="color: #FBDE2D;">int</span> $0x80
 </pre>
 </div>
 <div class="org-src-container">
 
-<pre class="src src-sh">汇编、链接、运行
+<pre class="src src-sh">&#27719;&#32534;&#12289;&#38142;&#25509;&#12289;&#36816;&#34892;
 $ as max.s -o max.o
 $ ld max.o -o max
 $ ./max
-$ echo $? # shell中查看上一个程序的返回状态
-这个程序在一组数中找到一个最大的数，并把它作为程序的退出状态。这组数在.data段给出：
+$ echo $<span style="color: #40E0D0;">?</span> <span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">shell&#20013;&#26597;&#30475;&#19978;&#19968;&#20010;&#31243;&#24207;&#30340;&#36820;&#22238;&#29366;&#24577;</span>
+&#36825;&#20010;&#31243;&#24207;&#22312;&#19968;&#32452;&#25968;&#20013;&#25214;&#21040;&#19968;&#20010;&#26368;&#22823;&#30340;&#25968;&#65292;&#24182;&#25226;&#23427;&#20316;&#20026;&#31243;&#24207;&#30340;&#36864;&#20986;&#29366;&#24577;&#12290;&#36825;&#32452;&#25968;&#22312;.data&#27573;&#32473;&#20986;&#65306;
 </pre>
 </div>
 <blockquote>
@@ -187,9 +187,9 @@ data_items数组的最后一个数是0，我们在一个循环中依次比较每
 </p>
 <div class="org-src-container">
 
-<pre class="src src-asm">_start:
- movl $0, %edi                        #    初始化edi，指向数组的第0个元素
- movl data_items(,%edi,4), %eax
+<pre class="src src-asm"><span style="color: #FF6400;">_start</span>:
+ <span style="color: #FBDE2D;">movl</span> $0, <span style="color: #40E0D0;">%edi</span>                        #    &#21021;&#22987;&#21270;edi&#65292;&#25351;&#21521;&#25968;&#32452;&#30340;&#31532;0&#20010;&#20803;&#32032;
+ <span style="color: #FBDE2D;">movl</span> data_items(,<span style="color: #40E0D0;">%edi</span>,4), <span style="color: #40E0D0;">%eax</span>
 </pre>
 </div>
 <p>
@@ -201,9 +201,9 @@ data_items + edi * 4，写在指令中就是data_items(,%edi,4)，<br  />
 
 <div class="org-src-container">
 
-<pre class="src src-asm">start_loop:
- cmpl $0, %eax
- je loop_exit
+<pre class="src src-asm"><span style="color: #FF6400;">start_loop</span>:
+ <span style="color: #FBDE2D;">cmpl</span> $0, <span style="color: #40E0D0;">%eax</span>
+ <span style="color: #FBDE2D;">je</span> loop_exit
 </pre>
 </div>
 <p>
@@ -220,15 +220,15 @@ cmpl指令将两个操作数相减，但计算结果并不保存，只是根据�
 
 <div class="org-src-container">
 
-<pre class="src src-asm">incl %edi
-movl data_items(,%edi,4), %eax
-将edi的值加1，把数组中的下一个数传送到eax寄存器中。
+<pre class="src src-asm"><span style="color: #FF6400;">incl</span> <span style="color: #FBDE2D;">%edi</span>
+<span style="color: #FF6400;">movl</span> <span style="color: #FBDE2D;">data</span>_items(,<span style="color: #40E0D0;">%edi</span>,4), <span style="color: #40E0D0;">%eax</span>
+<span style="color: #FF6400;">&#23558;edi&#30340;&#20540;&#21152;1&#65292;&#25226;&#25968;&#32452;&#20013;&#30340;&#19979;&#19968;&#20010;&#25968;&#20256;&#36865;&#21040;eax&#23492;&#23384;&#22120;&#20013;</span>&#12290;
 </pre>
 </div>
 <div class="org-src-container">
 
-<pre class="src src-asm">cmpl %ebx, %eax
-jle start_loop
+<pre class="src src-asm"><span style="color: #FF6400;">cmpl</span> <span style="color: #FBDE2D;">%ebx</span>, <span style="color: #40E0D0;">%eax</span>
+<span style="color: #FF6400;">jle</span> <span style="color: #FBDE2D;">start</span>_loop
 </pre>
 </div>
 <p>

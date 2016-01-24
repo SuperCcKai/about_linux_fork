@@ -109,9 +109,9 @@ git rm -rf .<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-sh">[submodule "site-lisp/anything-config"]
-path = site-lisp/anything-config
-url = http://repo.or.cz/r/anything-config.git
+<pre class="src src-sh">[submodule <span style="color: #ffa07a;">"site-lisp/anything-config"</span>]
+<span style="color: #40E0D0;">path</span> = site-lisp/anything-config
+<span style="color: #40E0D0;">url</span> = http://repo.or.cz/r/anything-config.git
 </pre>
 </div></li>
 <li><p>
@@ -119,8 +119,8 @@ url = http://repo.or.cz/r/anything-config.git
 </p>
 <div class="org-src-container">
 
-<pre class="src src-sh">[submodule "site-lisp/anything-config"]
-    url = http://repo.or.cz/r/anything-config.git
+<pre class="src src-sh">[submodule <span style="color: #ffa07a;">"site-lisp/anything-config"</span>]
+    <span style="color: #40E0D0;">url</span> = http://repo.or.cz/r/anything-config.git
 </pre>
 </div></li>
 <li><p>
@@ -178,7 +178,7 @@ git cat-file blob 0b26bbe907c929ed88f6ba3dfeaaa9a2953b1c56:a.txt
 </p>
 <div class="org-src-container">
 
-<pre class="src src-sh">root # git ls-tree f7619cab6a71505b23e172f3146adfa750bab71e
+<pre class="src src-sh">root <span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">git ls-tree f7619cab6a71505b23e172f3146adfa750bab71e</span>
 100644 blob 83c4ba189edcc364ca18b0b7d2cd81655d97adc5    a
 100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391    d
 </pre>
@@ -188,13 +188,13 @@ git cat-file blob 0b26bbe907c929ed88f6ba3dfeaaa9a2953b1c56:a.txt
 </p>
 <div class="org-src-container">
 
-<pre class="src src-sh">git show 83c4ba189edcc364ca18b0b7d2cd81655d97adc5 后查看文件a的内容
+<pre class="src src-sh">git show 83c4ba189edcc364ca18b0b7d2cd81655d97adc5 &#21518;&#26597;&#30475;&#25991;&#20214;a&#30340;&#20869;&#23481;
 </pre>
 </div>
 <div class="org-src-container">
 
-<pre class="src src-sh">这与
-git show f7619cab6a71505b23e172f3146adfa750bab71e:a     的效果相同
+<pre class="src src-sh">&#36825;&#19982;
+git show f7619cab6a71505b23e172f3146adfa750bab71e:a     &#30340;&#25928;&#26524;&#30456;&#21516;
 </pre>
 </div>
 </div>
@@ -318,13 +318,13 @@ in git diff, git show, etc.<br  />
 <div class="outline-text-3" id="text-orgheadline15">
 <div class="org-src-container">
 
-<pre class="src src-sh">  # Remove everything from the index
+<pre class="src src-sh">  <span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">Remove everything from the index</span>
 $ git rm --cached -r .
-# Re-add all the deleted files to the index
-# You should get lots of messages like: "warning: CRLF will be replaced by LF in &lt;file&gt;."
+<span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">Re-add all the deleted files to the index</span>
+<span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">You should get lots of messages like: "warning: CRLF will be replaced by LF in &lt;file&gt;."</span>
 $ git diff --cached --name-only -z | xargs -0 git add
-# Commit
-$ git commit -m "Fix CRLF"
+<span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">Commit</span>
+$ git commit -m <span style="color: #ffa07a;">"Fix CRLF"</span>
 </pre>
 </div>
 </div>
@@ -343,23 +343,23 @@ GIT: ignoring changes in tracked files<br  />
 </div>
 <div class="org-src-container">
 
-<pre class="src src-sh">恢复则为
+<pre class="src src-sh">&#24674;&#22797;&#21017;&#20026;
 git update-index --no-assume-unchanged &lt;file&gt;
 </pre>
 </div>
 <div class="org-src-container">
 
-<pre class="src src-sh">查看有哪些这样的文件
-  git ls-files -v|grep '^h'
+<pre class="src src-sh">&#26597;&#30475;&#26377;&#21738;&#20123;&#36825;&#26679;&#30340;&#25991;&#20214;
+  git ls-files -v|grep <span style="color: #ffa07a;">'^h'</span>
 </pre>
 </div>
 <div class="org-src-container">
 
-<pre class="src src-sh">在~/.gitconfig 以方便使用
+<pre class="src src-sh">&#22312;~/.gitconfig &#20197;&#26041;&#20415;&#20351;&#29992;
 [alias]
-      ignore = !git update-index --assume-unchanged
-      unignore = !git update-index --no-assume-unchanged
-      ignored = !git ls-files -v | grep ^[a-z]
+      <span style="color: #40E0D0;">ignore</span> = !git update-index --assume-unchanged
+      <span style="color: #40E0D0;">unignore</span> = !git update-index --no-assume-unchanged
+      <span style="color: #40E0D0;">ignored</span> = !git ls-files -v | grep ^[a-z]
 </pre>
 </div>
 </div>
@@ -376,7 +376,7 @@ git update-index --no-assume-unchanged &lt;file&gt;
 </p>
 <div class="org-src-container">
 
-<pre class="src src-sh">git log --stat -S密码
+<pre class="src src-sh">git log --stat -S&#23494;&#30721;
 </pre>
 </div>
 </div>
@@ -386,10 +386,10 @@ git update-index --no-assume-unchanged &lt;file&gt;
 <div class="outline-text-3" id="text-orgheadline18">
 <div class="org-src-container">
 
-<pre class="src src-sh">将提交信息中所有oldpass替换为newpasswd
-git filter-branch --msg-filter  'sed s/oldpass/newpasswd/' -f HEAD --all
-删除log中所有"git-svn-id:"
-git filter-branch --msg-filter 'sed -e "/^git-svn-id:/d"'
+<pre class="src src-sh">&#23558;&#25552;&#20132;&#20449;&#24687;&#20013;&#25152;&#26377;oldpass&#26367;&#25442;&#20026;newpasswd
+git filter-branch --msg-filter  <span style="color: #ffa07a;">'sed s/oldpass/newpasswd/'</span> -f HEAD --all
+&#21024;&#38500;log&#20013;&#25152;&#26377;<span style="color: #ffa07a;">"git-svn-id:"</span>
+git filter-branch --msg-filter <span style="color: #ffa07a;">'sed -e "/^git-svn-id:/d"'</span>
 </pre>
 </div>
 </div>
@@ -400,9 +400,9 @@ git filter-branch --msg-filter 'sed -e "/^git-svn-id:/d"'
 <div class="outline-text-3" id="text-orgheadline19">
 <div class="org-src-container">
 
-<pre class="src src-sh">git filter-branch --tree-filter 'rm -rf files_to_remove' --prune-empty -f HEAD --all
-或者(较快)
-git filter-branch -f --index-filter 'git rm --cached --ignore-unmatch  filename' --prune-empty HEAD
+<pre class="src src-sh">git filter-branch --tree-filter <span style="color: #ffa07a;">'rm -rf files_to_remove'</span> --prune-empty -f HEAD --all
+<span style="color: #FF6400;">&#25110;&#32773;</span>(&#36739;&#24555;)
+git filter-branch -f --index-filter <span style="color: #ffa07a;">'git rm --cached --ignore-unmatch  filename'</span> --prune-empty HEAD
 </pre>
 </div>
 <p>
@@ -420,7 +420,7 @@ git filter-branch -f --index-filter 'git rm --cached --ignore-unmatch  filename'
 <div class="outline-text-3" id="text-orgheadline20">
 <div class="org-src-container">
 
-<pre class="src src-sh">git filter-branch -f --env-filter "GIT_AUTHOR_NAME='Newname'; GIT_AUTHOR_EMAIL='newemail'; GIT_COMMITTER_NAME='Newname'; GIT_COMMITTER_EMAIL='newemail';" HEAD
+<pre class="src src-sh">git filter-branch -f --env-filter <span style="color: #ffa07a;">"GIT_AUTHOR_NAME='Newname'; GIT_AUTHOR_EMAIL='newemail'; GIT_COMMITTER_NAME='Newname'; GIT_COMMITTER_EMAIL='newemail';"</span> HEAD
 </pre>
 </div>
 <p>
@@ -459,8 +459,8 @@ git filter-branch -f --index-filter 'git rm --cached --ignore-unmatch  filename'
 </blockquote>
 <div class="org-src-container">
 
-<pre class="src src-sh">删除169849d与f5b0f0b之间的commit
-echo "f5b0f0bab898d4021dad6c87bfad0140dfb5bb23 169849d727285e6d3b1ff7536a2d22033d2b8b10" &gt;&gt; .git/info/grafts
+<pre class="src src-sh">&#21024;&#38500;169849d&#19982;f5b0f0b&#20043;&#38388;&#30340;commit
+<span style="color: #F8F8F8;">echo</span> <span style="color: #ffa07a;">"f5b0f0bab898d4021dad6c87bfad0140dfb5bb23 169849d727285e6d3b1ff7536a2d22033d2b8b10"</span> &gt;&gt; .git/info/grafts
 git filter-branch 169849d727285e6d3b1ff7536a2d22033d2b8b10..HEAD
 </pre>
 </div>

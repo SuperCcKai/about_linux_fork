@@ -62,7 +62,7 @@
 <li>在根目录下make 进行编译</li>
 <li><div class="org-src-container">
 
-<pre class="src src-sh">make app PROJECT=mochiweb_test
+<pre class="src src-sh">make app <span style="color: #40E0D0;">PROJECT</span>=mochiweb_test
 </pre>
 </div>
 <p>
@@ -87,22 +87,22 @@ mochiweb<sub>test</sub><sub>web.erl</sub> 模块是处理具体业务 的模块�
 <div class="org-src-container">
 
 <pre class="src src-erlang">....
-                case Path of
-                    "time" -&gt;%% 新增了 /timer 这个 URL，它是一个 HTTP Chunked 的例子
-                    Response = Req:ok({"text/plain", chunked}),
-                    time(Response);
-                    _ -&gt;
-                        Req:serve_file(Path, DocRoot)
-                end;
+                <span style="color: #FBDE2D;">case</span> <span style="color: #40E0D0;">Path</span> <span style="color: #FBDE2D;">of</span>
+                    <span style="color: #ffa07a;">"time"</span> -&gt;<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">&#26032;&#22686;&#20102; /timer &#36825;&#20010; URL&#65292;&#23427;&#26159;&#19968;&#20010; HTTP Chunked &#30340;&#20363;&#23376;</span>
+                    <span style="color: #40E0D0;">Response</span> = <span style="color: #40E0D0;">Req</span>:<span style="color: #8DA6CE;">ok</span>({<span style="color: #ffa07a;">"text/plain"</span>, chunked}),
+                    <span style="color: #F8F8F8;">time</span>(<span style="color: #40E0D0;">Response</span>);
+                    <span style="color: #40E0D0;">_</span> -&gt;
+                        <span style="color: #40E0D0;">Req</span>:<span style="color: #8DA6CE;">serve_file</span>(<span style="color: #40E0D0;">Path</span>, <span style="color: #40E0D0;">DocRoot</span>)
+                <span style="color: #FBDE2D;">end</span>;
 ...
 
 
-%% 打印当前时间，间隔一秒，再在已经打开的 http 连接之上，再次打印，这也就是所谓 HTTP长连接/ServerPush 的一种
-time(Resp)-&gt;
-    Resp:write_chunk(io_lib:format("The time is: ~p~n",
-                                   [calendar:local_time()])),
-    timer:sleep(1000),
-    time(Resp)        .
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">&#25171;&#21360;&#24403;&#21069;&#26102;&#38388;&#65292;&#38388;&#38548;&#19968;&#31186;&#65292;&#20877;&#22312;&#24050;&#32463;&#25171;&#24320;&#30340; http &#36830;&#25509;&#20043;&#19978;&#65292;&#20877;&#27425;&#25171;&#21360;&#65292;&#36825;&#20063;&#23601;&#26159;&#25152;&#35859; HTTP&#38271;&#36830;&#25509;/ServerPush &#30340;&#19968;&#31181;</span>
+<span style="color: #FF6400;">time</span>(<span style="color: #40E0D0;">Resp</span>)-&gt;
+    <span style="color: #40E0D0;">Resp</span>:<span style="color: #8DA6CE;">write_chunk</span>(<span style="color: #8DA6CE;">io_lib</span>:<span style="color: #8DA6CE;">format</span>(<span style="color: #ffa07a;">"The time is: ~p~n"</span>,
+                                   [<span style="color: #8DA6CE;">calendar</span>:<span style="color: #8DA6CE;">local_time</span>()])),
+    <span style="color: #8DA6CE;">timer</span>:<span style="color: #8DA6CE;">sleep</span>(1000),
+    <span style="color: #F8F8F8;">time</span>(<span style="color: #40E0D0;">Resp</span>)        .
 </pre>
 </div>
 <p>
@@ -125,13 +125,13 @@ tcp<sub>load</sub><sub>test.erl</sub>
 </p>
 <div class="org-src-container">
 
-<pre class="src src-erlang">%% tcp_load_test:start(10000).
-%%或
-%% tcp_load_test:start("http://localhost:8080/time",10000).
-%% 实是际访问
-%% http://localhost:8080/time?id=1
-%% ...
-%% http://localhost:8080/time?id=10000
+<pre class="src src-erlang"><span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">tcp_load_test:start(10000).</span>
+<span style="color: #AEAEAE;">%%</span><span style="color: #AEAEAE;">&#25110;</span>
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">tcp_load_test:start("http://localhost:8080/time",10000).</span>
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">&#23454;&#26159;&#38469;&#35775;&#38382;</span>
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">http://localhost:8080/time?id=1</span>
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">...</span>
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">http://localhost:8080/time?id=10000</span>
 </pre>
 </div>
 <p>
@@ -140,7 +140,7 @@ tcp<sub>load</sub><sub>test.erl</sub>
 </p>
 <div class="org-src-container">
 
-<pre class="src src-sh">eheap_alloc: Cannot allocate 583848200 bytes of memory (of type "heap").
+<pre class="src src-sh">eheap_alloc: Cannot allocate 583848200 bytes of memory (of type <span style="color: #ffa07a;">"heap"</span>).
 </pre>
 </div>
 <p>
@@ -152,7 +152,7 @@ tcp<sub>load</sub><sub>test.erl</sub>
 <div class="org-src-container">
 
 <pre class="src src-sh"> {Active, Closed, Chunks}
-{活动连接数，关闭的连接数(测试过程中始终为0),由服务端端发送的chunks总数}
+{&#27963;&#21160;&#36830;&#25509;&#25968;&#65292;&#20851;&#38381;&#30340;&#36830;&#25509;&#25968;(&#27979;&#35797;&#36807;&#31243;&#20013;&#22987;&#32456;&#20026;0),&#30001;&#26381;&#21153;&#31471;&#31471;&#21457;&#36865;&#30340;chunks&#24635;&#25968;}
 </pre>
 </div>
 </div>

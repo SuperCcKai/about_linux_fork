@@ -51,20 +51,20 @@
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c">;; 自动关闭某些窗口
-#Persistent
-#NoTrayIcon
-#SingleInstance force
-SetWorkingDir %A_ScriptDir%
+<pre class="src src-c">;; <span style="color: #8DA6CE;">&#33258;&#21160;&#20851;&#38381;&#26576;&#20123;&#31383;&#21475;</span>
+<span style="color: #7fffd4;">#Persistent</span>
+<span style="color: #7fffd4;">#NoTrayIcon</span>
+<span style="color: #7fffd4;">#SingleInstance</span> force
+<span style="color: #40E0D0;">SetWorkingDir</span> %A_ScriptDir%
 
-SetTimer, autocloseWin, 250
-return
+SetTimer, <span style="color: #40E0D0;">autocloseWin</span>, 250
+<span style="color: #FBDE2D;">return</span>
 
 autocloseWin:
-;;qq 广告窗口
-WinClose, 腾讯网 - 我的资讯
-WinClose, 安全沟通 - 为您提供全面的QQ安全保护
-return
+;;qq <span style="color: #8DA6CE;">&#24191;&#21578;&#31383;&#21475;</span>
+<span style="color: #40E0D0;">WinClose</span>, <span style="color: #40E0D0;">&#33150;&#35759;&#32593;</span> - &#25105;&#30340;&#36164;&#35759;
+WinClose, <span style="color: #40E0D0;">&#23433;&#20840;&#27807;&#36890;</span> - &#20026;&#24744;&#25552;&#20379;&#20840;&#38754;&#30340;QQ&#23433;&#20840;&#20445;&#25252;
+<span style="color: #FBDE2D;">return</span>
 </pre>
 </div>
 </div>

@@ -47,21 +47,21 @@
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c">int bar(int c, int d)
+<pre class="src src-c"><span style="color: #8DA6CE;">int</span> <span style="color: #FF6400;">bar</span>(<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">c</span>, <span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">d</span>)
 {
-    int e = c + d;
-    return e;
+    <span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">e</span> = c + d;
+    <span style="color: #FBDE2D;">return</span> e;
 }
 
-int foo(int a, int b)
+<span style="color: #8DA6CE;">int</span> <span style="color: #FF6400;">foo</span>(<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">a</span>, <span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">b</span>)
 {
-    return bar(a, b);
+    <span style="color: #FBDE2D;">return</span> bar(a, b);
 }
 
-int main(void)
+<span style="color: #8DA6CE;">int</span> <span style="color: #FF6400;">main</span>(<span style="color: #8DA6CE;">void</span>)
 {
     foo(2, 3);
-    return 0;
+    <span style="color: #FBDE2D;">return</span> 0;
 }
 </pre>
 </div>
@@ -82,7 +82,7 @@ objdump -dS a.out
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c">main:     file format elf32-i386
+<pre class="src src-c"><span style="color: #D8FA3C;">main</span>:     file <span style="color: #8DA6CE;">format</span> <span style="color: #40E0D0;">elf32</span>-i386
 
 
 Disassembly of section .init:
@@ -99,18 +99,18 @@ Disassembly of section .init:
 
 Disassembly of section .plt:
 
-080482ac &lt;__gmon_start__@plt-0x10&gt;:
+080482ac <a href="mailto:__gmon_start__%40plt-0x10">&lt;__gmon_start__@plt-0x10&gt;</a>:
  80482ac:    ff 35 f8 9f 04 08        pushl  0x8049ff8
  80482b2:    ff 25 fc 9f 04 08        jmp    *0x8049ffc
  80482b8:    00 00                    add    %al,(%eax)
     ...
 
-080482bc &lt;__gmon_start__@plt&gt;:
+080482bc <a href="mailto:__gmon_start__%40plt">&lt;__gmon_start__@plt&gt;</a>:
  80482bc:    ff 25 00 a0 04 08        jmp    *0x804a000
  80482c2:    68 00 00 00 00           push   $0x0
  80482c7:    e9 e0 ff ff ff           jmp    80482ac &lt;_init+0x18&gt;
 
-080482cc &lt;__libc_start_main@plt&gt;:
+080482cc <a href="mailto:__libc_start_main%40plt">&lt;__libc_start_main@plt&gt;</a>:
  80482cc:    ff 25 04 a0 04 08        jmp    *0x804a004
  80482d2:    68 08 00 00 00           push   $0x8
  80482d7:    e9 d0 ff ff ff           jmp    80482ac &lt;_init+0x18&gt;
@@ -121,7 +121,7 @@ Disassembly of section .text:
  80482e0:    31 ed                    xor    %ebp,%ebp
  80482e2:    5e                       pop    %esi
  80482e3:    89 e1                    mov    %esp,%ecx
- 80482e5:    83 e4 f0                 and    $0xfffffff0,%esp
+ 80482e5:    83 e4 f0                 <span style="color: #FBDE2D;">and</span>    $0xfffffff0,%esp
  80482e8:    50                       push   %eax
  80482e9:    54                       push   %esp
  80482ea:    52                       push   %edx
@@ -130,7 +130,7 @@ Disassembly of section .text:
  80482f5:    51                       push   %ecx
  80482f6:    56                       push   %esi
  80482f7:    68 e5 83 04 08           push   $0x80483e5
- 80482fc:    e8 cb ff ff ff           call   80482cc &lt;__libc_start_main@plt&gt;
+ 80482fc:    e8 cb ff ff ff           call   80482cc <a href="mailto:__libc_start_main%40plt">&lt;__libc_start_main@plt&gt;</a>
  8048301:    f4                       hlt
  8048302:    90                       nop
  8048303:    90                       nop
@@ -144,7 +144,7 @@ Disassembly of section .text:
  8048317:    8b 93 fc ff ff ff        mov    -0x4(%ebx),%edx
  804831d:    85 d2                    test   %edx,%edx
  804831f:    74 05                    je     8048326 &lt;_start+0x46&gt;
- 8048321:    e8 96 ff ff ff           call   80482bc &lt;__gmon_start__@plt&gt;
+ 8048321:    e8 96 ff ff ff           call   80482bc <a href="mailto:__gmon_start__%40plt">&lt;__gmon_start__@plt&gt;</a>
  8048326:    58                       pop    %eax
  8048327:    5b                       pop    %ebx
  8048328:    c9                       leave
@@ -199,17 +199,17 @@ Disassembly of section .text:
  80483b3:    90                       nop
 
 080483b4 &lt;bar&gt;:
-int bar(int c, int d)
+<span style="color: #8DA6CE;">int</span> bar(<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">c</span>, <span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">d</span>)
 {
  80483b4:    55                       push   %ebp
  80483b5:    89 e5                    mov    %esp,%ebp
  80483b7:    83 ec 10                 sub    $0x10,%esp
-    int e = c + d;
+    <span style="color: #8DA6CE;">int</span> e = c + d;
  80483ba:    8b 45 0c                 mov    0xc(%ebp),%eax
  80483bd:    8b 55 08                 mov    0x8(%ebp),%edx
  80483c0:    8d 04 02                 lea    (%edx,%eax,1),%eax
  80483c3:    89 45 fc                 mov    %eax,-0x4(%ebp)
-    return e;
+    <span style="color: #FBDE2D;">return</span> e;
  80483c6:    8b 45 fc                 mov    -0x4(%ebp),%eax
 }
  80483c9:    c9                       leave
@@ -217,12 +217,12 @@ int bar(int c, int d)
 
 080483cb &lt;foo&gt;:
 
-int foo(int a, int b)
+<span style="color: #8DA6CE;">int</span> foo(<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">a</span>, <span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">b</span>)
 {
  80483cb:    55                       push   %ebp
  80483cc:    89 e5                    mov    %esp,%ebp
  80483ce:    83 ec 08                 sub    $0x8,%esp
-    return bar(a, b);
+    <span style="color: #FBDE2D;">return</span> bar(a, b);
  80483d1:    8b 45 0c                 mov    0xc(%ebp),%eax
  80483d4:    89 44 24 04              mov    %eax,0x4(%esp)
  80483d8:    8b 45 08                 mov    0x8(%ebp),%eax
@@ -234,7 +234,7 @@ int foo(int a, int b)
 
 080483e5 &lt;main&gt;:
 
-int main(void)
+<span style="color: #8DA6CE;">int</span> main(<span style="color: #8DA6CE;">void</span>)
 {
  80483e5:    55                       push   %ebp
  80483e6:    89 e5                    mov    %esp,%ebp
@@ -244,7 +244,7 @@ int main(void)
  80483f2:    00
  80483f3:    c7 04 24 02 00 00 00     movl   $0x2,(%esp)
  80483fa:    e8 cc ff ff ff           call   80483cb &lt;foo&gt;
-    return 0;
+    <span style="color: #FBDE2D;">return</span> 0;
  80483ff:    b8 00 00 00 00           mov    $0x0,%eax
 }
  8048404:    c9                       leave
@@ -362,24 +362,24 @@ Disassembly of section .fini:
 
 <div class="org-src-container">
 
-<pre class="src src-c">int main(void)
+<pre class="src src-c"><span style="color: #8DA6CE;">int</span> <span style="color: #FF6400;">main</span>(<span style="color: #8DA6CE;">void</span>)
 {
-关于这两个操作在foo函数中进行讲解
+&#20851;&#20110;&#36825;&#20004;&#20010;&#25805;&#20316;&#22312;foo&#20989;&#25968;&#20013;&#36827;&#34892;&#35762;&#35299;
  80483e5:    55                       push   %ebp
  80483e6:    89 e5                    mov    %esp,%ebp
 
-将栈顶指针地址减8byte(两个int的长度),在栈上开辟两个int字节的长度
+&#23558;&#26632;&#39030;&#25351;&#38024;&#22320;&#22336;&#20943;8byte(&#20004;&#20010;<span style="color: #8DA6CE;">int</span>&#30340;&#38271;&#24230;),&#22312;&#26632;&#19978;&#24320;&#36767;&#20004;&#20010;<span style="color: #8DA6CE;">int</span>&#23383;&#33410;&#30340;&#38271;&#24230;
  80483e8:    83 ec 08                 sub    $0x8,%esp
     foo(2, 3);
 
- 依次将 参数3 、2入 栈 ,0x4(%esp)表示的地址是 :4+ esp中所指地址
+ <span style="color: #8DA6CE;">&#20381;&#27425;&#23558;</span> <span style="color: #40E0D0;">&#21442;&#25968;3</span> &#12289;2&#20837; &#26632; ,0x4(%esp)&#34920;&#31034;&#30340;&#22320;&#22336;&#26159; :4+ esp&#20013;&#25152;&#25351;&#22320;&#22336;
  80483eb:    c7 44 24 04 03 00 00     movl   $0x3,0x4(%esp)
  80483f2:    00
  80483f3:    c7 04 24 02 00 00 00     movl   $0x2,(%esp)
-跳到foo()函数的首地址进行执行
+&#36339;&#21040;foo()&#20989;&#25968;&#30340;&#39318;&#22320;&#22336;&#36827;&#34892;&#25191;&#34892;
  80483fa:    e8 cc ff ff ff           call   80483cb &lt;foo&gt;
-    return 0;
-这行move不理解
+    <span style="color: #FBDE2D;">return</span> 0;
+&#36825;&#34892;move&#19981;&#29702;&#35299;
  80483ff:    b8 00 00 00 00           mov    $0x0,%eax
 }
 </pre>
@@ -389,32 +389,32 @@ foo函数的调用<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c">int foo(int a, int b)
+<pre class="src src-c"><span style="color: #8DA6CE;">int</span> <span style="color: #FF6400;">foo</span>(<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">a</span>, <span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">b</span>)
 {
-首先经过main的调用，栈上元素依次是 3,2,
-经过此步push   %ebp ,栈变成了，3 ,2 ,%ebp ,注意，此时，%ebp中的地址是main 函数
-的首地址,即将main 函数的首地址压栈，（保存main的首地址，以便调用完foo函数，继
-续执行main函数时恢复ebp的值）(push操作在入栈时，会自动将esp的值减4)
+&#39318;&#20808;&#32463;&#36807;main&#30340;&#35843;&#29992;&#65292;&#26632;&#19978;&#20803;&#32032;&#20381;&#27425;&#26159; 3,2,
+&#32463;&#36807;&#27492;&#27493;push   %ebp ,&#26632;&#21464;&#25104;&#20102;&#65292;3 ,2 ,%ebp ,&#27880;&#24847;&#65292;&#27492;&#26102;&#65292;%ebp&#20013;&#30340;&#22320;&#22336;&#26159;main &#20989;&#25968;
+&#30340;&#39318;&#22320;&#22336;,<span style="color: #8DA6CE;">&#21363;&#23558;main</span> <span style="color: #40E0D0;">&#20989;&#25968;&#30340;&#39318;&#22320;&#22336;&#21387;&#26632;</span>&#65292;&#65288;&#20445;&#23384;main&#30340;&#39318;&#22320;&#22336;&#65292;&#20197;&#20415;&#35843;&#29992;&#23436;foo&#20989;&#25968;&#65292;&#32487;
+&#32493;&#25191;&#34892;main&#20989;&#25968;&#26102;&#24674;&#22797;ebp&#30340;&#20540;&#65289;(push&#25805;&#20316;&#22312;&#20837;&#26632;&#26102;&#65292;&#20250;&#33258;&#21160;&#23558;esp&#30340;&#20540;&#20943;4)
 80483cb:    55                       push   %ebp
-%esp 始终指向栈顶元素
-经mov    %esp,%ebp ，此时ebp所指的地址跟当下 esp所指的栈顶地址相同
-即将ebp指向新的 foo函数栈帧的首地址
+%esp &#22987;&#32456;&#25351;&#21521;&#26632;&#39030;&#20803;&#32032;
+&#32463;mov    %esp,%ebp &#65292;&#27492;&#26102;ebp&#25152;&#25351;&#30340;&#22320;&#22336;&#36319;&#24403;&#19979; esp&#25152;&#25351;&#30340;&#26632;&#39030;&#22320;&#22336;&#30456;&#21516;
+&#21363;&#23558;ebp&#25351;&#21521;&#26032;&#30340; foo&#20989;&#25968;&#26632;&#24103;&#30340;&#39318;&#22320;&#22336;
  80483cc:    89 e5                    mov    %esp,%ebp
-准备向栈上压入两个元素，
-此时栈上元素为: 3,2,main_ebp,空,空
-此时ebp与esp之间有两个空元素
+&#20934;&#22791;&#21521;&#26632;&#19978;&#21387;&#20837;&#20004;&#20010;&#20803;&#32032;&#65292;
+&#27492;&#26102;&#26632;&#19978;&#20803;&#32032;&#20026;: 3,2,main_ebp,&#31354;,<span style="color: #8DA6CE;">&#31354;</span>
+<span style="color: #40E0D0;">&#27492;&#26102;ebp&#19982;esp&#20043;&#38388;&#26377;&#20004;&#20010;&#31354;&#20803;&#32032;</span>
  80483ce:    83 ec 08                 sub    $0x8,%esp
-    return bar(a, b);
-经此操作 栈变成 3,2,main_ebp,3,空
-0xc+%ebp的地址中的内容是3,
+    <span style="color: #FBDE2D;">return</span> bar(a, b);
+<span style="color: #8DA6CE;">&#32463;&#27492;&#25805;&#20316;</span> <span style="color: #40E0D0;">&#26632;&#21464;&#25104;</span> 3,2,main_ebp,3,&#31354;
+0xc+%ebp&#30340;&#22320;&#22336;&#20013;&#30340;&#20869;&#23481;&#26159;3,
  80483d1:    8b 45 0c                 mov    0xc(%ebp),%eax
  80483d4:    89 44 24 04              mov    %eax,0x4(%esp)
 
-经此操作 栈变成 3,2,main_ebp,3,2
+<span style="color: #8DA6CE;">&#32463;&#27492;&#25805;&#20316;</span> <span style="color: #40E0D0;">&#26632;&#21464;&#25104;</span> 3,2,main_ebp,3,2
  80483d8:    8b 45 08                 mov    0x8(%ebp),%eax
  80483db:    89 04 24                 mov    %eax,(%esp)
 
-跳到80483b4处执行bar()函数
+&#36339;&#21040;80483b4&#22788;&#25191;&#34892;bar()&#20989;&#25968;
  80483de:    e8 d1 ff ff ff           call   80483b4 &lt;bar&gt;
 }
 </pre>
@@ -425,24 +425,24 @@ P.S.关于地址的表示方式 0xc(%ebp)内容见 <a href="x86.html">寻址方�
 <div class="org-src-container">
 
 <pre class="src src-c">080483b4 &lt;bar&gt;:
-int bar(int c, int d)
+<span style="color: #8DA6CE;">int</span> bar(<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">c</span>, <span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">d</span>)
 {
  80483b4:    55                       push   %ebp
  80483b5:    89 e5                    mov    %esp,%ebp
-# 这个sub 命令，我不太明白 ，参数为什么是10,而不是0xc,或者8
-#如果算上局部变量e 的究竟应该是8+4,如果不算，则为8,为什么是10呢
+<span style="color: #7fffd4;"># &#36825;&#20010;sub</span> &#21629;&#20196;&#65292;&#25105;&#19981;&#22826;&#26126;&#30333; &#65292;&#21442;&#25968;&#20026;&#20160;&#20040;&#26159;10,&#32780;&#19981;&#26159;0xc,&#25110;&#32773;8
+<span style="color: #7fffd4;">#&#22914;&#26524;&#31639;&#19978;&#23616;&#37096;&#21464;&#37327;e</span> &#30340;&#31350;&#31455;&#24212;&#35813;&#26159;8+4,&#22914;&#26524;&#19981;&#31639;&#65292;&#21017;&#20026;8,&#20026;&#20160;&#20040;&#26159;10&#21602;
  80483b7:    83 ec 10                 sub    $0x10,%esp
-    int e = c + d;
-# 这是将foo函数中最后压栈的两个参数取出放到eax edx中，
+    <span style="color: #8DA6CE;">int</span> e = c + d;
+<span style="color: #7fffd4;"># &#36825;&#26159;&#23558;foo&#20989;&#25968;&#20013;&#26368;&#21518;&#21387;&#26632;&#30340;&#20004;&#20010;&#21442;&#25968;&#21462;&#20986;&#25918;&#21040;eax</span> edx&#20013;&#65292;
  80483ba:    8b 45 0c                 mov    0xc(%ebp),%eax
  80483bd:    8b 55 08                 mov    0x8(%ebp),%edx
-#这个利用 寻址(%dex,%eax,1)= %edx+%eax+1 ,即做加法运算，
-#难道没有add指令？ lea是将运算后的结果存到%eax中
+<span style="color: #7fffd4;">#&#36825;&#20010;&#21033;&#29992;</span> &#23547;&#22336;(%dex,%eax,1)= %edx+%eax+1 ,&#21363;&#20570;&#21152;&#27861;&#36816;&#31639;&#65292;
+<span style="color: #7fffd4;">#&#38590;&#36947;&#27809;&#26377;add&#25351;&#20196;</span>&#65311; lea&#26159;&#23558;&#36816;&#31639;&#21518;&#30340;&#32467;&#26524;&#23384;&#21040;%eax&#20013;
  80483c0:    8d 04 02                 lea    (%edx,%eax,1),%eax
-#将运算结果存到局部变量e中
+<span style="color: #7fffd4;">#&#23558;&#36816;&#31639;&#32467;&#26524;&#23384;&#21040;&#23616;&#37096;&#21464;&#37327;e&#20013;</span>
  80483c3:    89 45 fc                 mov    %eax,-0x4(%ebp)
-    return e;
- 把e的值放到%eax中，返加
+    <span style="color: #FBDE2D;">return</span> e;
+ &#25226;e&#30340;&#20540;&#25918;&#21040;%eax&#20013;&#65292;&#36820;&#21152;
  80483c6:    8b 45 fc                 mov    -0x4(%ebp),%eax
 }
  80483c9:    c9                       leave

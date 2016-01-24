@@ -415,8 +415,8 @@ you can use it like this :<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c">#include anything.ahk
-#include anything-explorer-history.ahk
+<pre class="src src-c"><span style="color: #7fffd4;">#include</span> anything.ahk
+<span style="color: #7fffd4;">#include</span> anything-explorer-history.ahk
 f3::anything(anything_explorer_history_source)
 </pre>
 </div>
@@ -432,24 +432,24 @@ for example :<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c">#include anything.ahk
-#include anything-explorer-history.ahk
-#include anything-favorite-directories.ahk
+<pre class="src src-c"><span style="color: #7fffd4;">#include</span> anything.ahk
+<span style="color: #7fffd4;">#include</span> anything-explorer-history.ahk
+<span style="color: #7fffd4;">#include</span> anything-favorite-directories.ahk
  f3::
  sources:=Array()
- ;; anything_explorer_history_source is an anything-source defined in  anything-explorer-history.ahk   
+ ;; anything_explorer_history_source is <span style="color: #8DA6CE;">an</span> <span style="color: #FF6400;">anything</span>-source defined in  anything-explorer-history.ahk   
  sources.insert(anything_explorer_history_source)
- ;; anything_favorite_directories_source is an anything-source defined in anything-favorites-directory.ahk
+ ;; anything_favorite_directories_source is <span style="color: #8DA6CE;">an</span> <span style="color: #FF6400;">anything</span>-source defined in anything-favorites-directory.ahk
  sources.insert(anything_favorite_directories_source)
  anything_multiple_sources(sources)
- return
+ <span style="color: #FBDE2D;">return</span>
 </pre>
 </div>
 </div></li>
 <li><a id="orgheadline11"></a>actions for anything-explorer-history.ahk<br  /><div class="outline-text-4" id="text-orgheadline11">
 <div class="org-src-container">
 
-<pre class="src src-c">anything_explorer_history_source["action"]:=Array("visit_directory","delete_from_directory_history" ,"delete_all_directory_history")
+<pre class="src src-c">anything_explorer_history_source[<span style="color: #ffa07a;">"action"</span>]:=Array(<span style="color: #ffa07a;">"visit_directory"</span>,<span style="color: #ffa07a;">"delete_from_directory_history"</span> ,<span style="color: #ffa07a;">"delete_all_directory_history"</span>)
 </pre>
 </div>
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
@@ -534,9 +534,9 @@ you just need to bind it to a key like this :<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c">#include anything.ahk
- ;; anything_favorite_directories_source is an anything-source defined in anything-favorites-directory.ahk
-#include anything-favorites-directory.ahk
+<pre class="src src-c"><span style="color: #7fffd4;">#include</span> anything.ahk
+ ;; anything_favorite_directories_source is <span style="color: #8DA6CE;">an</span> <span style="color: #FF6400;">anything</span>-source defined in anything-favorites-directory.ahk
+<span style="color: #7fffd4;">#include</span> anything-favorites-directory.ahk
 f1::anything(anything_favorite_directories_source)
 </pre>
 </div>
@@ -548,17 +548,17 @@ default have added to  anything-config.ahk<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c">#include anything.ahk
-#include anything-explorer-history.ahk
-#include anything-favorite-directories.ahk
+<pre class="src src-c"><span style="color: #7fffd4;">#include</span> anything.ahk
+<span style="color: #7fffd4;">#include</span> anything-explorer-history.ahk
+<span style="color: #7fffd4;">#include</span> anything-favorite-directories.ahk
  f3::
  sources:=Array()
- ;; anything_explorer_history_source is an anything-source defined in  anything-explorer-history.ahk   
+ ;; anything_explorer_history_source is <span style="color: #8DA6CE;">an</span> <span style="color: #FF6400;">anything</span>-source defined in  anything-explorer-history.ahk   
  sources.insert(anything_explorer_history_source)
- ;; anything_favorite_directories_source is an anything-source defined in anything-favorites-directory.ahk
+ ;; anything_favorite_directories_source is <span style="color: #8DA6CE;">an</span> <span style="color: #FF6400;">anything</span>-source defined in anything-favorites-directory.ahk
  sources.insert(anything_favorite_directories_source)
  anything_multiple_sources(sources)
- return
+ <span style="color: #FBDE2D;">return</span>
 </pre>
 </div>
 </div></li>
@@ -581,7 +581,7 @@ anything_favorite_directories_source have three actions<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c">anything_favorite_directories_source["action"]:=Array("anything_favorite_directories_visit","anything_favorite_directories_delete","anything_favorite_directories_add")
+<pre class="src src-c">anything_favorite_directories_source[<span style="color: #ffa07a;">"action"</span>]:=Array(<span style="color: #ffa07a;">"anything_favorite_directories_visit"</span>,<span style="color: #ffa07a;">"anything_favorite_directories_delete"</span>,<span style="color: #ffa07a;">"anything_favorite_directories_add"</span>)
 </pre>
 </div>
 </div></li>
@@ -661,16 +661,16 @@ about how to use it .see comments in anything-run.ahk<br  />
 
 <div class="org-src-container">
 
-<pre class="src src-c">#include anything.ahk
-#include anything-run.ahk
-#include anything-run-launch-plugin.ahk
+<pre class="src src-c"><span style="color: #7fffd4;">#include</span> anything.ahk
+<span style="color: #7fffd4;">#include</span> anything-run.ahk
+<span style="color: #7fffd4;">#include</span> anything-run-launch-plugin.ahk
 
-#r::
-my_anything_properties2:=Object()
-my_anything_properties2["anything_use_large_icon"]:=0
-my_anything_properties2["FontSize"]:= 12
+<span style="color: #7fffd4;">#r</span>::
+<span style="color: #D8FA3C;">my_anything_properties2</span>:=Object()
+my_anything_properties2[<span style="color: #ffa07a;">"anything_use_large_icon"</span>]:=0
+my_anything_properties2[<span style="color: #ffa07a;">"FontSize"</span>]:= 12
 anything_multiple_sources_with_properties(Array(anything_run_source, anything_run_launch_source),my_anything_properties2)
-return
+<span style="color: #FBDE2D;">return</span>
 </pre>
 </div>
 <p>
@@ -685,14 +685,14 @@ you can also append other anything-source,for example<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c">#r::
-sources:=Array()
+<pre class="src src-c"><span style="color: #7fffd4;">#r</span>::
+<span style="color: #D8FA3C;">sources</span>:=Array()
 sources.insert(anything_cmd_source)
 sources.insert(anything_run_launch_source)
 sources.insert(anything_explorer_history_source)
 sources.insert(anything_favorite_directories_source)
 anything_multiple_sources(sources)
-return
+<span style="color: #FBDE2D;">return</span>
 </pre>
 </div>
 </div>
@@ -708,18 +708,18 @@ return
 </div>
 <div class="org-src-container">
 
-<pre class="src src-c">#include anything.ahk
-#include anything-window-switch.ahk 
+<pre class="src src-c"><span style="color: #7fffd4;">#include</span> anything.ahk
+<span style="color: #7fffd4;">#include</span> anything-window-<span style="color: #FBDE2D;">switch</span>.ahk 
  !Tab::
-; custom anything-properties (window width and window height)
+; <span style="color: #8DA6CE;">custom</span> <span style="color: #FF6400;">anything</span>-properties (window width <span style="color: #FBDE2D;">and</span> <span style="color: #8DA6CE;">window</span> <span style="color: #40E0D0;">height</span>)
  my_anything_properties:=Object()
- my_anything_properties["win_width"]:= 900    
- my_anything_properties["win_height"]:= 180
+ my_anything_properties[<span style="color: #ffa07a;">"win_width"</span>]:= 900    
+ my_anything_properties[<span style="color: #ffa07a;">"win_height"</span>]:= 180
 
  sources:=Array()
  sources.insert(anything_window_switcher_source)
  anything_multiple_sources_with_properties(sources,my_anything_properties)
- return
+ <span style="color: #FBDE2D;">return</span>
 </pre>
 </div>
 <p>
@@ -729,7 +729,7 @@ actions for anything-window-switch.ahk<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c">anything_window_switcher_source["action"]:=Array("anything_ws_activate_window", "anything_ws_close_window" ,"anything_ws_assign_key_4_current_window", "anything_ws_kill_process")
+<pre class="src src-c">anything_window_switcher_source[<span style="color: #ffa07a;">"action"</span>]:=Array(<span style="color: #ffa07a;">"anything_ws_activate_window"</span>, <span style="color: #ffa07a;">"anything_ws_close_window"</span> ,<span style="color: #ffa07a;">"anything_ws_assign_key_4_current_window"</span>, <span style="color: #ffa07a;">"anything_ws_kill_process"</span>)
 </pre>
 </div>
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
@@ -813,11 +813,11 @@ or change the priority of the process<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c">#include anything.ahk
-#include anything-process-manager.ahk
+<pre class="src src-c"><span style="color: #7fffd4;">#include</span> anything.ahk
+<span style="color: #7fffd4;">#include</span> anything-process-manager.ahk
 f2::
 anything(anything_process_manager_source)
-return
+<span style="color: #FBDE2D;">return</span>
 </pre>
 </div>
 
@@ -830,15 +830,15 @@ return
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c">#include anything.ahk
-#include anything-process-manager.ahk
-#include anything-services.ahk
+<pre class="src src-c"><span style="color: #7fffd4;">#include</span> anything.ahk
+<span style="color: #7fffd4;">#include</span> anything-process-manager.ahk
+<span style="color: #7fffd4;">#include</span> anything-services.ahk
  ^f4::
   sources:=Array()
   sources.Insert(anything_services_source)
   sources.Insert(anything_process_manager_source)  ;         &lt;--------- here.
   anything_multiple_sources(sources)
- return
+ <span style="color: #FBDE2D;">return</span>
 </pre>
 </div>
 </div>
@@ -857,11 +857,11 @@ or change the start type of a service &lt;Manual&gt; &lt;Disabled&gt;&lt;Automic
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c">#include anything.ahk
-#include anything-services.ahk
+<pre class="src src-c"><span style="color: #7fffd4;">#include</span> anything.ahk
+<span style="color: #7fffd4;">#include</span> anything-services.ahk
 f4::
 anything(anything_services_source)
-return
+<span style="color: #FBDE2D;">return</span>
 </pre>
 </div>
 
@@ -874,15 +874,15 @@ return
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c">#include anything.ahk
-#include anything-process-manager.ahk
-#include anything-services.ahk
+<pre class="src src-c"><span style="color: #7fffd4;">#include</span> anything.ahk
+<span style="color: #7fffd4;">#include</span> anything-process-manager.ahk
+<span style="color: #7fffd4;">#include</span> anything-services.ahk
  ^f4::
   sources:=Array()
   sources.Insert(anything_services_source) ;         &lt;--------- here.
   sources.Insert(anything_process_manager_source) 
   anything_multiple_sources(sources)
- return
+ <span style="color: #FBDE2D;">return</span>
 </pre>
 </div>
 </div>
@@ -912,7 +912,7 @@ for example:<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c">my_source:=Object()
+<pre class="src src-c"><span style="color: #D8FA3C;">my_source</span>:=Object()
 </pre>
 </div>
 </div>
@@ -924,7 +924,7 @@ for example:<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c">my_source["name"]:="my_source_name"
+<pre class="src src-c">my_source[<span style="color: #ffa07a;">"name"</span>]:=<span style="color: #ffa07a;">"my_source_name"</span>
 </pre>
 </div>
 </div>
@@ -946,7 +946,7 @@ for example:<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c">my_source["candidate"] :=Array("red","green")
+<pre class="src src-c">my_source[<span style="color: #ffa07a;">"candidate"</span>] :=Array(<span style="color: #ffa07a;">"red"</span>,<span style="color: #ffa07a;">"green"</span>)
 </pre>
 </div>
 <p>
@@ -954,11 +954,11 @@ or<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c"> my_candidates_fun()
+<pre class="src src-c"> <span style="color: #FF6400;">my_candidates_fun</span>()
  {
-     return Array("red","green")
+     <span style="color: #FBDE2D;">return</span> Array(<span style="color: #ffa07a;">"red"</span>,<span style="color: #ffa07a;">"green"</span>)
  }
-my_source["candidate"]:="my_candidates_fun"
+my_source[<span style="color: #ffa07a;">"candidate"</span>]:=<span style="color: #ffa07a;">"my_candidates_fun"</span>
 </pre>
 </div>
 </div></li>
@@ -975,9 +975,9 @@ see &lt;action&gt;<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c">my_source["candidate"]:=Array(
-             Array("red","useful info ,string ,object or anything(red) "),
-             Array("green","useful info ,string ,object or anything(red)")
+<pre class="src src-c">my_source[<span style="color: #ffa07a;">"candidate"</span>]:=Array(
+             Array(<span style="color: #ffa07a;">"red"</span>,<span style="color: #ffa07a;">"useful info ,string ,object or anything(red) "</span>),
+             Array(<span style="color: #ffa07a;">"green"</span>,<span style="color: #ffa07a;">"useful info ,string ,object or anything(red)"</span>)
              )
 </pre>
 </div>
@@ -994,12 +994,12 @@ the selected &lt;candidate&gt; .<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c">   my_action:="my_action_fun"
+<pre class="src src-c">   <span style="color: #D8FA3C;">my_action</span>:=<span style="color: #ffa07a;">"my_action_fun"</span>
             my_action_fun(candidate)
           {
             MsgBox , %candidate%
           }
-my_source["action"]:=my_action
+my_source[<span style="color: #ffa07a;">"action"</span>]:=my_action
 </pre>
 </div>
 <p>
@@ -1007,14 +1007,14 @@ or<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c">   my_action:="my_action_fun"
+<pre class="src src-c">   <span style="color: #D8FA3C;">my_action</span>:=<span style="color: #ffa07a;">"my_action_fun"</span>
             my_action_fun(candidate)
           {
-            display :=candidate[1]
+            <span style="color: #D8FA3C;">display</span> :=candidate[1]
             usefulinfo :=candidate[2]
             MsgBox % usefulinfo  
           }
-my_source["action"]:=my_action
+my_source[<span style="color: #ffa07a;">"action"</span>]:=my_action
 </pre>
 </div>
 
@@ -1023,17 +1023,17 @@ or<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c">  my_action:=Array("my_action_fun","my_action_fun2")
-            my_action_fun(candidate)
+<pre class="src src-c">  <span style="color: #D8FA3C;">my_action</span>:=Array(<span style="color: #ffa07a;">"my_action_fun"</span>,<span style="color: #ffa07a;">"my_action_fun2"</span>)
+            <span style="color: #FF6400;">my_action_fun</span>(candidate)
           {
             MsgBox , %candidate% from action_fun
           }
-            my_action_fun2(candidate)
+            <span style="color: #FF6400;">my_action_fun2</span>(candidate)
           {
             MsgBox , %candidate% from action_fun2
           }
 
-my_source["action"]:=my_action
+my_source[<span style="color: #ffa07a;">"action"</span>]:=my_action
 </pre>
 </div>
 </div>
@@ -1048,15 +1048,15 @@ this property is optional .if this property isn't empty<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c"> icon_fun()
+<pre class="src src-c"> <span style="color: #FF6400;">icon_fun</span>()
  {
-     ImageListID := IL_Create(2)  ; Create an ImageList to hold 10 small icons.
-     Loop 2  ; Load the ImageList with a series of icons from the DLL.
-     IL_Add(ImageListID, "shell32.dll", A_Index)
-     return ImageListID
+     <span style="color: #D8FA3C;">ImageListID</span> := IL_Create(2)  ; Create an ImageList <span style="color: #8DA6CE;">to</span> <span style="color: #40E0D0;">hold</span> 10 small icons.
+     Loop 2  ; Load the ImageList with a series of icons from <span style="color: #8DA6CE;">the</span> <span style="color: #FF6400;">DLL</span>.
+     IL_Add(ImageListID, <span style="color: #ffa07a;">"shell32.dll"</span>, A_Index)
+     <span style="color: #FBDE2D;">return</span> ImageListID
  }
-my_icon :="icon_fun"
-my_source["icon"]:=my_icon
+<span style="color: #D8FA3C;">my_icon</span> :=<span style="color: #ffa07a;">"icon_fun"</span>
+my_source[<span style="color: #ffa07a;">"icon"</span>]:=my_icon
 </pre>
 </div>
 </div>
@@ -1070,9 +1070,9 @@ if it has value for example:<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c">        my_source["match"]:="anything_match"
-; or 
-        my_source["match"]:="anything_match_case_sensetive"
+<pre class="src src-c">        my_source[<span style="color: #ffa07a;">"match"</span>]:=<span style="color: #ffa07a;">"anything_match"</span>
+; <span style="color: #8DA6CE;">or</span> 
+        <span style="color: #40E0D0;">my_source</span>[<span style="color: #ffa07a;">"match"</span>]:=<span style="color: #ffa07a;">"anything_match_case_sensetive"</span>
 </pre>
 </div>
 <p>
@@ -1092,9 +1092,9 @@ and these tow function is defined in anything.ahk<br  />
 <div class="org-src-container">
 
 <pre class="src src-c">;@param: candidate is current candidate passed to this function
-;@param: pattern, is what you have typed in the textfield
-anything_match_case_sensetive(candidate,pattern){}
-anything_match(candidate,pattern){}
+;@param: pattern, is what you have typed in the <span style="color: #8DA6CE;">textfield</span>
+<span style="color: #FF6400;">anything_match_case_sensetive</span>(candidate,pattern){}
+<span style="color: #FF6400;">anything_match</span>(candidate,pattern){}
 </pre>
 </div>
 </div>
@@ -1108,7 +1108,7 @@ if it has value  for example:<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c">my_source["anything-execute-action-at-once-if-one"]:="yes"
+<pre class="src src-c">my_source[<span style="color: #ffa07a;">"anything-execute-action-at-once-if-one"</span>]:=<span style="color: #ffa07a;">"yes"</span>
 </pre>
 </div>
 <p>
@@ -1127,7 +1127,7 @@ for example<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c">my_source["anything-execute-action-at-once-if-one"]:="yes"
+<pre class="src src-c">my_source[<span style="color: #ffa07a;">"anything-execute-action-at-once-if-one"</span>]:=<span style="color: #ffa07a;">"yes"</span>
 </pre>
 </div>
 <p>
@@ -1146,8 +1146,8 @@ the value of it is a function accept two parameters<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c">funname(candidate1,candidate2){}
-my_source["anything-action-when-2-candidates"] :="funname"
+<pre class="src src-c"><span style="color: #FF6400;">funname</span>(candidate1,candidate2){}
+my_source[<span style="color: #ffa07a;">"anything-action-when-2-candidates"</span>] :=<span style="color: #ffa07a;">"funname"</span>
 </pre>
 </div>
 
@@ -1178,7 +1178,7 @@ anything_multiple_sources(sources) with other anything-source<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c">sources := Array()
+<pre class="src src-c"><span style="color: #D8FA3C;">sources</span> := Array()
 sources.Insert(my_source)
 sources.Insert(other_source)
 anything_multiple_sources(sources)
@@ -1190,9 +1190,9 @@ anything_with_properties(anything-source,anything-properties)<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c">my_anything_properties:=Object()
-my_anything_properties["win_width"]:= 900
-my_anything_properties["win_height"]:= 180
+<pre class="src src-c"><span style="color: #D8FA3C;">my_anything_properties</span>:=Object()
+my_anything_properties[<span style="color: #ffa07a;">"win_width"</span>]:= 900
+my_anything_properties[<span style="color: #ffa07a;">"win_height"</span>]:= 180
 anything_with_properties(my_source,my_anything_properties)
 </pre>
 </div></li>
@@ -1201,9 +1201,9 @@ anything_multiple_sources_with_properties(anything-sources,anything-properties)<
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c">my_anything_properties:=Object()
-my_anything_properties["win_width"]:= 900
-my_anything_properties["win_height"]:= 180
+<pre class="src src-c"><span style="color: #D8FA3C;">my_anything_properties</span>:=Object()
+my_anything_properties[<span style="color: #ffa07a;">"win_width"</span>]:= 900
+my_anything_properties[<span style="color: #ffa07a;">"win_height"</span>]:= 180
 
 sources:=Array()
 sources.insert(my_source)
@@ -1366,12 +1366,12 @@ you can do it like this:<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c">your_fun(){
-  global 
-  old_value_of_quit_when_lose_focus=anything_properties["quit_when_lose_focus"] 
-  anything_set_property_4_quit_when_lose_focus("no")
-  ;write  your code here ...
-  anything_set_property_4_quit_when_lose_focus(old_value_of_quit_when_lose_focus=anything_properties)
+<pre class="src src-c"><span style="color: #FF6400;">your_fun</span>(){
+  <span style="color: #8DA6CE;">global</span> 
+  <span style="color: #40E0D0;">old_value_of_quit_when_lose_focus</span>=anything_properties[<span style="color: #ffa07a;">"quit_when_lose_focus"</span>] 
+  anything_set_property_4_quit_when_lose_focus(<span style="color: #ffa07a;">"no"</span>)
+  ;write  your code <span style="color: #8DA6CE;">here</span> ...
+  <span style="color: #FF6400;">anything_set_property_4_quit_when_lose_focus</span>(old_value_of_quit_when_lose_focus=anything_properties)
  }
 </pre>
 </div>

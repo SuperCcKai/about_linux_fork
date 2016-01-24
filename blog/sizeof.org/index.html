@@ -33,19 +33,19 @@
 <h1>sizeof.org</h1>
 <div class="org-src-container">
 
-<pre class="src src-c">#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
-#include &lt;string.h&gt;
+<pre class="src src-c"><span style="color: #7fffd4;">#include</span> <span style="color: #ffa07a;">&lt;stdio.h&gt;</span>
+<span style="color: #7fffd4;">#include</span> <span style="color: #ffa07a;">&lt;stdlib.h&gt;</span>
+<span style="color: #7fffd4;">#include</span> <span style="color: #ffa07a;">&lt;string.h&gt;</span>
 
-int main(int argc, char *argv[]){
-  char  array[]="hello";
-  char * str=array;
-  void *p = malloc(100);
-  printf("%lu\n",sizeof("hello")); /* =6  字符数组的大小， 包括后面附的字符结束符0 */
-  printf("%lu\n",sizeof(array));   /* =6 */
-  printf("%lu\n",sizeof(str)); /* =8 on x64, 4 on x86 指针的大小 ，跟char类型无关*/
-  printf("%lu\n",sizeof(p));   /* =8 on x64, 4 on x86 指针的大小 */
-  return 0;
+<span style="color: #8DA6CE;">int</span> <span style="color: #FF6400;">main</span>(<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">argc</span>, <span style="color: #8DA6CE;">char</span> *<span style="color: #40E0D0;">argv</span>[]){
+  <span style="color: #8DA6CE;">char</span>  <span style="color: #40E0D0;">array</span>[]=<span style="color: #ffa07a;">"hello"</span>;
+  <span style="color: #8DA6CE;">char</span> * <span style="color: #40E0D0;">str</span>=array;
+  <span style="color: #8DA6CE;">void</span> *<span style="color: #40E0D0;">p</span> = malloc(100);
+  printf(<span style="color: #ffa07a;">"%lu\n"</span>,<span style="color: #FBDE2D;">sizeof</span>(<span style="color: #ffa07a;">"hello"</span>)); <span style="color: #AEAEAE;">/* </span><span style="color: #AEAEAE;">=6  &#23383;&#31526;&#25968;&#32452;&#30340;&#22823;&#23567;&#65292; &#21253;&#25324;&#21518;&#38754;&#38468;&#30340;&#23383;&#31526;&#32467;&#26463;&#31526;0 </span><span style="color: #AEAEAE;">*/</span>
+  printf(<span style="color: #ffa07a;">"%lu\n"</span>,<span style="color: #FBDE2D;">sizeof</span>(array));   <span style="color: #AEAEAE;">/* </span><span style="color: #AEAEAE;">=6 </span><span style="color: #AEAEAE;">*/</span>
+  printf(<span style="color: #ffa07a;">"%lu\n"</span>,<span style="color: #FBDE2D;">sizeof</span>(str)); <span style="color: #AEAEAE;">/* </span><span style="color: #AEAEAE;">=8 on x64, 4 on x86 &#25351;&#38024;&#30340;&#22823;&#23567; &#65292;&#36319;char&#31867;&#22411;&#26080;&#20851;</span><span style="color: #AEAEAE;">*/</span>
+  printf(<span style="color: #ffa07a;">"%lu\n"</span>,<span style="color: #FBDE2D;">sizeof</span>(p));   <span style="color: #AEAEAE;">/* </span><span style="color: #AEAEAE;">=8 on x64, 4 on x86 &#25351;&#38024;&#30340;&#22823;&#23567; </span><span style="color: #AEAEAE;">*/</span>
+  <span style="color: #FBDE2D;">return</span> 0;
 }
 </pre>
 </div>

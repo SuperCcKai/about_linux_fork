@@ -60,13 +60,13 @@
 <div class="outline-text-2" id="text-orgheadline1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(global-set-key ... 'my-funtion)
-比如
-(global-set-key (kbd "C-f") 'forward-char)
-(global-set-key (kbd "C-x C-f") 'find-file)
-或者
-(define-key global-map (kbd "C-f") 'forward-char)
-(define-key global-map (kbd "C-x C-f") ''find-file)
+<pre class="src src-emacs-lisp">(<span style="color: #FF6400;">global-set-key</span> ... 'my-funtion)
+&#27604;&#22914;
+(<span style="color: #FF6400;">global-set-key</span> (kbd <span style="color: #ffa07a;">"C-f"</span>) 'forward-char)
+(<span style="color: #FF6400;">global-set-key</span> (kbd <span style="color: #ffa07a;">"C-x C-f"</span>) 'find-file)
+&#25110;&#32773;
+(<span style="color: #FF6400;">define-key</span> global-map (kbd <span style="color: #ffa07a;">"C-f"</span>) 'forward-char)
+(<span style="color: #FF6400;">define-key</span> global-map (kbd <span style="color: #ffa07a;">"C-x C-f"</span>) ''find-file)
 </pre>
 </div>
 <p>
@@ -88,7 +88,7 @@ M-x:global-set-key RET 然后 按下 Alt-Return 按键 ，然后输入forward-ch
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(global-set-key [27 13] (quote forward-char))
+<pre class="src src-emacs-lisp">(<span style="color: #FF6400;">global-set-key</span> [27 13] (<span style="color: #FBDE2D;">quote</span> forward-char))
 </pre>
 </div>
 </div>
@@ -104,7 +104,7 @@ save-buffer 到 "C-c C-c C-b a"。上面的办法就不灵了。我们必须 使
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(global-set-key (kbd "C-c C-c C-b a") 'save-buffer)
+<pre class="src src-emacs-lisp">(<span style="color: #FF6400;">global-set-key</span> (kbd <span style="color: #ffa07a;">"C-c C-c C-b a"</span>) 'save-buffer)
 </pre>
 </div>
 <p>
@@ -123,7 +123,7 @@ save-buffer 到 "C-c C-c C-b a"。上面的办法就不灵了。我们必须 使
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(global-set-key (kbd "C-z C-c C-w b") 'find-file)
+<pre class="src src-emacs-lisp">(<span style="color: #FF6400;">global-set-key</span> (kbd <span style="color: #ffa07a;">"C-z C-c C-w b"</span>) 'find-file)
 </pre>
 </div>
 <p>
@@ -136,8 +136,8 @@ save-buffer 到 "C-c C-c C-b a"。上面的办法就不灵了。我们必须 使
 <div class="org-src-container">
 
 <pre class="src src-emacs-lisp">(define-prefix-command 'ctl-z-map)
-(global-set-key (kbd "C-z") 'ctl-z-map)
-(global-set-key (kbd "C-z C-c C-w b") 'find-file)
+(<span style="color: #FF6400;">global-set-key</span> (kbd <span style="color: #ffa07a;">"C-z"</span>) 'ctl-z-map)
+(<span style="color: #FF6400;">global-set-key</span> (kbd <span style="color: #ffa07a;">"C-z C-c C-w b"</span>) 'find-file)
 </pre>
 </div>
 </div>
@@ -170,13 +170,13 @@ F1 f 然后输入forward-char 回车<br  />
 <div class="outline-text-2" id="text-orgheadline6">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(require 'dired)
-;;比如在dired mode 下  直接按u  就回到上层目录dired-up-directory
-(define-key dired-mode-map "u" 'dired-up-directory)
-;; 或者
-(defun my-dired-mode-hook()
-  (local-set-key "u" 'dired-up-directory))
-(add-hook 'dired-mode-hook 'my-dired-mode-hook)
+<pre class="src src-emacs-lisp">(<span style="color: #FBDE2D;">require</span> '<span style="color: #D8FA3C;">dired</span>)
+<span style="color: #AEAEAE;">;;</span><span style="color: #AEAEAE;">&#27604;&#22914;&#22312;dired mode &#19979;  &#30452;&#25509;&#25353;u  &#23601;&#22238;&#21040;&#19978;&#23618;&#30446;&#24405;dired-up-directory</span>
+(<span style="color: #FF6400;">define-key</span> dired-mode-map <span style="color: #ffa07a;">"u"</span> 'dired-up-directory)
+<span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">&#25110;&#32773;</span>
+(<span style="color: #FBDE2D;">defun</span> <span style="color: #FF6400;">my-dired-mode-hook</span>()
+  (local-set-key <span style="color: #ffa07a;">"u"</span> 'dired-up-directory))
+(<span style="color: #FF6400;">add-hook</span> 'dired-mode-hook 'my-dired-mode-hook)
 </pre>
 </div>
 </div>
@@ -491,8 +491,8 @@ point 之间的区域。<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"> C-@ = C-S-2 不好按，所以我设置成 C-2 好按一下，
-(global-set-key  (kbd "C-2") 'set-mark-command)
+<pre class="src src-emacs-lisp"> C-@ = C-S-2 &#19981;&#22909;&#25353;&#65292;&#25152;&#20197;&#25105;&#35774;&#32622;&#25104; C-2 &#22909;&#25353;&#19968;&#19979;&#65292;
+(<span style="color: #FF6400;">global-set-key</span>  (kbd <span style="color: #ffa07a;">"C-2"</span>) 'set-mark-command)
 </pre>
 </div>
 </div>
@@ -508,19 +508,19 @@ point 之间的区域。<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(autoload 'server-edit "server")
-;;;###autoload
-(defun kill-buffer-or-server-edit()
-  (interactive)
-  (message "kill buffer %s" (buffer-name))
-  (when (equal (buffer-name) "*scratch*")
+<pre class="src src-emacs-lisp">(<span style="color: #FF6400;">autoload</span> 'server-edit <span style="color: #ffa07a;">"server"</span>)
+<span style="color: #AEAEAE;">;;;</span><span style="color: #AEAEAE;">###</span><span style="color: #ffc0cb;">autoload</span>
+(<span style="color: #FBDE2D;">defun</span> kill-buffer-<span style="color: #FBDE2D;">or</span>-server-edit()
+  (<span style="color: #FBDE2D;">interactive</span>)
+  (message <span style="color: #ffa07a;">"kill buffer %s"</span> (buffer-name))
+  (<span style="color: #FBDE2D;">when</span> (<span style="color: #FBDE2D;">equal</span> (buffer-name) <span style="color: #ffa07a;">"*scratch*"</span>)
     (copy-region-as-kill (point-min)(point-max)))
-  (if (and (featurep 'server) server-buffer-clients)
+  (<span style="color: #FBDE2D;">if</span> (<span style="color: #FBDE2D;">and</span> (<span style="color: #FBDE2D;">featurep</span> '<span style="color: #D8FA3C;">server</span>) server-buffer-clients)
       (server-edit)
     (kill-this-buffer)
     )
   )
-(global-set-key (kbd "C-x k") 'kill-buffer-or-server-edit)
+(<span style="color: #FF6400;">global-set-key</span> (kbd <span style="color: #ffa07a;">"C-x k"</span>) 'kill-buffer-<span style="color: #FBDE2D;">or</span>-server-edit)
 </pre>
 </div>
 </div>
@@ -535,17 +535,17 @@ point 之间的区域。<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">;;;###autoload
-(defun smart-beginning-of-line ()
-  "Move point to first non-whitespace character or beginning-of-line.
-Move point to beginning-of-line ,if point was already at that position,
-  move point to first non-whitespace character. "
-  (interactive)
-  (let ((oldpos (point)))
+<pre class="src src-emacs-lisp"><span style="color: #AEAEAE;">;;;</span><span style="color: #AEAEAE;">###</span><span style="color: #ffc0cb;">autoload</span>
+(<span style="color: #FBDE2D;">defun</span> <span style="color: #FF6400;">smart-beginning-of-line</span> ()
+  <span style="color: #ffa07a;">"Move point to first non-whitespace character or beginning-of-line.</span>
+<span style="color: #ffa07a;">Move point to beginning-of-line ,if point was already at that position,</span>
+<span style="color: #ffa07a;">  move point to first non-whitespace character. "</span>
+  (<span style="color: #FBDE2D;">interactive</span>)
+  (<span style="color: #FBDE2D;">let</span> ((oldpos (point)))
     (beginning-of-line)
-    (and (= oldpos (point))
+    (<span style="color: #FBDE2D;">and</span> (= oldpos (point))
          (back-to-indentation) )))
-(global-set-key (kbd "C-a") 'smart-beginning-of-line)
+(<span style="color: #FF6400;">global-set-key</span> (kbd <span style="color: #ffa07a;">"C-a"</span>) 'smart-beginning-of-line)
 </pre>
 </div>
 </div>
@@ -558,19 +558,19 @@ C-e对于end-of-line ,也想要同样的效果。<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">;;;###autoload
-(defun smart-end-of-line()
-  "Move point to first non-whitespace character or end-of-line.
-Move point to end-of-line ,if point was already at that position,
-  move point to first non-whitespace character."
-  (interactive)
-  (let ((oldpos (point)))
+<pre class="src src-emacs-lisp"><span style="color: #AEAEAE;">;;;</span><span style="color: #AEAEAE;">###</span><span style="color: #ffc0cb;">autoload</span>
+(<span style="color: #FBDE2D;">defun</span> <span style="color: #FF6400;">smart-end-of-line</span>()
+  <span style="color: #ffa07a;">"Move point to first non-whitespace character or end-of-line.</span>
+<span style="color: #ffa07a;">Move point to end-of-line ,if point was already at that position,</span>
+<span style="color: #ffa07a;">  move point to first non-whitespace character."</span>
+  (<span style="color: #FBDE2D;">interactive</span>)
+  (<span style="color: #FBDE2D;">let</span> ((oldpos (point)))
     (beginning-of-line)
-    (when (re-search-forward "[ \t]*$" (point-at-eol) t)
+    (<span style="color: #FBDE2D;">when</span> (re-search-forward <span style="color: #ffa07a;">"[ \t]*$"</span> (point-at-eol) <span style="color: #D8FA3C;">t</span>)
       (goto-char (match-beginning 0)))
-    (when (= oldpos (point))
+    (<span style="color: #FBDE2D;">when</span> (= oldpos (point))
       (end-of-line))))
-(global-set-key (kbd "C-e") 'smart-end-of-line)
+(<span style="color: #FF6400;">global-set-key</span> (kbd <span style="color: #ffa07a;">"C-e"</span>) 'smart-end-of-line)
 </pre>
 </div>
 </div>

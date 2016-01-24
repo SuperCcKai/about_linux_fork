@@ -61,7 +61,7 @@ NodeDesc 表示此种Application可以在哪些节点上启动，优先级按Nod
 </p>
 <div class="org-src-container">
 
-<pre class="src src-erlang">{distributed, [{game_log_server, 5000, ['emacs@192.168.0.44', {'c@192.168.0.44','c2@192.168.0.44','c3@192.168.0.44' }]}]}
+<pre class="src src-erlang">{distributed, [{game_log_server, 5000, [<span style="color: #ffa07a;">'emacs@192.168.0.44'</span>, {<span style="color: #ffa07a;">'c@192.168.0.44'</span>,<span style="color: #ffa07a;">'c2@192.168.0.44'</span>,<span style="color: #ffa07a;">'c3@192.168.0.44'</span> }]}]}
 </pre>
 </div>
 <p>
@@ -108,8 +108,8 @@ Module:start({takeover, Node}, StartArgs)<br  />
 <div class="org-src-container">
 
 <pre class="src src-erlang">[{kernel,
-  [{distributed, [{game_log_server, 5000, ['emacs@192.168.0.44', {'c@192.168.0.44','c2@192.168.0.44' }]}]},
-   {sync_nodes_mandatory, ['c@192.168.0.44','c2@192.168.0.44' ]}, % mandatory托管
+  [{distributed, [{game_log_server, 5000, [<span style="color: #ffa07a;">'emacs@192.168.0.44'</span>, {<span style="color: #ffa07a;">'c@192.168.0.44'</span>,<span style="color: #ffa07a;">'c2@192.168.0.44'</span> }]}]},
+   {sync_nodes_mandatory, [<span style="color: #ffa07a;">'c@192.168.0.44'</span>,<span style="color: #ffa07a;">'c2@192.168.0.44'</span> ]}, <span style="color: #AEAEAE;">% </span><span style="color: #AEAEAE;">mandatory&#25176;&#31649;</span>
    {sync_nodes_timeout, 5000}
   ]
  }
@@ -120,14 +120,14 @@ Module:start({takeover, Node}, StartArgs)<br  />
 <li><a id="orgheadline3"></a>c.config<br  /><div class="outline-text-4" id="text-orgheadline3">
 <div class="org-src-container">
 
-<pre class="src src-erlang">%% http://www.erlang.org/doc/design_principles/distributed_applications.html
-%% erl -name emacs@l92.168.0.44 -config master.config
-%% erl -name c@l92.168.0.44 -config c.config
-%% erl -name c2@l92.168.0.44 -config c2.config
-%% erl -name c3@l92.168.0.44 -config c3.config
+<pre class="src src-erlang"><span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">http://www.erlang.org/doc/design_principles/distributed_applications.html</span>
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">erl -name emacs@l92.168.0.44 -config master.config</span>
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">erl -name c@l92.168.0.44 -config c.config</span>
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">erl -name c2@l92.168.0.44 -config c2.config</span>
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">erl -name c3@l92.168.0.44 -config c3.config</span>
 [{kernel,
-  [{distributed, [{game_log_server, 5000, ['emacs@192.168.0.44', {'c@192.168.0.44','c2@192.168.0.44' }]}]},
-   {sync_nodes_mandatory, ['emacs@192.168.0.44','c2@192.168.0.44' ]},
+  [{distributed, [{game_log_server, 5000, [<span style="color: #ffa07a;">'emacs@192.168.0.44'</span>, {<span style="color: #ffa07a;">'c@192.168.0.44'</span>,<span style="color: #ffa07a;">'c2@192.168.0.44'</span> }]}]},
+   {sync_nodes_mandatory, [<span style="color: #ffa07a;">'emacs@192.168.0.44'</span>,<span style="color: #ffa07a;">'c2@192.168.0.44'</span> ]},
    {sync_nodes_timeout, 5000}
   ]
  }
@@ -137,14 +137,14 @@ Module:start({takeover, Node}, StartArgs)<br  />
 
 <div class="org-src-container">
 
-<pre class="src src-erlang">%% http://www.erlang.org/doc/design_principles/distributed_applications.html
-%% erl -name emacs@l92.168.0.44 -config master.config
-%% erl -name c@l92.168.0.44 -config c.config
-%% erl -name c2@l92.168.0.44 -config c2.config
-%% erl -name c3@l92.168.0.44 -config c3.config
+<pre class="src src-erlang"><span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">http://www.erlang.org/doc/design_principles/distributed_applications.html</span>
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">erl -name emacs@l92.168.0.44 -config master.config</span>
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">erl -name c@l92.168.0.44 -config c.config</span>
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">erl -name c2@l92.168.0.44 -config c2.config</span>
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">erl -name c3@l92.168.0.44 -config c3.config</span>
 [{kernel,
-  [{distributed, [{game_log_server, 5000, ['emacs@192.168.0.44', {'c@192.168.0.44','c2@192.168.0.44' }]}]},
-   {sync_nodes_mandatory, ['c@192.168.0.44','emacs@192.168.0.44' ]},
+  [{distributed, [{game_log_server, 5000, [<span style="color: #ffa07a;">'emacs@192.168.0.44'</span>, {<span style="color: #ffa07a;">'c@192.168.0.44'</span>,<span style="color: #ffa07a;">'c2@192.168.0.44'</span> }]}]},
+   {sync_nodes_mandatory, [<span style="color: #ffa07a;">'c@192.168.0.44'</span>,<span style="color: #ffa07a;">'emacs@192.168.0.44'</span> ]},
    {sync_nodes_timeout, 5000}
   ]
  }

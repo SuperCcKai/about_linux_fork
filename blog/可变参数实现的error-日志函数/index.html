@@ -33,27 +33,27 @@
 <h1>可变参数实现的error 日志函数</h1>
 <div class="org-src-container">
 
-<pre class="src src-c">//file name : error.c
-//created at: 2011年10月22日 星期六 22时42分38秒
-//author:  纪秀峰
+<pre class="src src-c"><span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">file name : error.c</span>
+<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">created at: 2011&#24180;10&#26376;22&#26085; &#26143;&#26399;&#20845; 22&#26102;42&#20998;38&#31186;</span>
+<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">author:  &#32426;&#31168;&#23792;</span>
 
-#include &lt;stdio.h&gt;
-#include &lt;stdarg.h&gt;
+<span style="color: #7fffd4;">#include</span> <span style="color: #ffa07a;">&lt;stdio.h&gt;</span>
+<span style="color: #7fffd4;">#include</span> <span style="color: #ffa07a;">&lt;stdarg.h&gt;</span>
 
-int error(const char *format,...){
-  va_list arg;
+<span style="color: #8DA6CE;">int</span> <span style="color: #FF6400;">error</span>(<span style="color: #FBDE2D;">const</span> <span style="color: #8DA6CE;">char</span> *<span style="color: #40E0D0;">format</span>,...){
+  <span style="color: #8DA6CE;">va_list</span> <span style="color: #40E0D0;">arg</span>;
   va_start(arg,format);
-  fprintf(stderr,"Error:");
-  vfprintf(stderr,format,arg);  /* 注意这里用的是vfprintf ,而不是printf */
-  fprintf(stderr,"\n");
+  fprintf(stderr,<span style="color: #ffa07a;">"Error:"</span>);
+  vfprintf(stderr,format,arg);  <span style="color: #AEAEAE;">/* </span><span style="color: #AEAEAE;">&#27880;&#24847;&#36825;&#37324;&#29992;&#30340;&#26159;vfprintf ,&#32780;&#19981;&#26159;printf </span><span style="color: #AEAEAE;">*/</span>
+  fprintf(stderr,<span style="color: #ffa07a;">"\n"</span>);
 
   va_end(arg);
-  return 0;
+  <span style="color: #FBDE2D;">return</span> 0;
 }
-int main(int argc, char *argv[]){
-    error("[%s]:[%s]this is a error log message","2011","10");
-    error("[%s]:[%s]this is a error log message","2011","10");
-  return 0;
+<span style="color: #8DA6CE;">int</span> <span style="color: #FF6400;">main</span>(<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">argc</span>, <span style="color: #8DA6CE;">char</span> *<span style="color: #40E0D0;">argv</span>[]){
+    error(<span style="color: #ffa07a;">"[%s]:[%s]this is a error log message"</span>,<span style="color: #ffa07a;">"2011"</span>,<span style="color: #ffa07a;">"10"</span>);
+    error(<span style="color: #ffa07a;">"[%s]:[%s]this is a error log message"</span>,<span style="color: #ffa07a;">"2011"</span>,<span style="color: #ffa07a;">"10"</span>);
+  <span style="color: #FBDE2D;">return</span> 0;
 }
 </pre>
 </div>

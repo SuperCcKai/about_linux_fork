@@ -61,10 +61,10 @@ erlang 对于二进制的数据处理提供了非常强大的语法，而一般�
 <div class="outline-text-2" id="text-orgheadline1">
 <div class="org-src-container">
 
-<pre class="src src-sh">1 byte = 8 bit (1字节 === 8位)
-1 int =4 byte = 32 bit(其他语言中 一般情况下int 类型为4字节，32位)
-2^8 =256 (2 的八次方是256,)
-似乎erlang 不区分int float ,
+<pre class="src src-sh">1 <span style="color: #40E0D0;">byte</span> = 8 bit (<span style="color: #40E0D0;">1&#23383;&#33410;</span> === 8&#20301;)
+1 <span style="color: #40E0D0;">int</span> =4 <span style="color: #40E0D0;">byte</span> = 32 bit(&#20854;&#20182;&#35821;&#35328;&#20013; &#19968;&#33324;&#24773;&#20917;&#19979;int &#31867;&#22411;&#20026;4&#23383;&#33410;&#65292;32&#20301;)
+2^<span style="color: #40E0D0;">8</span> =256 (2 &#30340;&#20843;&#27425;&#26041;&#26159;256,)
+&#20284;&#20046;erlang &#19981;&#21306;&#20998;int float ,
 </pre>
 </div>
 
@@ -216,15 +216,15 @@ erlang 对于二进制的数据处理提供了非常强大的语法，而一般�
 </p>
 <div class="org-src-container">
 
-<pre class="src src-erlang">(emacs@jf.org)77&gt; A = &lt;&lt;12&gt;&gt;.
-&lt;&lt;"\f"&gt;&gt;
-(emacs@jf.org)78&gt; B = &lt;&lt;23&gt;&gt;.
+<pre class="src src-erlang">(emacs@jf.org)77&gt; <span style="color: #40E0D0;">A</span> = &lt;&lt;12&gt;&gt;.
+&lt;&lt;<span style="color: #ffa07a;">"\f"</span>&gt;&gt;
+(emacs@jf.org)78&gt; <span style="color: #40E0D0;">B</span> = &lt;&lt;23&gt;&gt;.
 &lt;&lt;23&gt;&gt;
-(emacs@jf.org)79&gt; C = &lt;&lt;257&gt;&gt;. % 大于256
+(emacs@jf.org)79&gt; <span style="color: #40E0D0;">C</span> = &lt;&lt;257&gt;&gt;. <span style="color: #AEAEAE;">% </span><span style="color: #AEAEAE;">&#22823;&#20110;256</span>
 &lt;&lt;1&gt;&gt;
-(emacs@jf.org)80&gt; bit_size(A).
+(emacs@jf.org)80&gt; <span style="color: #F8F8F8;">bit_size</span>(<span style="color: #40E0D0;">A</span>).
 8
-(emacs@jf.org)81&gt; bit_size(C).
+(emacs@jf.org)81&gt; <span style="color: #F8F8F8;">bit_size</span>(<span style="color: #40E0D0;">C</span>).
 8
 (emacs@jf.org)82&gt;
 </pre>
@@ -265,13 +265,13 @@ erlang 对于二进制的数据处理提供了非常强大的语法，而一般�
 
 <div class="org-src-container">
 
-<pre class="src src-erlang">(emacs@jf.org)63&gt; B= &lt;&lt;1,2,3,4&gt;&gt;. %B是二进制数据，32bit
+<pre class="src src-erlang">(emacs@jf.org)63&gt; <span style="color: #40E0D0;">B</span>= &lt;&lt;1,2,3,4&gt;&gt;. <span style="color: #AEAEAE;">%</span><span style="color: #AEAEAE;">B&#26159;&#20108;&#36827;&#21046;&#25968;&#25454;&#65292;32bit</span>
 &lt;&lt;1,2,3,4&gt;&gt;
-(emacs@jf.org)64&gt; &lt;&lt;C:32&gt;&gt; = B.  %给整数C赋值
+(emacs@jf.org)64&gt; &lt;&lt;<span style="color: #40E0D0;">C</span>:32&gt;&gt; = <span style="color: #40E0D0;">B</span>.  <span style="color: #AEAEAE;">%</span><span style="color: #AEAEAE;">&#32473;&#25972;&#25968;C&#36171;&#20540;</span>
 &lt;&lt;1,2,3,4&gt;&gt;
-(emacs@jf.org)65&gt; C.
+(emacs@jf.org)65&gt; <span style="color: #40E0D0;">C</span>.
 16909060
-(emacs@jf.org)66&gt;F = &lt;&lt;C:32&gt;&gt;.    % int --&gt;binary ,F是二进制
+(emacs@jf.org)66&gt;<span style="color: #40E0D0;">F</span> = &lt;&lt;<span style="color: #40E0D0;">C</span>:32&gt;&gt;.    <span style="color: #AEAEAE;">% </span><span style="color: #AEAEAE;">int --&gt;binary ,F&#26159;&#20108;&#36827;&#21046;</span>
 &lt;&lt;1,2,3,4&gt;&gt;
 </pre>
 </div>
@@ -327,23 +327,23 @@ erlang 对于二进制的数据处理提供了非常强大的语法，而一般�
 <div class="outline-text-3" id="text-orgheadline5">
 <div class="org-src-container">
 
-<pre class="src src-erlang">(emacs@jf.org)110&gt; A = &lt;&lt;"a"&gt;&gt;. % 等效于 A = &lt;&lt;97&gt;&gt;.
-&lt;&lt;"a"&gt;&gt;
-(emacs@jf.org)111&gt; A. % A是二进制数据
-&lt;&lt;"a"&gt;&gt;
-(emacs@jf.org)112&gt; &lt;&lt;B:8&gt;&gt; = A.
-&lt;&lt;"a"&gt;&gt;
-(emacs@jf.org)113&gt; B. % B是整数，8bit
+<pre class="src src-erlang">(emacs@jf.org)110&gt; <span style="color: #40E0D0;">A</span> = &lt;&lt;<span style="color: #ffa07a;">"a"</span>&gt;&gt;. <span style="color: #AEAEAE;">% </span><span style="color: #AEAEAE;">&#31561;&#25928;&#20110; A = &lt;&lt;97&gt;&gt;.</span>
+&lt;&lt;<span style="color: #ffa07a;">"a"</span>&gt;&gt;
+(emacs@jf.org)111&gt; <span style="color: #40E0D0;">A</span>. <span style="color: #AEAEAE;">% </span><span style="color: #AEAEAE;">A&#26159;&#20108;&#36827;&#21046;&#25968;&#25454;</span>
+&lt;&lt;<span style="color: #ffa07a;">"a"</span>&gt;&gt;
+(emacs@jf.org)112&gt; &lt;&lt;<span style="color: #40E0D0;">B</span>:8&gt;&gt; = <span style="color: #40E0D0;">A</span>.
+&lt;&lt;<span style="color: #ffa07a;">"a"</span>&gt;&gt;
+(emacs@jf.org)113&gt; <span style="color: #40E0D0;">B</span>. <span style="color: #AEAEAE;">% </span><span style="color: #AEAEAE;">B&#26159;&#25972;&#25968;&#65292;8bit</span>
 97
-(emacs@jf.org)114&gt; bit_size(A).
+(emacs@jf.org)114&gt; <span style="color: #F8F8F8;">bit_size</span>(<span style="color: #40E0D0;">A</span>).
 8
-(emacs@jf.org)115&gt; size(A).
+(emacs@jf.org)115&gt; <span style="color: #F8F8F8;">size</span>(<span style="color: #40E0D0;">A</span>).
 1
-(emacs@jf.org)116&gt; E = &lt;&lt;"ab"&gt;&gt;. %等效于 E = &lt;&lt;97,98&gt;&gt;.
-&lt;&lt;"ab"&gt;&gt;
-  % 另外字符还可以这样表示   $a,$b,$c
- (emacs@jf.org)132&gt;  C = &lt;&lt;$a&gt;&gt;.
-   &lt;&lt;"a"&gt;&gt;
+(emacs@jf.org)116&gt; <span style="color: #40E0D0;">E</span> = &lt;&lt;<span style="color: #ffa07a;">"ab"</span>&gt;&gt;. <span style="color: #AEAEAE;">%</span><span style="color: #AEAEAE;">&#31561;&#25928;&#20110; E = &lt;&lt;97,98&gt;&gt;.</span>
+&lt;&lt;<span style="color: #ffa07a;">"ab"</span>&gt;&gt;
+  <span style="color: #AEAEAE;">% </span><span style="color: #AEAEAE;">&#21478;&#22806;&#23383;&#31526;&#36824;&#21487;&#20197;&#36825;&#26679;&#34920;&#31034;   $a,$b,$c</span>
+ (emacs@jf.org)132&gt;  <span style="color: #40E0D0;">C</span> = &lt;&lt;<span style="color: #D8FA3C;">$a</span>&gt;&gt;.
+   &lt;&lt;<span style="color: #ffa07a;">"a"</span>&gt;&gt;
 </pre>
 </div>
 </div>
@@ -353,13 +353,13 @@ erlang 对于二进制的数据处理提供了非常强大的语法，而一般�
 <div class="outline-text-3" id="text-orgheadline6">
 <div class="org-src-container">
 
-<pre class="src src-erlang">(emacs@jf.org)127&gt; A = &lt;&lt;1,2,3&gt;&gt;.
+<pre class="src src-erlang">(emacs@jf.org)127&gt; <span style="color: #40E0D0;">A</span> = &lt;&lt;1,2,3&gt;&gt;.
 &lt;&lt;1,2,3&gt;&gt;
-(emacs@jf.org)128&gt; bit_size(A).
+(emacs@jf.org)128&gt; <span style="color: #F8F8F8;">bit_size</span>(<span style="color: #40E0D0;">A</span>).
 24
-(emacs@jf.org)129&gt; B = &lt;&lt;1,2,3:16&gt;&gt;.
+(emacs@jf.org)129&gt; <span style="color: #40E0D0;">B</span> = &lt;&lt;1,2,3:16&gt;&gt;.
 &lt;&lt;1,2,0,3&gt;&gt;
-(emacs@jf.org)130&gt; bit_size(B).
+(emacs@jf.org)130&gt; <span style="color: #F8F8F8;">bit_size</span>(<span style="color: #40E0D0;">B</span>).
 32
 (emacs@jf.org)131&gt;
 </pre>
@@ -456,7 +456,7 @@ signed  | unsigned<br  />
 </table>
 <div class="org-src-container">
 
-<pre class="src src-erlang">(emacs@jf.org)1&gt; A = &lt;&lt;72:32&gt;&gt;. % big-endian
+<pre class="src src-erlang">(emacs@jf.org)1&gt; <span style="color: #40E0D0;">A</span> = &lt;&lt;72:32&gt;&gt;. <span style="color: #AEAEAE;">% </span><span style="color: #AEAEAE;">big-endian</span>
 &lt;&lt;0,0,0,72&gt;&gt;
 </pre>
 </div>
@@ -493,27 +493,27 @@ signed  | unsigned<br  />
 </table>
 <div class="org-src-container">
 
-<pre class="src src-erlang">10&gt; &lt;&lt;X1/unsigned&gt;&gt; =  &lt;&lt;-44&gt;&gt;.
-&lt;&lt;"Ô"&gt;&gt;
-11&gt; X1.
+<pre class="src src-erlang">10&gt; &lt;&lt;<span style="color: #40E0D0;">X1</span>/unsigned&gt;&gt; =  &lt;&lt;-44&gt;&gt;.
+&lt;&lt;<span style="color: #ffa07a;">"&#212;"</span>&gt;&gt;
+11&gt; <span style="color: #40E0D0;">X1</span>.
 212
-12&gt; &lt;&lt;X2/signed&gt;&gt; =  &lt;&lt;-44&gt;&gt;.
-&lt;&lt;"Ô"&gt;&gt;
-13&gt; X2.
+12&gt; &lt;&lt;<span style="color: #40E0D0;">X2</span>/signed&gt;&gt; =  &lt;&lt;-44&gt;&gt;.
+&lt;&lt;<span style="color: #ffa07a;">"&#212;"</span>&gt;&gt;
+13&gt; <span style="color: #40E0D0;">X2</span>.
 -44
-14&gt; &lt;&lt;X2/integer-signed-little&gt;&gt; =  &lt;&lt;-44&gt;&gt;.
-&lt;&lt;"Ô"&gt;&gt;
-15&gt; X2.
+14&gt; &lt;&lt;<span style="color: #40E0D0;">X2</span>/integer-signed-little&gt;&gt; =  &lt;&lt;-44&gt;&gt;.
+&lt;&lt;<span style="color: #ffa07a;">"&#212;"</span>&gt;&gt;
+15&gt; <span style="color: #40E0D0;">X2</span>.
 -44
-16&gt; &lt;&lt;N:8/unit:1&gt;&gt; = &lt;&lt;72&gt;&gt;.
-&lt;&lt;"H"&gt;&gt;
-17&gt; N.
+16&gt; &lt;&lt;<span style="color: #40E0D0;">N</span>:8/unit:1&gt;&gt; = &lt;&lt;72&gt;&gt;.
+&lt;&lt;<span style="color: #ffa07a;">"H"</span>&gt;&gt;
+17&gt; <span style="color: #40E0D0;">N</span>.
 72
-18&gt; &lt;&lt;N/integer&gt;&gt; = &lt;&lt;72&gt;&gt;.
-&lt;&lt;"H"&gt;&gt;
-19&gt; &lt;&lt;Y:4/little-unit:8&gt;&gt; = &lt;&lt;72,0,0,0&gt;&gt;.
+18&gt; &lt;&lt;<span style="color: #40E0D0;">N</span>/integer&gt;&gt; = &lt;&lt;72&gt;&gt;.
+&lt;&lt;<span style="color: #ffa07a;">"H"</span>&gt;&gt;
+19&gt; &lt;&lt;<span style="color: #40E0D0;">Y</span>:4/little-unit:8&gt;&gt; = &lt;&lt;72,0,0,0&gt;&gt;.
 &lt;&lt;72,0,0,0&gt;&gt;
-20&gt; Y.
+20&gt; <span style="color: #40E0D0;">Y</span>.
 72
 </pre>
 </div>
@@ -541,30 +541,30 @@ signed  | unsigned<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-erlang">-module(aaa).
--export([int32_2_binary/1,read_int32_from_binary/1]).
+<pre class="src src-erlang"><span style="color: #7fffd4;">-module</span>(aaa).
+<span style="color: #7fffd4;">-export</span>([<span style="color: #8DA6CE;">int32_2_binary/1</span>,<span style="color: #8DA6CE;">read_int32_from_binary/1</span>]).
 
 
-%%int按网络字节流 转成binary
-%%网络传输一般采用大端序big，也被称之为网络字节序，或网络序
-%%而erlang 默认就是big
-int32_2_binary(Int) when is_integer(Int)-&gt;
-    &lt;&lt;Int:32&gt;&gt; ;
-int32_2_binary(Bin) when is_binary(Bin) -&gt;                          %若本就Bin ,直接返回
-    Bin.
+<span style="color: #AEAEAE;">%%</span><span style="color: #AEAEAE;">int&#25353;&#32593;&#32476;&#23383;&#33410;&#27969; &#36716;&#25104;binary</span>
+<span style="color: #AEAEAE;">%%</span><span style="color: #AEAEAE;">&#32593;&#32476;&#20256;&#36755;&#19968;&#33324;&#37319;&#29992;&#22823;&#31471;&#24207;big&#65292;&#20063;&#34987;&#31216;&#20043;&#20026;&#32593;&#32476;&#23383;&#33410;&#24207;&#65292;&#25110;&#32593;&#32476;&#24207;</span>
+<span style="color: #AEAEAE;">%%</span><span style="color: #AEAEAE;">&#32780;erlang &#40664;&#35748;&#23601;&#26159;big</span>
+<span style="color: #FF6400;">int32_2_binary</span>(<span style="color: #40E0D0;">Int</span>) <span style="color: #FBDE2D;">when</span> <span style="color: #F8F8F8;">is_integer</span>(<span style="color: #40E0D0;">Int</span>)-&gt;
+    &lt;&lt;<span style="color: #40E0D0;">Int</span>:32&gt;&gt; ;
+<span style="color: #FF6400;">int32_2_binary</span>(<span style="color: #40E0D0;">Bin</span>) <span style="color: #FBDE2D;">when</span> <span style="color: #F8F8F8;">is_binary</span>(<span style="color: #40E0D0;">Bin</span>) -&gt;<span style="color: #FF6400;"> </span>                         <span style="color: #AEAEAE;">%</span><span style="color: #AEAEAE;">&#33509;&#26412;&#23601;Bin ,&#30452;&#25509;&#36820;&#22238;</span>
+    <span style="color: #40E0D0;">Bin</span>.
 
-%%默认binary 长度大于32
-read_int32_from_binary(Bin) when is_binary(Bin)-&gt;
-    &lt;&lt;Int:32,_/bits&gt;&gt; = Bin,
-    Int
+<span style="color: #AEAEAE;">%%</span><span style="color: #AEAEAE;">&#40664;&#35748;binary &#38271;&#24230;&#22823;&#20110;32</span>
+<span style="color: #FF6400;">read_int32_from_binary</span>(<span style="color: #40E0D0;">Bin</span>) <span style="color: #FBDE2D;">when</span> <span style="color: #F8F8F8;">is_binary</span>(<span style="color: #40E0D0;">Bin</span>)-&gt;
+    &lt;&lt;<span style="color: #40E0D0;">Int</span>:32,<span style="color: #40E0D0;">_</span>/bits&gt;&gt; = <span style="color: #40E0D0;">Bin</span>,
+    <span style="color: #40E0D0;">Int</span>
         ;
-read_int32_from_binary(Int) when is_integer(Int) -&gt;
-    Int.
-%% aaa:read_int32_from_binary(&lt;&lt;"abcdefghijk"&gt;&gt;).
-%% 1633837924
-%% 1100001 01100010 01100011 01100100
-%% 97      98       99          100
-%% a       b         c          d
+<span style="color: #FF6400;">read_int32_from_binary</span>(<span style="color: #40E0D0;">Int</span>) <span style="color: #FBDE2D;">when</span> <span style="color: #F8F8F8;">is_integer</span>(<span style="color: #40E0D0;">Int</span>) -&gt;
+    <span style="color: #40E0D0;">Int</span>.
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">aaa:read_int32_from_binary(&lt;&lt;"abcdefghijk"&gt;&gt;).</span>
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">1633837924</span>
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">1100001 01100010 01100011 01100100</span>
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">97      98       99          100</span>
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">a       b         c          d</span>
 </pre>
 </div>
 </div>

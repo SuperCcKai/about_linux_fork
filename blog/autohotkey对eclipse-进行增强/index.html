@@ -47,16 +47,16 @@
 <div class="org-src-container">
 
 <pre class="src src-c">SetKeyDelay 0
-;;Eclipse 中Ctrl+PageUP Ctrl+pagedown在打开的编辑器中切换
-;;但是它硬编辑到代码中了,没法进行配置,这里将Ctrl+alt+n 按下时等效于Ctrl+pageDown
-#IfWinActive ahk_class SWT_Window0
+;;<span style="color: #8DA6CE;">Eclipse</span> <span style="color: #40E0D0;">&#20013;Ctrl</span>+PageUP Ctrl+pagedown&#22312;&#25171;&#24320;&#30340;&#32534;&#36753;&#22120;&#20013;&#20999;&#25442;
+;;&#20294;&#26159;&#23427;&#30828;&#32534;&#36753;&#21040;&#20195;&#30721;&#20013;&#20102;,&#27809;&#27861;&#36827;&#34892;&#37197;&#32622;,&#36825;&#37324;&#23558;Ctrl+alt+n &#25353;&#19979;&#26102;&#31561;&#25928;&#20110;Ctrl+pageDown
+<span style="color: #7fffd4;">#IfWinActive</span> ahk_class SWT_Window0
 ^!n::Send ^{PgDn}
 ^!p::Send ^{PgUp}
-;;而此处Alt+n 相当于按下5次{Down
-;;     Alt+p 相当于按下5次Up
+;;&#32780;&#27492;&#22788;Alt+n &#30456;&#24403;&#20110;&#25353;&#19979;5&#27425;{Down
+;;     Alt+p &#30456;&#24403;&#20110;&#25353;&#19979;5&#27425;Up
 !n::Send {Down 4} 
 !p::Send {Up 4}
-#IfWinActive
+<span style="color: #7fffd4;">#IfWinActive</span>
 </pre>
 </div>
 <p>
@@ -114,8 +114,8 @@ a的映射为例：<br  />
 
 <pre class="src src-c">a::
 ControlFocus ,Edit1
-SendInput a
-return
+<span style="color: #8DA6CE;">SendInput</span> <span style="color: #40E0D0;">a</span>
+<span style="color: #FBDE2D;">return</span>
 </pre>
 </div>
 <p>
@@ -125,9 +125,9 @@ return
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c">#IfWinActive Open Resource
- 这里放以上代码
-#IfWinActive
+<pre class="src src-c"><span style="color: #7fffd4;">#IfWinActive</span> Open Resource
+ &#36825;&#37324;&#25918;&#20197;&#19978;&#20195;&#30721;
+<span style="color: #7fffd4;">#IfWinActive</span>
 </pre>
 </div>
 <p>
@@ -139,169 +139,169 @@ return
 <pre class="src src-c">; #NoTrayIcon
 ; #SingleInstance force   
 SetKeyDelay 0
-;;Eclipse 中Ctrl+PageUP Ctrl+pagedown在打开的编辑器中切换
-;;但是它硬编辑到代码中了,没法进行配置,这里将Ctrl+alt+n 按下时等效于Ctrl+pageDown
-#IfWinActive ahk_class SWT_Window0
+;;<span style="color: #8DA6CE;">Eclipse</span> <span style="color: #40E0D0;">&#20013;Ctrl</span>+PageUP Ctrl+pagedown&#22312;&#25171;&#24320;&#30340;&#32534;&#36753;&#22120;&#20013;&#20999;&#25442;
+;;&#20294;&#26159;&#23427;&#30828;&#32534;&#36753;&#21040;&#20195;&#30721;&#20013;&#20102;,&#27809;&#27861;&#36827;&#34892;&#37197;&#32622;,&#36825;&#37324;&#23558;Ctrl+alt+n &#25353;&#19979;&#26102;&#31561;&#25928;&#20110;Ctrl+pageDown
+<span style="color: #7fffd4;">#IfWinActive</span> ahk_class SWT_Window0
 ^!n::Send ^{PgDn}
 ^!p::Send ^{PgUp}
-;;而此处Alt+n 相当于按下5次{Down
-;;     Alt+p 相当于按下5次Up
+;;&#32780;&#27492;&#22788;Alt+n &#30456;&#24403;&#20110;&#25353;&#19979;5&#27425;{Down
+;;     Alt+p &#30456;&#24403;&#20110;&#25353;&#19979;5&#27425;Up
 !n::SendInput {Down 4} 
 !p::SendInput {Up 4}
-#IfWinActive 
+<span style="color: #7fffd4;">#IfWinActive</span> 
 
-;;对于Ctrl+Shift+r ,open resource
-;;按下空格相当于按下*
-;;而输入a-z任何一个字符，先将焦点移到Edit上，然后再输入相应的字符
-#IfWinActive Open Resource
+;;&#23545;&#20110;Ctrl+Shift+r ,<span style="color: #8DA6CE;">open</span> <span style="color: #40E0D0;">resource</span>
+;;&#25353;&#19979;&#31354;&#26684;&#30456;&#24403;&#20110;&#25353;&#19979;*
+;;&#32780;&#36755;&#20837;a-z&#20219;&#20309;&#19968;&#20010;&#23383;&#31526;&#65292;&#20808;&#23558;&#28966;&#28857;&#31227;&#21040;Edit&#19978;&#65292;&#28982;&#21518;&#20877;&#36755;&#20837;&#30456;&#24212;&#30340;&#23383;&#31526;
+<span style="color: #7fffd4;">#IfWinActive</span> Open Resource
 ^p::send {Up}
 ^n::send {Down}
 space::SendInput *
 a::
 ControlFocus ,Edit1
-SendInput a
-return
+<span style="color: #8DA6CE;">SendInput</span> <span style="color: #40E0D0;">a</span>
+<span style="color: #FBDE2D;">return</span>
 b::
 ControlFocus ,Edit1
-SendInput b
-return
+<span style="color: #8DA6CE;">SendInput</span> <span style="color: #40E0D0;">b</span>
+<span style="color: #FBDE2D;">return</span>
 c::
 ControlFocus ,Edit1
-SendInput c
-return
+<span style="color: #8DA6CE;">SendInput</span> <span style="color: #40E0D0;">c</span>
+<span style="color: #FBDE2D;">return</span>
 d::
 ControlFocus ,Edit1
-SendInput d
-return
+<span style="color: #8DA6CE;">SendInput</span> <span style="color: #40E0D0;">d</span>
+<span style="color: #FBDE2D;">return</span>
 e::
 ControlFocus ,Edit1
-SendInput e
-return
+<span style="color: #8DA6CE;">SendInput</span> <span style="color: #40E0D0;">e</span>
+<span style="color: #FBDE2D;">return</span>
 f::
 ControlFocus ,Edit1
-SendInput f
-return
+<span style="color: #8DA6CE;">SendInput</span> <span style="color: #40E0D0;">f</span>
+<span style="color: #FBDE2D;">return</span>
 g::
 ControlFocus ,Edit1
-SendInput g
-return
+<span style="color: #8DA6CE;">SendInput</span> <span style="color: #40E0D0;">g</span>
+<span style="color: #FBDE2D;">return</span>
 h::
 ControlFocus ,Edit1
-SendInput h
-return
+<span style="color: #8DA6CE;">SendInput</span> <span style="color: #40E0D0;">h</span>
+<span style="color: #FBDE2D;">return</span>
 i::
 ControlFocus ,Edit1
-SendInput i
-return
+<span style="color: #8DA6CE;">SendInput</span> <span style="color: #40E0D0;">i</span>
+<span style="color: #FBDE2D;">return</span>
 j::
 ControlFocus ,Edit1
-SendInput j
-return
+<span style="color: #8DA6CE;">SendInput</span> <span style="color: #40E0D0;">j</span>
+<span style="color: #FBDE2D;">return</span>
 k::
 ControlFocus ,Edit1
-SendInput k
-return
+<span style="color: #8DA6CE;">SendInput</span> <span style="color: #40E0D0;">k</span>
+<span style="color: #FBDE2D;">return</span>
 l::
 ControlFocus ,Edit1
-SendInput l
-return
+<span style="color: #8DA6CE;">SendInput</span> <span style="color: #40E0D0;">l</span>
+<span style="color: #FBDE2D;">return</span>
 m::
 ControlFocus ,Edit1
-SendInput m
-return
+<span style="color: #8DA6CE;">SendInput</span> <span style="color: #40E0D0;">m</span>
+<span style="color: #FBDE2D;">return</span>
 n::
 ControlFocus ,Edit1
-SendInput n
-return
+<span style="color: #8DA6CE;">SendInput</span> <span style="color: #40E0D0;">n</span>
+<span style="color: #FBDE2D;">return</span>
 o::
 ControlFocus ,Edit1
-SendInput o
-return
+<span style="color: #8DA6CE;">SendInput</span> <span style="color: #40E0D0;">o</span>
+<span style="color: #FBDE2D;">return</span>
 p::
 ControlFocus ,Edit1
-SendInput p
-return
+<span style="color: #8DA6CE;">SendInput</span> <span style="color: #40E0D0;">p</span>
+<span style="color: #FBDE2D;">return</span>
 q::
 ControlFocus ,Edit1
-SendInput q
-return
+<span style="color: #8DA6CE;">SendInput</span> <span style="color: #40E0D0;">q</span>
+<span style="color: #FBDE2D;">return</span>
 r::
 ControlFocus ,Edit1
-SendInput r
-return
+<span style="color: #8DA6CE;">SendInput</span> <span style="color: #40E0D0;">r</span>
+<span style="color: #FBDE2D;">return</span>
 s::
 ControlFocus ,Edit1
-SendInput s
-return
+<span style="color: #8DA6CE;">SendInput</span> <span style="color: #40E0D0;">s</span>
+<span style="color: #FBDE2D;">return</span>
 t::
 ControlFocus ,Edit1
-SendInput t
-return
+<span style="color: #8DA6CE;">SendInput</span> <span style="color: #40E0D0;">t</span>
+<span style="color: #FBDE2D;">return</span>
 u::
 ControlFocus ,Edit1
-SendInput u
-return
+<span style="color: #8DA6CE;">SendInput</span> <span style="color: #40E0D0;">u</span>
+<span style="color: #FBDE2D;">return</span>
 v::
 ControlFocus ,Edit1
-SendInput v
-return
+<span style="color: #8DA6CE;">SendInput</span> <span style="color: #40E0D0;">v</span>
+<span style="color: #FBDE2D;">return</span>
 w::
 ControlFocus ,Edit1
-SendInput w
-return
+<span style="color: #8DA6CE;">SendInput</span> <span style="color: #40E0D0;">w</span>
+<span style="color: #FBDE2D;">return</span>
 x::
 ControlFocus ,Edit1
-SendInput x
-return
+<span style="color: #8DA6CE;">SendInput</span> <span style="color: #40E0D0;">x</span>
+<span style="color: #FBDE2D;">return</span>
 y::
 ControlFocus ,Edit1
-SendInput y
-return
+<span style="color: #8DA6CE;">SendInput</span> <span style="color: #40E0D0;">y</span>
+<span style="color: #FBDE2D;">return</span>
 z::
 ControlFocus ,Edit1
-SendInput z
-return
+<span style="color: #8DA6CE;">SendInput</span> <span style="color: #40E0D0;">z</span>
+<span style="color: #FBDE2D;">return</span>
 1::
-ControlFocus ,Edit1
-SendInput 1
-return
+ControlFocus ,<span style="color: #8DA6CE;">Edit1</span>
+<span style="color: #40E0D0;">SendInput</span> 1
+<span style="color: #FBDE2D;">return</span>
 2::
-ControlFocus ,Edit1
-SendInput 2
-return
+ControlFocus ,<span style="color: #8DA6CE;">Edit1</span>
+<span style="color: #40E0D0;">SendInput</span> 2
+<span style="color: #FBDE2D;">return</span>
 3::
-ControlFocus ,Edit1
-SendInput 3
-return
+ControlFocus ,<span style="color: #8DA6CE;">Edit1</span>
+<span style="color: #40E0D0;">SendInput</span> 3
+<span style="color: #FBDE2D;">return</span>
 4::
-ControlFocus ,Edit1
-SendInput 4
-return
+ControlFocus ,<span style="color: #8DA6CE;">Edit1</span>
+<span style="color: #40E0D0;">SendInput</span> 4
+<span style="color: #FBDE2D;">return</span>
 5::
-ControlFocus ,Edit1
-SendInput 5
-return
+ControlFocus ,<span style="color: #8DA6CE;">Edit1</span>
+<span style="color: #40E0D0;">SendInput</span> 5
+<span style="color: #FBDE2D;">return</span>
 6::
-ControlFocus ,Edit1
-SendInput 6
-return
+ControlFocus ,<span style="color: #8DA6CE;">Edit1</span>
+<span style="color: #40E0D0;">SendInput</span> 6
+<span style="color: #FBDE2D;">return</span>
 7::
-ControlFocus ,Edit1
-SendInput 7
-return
+ControlFocus ,<span style="color: #8DA6CE;">Edit1</span>
+<span style="color: #40E0D0;">SendInput</span> 7
+<span style="color: #FBDE2D;">return</span>
 8::
-ControlFocus ,Edit1
-SendInput 8
-return
+ControlFocus ,<span style="color: #8DA6CE;">Edit1</span>
+<span style="color: #40E0D0;">SendInput</span> 8
+<span style="color: #FBDE2D;">return</span>
 9::
-ControlFocus ,Edit1
-SendInput 9
-return
+ControlFocus ,<span style="color: #8DA6CE;">Edit1</span>
+<span style="color: #40E0D0;">SendInput</span> 9
+<span style="color: #FBDE2D;">return</span>
 .::
-ControlFocus ,Edit1
-SendInput .
-return
-#IfWinActive
+ControlFocus ,<span style="color: #8DA6CE;">Edit1</span>
+<span style="color: #40E0D0;">SendInput</span> .
+<span style="color: #FBDE2D;">return</span>
+<span style="color: #7fffd4;">#IfWinActive</span>
 </pre>
 </div></li>
 </ol>

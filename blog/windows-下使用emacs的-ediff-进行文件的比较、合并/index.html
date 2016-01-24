@@ -65,9 +65,9 @@
 </p>
 <div class="org-src-container">
 
-<pre class="src src-sh">emacsclientw -eval "(ediff-files \"文件1.txt\" \"文件2.txt\")"
-# 这个测试了一下好像不行，报找不着文件1.txt的错
-emacs -eval "(ediff-files \"文件1.txt\" \"文件2.txt\")"
+<pre class="src src-sh">emacsclientw -eval <span style="color: #ffa07a;">"(ediff-files \"&#25991;&#20214;1.txt\" \"&#25991;&#20214;2.txt\")"</span>
+<span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">&#36825;&#20010;&#27979;&#35797;&#20102;&#19968;&#19979;&#22909;&#20687;&#19981;&#34892;&#65292;&#25253;&#25214;&#19981;&#30528;&#25991;&#20214;1.txt&#30340;&#38169;</span>
+emacs -eval <span style="color: #ffa07a;">"(ediff-files \"&#25991;&#20214;1.txt\" \"&#25991;&#20214;2.txt\")"</span>
 </pre>
 </div>
 <p>
@@ -80,44 +80,44 @@ emacs -eval "(ediff-files \"文件1.txt\" \"文件2.txt\")"
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c">#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
+<pre class="src src-c"><span style="color: #7fffd4;">#include</span> <span style="color: #ffa07a;">&lt;stdio.h&gt;</span>
+<span style="color: #7fffd4;">#include</span> <span style="color: #ffa07a;">&lt;stdlib.h&gt;</span>
 
-/*
- * call-ediff is used to call ediff from Perforce.
- * gcc -o call-ediff call-ediff.c &amp;&amp; call-ediff y:/Source/find_audio_xmls.sh y:/Source/find_audio_xmls.sh~
- */
+<span style="color: #AEAEAE;">/*</span>
+<span style="color: #AEAEAE;"> * call-ediff is used to call ediff from Perforce.</span>
+<span style="color: #AEAEAE;"> * gcc -o call-ediff call-ediff.c &amp;&amp; call-ediff y:/Source/find_audio_xmls.sh y:/Source/find_audio_xmls.sh~</span>
+<span style="color: #AEAEAE;"> </span><span style="color: #AEAEAE;">*/</span>
 
-void hackPathSeparator(char *windozePath) {
-    char *c;
+<span style="color: #8DA6CE;">void</span> <span style="color: #FF6400;">hackPathSeparator</span>(<span style="color: #8DA6CE;">char</span> *<span style="color: #40E0D0;">windozePath</span>) {
+    <span style="color: #8DA6CE;">char</span> *<span style="color: #40E0D0;">c</span>;
 
-    for (c = windozePath; *c; c++) {
-    if ('\\' == *c)
-        *c = '/';
+    <span style="color: #FBDE2D;">for</span> (c = windozePath; *c; c++) {
+    <span style="color: #FBDE2D;">if</span> (<span style="color: #ffa07a;">'\\'</span> == *c)
+        *c = <span style="color: #ffa07a;">'/'</span>;
     }
 }
 
-int main(int argc, char *argv[], char *envp[]) {
-    char *param1 = argv[1];
-    char *param2 = argv[2];
+<span style="color: #8DA6CE;">int</span> <span style="color: #FF6400;">main</span>(<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">argc</span>, <span style="color: #8DA6CE;">char</span> *<span style="color: #40E0D0;">argv</span>[], <span style="color: #8DA6CE;">char</span> *<span style="color: #40E0D0;">envp</span>[]) {
+    <span style="color: #8DA6CE;">char</span> *<span style="color: #40E0D0;">param1</span> = argv[1];
+    <span style="color: #8DA6CE;">char</span> *<span style="color: #40E0D0;">param2</span> = argv[2];
 
-    /* We get \ part separators from Perforce; hack these to / */
+    <span style="color: #AEAEAE;">/* </span><span style="color: #AEAEAE;">We get \ part separators from Perforce; hack these to / </span><span style="color: #AEAEAE;">*/</span>
 
     hackPathSeparator(param1);
     hackPathSeparator(param2);
 
-    /* hack the arg list (ugh) */
+    <span style="color: #AEAEAE;">/* </span><span style="color: #AEAEAE;">hack the arg list (ugh) </span><span style="color: #AEAEAE;">*/</span>
 
-    argv[1] = "-e";
-    /* Sample usage: argv[2] = "(progn (message \"foo\") (raise-frame))"; */
+    argv[1] = <span style="color: #ffa07a;">"-e"</span>;
+    <span style="color: #AEAEAE;">/* </span><span style="color: #AEAEAE;">Sample usage: argv[2] = "(progn (message \"foo\") (raise-frame))"; </span><span style="color: #AEAEAE;">*/</span>
 
-    char *command = (char *)malloc(4096);
-    sprintf(command, "(progn (raise-frame) (ediff \"%s\" \"%s\"))", param1, param2);
+    <span style="color: #8DA6CE;">char</span> *<span style="color: #40E0D0;">command</span> = (<span style="color: #8DA6CE;">char</span> *)malloc(4096);
+    sprintf(command, <span style="color: #ffa07a;">"(progn (raise-frame) (ediff \"%s\" \"%s\"))"</span>, param1, param2);
 
     argv[2] = command;
 
-    execvp("gnuclientw.exe", argv);
-    return 0;
+    execvp(<span style="color: #ffa07a;">"gnuclientw.exe"</span>, argv);
+    <span style="color: #FBDE2D;">return</span> 0;
 }
 </pre>
 </div>
@@ -154,41 +154,41 @@ runemacs.exe emacsclientw.exe gnuclientw.exe<br  />
 <div class="org-src-container">
 
 <pre class="src src-sh">//start here.
-#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
+<span style="color: #AEAEAE;">#</span><span style="color: #AEAEAE;">include &lt;stdio.h&gt;</span>
+<span style="color: #AEAEAE;">#</span><span style="color: #AEAEAE;">include &lt;stdlib.h&gt;</span>
 
 /*
  * call-ediff is used to call ediff from Perforce.
  *  call-ediff c:\a\b\a.txt c:\a\b\b.txt
- *  or
+ *  <span style="color: #FBDE2D;">or</span>
  *  call-ediff c:/a/b/a.txt :/a/b/b.txt
  */
 
 void hackPathSeparator(char *windozePath) {
   char *c;
 
-  for (c = windozePath; *c; c++) {
-    if ('\\' == *c)
-      *c = '/';
+  <span style="color: #FBDE2D;">for</span> (<span style="color: #40E0D0;">c</span> = windozePath; *c; c++) {
+    <span style="color: #FBDE2D;">if</span> (<span style="color: #ffa07a;">'\\'</span> == *c)
+      *<span style="color: #40E0D0;">c</span> = <span style="color: #ffa07a;">'/'</span>;
   }
 }
 
 int main(int argc, char *argv[], char *envp[]) {
-  char *param1 = argv[1];
-  char *param2 = argv[2];
+  char *<span style="color: #40E0D0;">param1</span> = argv[1];
+  char *<span style="color: #40E0D0;">param2</span> = argv[2];
   char *command;
-  /* We get \ part separators from Perforce; hack these to / */
+  /* We get <span style="color: #ffa07a;">\ </span>part separators from Perforce; hack these to / */
 
   hackPathSeparator(param1);
   hackPathSeparator(param2);
 
 
-  /* /\* hack the arg list (ugh) *\/ */
-  command= (char*) malloc(4096);
+  /* /<span style="color: #ffa07a;">\*</span> hack the arg list (ugh) *<span style="color: #ffa07a;">\/</span> */
+  <span style="color: #40E0D0;">command</span>= (char*) malloc(4096);
 
-   sprintf(command, "emacsclientw -eval \"(progn (raise-frame) (ediff \\\"%s\\\" \\\"%s\\\"))\"", param1, param2);
+   sprintf(command, <span style="color: #ffa07a;">"emacsclientw -eval \"(progn (raise-frame) (ediff \\\"%s\\\" \\\"%s\\\"))\""</span>, param1, param2);
    system( command);
-  return 0;
+  <span style="color: #FBDE2D;">return</span> 0;
 }
 //ends here.
 </pre>

@@ -33,9 +33,9 @@
 <h1>数值转换</h1>
 <div class="org-src-container">
 
-<pre class="src src-c">int atoi(const char *nptr);
-double atof(const char *nptr);
- /* 返回值：转换结果 */
+<pre class="src src-c"><span style="color: #8DA6CE;">int</span> <span style="color: #FF6400;">atoi</span>(<span style="color: #FBDE2D;">const</span> <span style="color: #8DA6CE;">char</span> *<span style="color: #40E0D0;">nptr</span>);
+<span style="color: #8DA6CE;">double</span> <span style="color: #FF6400;">atof</span>(<span style="color: #FBDE2D;">const</span> <span style="color: #8DA6CE;">char</span> *<span style="color: #40E0D0;">nptr</span>);
+ <span style="color: #AEAEAE;">/* </span><span style="color: #AEAEAE;">&#36820;&#22238;&#20540;&#65306;&#36716;&#25442;&#32467;&#26524; </span><span style="color: #AEAEAE;">*/</span>
 </pre>
 </div>
 
@@ -58,11 +58,11 @@ atof也不能检查出错的情况，而strtod可以。<br  />
 
 <div class="org-src-container">
 
-<pre class="src src-c">#include &lt;stdlib.h&gt;
+<pre class="src src-c"><span style="color: #7fffd4;">#include</span> <span style="color: #ffa07a;">&lt;stdlib.h&gt;</span>
 
-long int strtol(const char *nptr, char **endptr, int base);
-double strtod(const char *nptr, char **endptr);
-/* 返回值：转换结果，出错时设置errno */
+<span style="color: #8DA6CE;">long</span> <span style="color: #8DA6CE;">int</span> <span style="color: #FF6400;">strtol</span>(<span style="color: #FBDE2D;">const</span> <span style="color: #8DA6CE;">char</span> *<span style="color: #40E0D0;">nptr</span>, <span style="color: #8DA6CE;">char</span> **<span style="color: #40E0D0;">endptr</span>, <span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">base</span>);
+<span style="color: #8DA6CE;">double</span> <span style="color: #FF6400;">strtod</span>(<span style="color: #FBDE2D;">const</span> <span style="color: #8DA6CE;">char</span> *<span style="color: #40E0D0;">nptr</span>, <span style="color: #8DA6CE;">char</span> **<span style="color: #40E0D0;">endptr</span>);
+<span style="color: #AEAEAE;">/* </span><span style="color: #AEAEAE;">&#36820;&#22238;&#20540;&#65306;&#36716;&#25442;&#32467;&#26524;&#65292;&#20986;&#38169;&#26102;&#35774;&#32622;errno </span><span style="color: #AEAEAE;">*/</span>
 </pre>
 </div>
 <p>
@@ -90,7 +90,7 @@ strtol("0XDEADbeef~~", NULL, 16)返回0x7fffffff并设置errno为ERANGE。<br  /
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c">if ( (fp = fopen(...)) == NULL) { 读取errno }，
+<pre class="src src-c"><span style="color: #FBDE2D;">if</span> ( (fp = fopen(...)) == <span style="color: #D8FA3C;">NULL</span>) { &#35835;&#21462;errno }&#65292;
 </pre>
 </div>
 <p>
@@ -100,47 +100,47 @@ strtol，再查看errno是否变成了错误码。Man Page上有一个很好的�
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c">#include &lt;stdlib.h&gt;
-#include &lt;limits.h&gt;
-#include &lt;stdio.h&gt;
-#include &lt;errno.h&gt;
+<pre class="src src-c"><span style="color: #7fffd4;">#include</span> <span style="color: #ffa07a;">&lt;stdlib.h&gt;</span>
+<span style="color: #7fffd4;">#include</span> <span style="color: #ffa07a;">&lt;limits.h&gt;</span>
+<span style="color: #7fffd4;">#include</span> <span style="color: #ffa07a;">&lt;stdio.h&gt;</span>
+<span style="color: #7fffd4;">#include</span> <span style="color: #ffa07a;">&lt;errno.h&gt;</span>
 
-int main(int argc, char *argv[])
+<span style="color: #8DA6CE;">int</span> <span style="color: #FF6400;">main</span>(<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">argc</span>, <span style="color: #8DA6CE;">char</span> *<span style="color: #40E0D0;">argv</span>[])
 {
-    int base;
-    char *endptr, *str;
-    long val;
+    <span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">base</span>;
+    <span style="color: #8DA6CE;">char</span> *<span style="color: #40E0D0;">endptr</span>, *<span style="color: #40E0D0;">str</span>;
+    <span style="color: #8DA6CE;">long</span> <span style="color: #40E0D0;">val</span>;
 
-    if (argc &lt; 2) {
-        fprintf(stderr, "Usage: %s str [base]\n", argv[0]);
+    <span style="color: #FBDE2D;">if</span> (argc &lt; 2) {
+        fprintf(stderr, <span style="color: #ffa07a;">"Usage: %s str [base]\n"</span>, argv[0]);
         exit(EXIT_FAILURE);
     }
 
     str = argv[1];
     base = (argc &gt; 2) ? atoi(argv[2]) : 10;
 
-    errno = 0;    /* To distinguish success/failure after call */
+    errno = 0;    <span style="color: #AEAEAE;">/* </span><span style="color: #AEAEAE;">To distinguish success/failure after call </span><span style="color: #AEAEAE;">*/</span>
     val = strtol(str, &amp;endptr, base);
 
-    /* Check for various possible errors */
+    <span style="color: #AEAEAE;">/* </span><span style="color: #AEAEAE;">Check for various possible errors </span><span style="color: #AEAEAE;">*/</span>
 
-    if ((errno == ERANGE &amp;&amp; (val == LONG_MAX || val == LONG_MIN))
+    <span style="color: #FBDE2D;">if</span> ((errno == ERANGE &amp;&amp; (val == LONG_MAX || val == LONG_MIN))
         || (errno != 0 &amp;&amp; val == 0)) {
-        perror("strtol");
+        perror(<span style="color: #ffa07a;">"strtol"</span>);
         exit(EXIT_FAILURE);
     }
 
-    if (endptr == str) {
-        fprintf(stderr, "No digits were found\n");
+    <span style="color: #FBDE2D;">if</span> (endptr == str) {
+        fprintf(stderr, <span style="color: #ffa07a;">"No digits were found\n"</span>);
         exit(EXIT_FAILURE);
     }
 
-    /* If we got here, strtol() successfully parsed a number */
+    <span style="color: #AEAEAE;">/* </span><span style="color: #AEAEAE;">If we got here, strtol() successfully parsed a number </span><span style="color: #AEAEAE;">*/</span>
 
-    printf("strtol() returned %ld\n", val);
+    printf(<span style="color: #ffa07a;">"strtol() returned %ld\n"</span>, val);
 
-    if (*endptr != '\0')        /* Not necessarily an error... */
-        printf("Further characters after number: %s\n", endptr);
+    <span style="color: #FBDE2D;">if</span> (*endptr != <span style="color: #ffa07a;">'\0'</span>)        <span style="color: #AEAEAE;">/* </span><span style="color: #AEAEAE;">Not necessarily an error... </span><span style="color: #AEAEAE;">*/</span>
+        printf(<span style="color: #ffa07a;">"Further characters after number: %s\n"</span>, endptr);
 
     exit(EXIT_SUCCESS);
 }

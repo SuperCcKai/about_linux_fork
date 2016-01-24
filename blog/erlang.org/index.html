@@ -50,7 +50,7 @@
 <div class="outline-text-2" id="text-orgheadline1">
 <div class="org-src-container">
 
-<pre class="src src-sh">cd erlcount_release/
+<pre class="src src-sh"><span style="color: #F8F8F8;">cd</span> erlcount_release/
 erl -env ERL_LIBS  .
 </pre>
 </div>
@@ -61,26 +61,26 @@ erlcount-1.0.rel<br  />
 <div class="org-src-container">
 
 <pre class="src src-erlang">{release,
- {"erlcount" ,"1.0.0"},
- {erts, "5.8.5"},
- [ {kernel ,"2.14.5"},
-   {stdlib,"1.17.5"},
-   {ppool,"1.1.0",permanent},
-   {erlcount,"1.0.0",transient}
+ {<span style="color: #ffa07a;">"erlcount"</span> ,<span style="color: #ffa07a;">"1.0.0"</span>},
+ {erts, <span style="color: #ffa07a;">"5.8.5"</span>},
+ [ {kernel ,<span style="color: #ffa07a;">"2.14.5"</span>},
+   {stdlib,<span style="color: #ffa07a;">"1.17.5"</span>},
+   {ppool,<span style="color: #ffa07a;">"1.1.0"</span>,permanent},
+   {erlcount,<span style="color: #ffa07a;">"1.0.0"</span>,transient}
  ]
-}.                    %最后一个点不能少。
-%% 相应 的版本号可以通过 erl 命令后，会显示当前 Eshell V5.8.5  (abort with ^G)
-%% application:which_applications(). 结果是：
-%% [{stdlib,"ERTS  CXC 138 10","1.17.5"},
-%%  {kernel,"ERTS  CXC 138 10","2.14.5"}]
+}.                    <span style="color: #AEAEAE;">%</span><span style="color: #AEAEAE;">&#26368;&#21518;&#19968;&#20010;&#28857;&#19981;&#33021;&#23569;&#12290;</span>
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">&#30456;&#24212; &#30340;&#29256;&#26412;&#21495;&#21487;&#20197;&#36890;&#36807; erl &#21629;&#20196;&#21518;&#65292;&#20250;&#26174;&#31034;&#24403;&#21069; Eshell V5.8.5  (abort with ^G)</span>
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">application:which_applications(). &#32467;&#26524;&#26159;&#65306;</span>
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">[{stdlib,"ERTS  CXC 138 10","1.17.5"},</span>
+<span style="color: #AEAEAE;">%%  </span><span style="color: #AEAEAE;">{kernel,"ERTS  CXC 138 10","2.14.5"}]</span>
 
-%% systools:make_script("erlcount-1.0",[local]). 通过此文件生成启动脚本boot
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">systools:make_script("erlcount-1.0",[local]). &#36890;&#36807;&#27492;&#25991;&#20214;&#29983;&#25104;&#21551;&#21160;&#33050;&#26412;boot</span>
 
-%% the local option means that we want the release to be possible to run from
-%% anywhere, and not just the current install.
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">the local option means that we want the release to be possible to run from</span>
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">anywhere, and not just the current install.</span>
 
-%% systools:make_tar("erlcount-1.0" ,[{erts, "d:/usr/erl5.8.5/"}]).
-%% 生成tar
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">systools:make_tar("erlcount-1.0" ,[{erts, "d:/usr/erl5.8.5/"}]).</span>
+<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">&#29983;&#25104;tar</span>
 </pre>
 </div>
 <p>
@@ -122,7 +122,7 @@ systools:make_tar("erlcount-1.0" ,[{erts, "d:/usr/erl5.8.5/"}]).<br  />
 <div class="outline-text-3" id="text-orgheadline2">
 <div class="org-src-container">
 
-<pre class="src src-sh">cd release
+<pre class="src src-sh"><span style="color: #F8F8F8;">cd</span> release
 mkdir rel
 </pre>
 </div>
@@ -131,18 +131,18 @@ mkdir rel
 </p>
 <div class="org-src-container">
 
-<pre class="src src-erlang">{ok, Conf} = file:consult("erlcount-1.0.config").
-{ok, Spec} = reltool:get_target_spec(Conf).
-reltool:eval_target_spec(Spec, code:root_dir(), "rel"). % 在rel 目录内生成相
-应的内容
+<pre class="src src-erlang">{ok, <span style="color: #40E0D0;">Conf</span>} = <span style="color: #8DA6CE;">file</span>:<span style="color: #8DA6CE;">consult</span>(<span style="color: #ffa07a;">"erlcount-1.0.config"</span>).
+{ok, <span style="color: #40E0D0;">Spec</span>} = <span style="color: #8DA6CE;">reltool</span>:<span style="color: #8DA6CE;">get_target_spec</span>(<span style="color: #40E0D0;">Conf</span>).
+<span style="color: #8DA6CE;">reltool</span>:<span style="color: #8DA6CE;">eval_target_spec</span>(<span style="color: #40E0D0;">Spec</span>, <span style="color: #8DA6CE;">code</span>:<span style="color: #8DA6CE;">root_dir</span>(), <span style="color: #ffa07a;">"rel"</span>). <span style="color: #AEAEAE;">% </span><span style="color: #AEAEAE;">&#22312;rel &#30446;&#24405;&#20869;&#29983;&#25104;&#30456;</span>
+&#24212;&#30340;&#20869;&#23481;
 </pre>
 </div>
 
 <div class="org-src-container">
 
-<pre class="src src-sh">cd rel
+<pre class="src src-sh"><span style="color: #F8F8F8;">cd</span> rel
 ./bin -noshell
-./bin -noshell -erlcount directory ' "/home/jixiuf/documents/erlang/erlcount_release/"'
+./bin -noshell -erlcount directory <span style="color: #ffa07a;">' "/home/jixiuf/documents/erlang/erlcount_release/"'</span>
 </pre>
 </div>
 </div>
@@ -443,9 +443,9 @@ derived - 表示如果其他被包含的模块引用本模块,则本模块被也
 
 <pre class="src src-erlang">{sys,
    [
-   {lib_dirs,["/home/jixiuf/erlang"]},
-   {boot_rel, "erlips"},
-   {rel, "erlips", "0.1", [kernel, stdlib, sasl, mochiweb, erlips]},
+   {lib_dirs,[<span style="color: #ffa07a;">"/home/jixiuf/erlang"</span>]},
+   {boot_rel, <span style="color: #ffa07a;">"erlips"</span>},
+   {rel, <span style="color: #ffa07a;">"erlips"</span>, <span style="color: #ffa07a;">"0.1"</span>, [kernel, stdlib, sasl, mochiweb, erlips]},
    {relocatable, true},
    {profile, embedded},
    {app_file, keep},
@@ -453,18 +453,18 @@ derived - 表示如果其他被包含的模块引用本模块,则本模块被也
    {mod_cond, all},
    {incl_cond, derived},
 
-   {incl_app_filters, ["^include", "^priv", "^ebin", "^src"]},
+   {incl_app_filters, [<span style="color: #ffa07a;">"^include"</span>, <span style="color: #ffa07a;">"^priv"</span>, <span style="color: #ffa07a;">"^ebin"</span>, <span style="color: #ffa07a;">"^src"</span>]},
    {excl_app_filters, []},
 
    {incl_archive_filters,[]},
-   {excl_archive_filters,[".*"]},
+   {excl_archive_filters,[<span style="color: #ffa07a;">".*"</span>]},
 
    {app, kernel, [{incl_cond, include}]},
    {app, stdlib, [{incl_cond, include}]},
    {app, sasl, [{incl_cond, include}]},
    {app, erlips, [{incl_cond, include},
-                   {incl_app_filters, [".*"]},
-                   {excl_app_filters, ["^log", "^var", "^release"]}]},
+                   {incl_app_filters, [<span style="color: #ffa07a;">".*"</span>]},
+                   {excl_app_filters, [<span style="color: #ffa07a;">"^log"</span>, <span style="color: #ffa07a;">"^var"</span>, <span style="color: #ffa07a;">"^release"</span>]}]},
    {app, mochiweb, [{incl_cond, include}]},
    {app, runtime_tools, [{incl_cond, include}]}
    ]

@@ -52,31 +52,31 @@
 <div class="outline-text-2" id="text-orgheadline1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">;;git mergetool 使用ediff ,前提可以正常使用emacsclient ,并且Emacs已经启动。
-;; ~/.gitconfig
-;; [mergetool "ediff"]
-;; cmd = emacsclient --eval \"(git-mergetool-emacsclient-ediff \\\"$LOCAL\\\" \\\"$REMOTE\\\" \\\"$BASE\\\" \\\"$MERGED\\\")\"
-;; trustExitCode = false
-;; [mergetool]
-;; prompt = false
-;; [merge]
-;; tool = ediff
-;;
-;; Setup for ediff.
-;;
-;;(require 'ediff)
+<pre class="src src-emacs-lisp"><span style="color: #AEAEAE;">;;</span><span style="color: #AEAEAE;">git mergetool &#20351;&#29992;ediff ,&#21069;&#25552;&#21487;&#20197;&#27491;&#24120;&#20351;&#29992;emacsclient ,&#24182;&#19988;Emacs&#24050;&#32463;&#21551;&#21160;&#12290;</span>
+<span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">~/.gitconfig</span>
+<span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">[mergetool "ediff"]</span>
+<span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">cmd = emacsclient --eval \"(git-mergetool-emacsclient-ediff \\\"$LOCAL\\\" \\\"$REMOTE\\\" \\\"$BASE\\\" \\\"$MERGED\\\")\"</span>
+<span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">trustExitCode = false</span>
+<span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">[mergetool]</span>
+<span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">prompt = false</span>
+<span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">[merge]</span>
+<span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">tool = ediff</span>
+<span style="color: #AEAEAE;">;;</span>
+<span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">Setup for ediff.</span>
+<span style="color: #AEAEAE;">;;</span>
+<span style="color: #AEAEAE;">;;</span><span style="color: #AEAEAE;">(require 'ediff)</span>
 
-(defvar ediff-after-quit-hooks nil
-  "* Hooks to run after ediff or emerge is quit.")
+(<span style="color: #FBDE2D;">defvar</span> <span style="color: #40E0D0;">ediff-after-quit-hooks</span> <span style="color: #D8FA3C;">nil</span>
+  <span style="color: #ffa07a;">"* Hooks to run after ediff or emerge is quit."</span>)
 
-(defadvice ediff-quit (after edit-after-quit-hooks activate)
+(<span style="color: #FBDE2D;">defadvice</span> <span style="color: #FF6400;">ediff-quit</span> (after edit-after-quit-hooks activate)
   (run-hooks 'ediff-after-quit-hooks))
 
-(setq git-mergetool-emacsclient-ediff-active nil)
+(<span style="color: #FF6400;">setq</span> git-mergetool-emacsclient-ediff-active <span style="color: #D8FA3C;">nil</span>)
 
-(defun local-ediff-frame-maximize ()
-  (when (boundp 'display-usable-bounds)
-    (let* ((bounds (display-usable-bounds))
+(<span style="color: #FBDE2D;">defun</span> <span style="color: #FF6400;">local-ediff-frame-maximize</span> ()
+  (<span style="color: #FBDE2D;">when</span> (boundp 'display-usable-bounds)
+    (<span style="color: #FBDE2D;">let*</span> ((bounds (display-usable-bounds))
            (x (nth 0 bounds))
            (y (nth 1 bounds))
            (width (/ (nth 2 bounds) (frame-char-width)))
@@ -85,40 +85,40 @@
       (set-frame-height (selected-frame) height)
       (set-frame-position (selected-frame) x y))  )
   )
-(setq ediff-window-setup-function 'ediff-setup-windows-plain)
-(setq ediff-split-window-function 'split-window-horizontally)
+(<span style="color: #FF6400;">setq</span> ediff-window-setup-function 'ediff-setup-windows-plain)
+(<span style="color: #FF6400;">setq</span> ediff-split-window-function 'split-window-horizontally)
 
-(defun local-ediff-before-setup-hook ()
-  (setq local-ediff-saved-frame-configuration (current-frame-configuration))
-  (setq local-ediff-saved-window-configuration (current-window-configuration))
+(<span style="color: #FBDE2D;">defun</span> <span style="color: #FF6400;">local-ediff-before-setup-hook</span> ()
+  (<span style="color: #FF6400;">setq</span> local-ediff-saved-frame-configuration (current-frame-configuration))
+  (<span style="color: #FF6400;">setq</span> local-ediff-saved-window-configuration (current-window-configuration))
   (local-ediff-frame-maximize)
-  (if git-mergetool-emacsclient-ediff-active
+  (<span style="color: #FBDE2D;">if</span> git-mergetool-emacsclient-ediff-active
       (raise-frame)))
 
-(defun local-ediff-quit-hook ()
+(<span style="color: #FBDE2D;">defun</span> <span style="color: #FF6400;">local-ediff-quit-hook</span> ()
   (set-frame-configuration local-ediff-saved-frame-configuration)
   (set-window-configuration local-ediff-saved-window-configuration))
 
-(defun local-ediff-suspend-hook ()
+(<span style="color: #FBDE2D;">defun</span> <span style="color: #FF6400;">local-ediff-suspend-hook</span> ()
   (set-frame-configuration local-ediff-saved-frame-configuration)
   (set-window-configuration local-ediff-saved-window-configuration))
 
-(add-hook 'ediff-before-setup-hook 'local-ediff-before-setup-hook)
-(add-hook 'ediff-quit-hook 'local-ediff-quit-hook 'append)
-(add-hook 'ediff-suspend-hook 'local-ediff-suspend-hook 'append)
+(<span style="color: #FF6400;">add-hook</span> 'ediff-before-setup-hook 'local-ediff-before-setup-hook)
+(<span style="color: #FF6400;">add-hook</span> 'ediff-quit-hook 'local-ediff-quit-hook 'append)
+(<span style="color: #FF6400;">add-hook</span> 'ediff-suspend-hook 'local-ediff-suspend-hook 'append)
 
-;; Useful for ediff merge from emacsclient.
-(defun git-mergetool-emacsclient-ediff (local remote base merged)
-  (setq git-mergetool-emacsclient-ediff-active t)
-  (if (file-readable-p base)
-      (ediff-merge-files-with-ancestor local remote base nil merged)
-    (ediff-merge-files local remote nil merged))
+<span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">Useful for ediff merge from emacsclient.</span>
+(<span style="color: #FBDE2D;">defun</span> <span style="color: #FF6400;">git-mergetool-emacsclient-ediff</span> (local remote base merged)
+  (<span style="color: #FF6400;">setq</span> git-mergetool-emacsclient-ediff-active <span style="color: #D8FA3C;">t</span>)
+  (<span style="color: #FBDE2D;">if</span> (file-readable-p base)
+      (ediff-merge-files-with-ancestor local remote base <span style="color: #D8FA3C;">nil</span> merged)
+    (ediff-merge-files local remote <span style="color: #D8FA3C;">nil</span> merged))
   (recursive-edit))
 
-(defun git-mergetool-emacsclient-ediff-after-quit-hook ()
+(<span style="color: #FBDE2D;">defun</span> <span style="color: #FF6400;">git-mergetool-emacsclient-ediff-after-quit-hook</span> ()
   (exit-recursive-edit))
 
-(add-hook 'ediff-after-quit-hooks 'git-mergetool-emacsclient-ediff-after-quit-hook 'append)
+(<span style="color: #FF6400;">add-hook</span> 'ediff-after-quit-hooks 'git-mergetool-emacsclient-ediff-after-quit-hook 'append)
 </pre>
 </div>
 </div>
@@ -131,11 +131,11 @@
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c">[mergetool "ediff"]
-cmd = emacsclient --eval \"(git-mergetool-emacsclient-ediff \\\"$LOCAL\\\" \\\"$REMOTE\\\" \\\"$BASE\\\" \\\"$MERGED\\\")\"
-trustExitCode = false
+<pre class="src src-c">[mergetool <span style="color: #ffa07a;">"ediff"</span>]
+cmd = emacsclient --eval \<span style="color: #ffc0cb;">"</span>(git-mergetool-emacsclient-ediff \\\<span style="color: #ffc0cb;">"</span>$LOCAL\\\<span style="color: #ffc0cb;">"</span> \\\<span style="color: #ffc0cb;">"</span>$REMOTE\\\<span style="color: #ffc0cb;">"</span> \\\<span style="color: #ffc0cb;">"</span>$BASE\\\<span style="color: #ffc0cb;">"</span> \\\<span style="color: #ffc0cb;">"</span>$MERGED\\\<span style="color: #ffc0cb;">"</span>)\<span style="color: #ffc0cb;">"</span>
+trustExitCode = <span style="color: #D8FA3C;">false</span>
 [mergetool]
-prompt = false
+prompt = <span style="color: #D8FA3C;">false</span>
 [merge]
 tool = ediff
 </pre>

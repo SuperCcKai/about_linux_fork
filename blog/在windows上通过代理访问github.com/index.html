@@ -59,11 +59,11 @@ github.com 的git 提供了三种方式： <a href="http://">http://</a> git:// 
 </p>
 <div class="org-src-container">
 
-<pre class="src src-sh">  #!/bin/bash
-#这里是你对应的代理ip 及端口
-_proxy=172.20.65.51
-_proxyport=12080
-exec socat STDIO PROXY:$_proxy:$1:$2,proxyport=$_proxyport
+<pre class="src src-sh">  <span style="color: #AEAEAE;">#</span><span style="color: #AEAEAE;">!/bin/bash</span>
+<span style="color: #AEAEAE;">#</span><span style="color: #AEAEAE;">&#36825;&#37324;&#26159;&#20320;&#23545;&#24212;&#30340;&#20195;&#29702;ip &#21450;&#31471;&#21475;</span>
+<span style="color: #40E0D0;">_proxy</span>=172.20.65.51
+<span style="color: #40E0D0;">_proxyport</span>=12080
+<span style="color: #FBDE2D;">exec</span> socat STDIO PROXY:$<span style="color: #40E0D0;">_proxy</span>:$<span style="color: #40E0D0;">1</span>:$<span style="color: #40E0D0;">2</span>,<span style="color: #40E0D0;">proxyport</span>=$<span style="color: #40E0D0;">_proxyport</span>
 </pre>
 </div>
 <p>
@@ -82,11 +82,11 @@ exec socat STDIO PROXY:$_proxy:$1:$2,proxyport=$_proxyport
 </p>
 <div class="org-src-container">
 
-<pre class="src src-sh"># git-proxy已经加入到path目录下
- git config --global core.gitproxy "git-proxy"
+<pre class="src src-sh"><span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">git-proxy&#24050;&#32463;&#21152;&#20837;&#21040;path&#30446;&#24405;&#19979;</span>
+ git config --global core.gitproxy <span style="color: #ffa07a;">"git-proxy"</span>
 
-# git-proxy没有加入到path目录下
- git config --global core.gitproxy "/local/path/to/git-proxy"
+<span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">git-proxy&#27809;&#26377;&#21152;&#20837;&#21040;path&#30446;&#24405;&#19979;</span>
+ git config --global core.gitproxy <span style="color: #ffa07a;">"/local/path/to/git-proxy"</span>
 </pre>
 </div>
 <p>
@@ -94,7 +94,7 @@ exec socat STDIO PROXY:$_proxy:$1:$2,proxyport=$_proxyport
 </p>
 <div class="org-src-container">
 
-<pre class="src src-sh">例如 git clone git://github.com/jixiuf/anything-etags-plus.git
+<pre class="src src-sh">&#20363;&#22914; git clone git://github.com/jixiuf/anything-etags-plus.git
 </pre>
 </div>
 <p>
@@ -111,7 +111,7 @@ msysGit bin目录下已经提供了这个文件。<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-sh"># 此行要改路径 代理ip 及port
+<pre class="src src-sh"><span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">&#27492;&#34892;&#35201;&#25913;&#36335;&#24452; &#20195;&#29702;ip &#21450;port</span>
 ProxyCommand d:/usr/Git/bin/connect.exe -H 172.20.65.51:12080 %h %p
 
 Host github.com
@@ -119,8 +119,8 @@ User git
 Port 22
 Hostname github.com
 
-#此行要改路径及id_dsa 或id_rsa
-IdentityFile "d:\.ssh\id_dsa"
+<span style="color: #AEAEAE;">#</span><span style="color: #AEAEAE;">&#27492;&#34892;&#35201;&#25913;&#36335;&#24452;&#21450;id_dsa &#25110;id_rsa</span>
+IdentityFile <span style="color: #ffa07a;">"d:\.ssh\id_dsa"</span>
 
 TCPKeepAlive yes
 IdentitiesOnly yes
@@ -130,8 +130,8 @@ User git
 Port 443
 Hostname ssh.github.com
 
-#此行要改路径及id_dsa 或id_rsa
-IdentityFile "d:\.ssh\id_dsa"
+<span style="color: #AEAEAE;">#</span><span style="color: #AEAEAE;">&#27492;&#34892;&#35201;&#25913;&#36335;&#24452;&#21450;id_dsa &#25110;id_rsa</span>
+IdentityFile <span style="color: #ffa07a;">"d:\.ssh\id_dsa"</span>
 
 TCPKeepAlive yes
 IdentitiesOnly yes
@@ -148,10 +148,10 @@ IdentitiesOnly yes
 </p>
 <div class="org-src-container">
 
-<pre class="src src-sh">export http_proxy='http://myproxy.example.com:1080/'
-export https_proxy='https://myproxy.example.com:1080/'
-export ftp_proxy='http://myproxy.example.com:1080/'
-export no_proxy = '.example.com'
+<pre class="src src-sh"><span style="color: #F8F8F8;">export</span> <span style="color: #40E0D0;">http_proxy</span>=<span style="color: #ffa07a;">'http://myproxy.example.com:1080/'</span>
+<span style="color: #F8F8F8;">export</span> <span style="color: #40E0D0;">https_proxy</span>=<span style="color: #ffa07a;">'https://myproxy.example.com:1080/'</span>
+<span style="color: #F8F8F8;">export</span> <span style="color: #40E0D0;">ftp_proxy</span>=<span style="color: #ffa07a;">'http://myproxy.example.com:1080/'</span>
+<span style="color: #F8F8F8;">export</span> <span style="color: #40E0D0;">no_proxy</span> = <span style="color: #ffa07a;">'.example.com'</span>
 </pre>
 </div>
 </div>

@@ -75,196 +75,196 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa|<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq-default window-system-default-frame-alist
-              '( (x ;; if frame created on x display
+<pre class="src src-emacs-lisp">(<span style="color: #FF6400;">setq-default</span> window-system-default-frame-alist
+              '( (x <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">if frame created on x display</span>
                   (alpha . 93)
-                  (cursor-color . "green")
+                  (cursor-color . <span style="color: #ffa07a;">"green"</span>)
                   )
-                 (ns ;; if frame created on mac
-                  ;; (border-color . "black")
-                  ;; (cursor-color . "green")
+                 (ns <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">if frame created on mac</span>
+                  <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">(border-color . "black")</span>
+                  <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">(cursor-color . "green")</span>
                   (alpha . 93)
                   (height . 55)
                   (width . 150)
                   (left . 200)
                   (top . 20)
-                  ;; (foreground-color . "green")
-                  ;;  (background-color . "black") ;;
-                  ;;  ;; (background-color . "#263111")
-                  ;;  (cursor-color . "green")
-                  ;;  (mouse-color ."gold")
-                  ;;  (mouse-color . "Gainsboro")
-                  ;;         (font . "-unknown-DejaVu Sans Mono-normal-normal-normal-*-15-*-*-*-m-0-iso10646-1")
-                  ;; (font . "fontset-mymac")
-                  ;;(font . "Menlo-14")
+                  <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">(foreground-color . "green")</span>
+                  <span style="color: #AEAEAE;">;;  </span><span style="color: #AEAEAE;">(background-color . "black") ;;</span>
+                  <span style="color: #AEAEAE;">;;  </span><span style="color: #AEAEAE;">;; (background-color . "#263111")</span>
+                  <span style="color: #AEAEAE;">;;  </span><span style="color: #AEAEAE;">(cursor-color . "green")</span>
+                  <span style="color: #AEAEAE;">;;  </span><span style="color: #AEAEAE;">(mouse-color ."gold")</span>
+                  <span style="color: #AEAEAE;">;;  </span><span style="color: #AEAEAE;">(mouse-color . "Gainsboro")</span>
+                  <span style="color: #AEAEAE;">;;         </span><span style="color: #AEAEAE;">(font . "-unknown-DejaVu Sans Mono-normal-normal-normal-*-15-*-*-*-m-0-iso10646-1")</span>
+                  <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">(font . "fontset-mymac")</span>
+                  <span style="color: #AEAEAE;">;;</span><span style="color: #AEAEAE;">(font . "Menlo-14")</span>
                   )
                  (w32
-                  ;; (font . "fontset-w32")
-                  ;; (background-color . "#0C1021")
-                  ;; (background-mode . dark)
-                  ;; (border-color . "black")
+                  <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">(font . "fontset-w32")</span>
+                  <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">(background-color . "#0C1021")</span>
+                  <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">(background-mode . dark)</span>
+                  <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">(border-color . "black")</span>
                   (alpha . 95)
-                  ;; (cursor-color . "#A7A7A7")
-                  (cursor-color . "green")
-                  ;; (foreground-color . "#F8F8F8")
-                  ;; (mouse-color . "sienna1")
+                  <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">(cursor-color . "#A7A7A7")</span>
+                  (cursor-color . <span style="color: #ffa07a;">"green"</span>)
+                  <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">(foreground-color . "#F8F8F8")</span>
+                  <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">(mouse-color . "sienna1")</span>
 
                   (height . 30)
                   (width . 100)
                   (left . 200)
                   (top . 20)
-                  ;; (visibility . nil)
-                  ;;         (font . "fontset-gbk")
+                  <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">(visibility . nil)</span>
+                  <span style="color: #AEAEAE;">;;         </span><span style="color: #AEAEAE;">(font . "fontset-gbk")</span>
                   )
-                 (nil ;; if on term
-                  ;; (background-color . "#0C1021")
-                  ;; (background-mode . dark)
-                  ;; (border-color . "black")
-                  ;; (cursor-color . "#A7A7A7")
-                  ;; (cursor-color . "green")
-                  ;; (foreground-color . "#F8F8F8")
-                  ;; (mouse-color . "sienna1")
-                  ;; (font . "fontset-mymac")
+                 (<span style="color: #D8FA3C;">nil</span> <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">if on term</span>
+                  <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">(background-color . "#0C1021")</span>
+                  <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">(background-mode . dark)</span>
+                  <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">(border-color . "black")</span>
+                  <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">(cursor-color . "#A7A7A7")</span>
+                  <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">(cursor-color . "green")</span>
+                  <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">(foreground-color . "#F8F8F8")</span>
+                  <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">(mouse-color . "sienna1")</span>
+                  <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">(font . "fontset-mymac")</span>
                   )))
 
 (custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "#222" :foreground "#eeeeec" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 1 :width normal :foundry "default" :family "default"))))
- '(buffers-tab ((t (:background "#0C1021" :foreground "#F8F8F8"))))
- '(completions-common-part ((t (:inherit default :foreground "Cyan"))))
- '(completions-first-difference ((t (:background "black" :foreground "Gold2" :weight extra-bold :height 1.3))))
- '(cursor ((t (:background "tomato"))))
- '(custom-comment-tag ((t (:inherit default))))
- '(custom-face-tag ((t (:inherit default))))
- '(custom-group-tag ((t (:inherit variable-pitch :weight bold :height 1.2))))
- '(custom-variable-tag ((t (:inherit default :weight bold))))
- '(diff-added ((t (:foreground "OliveDrab1"))))
- '(diff-changed ((t (:foreground "yellow"))))
- '(diff-context ((t (:inherit default))))
- '(diff-file-header ((t (:foreground "tan1"))))
- '(diff-function ((t (:inherit diff-header :inverse-video t))))
- '(diff-header ((t (:foreground "light steel blue"))))
- '(diff-hunk-header ((t (:inherit diff-header :inverse-video t))))
- '(diff-index ((t (:foreground "Magenta"))))
- '(diff-nonexistent ((t (:foreground "yellow"))))
- '(diff-refine-added ((t (:background "gray26"))))
- '(diff-refine-changed ((t (:background "gray26"))))
- '(diff-refine-removed ((t (:background "gray26"))))
- '(diff-removed ((t (:inherit font-lock-comment-face :slant italic))))
- '(dired-directory ((t (:background "Blue4" :foreground "gray"))))
- '(ediff-current-diff-A ((t (:background "dark cyan"))))
- '(ediff-current-diff-Ancestor ((t (:background "dark red"))))
- '(ediff-current-diff-B ((t (:background "chocolate4"))))
- '(ediff-current-diff-C ((t (:background "sea green"))))
- '(ediff-even-diff-A ((t (:background "gray33"))))
- '(ediff-even-diff-Ancestor ((t (:background "gray40"))))
- '(ediff-even-diff-B ((t (:background "gray35"))))
- '(ediff-even-diff-C ((t (:background "gray49"))))
- '(ediff-fine-diff-A ((t (:background "cadet blue"))))
- '(ediff-fine-diff-Ancestor ((t (:background "sienna1"))))
- '(ediff-fine-diff-B ((t (:background "SlateGray4"))))
- '(ediff-fine-diff-C ((t (:background "saddle brown"))))
- '(ediff-odd-diff-A ((t (:background "gray49"))))
- '(ediff-odd-diff-B ((t (:background "gray50"))))
- '(ediff-odd-diff-C ((t (:background "gray30"))))
- '(erc-command-indicator-face ((t (:background "Purple" :weight bold))))
- '(erc-direct-msg-face ((t (:foreground "Yellow"))))
- '(erc-header-line ((t (:background "GreenYellow" :foreground "Gold"))))
- '(erc-input-face ((t (:foreground "Cyan2"))))
- '(erc-my-nick-face ((t (:foreground "Goldenrod" :weight bold))))
- '(erc-nick-default-face ((t (:foreground "Chartreuse" :weight bold))))
- '(erl-fdoc-name-face ((t (:foreground "green" :weight bold))))
- '(error ((t (:foreground "red" :weight bold))))
- '(flymake-errline ((t (:inherit error :foreground "red"))))
- '(font-lock-builtin-face ((t (:foreground "#F8F8F8"))))
- '(font-lock-comment-face ((t (:foreground "#AEAEAE"))))
- '(font-lock-constant-face ((t (:foreground "#D8FA3C"))))
- '(font-lock-doc-string-face ((t (:foreground "DarkOrange"))))
- '(font-lock-done-face ((t (:foreground "Green" :box (:line-width 2 :color "grey75" :style released-button) :height 1.2))) t)
- '(font-lock-function-name-face ((t (:foreground "#FF6400"))))
- '(font-lock-keyword-face ((t (:foreground "#FBDE2D"))))
- '(font-lock-preprocessor-face ((t (:foreground "Aquamarine"))))
- '(font-lock-reference-face ((t (:foreground "SlateBlue"))))
- '(font-lock-regexp-grouping-backslash ((t (:foreground "#E9C062"))))
- '(font-lock-regexp-grouping-construct ((t (:foreground "red"))))
- '(font-lock-string-face ((t (:foreground "light salmon"))))
- '(font-lock-todo-face ((t (:foreground "Red" :box (:line-width 2 :color "grey75" :style released-button) :height 1.2))) t)
- '(font-lock-type-face ((t (:foreground "#8DA6CE"))))
- '(font-lock-variable-name-face ((t (:foreground "#40E0D0"))))
- '(font-lock-warning-face ((t (:foreground "Pink"))))
- '(gui-element ((t (:background "#D4D0C8" :foreground "black"))))
- '(helm-grep-file ((t (:foreground "cyan1" :underline t))))
- '(helm-match ((t (:foreground "gold1"))))
- '(helm-selection ((t (:background "gray26" :underline t))))
- '(helm-source-header ((t (:background "gray46" :foreground "yellow" :weight bold :height 1.3 :family "Sans Serif"))))
- '(helm-visible-mark ((t (:background "gray43" :foreground "orange1"))))
- '(highlight ((t (:background "darkolivegreen"))))
- '(highline-face ((t (:background "SeaGreen"))))
- '(hl-paren-face ((t (:overline t :underline t :weight extra-bold))) t)
- '(isearch ((t (:background "seashell4" :foreground "green1"))))
- '(joseph-scroll-highlight-line-face ((t (:background "cadetblue4" :foreground "white" :weight bold))))
- '(linum ((t (:inherit (shadow default) :foreground "green"))))
- '(linum-relative-current-face ((t (:inherit linum :foreground "#FBDE2D" :weight bold))))
- '(linum-relative-face ((t (:inherit linum :foreground "dark gray"))))
- '(log-view-file ((t (:foreground "DodgerBlue" :weight bold))))
- '(log-view-message ((t (:foreground "Goldenrod" :weight bold))))
- '(magit-branch ((t (:foreground "Green" :weight bold))))
- '(magit-branch-local ((t (:foreground "coral1"))))
- '(magit-branch-remote ((t (:foreground "green1"))))
- '(magit-diff-added ((t (:inherit diff-added))))
- '(magit-diff-added-highlight ((t (:background "gray26" :foreground "green4"))))
- '(magit-diff-context ((t (:inherit diff-context))))
- '(magit-diff-file-heading ((t (:inherit diff-file-header))))
- '(magit-diff-hunk-heading ((t (:inherit diff-hunk-header :inverse-video t))))
- '(magit-diff-removed ((t (:inherit diff-removed))))
- '(magit-header ((t (:foreground "DodgerBlue"))))
- '(magit-log-author ((t (:foreground "Green"))))
- '(magit-log-date ((t (:foreground "cyan"))))
- '(magit-section-heading ((t (:background "gray29" :weight bold))))
- '(minibuffer-prompt ((t (:foreground "salmon1"))))
- '(mode-line ((t (:background "grey75" :foreground "black"))))
- '(mode-line-buffer-id ((t (:background "dark olive green" :foreground "beige"))))
- '(mode-line-highlight ((((class color) (min-colors 88)) nil)))
- '(mode-line-inactive ((t (:background "dark olive green" :foreground "dark khaki" :weight light))))
- '(org-agenda-date ((t (:inherit org-agenda-structure))) t)
- '(org-agenda-date-today ((t (:inherit org-agenda-date :underline t))) t)
- '(org-agenda-date-weekend ((t (:inherit org-agenda-date :foreground "green"))) t)
- '(org-agenda-done ((t (:foreground "#269926"))))
- '(org-agenda-restriction-lock ((t (:background "#FFB273"))))
- '(org-agenda-structure ((t (:foreground "#4671D5" :weight bold))))
- '(org-date ((t (:foreground "medium sea green" :underline t))))
- '(org-document-info ((t (:foreground "tomato1"))))
- '(org-document-title ((t (:foreground "orchid1" :weight bold))))
- '(org-done ((t (:foreground "#008500" :weight bold))))
- '(org-drawer ((t (:foreground "purple1"))))
- '(org-ellipsis ((t (:foreground "#FF7400" :underline t))))
- '(org-footnote ((t (:foreground "#1240AB" :underline t))))
- '(org-hide ((t (:foreground "gray20"))))
- '(org-level-1 ((t (:inherit outline-1 :box nil))))
- '(org-level-2 ((t (:inherit outline-2 :box nil))))
- '(org-level-3 ((t (:inherit outline-3 :box nil))))
- '(org-level-4 ((t (:inherit outline-4 :box nil))))
- '(org-level-5 ((t (:inherit outline-5 :box nil))))
- '(org-level-6 ((t (:inherit outline-6 :box nil))))
- '(org-level-7 ((t (:inherit outline-7 :box nil))))
- '(org-level-8 ((t (:inherit outline-8 :box nil))))
- '(org-scheduled-previously ((t (:foreground "#FF7400"))))
- '(org-tag ((t (:weight bold))))
- '(org-todo ((t (:foreground "#FF6961" :weight bold))))
- '(region ((t (:background "DarkSlateGray"))))
- '(text-cursor ((t (:background "yellow" :foreground "black"))))
- '(tooltip ((t (:inherit variable-pitch :background "systeminfowindow" :foreground "DarkGreen" :height 2.5))))
- '(underline ((nil (:underline nil))))
- '(vhl/default-face ((t (:background "DarkSlateGray"))))
- '(warning ((t (:foreground "Salmon" :weight bold))))
- '(web-mode-html-tag-bracket-face ((t (:inherit web-mode-html-tag-face))))
- '(woman-addition ((t (:inherit font-lock-builtin-face :foreground "Tan2"))))
- '(woman-bold ((t (:inherit bold :foreground "yellow2"))))
- '(woman-italic ((t (:inherit italic :foreground "green"))))
- '(woman-unknown ((t (:inherit font-lock-warning-face :foreground "Firebrick")))))
+ <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">custom-set-faces was added by Custom.</span>
+ <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">If you edit it by hand, you could mess it up, so be careful.</span>
+ <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">Your init file should contain only one such instance.</span>
+ <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">If there is more than one, they won't work right.</span>
+ '(default ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:inherit</span> <span style="color: #D8FA3C;">nil</span> <span style="color: #F8F8F8;">:stipple</span> <span style="color: #D8FA3C;">nil</span> <span style="color: #F8F8F8;">:background</span> <span style="color: #ffa07a;">"#222"</span> <span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"#eeeeec"</span> <span style="color: #F8F8F8;">:inverse-video</span> <span style="color: #D8FA3C;">nil</span> <span style="color: #F8F8F8;">:box</span> <span style="color: #D8FA3C;">nil</span> <span style="color: #F8F8F8;">:strike-through</span> <span style="color: #D8FA3C;">nil</span> <span style="color: #F8F8F8;">:overline</span> <span style="color: #D8FA3C;">nil</span> <span style="color: #F8F8F8;">:underline</span> <span style="color: #D8FA3C;">nil</span> <span style="color: #F8F8F8;">:slant</span> normal <span style="color: #F8F8F8;">:weight</span> normal <span style="color: #F8F8F8;">:height</span> 1 <span style="color: #F8F8F8;">:width</span> normal <span style="color: #F8F8F8;">:foundry</span> <span style="color: #ffa07a;">"default"</span> <span style="color: #F8F8F8;">:family</span> <span style="color: #ffa07a;">"default"</span>))))
+ '(buffers-tab ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:background</span> <span style="color: #ffa07a;">"#0C1021"</span> <span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"#F8F8F8"</span>))))
+ '(completions-common-part ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:inherit</span> default <span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"Cyan"</span>))))
+ '(completions-first-difference ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:background</span> <span style="color: #ffa07a;">"black"</span> <span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"Gold2"</span> <span style="color: #F8F8F8;">:weight</span> extra-bold <span style="color: #F8F8F8;">:height</span> 1.3))))
+ '(cursor ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:background</span> <span style="color: #ffa07a;">"tomato"</span>))))
+ '(custom-comment-tag ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:inherit</span> default))))
+ '(custom-face-tag ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:inherit</span> default))))
+ '(custom-group-tag ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:inherit</span> variable-pitch <span style="color: #F8F8F8;">:weight</span> bold <span style="color: #F8F8F8;">:height</span> 1.2))))
+ '(custom-variable-tag ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:inherit</span> default <span style="color: #F8F8F8;">:weight</span> bold))))
+ '(diff-added ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"OliveDrab1"</span>))))
+ '(diff-changed ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"yellow"</span>))))
+ '(diff-context ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:inherit</span> default))))
+ '(diff-file-header ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"tan1"</span>))))
+ '(diff-function ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:inherit</span> diff-header <span style="color: #F8F8F8;">:inverse-video</span> <span style="color: #D8FA3C;">t</span>))))
+ '(diff-header ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"light steel blue"</span>))))
+ '(diff-hunk-header ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:inherit</span> diff-header <span style="color: #F8F8F8;">:inverse-video</span> <span style="color: #D8FA3C;">t</span>))))
+ '(diff-index ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"Magenta"</span>))))
+ '(diff-nonexistent ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"yellow"</span>))))
+ '(diff-refine-added ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:background</span> <span style="color: #ffa07a;">"gray26"</span>))))
+ '(diff-refine-changed ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:background</span> <span style="color: #ffa07a;">"gray26"</span>))))
+ '(diff-refine-removed ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:background</span> <span style="color: #ffa07a;">"gray26"</span>))))
+ '(diff-removed ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:inherit</span> font-lock-comment-face <span style="color: #F8F8F8;">:slant</span> italic))))
+ '(dired-directory ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:background</span> <span style="color: #ffa07a;">"Blue4"</span> <span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"gray"</span>))))
+ '(ediff-current-diff-A ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:background</span> <span style="color: #ffa07a;">"dark cyan"</span>))))
+ '(ediff-current-diff-Ancestor ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:background</span> <span style="color: #ffa07a;">"dark red"</span>))))
+ '(ediff-current-diff-B ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:background</span> <span style="color: #ffa07a;">"chocolate4"</span>))))
+ '(ediff-current-diff-C ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:background</span> <span style="color: #ffa07a;">"sea green"</span>))))
+ '(ediff-even-diff-A ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:background</span> <span style="color: #ffa07a;">"gray33"</span>))))
+ '(ediff-even-diff-Ancestor ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:background</span> <span style="color: #ffa07a;">"gray40"</span>))))
+ '(ediff-even-diff-B ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:background</span> <span style="color: #ffa07a;">"gray35"</span>))))
+ '(ediff-even-diff-C ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:background</span> <span style="color: #ffa07a;">"gray49"</span>))))
+ '(ediff-fine-diff-A ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:background</span> <span style="color: #ffa07a;">"cadet blue"</span>))))
+ '(ediff-fine-diff-Ancestor ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:background</span> <span style="color: #ffa07a;">"sienna1"</span>))))
+ '(ediff-fine-diff-B ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:background</span> <span style="color: #ffa07a;">"SlateGray4"</span>))))
+ '(ediff-fine-diff-C ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:background</span> <span style="color: #ffa07a;">"saddle brown"</span>))))
+ '(ediff-odd-diff-A ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:background</span> <span style="color: #ffa07a;">"gray49"</span>))))
+ '(ediff-odd-diff-B ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:background</span> <span style="color: #ffa07a;">"gray50"</span>))))
+ '(ediff-odd-diff-C ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:background</span> <span style="color: #ffa07a;">"gray30"</span>))))
+ '(erc-command-indicator-face ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:background</span> <span style="color: #ffa07a;">"Purple"</span> <span style="color: #F8F8F8;">:weight</span> bold))))
+ '(erc-direct-msg-face ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"Yellow"</span>))))
+ '(erc-header-line ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:background</span> <span style="color: #ffa07a;">"GreenYellow"</span> <span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"Gold"</span>))))
+ '(erc-input-face ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"Cyan2"</span>))))
+ '(erc-my-nick-face ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"Goldenrod"</span> <span style="color: #F8F8F8;">:weight</span> bold))))
+ '(erc-nick-default-face ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"Chartreuse"</span> <span style="color: #F8F8F8;">:weight</span> bold))))
+ '(erl-fdoc-name-face ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"green"</span> <span style="color: #F8F8F8;">:weight</span> bold))))
+ '(<span style="color: #ffc0cb;">error</span> ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"red"</span> <span style="color: #F8F8F8;">:weight</span> bold))))
+ '(flymake-errline ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:inherit</span> error <span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"red"</span>))))
+ '(font-lock-builtin-face ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"#F8F8F8"</span>))))
+ '(font-lock-comment-face ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"#AEAEAE"</span>))))
+ '(font-lock-constant-face ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"#D8FA3C"</span>))))
+ '(font-lock-doc-string-face ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"DarkOrange"</span>))))
+ '(font-lock-done-face ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"Green"</span> <span style="color: #F8F8F8;">:box</span> (<span style="color: #F8F8F8;">:line-width</span> 2 <span style="color: #F8F8F8;">:color</span> <span style="color: #ffa07a;">"grey75"</span> <span style="color: #F8F8F8;">:style</span> released-button) <span style="color: #F8F8F8;">:height</span> 1.2))) <span style="color: #D8FA3C;">t</span>)
+ '(font-lock-function-name-face ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"#FF6400"</span>))))
+ '(font-lock-keyword-face ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"#FBDE2D"</span>))))
+ '(font-lock-preprocessor-face ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"Aquamarine"</span>))))
+ '(font-lock-reference-face ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"SlateBlue"</span>))))
+ '(font-lock-regexp-grouping-backslash ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"#E9C062"</span>))))
+ '(font-lock-regexp-grouping-construct ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"red"</span>))))
+ '(font-lock-string-face ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"light salmon"</span>))))
+ '(font-lock-todo-face ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"Red"</span> <span style="color: #F8F8F8;">:box</span> (<span style="color: #F8F8F8;">:line-width</span> 2 <span style="color: #F8F8F8;">:color</span> <span style="color: #ffa07a;">"grey75"</span> <span style="color: #F8F8F8;">:style</span> released-button) <span style="color: #F8F8F8;">:height</span> 1.2))) <span style="color: #D8FA3C;">t</span>)
+ '(font-lock-type-face ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"#8DA6CE"</span>))))
+ '(font-lock-variable-name-face ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"#40E0D0"</span>))))
+ '(font-lock-warning-face ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"Pink"</span>))))
+ '(gui-element ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:background</span> <span style="color: #ffa07a;">"#D4D0C8"</span> <span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"black"</span>))))
+ '(helm-grep-file ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"cyan1"</span> <span style="color: #F8F8F8;">:underline</span> <span style="color: #D8FA3C;">t</span>))))
+ '(helm-match ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"gold1"</span>))))
+ '(helm-selection ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:background</span> <span style="color: #ffa07a;">"gray26"</span> <span style="color: #F8F8F8;">:underline</span> <span style="color: #D8FA3C;">t</span>))))
+ '(helm-source-header ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:background</span> <span style="color: #ffa07a;">"gray46"</span> <span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"yellow"</span> <span style="color: #F8F8F8;">:weight</span> bold <span style="color: #F8F8F8;">:height</span> 1.3 <span style="color: #F8F8F8;">:family</span> <span style="color: #ffa07a;">"Sans Serif"</span>))))
+ '(helm-visible-mark ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:background</span> <span style="color: #ffa07a;">"gray43"</span> <span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"orange1"</span>))))
+ '(highlight ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:background</span> <span style="color: #ffa07a;">"darkolivegreen"</span>))))
+ '(highline-face ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:background</span> <span style="color: #ffa07a;">"SeaGreen"</span>))))
+ '(hl-paren-face ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:overline</span> <span style="color: #D8FA3C;">t</span> <span style="color: #F8F8F8;">:underline</span> <span style="color: #D8FA3C;">t</span> <span style="color: #F8F8F8;">:weight</span> extra-bold))) <span style="color: #D8FA3C;">t</span>)
+ '(isearch ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:background</span> <span style="color: #ffa07a;">"seashell4"</span> <span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"green1"</span>))))
+ '(joseph-scroll-highlight-line-face ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:background</span> <span style="color: #ffa07a;">"cadetblue4"</span> <span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"white"</span> <span style="color: #F8F8F8;">:weight</span> bold))))
+ '(linum ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:inherit</span> (shadow default) <span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"green"</span>))))
+ '(linum-relative-current-face ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:inherit</span> linum <span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"#FBDE2D"</span> <span style="color: #F8F8F8;">:weight</span> bold))))
+ '(linum-relative-face ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:inherit</span> linum <span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"dark gray"</span>))))
+ '(log-view-file ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"DodgerBlue"</span> <span style="color: #F8F8F8;">:weight</span> bold))))
+ '(log-view-message ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"Goldenrod"</span> <span style="color: #F8F8F8;">:weight</span> bold))))
+ '(magit-branch ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"Green"</span> <span style="color: #F8F8F8;">:weight</span> bold))))
+ '(magit-branch-local ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"coral1"</span>))))
+ '(magit-branch-remote ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"green1"</span>))))
+ '(magit-diff-added ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:inherit</span> diff-added))))
+ '(magit-diff-added-highlight ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:background</span> <span style="color: #ffa07a;">"gray26"</span> <span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"green4"</span>))))
+ '(magit-diff-context ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:inherit</span> diff-context))))
+ '(magit-diff-file-heading ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:inherit</span> diff-file-header))))
+ '(magit-diff-hunk-heading ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:inherit</span> diff-hunk-header <span style="color: #F8F8F8;">:inverse-video</span> <span style="color: #D8FA3C;">t</span>))))
+ '(magit-diff-removed ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:inherit</span> diff-removed))))
+ '(magit-header ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"DodgerBlue"</span>))))
+ '(magit-log-author ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"Green"</span>))))
+ '(magit-log-date ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"cyan"</span>))))
+ '(magit-section-heading ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:background</span> <span style="color: #ffa07a;">"gray29"</span> <span style="color: #F8F8F8;">:weight</span> bold))))
+ '(minibuffer-prompt ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"salmon1"</span>))))
+ '(mode-line ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:background</span> <span style="color: #ffa07a;">"grey75"</span> <span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"black"</span>))))
+ '(mode-line-buffer-id ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:background</span> <span style="color: #ffa07a;">"dark olive green"</span> <span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"beige"</span>))))
+ '(mode-line-highlight ((((class color) (min-colors 88)) <span style="color: #D8FA3C;">nil</span>)))
+ '(mode-line-inactive ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:background</span> <span style="color: #ffa07a;">"dark olive green"</span> <span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"dark khaki"</span> <span style="color: #F8F8F8;">:weight</span> light))))
+ '(org-agenda-date ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:inherit</span> org-agenda-structure))) <span style="color: #D8FA3C;">t</span>)
+ '(org-agenda-date-today ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:inherit</span> org-agenda-date <span style="color: #F8F8F8;">:underline</span> <span style="color: #D8FA3C;">t</span>))) <span style="color: #D8FA3C;">t</span>)
+ '(org-agenda-date-weekend ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:inherit</span> org-agenda-date <span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"green"</span>))) <span style="color: #D8FA3C;">t</span>)
+ '(org-agenda-done ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"#269926"</span>))))
+ '(org-agenda-restriction-lock ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:background</span> <span style="color: #ffa07a;">"#FFB273"</span>))))
+ '(org-agenda-structure ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"#4671D5"</span> <span style="color: #F8F8F8;">:weight</span> bold))))
+ '(org-date ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"medium sea green"</span> <span style="color: #F8F8F8;">:underline</span> <span style="color: #D8FA3C;">t</span>))))
+ '(org-document-info ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"tomato1"</span>))))
+ '(org-document-title ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"orchid1"</span> <span style="color: #F8F8F8;">:weight</span> bold))))
+ '(org-done ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"#008500"</span> <span style="color: #F8F8F8;">:weight</span> bold))))
+ '(org-drawer ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"purple1"</span>))))
+ '(org-ellipsis ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"#FF7400"</span> <span style="color: #F8F8F8;">:underline</span> <span style="color: #D8FA3C;">t</span>))))
+ '(org-footnote ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"#1240AB"</span> <span style="color: #F8F8F8;">:underline</span> <span style="color: #D8FA3C;">t</span>))))
+ '(org-hide ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"gray20"</span>))))
+ '(org-level-1 ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:inherit</span> outline-1 <span style="color: #F8F8F8;">:box</span> <span style="color: #D8FA3C;">nil</span>))))
+ '(org-level-2 ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:inherit</span> outline-2 <span style="color: #F8F8F8;">:box</span> <span style="color: #D8FA3C;">nil</span>))))
+ '(org-level-3 ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:inherit</span> outline-3 <span style="color: #F8F8F8;">:box</span> <span style="color: #D8FA3C;">nil</span>))))
+ '(org-level-4 ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:inherit</span> outline-4 <span style="color: #F8F8F8;">:box</span> <span style="color: #D8FA3C;">nil</span>))))
+ '(org-level-5 ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:inherit</span> outline-5 <span style="color: #F8F8F8;">:box</span> <span style="color: #D8FA3C;">nil</span>))))
+ '(org-level-6 ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:inherit</span> outline-6 <span style="color: #F8F8F8;">:box</span> <span style="color: #D8FA3C;">nil</span>))))
+ '(org-level-7 ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:inherit</span> outline-7 <span style="color: #F8F8F8;">:box</span> <span style="color: #D8FA3C;">nil</span>))))
+ '(org-level-8 ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:inherit</span> outline-8 <span style="color: #F8F8F8;">:box</span> <span style="color: #D8FA3C;">nil</span>))))
+ '(org-scheduled-previously ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"#FF7400"</span>))))
+ '(org-tag ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:weight</span> bold))))
+ '(org-todo ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"#FF6961"</span> <span style="color: #F8F8F8;">:weight</span> bold))))
+ '(region ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:background</span> <span style="color: #ffa07a;">"DarkSlateGray"</span>))))
+ '(text-cursor ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:background</span> <span style="color: #ffa07a;">"yellow"</span> <span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"black"</span>))))
+ '(tooltip ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:inherit</span> variable-pitch <span style="color: #F8F8F8;">:background</span> <span style="color: #ffa07a;">"systeminfowindow"</span> <span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"DarkGreen"</span> <span style="color: #F8F8F8;">:height</span> 2.5))))
+ '(underline ((<span style="color: #D8FA3C;">nil</span> (<span style="color: #F8F8F8;">:underline</span> <span style="color: #D8FA3C;">nil</span>))))
+ '(vhl/default-face ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:background</span> <span style="color: #ffa07a;">"DarkSlateGray"</span>))))
+ '(warning ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"Salmon"</span> <span style="color: #F8F8F8;">:weight</span> bold))))
+ '(web-mode-html-tag-bracket-face ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:inherit</span> web-mode-html-tag-face))))
+ '(woman-addition ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:inherit</span> font-lock-builtin-face <span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"Tan2"</span>))))
+ '(woman-bold ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:inherit</span> bold <span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"yellow2"</span>))))
+ '(woman-italic ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:inherit</span> italic <span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"green"</span>))))
+ '(woman-unknown ((<span style="color: #D8FA3C;">t</span> (<span style="color: #F8F8F8;">:inherit</span> font-lock-warning-face <span style="color: #F8F8F8;">:foreground</span> <span style="color: #ffa07a;">"Firebrick"</span>)))))
 </pre>
 </div>
 </div>
@@ -280,25 +280,25 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa|<br  />
 <div class="org-src-container">
 
 <pre class="src src-sh">             position: 51 of 6777 (1%), column: 0
-            character: a (displayed as a) (codepoint 97, #o141, #x61)
+            character: a (displayed as a) (codepoint 97, <span style="color: #AEAEAE;">#</span><span style="color: #AEAEAE;">o141, #x61)</span>
     preferred charset: ascii (ASCII (ISO646 IRV))
-code point in charset: 0x61
+code point<span style="color: #FBDE2D;"> in</span> charset: 0x61
                syntax: w    which means: word
              category: .:Base, L:Left-to-right (strong), a:ASCII, l:Latin, r:Roman
-          buffer code: #x61
-            file code: #x61 (encoded by coding system utf-8)
+          buffer code: <span style="color: #AEAEAE;">#</span><span style="color: #AEAEAE;">x61</span>
+            file code: <span style="color: #AEAEAE;">#</span><span style="color: #AEAEAE;">x61 (encoded by coding system utf-8)</span>
               display: by this font (glyph code)
-    xft:-unknown-DejaVu Sans Mono-normal-normal-normal-*-15-*-*-*-m-0-iso10646-1 (#x44)
+    xft:-unknown-DejaVu Sans Mono-normal-normal-normal-*-15-*-*-*-m-0-iso10646-1 (<span style="color: #AEAEAE;">#</span><span style="color: #AEAEAE;">x44)</span>
 
 Character code properties: customize what to show
   name: LATIN SMALL LETTER A
   general-category: Ll (Letter, Lowercase)
-  decomposition: (97) ('a')
+  decomposition: (97) (<span style="color: #ffa07a;">'a'</span>)
 
 There are text properties here:
   fontified            t
   helm-realvalue       [Show]
-  help-echo            "/home/jixiuf/documents/org/src/emacs/auto-insert-and-yasnippet.org"
+  help-echo            <span style="color: #ffa07a;">"/home/jixiuf/documents/org/src/emacs/auto-insert-and-yasnippet.org"</span>
 </pre>
 </div>
 </div>

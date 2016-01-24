@@ -43,8 +43,8 @@
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c">#include &lt;stdio.h&gt;
-void perror(const char *s);
+<pre class="src src-c"><span style="color: #7fffd4;">#include</span> <span style="color: #ffa07a;">&lt;stdio.h&gt;</span>
+<span style="color: #8DA6CE;">void</span> <span style="color: #FF6400;">perror</span>(<span style="color: #FBDE2D;">const</span> <span style="color: #8DA6CE;">char</span> *<span style="color: #40E0D0;">s</span>);
 </pre>
 </div>
 <p>
@@ -53,17 +53,17 @@ perror函数将错误信息打印到标准错误输出，首先打印参数s所�
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c">#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
+<pre class="src src-c"><span style="color: #7fffd4;">#include</span> <span style="color: #ffa07a;">&lt;stdio.h&gt;</span>
+<span style="color: #7fffd4;">#include</span> <span style="color: #ffa07a;">&lt;stdlib.h&gt;</span>
 
-int main(void)
+<span style="color: #8DA6CE;">int</span> <span style="color: #FF6400;">main</span>(<span style="color: #8DA6CE;">void</span>)
 {
-    FILE *fp = fopen("abcde", "r");
-    if (fp == NULL) {
-        perror("Open file abcde");
+    <span style="color: #8DA6CE;">FILE</span> *<span style="color: #40E0D0;">fp</span> = fopen(<span style="color: #ffa07a;">"abcde"</span>, <span style="color: #ffa07a;">"r"</span>);
+    <span style="color: #FBDE2D;">if</span> (fp == <span style="color: #D8FA3C;">NULL</span>) {
+        perror(<span style="color: #ffa07a;">"Open file abcde"</span>);
         exit(1);
     }
-    return 0;
+    <span style="color: #FBDE2D;">return</span> 0;
 }
 </pre>
 </div>
@@ -85,10 +85,10 @@ Effect，就是有可能改变errno变量（当然也有少数例外，比如str
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c">#include &lt;string.h&gt;
+<pre class="src src-c"><span style="color: #7fffd4;">#include</span> <span style="color: #ffa07a;">&lt;string.h&gt;</span>
 
-char *strerror(int errnum);
-返回值：错误码errnum所对应的字符串
+<span style="color: #8DA6CE;">char</span> *<span style="color: #FF6400;">strerror</span>(<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">errnum</span>);
+&#36820;&#22238;&#20540;&#65306;&#38169;&#35823;&#30721;errnum&#25152;&#23545;&#24212;&#30340;&#23383;&#31526;&#20018;
 </pre>
 </div>
 

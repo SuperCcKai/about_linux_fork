@@ -67,45 +67,45 @@
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">  (require 'csharp-mode)
-  (require 'csharp-completion)
-  (require 'csharp-analysis)
+<pre class="src src-emacs-lisp">  (<span style="color: #FBDE2D;">require</span> '<span style="color: #D8FA3C;">csharp-mode</span>)
+  (<span style="color: #FBDE2D;">require</span> '<span style="color: #D8FA3C;">csharp-completion</span>)
+  (<span style="color: #FBDE2D;">require</span> '<span style="color: #D8FA3C;">csharp-analysis</span>)
 
-  (add-to-list 'auto-mode-alist '("\\.cs$" . csharp-mode))
-  (add-hook  'csharp-mode-hook 'my-csharp-mode-fn t)
+  (add-to-list 'auto-mode-alist '(<span style="color: #ffa07a;">"\\.cs$"</span> . csharp-mode))
+  (<span style="color: #FF6400;">add-hook</span>  'csharp-mode-hook 'my-csharp-mode-fn <span style="color: #D8FA3C;">t</span>)
   (eval-after-load 'csharp-mode '(add-csc-2-path-env))
   (eval-after-load 'csharp-mode '(add-gacutil-2-path-env))
 
-   ;; //用csharp-completion进行补全时，需要用到gacutil.exe 这个程序 ，
-   ;; // 你需要搜索一下gacutil.exe 在你系统的哪个目录 ，然后这个加到你的PATH 目录下，或像我这样，
-  ;;;###autoload
-  (defun add-gacutil-2-path-env()
-    "add gacutil.exe to $PATH, csharp complete 用的到"
-    (when (equal system-type 'windows-nt)
-      (when (file-exists-p "C:/Program Files (x86)/Microsoft SDKs/Windows/v7.0A/Bin")
-        (setenv "PATH" (concat  (getenv "PATH") ";" "C:\\Program Files (x86)\\Microsoft SDKs\\Windows\\v7.0A\\Bin"))
-        (setq exec-path (add-to-list 'exec-path   " C:\\Program Files (x86)\\Microsoft SDKs\\Windows\\v7.0A\\Bin")))
-      (when (file-exists-p "C:/Program Files/Microsoft SDKs/Windows/v7.0A/Bin")
-        (setenv "PATH" (concat  (getenv "PATH") ";" "C:\\Program Files\\Microsoft SDKs\\Windows\\v7.0A\\Bin"))
-        (setq exec-path (add-to-list 'exec-path   " C:\\Program Files)\\Microsoft SDKs\\Windows\\v7.0A\\Bin")))))
+   <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">//&#29992;csharp-completion&#36827;&#34892;&#34917;&#20840;&#26102;&#65292;&#38656;&#35201;&#29992;&#21040;gacutil.exe &#36825;&#20010;&#31243;&#24207; &#65292;</span>
+   <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">// &#20320;&#38656;&#35201;&#25628;&#32034;&#19968;&#19979;gacutil.exe &#22312;&#20320;&#31995;&#32479;&#30340;&#21738;&#20010;&#30446;&#24405; &#65292;&#28982;&#21518;&#36825;&#20010;&#21152;&#21040;&#20320;&#30340;PATH &#30446;&#24405;&#19979;&#65292;&#25110;&#20687;&#25105;&#36825;&#26679;&#65292;</span>
+  <span style="color: #AEAEAE;">;;;</span><span style="color: #AEAEAE;">###autoload</span>
+  (<span style="color: #FBDE2D;">defun</span> <span style="color: #FF6400;">add-gacutil-2-path-env</span>()
+    <span style="color: #ffa07a;">"add gacutil.exe to $PATH, csharp complete &#29992;&#30340;&#21040;"</span>
+    (<span style="color: #FBDE2D;">when</span> (<span style="color: #FBDE2D;">equal</span> system-type 'windows-nt)
+      (<span style="color: #FBDE2D;">when</span> (file-exists-p <span style="color: #ffa07a;">"C:/Program Files (x86)/Microsoft SDKs/Windows/v7.0A/Bin"</span>)
+        (setenv <span style="color: #ffa07a;">"PATH"</span> (concat  (getenv <span style="color: #ffa07a;">"PATH"</span>) <span style="color: #ffa07a;">";"</span> <span style="color: #ffa07a;">"C:\\Program Files (x86)\\Microsoft SDKs\\Windows\\v7.0A\\Bin"</span>))
+        (<span style="color: #FF6400;">setq</span> exec-path (add-to-list 'exec-path   <span style="color: #ffa07a;">" C:\\Program Files (x86)\\Microsoft SDKs\\Windows\\v7.0A\\Bin"</span>)))
+      (<span style="color: #FBDE2D;">when</span> (file-exists-p <span style="color: #ffa07a;">"C:/Program Files/Microsoft SDKs/Windows/v7.0A/Bin"</span>)
+        (setenv <span style="color: #ffa07a;">"PATH"</span> (concat  (getenv <span style="color: #ffa07a;">"PATH"</span>) <span style="color: #ffa07a;">";"</span> <span style="color: #ffa07a;">"C:\\Program Files\\Microsoft SDKs\\Windows\\v7.0A\\Bin"</span>))
+        (<span style="color: #FF6400;">setq</span> exec-path (add-to-list 'exec-path   <span style="color: #ffa07a;">" C:\\Program Files)\\Microsoft SDKs\\Windows\\v7.0A\\Bin"</span>)))))
 
-;; 命令行下编译cs文件时， 使用csc.exe这个命令，把它也加到PATH路径下
-;;
-  ;;;###autoload
-  (defun add-csc-2-path-env()
-    "add csc.exe to $PATH"
-    (when (equal system-type 'windows-nt)
-      (let ((windowsPaht (getenv "SYSTEMROOT")))
-        (cond ((file-directory-p (concat windowsPaht "/Microsoft.NET/Framework/v3.5"))
-               (setenv "PATH" (concat  (getenv "PATH") ";"  (concat windowsPaht "\\Microsoft.NET\\Framework\\v3.5\\")))
-               (setq exec-path (add-to-list 'exec-path   (concat windowsPaht "\\Microsoft.NET\\Framework\\v3.5\\")))
+<span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">&#21629;&#20196;&#34892;&#19979;&#32534;&#35793;cs&#25991;&#20214;&#26102;&#65292; &#20351;&#29992;csc.exe&#36825;&#20010;&#21629;&#20196;&#65292;&#25226;&#23427;&#20063;&#21152;&#21040;PATH&#36335;&#24452;&#19979;</span>
+<span style="color: #AEAEAE;">;;</span>
+  <span style="color: #AEAEAE;">;;;</span><span style="color: #AEAEAE;">###autoload</span>
+  (<span style="color: #FBDE2D;">defun</span> <span style="color: #FF6400;">add-csc-2-path-env</span>()
+    <span style="color: #ffa07a;">"add csc.exe to $PATH"</span>
+    (<span style="color: #FBDE2D;">when</span> (<span style="color: #FBDE2D;">equal</span> system-type 'windows-nt)
+      (<span style="color: #FBDE2D;">let</span> ((windowsPaht (getenv <span style="color: #ffa07a;">"SYSTEMROOT"</span>)))
+        (<span style="color: #FBDE2D;">cond</span> ((file-directory-p (concat windowsPaht <span style="color: #ffa07a;">"/Microsoft.NET/Framework/v3.5"</span>))
+               (setenv <span style="color: #ffa07a;">"PATH"</span> (concat  (getenv <span style="color: #ffa07a;">"PATH"</span>) <span style="color: #ffa07a;">";"</span>  (concat windowsPaht <span style="color: #ffa07a;">"\\Microsoft.NET\\Framework\\v3.5\\"</span>)))
+               (<span style="color: #FF6400;">setq</span> exec-path (add-to-list 'exec-path   (concat windowsPaht <span style="color: #ffa07a;">"\\Microsoft.NET\\Framework\\v3.5\\"</span>)))
                )
-              ((file-directory-p (concat windowsPaht "/Microsoft.NET/Framework/v4.0.30319"))
-               (setenv "PATH" (concat  (getenv "PATH") ";"  (concat windowsPaht "\\Microsoft.NET\\Framework\\v4.0.30319\\")))
-               (setq exec-path (add-to-list 'exec-path   (concat windowsPaht "\\Microsoft.NET\\Framework\\v4.0.30319\\"))))
-              ((file-directory-p (concat windowsPaht "/Microsoft.NET/Framework/v2.0.50727"))
-               (setenv "PATH" (concat  (getenv "PATH") ";"  (concat windowsPaht "\\Microsoft.NET\\Framework\\v2.0.50727\\")))
-               (setq exec-path (add-to-list 'exec-path   (concat windowsPaht "\\Microsoft.NET\\Framework\\v2.0.50727\\"))))))))
+              ((file-directory-p (concat windowsPaht <span style="color: #ffa07a;">"/Microsoft.NET/Framework/v4.0.30319"</span>))
+               (setenv <span style="color: #ffa07a;">"PATH"</span> (concat  (getenv <span style="color: #ffa07a;">"PATH"</span>) <span style="color: #ffa07a;">";"</span>  (concat windowsPaht <span style="color: #ffa07a;">"\\Microsoft.NET\\Framework\\v4.0.30319\\"</span>)))
+               (<span style="color: #FF6400;">setq</span> exec-path (add-to-list 'exec-path   (concat windowsPaht <span style="color: #ffa07a;">"\\Microsoft.NET\\Framework\\v4.0.30319\\"</span>))))
+              ((file-directory-p (concat windowsPaht <span style="color: #ffa07a;">"/Microsoft.NET/Framework/v2.0.50727"</span>))
+               (setenv <span style="color: #ffa07a;">"PATH"</span> (concat  (getenv <span style="color: #ffa07a;">"PATH"</span>) <span style="color: #ffa07a;">";"</span>  (concat windowsPaht <span style="color: #ffa07a;">"\\Microsoft.NET\\Framework\\v2.0.50727\\"</span>)))
+               (<span style="color: #FF6400;">setq</span> exec-path (add-to-list 'exec-path   (concat windowsPaht <span style="color: #ffa07a;">"\\Microsoft.NET\\Framework\\v2.0.50727\\"</span>))))))))
 </pre>
 </div>
 </div>
@@ -123,7 +123,7 @@ powershell.exe 是cmd.exe 的增强版<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-sh">[System.Reflection.Assembly]::LoadFrom('d:/.emacs.d/site-lisp/csharp-mode/CscompUtilities.dll')
+<pre class="src src-sh">[System.Reflection.Assembly]::LoadFrom(<span style="color: #ffa07a;">'d:/.emacs.d/site-lisp/csharp-mode/CscompUtilities.dll'</span>)
 </pre>
 </div>
 <blockquote>
@@ -144,12 +144,12 @@ False  v2.0.50727     d:\.emacs.d\site-lisp\csharp-mode\CscompUtilities.dll<br  
 </p>
 <div class="org-src-container">
 
-<pre class="src src-sh">到CscompUtilities.cs 所在目录 ，使用csc.exe编译，生成CscompUtilities.dll
- // 需要依赖ICSharpCode.NRefactory.dll, 同目录下已经自带
-// 注意不要用 c:\\windows\Microsoft.NET\\Framework\\v4.0.* 目录下的csc编译， 似乎版本太高， 用3.5 应该可以
+<pre class="src src-sh">&#21040;CscompUtilities.cs &#25152;&#22312;&#30446;&#24405; &#65292;&#20351;&#29992;csc.exe&#32534;&#35793;&#65292;&#29983;&#25104;CscompUtilities.dll
+ // &#38656;&#35201;&#20381;&#36182;ICSharpCode.NRefactory.dll, &#21516;&#30446;&#24405;&#19979;&#24050;&#32463;&#33258;&#24102;
+// &#27880;&#24847;&#19981;&#35201;&#29992; c:<span style="color: #ffa07a;">\\</span>windows\Microsoft.NET<span style="color: #ffa07a;">\\</span>Framework<span style="color: #ffa07a;">\\</span>v4.0.* &#30446;&#24405;&#19979;&#30340;csc&#32534;&#35793;&#65292; &#20284;&#20046;&#29256;&#26412;&#22826;&#39640;&#65292; &#29992;3.5 &#24212;&#35813;&#21487;&#20197;
 csc.exe  /target:library /R:ICSharpCode.NRefactory.dll   /debug /out:CscompUtilities.dll  CscompUtilities.cs
 csc.exe  /target:library /R:ICSharpCode.NRefactory.dll   /platform:anycpu  /out:CscompUtilities.dll  CscompUtilities.cs
- //或者你自己建一个VS2010 的项目，加入这段代码， 引用ICSharpCode.NRefactory.dll,利用VS2010进行编译，(我用vs2005打开CscompUtilities.cs报错)
+ //&#25110;&#32773;&#20320;&#33258;&#24049;&#24314;&#19968;&#20010;VS2010 &#30340;&#39033;&#30446;&#65292;&#21152;&#20837;&#36825;&#27573;&#20195;&#30721;&#65292; &#24341;&#29992;ICSharpCode.NRefactory.dll,&#21033;&#29992;VS2010&#36827;&#34892;&#32534;&#35793;&#65292;(&#25105;&#29992;vs2005&#25171;&#24320;CscompUtilities.cs&#25253;&#38169;)
 </pre>
 </div>
 <p>
@@ -157,9 +157,9 @@ csc.exe  /target:library /R:ICSharpCode.NRefactory.dll   /platform:anycpu  /out:
 </p>
 <div class="org-src-container">
 
-<pre class="src src-sh">[System.Reflection.Assembly]::LoadFrom('d:/.emacs.d/site-lisp/csharp-mode/CscompUtilities.dll')
-[Ionic.Cscomp.Utilities]::QualifyName("System")
- 如果能运行到这步，外部环境基本已经搞定
+<pre class="src src-sh">[System.Reflection.Assembly]::LoadFrom(<span style="color: #ffa07a;">'d:/.emacs.d/site-lisp/csharp-mode/CscompUtilities.dll'</span>)
+[Ionic.Cscomp.Utilities]::QualifyName(<span style="color: #ffa07a;">"System"</span>)
+ &#22914;&#26524;&#33021;&#36816;&#34892;&#21040;&#36825;&#27493;&#65292;&#22806;&#37096;&#29615;&#22659;&#22522;&#26412;&#24050;&#32463;&#25630;&#23450;
 </pre>
 </div>
 </div>
@@ -183,57 +183,57 @@ csc.exe  /target:library /R:ICSharpCode.NRefactory.dll   /platform:anycpu  /out:
 <div class="outline-text-2" id="text-orgheadline5">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq-default csharp-shell-location-of-util-dll (expand-file-name "~/.emacs.d/site-lisp/csharp-mode/"))
-(setq-default cscomp-assembly-search-paths
-              (list ;;"c:\\.net3.5ra"    ;; &lt;&lt;- locations of reference assemblies
-               ;;"c:\\.net3.0ra"    ;; &lt;&lt;-
-               ;; "C:\\Windows\\Microsoft.NET\\Framework\\v2.0"      ;; &lt;&lt;- location of .NET Framework assemblies
-               ;; 第一次试着补全这些目录下dll文件里的类里，可能会补不出来， 多试几次就好了
-               "D:\\usr\\unity\\Data\\Managed\\"  ;; 你自已项目用到的dll所在的路径
-               ;; "C:\\Windows\\Microsoft.NET\\Framework\\v3.5" ;; 系统路径 似乎不用加入
+<pre class="src src-emacs-lisp">(<span style="color: #FF6400;">setq-default</span> csharp-shell-location-of-util-dll (expand-file-name <span style="color: #ffa07a;">"~/.emacs.d/site-lisp/csharp-mode/"</span>))
+(<span style="color: #FF6400;">setq-default</span> cscomp-assembly-search-paths
+              (list <span style="color: #AEAEAE;">;;</span><span style="color: #AEAEAE;">"c:\\.net3.5ra"    ;; &lt;&lt;- locations of reference assemblies</span>
+               <span style="color: #AEAEAE;">;;</span><span style="color: #AEAEAE;">"c:\\.net3.0ra"    ;; &lt;&lt;-</span>
+               <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">"C:\\Windows\\Microsoft.NET\\Framework\\v2.0"      ;; &lt;&lt;- location of .NET Framework assemblies</span>
+               <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">&#31532;&#19968;&#27425;&#35797;&#30528;&#34917;&#20840;&#36825;&#20123;&#30446;&#24405;&#19979;dll&#25991;&#20214;&#37324;&#30340;&#31867;&#37324;&#65292;&#21487;&#33021;&#20250;&#34917;&#19981;&#20986;&#26469;&#65292; &#22810;&#35797;&#20960;&#27425;&#23601;&#22909;&#20102;</span>
+               <span style="color: #ffa07a;">"D:\\usr\\unity\\Data\\Managed\\"</span>  <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">&#20320;&#33258;&#24050;&#39033;&#30446;&#29992;&#21040;&#30340;dll&#25152;&#22312;&#30340;&#36335;&#24452;</span>
+               <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">"C:\\Windows\\Microsoft.NET\\Framework\\v3.5" ;; &#31995;&#32479;&#36335;&#24452; &#20284;&#20046;&#19981;&#29992;&#21152;&#20837;</span>
                ))
-(require 'csharp-completion)
-(require 'flymake)
-(add-to-list 'csharp-flymake-csc-arguments (concat "/R:" (expand-file-name "~/.emacs.d/site-lisp/csharp-mode/CscompUtilities.dll")))
-(add-to-list 'csharp-flymake-csc-arguments (concat "/R:" (expand-file-name "~/.emacs.d/site-lisp/csharp-mode/ICSharpCode.NRefactory.dll")))
-;; (defvar is-my-dll-loaded nil)
-(when (file-exists-p (expand-file-name "D:/usr/unity/Data/Managed/UnityEngine.dll"))
-  (add-to-list 'csharp-flymake-csc-arguments "/R:D:/usr/unity/Data/Managed/UnityEngine.dll")
-  (add-to-list 'csharp-flymake-csc-arguments "/R:D:/usr/unity/Data/Managed/UnityEditor.dll"))
+(<span style="color: #FBDE2D;">require</span> '<span style="color: #D8FA3C;">csharp-completion</span>)
+(<span style="color: #FBDE2D;">require</span> '<span style="color: #D8FA3C;">flymake</span>)
+(add-to-list 'csharp-flymake-csc-arguments (concat <span style="color: #ffa07a;">"/R:"</span> (expand-file-name <span style="color: #ffa07a;">"~/.emacs.d/site-lisp/csharp-mode/CscompUtilities.dll"</span>)))
+(add-to-list 'csharp-flymake-csc-arguments (concat <span style="color: #ffa07a;">"/R:"</span> (expand-file-name <span style="color: #ffa07a;">"~/.emacs.d/site-lisp/csharp-mode/ICSharpCode.NRefactory.dll"</span>)))
+<span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">(defvar is-my-dll-loaded nil)</span>
+(<span style="color: #FBDE2D;">when</span> (file-exists-p (expand-file-name <span style="color: #ffa07a;">"D:/usr/unity/Data/Managed/UnityEngine.dll"</span>))
+  (add-to-list 'csharp-flymake-csc-arguments <span style="color: #ffa07a;">"/R:D:/usr/unity/Data/Managed/UnityEngine.dll"</span>)
+  (add-to-list 'csharp-flymake-csc-arguments <span style="color: #ffa07a;">"/R:D:/usr/unity/Data/Managed/UnityEditor.dll"</span>))
 
-(defun helm-complete-csharp()
-  (interactive)
-  (setq cscomp-current-list nil)
-  (let ((prefix (thing-at-point 'symbol))
+(<span style="color: #FBDE2D;">defun</span> <span style="color: #FF6400;">helm-complete-csharp</span>()
+  (<span style="color: #FBDE2D;">interactive</span>)
+  (<span style="color: #FF6400;">setq</span> cscomp-current-list <span style="color: #D8FA3C;">nil</span>)
+  (<span style="color: #FBDE2D;">let</span> ((prefix (thing-at-point 'symbol))
         (candidates (cscomp-completions-at-point)))
-    (cond
+    (<span style="color: #FBDE2D;">cond</span>
      ((= 1 (length candidates))
       (insert (car candidates))
       (delete-region cscomp-current-beginning cscomp-current-end))
      ((= 0 (length candidates))
-      (message "not found"))
-     (t
-      (insert (completing-read "complete:" candidates nil t prefix ))
+      (message <span style="color: #ffa07a;">"not found"</span>))
+     (<span style="color: #D8FA3C;">t</span>
+      (insert (completing-read <span style="color: #ffa07a;">"complete:"</span> candidates <span style="color: #D8FA3C;">nil</span> <span style="color: #D8FA3C;">t</span> prefix ))
       (delete-region cscomp-current-beginning cscomp-current-end)))))
 
-    ;;;###autoload
-(defun my-csharp-mode-fn ()
-  "function that runs when csharp-mode is initialized for a buffer."
-  ;; (turn-on-auto-revert-mode)
-  (setq indent-tabs-mode nil)
-  ;; (set (make-local-variable 'c-basic-offset) 4)
-  ;; (make-local-variable 'c-offsets-alist)
-  ;; (c-set-offset 'substatement-open 0)
-  ;; (modify-syntax-entry ?_ "_" ) ;; 作为symbol 而不是word
+    <span style="color: #AEAEAE;">;;;</span><span style="color: #AEAEAE;">###autoload</span>
+(<span style="color: #FBDE2D;">defun</span> <span style="color: #FF6400;">my-csharp-mode-fn</span> ()
+  <span style="color: #ffa07a;">"function that runs when csharp-mode is initialized for a buffer."</span>
+  <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">(turn-on-auto-revert-mode)</span>
+  (<span style="color: #FF6400;">setq</span> indent-tabs-mode <span style="color: #D8FA3C;">nil</span>)
+  <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">(set (make-local-variable 'c-basic-offset) 4)</span>
+  <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">(make-local-variable 'c-offsets-alist)</span>
+  <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">(c-set-offset 'substatement-open 0)</span>
+  <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">(modify-syntax-entry ?_ "_" ) ;; &#20316;&#20026;symbol &#32780;&#19981;&#26159;word</span>
   (flymake-mode 1)
-  (require 'rfringe)
+  (<span style="color: #FBDE2D;">require</span> '<span style="color: #D8FA3C;">rfringe</span>)
 
   (csharp-analysis-mode 1)
-  (local-set-key "\M-\\"   'cscomp-complete-at-point)
+  (local-set-key <span style="color: #ffa07a;">"\M-\\"</span>   'cscomp-complete-at-point)
   (local-set-key [(control return)] 'helm-complete-csharp)
-  ;; (laod-my-dll)
-  ;; (local-set-key "\C-x\C-e"  'eval-print-last-sexp)
-  ;; (add-to-list 'ac-sources 'ac-source-csharp) ;
+  <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">(laod-my-dll)</span>
+  <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">(local-set-key "\C-x\C-e"  'eval-print-last-sexp)</span>
+  <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">(add-to-list 'ac-sources 'ac-source-csharp) ;</span>
   )
 </pre>
 </div>
@@ -256,31 +256,31 @@ helm可以受益于此，<br  />
 <div class="outline-text-2" id="text-orgheadline6">
 <div class="org-src-container">
 
-<pre class="src src-java">using UnityEngine;
-using System;
-using System.Collections;
+<pre class="src src-java"><span style="color: #8DA6CE;">using</span> <span style="color: #40E0D0;">UnityEngine</span>;
+<span style="color: #8DA6CE;">using</span> <span style="color: #40E0D0;">System</span>;
+<span style="color: #8DA6CE;">using</span> <span style="color: #D8FA3C;">System</span>.<span style="color: #40E0D0;">Collections</span>;
 [RequireComponent(typeof(AudioSource))]
-public class cube : MonoBehaviour {
-  public void test()
+<span style="color: #FBDE2D;">public</span> <span style="color: #FBDE2D;">class</span> cube : MonoBehaviour {
+  <span style="color: #FBDE2D;">public</span> <span style="color: #8DA6CE;">void</span> <span style="color: #FF6400;">test</span>()
   {
-    string s;
-    s. // 这里是可以进行补全的
+    <span style="color: #8DA6CE;">string</span> <span style="color: #40E0D0;">s</span>;
+    s. <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#36825;&#37324;&#26159;&#21487;&#20197;&#36827;&#34892;&#34917;&#20840;&#30340;</span>
   }
 }
 </pre>
 </div>
 <div class="org-src-container">
 
-<pre class="src src-java"> using UnityEngine;
-using System;
-using System.Collections;
+<pre class="src src-java"> <span style="color: #8DA6CE;">using</span> <span style="color: #40E0D0;">UnityEngine</span>;
+<span style="color: #8DA6CE;">using</span> <span style="color: #40E0D0;">System</span>;
+<span style="color: #8DA6CE;">using</span> <span style="color: #D8FA3C;">System</span>.<span style="color: #40E0D0;">Collections</span>;
 [RequireComponent(typeof(AudioSource))]
-public class cube : MonoBehaviour {
-  public void test()
+<span style="color: #FBDE2D;">public</span> <span style="color: #FBDE2D;">class</span> cube : MonoBehaviour {
+  <span style="color: #FBDE2D;">public</span> <span style="color: #8DA6CE;">void</span> <span style="color: #FF6400;">test</span>()
   {
-      if(true){
-          string s;// 声明在if 语句里的变量，似乎在分析语法树的时候 ,分析不到if里面定义的变量
-          s. // 这里不可以进行补全
+      <span style="color: #FBDE2D;">if</span>(<span style="color: #D8FA3C;">true</span>){
+          <span style="color: #8DA6CE;">string</span> <span style="color: #40E0D0;">s</span>;<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#22768;&#26126;&#22312;if &#35821;&#21477;&#37324;&#30340;&#21464;&#37327;&#65292;&#20284;&#20046;&#22312;&#20998;&#26512;&#35821;&#27861;&#26641;&#30340;&#26102;&#20505; ,&#20998;&#26512;&#19981;&#21040;if&#37324;&#38754;&#23450;&#20041;&#30340;&#21464;&#37327;</span>
+          s. <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#36825;&#37324;&#19981;&#21487;&#20197;&#36827;&#34892;&#34917;&#20840;</span>
       }
   }
 }
