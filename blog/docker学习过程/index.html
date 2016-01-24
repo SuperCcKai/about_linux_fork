@@ -16,7 +16,6 @@
         <p></p>
         <ul>
           <li><a href="/blog/">Blog</a></li>
-          <li><a href="/docker/">Docker</a></li>
           <li><a href="/tags/">Tags</a></li>
           <li><a href="/about/">About</a></li>
           <li><a href="http://github.com/jixiuf">GitHub</a></li>
@@ -37,10 +36,19 @@
 <div id="text-table-of-contents">
 <ul>
 <li><a href="#orgheadline1">link</a></li>
-<li><a href="#orgheadline2">安装</a></li>
-<li><a href="#orgheadline3">pull 镜像</a></li>
-<li><a href="#orgheadline4">列出镜像 docker images</a></li>
-<li><a href="#orgheadline5">创建镜像 docker commit</a></li>
+<li><a href="#orgheadline2">安装</a>
+<ul>
+<li><a href="#orgheadline3">安装特定的版本</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline4">pull 镜像</a></li>
+<li><a href="#orgheadline5">列出镜像 docker images</a></li>
+<li><a href="#orgheadline6">删除镜像 docker rmi imageId</a></li>
+<li><a href="#orgheadline7">创建镜像 docker commit</a></li>
+<li><a href="#orgheadline8">镜像的备份 恢复(save and load)</a></li>
+<li><a href="#orgheadline9">容器的备份 恢复 (export and import)</a></li>
+<li><a href="#orgheadline10">save 与export 的区别</a></li>
+<li><a href="#orgheadline11">DockerFile</a></li>
 </ul>
 </div>
 </div>
@@ -70,10 +78,32 @@ sudo docker run hello-world
 </pre>
 </div>
 </div>
+<div id="outline-container-orgheadline3" class="outline-3">
+<h3 id="orgheadline3">安装特定的版本</h3>
+<div class="outline-text-3" id="text-orgheadline3">
+<p>
+centos8 默认安装的docker是1.8 版本 ，<br  />
+经常出现一个bug (Layer already being pulled by another client)<br  />
+<a href="https://github.com/docker/docker/releases">https://github.com/docker/docker/releases</a><br  />
+比如以docker1.9.1 为例<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">wget https://get.docker.com/builds/Linux/x86_64/docker-1.9.1
+sudo mv docker-1.9.1 /usr/local/bin/docker
+ # centos7 上 作为服务启动
+wget https://github.com/docker/docker/raw/master/contrib/init/systemd/docker.service
+wget https://raw.githubusercontent.com/docker/docker/master/contrib/init/systemd/docker.socket
+sudo mv docker.socket /etc/systemd/system
+sudo mv docker.service  /etc/systemd/system
+</pre>
 </div>
-<div id="outline-container-orgheadline3" class="outline-2">
-<h2 id="orgheadline3">pull 镜像</h2>
-<div class="outline-text-2" id="text-orgheadline3">
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline4" class="outline-2">
+<h2 id="orgheadline4">pull 镜像</h2>
+<div class="outline-text-2" id="text-orgheadline4">
 <p>
 理论上:<br  />
 </p>
@@ -140,9 +170,9 @@ OPTIONS='&#x2013;selinux-enabled &#x2013;insecure-registry dl.dockerpool.com:500
 </div>
 </div>
 
-<div id="outline-container-orgheadline4" class="outline-2">
-<h2 id="orgheadline4">列出镜像 docker images</h2>
-<div class="outline-text-2" id="text-orgheadline4">
+<div id="outline-container-orgheadline5" class="outline-2">
+<h2 id="orgheadline5">列出镜像 docker images</h2>
+<div class="outline-text-2" id="text-orgheadline5">
 <pre>
 root@localhost ~ # docker images
 REPOSITORY                      TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
@@ -153,9 +183,21 @@ dl.dockerpool.com:5000/centos   latest              87e5b6b3ccc1        15 month
 </div>
 </div>
 
-<div id="outline-container-orgheadline5" class="outline-2">
-<h2 id="orgheadline5">创建镜像 docker commit</h2>
-<div class="outline-text-2" id="text-orgheadline5">
+<div id="outline-container-orgheadline6" class="outline-2">
+<h2 id="orgheadline6">删除镜像 docker rmi imageId</h2>
+<div class="outline-text-2" id="text-orgheadline6">
+<div class="org-src-container">
+
+<pre class="src src-sh">docker rmi imageId
+docker rmi --force=true imageId
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline7" class="outline-2">
+<h2 id="orgheadline7">创建镜像 docker commit</h2>
+<div class="outline-text-2" id="text-orgheadline7">
 <div class="org-src-container">
 
 <pre class="src src-sh">docker run -t -i centos /bin/bash
@@ -168,18 +210,19 @@ root@localhost ~ #<br  />
 </p>
 </blockquote>
 <p>
-官网上运行后的效果是这样的 提示符 @后面的是IMAGE ID<br  />
-你会发现这个Image Id 跟 docker images 列出的 docker.io/centos 的imageId 不一样<br  />
-你 run 出来之后 对其进行的修改 可以用这个imageId 来标志出来<br  />
+官网上运行后的效果是这样的 提示符 @后面的是CONTAINER ID<br  />
+你会发现这个CONTAINER Id 跟 docker images 列出的 docker.io/centos 的imageId 不一样<br  />
+你 run 出来之后 对其进行的修改 可以用这个CONTAINER Id 来标志出来<br  />
 比如我 yum install zsh 之后<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-sh">root@localhost ~ # docker commit -m "install zsh" -a "jixiuf" e658c5517df2 docker.io/centos:with-zsh
+<pre class="src src-sh">root@localhost ~ # docker commit -m "install zsh" -p -a "jixiuf" c00aeccfb3a6 docker.io/centos:with-zsh
 ab3fb905f9cfb1de43519cb5975e582761ce4a0a83facd96c786a525a40b2da4
 </pre>
 </div>
 <p>
+-p 的意思是如果此container 正在运行中在commit 的过程中会pause 之， 使之暂停<br  />
 你会发现 docker images 后 会多出个 docker.io/centos with-zsh<br  />
 </p>
 <pre>
@@ -198,9 +241,95 @@ dl.dockerpool.com:5000/centos   latest              87e5b6b3ccc1        15 month
 <pre class="src src-sh">docker run -t -i centos:with-zsh
 </pre>
 </div>
+
 <p>
-*<br  />
+查看所有的容器列表的命令是：docker ps -a ，显示最近一个容器的命令是：docker ps -l，<br  />
 </p>
+<div class="org-src-container">
+
+<pre class="src src-sh">deployer@bogon ~ $ docker ps -l
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                     PORTS               NAMES
+2ddd2f107676        centos              "bash"              14 minutes ago      Exited (0) 3 seconds ago                       gigantic_meninsky
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline8" class="outline-2">
+<h2 id="orgheadline8">镜像的备份 恢复(save and load)</h2>
+<div class="outline-text-2" id="text-orgheadline8">
+<div class="org-src-container">
+
+<pre class="src src-sh">docker save -o image.tar imageid
+docker save imageid|gzip &gt;image.tar.gz
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-sh">docker load -i image.tar
+cat image.tar.gz|gunzip|docker load
+</pre>
+</div>
+<p>
+load 完之后 docker images<br  />
+会发现多出一个无名无姓的imageId<br  />
+需要用docker tag 为之打标签<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">docker tag iamgeId golang:1.5
+docker tag iamgeId debian:latest
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline9" class="outline-2">
+<h2 id="orgheadline9">容器的备份 恢复 (export and import)</h2>
+<div class="outline-text-2" id="text-orgheadline9">
+<div class="org-src-container">
+
+<pre class="src src-sh">docker export &lt;CONTAINER ID&gt; &gt; /home/export.tar
+cat /home/export.tar | sudo docker import - reposName:latest
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline10" class="outline-2">
+<h2 id="orgheadline10">save 与export 的区别</h2>
+<div class="outline-text-2" id="text-orgheadline10">
+<p>
+导出后再导入(exported-imported)<br  />
+的镜像会丢失所有的历史，而保存后再加载（saveed-loaded）的镜像没有丢失<br  />
+历史和层(layer)。这意味着使用导出后再导入的方式，你将无法回滚到之前的<br  />
+层(layer)，同时，使用保存后再加载的方式持久化整个镜像，就可以做到层回<br  />
+滚（可以执行docker tag &lt;LAYER ID&gt; &lt;IMAGE NAME&gt;来回滚之前的层）。<br  />
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline11" class="outline-2">
+<h2 id="orgheadline11">DockerFile</h2>
+<div class="outline-text-2" id="text-orgheadline11">
+<div class="org-src-container">
+
+<pre class="src src-sh">docker build  -t tagname .
+# 不生成镜像，只根据imageid 来找对应的镜像
+docker build  .
+docker build --rm=true .
+</pre>
+</div>
+<p>
+Dockerfile example:<br  />
+</p>
+<blockquote>
+<p>
+FROM docker.io/centos:latest<br  />
+</p>
+
+<p>
+Run yum install -y go<br  />
+</p>
+</blockquote>
 </div>
 </div>
 
@@ -209,7 +338,7 @@ dl.dockerpool.com:5000/centos   latest              87e5b6b3ccc1        15 month
     <div>
       <div class="post-meta">
         <span title="post date" class="post-info">2016-01-19</span>
-        <span title="last modification date" class="post-info">2016-01-20</span>
+        <span title="last modification date" class="post-info">2016-01-24</span>
         <span title="tags" class="post-info"><a href="/tags/docker/">Docker</a>, <a href="/tags/linux/">Linux</a>, <a href="/tags/centos/">Centos</a></span>
         <span title="author" class="post-info">纪秀峰</span>
       </div>
