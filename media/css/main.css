@@ -147,32 +147,53 @@ pre {
     margin: 0 0 14px;
     padding: 15px;
     border: 1px solid #e1e1e8;
-    border-radius: 3px 3px 3px 3px;
+    border-radius: 12px 12px 12px 12px;
     line-height: 28px;
-    background-color: #888866;
+    /* background-color: #888866; */
+	background:#0c1021;
+    /* background:#263111; */
+    color: #f7f8c6;
+    
     white-space: pre;
     white-space: pre-wrap;
     word-break: break-all;
     word-wrap: break-word;
-}
-pre.src {
-    padding-top: 1.2em;
     position: relative;
 }
+pre:hover{
+    position: relative;
+    width:148%;
+    z-index:200;/*must set position:*/
+}
+
+
+pre.src {
+    padding-top: 1.2em;
+    margin-left:-10px;
+    position: relative;
+}
+pre.src:hover {
+    width:148%;
+    position: relative;
+    z-index:200;                /*must set position:*/
+}
+
 pre.src:before {
-  display: none;
+  display: inline;
   position: absolute;
-  background-color: white;
   top: -18px;
-  right: 10px;
+  left: -10px;
   padding: 3px;
   border: 1px solid black;
-}
-pre.src:hover:before {
-  display: inline;
+  border-radius: 12px 12px 12px 12px;
   background-color: #000000;
-  border: 1px solid #e1e1e8;
+  /* background-color: white; */
 }
+/* pre.src:hover:before { */
+/*   display: inline; */
+/*   background-color: #000000; */
+/*   border: 1px solid #e1e1e8; */
+/* } */
 pre.src-sh:before    { content: 'sh'; }
 pre.src-bash:before  { content: 'sh'; }
 pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
@@ -181,13 +202,56 @@ pre.src-matlab:before  { content: 'matlab'; }
 pre.src-maxima:before  { content: 'maxima'; }
 pre.src-lisp:before   { content: 'common lisp'; }
 
+pre.prettyprint:hover {
+    width:148%;
+    position: relative;
+    z-index:200;                /*must set position:*/
+}
+pre.prettyprint:before {
+  display: inline;
+  position: absolute;
+  top: -18px;
+  left: -10px;
+  padding: 3px;
+  border: 1px solid black;
+  border-radius: 12px 12px 12px 12px;
+  background-color: #000000;
+  /* background-color: white; */
+}
+/* pre.prettyprint:hover:before { */
+/*   display: inline; */
+/*   background-color: #000000; */
+/*   border: 1px solid #e1e1e8; */
+/* } */
+pre.lang-sh:before    { content: 'sh'; }
+pre.lang-bash:before  { content: 'sh'; }
+pre.lang-emacs-lisp:before { content: 'Emacs Lisp'; }
+pre.lang-C:before     { content: 'C/C++'; }
+pre.lang-matlab:before  { content: 'matlab'; }
+pre.lang-maxima:before  { content: 'maxima'; }
+pre.lang-lisp:before   { content: 'common lisp'; }
+
+
+
 blockquote {
-    padding: 0 0 0 20px;
-    margin: 1px 10px 1px 10px;
+    postion:relative;
+    padding: 10px 0 10px 20px;
+    margin: 0px 0px 20px -10px;
+    /* margin-left:-10px; */
     /* color: #ccffcc; */
     background-color: #555555;
     border: 1px solid #e5e5e5;
+    border-radius: 12px 12px 12px 12px;
 }
+
+blockquote:hover {
+    position: relative;
+    width:142%;
+    z-index:200;/*must set position:*/
+    /* height:100px; */
+    max-height:100%;
+}
+
 blockquote p:last-child {
     margin-bottom: 0;
 }
@@ -389,7 +453,7 @@ td	{
     /* ensure doesn't flow off the screen when expanded */
     max-height: 100%;
     overflow: auto;
-    z-index: 200;
+    z-index: 200;/*must set position:*/
     max-width: 26%;
     
 }
@@ -489,4 +553,3 @@ td	{
         padding: 30px;
     }
 }
-
