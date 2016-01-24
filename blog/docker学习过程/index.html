@@ -173,13 +173,15 @@ OPTIONS='&#x2013;selinux-enabled &#x2013;insecure-registry dl.dockerpool.com:500
 <div id="outline-container-orgheadline5" class="outline-2">
 <h2 id="orgheadline5">列出镜像 docker images</h2>
 <div class="outline-text-2" id="text-orgheadline5">
-<pre>
-root@localhost ~ # docker images
-REPOSITORY                      TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
-docker.io/centos                latest              60e65a8e4030        3 weeks ago         196.6 MB
-docker.io/hello-world           latest              975b84d108f1        3 months ago        960 B
-dl.dockerpool.com:5000/centos   latest              87e5b6b3ccc1        15 months ago       224 MB
-</pre>
+<blockquote>
+<p>
+root@localhost ~ # docker images<br  />
+REPOSITORY                      TAG                 IMAGE ID            CREATED             VIRTUAL SIZE<br  />
+docker.io/centos                latest              60e65a8e4030        3 weeks ago         196.6 MB<br  />
+docker.io/hello-world           latest              975b84d108f1        3 months ago        960 B<br  />
+dl.dockerpool.com:5000/centos   latest              87e5b6b3ccc1        15 months ago       224 MB<br  />
+</p>
+</blockquote>
 </div>
 </div>
 
@@ -225,15 +227,18 @@ ab3fb905f9cfb1de43519cb5975e582761ce4a0a83facd96c786a525a40b2da4
 -p 的意思是如果此container 正在运行中在commit 的过程中会pause 之， 使之暂停<br  />
 你会发现 docker images 后 会多出个 docker.io/centos with-zsh<br  />
 </p>
-<pre>
-root@localhost ~ # docker images
-REPOSITORY                      TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
-docker.io/centos                with-zsh            ab3fb905f9cf        28 seconds ago      261.7 MB
-docker.io/centos                latest              60e65a8e4030        3 weeks ago         196.6 MB
-docker.io/hello-world           latest              975b84d108f1        3 months ago        960 B
-dl.dockerpool.com:5000/centos   latest              87e5b6b3ccc1        15 months ago       224 MB
-</pre>
+<blockquote>
 <p>
+root@localhost ~ # docker images<br  />
+REPOSITORY                      TAG                 IMAGE ID            CREATED             VIRTUAL SIZE<br  />
+docker.io/centos                with-zsh            ab3fb905f9cf        28 seconds ago      261.7 MB<br  />
+docker.io/centos                latest              60e65a8e4030        3 weeks ago         196.6 MB<br  />
+docker.io/hello-world           latest              975b84d108f1        3 months ago        960 B<br  />
+dl.dockerpool.com:5000/centos   latest              87e5b6b3ccc1        15 months ago       224 MB<br  />
+</p>
+</blockquote>
+<p>
+#+END_HTML<br  />
 随后就可以这样使用with-zsh 这个镜像<br  />
 </p>
 <div class="org-src-container">
