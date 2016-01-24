@@ -75,15 +75,13 @@ OPTIONS='--selinux-enabled --insecure-registry dl.dockerpool.com:5000'
 #+END_SRC
 
 * 列出镜像 docker images
-  #+BEGIN_HTML
-  <pre>
+  #+BEGIN_QUOTE
   root@localhost ~ # docker images
   REPOSITORY                      TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
   docker.io/centos                latest              60e65a8e4030        3 weeks ago         196.6 MB
   docker.io/hello-world           latest              975b84d108f1        3 months ago        960 B
   dl.dockerpool.com:5000/centos   latest              87e5b6b3ccc1        15 months ago       224 MB
-  </pre>
-  #+END_HTML
+  #+END_QUOTE
 
 * 删除镜像 docker rmi imageId
   #+BEGIN_SRC sh
@@ -109,15 +107,14 @@ ab3fb905f9cfb1de43519cb5975e582761ce4a0a83facd96c786a525a40b2da4
 #+END_SRC
 -p 的意思是如果此container 正在运行中在commit 的过程中会pause 之， 使之暂停
 你会发现 docker images 后 会多出个 docker.io/centos with-zsh
-#+BEGIN_HTML
-<pre>
+#+BEGIN_QUOTE
 root@localhost ~ # docker images
 REPOSITORY                      TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
 docker.io/centos                with-zsh            ab3fb905f9cf        28 seconds ago      261.7 MB
 docker.io/centos                latest              60e65a8e4030        3 weeks ago         196.6 MB
 docker.io/hello-world           latest              975b84d108f1        3 months ago        960 B
 dl.dockerpool.com:5000/centos   latest              87e5b6b3ccc1        15 months ago       224 MB
-</pre>
+#+END_QUOTE
 #+END_HTML
 随后就可以这样使用with-zsh 这个镜像
 #+BEGIN_SRC sh
