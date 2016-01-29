@@ -355,3 +355,5 @@ Modeline "1440x900_75.00"  136.75  1440 1536 1688 1936  900 903 909 942 -hsync +
 
 
 
+* 用python 格式化json
+  cat a.json|python -m json.tool

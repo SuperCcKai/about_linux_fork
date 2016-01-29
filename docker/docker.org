@@ -75,15 +75,13 @@ OPTIONS='--selinux-enabled --insecure-registry dl.dockerpool.com:5000'
 #+END_SRC
 
 * 列出镜像 docker images
-  #+BEGIN_HTML
-  <pre>
+  #+BEGIN_QUOTE
   root@localhost ~ # docker images
   REPOSITORY                      TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
   docker.io/centos                latest              60e65a8e4030        3 weeks ago         196.6 MB
   docker.io/hello-world           latest              975b84d108f1        3 months ago        960 B
   dl.dockerpool.com:5000/centos   latest              87e5b6b3ccc1        15 months ago       224 MB
-  </pre>
-  #+END_HTML
+  #+END_QUOTE
 
 * 删除镜像 docker rmi imageId
   #+BEGIN_SRC sh
@@ -99,24 +97,24 @@ OPTIONS='--selinux-enabled --insecure-registry dl.dockerpool.com:5000'
 root@localhost ~ #
 [root@c00aeccfb3a6 /]#
 #+END_QUOTE
-官网上运行后的效果是这样的 提示符 @后面的是IMAGE ID
-你会发现这个Image Id 跟 docker images 列出的 docker.io/centos 的imageId 不一样
-你 run 出来之后 对其进行的修改 可以用这个imageId 来标志出来
+官网上运行后的效果是这样的 提示符 @后面的是CONTAINER ID
+你会发现这个CONTAINER Id 跟 docker images 列出的 docker.io/centos 的imageId 不一样
+你 run 出来之后 对其进行的修改 可以用这个CONTAINER Id 来标志出来
 比如我 yum install zsh 之后
 #+BEGIN_SRC sh
-root@localhost ~ # docker commit -m "install zsh" -a "jixiuf" e658c5517df2 docker.io/centos:with-zsh
+root@localhost ~ # docker commit -m "install zsh" -p -a "jixiuf" c00aeccfb3a6 docker.io/centos:with-zsh
 ab3fb905f9cfb1de43519cb5975e582761ce4a0a83facd96c786a525a40b2da4
 #+END_SRC
+-p 的意思是如果此container 正在运行中在commit 的过程中会pause 之， 使之暂停
 你会发现 docker images 后 会多出个 docker.io/centos with-zsh
-#+BEGIN_HTML
-<pre>
+#+BEGIN_QUOTE
 root@localhost ~ # docker images
 REPOSITORY                      TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
 docker.io/centos                with-zsh            ab3fb905f9cf        28 seconds ago      261.7 MB
 docker.io/centos                latest              60e65a8e4030        3 weeks ago         196.6 MB
 docker.io/hello-world           latest              975b84d108f1        3 months ago        960 B
 dl.dockerpool.com:5000/centos   latest              87e5b6b3ccc1        15 months ago       224 MB
-</pre>
+#+END_QUOTE
 #+END_HTML
 随后就可以这样使用with-zsh 这个镜像
 #+BEGIN_SRC sh
@@ -129,6 +127,34 @@ deployer@bogon ~ $ docker ps -l
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                     PORTS               NAMES
 2ddd2f107676        centos              "bash"              14 minutes ago      Exited (0) 3 seconds ago                       gigantic_meninsky
 #+END_SRC
+
+* 镜像的备份 恢复(save and load)
+  #+BEGIN_SRC sh
+  docker save -o image.tar imageid
+  docker save imageid|gzip >image.tar.gz
+  #+END_SRC
+  #+BEGIN_SRC sh
+  docker load -i image.tar
+  cat image.tar.gz|gunzip|docker load
+  #+END_SRC
+  load 完之后 docker images
+  会发现多出一个无名无姓的imageId
+  需要用docker tag 为之打标签
+  #+BEGIN_SRC sh
+  docker tag iamgeId golang:1.5
+  docker tag iamgeId debian:latest
+  #+END_SRC
+* 容器的备份 恢复 (export and import)
+  #+BEGIN_SRC sh
+  docker export <CONTAINER ID> > /home/export.tar
+  cat /home/export.tar | sudo docker import - reposName:latest
+  #+END_SRC
+*  save 与export 的区别
+导出后再导入(exported-imported)
+的镜像会丢失所有的历史，而保存后再加载（saveed-loaded）的镜像没有丢失
+历史和层(layer)。这意味着使用导出后再导入的方式，你将无法回滚到之前的
+层(layer)，同时，使用保存后再加载的方式持久化整个镜像，就可以做到层回
+滚（可以执行docker tag <LAYER ID> <IMAGE NAME>来回滚之前的层）。
 
 *  DockerFile
   #+BEGIN_SRC sh
