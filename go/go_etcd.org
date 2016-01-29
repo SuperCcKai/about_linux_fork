@@ -98,7 +98,7 @@ curl -L http://127.0.0.1:4001/v2/keys/mykey2
       wrong value is set, etcd will attempt to start but fail safely.
    7. -advertise-client-urls
       List of this member's client URLs to advertise to the rest of the cluster.
-      似乎是广播用url
+      它是把当前运行的etcd的client URL地址通知给cluster中的其它成员
       Be careful if you are advertising URLs such as
       http://localhost:2379 from a cluster member and are using the
       proxy feature of etcd. This will cause loops, because the proxy
@@ -139,7 +139,7 @@ curl -L http://127.0.0.1:4001/v2/keys/mykey2
             -initial-cluster infra0=http://127.0.0.1:2380,infra1=http://127.0.0.1:3380,infra2=http://127.0.0.1:4380 \
             -initial-cluster-state new
    #+END_SRC
-验证 集群是否连通
+   验证 集群是否连通
 #+BEGIN_SRC sh
   # 在其中一个节点上put
   curl -L http://127.0.0.1:2379/v2/keys/mykey -XPUT -d value="hello"
@@ -150,4 +150,75 @@ curl -L http://127.0.0.1:4001/v2/keys/mykey2
 #+END_SRC
 
 ** etcd服务发现
-** dns服务发现
+*** 使用公有 etcd 发现服务（Public etcd Discovery Service）
+    从 https://discovery.etcd.io/new 申请size=3 的一个token
+    然后用这个token 启动3个节点
+    当3个节点都启动成功后， 集群算启动成功
+    获得的token 只能使用一次(只能用于一个集群的创建)
+    但是网速原因 以下代码可能会失败
+    #+BEGIN_SRC sh
+    curl "https://discovery.etcd.io/new?size=3"
+    #return this:  https://discovery.etcd.io/b3117295b04f74ab53f9ea32fa5a4dcb
+    #+END_SRC
+
+   node1
+   #+BEGIN_SRC sh
+     etcd -name infra0 -initial-advertise-peer-urls http://127.0.0.1:5380 \
+            -listen-peer-urls http://127.0.0.1:5380 \
+            -listen-client-urls http://127.0.0.1:5379 \
+            -advertise-client-urls http://127.0.0.1:5379 \
+            -discovery  https://discovery.etcd.io/b3117295b04f74ab53f9ea32fa5a4dcb
+   #+END_SRC
+   node2
+   #+BEGIN_SRC sh
+     etcd -name infra1 -initial-advertise-peer-urls http://127.0.0.1:3380 \
+            -listen-peer-urls http://127.0.0.1:3380 \
+            -listen-client-urls http://127.0.0.1:3379 \
+            -advertise-client-urls http://127.0.0.1:3379 \
+            -discovery  https://discovery.etcd.io/b3117295b04f74ab53f9ea32fa5a4dcb
+   #+END_SRC
+   node3
+   #+BEGIN_SRC sh
+     etcd -name infra2 -initial-advertise-peer-urls http://127.0.0.1:4380 \
+            -listen-peer-urls http://127.0.0.1:4380 \
+            -listen-client-urls http://127.0.0.1:4379 \
+            -advertise-client-urls http://127.0.0.1:4379 \
+            -discovery  https://discovery.etcd.io/b3117295b04f74ab53f9ea32fa5a4dcb
+   #+END_SRC
+*** 构建自己的 etcd discovery service
+    首先要起动一个etcd 或集群用来做discovery service(即有一个已经起动的etcd)
+    比如我打算建一个size=3的etcd 集群
+    #+BEGIN_SRC sh
+      curl -X PUT https://localhost:2379/v2/keys/discovery/6c007a14875d53d9bf0ef5a6fc0257c817f0fb83/_config/size -d value=3
+    #+END_SRC
+
+   node1
+   #+BEGIN_SRC sh
+     etcd -name infra0 -initial-advertise-peer-urls http://127.0.0.1:5380 \
+            -listen-peer-urls http://127.0.0.1:5380 \
+            -listen-client-urls http://127.0.0.1:5379 \
+            -advertise-client-urls http://127.0.0.1:5379 \
+            -discovery  http://localhost:2379/v2/keys/discovery/6c007a14875d53d9bf0ef5a6fc0257c817f0fb83
+   #+END_SRC
+   node2
+   #+BEGIN_SRC sh
+     etcd -name infra1 -initial-advertise-peer-urls http://127.0.0.1:3380 \
+            -listen-peer-urls http://127.0.0.1:3380 \
+            -listen-client-urls http://127.0.0.1:3379 \
+            -advertise-client-urls http://127.0.0.1:3379 \
+            -discovery  http://localhost:2379/v2/keys/discovery/6c007a14875d53d9bf0ef5a6fc0257c817f0fb83
+   #+END_SRC
+   node3
+   #+BEGIN_SRC sh
+     etcd -name infra2 -initial-advertise-peer-urls http://127.0.0.1:4380 \
+            -listen-peer-urls http://127.0.0.1:4380 \
+            -listen-client-urls http://127.0.0.1:4379 \
+            -advertise-client-urls http://127.0.0.1:4379 \
+            -discovery  http://localhost:2379/v2/keys/discovery/6c007a14875d53d9bf0ef5a6fc0257c817f0fb83
+   #+END_SRC
+
+   为了安全，在每次启动新的etcd集群时，请务必使用新的discovery token进
+   行注册。 另外，如果你初始化时启动的节点超过了指定的数量，多余的节点
+   会自动转化为proxy模式的etcd。
+*  link
+  http://www.sel.zju.edu.cn/?p=523
