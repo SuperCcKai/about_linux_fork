@@ -1,0 +1,114 @@
+# -*- coding:utf-8 -*-
+#+LANGUAGE:  zh
+#+TITLE:    墙内搭 vitess 环境
+#+AUTHOR:    纪秀峰
+#+EMAIL:     jixiuf@gmail.com
+#+DATE:     2016-02-01 一
+#+DESCRIPTION:vitess 测试
+#+KEYWORDS:
+#+TAGS: Golang:Vitess
+#+FILETAGS:
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
+* 墙内在centos7上搭 vitess 环境
+  https://github.com/jixiuf/vitess-build-patch
+  有些墙外的文件 ，放到了 这个仓库中
+  有些 执行 go get url 会失败,但是其代码基本都可以从github.com 上直接下载
+  在centos 7 上执行以下命令 会 下载vitess 源码及其依赖
+  并给源码打补丁以避免翻墙的麻烦
+  #+BEGIN_SRC sh
+  git clone https://github.com/jixiuf/vitess-build-patch
+  cd vitess-build-patch;make
+  #+END_SRC
+  详细内容见https://github.com/jixiuf/vitess-build-patch
+* 检查 ulimit 等
+  #+BEGIN_SRC sh
+   cat /etc/security/limits.conf
+  #+END_SRC
+  #+BEGIN_QUOTE
+    * soft nofile 102400
+    * hard nofile 102400
+  #+END_QUOTE
+* 设置环境变量
+  VTROOT
+  VTDATAROOT
+  #+BEGIN_SRC sh
+    export VTROOT=$HOME/vt
+    export VTDATAROOT=$HOME/vtdataroot
+    export VTTOP=$VTROOT/src/github.com/youtube/vitess
+    export LD_LIBRARY_PATH=$VTROOT/dist/vt-zookeeper-3.4.6/lib:$LD_LIBRARY_PATH
+    mkdir -p $VTDATAROOT/tmp
+    mkdir -p $VTDATAROOT/backups
+  #+END_SRC
+* 启动etc
+  [[file:go_etcd.org][etcd介绍]]
+  这里以启动单实例etcd来代替一个集群
+  不用zookeeper
+  #+BEGIN_SRC sh
+     # 默认etcd client 兼听在localhost:2379端口
+    etcd
+    etcd -listen-client-urls http://127.0.0.1:2379  -advertise-client-urls http://127.0.0.1:2379
+    # docker 运行 不可bind 到localhost ，否则 docker容器外无法访问
+    sudo docker run --name=etcd-name -d -p 2380:2380 -p 2379:2379 vitess/etcd:v2.0.13-lite etcd  -listen-client-urls http://0.0.0.0:2379  -advertise-client-urls http://0.0.0.0:2379
+  #+END_SRC
+* 启动vtctld
+  vtctld-up.sh
+  #+BEGIN_SRC sh
+    #!/bin/bash
+
+    # This is an example script that starts vtctld.
+
+
+    $VTROOT/bin/vtctld \
+      -web_dir $VTTOP/web/vtctld \
+      -tablet_protocol grpc \
+      -tablet_manager_protocol grpc \
+      -service_map 'grpc-vtctl' \
+      -backup_storage_implementation file \
+      -file_backup_storage_root $VTDATAROOT/backups \
+      -log_dir $VTDATAROOT/tmp \
+      -port 15000 \
+      -grpc_port 15999 \
+      -topo_implementation etcd \
+      -etcd_global_addrs http://127.0.0.1:2379 \
+      -pid_file $VTDATAROOT/tmp/vtctld.pid  \
+      > $VTDATAROOT/tmp/vtctld.out 2>&1 &
+
+    echo "Access vtctld web UI at http://127.0.0.1:15000"
+    echo "Send commands with: vtctlclient -server 127.0.0.1:15999 ..."
+  #+END_SRC
+注意跟etcd 相关的参数
+#+BEGIN_QUOTE
+      -topo_implementation etcd \
+      -etcd_global_addrs http://127.0.0.1:2379 \
+#+END_QUOTE
+  web 访问15000 端口验证vtctld 是否启动成功
+  http://192.168.1.109:15000
+** docker run vtctld
+   #+BEGIN_SRC sh
+   sudo docker run  -p 15000:15000 -p 15999:15999 --link=etcd-name:etcd-alias --name=vtctld-name -d -u vitess vitess/lite:latest bash -c 'mkdir -p $VTDATAROOT/{backups,tmp}&&
+     vtctld \
+      -web_dir $VTTOP/web/vtctld \
+      -tablet_protocol grpc \
+      -tablet_manager_protocol grpc \
+      -service_map 'grpc-vtctl' \
+      -backup_storage_implementation file \
+      -file_backup_storage_root $VTDATAROOT/backups \
+      -log_dir $VTDATAROOT/tmp \
+      -port 15000 \
+      -grpc_port 15999 \
+      -topo_implementation etcd \
+      -etcd_global_addrs http://etcd-alias:2379 \
+      -pid_file $VTDATAROOT/tmp/vtctld.pid \
+      > $VTDATAROOT/tmp/vtctld.out 2>&1 '
+   #+END_SRC
+   1. 注意这里的 --link 将etcd 对应的容器链接起来，下面vtctld 起动的时候通过 http://etcd-alias:2379 来访问etcd
+   2. 这条指令使用 vitess/lite:latest 镜像生成 此镜像内有
+      VOLUME /vt/vtdataroot
+      这条指令，会创建一个数据卷，而运行后的 vtctld 会把数据存到这个目录/vt/vtdataroot
+      #+BEGIN_SRC sh
+        sudo docker run --rm --volumes-from vtctld-name  -ti debian:jessie
+              #通过这条命令 在这个新启动的容器中你可以看到 /vt/vtdataroot 这个目录
+              #这里面的内容就是 vtctld-name 这个容器里的数据卷
+      #+END_SRC
+* 启动vttablets
