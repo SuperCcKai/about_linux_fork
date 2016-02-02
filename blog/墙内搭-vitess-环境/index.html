@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <title>墙内搭 vitess 环境 - 一个人的狂欢</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="纪秀峰" />
+    <meta name="description" content="vitess 测试" />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="/media/css/main.css" type="text/css">
+    <!-- <link rel="stylesheet" href="/media/css/prettify.css" type="text/css"> -->
+  </head>
+  <body class="container">
+    <div>
+      <header class="masthead">
+        <h1 class="masthead-title"><a href="/">一个人的狂欢</a></h1>
+        <p></p>
+        <ul>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/tags/">Tags</a></li>
+          <li><a href="/tags/">Tags</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="http://github.com/jixiuf">GitHub</a></li>
+          <li><a href="/rss.xml">RSS</a></li>
+        </ul>
+        <form method="get" id="searchform" action="http://www.google.com/search">
+          <input type="text" class="field" name="q" id="s" placeholder="Search">
+          <input type="hidden" name="as_sitesearch" value="jixiuf.github.io">
+        </form>
+      </header>
+    </div>
+
+<div>
+<div class="post">
+<h1>墙内搭 vitess 环境</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgheadline1">墙内在centos7上搭 vitess 环境</a></li>
+<li><a href="#orgheadline2">检查 ulimit 等</a></li>
+<li><a href="#orgheadline3">设置环境变量</a></li>
+<li><a href="#orgheadline4">启动etcd(global topology service  and  local topology service)</a>
+<ul>
+<li><a href="#orgheadline5">本地启动 etcd   (global topology  and local topology)</a></li>
+<li><a href="#orgheadline6">docker 中运行etcd</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline9">启动vtctld</a>
+<ul>
+<li><a href="#orgheadline7">本地启动vtctld</a></li>
+<li><a href="#orgheadline8">docker 启动 vtctld</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline12">启动vttablets</a>
+<ul>
+<li><a href="#orgheadline10">本地启动vttablets</a></li>
+<li><a href="#orgheadline11">docker 启动vttablets</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline13">Initialize the new keyspace</a></li>
+<li><a href="#orgheadline14">Initialize MySQL databases</a></li>
+<li><a href="#orgheadline15">建表</a></li>
+<li><a href="#orgheadline16">backup 备份</a></li>
+<li><a href="#orgheadline17">启动 vtgate</a></li>
+<li><a href="#orgheadline18">启动客户端 连接 vitess 集群</a></li>
+<li><a href="#orgheadline19">关于 &#x2013;volumes-from vtctld-name</a></li>
+<li><a href="#orgheadline20">vtctld vtctl vtctlclient的关系</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">墙内在centos7上搭 vitess 环境</h2>
+<div class="outline-text-2" id="text-orgheadline1">
+<p>
+<a href="https://github.com/jixiuf/vitess-build-patch">https://github.com/jixiuf/vitess-build-patch</a><br  />
+有些墙外的文件 ，放到了 这个仓库中<br  />
+有些 执行 go get url 会失败,但是其代码基本都可以从github.com 上直接下载<br  />
+在centos 7 上执行以下命令 会 下载vitess 源码及其依赖<br  />
+并给源码打补丁以避免翻墙的麻烦<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">git clone https://github.com/jixiuf/vitess-build-patch
+<span style="color: #F8F8F8;">cd</span> vitess-build-patch;make
+</pre>
+</div>
+<p>
+详细内容见<a href="https://github.com/jixiuf/vitess-build-patch">https://github.com/jixiuf/vitess-build-patch</a><br  />
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2">检查 ulimit 等</h2>
+<div class="outline-text-2" id="text-orgheadline2">
+<div class="org-src-container">
+
+<pre class="src src-sh">cat /etc/security/limits.conf
+</pre>
+</div>
+<blockquote>
+<ul class="org-ul">
+<li>soft nofile 102400<br  /></li>
+<li>hard nofile 102400<br  /></li>
+</ul>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-orgheadline3" class="outline-2">
+<h2 id="orgheadline3">设置环境变量</h2>
+<div class="outline-text-2" id="text-orgheadline3">
+<p>
+VTROOT<br  />
+VTDATAROOT<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #F8F8F8;">export</span> <span style="color: #40E0D0;">VTROOT</span>=$<span style="color: #40E0D0;">HOME</span>/vt
+<span style="color: #F8F8F8;">export</span> <span style="color: #40E0D0;">VTDATAROOT</span>=$<span style="color: #40E0D0;">HOME</span>/vtdataroot
+<span style="color: #F8F8F8;">export</span> <span style="color: #40E0D0;">VTTOP</span>=$<span style="color: #40E0D0;">VTROOT</span>/src/github.com/youtube/vitess
+<span style="color: #F8F8F8;">export</span> <span style="color: #40E0D0;">LD_LIBRARY_PATH</span>=$<span style="color: #40E0D0;">VTROOT</span>/dist/vt-zookeeper-3.4.6/lib:$<span style="color: #40E0D0;">LD_LIBRARY_PATH</span>
+mkdir -p $<span style="color: #40E0D0;">VTDATAROOT</span>/tmp
+mkdir -p $<span style="color: #40E0D0;">VTDATAROOT</span>/backups
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline4" class="outline-2">
+<h2 id="orgheadline4">启动etcd(global topology service  and  local topology service)</h2>
+<div class="outline-text-2" id="text-orgheadline4">
+<p>
+<a href="go_etcd.html">etcd介绍</a><br  />
+关于下面提到的cell(数据中心等概念 传送门中有介绍)<br  />
+<a href="go_vitess.html">vitess架构介绍</a><br  />
+</p>
+
+<p>
+这里以启动单实例etcd来代替一个集群<br  />
+不用zookeeper<br  />
+下面启动的两个etcd 分别代表两个集群，一个做为 global topology 一个作为数据中心:test 的local topology<br  />
+</p>
+</div>
+<div id="outline-container-orgheadline5" class="outline-3">
+<h3 id="orgheadline5">本地启动 etcd   (global topology  and local topology)</h3>
+<div class="outline-text-3" id="text-orgheadline5">
+<div class="org-src-container">
+
+<pre class="src src-sh"> <span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">&#40664;&#35748;etcd client &#20860;&#21548;&#22312;localhost:2379&#31471;&#21475;</span>
+ <span style="color: #AEAEAE;">#</span><span style="color: #AEAEAE;">&#21551;&#21160;&#19968;&#20010;global topology     &#20860;&#21548;&#22312;2379&#31471;&#21475;</span>
+etcd  -listen-client-urls http://0.0.0.0:2379  -advertise-client-urls http://0.0.0.0:2379 -listen-peer-urls http://0.0.0.0:2380
+<span style="color: #AEAEAE;">#</span><span style="color: #AEAEAE;">&#21551;&#21160;&#19968;&#20010;local topology # &#20860;&#21548;&#21040;3379&#31471;&#21475;</span>
+etcd  -listen-client-urls http://0.0.0.0:3379  -advertise-client-urls http://0.0.0.0:3379 -listen-peer-urls http://0.0.0.0:3380
+<span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">&#22312;global topology &#20013;&#20026;&#21517;&#20026;test &#30340;cell&#65288;&#25968;&#25454;&#20013;&#24515;&#65289; &#27880;&#20876; local topology</span>
+etcdctl  -C <span style="color: #ffa07a;">"http://127.0.0.1:2379"</span>  set <span style="color: #ffa07a;">"/vt/cells/test"</span> <span style="color: #ffa07a;">"http://127.0.0.1:3379"</span>
+<span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">&#27880;&#24847; &#36825;&#37324;&#35774;&#32622;&#30340;&#20540;&#20351;&#29992;&#20102;127.0.0.1 ,&#22914;&#26524;&#20687;vttablets&#36825;&#31181;&#36827;&#31243;&#19981;&#26159;&#25918;&#22312;&#26412;&#26426;&#22120;&#19978;&#65292;&#21017;&#20250;&#20986;&#38382;&#39064;&#65292;&#20320;&#21487;&#33021;&#38656;&#35201;&#25226;127.0.0.1 &#25442;&#25104;&#20320;&#30495;&#23454;&#30340;ip</span>
+etcdctl -C <span style="color: #ffa07a;">"http://127.0.0.1:2379"</span> get /vt/cells/test
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline6" class="outline-3">
+<h3 id="orgheadline6">docker 中运行etcd</h3>
+<div class="outline-text-3" id="text-orgheadline6">
+<p>
+关于国内如何构建 vitess/etcd 镜像 见<br  />
+<a href="https://github.com/jixiuf/vitess-build-patch">https://github.com/jixiuf/vitess-build-patch</a><br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">docker &#36816;&#34892; &#36825;&#37324;&#32465;&#23450;&#21040;0.0.0.0 &#19981;&#21487;bind &#21040;localhost &#65292;&#21542;&#21017; docker&#23481;&#22120;&#22806;&#26080;&#27861;&#35775;&#38382;</span>
+<span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">&#29992;docker &#21551;&#21160;&#19968;&#20010;global topology &#21629;&#21517;&#20026; etcd-global</span>
+sudo docker run --name=etcd-global -d -p 2380:2380 -p 2379:2379 vitess/etcd:v2.0.13-lite etcd  -listen-client-urls http://0.0.0.0:2379  -advertise-client-urls http://0.0.0.0:2379 -listen-peer-urls http://0.0.0.0:2380
+<span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">&#29992;docker &#21551;&#21160;&#19968;&#20010;local topology &#21629;&#20196;&#20026; etcd-cell-test</span>
+sudo docker run --name=etcd-cell-test -d -p 3380:3380 -p 3379:3379 vitess/etcd:v2.0.13-lite etcd  -listen-client-urls http://0.0.0.0:3379  -advertise-client-urls http://0.0.0.0:3379 -listen-peer-urls http://0.0.0.0:3380
+</pre>
+</div>
+<p>
+在global topology 中为名为test 的cell（数据中心） 注册 local topology<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">etcdctl  -C <span style="color: #ffa07a;">"http://127.0.0.1:2379"</span>  set <span style="color: #ffa07a;">"/vt/cells/test"</span> <span style="color: #ffa07a;">"http://etcd-cell-test:3379"</span>
+<span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">&#36825;&#37324;&#30340;&#20540;&#20351;&#29992; etcd-cell-test &#20316;&#20026;&#22495;&#21517;&#65292;&#25152;&#20197; &#38656;&#35201;&#29992;&#21040;etcd-cell-test &#30340;&#23481;&#22120;&#38656;&#35201;link &#21040; etcd-cell-test &#19978;</span>
+<span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">&#27604;&#22914; &#21551;&#21160;vttablet&#26102;  --link=etcd-cell-test</span>
+etcdctl -C <span style="color: #ffa07a;">"http://127.0.0.1:2379"</span> get /vt/cells/test
+</pre>
+</div>
+<p>
+若不注册，下面启动vtctld 时会意外退出<br  />
+</p>
+<blockquote>
+<p>
+E0126 13:15:44.855077     957 vttablet.go:126] agent.InitTablet failed: CreateTablet failed: node doesn't exist<br  />
+</p>
+</blockquote>
+<p>
+此处cell 名字是"test" ,所以在下面启动 vttablet时有参数<br  />
+docker run .. &#x2013;env cell="test" ..指定cell 的值<br  />
+或者手动使用 <a href="https://github.com/jixiuf/vitess-build-patch/blob/master/docker/vttablet/vttablet-up.sh">https://github.com/jixiuf/vitess-build-patch/blob/master/docker/vttablet/vttablet-up.sh</a> 启动时<br  />
+设置环境变量指定cell 的值:<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #40E0D0;">cell</span>=<span style="color: #ffa07a;">"test"</span> ./vttablet-up.sh
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline9" class="outline-2">
+<h2 id="orgheadline9">启动vtctld</h2>
+<div class="outline-text-2" id="text-orgheadline9">
+</div><div id="outline-container-orgheadline7" class="outline-3">
+<h3 id="orgheadline7">本地启动vtctld</h3>
+<div class="outline-text-3" id="text-orgheadline7">
+<p>
+vtctld 是一个http server , 可以通过它查看 lock server(etcd/zookeeper )里的信息<br  />
+</p>
+
+<p>
+vtctld is an HTTP server that lets you browse the information stored<br  />
+in the lockserver. It is useful for troubleshooting or for getting a<br  />
+high-level overview of the servers and their current states.<br  />
+启动之后的web 服务器需要访问 google.com 下的js文件， 所以在国内使用时并不好用<br  />
+建议学习下vtctlclient 等命令，在命令行下确定 集群是否正确运行<br  />
+</p>
+
+<p>
+vtctld-up.sh<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #AEAEAE;">#</span><span style="color: #AEAEAE;">!/bin/</span><span style="color: #FBDE2D;">bash</span>
+
+<span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">This is an example script that starts vtctld.</span>
+
+
+$<span style="color: #40E0D0;">VTROOT</span>/bin/vtctld <span style="color: #ffa07a;">\</span>
+  -web_dir $<span style="color: #40E0D0;">VTTOP</span>/web/vtctld <span style="color: #ffa07a;">\</span>
+  -tablet_protocol grpc <span style="color: #ffa07a;">\</span>
+  -tablet_manager_protocol grpc <span style="color: #ffa07a;">\</span>
+  -service_map <span style="color: #ffa07a;">'grpc-vtctl'</span> <span style="color: #ffa07a;">\</span>
+  -backup_storage_implementation file <span style="color: #ffa07a;">\</span>
+  -file_backup_storage_root $<span style="color: #40E0D0;">VTDATAROOT</span>/backups <span style="color: #ffa07a;">\</span>
+  -log_dir $<span style="color: #40E0D0;">VTDATAROOT</span>/tmp <span style="color: #ffa07a;">\</span>
+  -port 15000 <span style="color: #ffa07a;">\</span>
+  -grpc_port 15999 <span style="color: #ffa07a;">\</span>
+  -topo_implementation etcd <span style="color: #ffa07a;">\</span>
+  -etcd_global_addrs http://127.0.0.1:2379 <span style="color: #ffa07a;">\</span>
+  -pid_file $<span style="color: #40E0D0;">VTDATAROOT</span>/tmp/vtctld.pid  <span style="color: #ffa07a;">\</span>
+  &gt; $<span style="color: #40E0D0;">VTDATAROOT</span>/tmp/vtctld.out 2&gt;&amp;1 &amp;
+
+<span style="color: #F8F8F8;">echo</span> <span style="color: #ffa07a;">"Access vtctld web UI at http://127.0.0.1:15000"</span>
+<span style="color: #F8F8F8;">echo</span> <span style="color: #ffa07a;">"Send commands with: vtctlclient -server 127.0.0.1:15999 ..."</span>
+</pre>
+</div>
+<p>
+注意跟etcd 相关的参数<br  />
+</p>
+<blockquote>
+<p>
+-topo_implementation etcd \<br  />
+-etcd_global_addrs <a href="http://127.0.0.1:2379/">http://127.0.0.1:2379/</a> \<br  />
+</p>
+</blockquote>
+<p>
+web 访问15000 端口验证vtctld 是否启动成功<br  />
+<a href="http://127.0.0.1:15000/">http://127.0.0.1:15000/</a><br  />
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline8" class="outline-3">
+<h3 id="orgheadline8">docker 启动 vtctld</h3>
+<div class="outline-text-3" id="text-orgheadline8">
+<div class="org-src-container">
+
+<pre class="src src-sh">sudo docker run  -p 15000:15000 -p 15999:15999 --link=etcd-cell-test --link=etcd-global:etcd-global-alias --name=vtctld-name -d -u vitess vitess/lite:latest bash -c <span style="color: #ffa07a;">'mkdir -p $VTDATAROOT/{backups,tmp}&amp;&amp;</span>
+<span style="color: #ffa07a;">  vtctld \</span>
+<span style="color: #ffa07a;">   -web_dir $VTTOP/web/vtctld \</span>
+<span style="color: #ffa07a;">   -tablet_protocol grpc \</span>
+<span style="color: #ffa07a;">   -tablet_manager_protocol grpc \</span>
+<span style="color: #ffa07a;">   -service_map "grpc-vtctl" \</span>
+<span style="color: #ffa07a;">   -backup_storage_implementation file \</span>
+<span style="color: #ffa07a;">   -file_backup_storage_root $VTDATAROOT/backups \</span>
+<span style="color: #ffa07a;">   -log_dir $VTDATAROOT/tmp \</span>
+<span style="color: #ffa07a;">   -port 15000 \</span>
+<span style="color: #ffa07a;">   -grpc_port 15999 \</span>
+<span style="color: #ffa07a;">   -topo_implementation etcd \</span>
+<span style="color: #ffa07a;">   -etcd_global_addrs http://etcd-global:2379 \</span>
+<span style="color: #ffa07a;">   -pid_file $VTDATAROOT/tmp/vtctld.pid \</span>
+<span style="color: #ffa07a;">   &gt; $VTDATAROOT/tmp/vtctld.out 2&gt;&amp;1 '</span>
+</pre>
+</div>
+<ol class="org-ol">
+<li>注意这里的 &#x2013;link 将etcd 对应的容器链接起来，下面vtctld 起动的时候通过 <a href="http://etcd-global:2379/">http://etcd-global:2379/</a> 来访问etcd<br  /></li>
+<li><p>
+这条指令使用 vitess/lite:latest 镜像生成 此镜像内有<br  />
+VOLUME /vt/vtdataroot<br  />
+这条指令，会创建一个数据卷，而运行后的 vtctld 会把数据存到这个目录/vt/vtdataroot<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">sudo docker run --rm --volumes-from vtctld-name  -ti debian:jessie
+      <span style="color: #AEAEAE;">#</span><span style="color: #AEAEAE;">&#36890;&#36807;&#36825;&#26465;&#21629;&#20196; &#22312;&#36825;&#20010;&#26032;&#21551;&#21160;&#30340;&#23481;&#22120;&#20013;&#20320;&#21487;&#20197;&#30475;&#21040; /vt/vtdataroot &#36825;&#20010;&#30446;&#24405;</span>
+      <span style="color: #AEAEAE;">#</span><span style="color: #AEAEAE;">&#36825;&#37324;&#38754;&#30340;&#20869;&#23481;&#23601;&#26159; vtctld-name &#36825;&#20010;&#23481;&#22120;&#37324;&#30340;&#25968;&#25454;&#21367;</span>
+</pre>
+</div></li>
+</ol>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline12" class="outline-2">
+<h2 id="orgheadline12">启动vttablets</h2>
+<div class="outline-text-2" id="text-orgheadline12">
+</div><div id="outline-container-orgheadline10" class="outline-3">
+<h3 id="orgheadline10">本地启动vttablets</h3>
+<div class="outline-text-3" id="text-orgheadline10">
+<p>
+或者手动使用 <a href="https://github.com/jixiuf/vitess-build-patch/blob/master/docker/vttablet/vttablet-up.sh">https://github.com/jixiuf/vitess-build-patch/blob/master/docker/vttablet/vttablet-up.sh</a> 启动时<br  />
+设置环境变量指定cell 的值:<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #40E0D0;">cell</span>=<span style="color: #ffa07a;">"test"</span> <span style="color: #40E0D0;">keyspace</span>=<span style="color: #ffa07a;">'test_keyspace'</span>  <span style="color: #40E0D0;">port</span>=15100  ./vttablet-up.sh
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline11" class="outline-3">
+<h3 id="orgheadline11">docker 启动vttablets</h3>
+<div class="outline-text-3" id="text-orgheadline11">
+<p>
+如果构建镜像 移步 <a href="https://github.com/jixiuf/vitess-build-patch/tree/master/docker/vttablet">https://github.com/jixiuf/vitess-build-patch/tree/master/docker/vttablet</a><br  />
+启动3 个vttablets<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">sudo docker run  -p 15100:15100 -p 16100:16100 -p 33100:33100 --env <span style="color: #40E0D0;">etcd_global_addrs</span>=<span style="color: #ffa07a;">"http://etcd-global:2379"</span> --env <span style="color: #40E0D0;">cell</span>=<span style="color: #ffa07a;">"test"</span> --env <span style="color: #40E0D0;">keyspace</span>=<span style="color: #ffa07a;">'test_keyspace'</span> --env <span style="color: #40E0D0;">uid</span>=100 --env <span style="color: #40E0D0;">port</span>=15100 --env <span style="color: #40E0D0;">grpc_port</span>=16100 --env <span style="color: #40E0D0;">mysql_port</span>=33100 --link=etcd-global:etcd-global-alias --link=etcd-cell-test  --volumes-from vtctld-name  --name=vttablet-name-1 -d -u vitess vitess/vttablet:lite /vt/bin/vttablet-up.sh
+
+sudo docker run  -p 15101:15101 -p 16101:16101 -p 33101:33101 --env <span style="color: #40E0D0;">etcd_global_addrs</span>=<span style="color: #ffa07a;">"http://etcd-global:2379"</span> --env <span style="color: #40E0D0;">cell</span>=<span style="color: #ffa07a;">"test"</span> --env <span style="color: #40E0D0;">keyspace</span>=<span style="color: #ffa07a;">'test_keyspace'</span> --env <span style="color: #40E0D0;">uid</span>=101  --env <span style="color: #40E0D0;">port</span>=15101 --env <span style="color: #40E0D0;">grpc_port</span>=16101 --env <span style="color: #40E0D0;">mysql_port</span>=33101  --link=etcd-global:etcd-global-alias --link=etcd-cell-test --volumes-from vtctld-name  --name=vttablet-name-2 -d -u vitess vitess/vttablet:lite /vt/bin/vttablet-up.sh
+
+sudo docker run  -p 15102:15102 -p 16102:16102 -p 33102:33102 --env <span style="color: #40E0D0;">etcd_global_addrs</span>=<span style="color: #ffa07a;">"http://etcd-global:2379"</span>  --env <span style="color: #40E0D0;">cell</span>=<span style="color: #ffa07a;">"test"</span> --env <span style="color: #40E0D0;">keyspace</span>=<span style="color: #ffa07a;">'test_keyspace'</span> --env <span style="color: #40E0D0;">uid</span>=102  --env <span style="color: #40E0D0;">port</span>=15102 --env <span style="color: #40E0D0;">grpc_port</span>=16102 --env <span style="color: #40E0D0;">mysql_port</span>=33102   --link=etcd-global:etcd-global-alias  --link=etcd-cell-test --volumes-from vtctld-name  --name=vttablet-name-3 -d -u vitess vitess/vttablet:lite /vt/bin/vttablet-up.sh
+</pre>
+</div>
+<p>
+这里&#x2013;env 主要为 动态修改vttablet-up.sh 开头的几个变量 ,如果不设置则使用脚本开头设置的默认值<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">sudo docker run --rm --volumes-from vttablet-name-1  -ti debian:jessie
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-sh">vtctlclient -server localhost:15999 GetKeyspaces
+<span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">&#22914;&#26524;&#25191;&#34892;&#23436;&#20197;&#19978;&#21629;&#20196;&#21518; &#33021;&#36820;&#22238; test_keyspace &#35828;&#26126; &#21551;&#21160; vttablets &#25104;&#21151;</span>
+<span style="color: #AEAEAE;">#</span><span style="color: #AEAEAE;">test_keyspace</span>
+</pre>
+</div>
+
+<p>
+启动完之后 启动 <a href="http://127.0.0.1:15000/">http://127.0.0.1:15000/</a><br  />
+大概是这个效果（假如你能翻墙,主要是一个js 文件在google.com 上，所以这里还是要翻墙的）<br  />
+<img src="/assets/blog/墙内搭-vitess-环境/vitess-screenshot-1.png" alt="vitess-screenshot-1.png" /><br  />
+点开0 之后的效果<br  />
+<img src="/assets/blog/墙内搭-vitess-环境/vitess-screenshot-2.png" alt="vitess-screenshot-2.png" /><br  />
+用 etcdctl 查看 golbal topology 与 local topology 中的key 大概是这样的<br  />
+</p>
+<blockquote>
+<p>
+deployer@localhost docker/vttablet (master) $ etcdctl -C "<a href="http://127.0.0.1:2379/">http://127.0.0.1:2379/</a>" ls / &#x2013;recursive                                                                                                         2<br  />
+/vt<br  />
+/vt/cells<br  />
+/vt/cells/test<br  />
+/vt/keyspaces<br  />
+/vt/keyspaces/test_keyspace<br  />
+/vt/keyspaces/test_keyspace/0<br  />
+deployer@localhost docker/vttablet (master) $ etcdctl -C "<a href="http://127.0.0.1:3379/">http://127.0.0.1:3379/</a>" ls / &#x2013;recursive<br  />
+/vt<br  />
+/vt/tablets<br  />
+/vt/tablets/test-0000000100<br  />
+/vt/tablets/test-0000000101<br  />
+/vt/tablets/test-0000000102<br  />
+/vt/replication<br  />
+/vt/replication/test_keyspace<br  />
+/vt/replication/test_keyspace/0<br  />
+/vt/ns<br  />
+/vt/ns/test_keyspace<br  />
+deployer@localhost docker/vttablet $ etcdctl -C "<a href="http://127.0.0.1:3379/">http://127.0.0.1:3379/</a>" get /vt/tablets/test-0000000101/_Data                                                                                             1<br  />
+{<br  />
+  "alias": {<br  />
+    "cell": "test",<br  />
+    "uid": 101<br  />
+  },<br  />
+  "hostname": "172.17.0.6",<br  />
+  "ip": "172.17.0.6",<br  />
+  "port_map": {<br  />
+    "grpc": 16101,<br  />
+    "mysql": 33101,<br  />
+    "vt": 15101<br  />
+  },<br  />
+  "keyspace": "test_keyspace",<br  />
+  "shard": "0",<br  />
+  "type": 2<br  />
+}<br  />
+</p>
+</blockquote>
+<p>
+在面的信息 大概显示了有3个tablets 分别名为 test-0000000100 test-0000000101 test-0000000102<br  />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline13" class="outline-2">
+<h2 id="orgheadline13">Initialize the new keyspace</h2>
+<div class="outline-text-2" id="text-orgheadline13">
+<p>
+By launching tablets assigned to a nonexistent keyspace, we've<br  />
+essentially created a new keyspace. To complete the initialization<br  />
+of the local topology data, perform a keyspace rebuild:<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">$<span style="color: #40E0D0;">VTROOT</span>/bin/vtctlclient -server localhost:15999 RebuildKeyspaceGraph test_keyspace
+&#25110;
+sudo docker run --rm  --link=vtctld-name  --link=etcd-global:etcd-global-alias --link=etcd-cell-test  -u vitess vitess/base vtctlclient -server vtctld-name:15999 RebuildKeyspaceGraph test_keyspace
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline14" class="outline-2">
+<h2 id="orgheadline14">Initialize MySQL databases</h2>
+<div class="outline-text-2" id="text-orgheadline14">
+<p>
+上面默认创建的3个tablets 都是 replica类型的， 在 vttablet-up.sh脚本中指定的<br  />
+且创建的时候不能指定为Master 类型，<br  />
+所以现在需要将其中一个设为master 类型，<br  />
+我们创建的keyspace 是test_keyspace<br  />
+mysql database 默认名为vt_test_keyspace<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">vtctlclient -server localhost:15999 InitShardMaster -force test_keyspace/0 test-0000000100
+&#25110;
+sudo docker run --rm  --link=vtctld-name  --link=etcd-global:etcd-global-alias --link=etcd-cell-test  -u vitess vitess/base vtctlclient -server vtctld-name:15999 InitShardMaster -force test_keyspace/0 test-0000000100
+</pre>
+</div>
+<blockquote>
+<p>
+W0126 16:27:59.683313       1 main.go:43] W0126 16:27:59.676297 logger.go:256] master-elect tablet test-0000000100 is not the shard master, proceeding anyway as -force was used<br  />
+W0126 16:27:59.686786       1 main.go:43] W0126 16:27:59.676335 logger.go:256] master-elect tablet test-0000000100 is not a master in the shard, proceeding anyway as -force was used<br  />
+</p>
+</blockquote>
+<p>
+因为是第一次启动这个shard (test_keyspace/0 默认没做shard,则命名为0)，所以此时还没有master 及各从库也无从同步数据,<br  />
+InitShardMaster 加-force 参数,似乎是对shard 进行是否正常的检查等<br  />
+正常情况下InitShardMaster 只对master 有用，加了-force则即使是slave也行，估计是同时把它设成master<br  />
+运行此命令之后的情况如下<br  />
+<img src="/assets/blog/墙内搭-vitess-环境/vitess-screenshot-3.png" alt="vitess-screenshot-3.png" /><br  />
+或者通过以下命令查看运行情况<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">&#36825;&#37324;&#20256;&#36882;&#30340;&#21442;&#25968; test &#26159;cell(&#25968;&#25454;&#20013;&#24515;&#21517;&#31216;)</span>
+$<span style="color: #40E0D0;">VTROOT</span>/bin/vtctlclient -server localhost:15999 ListAllTablets test
+sudo docker run --rm  --link=vtctld-name  --link=etcd-global:etcd-global-alias --link=etcd-cell-test  -u vitess vitess/base vtctlclient  -server vtctld-name:15999 ListAllTablets test
+</pre>
+</div>
+<blockquote>
+<p>
+test-0000000100 test_keyspace 0 master 172.17.0.5:15100 172.17.0.5:33100 []<br  />
+test-0000000101 test_keyspace 0 replica 172.17.0.6:15101 172.17.0.6:33101 []<br  />
+test-0000000102 test_keyspace 0 replica 172.17.0.7:15102 172.17.0.7:33102 []<br  />
+</p>
+</blockquote>
+<p>
+可以看到此时有一个master 两个salve<br  />
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline15" class="outline-2">
+<h2 id="orgheadline15">建表</h2>
+<div class="outline-text-2" id="text-orgheadline15">
+<div class="org-src-container">
+
+<pre class="src src-sh">sudo docker run --rm  --link=vtctld-name  --link=etcd-global:etcd-global-alias --link=etcd-cell-test  -u vitess vitess/base vtctlclient  -server vtctld-name:15999 ApplySchema -sql <span style="color: #ffa07a;">"$(cat create_test_table.sql)"</span> test_keyspace
+</pre>
+</div>
+<p>
+其中create_test_table.sql内容如下<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sql">  <span style="color: #FBDE2D;">CREATE</span> <span style="color: #FBDE2D;">TABLE</span> <span style="color: #FF6400;">test_table</span> (
+  id BIGINT AUTO_INCREMENT,
+  msg <span style="color: #8DA6CE;">VARCHAR</span>(250),
+  <span style="color: #FBDE2D;">PRIMARY</span> <span style="color: #FBDE2D;">KEY</span>(id)
+) Engine=InnoDB
+</pre>
+</div>
+<p>
+从任何一个tablets 上查看 建表语句是否成功<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">sudo docker run --rm  --link=vtctld-name  --link=etcd-global:etcd-global-alias --link=etcd-cell-test  -u vitess vitess/base vtctlclient  -server vtctld-name:15999 GetSchema test-0000000101
+</pre>
+</div>
+<blockquote>
+<p>
+{<br  />
+"database_schema": "CREATE DATABASE <i><b>!32312 IF NOT EXISTS</b></i> `{{.DatabaseName}}` <i>*!40100 DEFAULT CHARACTER SET utf8 *</i>",<br  />
+"table_definitions": [<br  />
+    {<br  />
+    "name": "test_table",<br  />
+    "schema": "CREATE TABLE `test_table` (\n  `id` bigint(20) NOT NULL AUTO_INCREMENT,\n  `msg` varchar(250) DEFAULT NULL,\n  PRIMARY KEY (`id`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8",<br  />
+    "columns": [<br  />
+        "id",<br  />
+        "msg"<br  />
+    ],<br  />
+    "primary_key_columns": [<br  />
+        "id"<br  />
+    ],<br  />
+    "type": "BASE TABLE",<br  />
+    "data_length": 16384<br  />
+    }<br  />
+],<br  />
+"version": "3a40f48d47be23b7827c58f64c00b86f"<br  />
+}<br  />
+</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-orgheadline16" class="outline-2">
+<h2 id="orgheadline16">backup 备份</h2>
+<div class="outline-text-2" id="text-orgheadline16">
+<p>
+第一次建完表后，最好进行一次备份，一些从库如果意外当掉，并且数据丢失的话，<br  />
+它可以自动从最近的一次备份开始与master 同步数据<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #AEAEAE;">#</span><span style="color: #AEAEAE;">&#36825;&#37324;&#21033;&#29992;&#26368;&#19968;&#20010;&#20174;&#24211;&#20570;&#22791;&#20221;</span>
+vtctlclient -server localhost:15999 Backup test-0000000101
+&#25110;
+sudo docker run --rm  --link=vtctld-name  --link=etcd-global:etcd-global-alias --link=etcd-cell-test  -u vitess vitess/base vtctlclient  -server vtctld-name:15999 Backup test-0000000101
+&#25110;
+sudo docker run --rm  --link=vtctld-name  --link=etcd-global:etcd-global-alias --link=etcd-cell-test  -u vitess vitess/base vtctl -etcd_global_addrs=<span style="color: #ffa07a;">'http://etcd-global:2379'</span>  -topo_implementation=etcd Backup test-0000000101
+</pre>
+</div>
+<p>
+查看备份<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">sudo docker run --rm  --link=vtctld-name  --link=etcd-global:etcd-global-alias --link=etcd-cell-test  -u vitess vitess/base vtctlclient  -server vtctld-name:15999 ListBackups test_keyspace/0
+sudo docker run --rm  --link=vtctld-name  --link=etcd-global:etcd-global-alias --link=etcd-cell-test  -u vitess vitess/base vtctl -etcd_global_addrs=<span style="color: #ffa07a;">'http://etcd-global:2379'</span>  -topo_implementation=etcd ListBackups test_keyspace/0
+</pre>
+</div>
+<p>
+似乎backup 有问题,根本没列出来备份的东西(这里先略过备份)<br  />
+</p>
+<blockquote>
+<p>
+W0126 17:12:52.129503       1 vtctl.go:77] cannot connect to syslog: Unix syslog delivery error<br  />
+E0126 17:12:52.130768       1 vtctl.go:100] action failed: ListBackups no registered implementation of BackupStorage<br  />
+</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-orgheadline17" class="outline-2">
+<h2 id="orgheadline17">启动 vtgate</h2>
+<div class="outline-text-2" id="text-orgheadline17">
+<p>
+正式环境中， 应该启动多个vtgate 实际来负载均衡<br  />
+注意这里的几个重要参数，<br  />
+-cell 数据中心的名称<br  />
+-port web端口<br  />
+-grpc_port grpc端口<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">   sudo docker run  -p 15001:15001 -p 15991:15991 --link=etcd-cell-test --link=etcd-global:etcd-global-alias --volumes-from vtctld-name  --name=vtgate-name-1 -d -u vitess vitess/lite:latest bash -c <span style="color: #ffa07a;">'mkdir -p $VTDATAROOT/{backups,tmp}&amp;&amp;</span>
+<span style="color: #ffa07a;">   $VTROOT/bin/vtgate \</span>
+<span style="color: #ffa07a;">-log_dir $VTDATAROOT/tmp \</span>
+<span style="color: #ffa07a;">-port 15001 \</span>
+<span style="color: #ffa07a;">-grpc_port 15991 \</span>
+<span style="color: #ffa07a;">-cell test \</span>
+<span style="color: #ffa07a;">-tablet_protocol grpc \</span>
+<span style="color: #ffa07a;">-service_map "bsonrpc-vt-vtgateservice,grpc-vtgateservice" \</span>
+<span style="color: #ffa07a;">-pid_file $VTDATAROOT/tmp/vtgate.pid \</span>
+<span style="color: #ffa07a;">-topo_implementation etcd \</span>
+<span style="color: #ffa07a;">-etcd_global_addrs http://etcd-global:2379 \</span>
+<span style="color: #ffa07a;">&gt; $VTDATAROOT/tmp/vtgate.out 2&gt;&amp;1'</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline18" class="outline-2">
+<h2 id="orgheadline18">启动客户端 连接 vitess 集群</h2>
+<div class="outline-text-2" id="text-orgheadline18">
+<p>
+<a href="https://github.com/youtube/vitess/blob/master/examples/local/client.go">https://github.com/youtube/vitess/blob/master/examples/local/client.go</a><br  />
+vitess 源码有一个测试 client.go<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">&#36825;&#37324;&#30340;15991 &#31471;&#21475; &#21363;&#20026; &#19978;&#38754;vtgate &#30340;&#31471;&#21475;</span>
+go run client.go -server=localhost:15991
+</pre>
+</div>
+<p>
+执行的效果图<br  />
+</p>
+<blockquote>
+<p>
+deployer@localhost examples/local (master) $ go run client.go -server=localhost:15991<br  />
+Inserting into master&#x2026;<br  />
+Reading from master&#x2026;<br  />
+(1, "V is for speed")<br  />
+Reading from replica&#x2026;<br  />
+(1, "V is for speed")<br  />
+deployer@localhost examples/local (master) $<br  />
+</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-orgheadline19" class="outline-2">
+<h2 id="orgheadline19">关于 &#x2013;volumes-from vtctld-name</h2>
+<div class="outline-text-2" id="text-orgheadline19">
+<p>
+在docker启动中启动vttables vtgates 时加了参数&#x2013;volumes-from vtctld-name<br  />
+而其使用的镜像中都有一句<br  />
+    VOLUME /vt/vtdataroot<br  />
+所以几个容器的/vt/vtdataroot是相同的<br  />
+用下面的命令就可以查看/vt/vtdataroot 目录下的内容<br  />
+当然你也可以选择将宿主机的某个目录挂载到 /vt/vtdataroot 上<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">sudo docker run --rm --volumes-from vtctld-name  -ti debian:jessie
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline20" class="outline-2">
+<h2 id="orgheadline20">vtctld vtctl vtctlclient的关系</h2>
+<div class="outline-text-2" id="text-orgheadline20">
+<p>
+vtctld 是个守护进程<br  />
+vtctlclient 需要vtctld的存在才能进行相应的操作 需要-server 指向vtctld的端口<br  />
+如<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">vtctlclient  -server vtctld-name:15999 Backup test-0000000101
+</pre>
+</div>
+<p>
+而vtctl 不需要vtctld 守护进程,但是它需要从topology（etcd or zookeeper） 直接获取信息<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">vtctl -etcd_global_addrs=<span style="color: #ffa07a;">'http://etcd-global:2379'</span>  -topo_implementation=etcd ListBackups test_keyspace/0
+</pre>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+    <div>
+      <div class="post-meta">
+        <span title="post date" class="post-info">2016-02-01</span>
+        <span title="last modification date" class="post-info">2016-02-04</span>
+        <span title="tags" class="post-info"><a href="/tags/golang/">Golang</a>, <a href="/tags/vitess/">Vitess</a></span>
+        <span title="author" class="post-info">纪秀峰</span>
+      </div>
+      <section>
+        <h1>Comments</h1>
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+          //var disqus_developer = 1;
+          var disqus_identifier = "/blog/墙内搭-vitess-环境/";
+          var disqus_url = "http://jixiuf.github.io/blog/墙内搭-vitess-环境/";
+          var disqus_shortname = 'jixiuf';
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        <div class="ds-thread"></div>
+        <script type="text/javascript">
+          var duoshuoQuery = {short_name:'jixiuf'};
+          (function() {
+          var ds = document.createElement('script');
+          ds.type = 'text/javascript';ds.async = true;
+          ds.src = 'http://static.duoshuo.com/embed.js';
+          ds.charset = 'UTF-8';
+          (document.getElementsByTagName('head')[0]
+          || document.getElementsByTagName('body')[0]).appendChild(ds);
+          })();
+        </script>
+      </section>
+      <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+      <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.js"></script> -->
+      <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script src="/media/js/main.js"></script>
+      <div class="footer">
+        <p>Generated by <a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.x (<a href="http://orgmode.org">Org mode</a> 8.x)</p>
+        <p>
+          Copyright &copy; 2012 - <span id="footerYear"></span> <a href="mailto:jixiuf &lt;at&gt; gmail &lt;dot&gt; com">纪秀峰</a>
+          &nbsp;&nbsp;-&nbsp;&nbsp;
+          Powered by <a href="https://github.com/kelvinh/org-page" target="_blank">org-page</a>
+          <script type="text/javascript">document.getElementById("footerYear").innerHTML = (new Date()).getFullYear();</script>
+        </p>
+      </div>
+    </div>
+
+  </body>
+</html>
