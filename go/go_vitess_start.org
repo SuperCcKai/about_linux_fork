@@ -594,6 +594,7 @@ deployer@localhost docker/vttablet $ etcdctl -C "http://127.0.0.1:3379" get /vt/
     #+END_QUOTE
 ** ReparentTablet 让指定的 tablet 变成master 类型
     似乎只有在各节点都正常运行的时候这个命令才有可能有效
+    我测试的时候，发现正常的情况下， 也不用把指定的 tablet 切成master
     #+BEGIN_SRC sh
     vtctlclient -server localhost:15999 ReparentTablet  test-0000000101
     #+END_SRC
@@ -601,7 +602,7 @@ deployer@localhost docker/vttablet $ etcdctl -C "http://127.0.0.1:3379" get /vt/
     这个命令用于紧急情况下的修复（master 节点已经当掉）
     这个命令会建议你用哪个slave 来暂代master
     #+BEGIN_SRC sh
-     vtctlclient -server localhost:15999 EmergencyReparentShard test_keyspace/0  test-0000000101                                                                  1
+     vtctlclient -server localhost:15999 EmergencyReparentShard test_keyspace/0  test-0000000101
     #+END_SRC
     #+BEGIN_QUOTE
     E0127 10:51:21.409971   12357 main.go:51] Remote error: rpc error: code = 2 desc = "tablet test-0000000101 is more advanced than master elect tablet test-0000000102: MySQL56/36cf5f1e-c494-11e5-8f62-0242ac110005:1-15 > position:\"MySQL56/36cf5f1e-c494-11e5-8f62-0242ac110005:1-11\" master_host:\"172.17.0.5\" master_port:33100 master_connect_retry:10 "
