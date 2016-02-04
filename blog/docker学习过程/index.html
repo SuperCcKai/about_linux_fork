@@ -50,6 +50,7 @@
 <li><a href="#orgheadline9">容器的备份 恢复 (export and import)</a></li>
 <li><a href="#orgheadline10">save 与export 的区别</a></li>
 <li><a href="#orgheadline11">DockerFile</a></li>
+<li><a href="#orgheadline12">把容器放到后面运行 attach</a></li>
 </ul>
 </div>
 </div>
@@ -58,7 +59,9 @@
 <h2 id="orgheadline1">link</h2>
 <div class="outline-text-2" id="text-orgheadline1">
 <p>
-教程 <a href="http://dockerpool.com/static/books/docker_practice/basic_concept/repository.html">http://dockerpool.com/static/books/docker_practice/basic_concept/repository.html</a><br  />
+<a href="http://dockerpool.com/static/books/docker_practice/basic_concept/repository.html">教程</a><br  />
+<a href="http://www.oschina.net/translate/why-you-dont-need-to-run-sshd-in-docker">为什么不需要在 Docker 容器中运行 sshd</a><br  />
+<a href="http://blog.csdn.net/u010397369/article/details/41045251">如何进入Docker容器</a><br  />
 </p>
 </div>
 </div>
@@ -339,12 +342,33 @@ Run yum install -y go<br  />
 </div>
 </div>
 
+<div id="outline-container-orgheadline12" class="outline-2">
+<h2 id="orgheadline12">把容器放到后面运行 attach</h2>
+<div class="outline-text-2" id="text-orgheadline12">
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">&#36825;&#37324;&#21152;&#20102;-d &#25918;&#21040;&#21518;&#21488;&#36816;&#34892;&#65292; &#21516;&#26102;&#21152;-t -i &#21542;&#21017;bash &#20250;&#31435;&#21363;&#36864;&#20986;</span>
+sudo docker run -d  -ti --name=mylinux debian:jessie bash
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-sh">sudo docker attach mylinux
+<span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">&#20284;&#20046;&#35201;&#31561;&#20960;&#31186;&#38047;&#25165;&#33021;&#31561;&#21040;&#25552;&#31034;&#31526;&#20986;&#29616;</span>
+</pre>
+</div>
+<p>
+attach 上之后 C-p C-q deattach<br  />
+</p>
+</div>
+</div>
+
 </div>
 </div>
     <div>
       <div class="post-meta">
         <span title="post date" class="post-info">2016-01-19</span>
-        <span title="last modification date" class="post-info">2016-01-24</span>
+        <span title="last modification date" class="post-info">2016-02-04</span>
         <span title="tags" class="post-info"><a href="/tags/docker/">Docker</a>, <a href="/tags/linux/">Linux</a>, <a href="/tags/centos/">Centos</a></span>
         <span title="author" class="post-info">纪秀峰</span>
       </div>
