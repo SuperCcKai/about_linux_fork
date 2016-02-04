@@ -394,3 +394,258 @@ deployer@localhost docker/vttablet $ etcdctl -C "http://127.0.0.1:3379" get /vt/
     vtctl -etcd_global_addrs='http://etcd-global:2379'  -topo_implementation=etcd ListBackups test_keyspace/0
   #+END_SRC
 
+* 一些常用的命令
+  + GetKeyspaces 查有哪些keyspace
+    #+BEGIN_SRC sh
+        vtctlclient -server=127.0.0.1:15999  GetKeyspaces
+        sudo docker run --rm  --link=vtctld-name  --link=etcd-global:etcd-global-alias --link=etcd-cell-test  -u vitess vitess/base  vtctlclient -server=vtctld-name:15999 GetKeyspaces
+    #+END_SRC
+    #+BEGIN_QUOTE
+    test_keyspace
+    #+END_QUOTE
+
+  + 查某cell=test  keyspace=test_keyspace shard=0 的主从关系
+    #+BEGIN_SRC sh
+        vtctlclient -server=127.0.0.1:15999 GetShardReplication test test_keyspace/0
+        sudo docker run --rm  --link=vtctld-name  --link=etcd-global:etcd-global-alias --link=etcd-cell-test  -u vitess vitess/base  vtctlclient -server=vtctld-name:15999 GetShardReplication test test_keyspace/0
+    #+END_SRC
+    #+BEGIN_QUOTE
+        {
+        "nodes": [
+            {
+            "tablet_alias": {
+                "cell": "test",
+                "uid": 100
+            }
+            },
+            {
+            "tablet_alias": {
+                "cell": "test",
+                "uid": 101
+            }
+            },
+            {
+            "tablet_alias": {
+                "cell": "test",
+                "uid": 102
+            }
+            }
+        ]
+        }
+    #+END_QUOTE
+
+  + ListAllTablets 查cell=test下有哪些 tablets
+    #+BEGIN_SRC sh
+        vtctlclient -server=127.0.0.1:15999  ListAllTablets test
+        sudo docker run --rm  --link=vtctld-name  --link=etcd-global:etcd-global-alias --link=etcd-cell-test  -u vitess vitess/base  vtctlclient -server=vtctld-name:15999 ListAllTablets test
+    #+END_SRC
+    #+BEGIN_QUOTE
+        test-0000000100 test_keyspace 0 master 172.17.0.5:15100 172.17.0.5:33100 []
+        test-0000000101 test_keyspace 0 spare 172.17.0.6:15101 172.17.0.6:33101 []
+        test-0000000102 test_keyspace 0 replica 172.17.0.7:15102 172.17.0.7:33102 []
+    #+END_QUOTE
+
+  + ListTablets 查某个tablet 的具体信息
+    #+BEGIN_SRC sh
+        vtctlclient -server=127.0.0.1:15999  ListTablets test-0000000100
+        sudo docker run --rm  --link=vtctld-name  --link=etcd-global:etcd-global-alias --link=etcd-cell-test  -u vitess vitess/base  vtctlclient -server=vtctld-name:15999 ListTablets test-0000000100
+    #+END_SRC
+    #+BEGIN_QUOTE
+        test-0000000100 test_keyspace 0 master 172.17.0.5:15100 172.17.0.5:33100 []
+    #+END_QUOTE
+
+  + Validate 查测global replication graph各个节点可达，并检测各cell 的tablets 一致
+    -ping-tablets 表时是否检测各tablets
+
+    #+BEGIN_SRC sh
+        vtctlclient -server=127.0.0.1:15999  Validate
+        vtctlclient -server=127.0.0.1:15999  Validate -ping-tablets
+        sudo docker run --rm  --link=vtctld-name  --link=etcd-global:etcd-global-alias --link=etcd-cell-test  -u vitess vitess/base  vtctlclient -server=vtctld-name:15999 Validate
+        sudo docker run --rm  --link=vtctld-name  --link=etcd-global:etcd-global-alias --link=etcd-cell-test  -u vitess vitess/base  vtctlclient -server=vtctld-name:15999 Validate -ping-tablets
+    #+END_SRC
+    #+BEGIN_QUOTE
+        E0127 09:59:18.056776   11676 main.go:45] E0127 01:59:18.056456 logger.go:262] no slaves of tablet test-0000000100 found
+        E0127 09:59:18.087638   11676 main.go:51] Remote error: rpc error: code = 2 desc = "some validation errors - see log"
+    #+END_QUOTE
+
+  + ValidateKeyspace 只查测指定keyspace
+    #+BEGIN_SRC sh
+        vtctlclient -server=127.0.0.1:15999  ValidateKeyspace -ping-tablets test_keyspace
+    #+END_SRC
+
+  + FindAllShardsInKeyspace 查keyspace=test_keyspace 内有哪些shard信息
+    #+BEGIN_SRC sh
+        vtctlclient -server=127.0.0.1:15999  FindAllShardsInKeyspace test_keyspace
+    #+END_SRC
+    以下内容显示有一个shard名为"0" 的shard,这个shard 中mysql主库 uid=100
+    served_types 不太了解是什么东西
+    #+BEGIN_QUOTE
+        {
+        "0": {
+            "master_alias": {
+            "cell": "test",
+            "uid": 100
+            },
+            "served_types": [
+            {
+                "tablet_type": 1
+            },
+            {
+                "tablet_type": 2
+            },
+            {
+                "tablet_type": 3
+            }
+            ],
+            "cells": [
+            "test"
+            ]
+        }
+        }
+    #+END_QUOTE
+
+  + ApplySchema [-allow_long_unavailability] {-sql=<sql> || -sql-file=<filename>} <keyspace>
+    执行建表语句等
+
+  + ValidateSchemaKeyspace 检测keyspace=test_keyspace上表结构是否与各slave 同步
+   #+BEGIN_SRC sh
+       vtctlclient -server=127.0.0.1:15999  ValidateSchemaKeyspace test_keyspace
+   #+END_SRC
+  + ValidateSchemaShard 检测keyspace=test_keyspace shard=0上表结构是否与各slave 同步
+   #+BEGIN_SRC sh
+       vtctlclient -server=127.0.0.1:15999  ValidateSchemaShard test_keyspace/0
+   #+END_SRC
+  + ValidateVersionKeyspace
+    查测 指定keyspace上的 master 的版本是否与各slave 一致
+   #+BEGIN_SRC sh
+       vtctlclient -server=127.0.0.1:15999  ValidateVersionKeyspace  test_keyspace
+   #+END_SRC
+  + GetEndPoints
+    查 cell=test,keyspace=test_keyspace shard=0 tableType=master 的EndPoints 信息
+    #+BEGIN_SRC sh
+      vtctlclient -server localhost:15999 GetEndPoints test test_keyspace/0 master
+    #+END_SRC
+    endpoints 似乎是列出 tablets 兼听在哪些端口等信息
+    #+BEGIN_QUOTE
+            {
+        "entries": [
+            {
+            "uid": 100,
+            "host": "172.17.0.5",
+            "port_map": {
+                "grpc": 16100,
+                "mysql": 33100,
+                "vt": 15100
+            }
+            }
+        ]
+        }
+    #+END_QUOTE
+  + GetSrvKeyspace 查询 cell=test keyspace=test_keyspace 的Srv信息
+    这个不太明白 ,served_type
+
+    #+BEGIN_SRC sh
+        vtctlclient -server localhost:15999 GetSrvKeyspace  test test_keyspace
+    #+END_SRC
+    #+BEGIN_QUOTE
+     {
+        "partitions": [
+            {
+            "served_type": 1,
+            "shard_references": [
+                {
+                "name": "0"
+                }
+            ]
+            },
+            {
+            "served_type": 2,
+            "shard_references": [
+                {
+                "name": "0"
+                }
+            ]
+            },
+            {
+            "served_type": 3,
+            "shard_references": [
+                {
+                "name": "0"
+                }
+            ]
+            }
+        ]
+    }
+    #+END_QUOTE
+  + ReparentTablet 让指定的 tablet 变成master 类型
+    似乎只有在各节点都正常运行的时候这个命令才有可能有效
+    #+BEGIN_SRC sh
+    vtctlclient -server localhost:15999 ReparentTablet  test-0000000101
+    #+END_SRC
+  + EmergencyReparentShard 将 keyspace='test_keyspace' shard=0 上的 tablet=test-0000000101 设置成当前master
+    这个命令用于紧急情况下的修复（master 节点已经当掉）
+    这个命令会建议你用哪个slave 来暂代master
+    #+BEGIN_QUOTE
+    E0127 10:51:21.409971   12357 main.go:51] Remote error: rpc error: code = 2 desc = "tablet test-0000000101 is more advanced than master elect tablet test-0000000102: MySQL56/36cf5f1e-c494-11e5-8f62-0242ac110005:1-15 > position:\"MySQL56/36cf5f1e-c494-11e5-8f62-0242ac110005:1-11\" master_host:\"172.17.0.5\" master_port:33100 master_connect_retry:10 "
+    deployer@localhost examples/local (master) $ vtctlclient -server localhost:15999 EmergencyReparentShard test_keyspace/0  test-0000000101                                                                  1
+    W0127 10:51:35.206041   12375 main.go:43] W0127 02:51:35.205299 logger.go:256] cannot read old master tablet test-0000000100, won't touch it: node doesn't exist
+    deployer@localhost examples/local (master) $
+    #+END_QUOTE
+  + StartSlave 将tablet= test-0000000101 的salve 节点进行 同步
+    如果发现某slave 节点数据不同步，可用此命令
+    #+BEGIN_SRC sh
+    vtctlclient -server localhost:15999 StartSlave test-0000000101
+    #+END_SRC
+  + ExecuteFetchAsDba 在指定的tablet 上执行sql 语句
+    #+BEGIN_SRC sh
+    vtctlclient -server localhost:15999 ExecuteFetchAsDba    test-0000000100 "select * from test_table"
+    #+END_SRC
+    但是返回的东西不是sql 语句的结果
+    #+BEGIN_QUOTE
+        {
+    "fields": [
+        {
+        "name": "id",
+        "type": 265
+        },
+        {
+        "name": "msg",
+        "type": 6165
+        }
+    ],
+    "rows_affected": 21,
+    "rows": [
+        {
+        "lengths": [
+            1,
+            14
+        ],
+        "values": "MVYgaXMgZm9yIHNwZWVk"
+        },
+        {
+        "lengths": [
+            1,
+            14
+        ],
+        "values": "MlYgaXMgZm9yIHNwZWVk"
+        },
+    }
+    #+END_QUOTE
+  + UpdateTabletAddrs 更改tablet 的host or ip or port
+    -hostname
+    -ip-addr
+    -mysql-port
+    -vt-port
+    -grpc-port
+    #+BEGIN_SRC sh
+    vtctlclient -server=127.0.0.1:15999  UpdateTabletAddrs -ip-addr=172.17.0.5 test-0000000100
+    #+END_SRC
+  + DeleteTablet 删除一个Tablet
+  + ChangeSlaveType 改变一个tablet 的slave类型
+    #+BEGIN_SRC sh
+      vtctlclient -server=127.0.0.1:15999  ChangeSlaveType test-0000000100 spare
+      # 运行完之后 好像没效果 (可能是这个tablet出问题了)
+      vtctlclient -server=127.0.0.1:15999  ListAllTablets test
+    #+END_SRC
+
+
