@@ -231,12 +231,26 @@ deployer@localhost docker/vttablet $ etcdctl -C "http://127.0.0.1:3379" get /vt/
 #+END_QUOTE
 在面的信息 大概显示了有3个tablets 分别名为 test-0000000100 test-0000000101 test-0000000102
 
-** 如何停掉docker 中的vttables
+** 如何停掉docker 中的vttablets
    #+BEGIN_SRC sh
      sudo docker exec vttablet-name-1 vttablet-down.sh
      sudo docker exec vttablet-name-2 vttablet-down.sh
      sudo docker exec vttablet-name-3 vttablet-down.sh
      # 不要用 docker stop vttablet-name-1
+   #+END_SRC
+   停掉后 ，tablet 状态变成spard 态
+   停掉的 vttablets
+   可以用
+   #+BEGIN_SRC sh
+     sudo docker start vttablet-name-1
+     sudo docker start vttablet-name-2
+     sudo docker start vttablet-name-3
+     # 起动之后 从库是处于不同步状态,需要手动同步一下
+     # 原则上 vttablets 不要轻易重起
+     vtctlclient -server localhost:15999 StartSlave test-0000000100
+     vtctlclient -server localhost:15999 StartSlave test-0000000101
+     vtctlclient -server localhost:15999 StartSlave test-0000000102
+
    #+END_SRC
 
 * Initialize the new keyspace
@@ -395,7 +409,7 @@ deployer@localhost docker/vttablet $ etcdctl -C "http://127.0.0.1:3379" get /vt/
   #+END_SRC
 
 * 一些常用的命令
-  + GetKeyspaces 查有哪些keyspace
+** GetKeyspaces 查有哪些keyspace
     #+BEGIN_SRC sh
         vtctlclient -server=127.0.0.1:15999  GetKeyspaces
         sudo docker run --rm  --link=vtctld-name  --link=etcd-global:etcd-global-alias --link=etcd-cell-test  -u vitess vitess/base  vtctlclient -server=vtctld-name:15999 GetKeyspaces
@@ -404,7 +418,7 @@ deployer@localhost docker/vttablet $ etcdctl -C "http://127.0.0.1:3379" get /vt/
     test_keyspace
     #+END_QUOTE
 
-  + 查某cell=test  keyspace=test_keyspace shard=0 的主从关系
+** 查某cell=test  keyspace=test_keyspace shard=0 的主从关系
     #+BEGIN_SRC sh
         vtctlclient -server=127.0.0.1:15999 GetShardReplication test test_keyspace/0
         sudo docker run --rm  --link=vtctld-name  --link=etcd-global:etcd-global-alias --link=etcd-cell-test  -u vitess vitess/base  vtctlclient -server=vtctld-name:15999 GetShardReplication test test_keyspace/0
@@ -434,7 +448,7 @@ deployer@localhost docker/vttablet $ etcdctl -C "http://127.0.0.1:3379" get /vt/
         }
     #+END_QUOTE
 
-  + ListAllTablets 查cell=test下有哪些 tablets
+** ListAllTablets 查cell=test下有哪些 tablets
     #+BEGIN_SRC sh
         vtctlclient -server=127.0.0.1:15999  ListAllTablets test
         sudo docker run --rm  --link=vtctld-name  --link=etcd-global:etcd-global-alias --link=etcd-cell-test  -u vitess vitess/base  vtctlclient -server=vtctld-name:15999 ListAllTablets test
@@ -445,7 +459,7 @@ deployer@localhost docker/vttablet $ etcdctl -C "http://127.0.0.1:3379" get /vt/
         test-0000000102 test_keyspace 0 replica 172.17.0.7:15102 172.17.0.7:33102 []
     #+END_QUOTE
 
-  + ListTablets 查某个tablet 的具体信息
+** ListTablets 查某个tablet 的具体信息
     #+BEGIN_SRC sh
         vtctlclient -server=127.0.0.1:15999  ListTablets test-0000000100
         sudo docker run --rm  --link=vtctld-name  --link=etcd-global:etcd-global-alias --link=etcd-cell-test  -u vitess vitess/base  vtctlclient -server=vtctld-name:15999 ListTablets test-0000000100
@@ -454,8 +468,9 @@ deployer@localhost docker/vttablet $ etcdctl -C "http://127.0.0.1:3379" get /vt/
         test-0000000100 test_keyspace 0 master 172.17.0.5:15100 172.17.0.5:33100 []
     #+END_QUOTE
 
-  + Validate 查测global replication graph各个节点可达，并检测各cell 的tablets 一致
+** Validate 查测global replication graph各个节点可达，并检测各cell 的tablets 一致
     -ping-tablets 表时是否检测各tablets
+    GetShardReplication
 
     #+BEGIN_SRC sh
         vtctlclient -server=127.0.0.1:15999  Validate
@@ -468,12 +483,12 @@ deployer@localhost docker/vttablet $ etcdctl -C "http://127.0.0.1:3379" get /vt/
         E0127 09:59:18.087638   11676 main.go:51] Remote error: rpc error: code = 2 desc = "some validation errors - see log"
     #+END_QUOTE
 
-  + ValidateKeyspace 只查测指定keyspace
+** ValidateKeyspace 只查测指定keyspace
     #+BEGIN_SRC sh
         vtctlclient -server=127.0.0.1:15999  ValidateKeyspace -ping-tablets test_keyspace
     #+END_SRC
 
-  + FindAllShardsInKeyspace 查keyspace=test_keyspace 内有哪些shard信息
+** FindAllShardsInKeyspace 查keyspace=test_keyspace 内有哪些shard信息
     #+BEGIN_SRC sh
         vtctlclient -server=127.0.0.1:15999  FindAllShardsInKeyspace test_keyspace
     #+END_SRC
@@ -504,23 +519,23 @@ deployer@localhost docker/vttablet $ etcdctl -C "http://127.0.0.1:3379" get /vt/
         }
     #+END_QUOTE
 
-  + ApplySchema [-allow_long_unavailability] {-sql=<sql> || -sql-file=<filename>} <keyspace>
+** ApplySchema [-allow_long_unavailability] {-sql=<sql> || -sql-file=<filename>} <keyspace>
     执行建表语句等
 
-  + ValidateSchemaKeyspace 检测keyspace=test_keyspace上表结构是否与各slave 同步
+** ValidateSchemaKeyspace 检测keyspace=test_keyspace上表结构是否与各slave 同步
    #+BEGIN_SRC sh
        vtctlclient -server=127.0.0.1:15999  ValidateSchemaKeyspace test_keyspace
    #+END_SRC
-  + ValidateSchemaShard 检测keyspace=test_keyspace shard=0上表结构是否与各slave 同步
+** ValidateSchemaShard 检测keyspace=test_keyspace shard=0上表结构是否与各slave 同步
    #+BEGIN_SRC sh
        vtctlclient -server=127.0.0.1:15999  ValidateSchemaShard test_keyspace/0
    #+END_SRC
-  + ValidateVersionKeyspace
+** ValidateVersionKeyspace
     查测 指定keyspace上的 master 的版本是否与各slave 一致
    #+BEGIN_SRC sh
        vtctlclient -server=127.0.0.1:15999  ValidateVersionKeyspace  test_keyspace
    #+END_SRC
-  + GetEndPoints
+** GetEndPoints
     查 cell=test,keyspace=test_keyspace shard=0 tableType=master 的EndPoints 信息
     #+BEGIN_SRC sh
       vtctlclient -server localhost:15999 GetEndPoints test test_keyspace/0 master
@@ -541,7 +556,7 @@ deployer@localhost docker/vttablet $ etcdctl -C "http://127.0.0.1:3379" get /vt/
         ]
         }
     #+END_QUOTE
-  + GetSrvKeyspace 查询 cell=test keyspace=test_keyspace 的Srv信息
+** GetSrvKeyspace 查询 cell=test keyspace=test_keyspace 的Srv信息
     这个不太明白 ,served_type
 
     #+BEGIN_SRC sh
@@ -577,26 +592,29 @@ deployer@localhost docker/vttablet $ etcdctl -C "http://127.0.0.1:3379" get /vt/
         ]
     }
     #+END_QUOTE
-  + ReparentTablet 让指定的 tablet 变成master 类型
+** ReparentTablet 让指定的 tablet 变成master 类型
     似乎只有在各节点都正常运行的时候这个命令才有可能有效
     #+BEGIN_SRC sh
     vtctlclient -server localhost:15999 ReparentTablet  test-0000000101
     #+END_SRC
-  + EmergencyReparentShard 将 keyspace='test_keyspace' shard=0 上的 tablet=test-0000000101 设置成当前master
+** EmergencyReparentShard 将 keyspace='test_keyspace' shard=0 上的 tablet=test-0000000101 设置成当前master
     这个命令用于紧急情况下的修复（master 节点已经当掉）
     这个命令会建议你用哪个slave 来暂代master
+    #+BEGIN_SRC sh
+     vtctlclient -server localhost:15999 EmergencyReparentShard test_keyspace/0  test-0000000101                                                                  1
+    #+END_SRC
     #+BEGIN_QUOTE
     E0127 10:51:21.409971   12357 main.go:51] Remote error: rpc error: code = 2 desc = "tablet test-0000000101 is more advanced than master elect tablet test-0000000102: MySQL56/36cf5f1e-c494-11e5-8f62-0242ac110005:1-15 > position:\"MySQL56/36cf5f1e-c494-11e5-8f62-0242ac110005:1-11\" master_host:\"172.17.0.5\" master_port:33100 master_connect_retry:10 "
     deployer@localhost examples/local (master) $ vtctlclient -server localhost:15999 EmergencyReparentShard test_keyspace/0  test-0000000101                                                                  1
     W0127 10:51:35.206041   12375 main.go:43] W0127 02:51:35.205299 logger.go:256] cannot read old master tablet test-0000000100, won't touch it: node doesn't exist
     deployer@localhost examples/local (master) $
     #+END_QUOTE
-  + StartSlave 将tablet= test-0000000101 的salve 节点进行 同步
+** StartSlave 将tablet= test-0000000101 的salve 节点进行 同步
     如果发现某slave 节点数据不同步，可用此命令
     #+BEGIN_SRC sh
     vtctlclient -server localhost:15999 StartSlave test-0000000101
     #+END_SRC
-  + ExecuteFetchAsDba 在指定的tablet 上执行sql 语句
+** ExecuteFetchAsDba 在指定的tablet 上执行sql 语句
     #+BEGIN_SRC sh
     vtctlclient -server localhost:15999 ExecuteFetchAsDba    test-0000000100 "select * from test_table"
     #+END_SRC
@@ -631,7 +649,7 @@ deployer@localhost docker/vttablet $ etcdctl -C "http://127.0.0.1:3379" get /vt/
         },
     }
     #+END_QUOTE
-  + UpdateTabletAddrs 更改tablet 的host or ip or port
+** UpdateTabletAddrs 更改tablet 的host or ip or port
     -hostname
     -ip-addr
     -mysql-port
@@ -640,12 +658,11 @@ deployer@localhost docker/vttablet $ etcdctl -C "http://127.0.0.1:3379" get /vt/
     #+BEGIN_SRC sh
     vtctlclient -server=127.0.0.1:15999  UpdateTabletAddrs -ip-addr=172.17.0.5 test-0000000100
     #+END_SRC
-  + DeleteTablet 删除一个Tablet
-  + ChangeSlaveType 改变一个tablet 的slave类型
+** DeleteTablet 删除一个Tablet
+** ChangeSlaveType 改变一个tablet 的slave类型
     #+BEGIN_SRC sh
       vtctlclient -server=127.0.0.1:15999  ChangeSlaveType test-0000000100 spare
       # 运行完之后 好像没效果 (可能是这个tablet出问题了)
       vtctlclient -server=127.0.0.1:15999  ListAllTablets test
     #+END_SRC
-
-
+  + 更多命令 http://vitess.io/reference/vtctl.html
