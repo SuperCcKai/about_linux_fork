@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <title>vitess 代码阅读之Context - 一个人的狂欢</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="纪秀峰" />
+    <meta name="description" content="vitess 代码阅读之Context" />
+    <meta name="keywords" content="vitess mysql golang" />
+    <link rel="stylesheet" href="/media/css/main.css" type="text/css">
+    <!-- <link rel="stylesheet" href="/media/css/prettify.css" type="text/css"> -->
+  </head>
+  <body class="container">
+    <div>
+      <header class="masthead">
+        <h1 class="masthead-title"><a href="/">一个人的狂欢</a></h1>
+        <p></p>
+        <ul>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/tags/">Tags</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="http://github.com/jixiuf">GitHub</a></li>
+          <li><a href="/rss.xml">RSS</a></li>
+        </ul>
+        <form method="get" id="searchform" action="http://www.google.com/search">
+          <input type="text" class="field" name="q" id="s" placeholder="Search">
+          <input type="hidden" name="as_sitesearch" value="jixiuf.github.io">
+        </form>
+      </header>
+    </div>
+
+<div>
+<div class="post">
+<h1>vitess 代码阅读之Context</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgheadline1">context之.context中.WithValue(ctx,key,value) 数据的存储与传递</a></li>
+<li><a href="#orgheadline2">context 之 WithCancel 与 Done()</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">context之.context中.WithValue(ctx,key,value) 数据的存储与传递</h2>
+<div class="outline-text-2" id="text-orgheadline1">
+<p>
+vitess 代码中到处充斥着它的身影,初读时颇为不解，<br  />
+仔细看了下context 的代码 ，大概明白Context 设计的用意。<br  />
+作一简短的记录<br  />
+学golang 之前， 有过一年多的erlang 开发经验，erlang 中也存在类似的<br  />
+轻量级进程，等同于golang 中的goroutine,erlang 中的进程有各自的进程字典<br  />
+进程字典只可以在本进程中访问，而golang 没有进程字典，要想存储，一般是放到map<br  />
+中 ，对map 的访问需要加锁，速度自然会慢上一些。vitess 没有采用map 来存储这类信息<br  />
+而是把数据作为参数在各个函数间传递，此种方式缺点是每<br  />
+个函数都需要多一个参数用来,传递数据，翻一下vitess 的代码 就会发现好多函数的第一个参数<br  />
+都是Context ,Context 中存储了各种类型的数据<br  />
+至于Context 一个参数是如何来存储各种数据的 ，下面简单说明一下<br  />
+先说一下 如何使用：<br  />
+</p>
+
+<p>
+使用Context  ,需要使用golang 的package 来配合， 基本上一个package 里定义一种Struct<br  />
+此package 需要存储的信息都在这个Struct里， 然后Context 会存储Struct内的信息<br  />
+</p>
+
+<p>
+假设有 package user<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-go"><span style="color: #FBDE2D;">type</span> <span style="color: #8DA6CE;">User</span> <span style="color: #FBDE2D;">struct</span> {...}
+
+<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#23450;&#20041;&#19968;&#31181;&#31867;&#22411;key ,&#27880;&#24847;&#36825;&#37324;&#26159;&#23567;&#20889;&#30340; &#65292;&#21363;&#22312;package &#22806;&#37096;&#26159;&#26080;&#27861;&#35775;&#38382;&#21040;key</span>
+<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#36825;&#26679;&#23601;&#21487;&#20197;&#20445;&#35777;&#23545;&#21482;&#33021;&#22312;package user &#20013;&#20351;&#29992;key&#31867;&#22411;</span>
+<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#27599;&#20010;package &#20013;&#37117;&#23450;&#20041;&#19968;&#20010;&#30456;&#24212;&#30340;key ,</span>
+<span style="color: #FBDE2D;">type</span> <span style="color: #8DA6CE;">key</span> <span style="color: #8DA6CE;">int</span>
+
+<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">Context &#20013;&#20250;&#26377;&#21508;&#31181;&#31867;&#22411;&#30340;&#25968;&#25454;&#65292;&#27599;&#31181;&#25968;&#25454;&#26377;&#19968;&#20010;key</span>
+<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#20197;userKey &#20026;user.User&#23545;&#24212;&#30340;key,userKey &#26410;&#23548;&#20986;&#65292; &#21363;&#22312;package user</span>
+<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#22806;&#37096;&#26080;&#27861;&#35775;&#38382;&#21040;userKey,&#23545;&#23427;&#30340;&#35775;&#38382;&#65292;&#20351;&#29992;&#19979;&#38754;&#25552;&#20379;&#30340;user.NewContext</span>
+<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#21644; user.FromContext &#26469;&#23384;&#20648;&#21644;&#35775;&#38382;</span>
+<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#19981;&#35201;&#30452;&#25509;&#20351;&#29992;&#36825;&#20010;&#21464;&#37327;</span>
+<span style="color: #FBDE2D;">var</span> userKey key = 0
+
+<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#25226;u &#23384;&#20648;&#21040;Context &#20013;&#65292; (&#20351;&#29992;&#19978;&#38754;&#23450;&#20041;&#30340;userKey&#21464;&#37327;&#20316;&#20026;key)</span>
+<span style="color: #FBDE2D;">func</span> <span style="color: #FF6400;">NewContext</span>(ctx <span style="color: #8DA6CE;">context.Context</span>, u *<span style="color: #8DA6CE;">User</span>) <span style="color: #8DA6CE;">context.Context</span> {
+    <span style="color: #FBDE2D;">return</span> context.<span style="color: #FF6400;">WithValue</span>(ctx, userKey, u)
+}
+
+<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#20174;Context &#20013; &#21462;&#22238;userKey &#23545;&#24212;&#30340;user.User</span>
+<span style="color: #FBDE2D;">func</span> <span style="color: #FF6400;">FromContext</span>(ctx <span style="color: #8DA6CE;">context.Context</span>) (*<span style="color: #8DA6CE;">User</span>, <span style="color: #8DA6CE;">bool</span>) {
+    u, ok := ctx.<span style="color: #FF6400;">Value</span>(userKey).(*<span style="color: #8DA6CE;">User</span>)
+    <span style="color: #FBDE2D;">return</span> u, ok
+}
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-go"><span style="color: #FBDE2D;">package</span> main
+
+<span style="color: #FBDE2D;">import</span> (
+
+    <span style="color: #ffa07a;">"golang.org/x/net/context"</span>
+)
+
+<span style="color: #FBDE2D;">func</span> <span style="color: #FF6400;">main</span>() {
+    ctx := context.<span style="color: #FF6400;">Background</span>() <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#26368;&#22522;&#30784;&#30340;&#19968;&#20010;Context &#65292;&#37324;&#38754;&#20160;&#20040;&#37117;&#27809;&#23384;&#20648;</span>
+    u := user.<span style="color: #8DA6CE;">User</span>{}
+    ctx = ctx.<span style="color: #FF6400;">NewContext</span>(ctx, &amp;u) <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#25226; *user.User &#31867;&#22411;&#30340;u  &#23384;&#19968;ctx &#20013;</span>
+    <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#20551;&#22914; &#36824;&#26377;&#21478;&#19968;&#20010;package &#21483;&#65292; group</span>
+
+    g := group.<span style="color: #8DA6CE;">Group</span>{}
+    ctx = ctx.<span style="color: #FF6400;">NewContext</span>(ctx, &amp;g) <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#25226; *group.Group &#31867;&#22411;&#30340;g  &#23384;&#19968;ctx &#20013;</span>
+    <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#29616;&#22312; ctx &#20013;&#23384;&#20102;user &#21644;group &#30340;&#25968;&#25454;&#65292;</span>
+    <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">ctx &#20250;&#20570;&#20026;&#21442;&#25968;&#22312; &#21508;&#20010;&#20989;&#25968;&#20013;&#36827;&#34892;&#20256;&#36882;</span>
+    <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#20363;&#22914;&#22312;&#26576;&#20010;&#20989;&#25968;&#29992;&#65292; &#20320;&#38656;&#35201;&#35775;&#38382;&#37324;&#38754;&#30340;user</span>
+    <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#36890;&#36807;&#19979;&#38754;&#36825;&#31181;&#26041;&#24335;&#26469;&#33719;&#24471;</span>
+    u, ok := user.<span style="color: #FF6400;">FromContext</span>(ctx)
+    g, ok := group.<span style="color: #FF6400;">Fromcontext</span>(ctx)
+    <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#27880;&#24847;&#21040;&#23384;&#21040;context &#20013;&#30340;&#25968;&#25454;&#22522;&#26412;&#37117;&#26159;&#25351;&#38024;&#31867;&#22411;&#65292; &#21363;&#38656;&#35201;&#20462;&#25913;&#25968;&#25454;&#26102;&#65292;&#21482;&#38656;&#35201;&#20462;&#25913;&#21363;&#21487;</span>
+    <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#19981;&#38656;&#35201;&#25226;&#25351;&#38024;&#37325;&#26032;&#23384;&#21040;context &#20013;&#65292;&#20284;&#20046; &#33509;&#19981;&#23384;&#25351;&#38024;&#32780;&#26159;&#23384;struct&#32467;&#26500;&#30340;&#35805;&#65292; &#21453;&#22797;&#30340;NewContext</span>
+    <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#20250;&#23548;&#33268;context &#20013;&#30340;&#25968;&#25454;&#26080;&#38480;&#22686;&#22823;</span>
+}
+</pre>
+</div>
+<p>
+context中 如何存储数据的，看下代码， 其实很简单<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-go"><span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">Use context Values only for request-scoped data that transits processes and</span>
+<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">APIs, not for passing optional parameters to functions.</span>
+<span style="color: #FBDE2D;">func</span> <span style="color: #FF6400;">WithValue</span>(parent <span style="color: #8DA6CE;">Context</span>, key <span style="color: #FBDE2D;">interface</span>{}, val <span style="color: #FBDE2D;">interface</span>{}) <span style="color: #8DA6CE;">Context</span> {
+    <span style="color: #FBDE2D;">return</span> &amp;<span style="color: #8DA6CE;">valueCtx</span>{parent, key, val}
+}
+
+<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">A valueCtx carries a key-value pair.  It implements Value for that key and</span>
+<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">delegates all other calls to the embedded Context.</span>
+<span style="color: #FBDE2D;">type</span> <span style="color: #8DA6CE;">valueCtx</span> <span style="color: #FBDE2D;">struct</span> {
+    Context
+    key, val <span style="color: #FBDE2D;">interface</span>{}
+}
+
+<span style="color: #FBDE2D;">func</span> (c *<span style="color: #8DA6CE;">valueCtx</span>) <span style="color: #FF6400;">String</span>() <span style="color: #8DA6CE;">string</span> {
+    <span style="color: #FBDE2D;">return</span> fmt.<span style="color: #FF6400;">Sprintf</span>(<span style="color: #ffa07a;">"%v.WithValue(%#v, %#v)"</span>, c.Context, c.key, c.val)
+}
+
+<span style="color: #FBDE2D;">func</span> (c *<span style="color: #8DA6CE;">valueCtx</span>) <span style="color: #FF6400;">Value</span>(key <span style="color: #FBDE2D;">interface</span>{}) <span style="color: #FBDE2D;">interface</span>{} {
+    <span style="color: #FBDE2D;">if</span> c.key == key {
+        <span style="color: #FBDE2D;">return</span> c.val
+    }
+    <span style="color: #FBDE2D;">return</span> c.Context.<span style="color: #FF6400;">Value</span>(key)
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2">context 之 WithCancel 与 Done()</h2>
+<div class="outline-text-2" id="text-orgheadline2">
+<p>
+提供一个如何使用 WithCancel() 与Done()的示例<br  />
+当某个goroutine A 等待别的goroutine B返回结果给他的时候<br  />
+C 调cancel() 可以让A 不再继续等待，继续往下走<br  />
+当然 cancel() 并不影响B 继续执行,只是给了b 提前退出的机会<br  />
+下面的示例 访问 <a href="http://127.0.0.1:8080">http://127.0.0.1:8080</a><br  />
+后，等2秒钟会看到 cancel()被调用后的效果<br  />
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-go"><span style="color: #FBDE2D;">package</span> main
+
+<span style="color: #FBDE2D;">import</span> (
+    <span style="color: #ffa07a;">"fmt"</span>
+    <span style="color: #ffa07a;">"net/http"</span>
+    <span style="color: #ffa07a;">"time"</span>
+
+    <span style="color: #ffa07a;">"golang.org/x/net/context"</span>
+)
+
+<span style="color: #FBDE2D;">func</span> <span style="color: #FF6400;">doALongJob</span>(r <span style="color: #FBDE2D;">chan</span> <span style="color: #8DA6CE;">string</span>) {
+    time.<span style="color: #FF6400;">Sleep</span>(time.Second * 5)
+    fmt.<span style="color: #FF6400;">Println</span>(<span style="color: #ffa07a;">"job is done"</span>)
+    r &lt;- <span style="color: #ffa07a;">"&#32463;&#21382;&#20102;&#28459;&#38271;&#30340;&#36807;&#31243;&#65292;&#29992;&#25143;&#31561;&#21040;&#20102;&#24819;&#35201;&#30340;&#25968;&#25454;"</span>
+    fmt.<span style="color: #FF6400;">Println</span>(<span style="color: #ffa07a;">"doALongJob is end"</span>)
+}
+<span style="color: #FBDE2D;">func</span> <span style="color: #FF6400;">handleTest</span>(w <span style="color: #8DA6CE;">http.ResponseWriter</span>, req *<span style="color: #8DA6CE;">http.Request</span>) {
+    <span style="color: #FBDE2D;">defer</span> req.Body.<span style="color: #FF6400;">Close</span>()
+    ctx := context.<span style="color: #FF6400;">Background</span>()
+    <span style="color: #FBDE2D;">var</span> cancel context.CancelFunc
+    ctx, cancel = context.<span style="color: #FF6400;">WithCancel</span>(ctx)
+    <span style="color: #FBDE2D;">defer</span> <span style="color: #FF6400;">cancel</span>()
+    <span style="color: #FBDE2D;">go</span> <span style="color: #FBDE2D;">func</span>() {
+        <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#25105; &#65288;&#21035;&#30340;&#36827;&#31243; &#65289; &#21487;&#20197;&#35753;&#26412;&#36827;&#31243;&#21462;&#28040;&#31561;&#24453;&#25968;&#25454;&#30340;&#36820;&#22238;</span>
+        time.<span style="color: #FF6400;">Sleep</span>(2 * time.Second)
+        fmt.<span style="color: #FF6400;">Println</span>(<span style="color: #ffa07a;">"&#31561;&#19981;&#21450;&#20102;&#65292; &#19981;&#20877;&#31561;&#24453;"</span>)
+        <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#22914;&#26524;&#27492;&#22788;&#27809;&#26377;&#35843;&#29992;cancel() ,&#27983;&#35272;&#22120;&#19978;&#20250;&#19968;&#30452;&#31561;&#21040; &#24819;&#36807;&#30340;&#32467;&#26524;</span>
+        <span style="color: #FF6400;">cancel</span>()
+    }()
+
+    <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#36825;&#37324;&#32531;&#20914;1&#20010;&#65292; &#21363; &#65292;&#23601;&#31639;&#25105;&#25918;&#24323;&#20174;resultChan &#35835;&#25968;&#25454;&#65292;doALongJob&#22788;&#20381;&#28982;&#21487;&#20197;&#24448;&#37324;&#38754;&#20889;&#20837;&#19968;&#20010;&#25968;&#25454;&#65292;&#20174;&#32780;&#27491;&#24120;&#36864;&#20986;</span>
+    <span style="color: #FBDE2D;">var</span> reusultChan <span style="color: #FBDE2D;">chan</span> <span style="color: #8DA6CE;">string</span> = <span style="color: #F8F8F8;">make</span>(<span style="color: #FBDE2D;">chan</span> <span style="color: #8DA6CE;">string</span>, 1)
+    <span style="color: #FBDE2D;">go</span> <span style="color: #FF6400;">doALongJob</span>(reusultChan)
+    <span style="color: #FBDE2D;">select</span> {
+    <span style="color: #FBDE2D;">case</span> &lt;-ctx.<span style="color: #FF6400;">Done</span>():
+        fmt.<span style="color: #FF6400;">Println</span>(<span style="color: #ffa07a;">"&#36208;&#21040;ctx.Done()&#65292;&#20998;&#25903;&#65292;&#35828;&#26126;&#29992;&#25143;&#19981;&#24895;&#24847;&#32487;&#32493;&#31561;&#24453;&#20102; with err:"</span>, ctx.<span style="color: #FF6400;">Err</span>())
+        w.<span style="color: #FF6400;">Write</span>([]<span style="color: #FF6400;">byte</span>(<span style="color: #ffa07a;">"&#36208;&#21040;ctx.Done()&#65292;&#20998;&#25903;&#65292;&#35828;&#26126;&#29992;&#25143;&#19981;&#24895;&#24847;&#32487;&#32493;&#31561;&#24453;&#20102; with err:"</span> + ctx.<span style="color: #FF6400;">Err</span>().<span style="color: #FF6400;">Error</span>()))
+    <span style="color: #FBDE2D;">case</span> result := &lt;-reusultChan:
+        w.<span style="color: #FF6400;">Write</span>([]<span style="color: #FF6400;">byte</span>(result))
+        fmt.<span style="color: #FF6400;">Println</span>(result)
+    }
+
+}
+<span style="color: #FBDE2D;">func</span> <span style="color: #FF6400;">main</span>() {
+    http.<span style="color: #FF6400;">HandleFunc</span>(<span style="color: #ffa07a;">"/"</span>, handleTest)
+    http.<span style="color: #FF6400;">ListenAndServe</span>(<span style="color: #ffa07a;">":8080"</span>, <span style="color: #D8FA3C;">nil</span>)
+}
+</pre>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+    <div>
+      <div class="post-meta">
+        <span title="post date" class="post-info">2016-03-29</span>
+        <span title="last modification date" class="post-info">2016-03-30</span>
+        <span title="tags" class="post-info"><a href="/tags/vitess/">Vitess</a>, <a href="/tags/mysql/">Mysql</a>, <a href="/tags/golang/">Golang</a></span>
+        <span title="author" class="post-info">纪秀峰</span>
+      </div>
+      <section>
+        <h1>Comments</h1>
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+          //var disqus_developer = 1;
+          var disqus_identifier = "/blog/vitess-代码阅读之context/";
+          var disqus_url = "http://jixiuf.github.io/blog/vitess-代码阅读之context/";
+          var disqus_shortname = 'jixiuf';
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        <div class="ds-thread"></div>
+        <script type="text/javascript">
+          var duoshuoQuery = {short_name:'jixiuf'};
+          (function() {
+          var ds = document.createElement('script');
+          ds.type = 'text/javascript';ds.async = true;
+          ds.src = 'http://static.duoshuo.com/embed.js';
+          ds.charset = 'UTF-8';
+          (document.getElementsByTagName('head')[0]
+          || document.getElementsByTagName('body')[0]).appendChild(ds);
+          })();
+        </script>
+      </section>
+      <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+      <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.js"></script> -->
+      <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script src="/media/js/main.js"></script>
+      <div class="footer">
+        <p>Generated by <a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.x (<a href="http://orgmode.org">Org mode</a> 8.x)</p>
+        <p>
+          Copyright &copy; 2012 - <span id="footerYear"></span> <a href="mailto:jixiuf &lt;at&gt; gmail &lt;dot&gt; com">纪秀峰</a>
+          &nbsp;&nbsp;-&nbsp;&nbsp;
+          Powered by <a href="https://github.com/kelvinh/org-page" target="_blank">org-page</a>
+          <script type="text/javascript">document.getElementById("footerYear").innerHTML = (new Date()).getFullYear();</script>
+        </p>
+      </div>
+    </div>
+
+  </body>
+</html>
