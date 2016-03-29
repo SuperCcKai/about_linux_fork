@@ -10,7 +10,7 @@
 #+FILETAGS:Vitess:Mysql:Golang
 #+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
-* golang.org/x/net/context
+* context之.context中.WithValue(ctx,key,value) 数据的存储与传递
   vitess 代码中到处充斥着它的身影,初读时颇为不解，
   仔细看了下context 的代码 ，大概明白Context 设计的用意。
   作一简短的记录
@@ -109,3 +109,60 @@ context中 如何存储数据的，看下代码， 其实很简单
       return c.Context.Value(key)
   }
 #+END_SRC
+* context 之 WithCancel 与 Done()
+  提供一个如何使用 WithCancel() 与Done()的示例
+  当某个goroutine A 等待别的goroutine B返回结果给他的时候
+  C 调cancel() 可以让A 不再继续等待，继续往下走
+  当然 cancel() 并不影响B 继续执行,只是给了b 提前退出的机会
+  下面的示例 访问 http://127.0.0.1:8080
+  后，等2秒钟会看到 cancel()被调用后的效果
+
+  #+BEGIN_SRC go
+    package main
+
+    import (
+        "fmt"
+        "net/http"
+        "time"
+
+        "golang.org/x/net/context"
+    )
+
+    func doALongJob(r chan string) {
+        time.Sleep(time.Second * 5)
+        fmt.Println("job is done")
+        r <- "经历了漫长的过程，用户等到了想要的数据"
+        fmt.Println("doALongJob is end")
+    }
+    func handleTest(w http.ResponseWriter, req *http.Request) {
+        defer req.Body.Close()
+        ctx := context.Background()
+        var cancel context.CancelFunc
+        ctx, cancel = context.WithCancel(ctx)
+        defer cancel()
+        go func() {
+            // 我 （别的进程 ） 可以让本进程取消等待数据的返回
+            time.Sleep(2 * time.Second)
+            fmt.Println("等不及了， 不再等待")
+            // 如果此处没有调用cancel() ,浏览器上会一直等到 想过的结果
+            cancel()
+        }()
+
+        // 这里缓冲1个， 即 ，就算我放弃从resultChan 读数据，doALongJob处依然可以往里面写入一个数据，从而正常退出
+        var reusultChan chan string = make(chan string, 1)
+        go doALongJob(reusultChan)
+        select {
+        case <-ctx.Done():
+            fmt.Println("走到ctx.Done()，分支，说明用户不愿意继续等待了 with err:", ctx.Err())
+            w.Write([]byte("走到ctx.Done()，分支，说明用户不愿意继续等待了 with err:" + ctx.Err().Error()))
+        case result := <-reusultChan:
+            w.Write([]byte(result))
+            fmt.Println(result)
+        }
+
+    }
+    func main() {
+        http.HandleFunc("/", handleTest)
+        http.ListenAndServe(":8080", nil)
+    }
+  #+END_SRC
