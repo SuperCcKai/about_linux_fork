@@ -1,0 +1,84 @@
+# -*- coding:utf-8 -*-
+#+LANGUAGE:  zh
+#+TITLE:     nginx拾遗
+#+AUTHOR:    纪秀峰
+#+EMAIL:     jixiuf@gmail.com
+#+DATE:     2016-05-09 一
+#+DESCRIPTION:nginx.org
+#+KEYWORDS: nginx
+#+TAGS: Nginx
+#+FILETAGS: Nginx
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
+* nginx 做反向代理配置示例
+  /etc/nginx/conf.d/your.dns.com.conf
+  比如 tomcat 兼听127.0.1:10080端口，
+  当通过域名 your.dns.com 访问 此机器的 80端口时 ，访问会被转到到tomcat 上
+  #+BEGIN_SRC sh
+      upstream your.dns.com{
+            server 127.0.0.1:10080;
+    }
+
+    server {
+      listen  80;
+
+      server_name your.dns.com;
+
+      access_log  /data/logs/nginx/your.dns.com.http.log;
+
+      location / {
+
+        proxy_set_header Host $http_host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Scheme $scheme;
+        proxy_pass http://your.dns.com;
+      }
+    }
+  #+END_SRC
+* 利用nginx 做简单的认证
+  开发了简单的网站 ，但是没有 认证功能。 又不想不加认证 暴露在外网环境下
+  可以用此方法进行 用户名密码认证
+
+  使用nignx反向代理kibana
+  nginx配置Http Basic Auth账号密码登陆
+  http://trac.edgewall.org/export/10770/trunk/contrib/htpasswd.py （nginx wiki里推荐的）
+  运行示例
+  chmod 755 htpasswd.py
+  ./htpasswd.py -c -b htpasswd username password
+  这个脚本会生成一个htpasswd 文件，里面存username 及加密后的password, nginx 配置中 会引用这个文件
+  #-c为生成文件 htpasswd为文件名
+
+  比如 /etc/nginx/conf.d/elk.dev.yourdns.com.conf
+  #+BEGIN_SRC sh
+    server {
+        listen 80;
+        #listen [::]:80;
+        server_name elk.dev.yourdns.com;
+            location / {
+            auth_basic "Password please";
+            auth_basic_user_file /etc/nginx/conf.d/htpasswd;  # 指向你刚生成的 htpasswd 文件
+            proxy_pass http://127.0.0.1:5601/;   # 认证之后 可以访问此内容
+            proxy_redirect off;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+            }
+
+    }
+  #+END_SRC
+* 利用nginx 404错误 下载某个文件
+  随便访问一个不存在的路么， 会下载/tmp/static.txt 这个文件，
+  用于快速搭建一个web 服务器 传文件
+  # 当然也可以用python 来实现此功能
+  python -m SimpleHTTPServer 8888
+
+  #+BEGIN_SRC sh
+    server {
+        listen 80 default;
+
+        location /test {
+            root /;
+            try_files /tmp/static.txt =404;
+        }
+    }
+  #+END_SRC
