@@ -849,16 +849,16 @@
    导出，也可以用来做elasticsearch的备份，elasticdump可以选择性的导出data和mapping。
    #+BEGIN_SRC sh
      #具体配置信息
-     elasticdump --ignore-errors=true  --scrollTime=120m  --bulk=true --input=http://xxxxx:9200/.kibana   --output=data.json  --type=data
+     elasticdump --ignore-errors=true  --scrollTime=120m  --bulk=true --input=http://ip1:9200/.kibana   --output=data.json  --type=data
 
      #导出mapping信息
-     elasticdump --ignore-errors=true  --scrollTime=120m  --bulk=true --input=http://xxxxxx/.kibana   --output=mapping.json  --type=mapping
+     elasticdump --ignore-errors=true  --scrollTime=120m  --bulk=true --input=http://ip1:9200/.kibana   --output=mapping.json  --type=mapping
    #+END_SRC
    咱们再把刚才备份的数据，导入到目标elasticsearch上
    #+BEGIN_SRC sh
-     导入mapping
-     elasticdump --input=mapping.json  --output=http://xxxxxxx:9000/.kibana --type=mapping
+     #导入mapping
+     elasticdump --input=mapping.json  --output=http://ip2:9200/.kibana --type=mapping
 
-     导入具体的kibana配置信息
-     elasticdump --input=data.json  --output=http://xxxxx:9000/.kibana --type=data
+     #导入具体的kibana配置信息
+     elasticdump --input=data.json  --output=http://ip2:9200/.kibana --type=data
    #+END_SRC
