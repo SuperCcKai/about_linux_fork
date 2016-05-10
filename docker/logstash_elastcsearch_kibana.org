@@ -20,8 +20,16 @@
      docker pull kibana
      docker pull elasticsearch
    #+END_SRC
+   demo
+   #+BEGIN_SRC sh
+      sudo docker run -it --name logstash-1 --rm -v "/data/mygame/config/":/config-dir logstash logstash -f /config-dir/logstash_mygame.conf
+      # es kibana 目前在同一个机器上
+      sudo docker run -d --name es-1 -e ES_HEAP_SIZE=1G -p 9200:9200 -v "/data/mygame/es/logs/":/usr/share/elasticsearch/logs  -v "/data/mygame/es/data/":/usr/share/elasticsearch/data elasticsearch -Des.cluster.name="mygame" -De.bootstrap.mlockall=true -Des.node.name="mygame-node-1"
+      sudo docker run --name kibana --link es-1:elasticsearch -p 5601:5601 -d kibana
+   #+END_SRC
 
 **  生成 包含 logstash elasticsearch kibana 的 docker 镜像
+   网速可以的话，用官方的docker 镜像还是不错的，
    直接本目录下
    #+BEGIN_SRC sh
   sudo make
@@ -822,3 +830,35 @@
    #+END_QUOTE
    根据这样的记录我可以以图表的形式分析资产变化的原因，每天资产是增是减
    [[file:../download/elk_demo1.png]]
+
+** kibana 的迁移
+   你在kibana 界面里做的配置及 创建的查询 视图都保存在
+   elasticsearch 内一个 叫 .kibana 的index 下
+   所以 当你在别的机器上想得到相同配置 相同视图的kibana
+   就得把 elasticsearch 的.kibana 节点复制到你的新机器上
+
+   这里重点说下怎么把kibana4的配置导出并迁移。 如果你不偷懒，可以自己
+   用pyhton写个elasticsearch的导出程序，实现起来很简单….. 如果你跟我
+   一样很偷懒，那么就直接用现成的工具。 elasticdump是个node.js开发的一
+   个小而精的elasticsearch导出程序。
+   #+BEGIN_SRC sh
+     sudo yum install npm
+     npm install -g elasticdump
+   #+END_SRC
+
+   导出，也可以用来做elasticsearch的备份，elasticdump可以选择性的导出data和mapping。
+   #+BEGIN_SRC sh
+     #具体配置信息
+     elasticdump --ignore-errors=true  --scrollTime=120m  --bulk=true --input=http://xxxxx:9200/.kibana   --output=data.json  --type=data
+
+     #导出mapping信息
+     elasticdump --ignore-errors=true  --scrollTime=120m  --bulk=true --input=http://xxxxxx/.kibana   --output=mapping.json  --type=mapping
+   #+END_SRC
+   咱们再把刚才备份的数据，导入到目标elasticsearch上
+   #+BEGIN_SRC sh
+     导入mapping
+     elasticdump --input=mapping.json  --output=http://xxxxxxx:9000/.kibana --type=mapping
+
+     导入具体的kibana配置信息
+     elasticdump --input=data.json  --output=http://xxxxx:9000/.kibana --type=data
+   #+END_SRC
