@@ -813,3 +813,12 @@
    可也以直接输入 elasticsearch 的json 查询语法
    #+END_QUOTE
    kibana 的可视化 是在上述查询出来的数据上 进行 统计
+
+**  demo
+   比如 我打印这样的日志 记录游戏资产变化（金币、钻石等通过key来区分）
+   #+BEGIN_QUOTE
+   2016-05-10_17:43:29 {"logtype":"assets_change","uin":"144150668431540282","key":6,"before":8,"after":4,"change":-4,"reason":"assets_sell_consume","timestamp":1462873382304931}
+   2016-05-10_17:43:29 {"logtype":"assets_change","uin":"144150668431540282","key":1,"before":19729900,"after":19769900,"change":40000,"reason":"assets_sell_obtain","timestamp":1462873382304931}
+   #+END_QUOTE
+   根据这样的记录我可以以图表的形式分析资产变化的原因，每天资产是增是减
+   [[file:../download/elk_demo1.png]]
