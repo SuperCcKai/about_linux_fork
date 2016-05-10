@@ -35,6 +35,43 @@
       }
     }
   #+END_SRC
+  #+BEGIN_SRC sh
+    upstream your.dns.com{
+            server 127.0.0.1:8888;
+    }
+    server {
+      listen  80;
+
+      server_name your.dns.com;
+
+      access_log  /var/log/nginx/yourdns.com.http.log  main;
+
+      location ~ /.*\.(gif|jpg|png|htm|html|css|js|flv|ico|swf|mp4)$ {
+      root /data/deployer/apache-tomcat-8.0.21/webapps/ROOT;
+      break;
+      }
+      #location /{
+       # root /data/deployer/apache-tomcat-8.0.21/webapps/ROOT;
+        #index  html/index.html html/index.htm;
+      #}
+      location / {
+            proxy_pass http://your.dns.com/;
+            proxy_pass_header Server;
+            proxy_set_header Host $http_host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Scheme $scheme;
+            index html/index.html html/index.htm;
+     }
+
+      # /usr/share/nginx/html/404.html
+      error_page   500 502 503 504  /50x.html;
+      error_page   404  /404.html;
+      location = /50x.html {
+        root   html;
+      }
+
+    }
+  #+END_SRC
 * 利用nginx 做简单的认证
   开发了简单的网站 ，但是没有 认证功能。 又不想不加认证 暴露在外网环境下
   可以用此方法进行 用户名密码认证
