@@ -181,4 +181,17 @@ Run yum install -y go
     sudo docker attach mylinux
     # 似乎要等几秒钟才能等到提示符出现
   #+END_SRC
-  attach 上之后 C-p C-q deattach
+  attach 上之后 Ctrl-p Ctrl-q deattach
+
+  # 能否用Ctrl-p Ctrl-q 是有条件的
+  docker run -t -i → can be detached with ^P^Q and reattached with docker attach
+  docker run -i → cannot be detached with ^P^Q; will disrupt stdin
+  docker run → cannot be detached with ^P^Q; can SIGKILL client; can reattach with docker attach
+  对于 docker run 未加 -t -i 的 可以用 kill -9 pid 一定要加-9
+  或者 启动attach 时加参数   --sig-proxy=false 然后直接用Ctrl-c 退出就可以了
+  意思是 不会把 给attach 进程的信息 发给 daemon 的进程
+  如
+  #+BEGIN_SRC sh
+   d attach --sig-proxy=false centos
+  #+END_SRC
+
