@@ -175,6 +175,17 @@
     "acknowledged" : true
     }
     #+END_QUOTE
+    #+BEGIN_SRC sh
+       #指定 shard 与replicas 数量
+      curl -XPUT 'http://localhost:9200/twitter/' -d '{
+          "settings" : {
+              "index" : {
+                  "number_of_shards" : 3,
+                  "number_of_replicas" : 2
+              }
+          }
+      }'
+    #+END_SRC
 
 *** 删除某个index
     #+BEGIN_SRC sh
@@ -296,6 +307,169 @@
           yellow bank    5   1       1000            0    424.4kb        424.4kb
      #+END_SRC
 
+*** 查看mapping
+    mapping 主要功能是用来指定 field 的类型的，
+    默认在创建document 时， 有dynamic mapping 机制 自动指定field 类型等，
+    比如上面创建 customer/external 时
+    #+BEGIN_SRC sh
+       #查看index=customer ,type=external 对应的 mapping
+       # 可以看到，它有一个field:name 对应类型为string
+       curl -XGET 'http://localhost:9200/customer/_mapping/external?pretty'
+      {
+        "customer" : {
+          "mappings" : {
+            "external" : {
+              "properties" : {
+                "name" : {
+                  "type" : "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    #+END_SRC
+    #查看所有index 的mappin
+    #+BEGIN_SRC sh
+    curl -XGET 'http://localhost:9200/_mapping?pretty'
+     或
+    curl -XGET 'http://localhost:9200/_all/_mapping?pretty'
+    #+END_SRC
+    查看某两个index 的mapping
+    #+BEGIN_SRC sh
+      curl -XGET 'http://localhost:9200/_mapping/twitter,kimchy'
+      或
+      curl -XGET 'http://localhost:9200/_all/_mapping/tweet,book'
+    #+END_SRC
+*** put mapping
+    put mapping ,可以实现
+**** 创建index 时 指定mapping
+     #+BEGIN_SRC sh
+       curl -XPOST localhost:9200/test -d '{
+           "settings" : {
+               "number_of_shards" : 1
+           },
+           "mappings" : {
+               "type1" : {
+                   "properties" : {
+                       "field1" : { "type" : "string", "index" : "not_analyzed" }
+                   }
+               }
+           }
+       }'
+
+     #+END_SRC
+****   向一个已经存在的index 加一个新的type (index 似乎必须存在)
+     #+BEGIN_SRC sh
+      curl -XPUT 'http://localhost:9200/gold' -d '
+      {"mappings":{
+            "gold_change":{
+                "properties":{
+                    "uin":{
+                        "type":"string",
+                        "index":"not_analyzed"
+                    },
+                    "change":{
+                        "type":"long"
+                    },
+                    "timestamp":{
+                        "type":"date",
+                        "format" : "strict_date_optional_time||epoch_millis"
+                    }
+
+                }
+            }
+      }}
+      '
+      #注上面 "index":"not_analyzed" 说明 不对uin 进行分词(把uin 对应的内容当成一个完整的term) ,可接受的类型"no","analyzed"
+       #no 表示， 此字段不可查询 analyzed 表示会进行分词
+       # 更多参数 ，见
+       #https://www.elastic.co/guide/en/elasticsearch/reference/current//mapping-index.html
+
+     #+END_SRC
+**** 向一个已经存在的type 加一个新的field
+     #+BEGIN_SRC sh
+      curl -XPUT 'http://localhost:9200/gold/_mapping/gold_change' -d '
+       {
+         "properties": {
+           "name": {
+             "type": "string"
+           }
+         }
+       }'
+     #+END_SRC
+  不能实现的功能，
+  如果一个type 已经存的某field ,则不能修改在field 的类型。
+  要想修改 只能在 未创建任何document 之前 put mapping
+  通常情况下， 如果未手动put mapping
+  在创建第一个document 时， 会自动创建相应的mapping
+  但是此时 ，mapping 里出现的field 类型后期不能进行修改了。
+  如果自动创建的mapping 不能满足你的需求。 则要提前创建。
+  比如， 本可能是时间的字段， 默认可能会是long
+  实际是个long , 本默认是string
+
+*** mapping types
+  string, date, long, double, boolean or ip
+  object, nested 等json 或对象 等特殊类型
+  geo_point, geo_shape, or completion等表示地图信息的类型
+  date 需要指定format
+  #+BEGIN_SRC js
+    "timestamp":{
+      "type":"date",
+      "format" : "strict_date_optional_time||epoch_millis"
+    }
+
+    // 或
+    #"format": "yyy-MM-dd HH:mm:ss||yyyy-MM-dd||epoch_millis"
+
+
+  #+END_SRC
+
+
+  https://www.elastic.co/guide/en/elasticsearch/reference/current//mapping.html#mapping-type
+  需要特别说明的一点是 。
+  同一个index 下 ， 相同名字的field ,不类在哪个type 中， 必须保证 此field 的类型 处处相同
+  即 ，title 字段可能出现在user 可能出现在group 中 ， 不论在哪里 title 必须都是string 或别的类型
+
+
+
+*** Index Template
+    template 存在的意义是，比如logstash 在创建index  可能是根据日期
+    创建不同的index ，以避免某个index 数据量过大，
+    如 每月建一个index,
+    为了保证这些每月自动创建的index 对其mapping,setting 进行定制，
+    保证其属性一致。 从而出现了template
+    template 需要一个index pattern,来匹配决定 新创建的index 是否需要应用此模版
+    #+BEGIN_SRC sh
+      # 只要新创建的index 前缀是"gold-*" ，就会应用此 template
+      curl -XPUT 'http://localhost:9200/_template/gold_template' -d '
+      {
+        "template": "gold-*",
+        "settings": {
+          "number_of_shards": 1
+        },
+        "mappings": {
+          "gold_change": {
+            "_source": {
+              "enabled": false
+            },
+            "properties": {
+              "host_name": {
+                "type": "string",
+                "index": "not_analyzed"
+              },
+              "created_at": {
+                "type": "date",
+                "format": "EEE MMM dd HH:mm:ss Z YYYY"
+              }
+            }
+          }
+        }
+       }
+        '
+
+    #+END_SRC
+
 *** Search
 
 **** 查所有
@@ -338,6 +512,44 @@
 
 **** 查询语法
      https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl.html
+     查询语法，包含两个Context: Query Context和Filter Context
+     Filter 用来 过滤document 是否包含在结果集中，主要用于过滤掉不符合的document
+     而Query context 是搜索引擎层面的，用来计算给定的关键词与document 的匹配度
+     它会计算一个score ,来标定这个这键字与document的匹配度。当然它也会过滤掉一些不匹配的document
+     而filter 是不计算score的 。
+
+     可以认为 filter context ,是严格过滤的， 即，  通常条件类似
+     status==1
+     age>0
+     age<10
+     name=="age"
+     而 query context ,是基于字符匹配层面的"匹配"（搜索引擎）
+     比如
+     #+BEGIN_SRC sh
+     curl -XPOST 'localhost:9200/bank/_search?pretty' -d '
+       {
+         "query": {
+           "bool": {
+             "must": [
+               { "match": { "title":   "Search"        }},
+               { "match": { "content": "Elasticsearch" }}
+             ],
+             "filter": [
+               { "term":  { "status": "published" }},
+               { "range": { "publish_date": { "gte": "2015-01-01" }}}
+             ]
+           }
+         }
+       }
+     #+END_SRC
+     filter:中 指定
+      1. status必须== "published"
+      2. publish_date > 2015-01-01
+     query 中 bool must,match 则是query context的
+     意即，使用bool 这类的must 子句来query ,(must 可以理解为 and or not 中的and)
+     而两个match ,则是要匹配的条件，
+     即title 中含"search",content中含 "Elasticsearch"
+
 ***** size 指定返回多少个结果
       #+BEGIN_SRC sh
        curl -XPOST 'localhost:9200/bank/_search?pretty' -d '
@@ -419,50 +631,69 @@
         }
       #+END_SRC
 
-***** 根据字段查询选定条件的
-      查 account_number=37的
-      #+BEGIN_SRC sh
-        curl -XPOST 'localhost:9200/bank/_search?pretty' -d '
-        {
-        "query": { "match":{"account_number":37} },
-        "_source":["account_number","balance"]
-        }'
-      #+END_SRC
-      match_phrase似乎跟match 是一样的(返回结果好像是一样的)
-      #+BEGIN_SRC sh
-        curl -XPOST 'localhost:9200/bank/_search?pretty' -d '
-        {
-        "query": { "match_phrase":{"account_number":37} },
-        "_source":["account_number","balance"]
-        }'
-      #+END_SRC
+***** Full Text Query (全文搜索) "match" "multi_match" 匹配级别的
+      https://www.elastic.co/guide/en/elasticsearch/reference/current//full-text-queries.html
 
-      #+BEGIN_SRC js
-              {
-          "took" : 33,
-          "timed_out" : false,
-          "_shards" : {
-            "total" : 5,
-            "successful" : 5,
-            "failed" : 0
-          },
-          "hits" : {
-            "total" : 1,
-            "max_score" : 0.30685282,
-            "hits" : [ {
-              "_index" : "bank",
-              "_type" : "account",
-              "_id" : "37",
-              "_score" : 0.30685282,
-              "_source" : {
-                "account_number" : 37,
-                "balance" : 18612
-              }
-            } ]
+        查 account_number=37的
+        #+BEGIN_SRC sh
+          curl -XPOST 'localhost:9200/bank/_search?pretty' -d '
+          {
+          "query": { "match":{"account_number":37} },
+          "_source":["account_number","balance"]
+          }'
+        #+END_SRC
+        match_phrase似乎跟match 是一样的(返回结果好像是一样的)
+        词组级别的查询
+        #+BEGIN_SRC sh
+          curl -XPOST 'localhost:9200/bank/_search?pretty' -d '
+          {
+          "query": { "match_phrase":{"account_number":37} },
+          "_source":["account_number","balance"]
+          }'
+        #+END_SRC
+
+        #+BEGIN_SRC js
+                {
+            "took" : 33,
+            "timed_out" : false,
+            "_shards" : {
+              "total" : 5,
+              "successful" : 5,
+              "failed" : 0
+            },
+            "hits" : {
+              "total" : 1,
+              "max_score" : 0.30685282,
+              "hits" : [ {
+                "_index" : "bank",
+                "_type" : "account",
+                "_id" : "37",
+                "_score" : 0.30685282,
+                "_source" : {
+                  "account_number" : 37,
+                  "balance" : 18612
+                }
+              } ]
+            }
           }
-        }
-      #+END_SRC
+        #+END_SRC
+****** 根据字段查询选定条件的 (term 级别)
+       term, terms,range, exists,missing,prefix,wildcard ,regex,,type
+       term 可以认为 那个字段 严格==查询的内容
+       #+BEGIN_SRC sh
+         curl -XPOST 'localhost:9200/zjh_login*/_search?pretty' -d '
+         {
+             "query": {
+                   "term":{ "text":"hello world" }
+              }
+         }'
+         假如text字段的mapping ,指定text 进行分词，
+         假如有个document.text="hello world",
+         则匹配失败， 因为text 被分词成了"hello" 和"world"
+         "hello world"!="hello" "hello world"!="world"
+         所以不匹配
 
+       #+END_SRC
 ***** bool 语法（must,must_not,should）
       相当于 and not or
 
