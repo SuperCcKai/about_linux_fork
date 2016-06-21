@@ -8,7 +8,7 @@
 #+KEYWORDS:
 #+TAGS:Mysql
 #+FILETAGS: Mysql
-#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t <:t
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:* f:t *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
 
 http://www.percona.com/software/percona-xtrabackup
@@ -30,25 +30,27 @@ yum install percona-xtrabackup-22
 http://blog.csdn.net/yongsheng0550/article/details/6682162
 https://www.tekovic.com/mysql-hot-backup-with-xtrabackup-on-centos
 crontab 定时运行
-0 3 * * * innobackupex --defaults-file=/etc/mysql/my.cnf --host=127.0.0.1  -port=3306 --user=root --password='root!!@@__))' /udisk/mysqlback/base
+0 3 * * * innobackupex --defaults-file=/etc/mysql/my.cnf --host=127.0.0.1  -port=3306 --user=root --password='rootpass' /udisk/mysqlback/base
+0 3 * * * innobackupex --defaults-file=/etc/my.cnf  --user=root --password='rootpass' --port=3306 --socket=/tmp/mysql.sock  /data/backup/mysql/
 0 0 * * *   python /root/script/daily_backup.py
 # 奖 修改时间是10天前的目录都删除，即只保留最后10天的数据
 10 3 * * * find /udisk/mysqlback/base/ -maxdepth 1 -mtime +10 -exec rm  -rf {} \;
 
 demo
 全量备份
-innobackupex --defaults-file=/usr/local/mysql/my.cnf  --user=root --password='root!!@@__))' --host=127.0.0.1 --port=3306 --socket=/tmp/mysql.sock --no-timestamp /data/mysql_backup/2015-10-16  2>/data/mysql_backup/log/2015-10-16.log
+innobackupex --defaults-file=/usr/local/mysql/my.cnf  --user=root --password='rootpass' --host=127.0.0.1 --port=3306 --socket=/tmp/mysql.sock --no-timestamp /data/mysql_backup/2015-10-16  2>/data/mysql_backup/log/2015-10-16.log
 全量备份的恢复
 service mysql stop
 rm  -rf /data/mysql/data/
 # --use-memory=100M default
-innobackupex --use-memory=500M  --user=root --password='root!!@@__))' --apply-log /data/mysql_backup/2015-10-16
+innobackupex --use-memory=500M  --user=root --password='rootpass' --apply-log /data/mysql_backup/2015-10-16
 
 # --defaults-file= 如果要加 必须放到第一个位置
-innobackupex --defaults-file=/usr/local/mysql/my.cnf  --user=root --password='root!!@@__))'  --copy-back  /data/mysql_backup/2015-10-16
+innobackupex --defaults-file=/usr/local/mysql/my.cnf  --user=root --password='rootpass'  --copy-back  /data/mysql_backup/2015-10-16
 chown mysql:mysql -R /data/mysql/data
 
-# innobackupex --user=root --password='root!!@@__))' --defaults-file=/usr/local/mysql/my.cnf  --apply-log  /data/mysql_backup/2015-10-16
+# innobackupex --user=root --password='rootpass' --defaults-file=/usr/local/mysql/my.cnf  --apply-log  /data/mysql_backup/2015-10-16
 
 
 
+innobackupex --defaults-file=/etc/my.cnf  --user=root --password='rootpass' --host=127.0.0.1 --port=3306 --socket=/tmp/mysql.sock  /data/backup/mysql/
