@@ -31,16 +31,20 @@ http://devliangel.blog.51cto.com/469347/1374232
 http://blog.csdn.net/yongsheng0550/article/details/6682162
 https://www.tekovic.com/mysql-hot-backup-with-xtrabackup-on-centos
 crontab 定时运行
-0 3 * * * innobackupex --defaults-file=/etc/mysql/my.cnf --host=127.0.0.1  -port=3306 --user=root --password='rootpass' /udisk/mysqlback/base
-0 3 * * * innobackupex --defaults-file=/etc/my.cnf  --user=root --password='rootpass' --port=3306 --socket=/tmp/mysql.sock  /data/backup/mysql/
-0 0 * * *   python /root/script/daily_backup.py
-# 奖 修改时间是10天前的目录都删除，即只保留最后10天的数据
-10 3 * * * find /udisk/mysqlback/base/ -maxdepth 1 -mtime +10 -exec rm  -rf {} \;
+#+BEGIN_SRC sh
+  0 3 * * * innobackupex --defaults-file=/etc/mysql/my.cnf --host=127.0.0.1  -port=3306 --user=root --password='rootpass' /udisk/mysqlback/base
+  0 3 * * * innobackupex --defaults-file=/etc/my.cnf  --user=root --password='rootpass' --port=3306 --socket=/tmp/mysql.sock  /data/backup/mysql/
+  0 0 * * *   python /root/script/daily_backup.py
+  # 奖 修改时间是10天前的目录都删除，即只保留最后10天的数据
+  10 3 * * * find /udisk/mysqlback/base/ -maxdepth 1 -mtime +10 -exec rm  -rf {} \;
+#+END_SRC
 
 demo
 全量备份
-innobackupex --defaults-file=/etc/my.cnf  --user=root --password='rootpass' --host=127.0.0.1 --port=3306 --socket=/tmp/mysql.sock --no-timestamp /data/mysql_backup/2016-06-21_18-18-55  2>/data/mysql_backup/log/2016-06-21_18-18-55.log
-innobackupex --defaults-file=/etc/my.cnf  --user=root --password='rootpass' --host=127.0.0.1 --port=3306 --socket=/tmp/mysql.sock  /data/backup/mysql/
+#+BEGIN_SRC sh
+  innobackupex --defaults-file=/etc/my.cnf  --user=root --password='rootpass' --host=127.0.0.1 --port=3306 --socket=/tmp/mysql.sock --no-timestamp /data/mysql_backup/2016-06-21_18-18-55  2>/data/mysql_backup/log/2016-06-21_18-18-55.log
+  innobackupex --defaults-file=/etc/my.cnf  --user=root --password='rootpass' --host=127.0.0.1 --port=3306 --socket=/tmp/mysql.sock  /data/backup/mysql/
+#+END_SRC
 * 针对全量备份的恢复过程
   比如创建的备份在 /data/backup/mysql/2016-06-21_18-18-55/下
   原mysql 数据文件在 /data/mysql/data/目录
