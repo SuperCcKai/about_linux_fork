@@ -87,11 +87,11 @@ mysql-bin.000005   和     2147  这两个数据 会在从库上用到
     #+END_QUOTE
     当 Slave_IO_Running 与Slave_SQL_Running 状态是Yes 的时候 就算配置完成了
     可以试着在master 插入数据 看看slave 上数据是否得到同步
-
-
-
-
-
+**  当出现主从不一致的时候的做法，
+   stop slave;
+   #表示跳过一步错误，后面的数字可变
+   set global sql_slave_skip_counter =1;
+   start slave;
 *  mysql热备做DR
 ** 在master db上使用mysqldump构建基于时间点的一致性全备
    mysqldump -uroot -pPASSWORD --single-transaction --master-data=2 --skip-opt --create-option -B item > dump.sql
