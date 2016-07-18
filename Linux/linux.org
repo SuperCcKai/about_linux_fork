@@ -357,3 +357,31 @@ Modeline "1440x900_75.00"  136.75  1440 1536 1688 1936  900 903 909 942 -hsync +
 
 * 用python 格式化json
   cat a.json|python -m json.tool
+
+* awk 怎么去除如果第一列相同，则只取一行？
+
+#+BEGIN_QUOTE
+例如：
+aaaaaa,bbbbbb,ccccccc
+sssssss,fffffffffff,wwwww
+eeeeee,rrrrrrrrr,2222222
+aaaaaa,qqqqqq,wwwwww
+sssssss,wwwww,3333333
+..........................................
+..........................................
+...........................................
+...........................................
+eeeeeee,tttttttttt,44444444
+
+
+以逗号分隔，就是如果第一列是重复的，不管后边的列，只取一行，怎么取
+#+END_QUOTE
+#+BEGIN_SRC sh
+awk -F, '!a[$1]++' urfile
+#+END_SRC
+#+BEGIN_QUOTE
+! a[$1] ++
+0为假， !0 为真
+以第一列（逗号分隔）为索引的数组元素的值为0则输出，输出后数组元素值++， 后面的行$1相同时a[$1]的值就不为0了。
+
+#+END_QUOTE
