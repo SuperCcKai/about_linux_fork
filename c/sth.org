@@ -15,16 +15,16 @@
   #+END_SRC
 * c cpp  的一些判断
   #+BEGIN_SRC c
-  if(flag)
-  if(!flag)
-  而非
-  if(0==flag)
+    if(flag)
+    if(!flag)
+    /* 而非 */
+    if(0==flag)
 
-  判断指针非空用
-  if(p==NULL) // NULL 定义的 #include<cstdlib>  或c的stdlib.h
-  尽量少用:
-  if(p)
-  if(p==0)
+    /* 判断指针非空用 */
+    if(p==NULL) // NULL 定义的 #include<cstdlib>  或c的stdlib.h
+    /* 尽量少用: */
+    if(p)
+    if(p==0)
   #+END_SRC
 
 * const 的作用
@@ -43,12 +43,12 @@
   声明可以多次， 定义只能一次，声明不分配内存
   用extern关键来来声明
   #+BEGIN_SRC c++
-   extern int i ;//声明i
-   int i ;//声明 并定义,所以这是定义 ，不可以出现多次
-   int i=2 ;//声明 并定义,并初始值
-   因为声明 不分配内存 所以不可以初始化，一旦有初始化的行为，则认为是定义，即便使用了ertern 也认为是定义而非声明
-   extern int i =3; // 声明 定义 并初始化， 这里的extern 几乎无意义.
-  定义之后可以再次出现 单独声明的语句， 但是不能出现
+     extern int i ;//声明i
+     int i ;//声明 并定义,所以这是定义 ，不可以出现多次
+     int i=2 ;//声明 并定义,并初始值
+     // 因为声明 不分配内存 所以不可以初始化，一旦有初始化的行为，则认为是定义，即便使用了ertern 也认为是定义而非声明
+     extern int i =3; // 声明 定义 并初始化， 这里的extern 几乎无意义.
+    // 定义之后可以再次出现 单独声明的语句， 但是不能出现
   #+END_SRC
   #+BEGIN_SRC c++
   int main(int argc, char *argv[]){
@@ -88,51 +88,51 @@
   #+END_SRC
 * c++ 枚举 enum
   #+BEGIN_SRC c++
-    enum Forms{shape=1,sphere,cylinder,polygon}
-    枚举的值后一个比前一个加1,除非显示初始化
-    shape=1 , sphere=2,cylinder=3,
+      enum Forms{shape=1,sphere,cylinder,polygon}
+      // 枚举的值后一个比前一个加1,除非显示初始化
+      shape=1 , sphere=2,cylinder=3,
 
-    枚举的值可以重复
-    enum Forms{shape=1,sphere,cylinder=2,polygon}
-    则shape=1 sphere=2 cylinder=2 polygon=3
-   定义成枚举后， 枚举跟int是不同类型
-   如
-  Froms f1=shape; //ok
-  Froms f2=2 ; // error
+      // 枚举的值可以重复
+      enum Forms{shape=1,sphere,cylinder=2,polygon}
+      // 则shape=1 sphere=2 cylinder=2 polygon=3
+     // 定义成枚举后， 枚举跟int是不同类型
+     // 如
+    Froms f1=shape; //ok
+    Froms f2=2 ; // error
 
 
   #+END_SRC
 * string 相关
 **  string.size() 返回string::size_type类型,而非int
    #+BEGIN_SRC c++
-   string::size_type len=  s.size();//ok
-   int len=  s.size();//error, 但是我试了 编译运行都 可过， 但是不推荐
+     string::size_type len=  s.size();//ok
+     int len=  s.size();//error, 但是我试了 编译运行都 可过， 但是不推荐
    #+END_SRC
 ** 取string第n个字符用[]下标操作即可,也可对其赋值,只能对已经存在的元素赋值，不能添加
    []中的数是一个size_type类型,从0 始计
    #+BEGIN_SRC c++
-   string str("hello");
-   char c=str [1];
-   std::cout << c << std::endl;
-   str[1]='E';
-   std::cout << str << std::endl;  // "hEllo"
+     string str("hello");
+     char c=str [1];
+     std::cout << c << std::endl;
+     str[1]='E';
+     std::cout << str << std::endl;  // "hEllo"
    #+END_SRC
    #+BEGIN_SRC c++
-   遍历
-   for (string::size_type  i= 0; i < str.size(); i++){
-     std::cout << str[i] << std::endl;
-    }
+     // 遍历
+     for (string::size_type  i= 0; i < str.size(); i++){
+       std::cout << str[i] << std::endl;
+      }
    #+END_SRC
 ** cctype 头文件里一些函数如isupper tolower isspace
    #+BEGIN_SRC c++
-   #include <cctype>
-   // isdigit(int)
-   // islower(int)
-   // isupper
-   // isalnum
-   // isspace 这些函数也是在std::下的
-   char c='d';
-   std::cout << isupper(c) << std::endl;
+     #include <cctype>
+     // isdigit(int)
+     // islower(int)
+     // isupper
+     // isalnum
+     // isspace 这些函数也是在std::下的
+     char c='d';
+     std::cout << isupper(c) << std::endl;
 
    #+END_SRC
 * vector 容器
@@ -140,36 +140,36 @@
   vector是类模版，不是数据类型
   vector<int> vector<string>则是数据类型
   #+BEGIN_SRC c++
-  vector<string> v1;
-  string s1("aaa");
-  string s2("bbb");
+    vector<string> v1;
+    string s1("aaa");
+    string s2("bbb");
 
-  v1.push_back(s1);
-  v1.push_back(s2);
-  vector<string> v2(v1);
+    v1.push_back(s1);
+    v1.push_back(s2);
+    vector<string> v2(v1);
 
-  s1="ccc";//对s1的改变 变不会影响v1 v2中的元素
+    s1="ccc";//对s1的改变 变不会影响v1 v2中的元素
 
-  // size_type类型的写法,不可以写成vector::size_type
-  for (vector<string>::size_type i = 0; i<v1.size(); i++) {
-    std::cout << v1.at(i) << std::endl;
-   } // 打印后的是"aaa" "bbb",
-  std::cout << "" << std::endl;
+    // size_type类型的写法,不可以写成vector::size_type
+    for (vector<string>::size_type i = 0; i<v1.size(); i++) {
+      std::cout << v1.at(i) << std::endl;
+     } // 打印后的是"aaa" "bbb",
+    std::cout << "" << std::endl;
 
-  for (vector<string>::size_type i = 0; i<v2.size(); i++) {
-    std::cout << v2.at(i) << std::endl;
-   }// 打印后的是"aaa" "bbb",
+    for (vector<string>::size_type i = 0; i<v2.size(); i++) {
+      std::cout << v2.at(i) << std::endl;
+     }// 打印后的是"aaa" "bbb",
   #+END_SRC
 ** vector [] 下标操作同 string ,可get 可set,只能针对存在的元素,但不能add
 ** 使用iterator
    #+BEGIN_SRC c++
-   # vector1.begin()指向首元素，
-   #vector1.end()指向尾元素的下一个位置
-   iterator的解引用操作(*it)，取得指向元素的对象 如元素类型是string ,则返回的是string对象
-   for (vector<string>::iterator it =  v1.begin();it!= v1.end() ; it++){
-     std::cout << *it << std::endl;
-     ,*it= *it+"hello";  //可以改变元素的值
-   }
+     # vector1.begin()指向首元素，
+     #vector1.end()指向尾元素的下一个位置
+     // iterator的解引用操作(*it)，取得指向元素的对象 如元素类型是string ,则返回的是string对象
+     for (vector<string>::iterator it =  v1.begin();it!= v1.end() ; it++){
+       std::cout << *it << std::endl;
+       ,*it= *it+"hello";  //可以改变元素的值
+     }
    #+END_SRC
 ** 使用const_iterator
    与iterator一样， 只是不能对iterator指向的元素进行赋值操作.
@@ -190,18 +190,18 @@
 * bitset
   bitset 是模版， 不同的是区别只在长度 ，不在类型
   #+BEGIN_SRC c++
-   #include<bitset>
-   using std::bitset;
-   bitset<32> bs; //32 bits all 0
-   bitset<16> bs2(0xffff);// 用0xffff的低16位填充
-   bs[0]  指的是低位第一位
-   bitset<16> bs2("11110001");
+     #include<bitset>
+     using std::bitset;
+     bitset<32> bs; //32 bits all 0
+     bitset<16> bs2(0xffff);// 用0xffff的低16位填充
+     // bs[0]  指的是低位第一位
+     bitset<16> bs2("11110001");
 
-  // bitset 提供 了 set all() any() ,count() test(pos)
-  //  flip()  flip(pos) 按位取反
-  // to_string to_ulong()
-  //  std::cout << bs << std::endl; //可以直接 入 流
-  // count() 返回有多少位是1，类型是size_t,在 #include<cstddef>中定义
+    // bitset 提供 了 set all() any() ,count() test(pos)
+    //  flip()  flip(pos) 按位取反
+    // to_string to_ulong()
+    //  std::cout << bs << std::endl; //可以直接 入 流
+    // count() 返回有多少位是1，类型是size_t,在 #include<cstddef>中定义
   #+END_SRC
 * 数组
   数组的维数 只能用 包含整形字面值常量、枚举常量 或者用常量表达式初始化的整形
@@ -263,22 +263,22 @@
     int i=1;
     int *p =&i;
     p++; //往后移动一个int单位,指向下一个int
-   ,*(p+4) ;//可以这样取p往后挪4个 int后所指对象的值
+   *(p+4) ;//可以这样取p往后挪4个 int后所指对象的值
    #+END_SRC
 ** 指向const对象的指针 和const 指针(本身的值不可变)
 *** 指向const对象的指针
     #+BEGIN_SRC c++
-    const double d=1;
-    const double *p=&d;//ok, 指向const 对象的指针 ,p 并不是const的
-    double *p2 = &d;//error ,普通的指针 不可以指向const对象
-    void *p3 = &d ;//错
-    const void *p4=&d;//ok
+      const double d=1;
+      const double *p=&d;//ok, 指向const 对象的指针 ,p 并不是const的
+      double *p2 = &d;//error ,普通的指针 不可以指向const对象
+      void *p3 = &d ;//错
+      const void *p4=&d;//ok
 
-    允许 把非const对象的地址赋值给 指向const对象的指针
-     double d2=2;
+      // 允许 把非const对象的地址赋值给 指向const对象的指针
+       double d2=2;
 
-    // 自以为指向const对象的指针
-     const double *p5 =&d2;     //ok, 但是不能通过*p5来改变 d2的值,虽然可以通过其他方法改d2的值
+      // 自以为指向const对象的指针
+       const double *p5 =&d2;     //ok, 但是不能通过*p5来改变 d2的值,虽然可以通过其他方法改d2的值
     #+END_SRC
 *** const 指针(本身的值不可变),即定义时必须初始化
     #+BEGIN_SRC c++
@@ -299,13 +299,13 @@
 * 动态数组
   普通数组长度在编译期就需要确定下来，动态数组长度可以在运行期确定
   #+BEGIN_SRC c++
-   int *p = new int[10];//返回指向第一个元素的指针
+    int *p = new int[10];//返回指向第一个元素的指针
 
-    动态数据允许长度为0
-  int *p = new int[0];//ok, 返回不是空， 但是不能进行解引用操作， 似类于vector.end()的返回值
-   int i[0]; //error
+    // 动态数据允许长度为0
+    int *p = new int[0];//ok, 返回不是空， 但是不能进行解引用操作， 似类于vector.end()的返回值
+    int i[0]; //error
 
-   delete[] p; //释放
+    delete[] p; //释放
   #+END_SRC
 * -> 操作符
   #+BEGIN_SRC c++
@@ -334,7 +334,6 @@
    string *str= new string; //初始化为空串
    int *i = new int;   //内建类型 则未初始化
 
-  ,*
    int *j  = new int(); // 初始化为0
   #+END_SRC
 * 强制类型转换( static_cast const_cast, dynamic_cast, reinterpret_cast)
@@ -464,16 +463,16 @@
 *** 对于值传递的参数,操作的只是副本,const与否并不影响副本,
     值传递参数 仅const 的区别,认为是同一个函数,不能根据是否有const来区分两个函数
     #+BEGIN_SRC c++
-     以下两种重载是  不 允许的
-    string getj(const int pi){
-    }
-    string getj(int pi){
-    }
+       // 以下两种重载是  不 允许的
+      string getj(const int pi){
+      }
+      string getj(int pi){
+      }
 
-    string getj(const Test pi){
-    }
-    string getj(Test pi){
-    }
+      string getj(const Test pi){
+      }
+      string getj(Test pi){
+      }
     #+END_SRC
 *** 对于引用形参和指针形参 可以根据 是否const 来区分两个函数
     #+BEGIN_SRC c++
@@ -708,12 +707,12 @@
    | insert(iter1,iter_beg,iter_end) | 在iter1前插入从iter_beg,到iter_end之间的元素 |
 *** 插入元素会使iterator失效
     #+BEGIN_SRC c++
-  vector<int>::iterator first= v1.begin();
-  v1.push_back(3);
-  vector<int>::iterator first2= v1.begin();
-  std::cout << first==first2 << std::endl;
-  两次返回的begin()是不同的，如果下面的处理，使用到了first局部变量，
-  后果不可预知
+      vector<int>::iterator first= v1.begin();
+      v1.push_back(3);
+      vector<int>::iterator first2= v1.begin();
+      std::cout << first==first2 << std::endl;
+      // 两次返回的begin()是不同的，如果下面的处理，使用到了first局部变量，
+      // 后果不可预知
     #+END_SRC
 **  删除元素
    | c.erase(iter1)   |
@@ -805,19 +804,19 @@
 ** find_first_of(iter1_beg,iter1_end,iter2_beg,iter2_end)
    在iter1_beg iter1_end的范围内查找任意一个属于iter2_beg iter2_end
    #+BEGIN_SRC c++
-  vector<string> v;
-  v.push_back("1");
-  v.push_back("2");
-  v.push_back("3");
+     vector<string> v;
+     v.push_back("1");
+     v.push_back("2");
+     v.push_back("3");
 
-  list<string> l;
-  l.push_back("2");
-  l.push_back("4");
+     list<string> l;
+     l.push_back("2");
+     l.push_back("4");
 
-  vector<string>::iterator it=find_first_of(v.begin(), v.end(), l.begin(), l.end());
-  if(it!=v.end()){
-    std::cout << *it << std::endl;
-  }
+     vector<string>::iterator it=find_first_of(v.begin(), v.end(), l.begin(), l.end());
+     if(it!=v.end()){
+       std::cout << *it << std::endl;
+     }
    #+END_SRC
 ** fill(beg,end,value) 填充value
    #+BEGIN_SRC c++

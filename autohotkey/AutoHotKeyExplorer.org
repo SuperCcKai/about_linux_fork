@@ -21,7 +21,7 @@ AutoHotKey几个简单的小例子]] 中已经有一个关于对资源管理器�
 + Alt+1 : copy 选中文件的名称
 + Alt+2 : copy 当前路径名
 + Alt+3 : copy 选中文件的完整路径名
-#+begin_src c
+#+begin_src sh
 SetTitleMatchMode Regex ;可以使用正则表达式对标题进行匹配
 ; 下面的窗口类依次为：桌面、Win+D后的桌面、我的电脑、资源管理器、另存为等
 #IfWinActive ahk_class Progman|WorkerW|CabinetWClass|ExploreWClass|#32770
@@ -51,7 +51,7 @@ SetTitleMatchMode Regex ;可以使用正则表达式对标题进行匹配
 #+end_src
 
 * Alt+h 一键显隐扩展名
-#+begin_src c
+#+begin_src xahk
 SetTitleMatchMode Regex ;可以使用正则表达式对标题进行匹配
 #IfWinActive ahk_class CabinetWClass|ExploreWClass
 ;Alt+h TOGGLES FILE EXTENSIONS

@@ -10,6 +10,9 @@
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
 #+TAGS: :Linux: :C:
 
+#+LATEX_HEADER: \usepackage{fontspec}
+#+LATEX_HEADER: \setmainfont{Songti SC}
+
 * 链接
   http://learn.akae.cn/media/ch29s02.html
 * ext2

@@ -48,8 +48,8 @@ errno是一个全局变量，很多系统函数都会改变它，fopen函数Man 
 Effect，就是有可能改变errno变量（当然也有少数例外，比如strcpy），所以一个系统函
 数错误返回后应该马上检查errno，在检查errno之前不能再调用其它系统函数。
 #+BEGIN_SRC c
-#include <string.h>
+  #include <string.h>
 
-char *strerror(int errnum);
-返回值：错误码errnum所对应的字符串
+  char *strerror(int errnum);
+  /* 返回值：错误码errnum所对应的字符串 */
 #+END_SRC
