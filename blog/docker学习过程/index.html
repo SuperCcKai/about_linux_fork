@@ -17,7 +17,6 @@
         <ul>
           <li><a href="/blog/">Blog</a></li>
           <li><a href="/tags/">Tags</a></li>
-          <li><a href="/tags/">Tags</a></li>
           <li><a href="/about/">About</a></li>
           <li><a href="http://github.com/jixiuf">GitHub</a></li>
           <li><a href="/rss.xml">RSS</a></li>
@@ -358,8 +357,23 @@ sudo docker run -d  -ti --name=mylinux debian:jessie bash
 </pre>
 </div>
 <p>
-attach 上之后 C-p C-q deattach<br  />
+attach 上之后 Ctrl-p Ctrl-q deattach<br  />
 </p>
+
+<p>
+docker run -t -i → can be detached with ^P^Q and reattached with docker attach<br  />
+docker run -i → cannot be detached with ^P^Q; will disrupt stdin<br  />
+docker run → cannot be detached with ^P^Q; can SIGKILL client; can reattach with docker attach<br  />
+对于 docker run 未加 -t -i 的 可以用 kill -9 pid 一定要加-9<br  />
+或者 启动attach 时加参数   &#x2013;sig-proxy=false 然后直接用Ctrl-c 退出就可以了<br  />
+意思是 不会把 给attach 进程的信息 发给 daemon 的进程<br  />
+如<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">d attach --sig-proxy=false centos
+</pre>
+</div>
 </div>
 </div>
 
@@ -368,7 +382,7 @@ attach 上之后 C-p C-q deattach<br  />
     <div>
       <div class="post-meta">
         <span title="post date" class="post-info">2016-01-19</span>
-        <span title="last modification date" class="post-info">2016-02-04</span>
+        <span title="last modification date" class="post-info">2016-05-11</span>
         <span title="tags" class="post-info"><a href="/tags/docker/">Docker</a>, <a href="/tags/linux/">Linux</a>, <a href="/tags/centos/">Centos</a></span>
         <span title="author" class="post-info">纪秀峰</span>
       </div>

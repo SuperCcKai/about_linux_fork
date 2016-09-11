@@ -17,7 +17,6 @@
         <ul>
           <li><a href="/blog/">Blog</a></li>
           <li><a href="/tags/">Tags</a></li>
-          <li><a href="/tags/">Tags</a></li>
           <li><a href="/about/">About</a></li>
           <li><a href="http://github.com/jixiuf">GitHub</a></li>
           <li><a href="/rss.xml">RSS</a></li>
@@ -180,9 +179,9 @@ git clone  git://git.sv.gnu.org/emacs.git --depth=1
 </div>
 <div class="org-src-container">
 
-<pre class="src src-xml">&lt;?<span style="color: #FBDE2D;">xml</span> <span style="color: #40E0D0;">version</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">1.0</span><span style="color: #ffa07a;">"</span> <span style="color: #40E0D0;">encoding</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">UTF-8</span><span style="color: #ffa07a;">"</span>?&gt;
-&lt;!<span style="color: #FBDE2D;">DOCTYPE</span> plist <span style="color: #FBDE2D;">PUBLIC</span> <span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">-//Apple//DTD PLIST 1.0//EN</span><span style="color: #ffa07a;">"</span> <span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">http://www.apple.com/DTDs/PropertyList-1.0.dtd</span><span style="color: #ffa07a;">"</span>&gt;
-&lt;<span style="color: #FF6400;">plist</span> <span style="color: #40E0D0;">version</span>=<span style="color: #ffa07a;">"</span><span style="color: #ffa07a;">1.0</span><span style="color: #ffa07a;">"</span>&gt;
+<pre class="src src-xml">&lt;?<span style="color: #FBDE2D;">xml</span> <span style="color: #ffa07a;">version=</span><span style="color: #ffa07a;">"1.0"</span><span style="color: #ffa07a;"> encoding=</span><span style="color: #ffa07a;">"UTF-8"</span>?&gt;
+&lt;!DOCTYPE plist PUBLIC <span style="color: #ffa07a;">"-//Apple//DTD PLIST 1.0//EN"</span> <span style="color: #ffa07a;">"http://www.apple.com/DTDs/PropertyList-1.0.dtd"</span>&gt;
+&lt;<span style="color: #FF6400;">plist</span> <span style="color: #40E0D0;">version</span>=<span style="color: #ffa07a;">"1.0"</span>&gt;
 &lt;<span style="color: #FF6400;">dict</span>&gt;
     &lt;<span style="color: #FF6400;">key</span>&gt;EnableGlobbing&lt;/<span style="color: #FF6400;">key</span>&gt;
     &lt;<span style="color: #FF6400;">true</span>/&gt;
@@ -215,20 +214,20 @@ git clone  git://git.sv.gnu.org/emacs.git --depth=1
 
 <pre class="src src-sh"><span style="color: #AEAEAE;">#</span><span style="color: #AEAEAE;">!/bin/</span><span style="color: #FBDE2D;">sh</span>
 <span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">use default emacsclient in $PATH</span>
-<span style="color: #40E0D0;">EMACSCLIENT</span>=<span style="color: #fa8072;">`command -v emacsclient`</span>
+<span style="color: #40E0D0;">EMACSCLIENT</span>=<span style="color: #ff00ff;">`command -v emacsclient`</span>
 <span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">if emacsclient major version ==22</span>
-<span style="color: #FBDE2D;">if</span> [ ! -z $<span style="color: #40E0D0;">EMACSCLIENT</span> ] &amp;&amp; [ <span style="color: #fa8072;">`$EMACSCLIENT --version 2&gt;&amp;1| awk -F ' ' '/emacsclient/ {print $2}'|awk -F '.' '{print $1}'`</span> = <span style="color: #ffa07a;">"22"</span> ] ; <span style="color: #FBDE2D;">then</span>
+<span style="color: #FBDE2D;">if</span> [ ! -z $<span style="color: #40E0D0;">EMACSCLIENT</span> ] &amp;&amp; [ <span style="color: #ff00ff;">`$EMACSCLIENT --version 2&gt;&amp;1| awk -F ' ' '/emacsclient/ {print $2}'|awk -F '.' '{print $1}'`</span> = <span style="color: #ffa07a;">"22"</span> ] ; <span style="color: #FBDE2D;">then</span>
     <span style="color: #40E0D0;">EMACSCLIENT</span>=<span style="color: #ffa07a;">""</span>
 <span style="color: #FBDE2D;">fi</span>
 <span style="color: #AEAEAE;">#  </span><span style="color: #AEAEAE;">if EMACSCLIENT is empty</span>
-<span style="color: #FBDE2D;">if</span> [  -z $<span style="color: #40E0D0;">EMACSCLIENT</span> ] &amp;&amp; [ -x <span style="color: #ffa07a;">"~/bin/emacsclient"</span>  ] &amp;&amp; [ <span style="color: #fa8072;">`~/bin/emacsclient --version 2&gt;&amp;1| awk -F ' ' '/emacsclient/ {print $2}'|awk -F '.' '{print $1}'`</span> != <span style="color: #ffa07a;">"22"</span> ]; <span style="color: #FBDE2D;">then</span>
+<span style="color: #FBDE2D;">if</span> [  -z $<span style="color: #40E0D0;">EMACSCLIENT</span> ] &amp;&amp; [ -x <span style="color: #ffa07a;">"~/bin/emacsclient"</span>  ] &amp;&amp; [ <span style="color: #ff00ff;">`~/bin/emacsclient --version 2&gt;&amp;1| awk -F ' ' '/emacsclient/ {print $2}'|awk -F '.' '{print $1}'`</span> != <span style="color: #ffa07a;">"22"</span> ]; <span style="color: #FBDE2D;">then</span>
     <span style="color: #40E0D0;">EMACSCLIENT</span>=<span style="color: #ffa07a;">"~/bin/emacsclient"</span>
 <span style="color: #FBDE2D;">fi</span>
 
-<span style="color: #FBDE2D;">if</span> [  -z $<span style="color: #40E0D0;">EMACSCLIENT</span> ] &amp;&amp; [ -x <span style="color: #ffa07a;">"/usr/local/bin/emacsclient"</span>  ] &amp;&amp; [ <span style="color: #fa8072;">`/usr/local/bin/emacsclient --version 2&gt;&amp;1| awk -F ' ' '/emacsclient/ {print $2}'|awk -F '.' '{print $1}'`</span> != <span style="color: #ffa07a;">"22"</span> ]; <span style="color: #FBDE2D;">then</span>
+<span style="color: #FBDE2D;">if</span> [  -z $<span style="color: #40E0D0;">EMACSCLIENT</span> ] &amp;&amp; [ -x <span style="color: #ffa07a;">"/usr/local/bin/emacsclient"</span>  ] &amp;&amp; [ <span style="color: #ff00ff;">`/usr/local/bin/emacsclient --version 2&gt;&amp;1| awk -F ' ' '/emacsclient/ {print $2}'|awk -F '.' '{print $1}'`</span> != <span style="color: #ffa07a;">"22"</span> ]; <span style="color: #FBDE2D;">then</span>
     <span style="color: #40E0D0;">EMACSCLIENT</span>=<span style="color: #ffa07a;">"/usr/local/bin/emacsclient"</span>
 <span style="color: #FBDE2D;">fi</span>
-<span style="color: #FBDE2D;">if</span> [  -z $<span style="color: #40E0D0;">EMACSCLIENT</span> ] &amp;&amp; [ -x <span style="color: #ffa07a;">"/usr/bin/emacsclient"</span>  ] &amp;&amp; [ <span style="color: #fa8072;">`/usr/bin/emacsclient --version 2&gt;&amp;1| awk -F ' ' '/emacsclient/ {print $2}'|awk -F '.' '{print $1}'`</span> != <span style="color: #ffa07a;">"22"</span> ]; <span style="color: #FBDE2D;">then</span>
+<span style="color: #FBDE2D;">if</span> [  -z $<span style="color: #40E0D0;">EMACSCLIENT</span> ] &amp;&amp; [ -x <span style="color: #ffa07a;">"/usr/bin/emacsclient"</span>  ] &amp;&amp; [ <span style="color: #ff00ff;">`/usr/bin/emacsclient --version 2&gt;&amp;1| awk -F ' ' '/emacsclient/ {print $2}'|awk -F '.' '{print $1}'`</span> != <span style="color: #ffa07a;">"22"</span> ]; <span style="color: #FBDE2D;">then</span>
     <span style="color: #40E0D0;">EMACSCLIENT</span>=<span style="color: #ffa07a;">"/usr/bin/emacsclient"</span>
 <span style="color: #FBDE2D;">fi</span>
 

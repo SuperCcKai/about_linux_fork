@@ -17,7 +17,6 @@
         <ul>
           <li><a href="/blog/">Blog</a></li>
           <li><a href="/tags/">Tags</a></li>
-          <li><a href="/tags/">Tags</a></li>
           <li><a href="/about/">About</a></li>
           <li><a href="http://github.com/jixiuf">GitHub</a></li>
           <li><a href="/rss.xml">RSS</a></li>
@@ -62,6 +61,7 @@
 <li><a href="#orgheadline24">“.”点号替代单个字符</a></li>
 <li><a href="#orgheadline25">shell for if example</a></li>
 <li><a href="#orgheadline26">用python 格式化json</a></li>
+<li><a href="#orgheadline27">awk 怎么去除如果第一列相同，则只取一行？</a></li>
 </ul>
 </div>
 </div>
@@ -555,7 +555,7 @@ autoconf_min=`sed -n 's/^ <b>AC_PREREQ(\([0-9\.]</b>\)).*/\1/p' configure.ac`<br
 
 <pre class="src src-sh"><span style="color: #AEAEAE;">#</span><span style="color: #AEAEAE;">!/bin/</span><span style="color: #FBDE2D;">sh</span>
 <span style="color: #40E0D0;">a</span>=<span style="color: #ffa07a;">"Hello i am pass"</span>;
-<span style="color: #FBDE2D;">if</span> [ <span style="color: #fa8072;">`echo $a | grep -c "pass" `</span> -gt 0 ]
+<span style="color: #FBDE2D;">if</span> [ <span style="color: #ff00ff;">`echo $a | grep -c "pass" `</span> -gt 0 ]
 <span style="color: #FBDE2D;">then</span>
   <span style="color: #F8F8F8;">echo</span> <span style="color: #ffa07a;">"Success"</span>
 <span style="color: #FBDE2D;">else</span>
@@ -598,8 +598,8 @@ sed 's/^&#x2026;..//g' file        删除文件所有行的前5列<br  />
 <div class="org-src-container">
 
 <pre class="src src-sh" id="orgsrcblock2">  <span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">&#36807;&#28388;&#25481;&#24320;&#22836;&#26159;#&#30340;&#27880;&#37322;&#34892;</span>
-<span style="color: #FBDE2D;">for</span> url<span style="color: #FBDE2D;"> in</span>  <span style="color: #fa8072;">`cat $MODULE_FILE_NAME|grep -v "^[ \t]*#" `</span> ; <span style="color: #FBDE2D;">do</span>
-    <span style="color: #40E0D0;">mod</span>=<span style="color: #fa8072;">`echo $url|sed 's|.*/||g'|awk -F '.git$' '{print $1}'`</span>
+<span style="color: #FBDE2D;">for</span> url<span style="color: #FBDE2D;"> in</span>  <span style="color: #ff00ff;">`cat $MODULE_FILE_NAME|grep -v "^[ \t]*#" `</span> ; <span style="color: #FBDE2D;">do</span>
+    <span style="color: #40E0D0;">mod</span>=<span style="color: #ff00ff;">`echo $url|sed 's|.*/||g'|awk -F '.git$' '{print $1}'`</span>
     <span style="color: #40E0D0;">abs_mod_path</span>=$<span style="color: #40E0D0;">WORD_DIR</span>/$<span style="color: #40E0D0;">mod</span>
     <span style="color: #FBDE2D;">if</span> [ -d $<span style="color: #40E0D0;">abs_mod_path</span> ] &amp;&amp; [ -d $<span style="color: #40E0D0;">abs_mod_path</span>/.git ] ; <span style="color: #FBDE2D;">then</span>
         <span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">&#22914;&#26524;&#24211;&#24050;&#32463;&#23384;&#22312;</span>
@@ -630,12 +630,50 @@ cat a.json|python -m json.tool<br  />
 </div>
 </div>
 
+<div id="outline-container-orgheadline27" class="outline-2">
+<h2 id="orgheadline27">awk 怎么去除如果第一列相同，则只取一行？</h2>
+<div class="outline-text-2" id="text-orgheadline27">
+<blockquote>
+<p>
+例如：<br  />
+aaaaaa,bbbbbb,ccccccc<br  />
+sssssss,fffffffffff,wwwww<br  />
+eeeeee,rrrrrrrrr,2222222<br  />
+aaaaaa,qqqqqq,wwwwww<br  />
+sssssss,wwwww,3333333<br  />
+&#x2026;&#x2026;&#x2026;&#x2026;&#x2026;&#x2026;&#x2026;&#x2026;&#x2026;&#x2026;&#x2026;&#x2026;&#x2026;&#x2026;<br  />
+&#x2026;&#x2026;&#x2026;&#x2026;&#x2026;&#x2026;&#x2026;&#x2026;&#x2026;&#x2026;&#x2026;&#x2026;&#x2026;&#x2026;<br  />
+&#x2026;&#x2026;&#x2026;&#x2026;&#x2026;&#x2026;&#x2026;&#x2026;&#x2026;&#x2026;&#x2026;&#x2026;&#x2026;&#x2026;.<br  />
+&#x2026;&#x2026;&#x2026;&#x2026;&#x2026;&#x2026;&#x2026;&#x2026;&#x2026;&#x2026;&#x2026;&#x2026;&#x2026;&#x2026;.<br  />
+eeeeeee,tttttttttt,44444444<br  />
+</p>
+
+
+<p>
+以逗号分隔，就是如果第一列是重复的，不管后边的列，只取一行，怎么取<br  />
+</p>
+</blockquote>
+<div class="org-src-container">
+
+<pre class="src src-sh">awk -F, <span style="color: #ffa07a;">'!a[$1]++'</span> urfile
+</pre>
+</div>
+<blockquote>
+<p>
+! a[$1] ++<br  />
+0为假， !0 为真<br  />
+以第一列（逗号分隔）为索引的数组元素的值为0则输出，输出后数组元素值++， 后面的行$1相同时a[$1]的值就不为0了。<br  />
+</p>
+</blockquote>
+</div>
+</div>
+
 </div>
 </div>
     <div>
       <div class="post-meta">
         <span title="post date" class="post-info">2013-02-17</span>
-        <span title="last modification date" class="post-info">2016-01-24</span>
+        <span title="last modification date" class="post-info">2016-07-18</span>
         <span title="tags" class="post-info"><a href="/tags/linux/">Linux</a></span>
         <span title="author" class="post-info">纪秀峰</span>
       </div>

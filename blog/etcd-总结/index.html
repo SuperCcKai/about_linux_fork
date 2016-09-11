@@ -17,7 +17,6 @@
         <ul>
           <li><a href="/blog/">Blog</a></li>
           <li><a href="/tags/">Tags</a></li>
-          <li><a href="/tags/">Tags</a></li>
           <li><a href="/about/">About</a></li>
           <li><a href="http://github.com/jixiuf">GitHub</a></li>
           <li><a href="/rss.xml">RSS</a></li>
@@ -101,10 +100,10 @@
 <p>
 2016/01/25 19:01:02 etcd: no data-dir provided, using default data-dir ./default.etcd<br  />
 2016/01/25 19:01:02 etcd: already initialized as member before, starting as etcd member&#x2026;<br  />
-2016/01/25 19:01:02 etcd: listening for peers on <a href="http://localhost:2380/">http://localhost:2380/</a><br  />
-2016/01/25 19:01:02 etcd: listening for peers on <a href="http://localhost:7001/">http://localhost:7001/</a><br  />
-2016/01/25 19:01:02 etcd: listening for client requests on <a href="http://localhost:2379/">http://localhost:2379/</a><br  />
-2016/01/25 19:01:02 etcd: listening for client requests on <a href="http://localhost:4001/">http://localhost:4001/</a><br  />
+2016/01/25 19:01:02 etcd: listening for peers on <a href="http://localhost:2380">http://localhost:2380</a><br  />
+2016/01/25 19:01:02 etcd: listening for peers on <a href="http://localhost:7001">http://localhost:7001</a><br  />
+2016/01/25 19:01:02 etcd: listening for client requests on <a href="http://localhost:2379">http://localhost:2379</a><br  />
+2016/01/25 19:01:02 etcd: listening for client requests on <a href="http://localhost:4001">http://localhost:4001</a><br  />
 2016/01/25 19:01:02 etcdserver: datadir is valid for the 2.0.1 format<br  />
 2016/01/25 19:01:02 etcdserver: recovered store from snapshot at index 10001<br  />
 2016/01/25 19:01:02 etcdserver: name = default<br  />
@@ -113,8 +112,8 @@
 2016/01/25 19:01:02 etcdserver: heartbeat = 100ms<br  />
 2016/01/25 19:01:02 etcdserver: election = 1000ms<br  />
 2016/01/25 19:01:02 etcdserver: snapshot count = 10000<br  />
-2016/01/25 19:01:02 etcdserver: advertise client URLs = <a href="http://localhost%3A2379,http//localhost:4001">http://localhost%3A2379,http//localhost:4001</a><br  />
-2016/01/25 19:01:02 etcdserver: loaded cluster information from store: default=<a href="http://localhost%3A2380,default=http//localhost:7001">http://localhost%3A2380,default=http//localhost:7001</a><br  />
+2016/01/25 19:01:02 etcdserver: advertise client URLs = <a href="http://localhost:2379,http//localhost:4001">http://localhost:2379,http//localhost:4001</a><br  />
+2016/01/25 19:01:02 etcdserver: loaded cluster information from store: default=<a href="http://localhost:2380,default=http//localhost:7001">http://localhost:2380,default=http//localhost:7001</a><br  />
 2016/01/25 19:01:02 etcdserver: restart member ce2a822cea30bfca in cluster 7e27652122e8b2ae at commit index 11019<br  />
 2016/01/25 19:01:02 raft: ce2a822cea30bfca became follower at term 2<br  />
 2016/01/25 19:01:02 raft: newRaft ce2a822cea30bfca [peers: [ce2a822cea30bfca], term: 2, commit: 11019, applied: 10001, lastindex: 11019, lastterm: 2]<br  />
@@ -123,7 +122,7 @@
 2016/01/25 19:01:04 raft: ce2a822cea30bfca received vote from ce2a822cea30bfca at term 3<br  />
 2016/01/25 19:01:04 raft: ce2a822cea30bfca became leader at term 3<br  />
 2016/01/25 19:01:04 raft.node: ce2a822cea30bfca elected leader ce2a822cea30bfca at term 3<br  />
-2016/01/25 19:01:04 etcdserver: published {Name:default ClientURLs:[<a href="http://localhost:2379/">http://localhost:2379/</a> <a href="http://localhost:4001/">http://localhost:4001/</a>]} to cluster 7e27652122e8b2ae<br  />
+2016/01/25 19:01:04 etcdserver: published {Name:default ClientURLs:[<a href="http://localhost:2379">http://localhost:2379</a> <a href="http://localhost:4001">http://localhost:4001</a>]} to cluster 7e27652122e8b2ae<br  />
 </p>
 </blockquote>
 </div>
@@ -172,7 +171,7 @@ etcd 可以通过参数与环境变量进行配置<br  />
 <li>-initial-cluster-token etcd-cluster-1 需要保证每个节点设置相同的值,作用只是避免混乱，<br  />
 比如你在同一台机器上配置了多个集群， 此值可避免不同集群节点间混乱<br  /></li>
 <li>-listen-client-urls 指定 哪此端口对client 开放<br  /></li>
-<li>-listen-peer-urls default: "<a href="http://localhost%3A2380,http//localhost:7001">http://localhost%3A2380,http//localhost:7001</a>" 节点之间的流量走这个端口 可以https<br  /></li>
+<li>-listen-peer-urls default: "<a href="http://localhost:2380,http//localhost:7001">http://localhost:2380,http//localhost:7001</a>" 节点之间的流量走这个端口 可以https<br  /></li>
 <li>-initial-cluster-state new<br  />
 ("new" or "existing"). Set to new for all members present during<br  />
 initial static or DNS bootstrapping. If this option is set to<br  />
@@ -182,7 +181,7 @@ wrong value is set, etcd will attempt to start but fail safely.<br  /></li>
 List of this member's client URLs to advertise to the rest of the cluster.<br  />
 它是把当前运行的etcd的client URL地址通知给cluster中的其它成员<br  />
 Be careful if you are advertising URLs such as<br  />
-<a href="http://localhost:2379/">http://localhost:2379/</a> from a cluster member and are using the<br  />
+<a href="http://localhost:2379">http://localhost:2379</a> from a cluster member and are using the<br  />
 proxy feature of etcd. This will cause loops, because the proxy<br  />
 will be forwarding requests to itself until its resources<br  />
 (memory, file descriptors) are eventually depleted.<br  />

@@ -17,7 +17,6 @@
         <ul>
           <li><a href="/blog/">Blog</a></li>
           <li><a href="/tags/">Tags</a></li>
-          <li><a href="/tags/">Tags</a></li>
           <li><a href="/about/">About</a></li>
           <li><a href="http://github.com/jixiuf">GitHub</a></li>
           <li><a href="/rss.xml">RSS</a></li>
@@ -285,12 +284,12 @@ $<span style="color: #40E0D0;">VTROOT</span>/bin/vtctld <span style="color: #ffa
 <blockquote>
 <p>
 -topo_implementation etcd \<br  />
--etcd_global_addrs <a href="http://127.0.0.1:2379/">http://127.0.0.1:2379/</a> \<br  />
+-etcd_global_addrs <a href="http://127.0.0.1:2379">http://127.0.0.1:2379</a> \<br  />
 </p>
 </blockquote>
 <p>
 web 访问15000 端口验证vtctld 是否启动成功<br  />
-<a href="http://127.0.0.1:15000/">http://127.0.0.1:15000/</a><br  />
+<a href="http://127.0.0.1:15000">http://127.0.0.1:15000</a><br  />
 </p>
 </div>
 </div>
@@ -317,7 +316,7 @@ web 访问15000 端口验证vtctld 是否启动成功<br  />
 </pre>
 </div>
 <ol class="org-ol">
-<li>注意这里的 &#x2013;link 将etcd 对应的容器链接起来，下面vtctld 起动的时候通过 <a href="http://etcd-global:2379/">http://etcd-global:2379/</a> 来访问etcd<br  /></li>
+<li>注意这里的 &#x2013;link 将etcd 对应的容器链接起来，下面vtctld 起动的时候通过 <a href="http://etcd-global:2379">http://etcd-global:2379</a> 来访问etcd<br  /></li>
 <li><p>
 这条指令使用 vitess/lite:latest 镜像生成 此镜像内有<br  />
 VOLUME /vt/vtdataroot<br  />
@@ -385,7 +384,7 @@ sudo docker run  -p 15102:15102 -p 16102:16102 -p 33102:33102 --env <span style=
 </div>
 
 <p>
-启动完之后 启动 <a href="http://127.0.0.1:15000/">http://127.0.0.1:15000/</a><br  />
+启动完之后 启动 <a href="http://127.0.0.1:15000">http://127.0.0.1:15000</a><br  />
 大概是这个效果（假如你能翻墙,主要是一个js 文件在google.com 上，所以这里还是要翻墙的）<br  />
 <img src="/assets/blog/墙内搭-vitess-环境/vitess-screenshot-1.png" alt="vitess-screenshot-1.png" /><br  />
 点开0 之后的效果<br  />
@@ -394,14 +393,14 @@ sudo docker run  -p 15102:15102 -p 16102:16102 -p 33102:33102 --env <span style=
 </p>
 <blockquote>
 <p>
-deployer@localhost docker/vttablet (master) $ etcdctl -C "<a href="http://127.0.0.1:2379/">http://127.0.0.1:2379/</a>" ls / &#x2013;recursive                                                                                                         2<br  />
+deployer@localhost docker/vttablet (master) $ etcdctl -C "<a href="http://127.0.0.1:2379">http://127.0.0.1:2379</a>" ls / &#x2013;recursive                                                                                                         2<br  />
 /vt<br  />
 /vt/cells<br  />
 /vt/cells/test<br  />
 /vt/keyspaces<br  />
 /vt/keyspaces/test_keyspace<br  />
 /vt/keyspaces/test_keyspace/0<br  />
-deployer@localhost docker/vttablet (master) $ etcdctl -C "<a href="http://127.0.0.1:3379/">http://127.0.0.1:3379/</a>" ls / &#x2013;recursive<br  />
+deployer@localhost docker/vttablet (master) $ etcdctl -C "<a href="http://127.0.0.1:3379">http://127.0.0.1:3379</a>" ls / &#x2013;recursive<br  />
 /vt<br  />
 /vt/tablets<br  />
 /vt/tablets/test-0000000100<br  />
@@ -412,7 +411,7 @@ deployer@localhost docker/vttablet (master) $ etcdctl -C "<a href="http://127.0.
 /vt/replication/test_keyspace/0<br  />
 /vt/ns<br  />
 /vt/ns/test_keyspace<br  />
-deployer@localhost docker/vttablet $ etcdctl -C "<a href="http://127.0.0.1:3379/">http://127.0.0.1:3379/</a>" get /vt/tablets/test-0000000101/_Data                                                                                             1<br  />
+deployer@localhost docker/vttablet $ etcdctl -C "<a href="http://127.0.0.1:3379">http://127.0.0.1:3379</a>" get /vt/tablets/test-0000000101/_Data                                                                                             1<br  />
 {<br  />
   "alias": {<br  />
     "cell": "test",<br  />
@@ -1013,6 +1012,7 @@ endpoints 似乎是列出 tablets 兼听在哪些端口等信息<br  />
 <div class="outline-text-3" id="text-orgheadline35">
 <p>
 似乎只有在各节点都正常运行的时候这个命令才有可能有效<br  />
+我测试的时候，发现正常的情况下， 也不用把指定的 tablet 切成master<br  />
 </p>
 <div class="org-src-container">
 
@@ -1030,7 +1030,7 @@ endpoints 似乎是列出 tablets 兼听在哪些端口等信息<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-sh">vtctlclient -server localhost:15999 EmergencyReparentShard test_keyspace/0  test-0000000101                                                                  1
+<pre class="src src-sh">vtctlclient -server localhost:15999 EmergencyReparentShard test_keyspace/0  test-0000000101
 </pre>
 </div>
 <blockquote>

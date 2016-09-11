@@ -17,7 +17,6 @@
         <ul>
           <li><a href="/blog/">Blog</a></li>
           <li><a href="/tags/">Tags</a></li>
-          <li><a href="/tags/">Tags</a></li>
           <li><a href="/about/">About</a></li>
           <li><a href="http://github.com/jixiuf">GitHub</a></li>
           <li><a href="/rss.xml">RSS</a></li>
@@ -235,12 +234,12 @@
 
 <pre class="src src-c"><span style="color: #FBDE2D;">if</span>(flag)
 <span style="color: #FBDE2D;">if</span>(!flag)
-&#32780;&#38750;
+<span style="color: #AEAEAE;">/* </span><span style="color: #AEAEAE;">&#32780;&#38750; </span><span style="color: #AEAEAE;">*/</span>
 <span style="color: #FBDE2D;">if</span>(0==flag)
 
-&#21028;&#26029;&#25351;&#38024;&#38750;&#31354;&#29992;
+<span style="color: #AEAEAE;">/* </span><span style="color: #AEAEAE;">&#21028;&#26029;&#25351;&#38024;&#38750;&#31354;&#29992; </span><span style="color: #AEAEAE;">*/</span>
 <span style="color: #FBDE2D;">if</span>(p==<span style="color: #D8FA3C;">NULL</span>) <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">NULL &#23450;&#20041;&#30340; #include&lt;cstdlib&gt;  &#25110;c&#30340;stdlib.h</span>
-<span style="color: #D8FA3C;">&#23613;&#37327;&#23569;&#29992;</span>:
+<span style="color: #AEAEAE;">/* </span><span style="color: #AEAEAE;">&#23613;&#37327;&#23569;&#29992;: </span><span style="color: #AEAEAE;">*/</span>
 <span style="color: #FBDE2D;">if</span>(p)
 <span style="color: #FBDE2D;">if</span>(p==0)
 </pre>
@@ -262,12 +261,12 @@
 <div class="outline-text-2" id="text-orgheadline4">
 <div class="org-src-container">
 
-<pre class="src src-c++">   <span style="color: #8DA6CE;">int</span> <span style="color: #FF6400;">i</span>(1024);<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#30452;&#25509;&#21021;&#22987;&#21270;</span>
+<pre class="src src-c++">   <span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">i</span>(1024);<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#30452;&#25509;&#21021;&#22987;&#21270;</span>
    <span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">i</span>=1024; <span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#22797;&#21046;&#21021;&#22987;&#21270;</span>
 
 <span style="color: #7fffd4;">#include</span><span style="color: #ffa07a;">&lt;string&gt;</span>
 <span style="color: #D8FA3C;">std</span>:<span style="color: #8DA6CE;">string</span> <span style="color: #40E0D0;">str</span>=<span style="color: #ffa07a;">"asfdasd"</span>;
-<span style="color: #D8FA3C;">std</span>:<span style="color: #8DA6CE;">string</span> <span style="color: #FF6400;">str</span>(<span style="color: #ffa07a;">"asfdasd"</span>);
+<span style="color: #D8FA3C;">std</span>:<span style="color: #8DA6CE;">string</span> <span style="color: #40E0D0;">str</span>(<span style="color: #ffa07a;">"asfdasd"</span>);
 </pre>
 </div>
 </div>
@@ -284,9 +283,9 @@
 <pre class="src src-c++"> <span style="color: #FBDE2D;">extern</span> <span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">i</span> ;<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#22768;&#26126;i</span>
  <span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">i</span> ;<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#22768;&#26126; &#24182;&#23450;&#20041;,&#25152;&#20197;&#36825;&#26159;&#23450;&#20041; &#65292;&#19981;&#21487;&#20197;&#20986;&#29616;&#22810;&#27425;</span>
  <span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">i</span>=2 ;<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#22768;&#26126; &#24182;&#23450;&#20041;,&#24182;&#21021;&#22987;&#20540;</span>
- &#22240;&#20026;&#22768;&#26126; <span style="color: #8DA6CE;">&#19981;&#20998;&#37197;&#20869;&#23384;</span> <span style="color: #40E0D0;">&#25152;&#20197;&#19981;&#21487;&#20197;&#21021;&#22987;&#21270;</span>&#65292;&#19968;&#26086;&#26377;&#21021;&#22987;&#21270;&#30340;&#34892;&#20026;&#65292;&#21017;&#35748;&#20026;&#26159;&#23450;&#20041;&#65292;&#21363;&#20415;&#20351;&#29992;&#20102;ertern &#20063;&#35748;&#20026;&#26159;&#23450;&#20041;&#32780;&#38750;&#22768;&#26126;
- <span style="color: #FBDE2D;">extern</span> <span style="color: #8DA6CE;">int</span> i =3; <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#22768;&#26126; &#23450;&#20041; &#24182;&#21021;&#22987;&#21270;&#65292; &#36825;&#37324;&#30340;extern &#20960;&#20046;&#26080;&#24847;&#20041;.</span>
-<span style="color: #8DA6CE;">&#23450;&#20041;&#20043;&#21518;&#21487;&#20197;&#20877;&#27425;&#20986;&#29616;</span> <span style="color: #40E0D0;">&#21333;&#29420;&#22768;&#26126;&#30340;&#35821;&#21477;</span>&#65292; &#20294;&#26159;&#19981;&#33021;&#20986;&#29616;
+ <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#22240;&#20026;&#22768;&#26126; &#19981;&#20998;&#37197;&#20869;&#23384; &#25152;&#20197;&#19981;&#21487;&#20197;&#21021;&#22987;&#21270;&#65292;&#19968;&#26086;&#26377;&#21021;&#22987;&#21270;&#30340;&#34892;&#20026;&#65292;&#21017;&#35748;&#20026;&#26159;&#23450;&#20041;&#65292;&#21363;&#20415;&#20351;&#29992;&#20102;ertern &#20063;&#35748;&#20026;&#26159;&#23450;&#20041;&#32780;&#38750;&#22768;&#26126;</span>
+ <span style="color: #FBDE2D;">extern</span> <span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">i</span> =3; <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#22768;&#26126; &#23450;&#20041; &#24182;&#21021;&#22987;&#21270;&#65292; &#36825;&#37324;&#30340;extern &#20960;&#20046;&#26080;&#24847;&#20041;.</span>
+<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#23450;&#20041;&#20043;&#21518;&#21487;&#20197;&#20877;&#27425;&#20986;&#29616; &#21333;&#29420;&#22768;&#26126;&#30340;&#35821;&#21477;&#65292; &#20294;&#26159;&#19981;&#33021;&#20986;&#29616;</span>
 </pre>
 </div>
 <div class="org-src-container">
@@ -355,15 +354,15 @@ const 引用 是指向 const对象的 引用 both ref and object are const<br  /
 <div class="org-src-container">
 
 <pre class="src src-c++">  <span style="color: #FBDE2D;">enum</span> <span style="color: #8DA6CE;">Forms</span>{<span style="color: #40E0D0;">shape</span>=1,<span style="color: #40E0D0;">sphere</span>,<span style="color: #40E0D0;">cylinder</span>,<span style="color: #40E0D0;">polygon</span>}
-  <span style="color: #40E0D0;">&#26522;&#20030;&#30340;&#20540;&#21518;&#19968;&#20010;&#27604;&#21069;&#19968;&#20010;&#21152;1</span>,<span style="color: #40E0D0;">&#38500;&#38750;&#26174;&#31034;&#21021;&#22987;&#21270;</span>
-  shape=1 , <span style="color: #40E0D0;">sphere</span>=2,<span style="color: #40E0D0;">cylinder</span>=3,
+  <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#26522;&#20030;&#30340;&#20540;&#21518;&#19968;&#20010;&#27604;&#21069;&#19968;&#20010;&#21152;1,&#38500;&#38750;&#26174;&#31034;&#21021;&#22987;&#21270;</span>
+  <span style="color: #40E0D0;">shape</span>=1 , <span style="color: #40E0D0;">sphere</span>=2,<span style="color: #40E0D0;">cylinder</span>=3,
 
-  <span style="color: #40E0D0;">&#26522;&#20030;&#30340;&#20540;&#21487;&#20197;&#37325;&#22797;</span>
+  <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#26522;&#20030;&#30340;&#20540;&#21487;&#20197;&#37325;&#22797;</span>
   <span style="color: #FBDE2D;">enum</span> <span style="color: #8DA6CE;">Forms</span>{<span style="color: #40E0D0;">shape</span>=1,<span style="color: #40E0D0;">sphere</span>,<span style="color: #40E0D0;">cylinder</span>=2,<span style="color: #40E0D0;">polygon</span>}
-  &#21017;shape=1 sphere=2 cylinder=2 polygon=3
- &#23450;&#20041;&#25104;&#26522;&#20030;&#21518;&#65292; &#26522;&#20030;&#36319;<span style="color: #8DA6CE;">int</span>&#26159;&#19981;&#21516;&#31867;&#22411;
- &#22914;
-Froms f1=shape; <span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">ok</span>
+  <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#21017;shape=1 sphere=2 cylinder=2 polygon=3</span>
+ <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#23450;&#20041;&#25104;&#26522;&#20030;&#21518;&#65292; &#26522;&#20030;&#36319;int&#26159;&#19981;&#21516;&#31867;&#22411;</span>
+ <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#22914;</span>
+<span style="color: #8DA6CE;">Froms</span> <span style="color: #40E0D0;">f1</span>=shape; <span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">ok</span>
 <span style="color: #8DA6CE;">Froms</span> <span style="color: #40E0D0;">f2</span>=2 ; <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">error</span>
 </pre>
 </div>
@@ -391,7 +390,7 @@ Froms f1=shape; <span style="color: #AEAEAE;">//</span><span style="color: #AEAE
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c++"><span style="color: #8DA6CE;">string</span> <span style="color: #FF6400;">str</span>(<span style="color: #ffa07a;">"hello"</span>);
+<pre class="src src-c++"><span style="color: #8DA6CE;">string</span> <span style="color: #40E0D0;">str</span>(<span style="color: #ffa07a;">"hello"</span>);
 <span style="color: #8DA6CE;">char</span> <span style="color: #40E0D0;">c</span>=str [1];
 <span style="color: #D8FA3C;">std</span>::cout &lt;&lt; c &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
 str[1]=<span style="color: #ffa07a;">'E'</span>;
@@ -400,7 +399,7 @@ str[1]=<span style="color: #ffa07a;">'E'</span>;
 </div>
 <div class="org-src-container">
 
-<pre class="src src-c++">&#36941;&#21382;
+<pre class="src src-c++"><span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#36941;&#21382;</span>
 <span style="color: #FBDE2D;">for</span> (<span style="color: #D8FA3C;">string</span>::<span style="color: #8DA6CE;">size_type</span>  <span style="color: #40E0D0;">i</span>= 0; i &lt; str.size(); i++){
   <span style="color: #D8FA3C;">std</span>::cout &lt;&lt; str[i] &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
  }
@@ -437,8 +436,8 @@ vector&lt;int&gt; vector&lt;string&gt;则是数据类型<br  />
 <div class="org-src-container">
 
 <pre class="src src-c++"><span style="color: #8DA6CE;">vector</span>&lt;<span style="color: #8DA6CE;">string</span>&gt; <span style="color: #40E0D0;">v1</span>;
-<span style="color: #8DA6CE;">string</span> <span style="color: #FF6400;">s1</span>(<span style="color: #ffa07a;">"aaa"</span>);
-<span style="color: #8DA6CE;">string</span> <span style="color: #FF6400;">s2</span>(<span style="color: #ffa07a;">"bbb"</span>);
+<span style="color: #8DA6CE;">string</span> <span style="color: #40E0D0;">s1</span>(<span style="color: #ffa07a;">"aaa"</span>);
+<span style="color: #8DA6CE;">string</span> <span style="color: #40E0D0;">s2</span>(<span style="color: #ffa07a;">"bbb"</span>);
 
 v1.push_back(s1);
 v1.push_back(s2);
@@ -468,7 +467,7 @@ s1=<span style="color: #ffa07a;">"ccc"</span>;<span style="color: #AEAEAE;">//</
 
 <pre class="src src-c++"><span style="color: #7fffd4;"># vector1</span>.begin()&#25351;&#21521;&#39318;&#20803;&#32032;&#65292;
 <span style="color: #7fffd4;">#vector1</span>.end()&#25351;&#21521;&#23614;&#20803;&#32032;&#30340;&#19979;&#19968;&#20010;&#20301;&#32622;
-iterator&#30340;&#35299;&#24341;&#29992;&#25805;&#20316;(*it)&#65292;&#21462;&#24471;&#25351;&#21521;&#20803;&#32032;&#30340;&#23545;&#35937; &#22914;&#20803;&#32032;&#31867;&#22411;&#26159;string ,&#21017;&#36820;&#22238;&#30340;&#26159;string&#23545;&#35937;
+<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">iterator&#30340;&#35299;&#24341;&#29992;&#25805;&#20316;(*it)&#65292;&#21462;&#24471;&#25351;&#21521;&#20803;&#32032;&#30340;&#23545;&#35937; &#22914;&#20803;&#32032;&#31867;&#22411;&#26159;string ,&#21017;&#36820;&#22238;&#30340;&#26159;string&#23545;&#35937;</span>
 <span style="color: #FBDE2D;">for</span> (<span style="color: #D8FA3C;">vector</span>&lt;<span style="color: #8DA6CE;">string</span>&gt;::<span style="color: #8DA6CE;">iterator</span> <span style="color: #40E0D0;">it</span> =  v1.begin();it!= v1.end() ; it++){
   <span style="color: #D8FA3C;">std</span>::cout &lt;&lt; *it &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
   *it= *it+<span style="color: #ffa07a;">"hello"</span>;  <span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#21487;&#20197;&#25913;&#21464;&#20803;&#32032;&#30340;&#20540;</span>
@@ -523,9 +522,9 @@ bitset 是模版， 不同的是区别只在长度 ，不在类型<br  />
 <pre class="src src-c++"><span style="color: #7fffd4;"> #include</span><span style="color: #ffa07a;">&lt;bitset&gt;</span>
  <span style="color: #FBDE2D;">using</span> <span style="color: #D8FA3C;">std</span>::<span style="color: #8DA6CE;">bitset</span>;
  <span style="color: #8DA6CE;">bitset</span>&lt;32&gt; <span style="color: #40E0D0;">bs</span>; <span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">32 bits all 0</span>
- <span style="color: #8DA6CE;">bitset</span>&lt;16&gt; <span style="color: #FF6400;">bs2</span>(0xffff);<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#29992;0xffff&#30340;&#20302;16&#20301;&#22635;&#20805;</span>
- bs[0]  &#25351;&#30340;&#26159;&#20302;&#20301;&#31532;&#19968;&#20301;
- <span style="color: #8DA6CE;">bitset</span>&lt;16&gt; bs2(<span style="color: #ffa07a;">"11110001"</span>);
+ <span style="color: #8DA6CE;">bitset</span>&lt;16&gt; <span style="color: #40E0D0;">bs2</span>(0xffff);<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#29992;0xffff&#30340;&#20302;16&#20301;&#22635;&#20805;</span>
+ <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">bs[0]  &#25351;&#30340;&#26159;&#20302;&#20301;&#31532;&#19968;&#20301;</span>
+ <span style="color: #8DA6CE;">bitset</span>&lt;16&gt; <span style="color: #40E0D0;">bs2</span>(<span style="color: #ffa07a;">"11110001"</span>);
 
 <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">bitset &#25552;&#20379; &#20102; set all() any() ,count() test(pos)</span>
 <span style="color: #AEAEAE;">//  </span><span style="color: #AEAEAE;">flip()  flip(pos) &#25353;&#20301;&#21462;&#21453;</span>
@@ -658,7 +657,7 @@ const对象 ,非const变量， 以及到运行时才知道其值的const变量�
 <span style="color: #8DA6CE;">void</span> *<span style="color: #40E0D0;">p3</span> = &amp;d ;<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#38169;</span>
 <span style="color: #FBDE2D;">const</span> <span style="color: #8DA6CE;">void</span> *<span style="color: #40E0D0;">p4</span>=&amp;d;<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">ok</span>
 
-&#20801;&#35768; &#25226;&#38750;const&#23545;&#35937;&#30340;&#22320;&#22336;&#36171;&#20540;&#32473; &#25351;&#21521;const&#23545;&#35937;&#30340;&#25351;&#38024;
+<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#20801;&#35768; &#25226;&#38750;const&#23545;&#35937;&#30340;&#22320;&#22336;&#36171;&#20540;&#32473; &#25351;&#21521;const&#23545;&#35937;&#30340;&#25351;&#38024;</span>
  <span style="color: #8DA6CE;">double</span> <span style="color: #40E0D0;">d2</span>=2;
 
 <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#33258;&#20197;&#20026;&#25351;&#21521;const&#23545;&#35937;&#30340;&#25351;&#38024;</span>
@@ -698,13 +697,13 @@ const对象 ,非const变量， 以及到运行时才知道其值的const变量�
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c++"> <span style="color: #8DA6CE;">int</span> *<span style="color: #40E0D0;">p</span> = <span style="color: #FBDE2D;">new</span> <span style="color: #8DA6CE;">int</span>[10];<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#36820;&#22238;&#25351;&#21521;&#31532;&#19968;&#20010;&#20803;&#32032;&#30340;&#25351;&#38024;</span>
+<pre class="src src-c++"><span style="color: #8DA6CE;">int</span> *<span style="color: #40E0D0;">p</span> = <span style="color: #FBDE2D;">new</span> <span style="color: #8DA6CE;">int</span>[10];<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#36820;&#22238;&#25351;&#21521;&#31532;&#19968;&#20010;&#20803;&#32032;&#30340;&#25351;&#38024;</span>
 
-  &#21160;&#24577;&#25968;&#25454;&#20801;&#35768;&#38271;&#24230;&#20026;0
+<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#21160;&#24577;&#25968;&#25454;&#20801;&#35768;&#38271;&#24230;&#20026;0</span>
 <span style="color: #8DA6CE;">int</span> *<span style="color: #40E0D0;">p</span> = <span style="color: #FBDE2D;">new</span> <span style="color: #8DA6CE;">int</span>[0];<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">ok, &#36820;&#22238;&#19981;&#26159;&#31354;&#65292; &#20294;&#26159;&#19981;&#33021;&#36827;&#34892;&#35299;&#24341;&#29992;&#25805;&#20316;&#65292; &#20284;&#31867;&#20110;vector.end()&#30340;&#36820;&#22238;&#20540;</span>
- <span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">i</span>[0]; <span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">error</span>
+<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">i</span>[0]; <span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">error</span>
 
- <span style="color: #FBDE2D;">delete</span>[] p; <span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#37322;&#25918;</span>
+<span style="color: #FBDE2D;">delete</span>[] p; <span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#37322;&#25918;</span>
 </pre>
 </div>
 </div>
@@ -750,11 +749,10 @@ strcpy(c, <span style="color: #ffa07a;">"ab"</span>);
 <div class="outline-text-2" id="text-orgheadline38">
 <div class="org-src-container">
 
-<pre class="src src-c++"> <span style="color: #8DA6CE;">string</span> *<span style="color: #40E0D0;">str</span>= <span style="color: #FBDE2D;">new</span> <span style="color: #8DA6CE;">string</span>; <span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#21021;&#22987;&#21270;&#20026;&#31354;&#20018;</span>
- <span style="color: #8DA6CE;">int</span> *<span style="color: #40E0D0;">i</span> = <span style="color: #FBDE2D;">new</span> <span style="color: #8DA6CE;">int</span>;   <span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#20869;&#24314;&#31867;&#22411; &#21017;&#26410;&#21021;&#22987;&#21270;</span>
+<pre class="src src-c++"><span style="color: #8DA6CE;">string</span> *<span style="color: #40E0D0;">str</span>= <span style="color: #FBDE2D;">new</span> <span style="color: #8DA6CE;">string</span>; <span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#21021;&#22987;&#21270;&#20026;&#31354;&#20018;</span>
+<span style="color: #8DA6CE;">int</span> *<span style="color: #40E0D0;">i</span> = <span style="color: #FBDE2D;">new</span> <span style="color: #8DA6CE;">int</span>;   <span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#20869;&#24314;&#31867;&#22411; &#21017;&#26410;&#21021;&#22987;&#21270;</span>
 
-*
- <span style="color: #8DA6CE;">int</span> *j  = <span style="color: #FBDE2D;">new</span> <span style="color: #8DA6CE;">int</span>(); <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#21021;&#22987;&#21270;&#20026;0</span>
+<span style="color: #8DA6CE;">int</span> *<span style="color: #40E0D0;">j</span>  = <span style="color: #FBDE2D;">new</span> <span style="color: #8DA6CE;">int</span>(); <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#21021;&#22987;&#21270;&#20026;0</span>
 </pre>
 </div>
 </div>
@@ -772,7 +770,7 @@ strcpy(c, <span style="color: #ffa07a;">"ab"</span>);
 i *= <span style="color: #FBDE2D;">static_cast</span>&lt;<span style="color: #8DA6CE;">int</span>&gt;(d) ;<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#23558;d &#24378;&#21046;&#36716;&#21270;&#25104;int ,&#28982;&#21518;&#19982; int i&#30456;&#20056;</span>
 
 <span style="color: #8DA6CE;">void</span> *<span style="color: #40E0D0;">p</span> = &amp;d;
-<span style="color: #8DA6CE;">double</span> *<span style="color: #40E0D0;">pd</span>= <span style="color: #8DA6CE;">static_const</span>&lt;<span style="color: #8DA6CE;">double</span>*&gt; (p);
+<span style="color: #8DA6CE;">double</span> *<span style="color: #40E0D0;">pd</span>= static_const&lt;<span style="color: #8DA6CE;">double</span>*&gt; (p);
 </pre>
 </div>
 </div>
@@ -962,7 +960,7 @@ i *= <span style="color: #FBDE2D;">static_cast</span>&lt;<span style="color: #8D
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c++"> &#20197;&#19979;&#20004;&#31181;&#37325;&#36733;&#26159;  &#19981; &#20801;&#35768;&#30340;
+<pre class="src src-c++"> <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#20197;&#19979;&#20004;&#31181;&#37325;&#36733;&#26159;  &#19981; &#20801;&#35768;&#30340;</span>
 <span style="color: #8DA6CE;">string</span> <span style="color: #FF6400;">getj</span>(<span style="color: #FBDE2D;">const</span> <span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">pi</span>){
 }
 <span style="color: #8DA6CE;">string</span> <span style="color: #FF6400;">getj</span>(<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">pi</span>){
@@ -1065,7 +1063,7 @@ fstream sstring中定义的类型都是从iostream中定义的类型继承而来
 </table>
 
 <div class="figure">
-<p><img src="/assets/blog/c-cpp-拾遗/cpp-io-class.png" alt="cpp-io-class.png" /><br  />
+<p><img src="file:///Users/jixiuf/Documents/org/img/cpp-io-class.png" alt="cpp-io-class.png" /><br  />
 </p>
 </div>
 </div>
@@ -1190,8 +1188,8 @@ cin&gt;&gt;i;
 
 <pre class="src src-c++"><span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#19968;&#34892;&#34892;&#35835;&#21462;&#19968;&#20010;&#25991;&#20214;&#65292; &#20889;&#21040;&#21478;&#19968;&#20010;&#25991;&#20214;</span>
 <span style="color: #FF6400;">main</span>(<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">argc</span>, <span style="color: #8DA6CE;">char</span> *<span style="color: #40E0D0;">argv</span>[]){
-  <span style="color: #8DA6CE;">ifstream</span> <span style="color: #FF6400;">fin</span>(<span style="color: #ffa07a;">"c.cpp"</span>);
-  <span style="color: #8DA6CE;">ofstream</span> <span style="color: #FF6400;">fout</span>(<span style="color: #ffa07a;">"c.cpp2"</span>);
+  <span style="color: #8DA6CE;">ifstream</span> <span style="color: #40E0D0;">fin</span>(<span style="color: #ffa07a;">"c.cpp"</span>);
+  <span style="color: #8DA6CE;">ofstream</span> <span style="color: #40E0D0;">fout</span>(<span style="color: #ffa07a;">"c.cpp2"</span>);
   <span style="color: #8DA6CE;">string</span> <span style="color: #40E0D0;">buf</span>;
   <span style="color: #FBDE2D;">if</span> (fin ){
     <span style="color: #FBDE2D;">while</span>(<span style="color: #D8FA3C;">std</span>::getline(fin, buf)){
@@ -1222,7 +1220,7 @@ fin.close();
 <pre class="src src-c++"><span style="color: #7fffd4;">#include</span> <span style="color: #ffa07a;">&lt;sstream&gt;</span>
 <span style="color: #FBDE2D;">using</span> <span style="color: #D8FA3C;">std</span>::<span style="color: #8DA6CE;">stringstream</span>;
 
-<span style="color: #8DA6CE;">stringstream</span> <span style="color: #FF6400;">ss</span>(<span style="color: #ffa07a;">"hello"</span>);
+<span style="color: #8DA6CE;">stringstream</span> <span style="color: #40E0D0;">ss</span>(<span style="color: #ffa07a;">"hello"</span>);
 <span style="color: #D8FA3C;">std</span>::cout &lt;&lt; ss.str() &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
 
 ss&lt;&lt; <span style="color: #ffa07a;">"hello"</span> &lt;&lt; 1&lt;&lt; <span style="color: #ffa07a;">"world"</span>;
@@ -1547,8 +1545,8 @@ v1.push_back(3);
 v1.push_back(3);
 <span style="color: #D8FA3C;">vector</span>&lt;<span style="color: #8DA6CE;">int</span>&gt;::<span style="color: #8DA6CE;">iterator</span> <span style="color: #40E0D0;">first2</span>= v1.begin();
 <span style="color: #D8FA3C;">std</span>::cout &lt;&lt; first==first2 &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
-&#20004;&#27425;&#36820;&#22238;&#30340;begin()&#26159;&#19981;&#21516;&#30340;&#65292;&#22914;&#26524;&#19979;&#38754;&#30340;&#22788;&#29702;&#65292;&#20351;&#29992;&#21040;&#20102;first&#23616;&#37096;&#21464;&#37327;&#65292;
-&#21518;&#26524;&#19981;&#21487;&#39044;&#30693;
+<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#20004;&#27425;&#36820;&#22238;&#30340;begin()&#26159;&#19981;&#21516;&#30340;&#65292;&#22914;&#26524;&#19979;&#38754;&#30340;&#22788;&#29702;&#65292;&#20351;&#29992;&#21040;&#20102;first&#23616;&#37096;&#21464;&#37327;&#65292;</span>
+<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#21518;&#26524;&#19981;&#21487;&#39044;&#30693;</span>
 </pre>
 </div>
 </div></li></ul>
@@ -1635,7 +1633,7 @@ v1.push_back(3);
 <div class="org-src-container">
 
 <pre class="src src-c++"><span style="color: #7fffd4;">#include</span> <span style="color: #ffa07a;">&lt;utility&gt;</span>
-<span style="color: #8DA6CE;">pair</span>&lt;<span style="color: #8DA6CE;">string</span> ,<span style="color: #8DA6CE;">int</span>&gt; <span style="color: #FF6400;">p</span>(<span style="color: #ffa07a;">"v1"</span> ,100);
+<span style="color: #8DA6CE;">pair</span>&lt;<span style="color: #8DA6CE;">string</span> ,<span style="color: #8DA6CE;">int</span>&gt; <span style="color: #40E0D0;">p</span>(<span style="color: #ffa07a;">"v1"</span> ,100);
 <span style="color: #D8FA3C;">std</span>::cout &lt;&lt; p.first &lt;&lt; <span style="color: #ffa07a;">" "</span>&lt;&lt; p.second&lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
 p=make_pair(<span style="color: #ffa07a;">"hello"</span>, 300);
 </pre>
@@ -1659,7 +1657,7 @@ p=make_pair(<span style="color: #ffa07a;">"hello"</span>, 300);
 }
 
 
-   <span style="color: #FBDE2D;">for</span> (map&lt;string,<span style="color: #8DA6CE;">int</span>&gt;::<span style="color: #8DA6CE;">iterator</span> <span style="color: #40E0D0;">it</span>=m.begin(); it!=m.end(); it++) {
+   <span style="color: #FBDE2D;">for</span> (map&lt;string,<span style="color: #8DA6CE;">int</span>&gt;::iterator it=m.begin(); it!=m.end(); it++) {
      <span style="color: #8DA6CE;">pair</span>&lt;<span style="color: #8DA6CE;">string</span>,<span style="color: #8DA6CE;">int</span>&gt; <span style="color: #40E0D0;">p</span> = *it;
      <span style="color: #D8FA3C;">std</span>::cout &lt;&lt; p.first &lt;&lt;<span style="color: #ffa07a;">"="</span>&lt;&lt;p.second &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
     }
@@ -2041,7 +2039,7 @@ v.push_back(string(<span style="color: #ffa07a;">"3"</span>));
 
   <span style="color: #8DA6CE;">int</span> <span style="color: #FF6400;">main</span>(<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">argc</span>, <span style="color: #8DA6CE;">char</span> *<span style="color: #40E0D0;">argv</span>[])
   {
-    <span style="color: #8DA6CE;">Name</span> <span style="color: #FF6400;">n</span>(<span style="color: #ffa07a;">"hello"</span>);
+    <span style="color: #8DA6CE;">Name</span> <span style="color: #40E0D0;">n</span>(<span style="color: #ffa07a;">"hello"</span>);
     <span style="color: #8DA6CE;">NameF</span> <span style="color: #40E0D0;">f</span>;
     f.print(n);
     <span style="color: #FBDE2D;">return</span> 0;
@@ -2087,7 +2085,7 @@ v.push_back(string(<span style="color: #ffa07a;">"3"</span>));
 }
 <span style="color: #8DA6CE;">int</span> <span style="color: #FF6400;">main</span>(<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">argc</span>, <span style="color: #8DA6CE;">char</span> *<span style="color: #40E0D0;">argv</span>[])
 {
-  <span style="color: #8DA6CE;">Name</span> <span style="color: #FF6400;">n</span>(<span style="color: #ffa07a;">"hello"</span>);
+  <span style="color: #8DA6CE;">Name</span> <span style="color: #40E0D0;">n</span>(<span style="color: #ffa07a;">"hello"</span>);
   <span style="color: #8DA6CE;">NameF</span> <span style="color: #40E0D0;">f</span>;
   f.print(n);
   <span style="color: #FBDE2D;">return</span> 0;
@@ -2228,7 +2226,7 @@ v.push_back(string(<span style="color: #ffa07a;">"3"</span>));
 {
 <span style="color: #FBDE2D;">public</span>:
   <span style="color: #8DA6CE;">Nptr</span> *<span style="color: #40E0D0;">nptr</span>;
-  <span style="color: #FF6400;">Obj</span>(<span style="color: #8DA6CE;">int</span> *<span style="color: #40E0D0;">i</span> ):<span style="color: #FF6400;">nptr</span>( <span style="color: #FBDE2D;">new</span> <span style="color: #8DA6CE;">Nptr</span>(1,i)) {}
+  <span style="color: #FF6400;">Obj</span>(<span style="color: #8DA6CE;">int</span> *<span style="color: #40E0D0;">i</span> ):nptr( <span style="color: #FBDE2D;">new</span> <span style="color: #8DA6CE;">Nptr</span>(1,i)) {}
   <span style="color: #FBDE2D;">virtual</span> ~<span style="color: #FF6400;">Obj</span>(){
     <span style="color: #D8FA3C;">std</span>::cout &lt;&lt; <span style="color: #ffa07a;">"nptr.cnt--"</span> &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
     <span style="color: #FBDE2D;">if</span> (--nptr-&gt;cnt==0){
@@ -2352,7 +2350,7 @@ v.push_back(string(<span style="color: #ffa07a;">"3"</span>));
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c++">Class&amp; <span style="color: #FBDE2D;">operator</span>[](<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">index</span>);
+<pre class="src src-c++"><span style="color: #8DA6CE;">Class</span>&amp; <span style="color: #FBDE2D;">operator</span><span style="color: #FF6400;">[]</span>(<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">index</span>);
 </pre>
 </div></li>
 <li><p>
@@ -3012,7 +3010,7 @@ a.deallocate(str,2);<span style="color: #AEAEAE;">//</span><span style="color: #
 
 <div class="org-src-container">
 
-<pre class="src src-c++"><span style="color: #8DA6CE;">string</span> *<span style="color: #40E0D0;">str</span> = <span style="color: #FBDE2D;">static_cast</span>&lt;string*&gt; (<span style="color: #FBDE2D;">operator</span> <span style="color: #FBDE2D;">new</span> (<span style="color: #FBDE2D;">sizeof</span>(string)));
+<pre class="src src-c++"><span style="color: #8DA6CE;">string</span> *<span style="color: #40E0D0;">str</span> = <span style="color: #FBDE2D;">static_cast</span>&lt;<span style="color: #8DA6CE;">string</span>*&gt; (<span style="color: #FBDE2D;">operator</span> <span style="color: #FBDE2D;">new</span> (<span style="color: #FBDE2D;">sizeof</span>(string)));
 <span style="color: #FBDE2D;">new</span> (str)<span style="color: #8DA6CE;">string</span>(<span style="color: #ffa07a;">"hell"</span>);
 <span style="color: #D8FA3C;">std</span>::cout &lt;&lt; *str &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
 </pre>
@@ -3059,29 +3057,29 @@ a.deallocate(str,2);<span style="color: #AEAEAE;">//</span><span style="color: #
 
   <span style="color: #D8FA3C;">std</span>::cout &lt;&lt; <span style="color: #ffa07a;">"new called"</span> &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
   <span style="color: #FBDE2D;">if</span> (<span style="color: #FBDE2D;">sizeof</span>(T)!= sz){<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#36825;&#37324;&#20570;&#26816;&#26597; &#65292;&#20445;&#35777;&#20256;&#36807;&#26469;&#26159;T&#26412;&#36523;&#65292; &#32780;&#38750;&#20854;&#23376;&#31867;</span>
-    <span style="color: #FBDE2D;">throw</span> <span style="color: #D8FA3C;">std</span>::<span style="color: #8DA6CE;">runtime_error</span>(<span style="color: #ffa07a;">"CacheObj wrong size"</span>);
+    <span style="color: #FBDE2D;">throw</span> <span style="color: #D8FA3C;">std</span>::runtime_error(<span style="color: #ffa07a;">"CacheObj wrong size"</span>);
   }
   <span style="color: #FBDE2D;">if</span>(!free_list){               <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#22914;&#26524;free_list null</span>
     <span style="color: #8DA6CE;">T</span>* <span style="color: #40E0D0;">array</span>=t_allocator.allocate(incr_size);
-    <span style="color: #D8FA3C;">CacheObj</span>&lt;<span style="color: #8DA6CE;">T</span>&gt;::sz= <span style="color: #D8FA3C;">CacheObj</span>&lt;T&gt;::sz+incr_size;
+    <span style="color: #D8FA3C;">CacheObj</span>&lt;<span style="color: #8DA6CE;">T</span>&gt;::sz= <span style="color: #D8FA3C;">CacheObj</span>&lt;<span style="color: #8DA6CE;">T</span>&gt;::sz+incr_size;
     <span style="color: #FBDE2D;">for</span> (<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">i</span> = 0; i !=incr_size ; i++){
       add_to_free_list(&amp;array[0]);
     }
   }
   <span style="color: #8DA6CE;">T</span>* <span style="color: #40E0D0;">tmp</span> = free_list;
-  free_list=free_list-&gt;<span style="color: #D8FA3C;">CacheObj</span>&lt;T&gt;::next;
+  free_list=free_list-&gt;<span style="color: #D8FA3C;">CacheObj</span>&lt;<span style="color: #8DA6CE;">T</span>&gt;::next;
   <span style="color: #FBDE2D;">return</span> tmp;
 }
 
 <span style="color: #FBDE2D;">template</span>&lt;<span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">T</span>&gt; <span style="color: #8DA6CE;">void</span> <span style="color: #D8FA3C;">CacheObj</span>&lt;<span style="color: #8DA6CE;">T</span>&gt;::<span style="color: #FBDE2D;">operator</span> <span style="color: #FBDE2D;">delete</span>(<span style="color: #8DA6CE;">void</span>* <span style="color: #40E0D0;">ptr</span>,<span style="color: #8DA6CE;">size_t</span> <span style="color: #40E0D0;">sz</span>){
   <span style="color: #D8FA3C;">std</span>::cout &lt;&lt; <span style="color: #ffa07a;">"delted called"</span> &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
   <span style="color: #FBDE2D;">if</span>(ptr){
-    add_to_free_list(<span style="color: #FBDE2D;">static_cast</span>&lt;T*&gt; (ptr));
+    add_to_free_list(<span style="color: #FBDE2D;">static_cast</span>&lt;<span style="color: #8DA6CE;">T</span>*&gt; (ptr));
   }
 }
 
 <span style="color: #FBDE2D;">template</span>&lt;<span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">T</span>&gt; <span style="color: #8DA6CE;">void</span> <span style="color: #D8FA3C;">CacheObj</span>&lt;<span style="color: #8DA6CE;">T</span>&gt;::<span style="color: #FF6400;">add_to_free_list</span>(<span style="color: #8DA6CE;">T</span>* <span style="color: #40E0D0;">t</span>){
-  t-&gt;<span style="color: #D8FA3C;">CacheObj</span>&lt;T&gt;::next=free_list;
+  t-&gt;<span style="color: #D8FA3C;">CacheObj</span>&lt;<span style="color: #8DA6CE;">T</span>&gt;::next=free_list;
   free_list=t;
 }
 <span style="color: #FBDE2D;">class</span> <span style="color: #8DA6CE;">Item</span>: <span style="color: #FBDE2D;">public</span> <span style="color: #8DA6CE;">CacheObj</span>&lt;<span style="color: #8DA6CE;">Item</span>&gt;
@@ -3122,7 +3120,7 @@ a.deallocate(str,2);<span style="color: #AEAEAE;">//</span><span style="color: #
     <div>
       <div class="post-meta">
         <span title="post date" class="post-info">2012-08-01</span>
-        <span title="last modification date" class="post-info">2016-01-14</span>
+        <span title="last modification date" class="post-info">2016-09-11</span>
         <span title="tags" class="post-info"><a href="/tags/c/">C</a></span>
         <span title="author" class="post-info">纪秀峰</span>
       </div>
