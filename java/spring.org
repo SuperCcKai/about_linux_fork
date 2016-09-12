@@ -11,7 +11,7 @@
 #+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: noexport
-#+TAGS: :Java: :Emacs:
+#+TAGS: :Java:
 链接:
 http://jamsa.javaeye.com/blog/38202
 http://infohost.nmt.edu/tcc/help/pubs/nxml/schema-locating.html
