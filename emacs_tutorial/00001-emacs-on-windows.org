@@ -96,9 +96,9 @@ Options的时候，Emacs会在home路径下产生.emacs文件，并把配置信�
 
 *** 配置d:\.emacs文件或d:\_emacs
 #+begin_src emacs-lisp
-(setq server-auth-dir "d:\")
-(setq server-name "emacs-server-file")
-(server-start)
+  (setq server-auth-dir "d:\\")
+  (setq server-name "emacs-server-file")
+  (server-start)
 #+end_src
 
     然后像建HOME变量一样建一个
