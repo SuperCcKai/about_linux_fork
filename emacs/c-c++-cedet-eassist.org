@@ -1,0 +1,58 @@
+# -*- coding:utf-8-unix -*-
+#+LANGUAGE:  zh
+#+TITLE:     cedet eassist在c c++编程中的应用
+#+AUTHOR:    纪秀峰
+#+EMAIL:     jixiuf@gmail.com
+#+DATE:     2012-08-27 一
+#+DESCRIPTION:cedet eassist在c c++编程中的应用
+#+KEYWORDS:
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
+#+TAGS: :Cedet: :Emacs: :C: :C++:
+eassist.el是cedet/contrib/下的一个文件,主要提供了两项功能，
+ + 列出当前类的所有方法(还可以直接输入方法名来从众多的方法中过滤)
+ + 在头文件与代码文件间切换，即在 .h 与.c 或.h 与.cpp两个相关文件间切换
+ 以下内容是从 eassist.el文件中摘出来的
+#+BEGIN_QUOTE
+1) Install CEDET package for Emacs (if you don't have CEDET already).
+2) Add convenient keymaps for fast EmacsAssist calls in c-mode and (or) python-mode
+   and for lisp:
+
+   (defun my-c-mode-common-hook ()
+     (define-key c-mode-base-map (kbd "M-o") 'eassist-switch-h-cpp)
+     (define-key c-mode-base-map (kbd "M-m") 'eassist-list-methods))
+   (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
+
+   (defun my-python-mode-hook ()
+     (define-key python-mode-map (kbd "M-m") 'eassist-list-methods))
+   (add-hook 'python-mode-hook 'my-python-mode-hook)
+
+   (define-key lisp-mode-shared-map (kbd "M-m") 'eassist-list-methods)
+
+3) Open any C++ file with class definition, press M-m.  Try to type
+   any method name(还可以直接输入方法名来从众多的方法中过滤).
+4) Open any .cpp file.  Press M-o.  If there is .h or .hpp file in the
+   same folder, it will be opened.
+#+END_QUOTE
+#+BEGIN_SRC emacs-lisp
+(require 'eassisct)
+(defun my-c-mode-cedet-hook ()
+  (local-set-key "\C-ct" 'eassist-switch-h-cpp)
+  (local-set-key "\C-xt" 'eassist-switch-h-cpp)
+  (local-set-key "\C-ce" 'eassist-list-methods)
+  )
+(add-hook 'c-mode-common-hook 'my-c-mode-cedet-hook)
+#+END_SRC
+ 可以这样配置
+#+BEGIN_SRC emacs-lisp
+;; (require 'eassisct)
+;; eassist-switch-h-cpp and eassist-list-methods is autoloaded in cedet-contrib-load
+(require 'cedet-contrib-load)
+(defun my-c-mode-cedet-hook ()
+  (local-set-key "\C-ct" 'eassist-switch-h-cpp)
+  (local-set-key "\C-xt" 'eassist-switch-h-cpp)
+  (local-set-key "\C-ce" 'eassist-list-methods)
+  )
+(add-hook 'c-mode-common-hook 'my-c-mode-cedet-hook)
+#+END_SRC
+ 也可以这样配置
