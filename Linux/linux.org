@@ -11,12 +11,25 @@
 #+TAGS: :Linux:
 * 几个工具
 - nload 查看网卡流量
-- nethugs 查看具体的进程发包收包情况
+- nethogs iptrafr iftop 查看具体的进程发包收包情况
+  sudo yum install nethogs
 - rkhunter linux 安全工具，扫描后门程序（需要刚装机时建立样本进行对比)
+   rkhunter --propupd 刚装完机 用此命令建立样本
+   rkhunter -c   check
+   rkhunter –-update  更新数据库，
+
 - lsof -i:8888  查看兼听8888端口的程序
 - top 按M按内存排序
 - tmux
-  tmux attach
+- nc -u localhost 7777 nc 可以跟telnet 一样， 不过支持udp telnet
+- 创建虚拟ftp 用户 ftpasswd --passwd --file=/etc/ftpd.passwd --name=ftp  --home=/home/ftp --shell=/bin/false --uid 508
+- exit code $?  echo $?
+- strace -p 29064 >/tmp/strace.log 2>&1
+   cat strace.log|cut -f 1 -d "("|sort|uniq -c
+   统计某进程系统调用的信息 ，比如归个系统调用多
+
+
+- tmux attach
   C-bd  退出
   C-b0 C-b1 C-b2  切tag
   C-bs list sessions
@@ -235,6 +248,14 @@ Partition table区（分区表），占64个字节，硬盘中分区有多少以
     |     |             |
     扫描tcp连接
     nmap -sT 192.168.1.101
+* tcpdump
+  sudo tcpdump port 80 # only 80 端口
+  sudo tcpdump -w filename port 80   # write to filename似乎 -w 参数不能太靠后
+* mac shutdown
+ . 10分钟后关机 sudo shutdown -h +10
+ . 晚上8点关机 sudo shutdown -h 20:00
+
+
 * linux下分辨率调整
   http://blog.csdn.net/wangfaqiang/article/details/6289959
   #+BEGIN_SRC sh
@@ -292,9 +313,49 @@ Modeline "1440x900_75.00"  136.75  1440 1536 1688 1936  900 903 909 942 -hsync +
   socks5 7070端口
   ssh -p 2222  -D 0.0.0.0:7070 deployer@se.najaplus.com -N -4
   ssh -p 2222  -D 7070 deployer@se.najaplus.com -N -4
+  -4 ipv4
 
   ssh -L 3307:serverip:3306 root@serverip -N
   则直接访问本机3307端口 相当于方法serverip的3306端口
+* tsocks 配置
+  wget ,git  通过ssh tunnel 连网
+  tsocks wget http://googletest.googlecode.com/files/gtest-1.5.0.tar.bz2
+  tsocks git clone url
+  tsocks curl url
+  tsocks go get google.golang.org/grpc
+  tsocks 的安装
+  brew tap Anakros/homebrew-tsocks
+  brew install --HEAD tsocks
+  vim /usr/local/etc/tsocks.conf
+       server = 127.0.0.1
+       server_type = 5    #to use socks V5
+       server_port = 7070  #the port of your porxy%
+   类似工具
+   brew install proxychains-ng
+   /usr/local/etc/proxychains.conf
+      socks5 	127.0.0.1 7070
+* adb shell
+  su
+   mount -o remount,rw /  /
+    mount -o remount,rw /system
+   FAQ：提示没有权限如何处理？
+   cannot create hosts: read-only file system
+   出现以上红色问题，需要执行以下命令
+   # mount -o remount,rw /system  /system
+   adb kill-server 停止服务器
+   adb remount  重新挂载文件系统
+   adb reboot 重启手机
+   adb logcat 查看手机上的运行日志，此项可以用来查错
+* curl demo
+    curl https://api.sandbox.paypal.com/v1/oauth2/token -H "Accept: application/json"
+    -H "Accept-Language: en_US"
+    -u "AVNJj1L75UxFsQYwqBRk8s_5qc07ARsy-vznUCpnxLaP2pGqwzUXLFqaWANhBZjhGsrG83Ad7Xwtni1P:EBUuK3Gr7e5JFe7SxNAtvkas2NEvwoKwp-_UCMQwNymCCDHlJJ6OCtBwvWyDH03XXPfZgn49vcnBmHrC"
+    -d "grant_type=client_credentials"
+    -L follow redirect
+* time sync
+    #chkconfig ntpd on
+    #service ntpd start
+    #ntpdate -u pool.ntp.org
 
 * sed 一些用法
   1. 最常见的 sed 's/old/new/g' filename
