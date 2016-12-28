@@ -186,12 +186,12 @@ pre.src:hover {
 pre.src:before {
   display: inline;
   position: absolute;
-  top: -18px;
-  left: -10px;
+  top: -10px;
+  left: 0px;
   padding: 3px;
   border: 1px solid black;
   border-radius: 12px 12px 12px 12px;
-  background-color: #000000;
+  /* background-color: #000000; */
 }
   /* background-color: white; */
 }

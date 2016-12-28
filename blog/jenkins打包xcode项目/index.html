@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <title>jenkins打包xcode项目 - 一个人的狂欢</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="纪秀峰" />
+    <meta name="description" content="jenkins打包xcode项目" />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="/media/css/main.css" type="text/css">
+    <!-- <link rel="stylesheet" href="/media/css/prettify.css" type="text/css"> -->
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-6633117582073327",
+        enable_page_level_ads: true
+    });
+    </script>    
+  </head>
+  <body class="container">
+    <div>
+      <header class="masthead">
+        <h1 class="masthead-title"><a href="/">一个人的狂欢</a></h1>
+        <p></p>
+        <ul>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/tags/">Tags</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="http://github.com/jixiuf">GitHub</a></li>
+          <li><a href="/rss.xml">RSS</a></li>
+        </ul>
+        <form method="get" id="searchform" action="http://www.google.com/search">
+          <input type="text" class="field" name="q" id="s" placeholder="Search">
+          <input type="hidden" name="as_sitesearch" value="jixiuf.github.io">
+        </form>
+      </header>
+    </div>
+
+<div>
+<div class="post">
+<h1>jenkins打包xcode项目</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgheadline1">jenkins 运行</a></li>
+<li><a href="#orgheadline8">配置一个项目</a>
+<ul>
+<li><a href="#orgheadline2">丢弃旧的构建</a></li>
+<li><a href="#orgheadline3">选择使用源码管理，或者手动管理代码</a></li>
+<li><a href="#orgheadline4">构建触发器</a></li>
+<li><a href="#orgheadline5">xcode 相关配置</a></li>
+<li><a href="#orgheadline6">上专到fir.im</a></li>
+<li><a href="#orgheadline7">构建后的操作</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">jenkins 运行</h2>
+<div class="outline-text-2" id="text-orgheadline1">
+<div class="org-src-container">
+
+<pre class="src src-sh">java -jar jenkins.war
+</pre>
+</div>
+<p>
+起动后 访问 localhost:8080<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline8" class="outline-2">
+<h2 id="orgheadline8">配置一个项目</h2>
+<div class="outline-text-2" id="text-orgheadline8">
+</div><div id="outline-container-orgheadline2" class="outline-3">
+<h3 id="orgheadline2">丢弃旧的构建</h3>
+<div class="outline-text-3" id="text-orgheadline2">
+<p>
+策略：Log Rotation<br  />
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-right" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">保持构建天数</td>
+<td class="org-right">3</td>
+</tr>
+
+<tr>
+<td class="org-left">保持构建的最大个数</td>
+<td class="org-right">10</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-orgheadline3" class="outline-3">
+<h3 id="orgheadline3">选择使用源码管理，或者手动管理代码</h3>
+<div class="outline-text-3" id="text-orgheadline3">
+<p>
+我机器上已经用svn 下载了源码，我选择手动管理<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh"> <span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">&#25226;&#20195;&#30721;copy &#21040;jenkins &#30340;workspace</span>
+cp -r /Users/admin/Documents/SVN/game2/dev .
+chmod -R 777 .
+svn cleanup ./dev
+<span style="color: #AEAEAE;">#</span><span style="color: #AEAEAE;">revert changed file</span>
+svn revert -R ./dev
+<span style="color: #AEAEAE;">#</span><span style="color: #AEAEAE;">rm new files</span>
+<span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">svn status &#29366;&#24577;&#20026;&#8220;&#65311;&#8221;&#30340;&#25991;&#20214; &#30452;&#25509;&#21024;&#38500;&#65292;&#21363;&#26410;&#34987;&#31649;&#29702;&#30340;&#25991;&#20214;</span>
+svn status --no-ignore | grep <span style="color: #ffa07a;">'^\?'</span> |  perl -ne <span style="color: #ffa07a;">'print "$1\n" if $_ =~ /^\S+\s+(.*)$/'</span> |  tr <span style="color: #ffa07a;">'\n'</span> <span style="color: #ffa07a;">'\0'</span> | xargs -0 rm -rf
+svn up ./dev
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline4" class="outline-3">
+<h3 id="orgheadline4">构建触发器</h3>
+<div class="outline-text-3" id="text-orgheadline4">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">Build periodically</td>
+<td class="org-left">定期运行此项目</td>
+</tr>
+</tbody>
+</table>
+<p>
+配置格式类似于cron<br  />
+</p>
+<blockquote>
+<p>
+Examples:<br  />
+</p>
+
+<p>
+H/15 * * * *<br  />
+</p>
+
+<p>
+H(0-29)/10 * * * *<br  />
+</p>
+
+<p>
+H 9-16/2 * * 1-5<br  />
+</p>
+
+<p>
+H H 1,15 1-11 *<br  />
+</p>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-orgheadline5" class="outline-3">
+<h3 id="orgheadline5">xcode 相关配置</h3>
+<div class="outline-text-3" id="text-orgheadline5">
+<ol class="org-ol">
+<li><p>
+配置Target:即xcode的target<br  />
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">Clean before build</td>
+<td class="org-left">勾上</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Configuration</td>
+<td class="org-left">Release</td>
+<td class="org-left">或Debug</td>
+</tr>
+</tbody>
+</table>
+<p>
+不同的target可以配置不同的证书、bid等，打出的包供不同用途使用<br  />
+</p></li>
+<li>Code signing &amp; OS X keychain options<br  />
+选中Unlock Keychain<br  />
+配置Keychain path为 ${HOME}/Library/Keychains/login.keychai 及密码，应该就是登录密码<br  /></li>
+<li><p>
+Advanced Xcode build options<br  />
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">Xcode Project Directory</td>
+<td class="org-left">${WORKSPACE}/dev/client/cocos2d-x-2.2.6/projects/client/proj.ios/</td>
+</tr>
+
+<tr>
+<td class="org-left">Xcode Project File</td>
+<td class="org-left">client.xcodeproj</td>
+</tr>
+</tbody>
+</table></li>
+</ol>
+<ol class="org-ol">
+<li>上面的步骤相当于Xocde里Cmd-r run,生成app,下面则将生成的app导出成ipa<br  /></li>
+</ol>
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #F8F8F8;">cd</span> ${<span style="color: #40E0D0;">WORKSPACE</span>}/dev/client/cocos2d-x-2.2.6/projects/client/proj.ios/build/Release-iphoneos
+xcrun -sdk iphoneos PackageApplication -v ${<span style="color: #40E0D0;">WORKSPACE</span>}/dev/client/cocos2d-x-2.2.6/projects/client/proj.ios/build/Release-iphoneos/ZombieCave.app -o ${<span style="color: #40E0D0;">WORKSPACE</span>}/dev/client/cocos2d-x-2.2.6/projects/client/proj.ios/build/Release-iphoneos/zombiecave.ipa
+
+<span style="color: #AEAEAE;">#</span><span style="color: #AEAEAE;">&#25226;&#29983;&#25104;&#30340;ipa copy &#21040;&#26412;&#22320;site&#65292;&#20869;&#32593;&#20379;&#21035;&#20154;&#19979;&#36733;&#65288;&#38656;&#35201;&#26412;&#26426;&#21551;&#29992;apache&#26381;&#21153;&#65289;</span>
+[ -d ~/site/zombiecave/${<span style="color: #40E0D0;">BUILD_ID</span>} ] &amp;&amp; rm -rf ~/site/zombiecave/${<span style="color: #40E0D0;">BUILD_ID</span>}
+mkdir ~/site/zombiecave/${<span style="color: #40E0D0;">BUILD_ID</span>}
+cp zombiecave.ipa ~/site/zombiecave/${<span style="color: #40E0D0;">BUILD_ID</span>}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline6" class="outline-3">
+<h3 id="orgheadline6">上专到fir.im</h3>
+<div class="outline-text-3" id="text-orgheadline6">
+<ol class="org-ol">
+<li><p>
+fir.im Token 从fir.im上取<br  />
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">ExInclude IPA/APK File Nam</td>
+<td class="org-left"><b>*/*unaligned</b>.apk,**/*unsigned*.apk</td>
+</tr>
+
+<tr>
+<td class="org-left">Build Notes</td>
+<td class="org-left">generated by jenkins</td>
+</tr>
+</tbody>
+</table></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgheadline7" class="outline-3">
+<h3 id="orgheadline7">构建后的操作</h3>
+<div class="outline-text-3" id="text-orgheadline7">
+<p>
+可以选择执行另一个job的构建<br  />
+</p>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+    <div>
+      <div class="post-meta">
+        <span title="post date" class="post-info">2016-12-21</span>
+        <span title="last modification date" class="post-info">2016-12-21</span>
+        <span title="tags" class="post-info"><a href="/tags/jenkins/">Jenkins</a>, <a href="/tags/cocos2dx/">Cocos2dx</a></span>
+        <span title="author" class="post-info">纪秀峰</span>
+      </div>
+      <section>
+        <h1>Comments</h1>
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+          //var disqus_developer = 1;
+          var disqus_identifier = "/blog/jenkins打包xcode项目/";
+          var disqus_url = "http://jixiuf.github.io/blog/jenkins打包xcode项目/";
+          var disqus_shortname = 'jixiuf';
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        <div class="ds-thread"></div>
+        <script type="text/javascript">
+          var duoshuoQuery = {short_name:'jixiuf'};
+          (function() {
+          var ds = document.createElement('script');
+          ds.type = 'text/javascript';ds.async = true;
+          ds.src = 'http://static.duoshuo.com/embed.js';
+          ds.charset = 'UTF-8';
+          (document.getElementsByTagName('head')[0]
+          || document.getElementsByTagName('body')[0]).appendChild(ds);
+          })();
+        </script>
+      </section>
+      <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+      <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.js"></script> -->
+      <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script src="/media/js/main.js"></script>
+      <div class="footer">
+        <p>Generated by <a href="http://www.gnu.org/software/emacs/">Emacs</a> 26.x (<a href="http://orgmode.org">Org mode</a> 8.x)</p>
+        <p>
+          Copyright &copy; 2012 - <span id="footerYear"></span> <a href="mailto:jixiuf &lt;at&gt; gmail &lt;dot&gt; com">纪秀峰</a>
+          &nbsp;&nbsp;-&nbsp;&nbsp;
+          Powered by <a href="https://github.com/kelvinh/org-page" target="_blank">org-page</a>
+          <script type="text/javascript">document.getElementById("footerYear").innerHTML = (new Date()).getFullYear();</script>
+        </p>
+      </div>
+    </div>
+
+  </body>
+</html>

@@ -8,6 +8,13 @@
     <meta name="keywords" content=":Linux:" />
     <link rel="stylesheet" href="/media/css/main.css" type="text/css">
     <!-- <link rel="stylesheet" href="/media/css/prettify.css" type="text/css"> -->
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-6633117582073327",
+        enable_page_level_ads: true
+    });
+    </script>    
   </head>
   <body class="container">
     <div>
@@ -45,23 +52,30 @@
 <li><a href="#orgheadline8">mbr and dd</a></li>
 <li><a href="#orgheadline9">ctags</a></li>
 <li><a href="#orgheadline13">nmap</a></li>
-<li><a href="#orgheadline14">linux下分辨率调整</a></li>
-<li><a href="#orgheadline15">通过ssh 连接远程机器上的mysql 等</a></li>
-<li><a href="#orgheadline16">ssh socat</a></li>
-<li><a href="#orgheadline17">sed 一些用法</a></li>
-<li><a href="#orgheadline22">grep</a>
+<li><a href="#orgheadline14">tcpdump</a></li>
+<li><a href="#orgheadline15">mac shutdown</a></li>
+<li><a href="#orgheadline16">linux下分辨率调整</a></li>
+<li><a href="#orgheadline17">通过ssh 连接远程机器上的mysql 等</a></li>
+<li><a href="#orgheadline18">ssh socat</a></li>
+<li><a href="#orgheadline19">ssh tunnel</a></li>
+<li><a href="#orgheadline20">tsocks 配置</a></li>
+<li><a href="#orgheadline21">adb shell</a></li>
+<li><a href="#orgheadline22">curl demo</a></li>
+<li><a href="#orgheadline23">time sync</a></li>
+<li><a href="#orgheadline24">sed 一些用法</a></li>
+<li><a href="#orgheadline29">grep</a>
 <ul>
-<li><a href="#orgheadline18">grep -v 过滤 不匹配的行</a></li>
-<li><a href="#orgheadline19">grep [a,A]..[b,B]* file  在文件中查找a（或A）开头，第四个字母为b（或B）的所有单词</a></li>
-<li><a href="#orgheadline20">grep -E 'string1|string2' file        搜寻文件中或者存在string1或者存在string2的行</a></li>
-<li><a href="#orgheadline21">利用grep -c 来作instr()用</a></li>
+<li><a href="#orgheadline25">grep -v 过滤 不匹配的行</a></li>
+<li><a href="#orgheadline26">grep [a,A]..[b,B]* file  在文件中查找a（或A）开头，第四个字母为b（或B）的所有单词</a></li>
+<li><a href="#orgheadline27">grep -E 'string1|string2' file        搜寻文件中或者存在string1或者存在string2的行</a></li>
+<li><a href="#orgheadline28">利用grep -c 来作instr()用</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline23">find</a></li>
-<li><a href="#orgheadline24">“.”点号替代单个字符</a></li>
-<li><a href="#orgheadline25">shell for if example</a></li>
-<li><a href="#orgheadline26">用python 格式化json</a></li>
-<li><a href="#orgheadline27">awk 怎么去除如果第一列相同，则只取一行？</a></li>
+<li><a href="#orgheadline30">find</a></li>
+<li><a href="#orgheadline31">“.”点号替代单个字符</a></li>
+<li><a href="#orgheadline32">shell for if example</a></li>
+<li><a href="#orgheadline33">用python 格式化json</a></li>
+<li><a href="#orgheadline34">awk 怎么去除如果第一列相同，则只取一行？</a></li>
 </ul>
 </div>
 </div>
@@ -70,12 +84,27 @@
 <div class="outline-text-2" id="text-orgheadline1">
 <ul class="org-ul">
 <li>nload 查看网卡流量<br  /></li>
-<li>nethugs 查看具体的进程发包收包情况<br  /></li>
-<li>rkhunter linux 安全工具，扫描后门程序（需要刚装机时建立样本进行对比)<br  /></li>
+<li>nethogs iptrafr iftop 查看具体的进程发包收包情况<br  />
+sudo yum install nethogs<br  /></li>
+<li>rkhunter linux 安全工具，扫描后门程序（需要刚装机时建立样本进行对比)<br  />
+rkhunter &#x2013;propupd 刚装完机 用此命令建立样本<br  />
+rkhunter -c   check<br  />
+rkhunter –-update  更新数据库，<br  /></li>
+
 <li>lsof -i:8888  查看兼听8888端口的程序<br  /></li>
 <li>top 按M按内存排序<br  /></li>
-<li>tmux<br  />
-tmux attach<br  />
+<li>tmux<br  /></li>
+<li>nc -u localhost 7777 nc 可以跟telnet 一样， 不过支持udp telnet<br  /></li>
+<li>创建虚拟ftp 用户 ftpasswd &#x2013;passwd &#x2013;file=/etc/ftpd.passwd &#x2013;name=ftp  &#x2013;home=/home/ftp &#x2013;shell=/bin/false &#x2013;uid 508<br  /></li>
+<li>exit code $?  echo $?<br  /></li>
+<li>strace -p 29064 &gt;/tmp/strace.log 2&gt;&amp;1<br  />
+cat strace.log|cut -f 1 -d "("|sort|uniq -c<br  />
+统计某进程系统调用的信息 ，比如归个系统调用多<br  /></li>
+</ul>
+
+
+<ul class="org-ul">
+<li>tmux attach<br  />
 C-bd  退出<br  />
 C-b0 C-b1 C-b2  切tag<br  />
 C-bs list sessions<br  />
@@ -428,8 +457,28 @@ nmap -sT 192.168.1.101<br  />
 </div></li></ul>
 </div>
 <div id="outline-container-orgheadline14" class="outline-2">
-<h2 id="orgheadline14">linux下分辨率调整</h2>
+<h2 id="orgheadline14">tcpdump</h2>
 <div class="outline-text-2" id="text-orgheadline14">
+<p>
+sudo tcpdump port 80 # only 80 端口<br  />
+sudo tcpdump -w filename port 80   # write to filename似乎 -w 参数不能太靠后<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline15" class="outline-2">
+<h2 id="orgheadline15">mac shutdown</h2>
+<div class="outline-text-2" id="text-orgheadline15">
+<p>
+. 10分钟后关机 sudo shutdown -h +10<br  />
+. 晚上8点关机 sudo shutdown -h 20:00<br  />
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orgheadline16" class="outline-2">
+<h2 id="orgheadline16">linux下分辨率调整</h2>
+<div class="outline-text-2" id="text-orgheadline16">
 <p>
 <a href="http://blog.csdn.net/wangfaqiang/article/details/6289959">http://blog.csdn.net/wangfaqiang/article/details/6289959</a><br  />
 </p>
@@ -470,9 +519,9 @@ EndSection<br  />
 </blockquote>
 </div>
 </div>
-<div id="outline-container-orgheadline15" class="outline-2">
-<h2 id="orgheadline15">通过ssh 连接远程机器上的mysql 等</h2>
-<div class="outline-text-2" id="text-orgheadline15">
+<div id="outline-container-orgheadline17" class="outline-2">
+<h2 id="orgheadline17">通过ssh 连接远程机器上的mysql 等</h2>
+<div class="outline-text-2" id="text-orgheadline17">
 <p>
 通常的情况是远程 42.62.14.55 上有一个mysql ,兼听在3306端口上<br  />
 但是防火墙阻止直接连3306端口<br  />
@@ -487,9 +536,9 @@ ssh -L 3307:localhost:3306 username@42.62.14.55 -N<br  />
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline16" class="outline-2">
-<h2 id="orgheadline16">ssh socat</h2>
-<div class="outline-text-2" id="text-orgheadline16">
+<div id="outline-container-orgheadline18" class="outline-2">
+<h2 id="orgheadline18">ssh socat</h2>
+<div class="outline-text-2" id="text-orgheadline18">
 <p>
 我局域网ip 是192.168.1网段的<br  />
 </p>
@@ -516,46 +565,179 @@ sudo ssh -o ProxyCommand='socat - socks:122.224.249.55:%h:%p,socksport=9991' use
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline17" class="outline-2">
-<h2 id="orgheadline17">sed 一些用法</h2>
-<div class="outline-text-2" id="text-orgheadline17">
-<ol class="org-ol">
-<li>最常见的 sed 's/old/new/g' filename<br  /></li>
+<div id="outline-container-orgheadline19" class="outline-2">
+<h2 id="orgheadline19">ssh tunnel</h2>
+<div class="outline-text-2" id="text-orgheadline19">
+<p>
+socks5 7070端口<br  />
+ssh -p 2222  -D 0.0.0.0:7070 deployer@se.najaplus.com -N -4<br  />
+ssh -p 2222  -D 7070 deployer@se.najaplus.com -N -4<br  />
+-4 ipv4<br  />
+</p>
 
-<li>如果想直接修改原文件<br  />
-sed  -i "" 's/2/3/g' a.txt<br  />
-或乾修改前将原文件备份为 a.txt.bak<br  />
-sed  -i ".bak" 's/2/3/g' a.txt<br  /></li>
+<p>
+ssh -L 3307:serverip:3306 root@serverip -N<br  />
+则直接访问本机3307端口 相当于方法serverip的3306端口<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline20" class="outline-2">
+<h2 id="orgheadline20">tsocks 配置</h2>
+<div class="outline-text-2" id="text-orgheadline20">
+<p>
+wget ,git  通过ssh tunnel 连网<br  />
+tsocks wget <a href="http://googletest.googlecode.com/files/gtest-1.5.0.tar.bz2">http://googletest.googlecode.com/files/gtest-1.5.0.tar.bz2</a><br  />
+tsocks git clone url<br  />
+tsocks curl url<br  />
+tsocks go get google.golang.org/grpc<br  />
+tsocks 的安装<br  />
+brew tap Anakros/homebrew-tsocks<br  />
+brew install &#x2013;HEAD tsocks<br  />
+vim /usr/local/etc/tsocks.conf<br  />
+     server = 127.0.0.1<br  />
+     server_type = 5    #to use socks V5<br  />
+     server_port = 7070  #the port of your porxy%<br  />
+ 类似工具<br  />
+ brew install proxychains-ng<br  />
+ /usr/local/etc/proxychains.conf<br  />
+    socks5     127.0.0.1 7070<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline21" class="outline-2">
+<h2 id="orgheadline21">adb shell</h2>
+<div class="outline-text-2" id="text-orgheadline21">
+<p>
+su<br  />
+ mount -o remount,rw /  /<br  />
+  mount -o remount,rw /system<br  />
+ FAQ：提示没有权限如何处理？<br  />
+ cannot create hosts: read-only file system<br  />
+ 出现以上红色问题，需要执行以下命令<br  />
+</p>
 
-<li>提取匹配的某一部分 (这里最后用到了/p  估计是print 的意思)<br  />
-比如文件有有一行内容如下,我想取出其中的数字部分<br  />
-    AC_PREREQ(2.65)<br  />
-autoconf_min=`sed -n 's/^ <b>AC_PREREQ(\([0-9\.]</b>\)).*/\1/p' configure.ac`<br  />
-其中 \1  引用 \([0-9\.]*\) 匹配的部分<br  />
-常用到从某文件中取版本号等<br  /></li>
-</ol>
+<p>
+adb kill-server 停止服务器<br  />
+adb remount  重新挂载文件系统<br  />
+adb reboot 重启手机<br  />
+adb logcat 查看手机上的运行日志，此项可以用来查错<br  />
+</p>
 </div>
 </div>
 <div id="outline-container-orgheadline22" class="outline-2">
-<h2 id="orgheadline22">grep</h2>
+<h2 id="orgheadline22">curl demo</h2>
 <div class="outline-text-2" id="text-orgheadline22">
-</div><div id="outline-container-orgheadline18" class="outline-3">
-<h3 id="orgheadline18">grep -v 过滤 不匹配的行</h3>
+<p>
+curl <a href="https://api.sandbox.paypal.com/v1/oauth2/token">https://api.sandbox.paypal.com/v1/oauth2/token</a> -H "Accept: application/json"<br  />
+-H "Accept-Language: en_US"<br  />
+-u "AVNJj1L75UxFsQYwqBRk8s_5qc07ARsy-vznUCpnxLaP2pGqwzUXLFqaWANhBZjhGsrG83Ad7Xwtni1P:EBUuK3Gr7e5JFe7SxNAtvkas2NEvwoKwp-_UCMQwNymCCDHlJJ6OCtBwvWyDH03XXPfZgn49vcnBmHrC"<br  />
+-d "grant_type=client_credentials"<br  />
+-L follow redirect<br  />
+</p>
 </div>
-<div id="outline-container-orgheadline19" class="outline-3">
-<h3 id="orgheadline19">grep [a,A]..[b,B]* file  在文件中查找a（或A）开头，第四个字母为b（或B）的所有单词</h3>
 </div>
-<div id="outline-container-orgheadline20" class="outline-3">
-<h3 id="orgheadline20">grep -E 'string1|string2' file        搜寻文件中或者存在string1或者存在string2的行</h3>
+<div id="outline-container-orgheadline23" class="outline-2">
+<h2 id="orgheadline23">time sync</h2>
+<div class="outline-text-2" id="text-orgheadline23">
+<div class="org-src-container">
+
+<pre class="src src-sh">cat /etc/ntp.conf|grep server&#20250;&#21015;&#20986;&#20960;&#20010;&#26381;&#21153;&#22120;
+</pre>
 </div>
-<div id="outline-container-orgheadline21" class="outline-3">
-<h3 id="orgheadline21">利用grep -c 来作instr()用</h3>
-<div class="outline-text-3" id="text-orgheadline21">
+<p>
+没有的话会<a href="http://www.pool.ntp.org/zone/cn%E6%89%BE%E7%A6%BB%E8%87%AA%E5%B7%B1%E6%9C%80%E8%BF%91%E7%9A%84server">http://www.pool.ntp.org/zone/cn%E6%89%BE%E7%A6%BB%E8%87%AA%E5%B7%B1%E6%9C%80%E8%BF%91%E7%9A%84server</a>, 如<br  />
+</p>
+<blockquote>
+<p>
+server 0.asia.pool.ntp.org<br  />
+server 1.asia.pool.ntp.org<br  />
+server 2.asia.pool.ntp.org<br  />
+server 3.asia.pool.ntp.org<br  />
+</p>
+</blockquote>
+<div class="org-src-container">
+
+<pre class="src src-sh">sudo yum install ntp
+&#25163;&#21160;&#21516;&#27493;&#20004;&#27425;
+sudo ntpdate -u 0.asia.pool.ntp.org
+sudo ntpdate -u 0.asia.pool.ntp.org
+
+sudo service ntpd start
+sudo chkconfig ntpd on
+<span style="color: #AEAEAE;">#</span><span style="color: #AEAEAE;">&#26597;&#30475;&#21516;&#27493;&#24773;&#20917;</span>
+watch ntpq -p
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline24" class="outline-2">
+<h2 id="orgheadline24">sed 一些用法</h2>
+<div class="outline-text-2" id="text-orgheadline24">
+<ol class="org-ol">
+<li>最常见的 sed 's/old/new/g' filename<br  /></li>
+
+<li><p>
+如果想直接修改原文件<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">sed  -i <span style="color: #ffa07a;">""</span> <span style="color: #ffa07a;">'s/2/3/g'</span> a.txt
+<span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">&#25110;&#20094;&#20462;&#25913;&#21069;&#23558;&#21407;&#25991;&#20214;&#22791;&#20221;&#20026; a.txt.bak</span>
+sed  -i <span style="color: #ffa07a;">".bak"</span> <span style="color: #ffa07a;">'s/2/3/g'</span> a.txt
+</pre>
+</div></li>
+
+<li><p>
+提取匹配的某一部分 (这里最后用到了/p  估计是print 的意思)<br  />
+比如文件有有一行内容如下,我想取出其中的数字部分<br  />
+    AC_PREREQ(2.65)<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #40E0D0;">autoconf_min</span>=<span style="color: #fa8072;">`sed -n 's/^ *AC_PREREQ(\([0-9\.]*\)).*/\1/p' configure.ac`</span>
+<span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">&#20854;&#20013; \1  &#24341;&#29992; \([0-9\.]*\) &#21305;&#37197;&#30340;&#37096;&#20998;</span>
+</pre>
+</div>
+<p>
+常用到从某文件中取版本号等<br  />
+</p></li>
+
+<li><p>
+有条件的替换<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">sed -i <span style="color: #ffa07a;">'/SELINUX/s/enforcing/disabled/'</span> /etc/selinux/config
+</pre>
+</div>
+<p>
+实现将 如果某行含有SELINUX 这个关键字，则把此行的 enforcing 替换成 disabled<br  />
+实际实现了 将SELINUX=enforcing 换成SELINUX=disabled 这个功能<br  />
+</p></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgheadline29" class="outline-2">
+<h2 id="orgheadline29">grep</h2>
+<div class="outline-text-2" id="text-orgheadline29">
+</div><div id="outline-container-orgheadline25" class="outline-3">
+<h3 id="orgheadline25">grep -v 过滤 不匹配的行</h3>
+</div>
+<div id="outline-container-orgheadline26" class="outline-3">
+<h3 id="orgheadline26">grep [a,A]..[b,B]* file  在文件中查找a（或A）开头，第四个字母为b（或B）的所有单词</h3>
+</div>
+<div id="outline-container-orgheadline27" class="outline-3">
+<h3 id="orgheadline27">grep -E 'string1|string2' file        搜寻文件中或者存在string1或者存在string2的行</h3>
+</div>
+<div id="outline-container-orgheadline28" class="outline-3">
+<h3 id="orgheadline28">利用grep -c 来作instr()用</h3>
+<div class="outline-text-3" id="text-orgheadline28">
 <div class="org-src-container">
 
 <pre class="src src-sh"><span style="color: #AEAEAE;">#</span><span style="color: #AEAEAE;">!/bin/</span><span style="color: #FBDE2D;">sh</span>
 <span style="color: #40E0D0;">a</span>=<span style="color: #ffa07a;">"Hello i am pass"</span>;
-<span style="color: #FBDE2D;">if</span> [ <span style="color: #ff00ff;">`echo $a | grep -c "pass" `</span> -gt 0 ]
+<span style="color: #FBDE2D;">if</span> [ <span style="color: #fa8072;">`echo $a | grep -c "pass" `</span> -gt 0 ]
 <span style="color: #FBDE2D;">then</span>
   <span style="color: #F8F8F8;">echo</span> <span style="color: #ffa07a;">"Success"</span>
 <span style="color: #FBDE2D;">else</span>
@@ -566,9 +748,9 @@ autoconf_min=`sed -n 's/^ <b>AC_PREREQ(\([0-9\.]</b>\)).*/\1/p' configure.ac`<br
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline23" class="outline-2">
-<h2 id="orgheadline23">find</h2>
-<div class="outline-text-2" id="text-orgheadline23">
+<div id="outline-container-orgheadline30" class="outline-2">
+<h2 id="orgheadline30">find</h2>
+<div class="outline-text-2" id="text-orgheadline30">
 <div class="org-src-container">
 
 <pre class="src src-sh"><span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">&#20462;&#25913;&#26102;&#38388;&#22312;10&#22825;&#21069;&#30340;&#37117;&#21024;&#38500;</span>
@@ -580,9 +762,9 @@ find . -maxdepth 1 -mtime -10 -exec rm  -rf {} <span style="color: #ffa07a;">\;<
 </div>
 </div>
 
-<div id="outline-container-orgheadline24" class="outline-2">
-<h2 id="orgheadline24">“.”点号替代单个字符</h2>
-<div class="outline-text-2" id="text-orgheadline24">
+<div id="outline-container-orgheadline31" class="outline-2">
+<h2 id="orgheadline31">“.”点号替代单个字符</h2>
+<div class="outline-text-2" id="text-orgheadline31">
 <p>
 这个用法真的非常非常有用，极力推荐。<br  />
 grep [a,A]..[b,B]* file  在文件中查找a（或A）开头，第四个字母为b（或B）的所有单词<br  />
@@ -592,14 +774,14 @@ sed 's/^&#x2026;..//g' file        删除文件所有行的前5列<br  />
 </div>
 </div>
 
-<div id="outline-container-orgheadline25" class="outline-2">
-<h2 id="orgheadline25">shell for if example</h2>
-<div class="outline-text-2" id="text-orgheadline25">
+<div id="outline-container-orgheadline32" class="outline-2">
+<h2 id="orgheadline32">shell for if example</h2>
+<div class="outline-text-2" id="text-orgheadline32">
 <div class="org-src-container">
 
 <pre class="src src-sh" id="orgsrcblock2">  <span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">&#36807;&#28388;&#25481;&#24320;&#22836;&#26159;#&#30340;&#27880;&#37322;&#34892;</span>
-<span style="color: #FBDE2D;">for</span> url<span style="color: #FBDE2D;"> in</span>  <span style="color: #ff00ff;">`cat $MODULE_FILE_NAME|grep -v "^[ \t]*#" `</span> ; <span style="color: #FBDE2D;">do</span>
-    <span style="color: #40E0D0;">mod</span>=<span style="color: #ff00ff;">`echo $url|sed 's|.*/||g'|awk -F '.git$' '{print $1}'`</span>
+<span style="color: #FBDE2D;">for</span> url<span style="color: #FBDE2D;"> in</span>  <span style="color: #fa8072;">`cat $MODULE_FILE_NAME|grep -v "^[ \t]*#" `</span> ; <span style="color: #FBDE2D;">do</span>
+    <span style="color: #40E0D0;">mod</span>=<span style="color: #fa8072;">`echo $url|sed 's|.*/||g'|awk -F '.git$' '{print $1}'`</span>
     <span style="color: #40E0D0;">abs_mod_path</span>=$<span style="color: #40E0D0;">WORD_DIR</span>/$<span style="color: #40E0D0;">mod</span>
     <span style="color: #FBDE2D;">if</span> [ -d $<span style="color: #40E0D0;">abs_mod_path</span> ] &amp;&amp; [ -d $<span style="color: #40E0D0;">abs_mod_path</span>/.git ] ; <span style="color: #FBDE2D;">then</span>
         <span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">&#22914;&#26524;&#24211;&#24050;&#32463;&#23384;&#22312;</span>
@@ -621,18 +803,18 @@ sed 's/^&#x2026;..//g' file        删除文件所有行的前5列<br  />
 
 
 
-<div id="outline-container-orgheadline26" class="outline-2">
-<h2 id="orgheadline26">用python 格式化json</h2>
-<div class="outline-text-2" id="text-orgheadline26">
+<div id="outline-container-orgheadline33" class="outline-2">
+<h2 id="orgheadline33">用python 格式化json</h2>
+<div class="outline-text-2" id="text-orgheadline33">
 <p>
 cat a.json|python -m json.tool<br  />
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgheadline27" class="outline-2">
-<h2 id="orgheadline27">awk 怎么去除如果第一列相同，则只取一行？</h2>
-<div class="outline-text-2" id="text-orgheadline27">
+<div id="outline-container-orgheadline34" class="outline-2">
+<h2 id="orgheadline34">awk 怎么去除如果第一列相同，则只取一行？</h2>
+<div class="outline-text-2" id="text-orgheadline34">
 <blockquote>
 <p>
 例如：<br  />
@@ -673,7 +855,7 @@ eeeeeee,tttttttttt,44444444<br  />
     <div>
       <div class="post-meta">
         <span title="post date" class="post-info">2013-02-17</span>
-        <span title="last modification date" class="post-info">2016-07-18</span>
+        <span title="last modification date" class="post-info">2016-12-14</span>
         <span title="tags" class="post-info"><a href="/tags/linux/">Linux</a></span>
         <span title="author" class="post-info">纪秀峰</span>
       </div>
@@ -712,7 +894,7 @@ eeeeeee,tttttttttt,44444444<br  />
       <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
       <script src="/media/js/main.js"></script>
       <div class="footer">
-        <p>Generated by <a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.x (<a href="http://orgmode.org">Org mode</a> 8.x)</p>
+        <p>Generated by <a href="http://www.gnu.org/software/emacs/">Emacs</a> 26.x (<a href="http://orgmode.org">Org mode</a> 8.x)</p>
         <p>
           Copyright &copy; 2012 - <span id="footerYear"></span> <a href="mailto:jixiuf &lt;at&gt; gmail &lt;dot&gt; com">纪秀峰</a>
           &nbsp;&nbsp;-&nbsp;&nbsp;
