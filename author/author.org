@@ -10,7 +10,7 @@
 #+TAGS:
 #+URI:         /author/
 * Word 版简历
-+  [[file:~/Documents/org/src/download/JiXiufeng.doc][纪秀峰.doc]]
++  [[file:../download/JiXiufeng.doc][纪秀峰.doc]]
 * 基本信息
   |------------+--------------------|
   | 电    话   | 13522419247　      |

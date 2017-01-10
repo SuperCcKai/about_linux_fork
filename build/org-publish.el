@@ -12,6 +12,12 @@
 (require 'ox-org nil t)
 (require 'ob-ditaa nil t)
 
+(setq-default
+ user-full-name "纪秀峰"                ;记得改成你的名字
+ user-login-name "jixiuf"
+ user-mail-address "jixiuf@qq.com")
+(setq load-prefer-newer t)              ;当el文件比elc文件新的时候,则加载el,即尽量Load最新文件文件
+
 (setq user-emacs-directory (expand-file-name "."))
 ;;  第三方package相关配置
 (require 'package)
