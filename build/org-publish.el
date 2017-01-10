@@ -37,6 +37,9 @@
 
 ;;; the following is only needed if you install org-page manually
 (require 'org-page)
+
+(setq org-confirm-babel-evaluate nil)
+
 (setq op/site-main-title "一个人的狂欢")
 (setq op/site-sub-title "")
 (setq op/personal-github-link "http://github.com/jixiuf")

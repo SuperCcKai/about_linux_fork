@@ -1,4 +1,6 @@
 # -*- coding:utf-8 -*-
 .PHONY: build
-build:
-	make -C ./build
+recent:
+	make -C ./build recent
+all:
+	make -C ./build all
