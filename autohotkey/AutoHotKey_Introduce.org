@@ -1,6 +1,7 @@
 # -*- coding:utf-8-unix -*-
 #+LANGUAGE:  zh
 #+TITLE:     AutoHotKey 简介
+#+DATE:     2011-06-26 星期日
 #+AUTHOR:    纪秀峰
 #+EMAIL:     jixiuf@gmail.com
 #+TAGS: :AutoHotKey: :Windows:

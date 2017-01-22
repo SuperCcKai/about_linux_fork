@@ -2,6 +2,7 @@
 #+LANGUAGE:  zh
 #+TITLE:     anything-doc.org
 #+KEYWORDS: Autohotkey windows 
+#+DATE:     2011-06-26 星期日
 #+TAGS: :AutoHotKey: :Windows:
 #+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc

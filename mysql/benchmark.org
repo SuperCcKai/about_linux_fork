@@ -3,7 +3,7 @@
 #+TITLE:     mysql压力测试
 #+AUTHOR:    纪秀峰
 #+EMAIL:     jixiuf@gmail.com
-#+DAkkTE:     2012-04-21 六
+#+DATE:     2012-04-21 六
 #+DESCRIPTION:mysql压力测试
 #+KEYWORDS: mysql db
 #+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t <:t
