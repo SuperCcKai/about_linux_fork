@@ -33,7 +33,8 @@
   svn revert -R ./dev
   #rm new files
   # svn status 状态为“？”的文件 直接删除，即未被管理的文件
-  svn status --no-ignore | grep '^\?' |  perl -ne 'print "$1\n" if $_ =~ /^\S+\s+(.*)$/' |  tr '\n' '\0' | xargs -0 rm -rf
+  # jenkins 似乎不能支持带管道的命令，这行需要写成一个脚本，调相应的脚本
+  #svn status --no-ignore | grep '^\?' |  perl -ne 'print "$1\n" if $_ =~ /^\S+\s+(.*)$/' |  tr '\n' '\0' | xargs -0 rm -rf
   svn up ./dev
 #+END_SRC
 ** 构建触发器
