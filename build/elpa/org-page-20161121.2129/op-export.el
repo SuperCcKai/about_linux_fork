@@ -180,7 +180,6 @@ content of the buffer will be converted into html."
               (setq org-path (replace-regexp-in-string "\\.html?$"  ".org" asset-abs-path))
               (setq org-abs-path (expand-file-name org-path (file-name-directory filename)))
               (when (file-exists-p org-abs-path)
-                (setq asset-abs-path org-abs-path) ;do not show WARN
                 (setq org-uri (plist-get file-uri-plist (intern org-abs-path)))
                 (when org-uri
                   (setq post-content
