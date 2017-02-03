@@ -124,21 +124,21 @@
   '(("blog" ;; this is the default configuration
     :show-meta t
     :show-comment t
-    :uri-generator op/generate-uri
-    :uri-template "/blog/%t/"
+    :uri-generator jixiuf/generate-uri
+    :uri-template "/blog/%f"
     :sort-by :date     ;; how to sort the posts
     :category-index t) ;; generate category index or not
    ("index"
     :show-meta nil
     :show-comment nil
-    :uri-generator op/generate-uri
+    :uri-generator jixiuf/generate-uri
     :uri-template "/"
     :sort-by :date
     :category-index nil)
    ("about"
     :show-meta nil
     :show-comment nil
-    :uri-generator op/generate-uri
+    :uri-generator jixiuf/generate-uri
     :uri-template "/about/"
     :sort-by :date
     :category-index nil)))
@@ -148,12 +148,35 @@
 ;;              '("sitemap"
 ;;               :show-meta nil
 ;;               :show-comment nil
-;;               :uri-generator op/generate-uri
+;;               :uri-generator jixiuf/generate-uri
 ;;               :uri-template "/blog/sitemap"
 ;;               :sort-by :date
 ;;               :category-index nil)
 ;;              )
 
+
+(defun jixiuf/generate-uri (default-uri-template creation-date title)
+  "Generate URI of org file opened in current buffer. It will be firstly created
+by #+URI option, if it is nil, DEFAULT-URI-TEMPLATE will be used to generate the
+uri. If CREATION-DATE is nil, current date will be used. The uri template option
+can contain following parameters:
+%y: year of creation date
+%m: month of creation date
+%d: day of creation date
+%t: title of current buffer"
+  (let ((uri-template (or (op/read-org-option "URI")
+                          default-uri-template))
+        (date-list (split-string (if creation-date
+                                     (fix-timestamp-string creation-date)
+                                   (format-time-string "%Y-%m-%d"))
+                                 "-"))
+        (html-file-name (concat (buffer-file-name) ".html"))
+        (encoded-title (encode-string-to-url title)))
+    (format-spec uri-template `((?y . ,(car date-list))
+                                (?m . ,(cadr date-list))
+                                (?d . ,(cl-caddr date-list))
+                                (?f . ,html-file-name)
+                                (?t . ,encoded-title)))))
 
 (defun jixiuf-get-file-category (org-file)
   "Get org file category presented by ORG-FILE, return all categories if
