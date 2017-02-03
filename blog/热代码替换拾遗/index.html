@@ -48,13 +48,16 @@
 </p>
 <ul class="org-ul">
 <li>erlang:purge_module(Mod)<br  />
-Removes old code for Module.<br  /></li>
+Removes old code for Module.<br  />
+</li>
 <li>check_process_code(Pid, Module) -&gt; boolean()<br  />
-Returns true if the process Pid is executing old code for Module<br  /></li>
+Returns true if the process Pid is executing old code for Module<br  />
+</li>
 <li>code:soft_purge(Mod)<br  />
 基本是以上两个函数的合作。，只有当此Module 的old code 没有任何进程调用时，<br  />
 才将old code 清除<br  />
-具体代码在code_server:do_soft_purge/1里<br  /></li>
+具体代码在code_server:do_soft_purge/1里<br  />
+</li>
 </ul>
 
 </div>

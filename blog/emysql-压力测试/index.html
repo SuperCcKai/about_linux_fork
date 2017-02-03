@@ -47,11 +47,11 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgheadline1">建表语句</a></li>
-<li><a href="#orgheadline2">mysqlslap 测试</a></li>
-<li><a href="#orgheadline3">emysql的压力测试，开一条mysql连接，用存储过程插入10000条数据</a>
+<li><a href="#sec-1">建表语句</a></li>
+<li><a href="#sec-2">mysqlslap 测试</a></li>
+<li><a href="#sec-3">emysql的压力测试，开一条mysql连接，用存储过程插入10000条数据</a>
 <ul>
-<li><a href="#orgheadline4">测试用 press.erl</a></li>
+<li><a href="#sec-3-1">测试用 press.erl</a></li>
 </ul>
 </li>
 </ul>
@@ -60,9 +60,9 @@
 <p>
 本站关于mysql的测试在 <a href="../mysql/benchmark_demo.html">../mysql/benchmark_demo.html</a><br  />
 </p>
-<div id="outline-container-orgheadline1" class="outline-2">
-<h2 id="orgheadline1">建表语句</h2>
-<div class="outline-text-2" id="text-orgheadline1">
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">建表语句</h2>
+<div class="outline-text-2" id="text-1">
 <div class="org-src-container">
 
 <pre class="src src-sql"> <span style="color: #FBDE2D;">CREATE</span> <span style="color: #FBDE2D;">TABLE</span> `tbl_test` (
@@ -88,55 +88,55 @@
 DELIMITER $$
 <span style="color: #FBDE2D;">drop</span> <span style="color: #FBDE2D;">procedure</span> <span style="color: #FF6400;">if</span> <span style="color: #FBDE2D;">exists</span> `insert_tbl_test`$$
 <span style="color: #FBDE2D;">create</span> <span style="color: #FBDE2D;">procedure</span> `insert_tbl_test`(
-<span style="color: #FBDE2D;">IN</span> inaccountId <span style="color: #8DA6CE;">int</span>(11),<span style="color: #AEAEAE;">/**/</span>
-<span style="color: #FBDE2D;">IN</span> inaccountType <span style="color: #8DA6CE;">int</span>(11),<span style="color: #AEAEAE;">/**/</span>
-<span style="color: #FBDE2D;">IN</span> inplayerId <span style="color: #8DA6CE;">int</span>(11),<span style="color: #AEAEAE;">/**/</span>
-<span style="color: #FBDE2D;">IN</span> inheadHeroId <span style="color: #8DA6CE;">int</span>(11),<span style="color: #AEAEAE;">/**/</span>
-<span style="color: #FBDE2D;">IN</span> inplayerLevel <span style="color: #8DA6CE;">int</span>(11),<span style="color: #AEAEAE;">/**/</span>
-<span style="color: #FBDE2D;">IN</span> inplayerName <span style="color: #8DA6CE;">varchar</span>(255),<span style="color: #AEAEAE;">/**/</span>
-<span style="color: #FBDE2D;">IN</span> inlogTime datetime,<span style="color: #AEAEAE;">/**/</span>
-<span style="color: #FBDE2D;">IN</span> inclientVersion <span style="color: #8DA6CE;">varchar</span>(255),<span style="color: #AEAEAE;">/**/</span>
-<span style="color: #FBDE2D;">IN</span> inclientType <span style="color: #8DA6CE;">varchar</span>(255),<span style="color: #AEAEAE;">/**/</span>
-<span style="color: #FBDE2D;">IN</span> inissuers <span style="color: #8DA6CE;">varchar</span>(255),<span style="color: #AEAEAE;">/**/</span>
-<span style="color: #FBDE2D;">IN</span> inflashPlayerVersion <span style="color: #8DA6CE;">int</span>(11),<span style="color: #AEAEAE;">/**/</span>
-<span style="color: #FBDE2D;">IN</span> inconnectType <span style="color: #8DA6CE;">int</span>(11),<span style="color: #AEAEAE;">/**/</span>
-<span style="color: #FBDE2D;">IN</span> ingameServerName <span style="color: #8DA6CE;">varchar</span>(255),<span style="color: #AEAEAE;">/**/</span>
-<span style="color: #FBDE2D;">IN</span> inipAddr <span style="color: #8DA6CE;">varchar</span>(255),<span style="color: #AEAEAE;">/**/</span>
-<span style="color: #FBDE2D;">IN</span> inonOffType <span style="color: #8DA6CE;">int</span>(11) <span style="color: #AEAEAE;">/**/</span>
+<span style="color: #FBDE2D;">IN</span> inaccountId <span style="color: #8DA6CE;">int</span>(11),<span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+<span style="color: #FBDE2D;">IN</span> inaccountType <span style="color: #8DA6CE;">int</span>(11),<span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+<span style="color: #FBDE2D;">IN</span> inplayerId <span style="color: #8DA6CE;">int</span>(11),<span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+<span style="color: #FBDE2D;">IN</span> inheadHeroId <span style="color: #8DA6CE;">int</span>(11),<span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+<span style="color: #FBDE2D;">IN</span> inplayerLevel <span style="color: #8DA6CE;">int</span>(11),<span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+<span style="color: #FBDE2D;">IN</span> inplayerName <span style="color: #8DA6CE;">varchar</span>(255),<span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+<span style="color: #FBDE2D;">IN</span> inlogTime datetime,<span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+<span style="color: #FBDE2D;">IN</span> inclientVersion <span style="color: #8DA6CE;">varchar</span>(255),<span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+<span style="color: #FBDE2D;">IN</span> inclientType <span style="color: #8DA6CE;">varchar</span>(255),<span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+<span style="color: #FBDE2D;">IN</span> inissuers <span style="color: #8DA6CE;">varchar</span>(255),<span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+<span style="color: #FBDE2D;">IN</span> inflashPlayerVersion <span style="color: #8DA6CE;">int</span>(11),<span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+<span style="color: #FBDE2D;">IN</span> inconnectType <span style="color: #8DA6CE;">int</span>(11),<span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+<span style="color: #FBDE2D;">IN</span> ingameServerName <span style="color: #8DA6CE;">varchar</span>(255),<span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+<span style="color: #FBDE2D;">IN</span> inipAddr <span style="color: #8DA6CE;">varchar</span>(255),<span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+<span style="color: #FBDE2D;">IN</span> inonOffType <span style="color: #8DA6CE;">int</span>(11) <span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
 )
 <span style="color: #FBDE2D;">BEGIN</span>
 <span style="color: #FBDE2D;">insert</span> <span style="color: #FBDE2D;">into</span> `tbl_on_off`(
-`accountId`, <span style="color: #AEAEAE;">/**/</span>
-`accountType`, <span style="color: #AEAEAE;">/**/</span>
-`playerId`, <span style="color: #AEAEAE;">/**/</span>
-`headHeroId`, <span style="color: #AEAEAE;">/**/</span>
-`playerLevel`, <span style="color: #AEAEAE;">/**/</span>
-`playerName`, <span style="color: #AEAEAE;">/**/</span>
-`logTime`, <span style="color: #AEAEAE;">/**/</span>
-`clientVersion`, <span style="color: #AEAEAE;">/**/</span>
-`clientType`, <span style="color: #AEAEAE;">/**/</span>
-`issuers`, <span style="color: #AEAEAE;">/**/</span>
-`flashPlayerVersion`, <span style="color: #AEAEAE;">/**/</span>
-`connectType`, <span style="color: #AEAEAE;">/**/</span>
-`gameServerName`, <span style="color: #AEAEAE;">/**/</span>
-`ipAddr`, <span style="color: #AEAEAE;">/**/</span>
-`onOffType` <span style="color: #AEAEAE;">/**/</span>
+`accountId`, <span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+`accountType`, <span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+`playerId`, <span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+`headHeroId`, <span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+`playerLevel`, <span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+`playerName`, <span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+`logTime`, <span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+`clientVersion`, <span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+`clientType`, <span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+`issuers`, <span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+`flashPlayerVersion`, <span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+`connectType`, <span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+`gameServerName`, <span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+`ipAddr`, <span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+`onOffType` <span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
 ) <span style="color: #FBDE2D;">values</span>(
-inaccountId,<span style="color: #AEAEAE;">/**/</span>
-inaccountType,<span style="color: #AEAEAE;">/**/</span>
-inplayerId,<span style="color: #AEAEAE;">/**/</span>
-inheadHeroId,<span style="color: #AEAEAE;">/**/</span>
-inplayerLevel,<span style="color: #AEAEAE;">/**/</span>
-inplayerName,<span style="color: #AEAEAE;">/**/</span>
-inlogTime,<span style="color: #AEAEAE;">/**/</span>
-inclientVersion,<span style="color: #AEAEAE;">/**/</span>
-inclientType,<span style="color: #AEAEAE;">/**/</span>
-inissuers,<span style="color: #AEAEAE;">/**/</span>
-inflashPlayerVersion,<span style="color: #AEAEAE;">/**/</span>
-inconnectType,<span style="color: #AEAEAE;">/**/</span>
-ingameServerName,<span style="color: #AEAEAE;">/**/</span>
-inipAddr,<span style="color: #AEAEAE;">/**/</span>
- inonOffType <span style="color: #AEAEAE;">/**/</span>
+inaccountId,<span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+inaccountType,<span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+inplayerId,<span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+inheadHeroId,<span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+inplayerLevel,<span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+inplayerName,<span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+inlogTime,<span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+inclientVersion,<span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+inclientType,<span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+inissuers,<span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+inflashPlayerVersion,<span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+inconnectType,<span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+ingameServerName,<span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+inipAddr,<span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+ inonOffType <span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
 );
 <span style="color: #FBDE2D;">END</span>$$
 DELIMITER ;
@@ -144,9 +144,9 @@ DELIMITER ;
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline2" class="outline-2">
-<h2 id="orgheadline2">mysqlslap 测试</h2>
-<div class="outline-text-2" id="text-orgheadline2">
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2">mysqlslap 测试</h2>
+<div class="outline-text-2" id="text-2">
 <div class="org-src-container">
 
 <pre class="src src-sh">&#20854;&#20013;&#20851;&#20110;&#24320;&#19968;&#20010;mysql&#36830;&#25509;&#25191;&#34892;10000&#27425;&#23384;&#20648;&#36807;&#31243;&#25554;&#20837;10000&#26465;&#25968;&#25454;&#30340;&#27979;&#35797;
@@ -188,20 +188,18 @@ Average number of queries per client: 10000<br  />
 </div>
 </div>
 
-<div id="outline-container-orgheadline3" class="outline-2">
-<h2 id="orgheadline3">emysql的压力测试，开一条mysql连接，用存储过程插入10000条数据</h2>
-<div class="outline-text-2" id="text-orgheadline3">
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3">emysql的压力测试，开一条mysql连接，用存储过程插入10000条数据</h2>
+<div class="outline-text-2" id="text-3">
 <ol class="org-ol">
-<li><p>
-首先修改emysql的 emysql.app.src,添加env的值{lock_timeout,infinity}<br  />
+<li>首先修改emysql的 emysql.app.src,添加env的值{lock_timeout,infinity}<br  />
 ,以避免因超时 emysql不工作 。别忘了重新编译emysql<br  />
-</p>
 <div class="org-src-container">
 
 <pre class="src src-sh">%% Emysql .app file template
 %% This template is filled out by rebar,
-%% <span style="color: #FBDE2D;">or</span> make (Makefile made to fill modules<span style="color: #FBDE2D;"> in</span>)
-%% <span style="color: #FBDE2D;">and</span> then cp src/emysql.app.src ebin/emysql.app
+%% or make (Makefile made to fill modules<span style="color: #FBDE2D;"> in</span>)
+%% and then cp src/emysql.app.src ebin/emysql.app
 
 %% Settings (defaults<span style="color: #FBDE2D;"> in</span> include/emysql.hrl):
 %% default_timeout (<span style="color: #40E0D0;">TIMEOUT</span> = 8000)
@@ -219,79 +217,80 @@ Average number of queries per client: 10000<br  />
                 ]}
         ]}.
 </pre>
-</div></li>
+</div>
+</li>
 </ol>
 </div>
 
-<div id="outline-container-orgheadline4" class="outline-3">
-<h3 id="orgheadline4">测试用 press.erl</h3>
-<div class="outline-text-3" id="text-orgheadline4">
+<div id="outline-container-sec-3-1" class="outline-3">
+<h3 id="sec-3-1">测试用 press.erl</h3>
+<div class="outline-text-3" id="text-3-1">
 <div class="org-src-container">
 
-<pre class="src src-erlang"><span style="color: #7fffd4;">-module</span>(press).
-<span style="color: #7fffd4;">-export</span>([<span style="color: #8DA6CE;">get_timestamp/0</span>,<span style="color: #8DA6CE;">start/3</span>,<span style="color: #8DA6CE;">run/3</span>]).
-<span style="color: #7fffd4;">-include</span>(<span style="color: #ffa07a;">"emysql.hrl"</span>).
+<pre class="src src-erlang">-module(press).
+-export([get_timestamp/0,start/3,run/3]).
+-include("emysql.hrl").
 
-<span style="color: #7fffd4;">-record</span>(<span style="color: #8DA6CE;">state</span>,{running=0,start_time,process_count_all,sql_count_each_process}).
-<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">&#21551;&#21160;ProcessCount&#20010;&#36827;&#31243;&#65292;&#27599;&#20010;&#36827;&#31243;&#25191;&#34892;SqlCountEachProcess&#27425;sql &#25805;&#20316;</span>
-<span style="color: #FF6400;">start</span>(<span style="color: #40E0D0;">ProcessCount</span>,<span style="color: #40E0D0;">SqlCountEachProcess</span>,<span style="color: #40E0D0;">MysqlConnectionCount</span>)-&gt;
-    <span style="color: #8DA6CE;">crypto</span>:<span style="color: #8DA6CE;">start</span>(),
-    <span style="color: #8DA6CE;">application</span>:<span style="color: #8DA6CE;">start</span>(emysql),
-    <span style="color: #8DA6CE;">emysql</span>:<span style="color: #8DA6CE;">add_pool</span>(hello_pool, <span style="color: #40E0D0;">MysqlConnectionCount</span>, <span style="color: #ffa07a;">"root"</span>, <span style="color: #ffa07a;">"root"</span>, <span style="color: #ffa07a;">"localhost"</span>, 3306, <span style="color: #ffa07a;">"mysqlslap"</span>, utf8),
+-record(state,{running=0,start_time,process_count_all,sql_count_each_process}).
+%% 启动ProcessCount个进程，每个进程执行SqlCountEachProcess次sql 操作
+start(ProcessCount,SqlCountEachProcess,MysqlConnectionCount)-&gt;
+    crypto:start(),
+    application:start(emysql),
+    emysql:add_pool(hello_pool, MysqlConnectionCount, "root", "root", "localhost", 3306, "mysqlslap", utf8),
 
-    <span style="color: #40E0D0;">CurrentTime</span>=<span style="color: #8DA6CE;">get_timestamp</span>(),
-    <span style="color: #F8F8F8;">spawn_link</span>(?<span style="color: #D8FA3C;">MODULE</span>,run,[<span style="color: #40E0D0;">ProcessCount</span>,<span style="color: #40E0D0;">SqlCountEachProcess</span>,#<span style="color: #8DA6CE;">state</span>{start_time=<span style="color: #40E0D0;">CurrentTime</span>,
-                                                                    process_count_all=<span style="color: #40E0D0;">ProcessCount</span>,
-                                                                    sql_count_each_process=<span style="color: #40E0D0;">SqlCountEachProcess</span>}])
-        .
-
-
-<span style="color: #FF6400;">recv</span>(#<span style="color: #8DA6CE;">state</span>{running=0,start_time=<span style="color: #40E0D0;">StartTime</span>,
-            process_count_all=<span style="color: #40E0D0;">ProcessCount</span>,
-            sql_count_each_process=<span style="color: #40E0D0;">SqlCountEachProcess</span>
-           })-&gt;
-    <span style="color: #40E0D0;">Usedtime</span> =<span style="color: #8DA6CE;">get_timestamp</span>()-<span style="color: #40E0D0;">StartTime</span>,
-    <span style="color: #8DA6CE;">io</span>:<span style="color: #8DA6CE;">format</span>(<span style="color: #ffa07a;">"process_count:~p sql count each process:~p used time:~p~n"</span>,[<span style="color: #40E0D0;">ProcessCount</span>,<span style="color: #40E0D0;">SqlCountEachProcess</span>,<span style="color: #40E0D0;">Usedtime</span>]),
-    <span style="color: #8DA6CE;">emysql</span>:<span style="color: #8DA6CE;">remove_pool</span>(hello_pool);
-<span style="color: #FF6400;">recv</span>(#<span style="color: #8DA6CE;">state</span>{running=<span style="color: #40E0D0;">Running</span>}=<span style="color: #40E0D0;">State</span>)-&gt;
-    <span style="color: #FBDE2D;">receive</span>
-        done-&gt;
-            <span style="color: #8DA6CE;">recv</span>(<span style="color: #40E0D0;">State</span>#<span style="color: #8DA6CE;">state</span>{running=<span style="color: #40E0D0;">Running</span>-1})
-    <span style="color: #FBDE2D;">end</span>
-        .
-
-<span style="color: #FF6400;">run</span>(0,<span style="color: #40E0D0;">_SqlCountEachProcess</span>,#<span style="color: #8DA6CE;">state</span>{}=<span style="color: #40E0D0;">State</span>)-&gt;
-    <span style="color: #8DA6CE;">recv</span>(<span style="color: #40E0D0;">State</span>);
-<span style="color: #FF6400;">run</span>(<span style="color: #40E0D0;">ProcessCount</span>,<span style="color: #40E0D0;">SqlCountEachProcess</span>,#<span style="color: #8DA6CE;">state</span>{running=<span style="color: #40E0D0;">Running</span>}=<span style="color: #40E0D0;">State</span>) -&gt;
-    <span style="color: #40E0D0;">Parent</span> =<span style="color: #F8F8F8;">self</span>(),
-    <span style="color: #F8F8F8;">spawn</span>(<span style="color: #FBDE2D;">fun</span>()-&gt;<span style="color: #FF6400;"> </span><span style="color: #8DA6CE;">run_sql</span>(<span style="color: #40E0D0;">SqlCountEachProcess</span>,<span style="color: #40E0D0;">Parent</span>)<span style="color: #FBDE2D;">end</span>),
-    <span style="color: #8DA6CE;">run</span>(<span style="color: #40E0D0;">ProcessCount</span>-1,<span style="color: #40E0D0;">SqlCountEachProcess</span>,<span style="color: #40E0D0;">State</span>#<span style="color: #8DA6CE;">state</span>{running=<span style="color: #40E0D0;">Running</span>+1})
-        .
-
-<span style="color: #FF6400;">run_sql</span>(0,<span style="color: #40E0D0;">Parent</span>)-&gt;
-    <span style="color: #40E0D0;">Parent</span>!done;
-<span style="color: #FF6400;">run_sql</span>(<span style="color: #40E0D0;">SqlCountEachProcess</span>,<span style="color: #40E0D0;">Parent</span>) -&gt;
-    <span style="color: #8DA6CE;">test2</span>(),
-    <span style="color: #8DA6CE;">run_sql</span>(<span style="color: #40E0D0;">SqlCountEachProcess</span>-1 ,<span style="color: #40E0D0;">Parent</span>)
-        .
+    CurrentTime=get_timestamp(),
+    spawn_link(?MODULE,run,[ProcessCount,SqlCountEachProcess,#state{start_time=CurrentTime,
+								    process_count_all=ProcessCount,
+								    sql_count_each_process=SqlCountEachProcess}])
+	.
 
 
-<span style="color: #FF6400;">test2</span>()-&gt;
-    <span style="color: #AEAEAE;">%%</span><span style="color: #AEAEAE;">"insert into tbl_test(  accountId,  accountType,  playerId,  headHeroId,  playerLevel,  playerName,  logTime,  clientVersion,  clientType,  issuers,  flashPlayerVersion,  connectType,  gameServerName,  ipAddr,  onOffType  ) values(1,1,1,1,1,'name','1989-01-26','ver','t','dd',1,1,'name','localhost',1)"</span>
-    <span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">"call insert_tbl_test(1,1,1,1,1,'name','1989-01-26','ver','t','dd',1,1,'name','localhost',1);"</span>
-    <span style="color: #40E0D0;">Result</span>=<span style="color: #8DA6CE;">emysql</span>:<span style="color: #8DA6CE;">execute</span>(hello_pool,&lt;&lt; <span style="color: #ffa07a;">"call insert_tbl_test(1,1,1,1,1,'name','1989-01-26','ver','t','dd',1,1,'name','localhost',1);"</span>&gt;&gt;),
-    <span style="color: #FBDE2D;">case</span> <span style="color: #40E0D0;">Result</span> <span style="color: #FBDE2D;">of</span>
-        <span style="color: #40E0D0;">Rec</span> <span style="color: #FBDE2D;">when</span> <span style="color: #F8F8F8;">is_record</span>(<span style="color: #40E0D0;">Rec</span> ,ok_packet) -&gt;
-            ok;
-        <span style="color: #40E0D0;">Rec</span> <span style="color: #FBDE2D;">when</span> <span style="color: #F8F8F8;">is_record</span>(<span style="color: #40E0D0;">Rec</span> ,error_packet) -&gt;
-            <span style="color: #8DA6CE;">io</span>:<span style="color: #8DA6CE;">format</span>(<span style="color: #ffa07a;">"~p~n"</span>,[<span style="color: #40E0D0;">Result</span>])
-    <span style="color: #FBDE2D;">end</span>
+recv(#state{running=0,start_time=StartTime,
+	    process_count_all=ProcessCount,
+	    sql_count_each_process=SqlCountEachProcess
+	   })-&gt;
+    Usedtime =get_timestamp()-StartTime,
+    io:format("process_count:~p sql count each process:~p used time:~p~n",[ProcessCount,SqlCountEachProcess,Usedtime]),
+    emysql:remove_pool(hello_pool);
+recv(#state{running=Running}=State)-&gt;
+    receive
+	done-&gt;
+	    recv(State#state{running=Running-1})
+    end
+	.
 
-    <span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">%% Pid=global:whereis_name(emysql_center)</span>
-        .
-<span style="color: #FF6400;">get_timestamp</span>() -&gt;
-    {<span style="color: #40E0D0;">Mega</span>,<span style="color: #40E0D0;">Sec</span>,<span style="color: #40E0D0;">Micro</span>} = <span style="color: #F8F8F8;">erlang</span>:<span style="color: #F8F8F8;">now</span>(),
-    ((<span style="color: #40E0D0;">Mega</span>*1000000+<span style="color: #40E0D0;">Sec</span>)*1000000+<span style="color: #40E0D0;">Micro</span>)/1000.
+run(0,_SqlCountEachProcess,#state{}=State)-&gt;
+    recv(State);
+run(ProcessCount,SqlCountEachProcess,#state{running=Running}=State) -&gt;
+    Parent =self(),
+    spawn(fun()-&gt; run_sql(SqlCountEachProcess,Parent)end),
+    run(ProcessCount-1,SqlCountEachProcess,State#state{running=Running+1})
+	.
+
+run_sql(0,Parent)-&gt;
+    Parent!done;
+run_sql(SqlCountEachProcess,Parent) -&gt;
+    test2(),
+    run_sql(SqlCountEachProcess-1 ,Parent)
+	.
+
+
+test2()-&gt;
+    %%"insert into tbl_test(  accountId,  accountType,  playerId,  headHeroId,  playerLevel,  playerName,  logTime,  clientVersion,  clientType,  issuers,  flashPlayerVersion,  connectType,  gameServerName,  ipAddr,  onOffType  ) values(1,1,1,1,1,'name','1989-01-26','ver','t','dd',1,1,'name','localhost',1)"
+    %% "call insert_tbl_test(1,1,1,1,1,'name','1989-01-26','ver','t','dd',1,1,'name','localhost',1);"
+    Result=emysql:execute(hello_pool,&lt;&lt; "call insert_tbl_test(1,1,1,1,1,'name','1989-01-26','ver','t','dd',1,1,'name','localhost',1);"&gt;&gt;),
+    case Result of
+	Rec when is_record(Rec ,ok_packet) -&gt;
+	    ok;
+	Rec when is_record(Rec ,error_packet) -&gt;
+	    io:format("~p~n",[Result])
+    end
+
+    %% %% Pid=global:whereis_name(emysql_center)
+	.
+get_timestamp() -&gt;
+    {Mega,Sec,Micro} = erlang:now(),
+    ((Mega*1000000+Sec)*1000000+Micro)/1000.
 </pre>
 </div>
 <div class="org-src-container">
@@ -331,7 +330,6 @@ process_count:10 sql count each process:1000 used time:7520.348876953125
 process_count:100 sql count each process:100 used time:7613.68896484375
 </pre>
 </div>
-
 <div class="org-src-container">
 
 <pre class="src src-java"><span style="color: #FBDE2D;">import</span> <span style="color: #D8FA3C;">java</span>.<span style="color: #D8FA3C;">sql</span>.<span style="color: #8DA6CE;">Date</span>;

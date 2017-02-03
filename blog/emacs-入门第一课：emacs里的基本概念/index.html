@@ -47,19 +47,19 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgheadline1">无聊的开场白</a></li>
-<li><a href="#orgheadline2">buffer（缓冲区）</a></li>
-<li><a href="#orgheadline3">window（窗口）与frame</a></li>
-<li><a href="#orgheadline4">Emacs的mode</a></li>
-<li><a href="#orgheadline5">Emacs Lisp</a></li>
-<li><a href="#orgheadline6">函数function、命令command、键绑定keybinding</a></li>
-<li><a href="#orgheadline7">kill  delete kill-save  yank  king-ring</a></li>
+<li><a href="#sec-1">无聊的开场白</a></li>
+<li><a href="#sec-2">buffer（缓冲区）</a></li>
+<li><a href="#sec-3">window（窗口）与frame</a></li>
+<li><a href="#sec-4">Emacs的mode</a></li>
+<li><a href="#sec-5">Emacs Lisp</a></li>
+<li><a href="#sec-6">函数function、命令command、键绑定keybinding</a></li>
+<li><a href="#sec-7">kill  delete kill-save  yank  king-ring</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgheadline1" class="outline-2">
-<h2 id="orgheadline1">无聊的开场白</h2>
-<div class="outline-text-2" id="text-orgheadline1">
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">无聊的开场白</h2>
+<div class="outline-text-2" id="text-1">
 <p>
 所谓“名不正则言不顺,言不顺则事不成，事不成则礼乐不兴，礼乐不兴则刑<br  />
 罚不中，刑罚不中则民无所措手足”又所谓“瞽不知黑白者，非以其名也，以<br  />
@@ -70,9 +70,9 @@
 </div>
 </div>
 
-<div id="outline-container-orgheadline2" class="outline-2">
-<h2 id="orgheadline2">buffer（缓冲区）</h2>
-<div class="outline-text-2" id="text-orgheadline2">
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2">buffer（缓冲区）</h2>
+<div class="outline-text-2" id="text-2">
 <p>
 Emacs并不直接对文件进行操作, 它是把文件加载进buffer, 用户直接操作<br  />
 buffer, 只有当用户确定把buffer中所做的修改写入文件时, Emacs才把<br  />
@@ -101,9 +101,9 @@ buffer 来进行相应的操作，Emacs自已使用的buffer 一般用"*" 引起
 </div>
 
 
-<div id="outline-container-orgheadline3" class="outline-2">
-<h2 id="orgheadline3">window（窗口）与frame</h2>
-<div class="outline-text-2" id="text-orgheadline3">
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3">window（窗口）与frame</h2>
+<div class="outline-text-2" id="text-3">
 <p>
 这两个概念与浏览器里的window ,frame 概念正好颠倒。由于Emacs很早就<br  />
 诞生了（1984年由Richard Stallman发起）,它诞生的时候，Windows还在娘<br  />
@@ -124,9 +124,9 @@ frame)注意他们是同一个进程里的两个Windows窗口，所以他们之�
 </div>
 </div>
 
-<div id="outline-container-orgheadline4" class="outline-2">
-<h2 id="orgheadline4">Emacs的mode</h2>
-<div class="outline-text-2" id="text-orgheadline4">
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4">Emacs的mode</h2>
+<div class="outline-text-2" id="text-4">
 <p>
 建立一个微小的基本功能的集合，然后把所有复杂功能作为这些基本功能的组合。<br  />
 这体现了一种程序设计的哲学。不同于 Windows, 也不同于 UNIX，它更好的协<br  />
@@ -146,9 +146,9 @@ Column-Number , 高亮显示匹配的括号的Show-Paren mode ,mode-line 上显�
 </div>
 
 
-<div id="outline-container-orgheadline5" class="outline-2">
-<h2 id="orgheadline5">Emacs Lisp</h2>
-<div class="outline-text-2" id="text-orgheadline5">
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5">Emacs Lisp</h2>
+<div class="outline-text-2" id="text-5">
 <p>
 Emacs最基础的部分是用c写的，其他部分都是用Emacs Lisp语言写的（Emacs<br  />
 Lisp占大约2/3），也就是说 ,Emacs 用c语言写了一个lisp 语言的解释器，而<br  />
@@ -173,7 +173,7 @@ Lisp(elisp)。只要这门编程语言能做，你就能让你的Emacs实现特�
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #FF6400;">setq</span> a (* (+ c d) e))
+<pre class="src src-emacs-lisp">(<span style="color: #FBDE2D;">setq</span> a (* (+ c d) e))
 </pre>
 </div>
 <p>
@@ -185,9 +185,9 @@ lisp 的语法初看上去很吓人，但是想一想小学学的加减乘除优
 
 
 
-<div id="outline-container-orgheadline6" class="outline-2">
-<h2 id="orgheadline6">函数function、命令command、键绑定keybinding</h2>
-<div class="outline-text-2" id="text-orgheadline6">
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6">函数function、命令command、键绑定keybinding</h2>
+<div class="outline-text-2" id="text-6">
 <p>
  函数不用多解释，命令是一种特殊的函数，在这种函数内部通常第一个调用<br  />
 的函数是(interactive) ，表示这是一个可交互的函数，即命令，命令可以<br  />
@@ -223,7 +223,7 @@ major mode的keymap. 另外在Emacs中的每个操作都对应一个命令，包
   (kill-line)  <span style="color: #AEAEAE;">;;</span><span style="color: #AEAEAE;">&#36825;&#20010;&#26159;&#21024;&#38500;&#20809;&#26631;&#21040;&#34892;&#26411;&#20043;&#38388;&#20869;&#23481;&#30340;&#20989;&#25968;&#65292;&#40664;&#35748;&#32465;&#23450;&#20026;C-k</span>
   )
 
-(<span style="color: #FF6400;">global-set-key</span> (kbd <span style="color: #ffa07a;">"C-k"</span>) 'my-kill-whole-line)  <span style="color: #AEAEAE;">;;</span><span style="color: #AEAEAE;">&#36825;&#20010;&#23558;my-kill-whole-line&#37325;&#26032;&#32465;&#23450;&#21040;C-k</span>
+(global-set-key (kbd <span style="color: #ffa07a;">"C-k"</span>) 'my-kill-whole-line)  <span style="color: #AEAEAE;">;;</span><span style="color: #AEAEAE;">&#36825;&#20010;&#23558;my-kill-whole-line&#37325;&#26032;&#32465;&#23450;&#21040;C-k</span>
 &#19978;
 </pre>
 </div>
@@ -232,9 +232,9 @@ major mode的keymap. 另外在Emacs中的每个操作都对应一个命令，包
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline7" class="outline-2">
-<h2 id="orgheadline7">kill  delete kill-save  yank  king-ring</h2>
-<div class="outline-text-2" id="text-orgheadline7">
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7">kill  delete kill-save  yank  king-ring</h2>
+<div class="outline-text-2" id="text-7">
 <p>
 kill等同于剪切，delete 就是删除的意思，kill 与delete 的不同是 kill<br  />
 掉的内容会放到kill-ring（剪切环）里，你可以重新取回你kill的内容,而<br  />
@@ -248,10 +248,10 @@ delete-char delete-region 才是具体的命令或函数默认的等同于cut co
 paste 的相应操作是<br  />
 </p>
 </div>
-<ul class="org-ul"><li><a id="orgheadline8"></a>C-w ,kill-regin           cut<br  /></li>
-<li><a id="orgheadline9"></a>M-w ,kill-ring-save       copy<br  /></li>
-<li><a id="orgheadline10"></a>C-y, yank                 paste<br  /></li>
-<li><a id="orgheadline11"></a>M-y   yank-pop           从kill-ring 里取出以前的内容，按时间顺序，（前提是你按下一次C-y）<br  /></li></ul>
+<ul class="org-ul"><li><a id="sec-7-0-0-0-1" name="sec-7-0-0-0-1"></a>C-w ,kill-regin           cut<br  /></li>
+<li><a id="sec-7-0-0-0-2" name="sec-7-0-0-0-2"></a>M-w ,kill-ring-save       copy<br  /></li>
+<li><a id="sec-7-0-0-0-3" name="sec-7-0-0-0-3"></a>C-y, yank                 paste<br  /></li>
+<li><a id="sec-7-0-0-0-4" name="sec-7-0-0-0-4"></a>M-y   yank-pop           从kill-ring 里取出以前的内容，按时间顺序，（前提是你按下一次C-y）<br  /></li></ul>
 </div>
 
 </div>

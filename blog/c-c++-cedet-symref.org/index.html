@@ -47,20 +47,20 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgheadline2">semantic-symref semantic-symref-symbol</a>
+<li><a href="#sec-1">semantic-symref semantic-symref-symbol</a>
 <ul>
-<li><a href="#orgheadline1">Search for places where function is called(寻找某函数、变量在哪个地方被调用了)</a></li>
+<li><a href="#sec-1-1">Search for places where function is called(寻找某函数、变量在哪个地方被调用了)</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgheadline2" class="outline-2">
-<h2 id="orgheadline2">semantic-symref semantic-symref-symbol</h2>
-<div class="outline-text-2" id="text-orgheadline2">
-</div><div id="outline-container-orgheadline1" class="outline-3">
-<h3 id="orgheadline1">Search for places where function is called(寻找某函数、变量在哪个地方被调用了)</h3>
-<div class="outline-text-3" id="text-orgheadline1">
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">semantic-symref semantic-symref-symbol</h2>
+<div class="outline-text-2" id="text-1">
+</div><div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1">Search for places where function is called(寻找某函数、变量在哪个地方被调用了)</h3>
+<div class="outline-text-3" id="text-1-1">
 <p>
 semantic-symref命令 可以查找到光标下变量的在本项目中声明位置 semantic-symref-symbol 可以输入你想要找的具体变量名.<br  />
 如果某些名称没有在相应的database(如gnu/global,)中找到,它会用 find-grep命令尝试搜索.可以在打开的新buffer中找到你要找的变量进行跳转.<br  />
@@ -71,7 +71,7 @@ semantic-symref命令 可以查找到光标下变量的在本项目中声明位�
   (local-set-key <span style="color: #ffa07a;">"\C-c\C-r"</span> 'semantic-symref)
   (local-set-key <span style="color: #ffa07a;">"\C-cr"</span> 'semantic-symref-symbol)
   )
-(<span style="color: #FF6400;">add-hook</span> 'c-mode-common-hook 'alexott/c-mode-cedet-hook)
+(add-hook 'c-mode-common-hook 'alexott/c-mode-cedet-hook)
 </pre>
 </div>
 <div class="org-src-container">

@@ -47,15 +47,15 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgheadline1">一堆废话</a></li>
-<li><a href="#orgheadline2">下载</a></li>
-<li><a href="#orgheadline12">配置</a></li>
+<li><a href="#sec-1">一堆废话</a></li>
+<li><a href="#sec-2">下载</a></li>
+<li><a href="#sec-3">配置</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgheadline1" class="outline-2">
-<h2 id="orgheadline1">一堆废话</h2>
-<div class="outline-text-2" id="text-orgheadline1">
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">一堆废话</h2>
+<div class="outline-text-2" id="text-1">
 <p>
     在windows 上使用emacs .实在是个无奈之举.没办法,在公司大家都得用windows.<br  />
 但刚用熟Emacs,实在不忍心就这样仍了它.虽然让Emacs委屈下嫁Windows,有让人联想鲜<br  />
@@ -95,9 +95,9 @@ Emacs 自带的emacsclient,就已经足够了.<br  />
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline2" class="outline-2">
-<h2 id="orgheadline2">下载</h2>
-<div class="outline-text-2" id="text-orgheadline2">
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2">下载</h2>
+<div class="outline-text-2" id="text-2">
 <p>
   下面从头到尾介绍Emacs 在Windows 上的安装及简单配置首先到<a href="http://ftp.gnu.org/pub/gnu/emacs/windows/">这个</a>目录下载<br  />
 emacs 的安装包目前的最新版是24.5所以下载<a href="http://ftp.gnu.org/pub/gnu/emacs/windows/emacs-24.5-bin-i686-mingw32.zip">emacs-24.5-bin-i686-mingw32.zip</a> 这个这可以了.<br  />
@@ -112,10 +112,10 @@ emacs 的安装包目前的最新版是24.5所以下载<a href="http://ftp.gnu.o
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline12" class="outline-2">
-<h2 id="orgheadline12">配置</h2>
-<div class="outline-text-2" id="text-orgheadline12">
-</div><ul class="org-ul"><li><a id="orgheadline3"></a>关于Emacs 的配置文件 .emacs文件 及.emacs.d目录 及主目录(Home)<br  /><div class="outline-text-4" id="text-orgheadline3">
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3">配置</h2>
+<div class="outline-text-2" id="text-3">
+</div><ul class="org-ul"><li><a id="sec-3-0-1" name="sec-3-0-1"></a>关于Emacs 的配置文件 .emacs文件 及.emacs.d目录 及主目录(Home)<br  /><div class="outline-text-4" id="text-3-0-1">
 <p>
 在Linux 下，每个用户都有属于它自已的目录称为主目录，即HOME变量所指向的目<br  />
 录，如joseph用户的home 目录是指/home/joseph/这个目录。而Linux 下的程序的<br  />
@@ -143,8 +143,9 @@ Data\"这个目录我实在没有好感,它脸长得太长先不用说,单看看
 Settings\Administrator\Application Data\"目录修改为一个短一点的目录,譬<br  />
 如: "d:\".还能更短吗? 如何修改,只要修改HOME系统变量就行了.<br  />
 </p>
-</div></li>
-<li><a id="orgheadline4"></a>新建 HOME环境变量<br  /><div class="outline-text-4" id="text-orgheadline4">
+</div>
+</li>
+<li><a id="sec-3-0-2" name="sec-3-0-2"></a>新建 HOME环境变量<br  /><div class="outline-text-4" id="text-3-0-2">
 <p>
 大体步骤是这样的. 右击"我的电脑"~属性~环境变量,然后点击上面的那个"新建<br  />
 ",然后变量名输入"HOME"变量值输入"d:\",一路确定之后Home变量就设好了.<br  />
@@ -154,8 +155,9 @@ Settings\Administrator\Application Data\"目录修改为一个短一点的目录
 <p><img src="/assets/blog/windows上emacs的安装及emacsclient进行c-s连接/env_home.JPG" alt="env_home.JPG" /><br  />
 </p>
 </div>
-</div></li>
-<li><a id="orgheadline5"></a>创建.emacs.d目录和.emacs文件<br  /><div class="outline-text-4" id="text-orgheadline5">
+</div>
+</li>
+<li><a id="sec-3-0-3" name="sec-3-0-3"></a>创建.emacs.d目录和.emacs文件<br  /><div class="outline-text-4" id="text-3-0-3">
 <p>
 相信.emacs.d目录和.emacs文件是困扰大家很久的问题了，其实有个简单的办法可以解<br  />
 决此问题。启动emacs，用鼠标点击Options菜单，随便点击一两个选项，比如点击一下<br  />
@@ -165,8 +167,9 @@ Active Region Highlighting，然后点击Save Options。先不要担心你会破
 Options的时候，Emacs会在home路径下产生.emacs文件，并把配置信息写进这个文件。<br  />
 现在看看你的d:\目录下是否产生了这两个东西？<br  />
 </p>
-</div></li>
-<li><a id="orgheadline6"></a>修改Path 变量，将D:\\emacs-23.3\\bin加入到Path中去，其实现在可以不加，<br  /><div class="outline-text-4" id="text-orgheadline6">
+</div>
+</li>
+<li><a id="sec-3-0-4" name="sec-3-0-4"></a>修改Path 变量，将D:\\emacs-23.3\\bin加入到Path中去，其实现在可以不加，<br  /><div class="outline-text-4" id="text-3-0-4">
 <p>
 但为了以后使用方便，最好加上。<br  />
 </p>
@@ -176,13 +179,14 @@ Options的时候，Emacs会在home路径下产生.emacs文件，并把配置信�
 了你的配置文件会变得很大很难管理所以一般大家都会建一个.emacs.d的目录,然<br  />
 后把其他的配置文件放在这个目录里. 下面简单起见只用.emacs这一个配置文件.<br  />
 </p>
-</div></li>
+</div>
+</li>
 
-<li><a id="orgheadline7"></a>配置d:\.emacs文件或d:\_emacs<br  /><div class="outline-text-4" id="text-orgheadline7">
+<li><a id="sec-3-0-5" name="sec-3-0-5"></a>配置d:\.emacs文件或d:\_emacs<br  /><div class="outline-text-4" id="text-3-0-5">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #FF6400;">setq</span> server-auth-dir <span style="color: #ffa07a;">"d:\\"</span>)
-(<span style="color: #FF6400;">setq</span> server-name <span style="color: #ffa07a;">"emacs-server-file"</span>)
+<pre class="src src-emacs-lisp">(<span style="color: #FBDE2D;">setq</span> server-auth-dir <span style="color: #ffa07a;">"d:\\"</span>)
+(<span style="color: #FBDE2D;">setq</span> server-name <span style="color: #ffa07a;">"emacs-server-file"</span>)
 (server-start)
 </pre>
 </div>
@@ -190,24 +194,28 @@ Options的时候，Emacs会在home路径下产生.emacs文件，并把配置信�
 <p>
 然后像建HOME变量一样建一个<br  />
 </p>
-</div></li>
-<li><a id="orgheadline10"></a>EMACS_SERVER_FILE  与 ALTERNATE_EDITOR环境变量<br  /><ul class="org-ul"><li><a id="orgheadline8"></a>EMACS_SERVER_FILE变量,值为"d:\emacs-server-file"<br  /><div class="outline-text-5" id="text-orgheadline8">
+</div>
+</li>
+<li><a id="sec-3-0-6" name="sec-3-0-6"></a>EMACS_SERVER_FILE  与 ALTERNATE_EDITOR环境变量<br  /><ul class="org-ul"><li><a id="sec-3-0-6-1" name="sec-3-0-6-1"></a>EMACS_SERVER_FILE变量,值为"d:\emacs-server-file"<br  /><div class="outline-text-5" id="text-3-0-6-1">
 
 <div class="figure">
 <p><img src="/assets/blog/windows上emacs的安装及emacsclient进行c-s连接/env_emacs_server_file.JPG" alt="env_emacs_server_file.JPG" /><br  />
 </p>
 </div>
-</div></li>
+</div>
+</li>
 
-<li><a id="orgheadline9"></a>ALTERNATE_EDITOR=d:\emacs-23.3\runemacs.exe<br  /><div class="outline-text-5" id="text-orgheadline9">
+<li><a id="sec-3-0-6-2" name="sec-3-0-6-2"></a>ALTERNATE_EDITOR=d:\emacs-23.3\runemacs.exe<br  /><div class="outline-text-5" id="text-3-0-6-2">
 
 <div class="figure">
 <p><img src="/assets/blog/windows上emacs的安装及emacsclient进行c-s连接/env_alternate_editor.JPG" alt="env_alternate_editor.JPG" /><br  />
 </p>
 </div>
-</div></li></ul></li>
+</div>
+</li></ul>
+</li>
 
-<li><a id="orgheadline11"></a>右键菜单中加入 "Open With Emacs"<br  /><div class="outline-text-4" id="text-orgheadline11">
+<li><a id="sec-3-0-7" name="sec-3-0-7"></a>右键菜单中加入 "Open With Emacs"<br  /><div class="outline-text-4" id="text-3-0-7">
 <p>
 下面要实现，在资源管理器的右键菜单中加入，"Open with Emacs"这个一个选项<br  />
 。假设你把Emacs 解压到了d:\emacs-23.3\这个目录下。<br  />
@@ -227,7 +235,8 @@ Options的时候，Emacs会在home路径下产生.emacs文件，并把配置信�
 <img src="/assets/blog/windows上emacs的安装及emacsclient进行c-s连接/emacsclient_reg.JPG" alt="emacsclient_reg.JPG" /><br  />
 <img src="/assets/blog/windows上emacs的安装及emacsclient进行c-s连接/open_with_emacs.JPG" alt="open_with_emacs.JPG" /><br  />
 </p>
-</div></li></ul>
+</div>
+</li></ul>
 </div>
 
 </div>

@@ -47,34 +47,34 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgheadline1">链接</a></li>
-<li><a href="#orgheadline2">ext2</a>
+<li><a href="#sec-1">链接</a></li>
+<li><a href="#sec-2">ext2</a>
 <ul>
-<li><a href="#orgheadline3">超级块（Super Block）</a></li>
-<li><a href="#orgheadline4">块组描述符表（GDT，Group Descriptor Table）</a></li>
-<li><a href="#orgheadline5">块位图（Block Bitmap）</a></li>
-<li><a href="#orgheadline6">inode位图（inode Bitmap）</a></li>
-<li><a href="#orgheadline7">inode表（inode Table）</a></li>
-<li><a href="#orgheadline8">数据块（Data Block）</a></li>
+<li><a href="#sec-2-1">超级块（Super Block）</a></li>
+<li><a href="#sec-2-2">块组描述符表（GDT，Group Descriptor Table）</a></li>
+<li><a href="#sec-2-3">块位图（Block Bitmap）</a></li>
+<li><a href="#sec-2-4">inode位图（inode Bitmap）</a></li>
+<li><a href="#sec-2-5">inode表（inode Table）</a></li>
+<li><a href="#sec-2-6">数据块（Data Block）</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline9">可用的命令</a></li>
-<li><a href="#orgheadline10">系统函数</a></li>
+<li><a href="#sec-3">可用的命令</a></li>
+<li><a href="#sec-4">系统函数</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgheadline1" class="outline-2">
-<h2 id="orgheadline1">链接</h2>
-<div class="outline-text-2" id="text-orgheadline1">
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">链接</h2>
+<div class="outline-text-2" id="text-1">
 <p>
 <a href="http://learn.akae.cn/media/ch29s02.html">http://learn.akae.cn/media/ch29s02.html</a><br  />
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline2" class="outline-2">
-<h2 id="orgheadline2">ext2</h2>
-<div class="outline-text-2" id="text-orgheadline2">
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2">ext2</h2>
+<div class="outline-text-2" id="text-2">
 
 <div class="figure">
 <p><img src="/assets/blog/ext2文件系统/ext2.png" alt="ext2.png" /><br  />
@@ -89,9 +89,9 @@ mke2fs的-b选项可以设定块大小为1024、2048或4096字节,默认是1024b
 ext2文件系统将整个分区划成若干个同样大小的块组（Block Group）<br  />
 </p>
 </div>
-<div id="outline-container-orgheadline3" class="outline-3">
-<h3 id="orgheadline3">超级块（Super Block）</h3>
-<div class="outline-text-3" id="text-orgheadline3">
+<div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1">超级块（Super Block）</h3>
+<div class="outline-text-3" id="text-2-1">
 <p>
 描述 <i>整个分区</i> 的文件系统信息，例如块大小、文件系统版本号、上次mount的时间等<br  />
 等。超级块在每个块组的开头都有一份拷贝。(占用一个block块大小).<br  />
@@ -100,14 +100,14 @@ ext2文件系统将整个分区划成若干个同样大小的块组（Block Grou
 </div>
 </div>
 
-<div id="outline-container-orgheadline4" class="outline-3">
-<h3 id="orgheadline4">块组描述符表（GDT，Group Descriptor Table）</h3>
-<div class="outline-text-3" id="text-orgheadline4">
+<div id="outline-container-sec-2-2" class="outline-3">
+<h3 id="sec-2-2">块组描述符表（GDT，Group Descriptor Table）</h3>
+<div class="outline-text-3" id="text-2-2">
 <p>
 由很多块组描述符组成，整个分区分成多少个块组就对应有多少个块组描述符。每个<br  />
 块组描述符（Group Descriptor）存储一个块组的描述信息，例如在这个块组中从哪<br  />
 里开始是inode表，从哪里开始是数据块，空闲的inode和数据块还有多少个等等。和<br  />
-超级块类似，块组描述符表在每个块组的开头也都有一份拷贝_，这些信息是非常重要<br  />
+超级块类似，块组描述符表在每个块组的开头也都有一份拷贝<sub>，这些信息是非常重要</sub><br  />
 的，一旦超级块意外损坏就会丢失整个分区的数据，一旦块组描述符意外损坏就会丢<br  />
 失整个块组的数据，因此它们都有多份拷贝。/通常内核只用到第0个块组中的拷贝/，当<br  />
 执行e2fsck检查文件系统一致性时，第0个块组中的超级块和块组描述符表就会拷贝到<br  />
@@ -116,9 +116,9 @@ ext2文件系统将整个分区划成若干个同样大小的块组（Block Grou
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline5" class="outline-3">
-<h3 id="orgheadline5">块位图（Block Bitmap）</h3>
-<div class="outline-text-3" id="text-orgheadline5">
+<div id="outline-container-sec-2-3" class="outline-3">
+<h3 id="sec-2-3">块位图（Block Bitmap）</h3>
+<div class="outline-text-3" id="text-2-3">
 <p>
 一个块组中的块是这样利用的：数据块存储所有文件的数据，比如某个分区的块大小<br  />
 是1024字节，某个文件是2049字节，那么就需要三个数据块来存，即使第三个块只存<br  />
@@ -140,17 +140,17 @@ inode表这几部分存储该块组的描述信息。那么如何知道哪些块
 </div>
 </div>
 
-<div id="outline-container-orgheadline6" class="outline-3">
-<h3 id="orgheadline6">inode位图（inode Bitmap）</h3>
-<div class="outline-text-3" id="text-orgheadline6">
+<div id="outline-container-sec-2-4" class="outline-3">
+<h3 id="sec-2-4">inode位图（inode Bitmap）</h3>
+<div class="outline-text-3" id="text-2-4">
 <p>
 和块位图类似，本身占一个块，其中每个bit表示一个inode是否空闲可用。<br  />
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline7" class="outline-3">
-<h3 id="orgheadline7">inode表（inode Table）</h3>
-<div class="outline-text-3" id="text-orgheadline7">
+<div id="outline-container-sec-2-5" class="outline-3">
+<h3 id="sec-2-5">inode表（inode Table）</h3>
+<div class="outline-text-3" id="text-2-5">
 <p>
 我们知道，一个文件除了数据需要存储之外，一些描述信息也需要存储，例如文件类<br  />
 型（常规、目录、符号链接等），权限，文件大小，创建/修改/访问时间等，也就是<br  />
@@ -172,21 +172,25 @@ inode表占多少个块在格式化时就要决定并写入块组描述符中，
 </div>
 </div>
 
-<div id="outline-container-orgheadline8" class="outline-3">
-<h3 id="orgheadline8">数据块（Data Block）</h3>
-<div class="outline-text-3" id="text-orgheadline8">
+<div id="outline-container-sec-2-6" class="outline-3">
+<h3 id="sec-2-6">数据块（Data Block）</h3>
+<div class="outline-text-3" id="text-2-6">
 <p>
 根据不同的文件类型有以下几种情况<br  />
 </p>
 <ul class="org-ul">
-<li>对于常规文件，文件的数据存储在数据块中。<br  /></li>
+<li>对于常规文件，文件的数据存储在数据块中。<br  />
+</li>
 <li>对于目录，该目录下的所有文件名和目录名存储在数据块中，注意文件名保存<br  />
 在它所在目录的数据块中，除文件名之外，ls -l命令看到的其它信息都保存在<br  />
-该文件的inode中。注意这个概念：目录也是一种文件，是一种特殊类型的文件。<br  /></li>
+该文件的inode中。注意这个概念：目录也是一种文件，是一种特殊类型的文件。<br  />
+</li>
 <li>对于符号链接，如果目标路径名较短则直接保存在inode中以便更快地查找，如<br  />
-果目标路径名较长则分配一个数据块来保存。<br  /></li>
+果目标路径名较长则分配一个数据块来保存。<br  />
+</li>
 <li>设备文件、FIFO和socket等特殊文件没有数据块，设备文件的主设备号和次设<br  />
-备号保存在inode中<br  /></li>
+备号保存在inode中<br  />
+</li>
 </ul>
 <p>
 默认的块大小是4k.<br  />
@@ -319,18 +323,18 @@ inode号（4bytes）|记录长度   (2bytes)|filename length(1byte)|filetype(1by
 </div>
 </div>
 
-<div id="outline-container-orgheadline9" class="outline-2">
-<h2 id="orgheadline9">可用的命令</h2>
-<div class="outline-text-2" id="text-orgheadline9">
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3">可用的命令</h2>
+<div class="outline-text-2" id="text-3">
 <p>
 dumpe2fs<br  />
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgheadline10" class="outline-2">
-<h2 id="orgheadline10">系统函数</h2>
-<div class="outline-text-2" id="text-orgheadline10">
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4">系统函数</h2>
+<div class="outline-text-2" id="text-4">
 <div class="org-src-container">
 
 <pre class="src src-c"><span style="color: #7fffd4;">#include</span> <span style="color: #ffa07a;">&lt;stdio.h&gt;</span>

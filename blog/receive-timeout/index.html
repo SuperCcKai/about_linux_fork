@@ -45,16 +45,16 @@
 <h1>receive timeout</h1>
 <div class="org-src-container">
 
-<pre class="src src-erlang"><span style="color: #FBDE2D;">receive</span>
-    <span style="color: #40E0D0;">Message1</span> [<span style="color: #FBDE2D;">when</span> <span style="color: #40E0D0;">Guard1</span>] -&gt;
-        <span style="color: #40E0D0;">Actions1</span> ;
-    <span style="color: #40E0D0;">Message2</span> [<span style="color: #FBDE2D;">when</span> <span style="color: #40E0D0;">Guard2</span>] -&gt;
-        <span style="color: #40E0D0;">Actions2</span> ;
+<pre class="src src-erlang">receive
+    Message1 [when Guard1] -&gt;
+	Actions1 ;
+    Message2 [when Guard2] -&gt;
+	Actions2 ;
     ...
-<span style="color: #FBDE2D;">after</span>
-    <span style="color: #40E0D0;">TimeOutExpr</span> -&gt;
-        <span style="color: #40E0D0;">ActionsT</span>
-<span style="color: #FBDE2D;">end</span>
+after
+    TimeOutExpr -&gt;
+	ActionsT
+end
 </pre>
 </div>
 <p>
@@ -62,36 +62,36 @@
 </p>
 <div class="org-src-container">
 
-<pre class="src src-erlang"><span style="color: #7fffd4;">-module</span>(tt).
-<span style="color: #7fffd4;">-export</span>([<span style="color: #8DA6CE;">start/0</span>,<span style="color: #8DA6CE;">value/1</span>,<span style="color: #8DA6CE;">loop/1</span>,<span style="color: #8DA6CE;">test/0</span>]).
+<pre class="src src-erlang">-module(tt).
+-export([start/0,value/1,loop/1,test/0]).
 
 
-<span style="color: #FF6400;">start</span>()-&gt;
-    <span style="color: #F8F8F8;">spawn</span>(tt,loop,[0])
-        .
+start()-&gt;
+    spawn(tt,loop,[0])
+	.
 
-<span style="color: #FF6400;">value</span>(<span style="color: #40E0D0;">T</span>) -&gt;
-    <span style="color: #40E0D0;">T</span>!{<span style="color: #F8F8F8;">self</span>(),value},
-    <span style="color: #FBDE2D;">receive</span>
-        <span style="color: #40E0D0;">Val</span>-&gt;
-            <span style="color: #40E0D0;">Val</span>
-    <span style="color: #FBDE2D;">after</span> 1000 -&gt;<span style="color: #FF6400;"> </span>                              <span style="color: #AEAEAE;">%</span><span style="color: #AEAEAE;">&#19968;&#31186;&#38047;&#36229;&#26102;</span>
-            timeout
-    <span style="color: #FBDE2D;">end</span>
-        .
-<span style="color: #FF6400;">loop</span> (<span style="color: #40E0D0;">Val</span>) -&gt;
-    <span style="color: #FBDE2D;">receive</span>
-        inc-&gt;
-            <span style="color: #8DA6CE;">loop</span>(<span style="color: #40E0D0;">Val</span>+1);
-        {<span style="color: #40E0D0;">From</span>,value}-&gt;
-            <span style="color: #40E0D0;">From</span>! <span style="color: #40E0D0;">Val</span>
-    <span style="color: #FBDE2D;">end</span>.
+value(T) -&gt;
+    T!{self(),value},
+    receive
+	Val-&gt;
+	    Val
+    after 1000 -&gt;                               %一秒钟超时
+	    timeout
+    end
+	.
+loop (Val) -&gt;
+    receive
+	inc-&gt;
+	    loop(Val+1);
+	{From,value}-&gt;
+	    From! Val
+    end.
 
-<span style="color: #FF6400;">test</span>() -&gt;
-    <span style="color: #40E0D0;">P</span>=<span style="color: #8DA6CE;">tt</span>:<span style="color: #8DA6CE;">start</span>(),
-    <span style="color: #40E0D0;">P</span>!inc,
-    <span style="color: #40E0D0;">P</span>!inc,
-    <span style="color: #8DA6CE;">value</span>(<span style="color: #40E0D0;">P</span>).
+test() -&gt;
+    P=tt:start(),
+    P!inc,
+    P!inc,
+    value(P).
 </pre>
 </div>
 
@@ -99,7 +99,8 @@
 在超时表达式的参数中有两个值有特殊意义：<br  />
 </p>
 <ul class="org-ul">
-<li>infinity<br  /></li>
+<li>infinity<br  />
+</li>
 </ul>
 
 <p>
@@ -109,7 +110,8 @@
 </p>
 
 <ul class="org-ul">
-<li>0<br  /></li>
+<li>0<br  />
+</li>
 </ul>
 <p>
 数值0表示超时会立即发生，不过在那之前系统仍然会首先尝试对邮箱中已有的消息进<br  />
@@ -119,64 +121,64 @@
 
 <div class="org-src-container">
 
-<pre class="src src-erlang"><span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">&#27604;&#22914;,&#30830;&#23450; &#40736;&#26631;&#21452;&#20987;&#25110;&#21333;&#20987;&#20107;&#20214;</span>
-<span style="color: #FF6400;">get_event</span>() -&gt;
-    <span style="color: #FBDE2D;">receive</span>
-        {mouse, click} -&gt;
-            <span style="color: #FBDE2D;">receive</span>
-                {mouse, click} -&gt;
-                    double_click
-            <span style="color: #FBDE2D;">after</span> <span style="color: #8DA6CE;">double_click_interval</span>() -&gt;
-                single_click
-            <span style="color: #FBDE2D;">end</span>
-        ...
-    <span style="color: #FBDE2D;">end</span>.
+<pre class="src src-erlang">%% 比如,确定 鼠标双击或单击事件
+get_event() -&gt;
+    receive
+	{mouse, click} -&gt;
+	    receive
+		{mouse, click} -&gt;
+		    double_click
+	    after double_click_interval() -&gt;
+		single_click
+	    end
+	...
+    end.
 </pre>
 </div>
 <div class="org-src-container">
 
-<pre class="src src-erlang"><span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">&#36229;&#26102;,sleep</span>
-<span style="color: #FF6400;">sleep</span>(<span style="color: #40E0D0;">Time</span>) -&gt;
-    <span style="color: #FBDE2D;">receive</span>
-        <span style="color: #FBDE2D;">after</span> <span style="color: #40E0D0;">Time</span> -&gt;
-            true
-    <span style="color: #FBDE2D;">end</span>.
+<pre class="src src-erlang">%% 超时,sleep
+sleep(Time) -&gt;
+    receive
+	after Time -&gt;
+	    true
+    end.
 </pre>
 </div>
 <div class="org-src-container">
 
-<pre class="src src-erlang"><span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">flush_buffer()&#28165;&#31354;&#24403;&#21069;&#36827;&#31243;&#30340;&#37038;&#31665;&#65306;</span>
+<pre class="src src-erlang">%% flush_buffer()清空当前进程的邮箱：
 
-<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">&#21482;&#35201;&#37038;&#31665;&#20013;&#36824;&#26377;&#28040;&#24687;&#65292;&#31532;&#19968;&#20010;&#28040;&#24687;&#20250;&#34987;&#21305;&#37197;&#21040;&#65288;&#26410;&#32465;&#23450;&#21464;&#37327;AnyMessage&#20250;&#21305;&#37197;&#21040;&#20219;&#20309;&#28040;</span>
-<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">&#24687;&#65292;&#22312;&#36825;&#37324;&#23601;&#26159;&#31532;&#19968;&#20010;&#28040;&#24687;&#65289;&#65292;&#28982;&#21518;flush_buffer&#20250;&#20877;&#27425;&#34987;&#35843;&#29992;&#65292;&#20294;&#26159;&#22914;&#26524;&#37038;&#31665;&#24050;&#32463;&#20026;</span>
-<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">&#31354;&#20102;&#65292;&#37027;&#20040;&#20989;&#25968;&#20250;&#20174;&#36229;&#26102;&#23376;&#21477;&#20013;&#36820;&#22238;&#12290;</span>
+%% 只要邮箱中还有消息，第一个消息会被匹配到（未绑定变量AnyMessage会匹配到任何消
+%% 息，在这里就是第一个消息），然后flush_buffer会再次被调用，但是如果邮箱已经为
+%% 空了，那么函数会从超时子句中返回。
 
-<span style="color: #FF6400;">flush_buffer</span>() -&gt;
-    <span style="color: #FBDE2D;">receive</span>
-        <span style="color: #40E0D0;">AnyMessage</span> -&gt;<span style="color: #FF6400;"> </span>                          <span style="color: #AEAEAE;">%</span><span style="color: #AEAEAE;">&#27880;&#24847;&#39318;&#23383;&#27597;&#22823;&#20889;&#34920;&#31034;&#36825;&#26159;&#19968;&#20010;&#21464;&#37327;,&#25152;&#20197;&#21487;&#20197;&#21542;&#37197;&#20219;&#20309;&#20256;&#36807;&#26469;&#30340;&#28040;&#24687;.</span>
-            <span style="color: #8DA6CE;">flush_buffer</span>()
-        <span style="color: #FBDE2D;">after</span> 0 -&gt;
-            true
-    <span style="color: #FBDE2D;">end</span>.
+flush_buffer() -&gt;
+    receive
+	AnyMessage -&gt;                           %注意首字母大写表示这是一个变量,所以可以否配任何传过来的消息.
+	    flush_buffer()
+	after 0 -&gt;
+	    true
+    end.
 </pre>
 </div>
 <div class="org-src-container">
 
-<pre class="src src-erlang"><span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">&#28040;&#24687;&#30340;&#20248;&#20808;&#32423;&#20063;&#21487;&#20197;&#36890;&#36807;&#20351;&#29992;0&#20316;&#20026;&#36229;&#26102;&#38271;&#24230;&#26469;&#23454;&#29616;&#65306;</span>
+<pre class="src src-erlang">%% 消息的优先级也可以通过使用0作为超时长度来实现：
 
-<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">&#20989;&#25968;priority_receive&#20250;&#36820;&#22238;&#37038;&#31665;&#20013;&#31532;&#19968;&#20010;&#28040;&#24687;&#65292;</span>
-<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">&#38500;&#38750;&#26377;&#28040;&#24687;interrupt&#21457;&#36865;&#21040;&#20102;&#37038;&#31665;&#20013;&#65292;&#27492;&#26102;&#23558;&#36820;&#22238;interrupt</span>
-<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">&#21363;&#28040;&#24687; interrupt &#20248;&#20808;&#32423;&#36739;&#20854;&#20182;&#39640;.</span>
-<span style="color: #FF6400;">priority_receive</span>() -&gt;
-    <span style="color: #FBDE2D;">receive</span>
-        interrupt -&gt;
-            interrupt
-    <span style="color: #FBDE2D;">after</span> 0 -&gt;
-        <span style="color: #FBDE2D;">receive</span>
-            <span style="color: #40E0D0;">AnyMessage</span> -&gt;
-                <span style="color: #40E0D0;">AnyMessage</span>
-        <span style="color: #FBDE2D;">end</span>
-    <span style="color: #FBDE2D;">end</span>
+%% 函数priority_receive会返回邮箱中第一个消息，
+%% 除非有消息interrupt发送到了邮箱中，此时将返回interrupt
+%% 即消息 interrupt 优先级较其他高.
+priority_receive() -&gt;
+    receive
+	interrupt -&gt;
+	    interrupt
+    after 0 -&gt;
+	receive
+	    AnyMessage -&gt;
+		AnyMessage
+	end
+    end
 </pre>
 </div>
 

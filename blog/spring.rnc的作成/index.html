@@ -47,13 +47,13 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgheadline1">下载trang.jar rngconv.jar</a></li>
-<li><a href="#orgheadline2">2找到这几个文件,放到同一个目录</a></li>
-<li><a href="#orgheadline3">具体操作</a></li>
-<li><a href="#orgheadline4">spring-beans-3.0.xsd 转换成spring-beans-3.0.rnc</a></li>
-<li><a href="#orgheadline5">如何编辑applicationContext.xml 文件时,自动用spring-beans-3.0.rnc 对其进行解析</a></li>
-<li><a href="#orgheadline6">spring-aop-3.0.xsd 转换成spring-aop-3.0.rnc</a></li>
-<li><a href="#orgheadline7">合并成一个spring.rnc</a></li>
+<li><a href="#sec-1">下载trang.jar rngconv.jar</a></li>
+<li><a href="#sec-2">2找到这几个文件,放到同一个目录</a></li>
+<li><a href="#sec-3">具体操作</a></li>
+<li><a href="#sec-4">spring-beans-3.0.xsd 转换成spring-beans-3.0.rnc</a></li>
+<li><a href="#sec-5">如何编辑applicationContext.xml 文件时,自动用spring-beans-3.0.rnc 对其进行解析</a></li>
+<li><a href="#sec-6">spring-aop-3.0.xsd 转换成spring-aop-3.0.rnc</a></li>
+<li><a href="#sec-7">合并成一个spring.rnc</a></li>
 </ul>
 </div>
 </div>
@@ -89,18 +89,18 @@ xsd  &#x2013;&gt; rng &#x2013;&gt;rnc<br  />
 如果一切都正常的话,那面上面这些已经足够了,但是实际情况总是会出一些小问题<br  />
 下面具体分说<br  />
 </p>
-<div id="outline-container-orgheadline1" class="outline-2">
-<h2 id="orgheadline1">下载trang.jar rngconv.jar</h2>
-<div class="outline-text-2" id="text-orgheadline1">
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">下载trang.jar rngconv.jar</h2>
+<div class="outline-text-2" id="text-1">
 <p>
 首先你先要下载trang.jar rngconv.jar 等几个jar 包,当然可能会有几个依赖的jar<br  />
 会一起用到,分别下载两个压缩包解压开找到jar 即可.<br  />
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline2" class="outline-2">
-<h2 id="orgheadline2">2找到这几个文件,放到同一个目录</h2>
-<div class="outline-text-2" id="text-orgheadline2">
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2">2找到这几个文件,放到同一个目录</h2>
+<div class="outline-text-2" id="text-2">
 <div class="org-src-container">
 
 <pre class="src src-sh">spring-aop-3.0.xsd
@@ -120,12 +120,12 @@ spring-util-3.0.xsd
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline3" class="outline-2">
-<h2 id="orgheadline3">具体操作</h2>
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3">具体操作</h2>
 </div>
-<div id="outline-container-orgheadline4" class="outline-2">
-<h2 id="orgheadline4">spring-beans-3.0.xsd 转换成spring-beans-3.0.rnc</h2>
-<div class="outline-text-2" id="text-orgheadline4">
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4">spring-beans-3.0.xsd 转换成spring-beans-3.0.rnc</h2>
+<div class="outline-text-2" id="text-4">
 <p>
 当运行这条命令时,<br  />
 </p>
@@ -180,9 +180,9 @@ namespace指向<a href="http://www.w3.org/XML/1998/namespace%E5%9C%B0%E5%9D%80%E
 </div>
 </div>
 
-<div id="outline-container-orgheadline5" class="outline-2">
-<h2 id="orgheadline5">如何编辑applicationContext.xml 文件时,自动用spring-beans-3.0.rnc 对其进行解析</h2>
-<div class="outline-text-2" id="text-orgheadline5">
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5">如何编辑applicationContext.xml 文件时,自动用spring-beans-3.0.rnc 对其进行解析</h2>
+<div class="outline-text-2" id="text-5">
 <div class="org-src-container">
 
 <pre class="src src-emacs-lisp">(eval-after-load 'rng-loc
@@ -193,9 +193,9 @@ namespace指向<a href="http://www.w3.org/XML/1998/namespace%E5%9C%B0%E5%9D%80%E
   <span style="color: #AEAEAE;">;;</span><span style="color: #AEAEAE;">&#40664;&#35748;&#32465;&#23450;&#30340;&#38190;&#26159;`</span><span style="color: #D8FA3C;">C-cC-sC-a</span><span style="color: #AEAEAE;">' ,&#23558;&#24403;&#21069;&#32534;&#36753;&#30340;&#25991;&#20214;&#19982;&#29305;&#23450;&#30340;rnc &#25991;&#20214;&#36827;&#34892;&#20851;&#32852;,&#21482;&#26377;</span>
   <span style="color: #AEAEAE;">;;</span><span style="color: #AEAEAE;">&#20851;&#32852;&#21518;&#30340;xml &#25165;&#21487;&#20197;&#35299;&#26512;&#20854;&#35821;&#27861;&#35268;&#21017;&#36827;&#34892;&#34917;&#20840;</span>
   (<span style="color: #FBDE2D;">require</span> '<span style="color: #D8FA3C;">rng-valid</span>)
-  (rng-auto-set-schema-<span style="color: #FBDE2D;">and</span>-validate)
+  (rng-auto-set-schema-and-validate)
   )
-(<span style="color: #FF6400;">add-hook</span> 'nxml-mode-hook 'nxml-mode-hook-fun)
+(add-hook 'nxml-mode-hook 'nxml-mode-hook-fun)
 </pre>
 </div>
 <p>
@@ -239,8 +239,8 @@ namespace指向<a href="http://www.w3.org/XML/1998/namespace%E5%9C%B0%E5%9D%80%E
   error(<span style="color: #ffa07a;">"%s"</span> <span style="color: #ffa07a;">"Expected `}' but got `+'"</span>)
   nxml-display-file-parse-error((rng-c-incorrect-schema <span style="color: #ffa07a;">"/tmp/spring-beans-3.0.rnc"</span> 743 <span style="color: #ffa07a;">"Expected `}' but got `+'"</span>))
   rng-set-schema-file(<span style="color: #ffa07a;">"/tmp/spring-beans-3.0.rnc"</span>)
-  rng-set-schema-file-<span style="color: #FBDE2D;">and</span>-validate(<span style="color: #ffa07a;">"/tmp/spring-beans-3.0.rnc"</span>)
-  call-interactively(rng-set-schema-file-<span style="color: #FBDE2D;">and</span>-validate <span style="color: #D8FA3C;">nil</span> <span style="color: #D8FA3C;">nil</span>)
+  rng-set-schema-file-and-validate(<span style="color: #ffa07a;">"/tmp/spring-beans-3.0.rnc"</span>)
+  call-interactively(rng-set-schema-file-and-validate nil nil)
 </pre>
 </div>
 <p>
@@ -253,8 +253,8 @@ namespace指向<a href="http://www.w3.org/XML/1998/namespace%E5%9C%B0%E5%9D%80%E
   error(<span style="color: #ffa07a;">"%s"</span> <span style="color: #ffa07a;">"Invalid grammar content"</span>)
   nxml-display-file-parse-error((rng-c-incorrect-schema <span style="color: #ffa07a;">"/tmp/spring-beans-3.0.rnc"</span> 1627 <span style="color: #ffa07a;">"Invalid grammar content"</span>))
   rng-set-schema-file(<span style="color: #ffa07a;">"/tmp/spring-beans-3.0.rnc"</span>)
-  rng-set-schema-file-<span style="color: #FBDE2D;">and</span>-validate(<span style="color: #ffa07a;">"/tmp/spring-beans-3.0.rnc"</span>)
-  call-interactively(rng-set-schema-file-<span style="color: #FBDE2D;">and</span>-validate <span style="color: #D8FA3C;">nil</span> <span style="color: #D8FA3C;">nil</span>)
+  rng-set-schema-file-and-validate(<span style="color: #ffa07a;">"/tmp/spring-beans-3.0.rnc"</span>)
+  call-interactively(rng-set-schema-file-and-validate nil nil)
 </pre>
 </div>
 <p>
@@ -279,9 +279,9 @@ namespace指向<a href="http://www.w3.org/XML/1998/namespace%E5%9C%B0%E5%9D%80%E
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline6" class="outline-2">
-<h2 id="orgheadline6">spring-aop-3.0.xsd 转换成spring-aop-3.0.rnc</h2>
-<div class="outline-text-2" id="text-orgheadline6">
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6">spring-aop-3.0.xsd 转换成spring-aop-3.0.rnc</h2>
+<div class="outline-text-2" id="text-6">
 <p>
 spring-aop-3.0.xsd比 spring-beans-3.0.xsd的处理要复杂一点<br  />
 </p>
@@ -292,9 +292,9 @@ spring-aop-3.0.xsd比 spring-beans-3.0.xsd的处理要复杂一点<br  />
 </div>
 <div class="org-src-container">
 
-<pre class="src src-sh"><span style="color: #ffa07a;">"schemaLocation"</span> attribute is required for <span style="color: #ffa07a;">"xsd:import"</span> element, but is <span style="color: #FBDE2D;">not</span> specified
+<pre class="src src-sh"><span style="color: #ffa07a;">"schemaLocation"</span> attribute is required for <span style="color: #ffa07a;">"xsd:import"</span> element, but is not specified
   7:64@http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-<span style="color: #ffa07a;">"schemaLocation"</span> attribute is required for <span style="color: #ffa07a;">"xsd:import"</span> element, but is <span style="color: #FBDE2D;">not</span> specified
+<span style="color: #ffa07a;">"schemaLocation"</span> attribute is required for <span style="color: #ffa07a;">"xsd:import"</span> element, but is not specified
   8:64@http://www.springframework.org/schema/tool/spring-tool-3.0.xsd
 namespace <span style="color: #ffa07a;">"http://www.w3.org/XML/1998/namespace"</span> is referenced but no schema definition of this namespace was found.
   7:64@http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
@@ -369,9 +369,9 @@ failed to load the grammar
 </div>
 
 
-<div id="outline-container-orgheadline7" class="outline-2">
-<h2 id="orgheadline7">合并成一个spring.rnc</h2>
-<div class="outline-text-2" id="text-orgheadline7">
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7">合并成一个spring.rnc</h2>
+<div class="outline-text-2" id="text-7">
 <p>
 通过修改 spring-aop-3.0.xsd,来包含其他几个文件来实现,这样生成的<br  />
 spring-aop-3.0.rnc 就包含了其他几个xsd文件中的内容<br  />
@@ -380,32 +380,32 @@ spring-aop-3.0.rnc 就包含了其他几个xsd文件中的内容<br  />
 <div class="org-src-container">
 
 <pre class="src src-xml">&lt;<span style="color: #F8F8F8;">xsd</span>:<span style="color: #FF6400;">schema</span> <span style="color: #F8F8F8;">xmlns</span>=<span style="color: #ffa07a;">"http://www.springframework.org/schema/aop"</span>
-        <span style="color: #F8F8F8;">xmlns</span>:<span style="color: #40E0D0;">xsd</span>=<span style="color: #ffa07a;">"http://www.w3.org/2001/XMLSchema"</span>
-        <span style="color: #F8F8F8;">xmlns</span>:<span style="color: #40E0D0;">beans</span>=<span style="color: #ffa07a;">"http://www.springframework.org/schema/beans"</span>
-        <span style="color: #F8F8F8;">xmlns</span>:<span style="color: #40E0D0;">tx</span>=<span style="color: #ffa07a;">"http://www.springframework.org/schema/tx"</span>
-        <span style="color: #F8F8F8;">xmlns</span>:<span style="color: #40E0D0;">tool</span>=<span style="color: #ffa07a;">"http://www.springframework.org/schema/tool"</span>
-        <span style="color: #F8F8F8;">xmlns</span>:<span style="color: #40E0D0;">context</span>=<span style="color: #ffa07a;">"http://www.springframework.org/schema/context"</span>
-        <span style="color: #F8F8F8;">xmlns</span>:<span style="color: #40E0D0;">jdbc</span>=<span style="color: #ffa07a;">"http://www.springframework.org/schema/jdbc"</span>
-        <span style="color: #F8F8F8;">xmlns</span>:<span style="color: #40E0D0;">jee</span>=<span style="color: #ffa07a;">"http://www.springframework.org/schema/jee"</span>
-        <span style="color: #F8F8F8;">xmlns</span>:<span style="color: #40E0D0;">jms</span>=<span style="color: #ffa07a;">"http://www.springframework.org/schema/jms"</span>
-        <span style="color: #F8F8F8;">xmlns</span>:<span style="color: #40E0D0;">lang</span>=<span style="color: #ffa07a;">"http://www.springframework.org/schema/lang"</span>
-        <span style="color: #F8F8F8;">xmlns</span>:<span style="color: #40E0D0;">mvc</span>=<span style="color: #ffa07a;">"http://www.springframework.org/schema/mvc"</span>
-        <span style="color: #F8F8F8;">xmlns</span>:<span style="color: #40E0D0;">oxm</span>=<span style="color: #ffa07a;">"http://www.springframework.org/schema/oxm"</span>
-        <span style="color: #F8F8F8;">xmlns</span>:<span style="color: #40E0D0;">task</span>=<span style="color: #ffa07a;">"http://www.springframework.org/schema/task"</span>
-        <span style="color: #F8F8F8;">xmlns</span>:<span style="color: #40E0D0;">util</span>=<span style="color: #ffa07a;">"http://www.springframework.org/schema/util"</span>
-        <span style="color: #40E0D0;">targetNamespace</span>=<span style="color: #ffa07a;">"http://www.springframework.org/schema/aop"</span>
-        <span style="color: #40E0D0;">elementFormDefault</span>=<span style="color: #ffa07a;">"qualified"</span>
-        <span style="color: #40E0D0;">attributeFormDefault</span>=<span style="color: #ffa07a;">"unqualified"</span>&gt;
-    &lt;<span style="color: #F8F8F8;">xsd</span>:<span style="color: #FF6400;">import</span> <span style="color: #40E0D0;">namespace</span>=<span style="color: #ffa07a;">"http://www.springframework.org/schema/tx"</span> <span style="color: #40E0D0;">schemaLocation</span>=<span style="color: #ffa07a;">"spring-tx-3.0.xsd"</span> /&gt;
-    &lt;<span style="color: #F8F8F8;">xsd</span>:<span style="color: #FF6400;">import</span> <span style="color: #40E0D0;">namespace</span>=<span style="color: #ffa07a;">"http://www.springframework.org/schema/context"</span> <span style="color: #40E0D0;">schemaLocation</span>=<span style="color: #ffa07a;">"spring-context-3.0.xsd"</span> /&gt;
-    &lt;<span style="color: #F8F8F8;">xsd</span>:<span style="color: #FF6400;">import</span> <span style="color: #40E0D0;">namespace</span>=<span style="color: #ffa07a;">"http://www.springframework.org/schema/jdbc"</span> <span style="color: #40E0D0;">schemaLocation</span>=<span style="color: #ffa07a;">"spring-jdbc-3.0.xsd"</span> /&gt;
-    &lt;<span style="color: #F8F8F8;">xsd</span>:<span style="color: #FF6400;">import</span> <span style="color: #40E0D0;">namespace</span>=<span style="color: #ffa07a;">"http://www.springframework.org/schema/jee"</span> <span style="color: #40E0D0;">schemaLocation</span>=<span style="color: #ffa07a;">"spring-jee-3.0.xsd"</span> /&gt;
-    &lt;<span style="color: #F8F8F8;">xsd</span>:<span style="color: #FF6400;">import</span> <span style="color: #40E0D0;">namespace</span>=<span style="color: #ffa07a;">"http://www.springframework.org/schema/jms"</span> <span style="color: #40E0D0;">schemaLocation</span>=<span style="color: #ffa07a;">"spring-jms-3.0.xsd"</span> /&gt;
-    &lt;<span style="color: #F8F8F8;">xsd</span>:<span style="color: #FF6400;">import</span> <span style="color: #40E0D0;">namespace</span>=<span style="color: #ffa07a;">"http://www.springframework.org/schema/lang"</span> <span style="color: #40E0D0;">schemaLocation</span>=<span style="color: #ffa07a;">"spring-lang-3.0.xsd"</span> /&gt;
-    &lt;<span style="color: #F8F8F8;">xsd</span>:<span style="color: #FF6400;">import</span> <span style="color: #40E0D0;">namespace</span>=<span style="color: #ffa07a;">"http://www.springframework.org/schema/mvc"</span> <span style="color: #40E0D0;">schemaLocation</span>=<span style="color: #ffa07a;">"spring-mvc-3.0.xsd"</span> /&gt;
-    &lt;<span style="color: #F8F8F8;">xsd</span>:<span style="color: #FF6400;">import</span> <span style="color: #40E0D0;">namespace</span>=<span style="color: #ffa07a;">"http://www.springframework.org/schema/oxm"</span> <span style="color: #40E0D0;">schemaLocation</span>=<span style="color: #ffa07a;">"spring-oxm-3.0.xsd"</span> /&gt;
-    &lt;<span style="color: #F8F8F8;">xsd</span>:<span style="color: #FF6400;">import</span> <span style="color: #40E0D0;">namespace</span>=<span style="color: #ffa07a;">"http://www.springframework.org/schema/task"</span> <span style="color: #40E0D0;">schemaLocation</span>=<span style="color: #ffa07a;">"spring-task-3.0.xsd"</span> /&gt;
-    &lt;<span style="color: #F8F8F8;">xsd</span>:<span style="color: #FF6400;">import</span> <span style="color: #40E0D0;">namespace</span>=<span style="color: #ffa07a;">"http://www.springframework.org/schema/util"</span> <span style="color: #40E0D0;">schemaLocation</span>=<span style="color: #ffa07a;">"spring-util-3.0.xsd"</span> /&gt;
+                <span style="color: #F8F8F8;">xmlns</span>:<span style="color: #40E0D0;">xsd</span>=<span style="color: #ffa07a;">"http://www.w3.org/2001/XMLSchema"</span>
+                <span style="color: #F8F8F8;">xmlns</span>:<span style="color: #40E0D0;">beans</span>=<span style="color: #ffa07a;">"http://www.springframework.org/schema/beans"</span>
+                <span style="color: #F8F8F8;">xmlns</span>:<span style="color: #40E0D0;">tx</span>=<span style="color: #ffa07a;">"http://www.springframework.org/schema/tx"</span>
+                <span style="color: #F8F8F8;">xmlns</span>:<span style="color: #40E0D0;">tool</span>=<span style="color: #ffa07a;">"http://www.springframework.org/schema/tool"</span>
+                <span style="color: #F8F8F8;">xmlns</span>:<span style="color: #40E0D0;">context</span>=<span style="color: #ffa07a;">"http://www.springframework.org/schema/context"</span>
+                <span style="color: #F8F8F8;">xmlns</span>:<span style="color: #40E0D0;">jdbc</span>=<span style="color: #ffa07a;">"http://www.springframework.org/schema/jdbc"</span>
+                <span style="color: #F8F8F8;">xmlns</span>:<span style="color: #40E0D0;">jee</span>=<span style="color: #ffa07a;">"http://www.springframework.org/schema/jee"</span>
+                <span style="color: #F8F8F8;">xmlns</span>:<span style="color: #40E0D0;">jms</span>=<span style="color: #ffa07a;">"http://www.springframework.org/schema/jms"</span>
+                <span style="color: #F8F8F8;">xmlns</span>:<span style="color: #40E0D0;">lang</span>=<span style="color: #ffa07a;">"http://www.springframework.org/schema/lang"</span>
+                <span style="color: #F8F8F8;">xmlns</span>:<span style="color: #40E0D0;">mvc</span>=<span style="color: #ffa07a;">"http://www.springframework.org/schema/mvc"</span>
+                <span style="color: #F8F8F8;">xmlns</span>:<span style="color: #40E0D0;">oxm</span>=<span style="color: #ffa07a;">"http://www.springframework.org/schema/oxm"</span>
+                <span style="color: #F8F8F8;">xmlns</span>:<span style="color: #40E0D0;">task</span>=<span style="color: #ffa07a;">"http://www.springframework.org/schema/task"</span>
+                <span style="color: #F8F8F8;">xmlns</span>:<span style="color: #40E0D0;">util</span>=<span style="color: #ffa07a;">"http://www.springframework.org/schema/util"</span>
+                <span style="color: #40E0D0;">targetNamespace</span>=<span style="color: #ffa07a;">"http://www.springframework.org/schema/aop"</span>
+                <span style="color: #40E0D0;">elementFormDefault</span>=<span style="color: #ffa07a;">"qualified"</span>
+                <span style="color: #40E0D0;">attributeFormDefault</span>=<span style="color: #ffa07a;">"unqualified"</span>&gt;
+        &lt;<span style="color: #F8F8F8;">xsd</span>:<span style="color: #FF6400;">import</span> <span style="color: #40E0D0;">namespace</span>=<span style="color: #ffa07a;">"http://www.springframework.org/schema/tx"</span> <span style="color: #40E0D0;">schemaLocation</span>=<span style="color: #ffa07a;">"spring-tx-3.0.xsd"</span> /&gt;
+        &lt;<span style="color: #F8F8F8;">xsd</span>:<span style="color: #FF6400;">import</span> <span style="color: #40E0D0;">namespace</span>=<span style="color: #ffa07a;">"http://www.springframework.org/schema/context"</span> <span style="color: #40E0D0;">schemaLocation</span>=<span style="color: #ffa07a;">"spring-context-3.0.xsd"</span> /&gt;
+        &lt;<span style="color: #F8F8F8;">xsd</span>:<span style="color: #FF6400;">import</span> <span style="color: #40E0D0;">namespace</span>=<span style="color: #ffa07a;">"http://www.springframework.org/schema/jdbc"</span> <span style="color: #40E0D0;">schemaLocation</span>=<span style="color: #ffa07a;">"spring-jdbc-3.0.xsd"</span> /&gt;
+        &lt;<span style="color: #F8F8F8;">xsd</span>:<span style="color: #FF6400;">import</span> <span style="color: #40E0D0;">namespace</span>=<span style="color: #ffa07a;">"http://www.springframework.org/schema/jee"</span> <span style="color: #40E0D0;">schemaLocation</span>=<span style="color: #ffa07a;">"spring-jee-3.0.xsd"</span> /&gt;
+        &lt;<span style="color: #F8F8F8;">xsd</span>:<span style="color: #FF6400;">import</span> <span style="color: #40E0D0;">namespace</span>=<span style="color: #ffa07a;">"http://www.springframework.org/schema/jms"</span> <span style="color: #40E0D0;">schemaLocation</span>=<span style="color: #ffa07a;">"spring-jms-3.0.xsd"</span> /&gt;
+        &lt;<span style="color: #F8F8F8;">xsd</span>:<span style="color: #FF6400;">import</span> <span style="color: #40E0D0;">namespace</span>=<span style="color: #ffa07a;">"http://www.springframework.org/schema/lang"</span> <span style="color: #40E0D0;">schemaLocation</span>=<span style="color: #ffa07a;">"spring-lang-3.0.xsd"</span> /&gt;
+        &lt;<span style="color: #F8F8F8;">xsd</span>:<span style="color: #FF6400;">import</span> <span style="color: #40E0D0;">namespace</span>=<span style="color: #ffa07a;">"http://www.springframework.org/schema/mvc"</span> <span style="color: #40E0D0;">schemaLocation</span>=<span style="color: #ffa07a;">"spring-mvc-3.0.xsd"</span> /&gt;
+        &lt;<span style="color: #F8F8F8;">xsd</span>:<span style="color: #FF6400;">import</span> <span style="color: #40E0D0;">namespace</span>=<span style="color: #ffa07a;">"http://www.springframework.org/schema/oxm"</span> <span style="color: #40E0D0;">schemaLocation</span>=<span style="color: #ffa07a;">"spring-oxm-3.0.xsd"</span> /&gt;
+        &lt;<span style="color: #F8F8F8;">xsd</span>:<span style="color: #FF6400;">import</span> <span style="color: #40E0D0;">namespace</span>=<span style="color: #ffa07a;">"http://www.springframework.org/schema/task"</span> <span style="color: #40E0D0;">schemaLocation</span>=<span style="color: #ffa07a;">"spring-task-3.0.xsd"</span> /&gt;
+        &lt;<span style="color: #F8F8F8;">xsd</span>:<span style="color: #FF6400;">import</span> <span style="color: #40E0D0;">namespace</span>=<span style="color: #ffa07a;">"http://www.springframework.org/schema/util"</span> <span style="color: #40E0D0;">schemaLocation</span>=<span style="color: #ffa07a;">"spring-util-3.0.xsd"</span> /&gt;
 </pre>
 </div>
 <p>

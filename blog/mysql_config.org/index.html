@@ -47,31 +47,29 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgheadline1">server 层参数</a>
+<li><a href="#sec-1">server 层参数</a>
 <ul>
-<li><a href="#orgheadline2">复制参数 master (server层做)</a></li>
-<li><a href="#orgheadline4">复制参数 slave (server层做)</a></li>
+<li><a href="#sec-1-1">复制参数 master (server层做)</a></li>
+<li><a href="#sec-1-2">复制参数 slave (server层做)</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline6">Engine 层参数</a>
+<li><a href="#sec-2">Engine 层参数</a>
 <ul>
-<li><a href="#orgheadline5">innodb</a></li>
+<li><a href="#sec-2-1">innodb</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline7">example  with 4G Mem</a></li>
-<li><a href="#orgheadline8">tips</a></li>
+<li><a href="#sec-3">example  with 4G Mem</a></li>
+<li><a href="#sec-4">tips</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgheadline1" class="outline-2">
-<h2 id="orgheadline1">server 层参数</h2>
-<div class="outline-text-2" id="text-orgheadline1">
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">server 层参数</h2>
+<div class="outline-text-2" id="text-1">
 <ol class="org-ol">
-<li><p>
-tmp-table-size<br  />
+<li>tmp-table-size<br  />
 default 32M<br  />
-</p>
 
 <p>
 copy to tmp talbe 语句产生的原因是查询需要Order By 或者Group By等<br  />
@@ -80,7 +78,8 @@ copy to tmp talbe 语句产生的原因是查询需要Order By 或者Group By等
 时间也多很多。另外Mysql的另外一个参数max_heap_table_size比<br  />
 tmp_table_size小时，则系统会把max_heap_table_size的值作为最大的内<br  />
 存临时表的上限，大于这个时，改写硬盘。<br  />
-</p></li>
+</p>
+</li>
 </ol>
 
 
@@ -100,9 +99,12 @@ less threads being active at any one time, with all-round<br  />
 benefits for the server, and available memory.<br  />
 </p>
 <ol class="org-ol">
-<li>query-cache-type (0|1|2)<br  /></li>
-<li>query-cache-size<br  /></li>
-<li>max-connections<br  /></li>
+<li>query-cache-type (0|1|2)<br  />
+</li>
+<li>query-cache-size<br  />
+</li>
+<li>max-connections<br  />
+</li>
 <li>table-open-cache<br  />
 保持处于open 状态的table 的数量（应该是）（需要根据库里表的数量来决定）<br  />
 mysql 会缓存 一部分 open table, 当缓存满时  再去open 一个table 时， mysql<br  />
@@ -110,17 +112,23 @@ mysql 会缓存 一部分 open table, 当缓存满时  再去open 一个table �
 mysql 会频繁的open close table<br  />
 可以根据Table_open_cache_misses这个值来判断 table-open-cache 是否正常<br  />
 如果Table_open_cache_misses 远大于Open_tables<br  />
-这几个变量show  global  status like 'Open%';<br  /></li>
-<li>wait_timeout (8h? 8day?)<br  /></li>
-<li>transaction-isolation (rc|rc) 事务隔离级别<br  /></li>
-<li>key_buffer<br  /></li>
-<li>low_case_table_names (ignore case )<br  /></li>
-<li>sort_buffer_size  (order by 是在server 层做)<br  /></li>
+这几个变量show  global  status like 'Open%';<br  />
+</li>
+<li>wait_timeout (8h? 8day?)<br  />
+</li>
+<li>transaction-isolation (rc|rc) 事务隔离级别<br  />
+</li>
+<li>key_buffer<br  />
+</li>
+<li>low_case_table_names (ignore case )<br  />
+</li>
+<li>sort_buffer_size  (order by 是在server 层做)<br  />
+</li>
 </ol>
 </div>
-<div id="outline-container-orgheadline2" class="outline-3">
-<h3 id="orgheadline2">复制参数 master (server层做)</h3>
-<div class="outline-text-3" id="text-orgheadline2">
+<div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1">复制参数 master (server层做)</h3>
+<div class="outline-text-3" id="text-1-1">
 <p>
 log-bin<br  />
 server-id<br  />
@@ -129,7 +137,7 @@ binlog-ignore-db （忽略哪些库）<br  />
 binlog-format(row|stmt|mixed) row-整行数据记录  ， stmt-记录sql语句<br  />
 </p>
 </div>
-<ul class="org-ul"><li><a id="orgheadline3"></a>半同步复制(plugin 存在)<br  /><div class="outline-text-4" id="text-orgheadline3">
+<ul class="org-ul"><li><a id="sec-1-1-1" name="sec-1-1-1"></a>半同步复制(plugin 存在)<br  /><div class="outline-text-4" id="text-1-1-1">
 <p>
 半同步复制&#x2014; 扔给从库  从库接收后立刻回复master好了，<br  />
 同步复制&#x2014;  扔给从库  从库接收后，从库上apply后 再回复我好了<br  />
@@ -139,38 +147,46 @@ binlog-format(row|stmt|mixed) row-整行数据记录  ， stmt-记录sql语句<b
 rpl_semi_sync_master_enabled<br  />
 rpl_semi_sync_master_timeout<br  />
 </p>
-</div></li></ul>
 </div>
-<div id="outline-container-orgheadline4" class="outline-3">
-<h3 id="orgheadline4">复制参数 slave (server层做)</h3>
-<div class="outline-text-3" id="text-orgheadline4">
+</li></ul>
+</div>
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2">复制参数 slave (server层做)</h3>
+<div class="outline-text-3" id="text-1-2">
 <ol class="org-ol">
-<li>server-id<br  /></li>
-<li>master-port<br  /></li>
-<li>slave-skip-errors<br  /></li>
-<li>relay_log<br  /></li>
-<li>sync_binlog<br  /></li>
+<li>server-id<br  />
+</li>
+<li>master-port<br  />
+</li>
+<li>slave-skip-errors<br  />
+</li>
+<li>relay_log<br  />
+</li>
+<li>sync_binlog<br  />
+</li>
 <li>replicate-ignore-db replicate-do-db replicate-do-table 与master<br  />
-上的binlog-do-db inlog-ignore-db 对应<br  /></li>
+上的binlog-do-db inlog-ignore-db 对应<br  />
+</li>
 </ol>
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline6" class="outline-2">
-<h2 id="orgheadline6">Engine 层参数</h2>
-<div class="outline-text-2" id="text-orgheadline6">
-</div><div id="outline-container-orgheadline5" class="outline-3">
-<h3 id="orgheadline5">innodb</h3>
-<div class="outline-text-3" id="text-orgheadline5">
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2">Engine 层参数</h2>
+<div class="outline-text-2" id="text-2">
+</div><div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1">innodb</h3>
+<div class="outline-text-3" id="text-2-1">
 <ol class="org-ol">
-<li>innodb-buffer-pool-size  default 8M  (一定要调大 50%~-80% mem)<br  /></li>
-<li><p>
-innodb-flush-log-at-tx-commit (0|1|2)<br  />
+<li>innodb-buffer-pool-size  default 8M  (一定要调大 50%~-80% mem)<br  />
+</li>
+<li>innodb-flush-log-at-tx-commit (0|1|2)<br  />
 不同的值 影响两个操作 （write,flush） ,<br  />
-</p>
 <ul class="org-ul">
-<li>write 是操作系统级的write(意思是说 write 到操作系统的缓存了)<br  /></li>
-<li>flush  刷日志到硬盘<br  /></li>
+<li>write 是操作系统级的write(意思是说 write 到操作系统的缓存了)<br  />
+</li>
+<li>flush  刷日志到硬盘<br  />
+</li>
 </ul>
 <p>
 0  表示每秒钟write and flush 一次，  但是sql commit 的时候并不提交<br  />
@@ -187,43 +203,56 @@ is not performed on it. However, the flushing on the log file<br  />
 takes place once per second also when the value is 2. Note that<br  />
 the once-per-second flushing is not 100% guaranteed to happen<br  />
 every second, due to process scheduling issues.<br  />
-</p></li>
+</p>
+</li>
 
 <li>innodb-flush-method(fdatasync|O_DIRECT|O_DSYNC)<br  />
 基本O_DIRECT<br  />
 fdatasync  用fsync  告诉操作系统 ( 一定要绕过缓存)<br  />
-O_DIRECT  redo log 直接到硬盘<br  /></li>
+O_DIRECT  redo log 直接到硬盘<br  />
+</li>
 <li>innodb-file-per-table 一定要设<br  />
 每建个表  innodb 为其建两文件<br  />
-inodb_file_format 与之相关<br  /></li>
-<li>innodb-log-buffer-size &#x2013;64M<br  /></li>
-<li>innodb-log-file-size 两个文件轮换着写<br  /></li>
+inodb_file_format 与之相关<br  />
+</li>
+<li>innodb-log-buffer-size &#x2013;64M<br  />
+</li>
+<li>innodb-log-file-size 两个文件轮换着写<br  />
+</li>
 <li>innodb-io-capacity=200|2000|20000<br  />
 200 15000转sasi盘<br  />
 2000 150000转  做了raid10的盘20块<br  />
-根据iops来设置<br  /></li>
+根据iops来设置<br  />
+</li>
 <li>inodb-read-io-threads  2*cpu<br  />
-inodb-write-io-threads  2*cpu<br  /></li>
-<li>innodb_stats_on_metadata=off<br  /></li>
+inodb-write-io-threads  2*cpu<br  />
+</li>
+<li>innodb_stats_on_metadata=off<br  />
+</li>
 <li>innodb-buffer-pool-instance=4 左右<br  />
 innodb-buffer-pool-instance*innodb-buffer-pool-size<br  />
-实际使用的内存<br  /></li>
+实际使用的内存<br  />
+</li>
 <li>libaio<br  />
-innodb_use_native_aio (需要装libaio)<br  /></li>
-<li>use-sys-malloc (do not use)<br  />
-use google tc-malloc<br  /></li>
+innodb_use_native_aio (需要装libaio)<br  />
+</li>
+<li>        use-sys-malloc (do not use)<br  />
+use google tc-malloc<br  />
+</li>
 
-<li>mysql 改io 调度器为deadline<br  /></li>
+<li>mysql 改io 调度器为deadline<br  />
+</li>
 
-<li>sync_binlog：默认情况下，0,表示写日志文件不会马上同步到磁盘。可以设置每N次写操作后同步到磁盘。<br  /></li>
+<li>sync_binlog：默认情况下，0,表示写日志文件不会马上同步到磁盘。可以设置每N次写操作后同步到磁盘。<br  />
+</li>
 </ol>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgheadline7" class="outline-2">
-<h2 id="orgheadline7">example  with 4G Mem</h2>
-<div class="outline-text-2" id="text-orgheadline7">
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3">example  with 4G Mem</h2>
+<div class="outline-text-2" id="text-3">
 <div class="org-src-container">
 
 <pre class="src src-sh"><span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">Generated by Percona Configuration Wizard (http://tools.percona.com/) version REL5-20120208</span>
@@ -289,13 +318,13 @@ slow-query-log-file            = /data/mysql/mysql-slow.log
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline8" class="outline-2">
-<h2 id="orgheadline8">tips</h2>
-<div class="outline-text-2" id="text-orgheadline8">
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4">tips</h2>
+<div class="outline-text-2" id="text-4">
 <p>
 可以查看 当前mysql 正在执行哪些sql 语句，<br  />
 可以用来统计 正在大量执行哪些sql 语句<br  />
- set global general_log=on<br  />
+     set global general_log=on<br  />
 </p>
 </div>
 </div>

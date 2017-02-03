@@ -61,9 +61,9 @@ emacswiki上有人提供了openwith.el 插件。用来实现对于不同后缀�
   (<span style="color: #FBDE2D;">require</span>'<span style="color: #D8FA3C;">w32-shell-execute</span>)
   )
 (<span style="color: #FBDE2D;">require</span> '<span style="color: #D8FA3C;">openwith</span>)
-(openwith-mode <span style="color: #D8FA3C;">t</span>)
+(openwith-mode t)
 (<span style="color: #FBDE2D;">when</span> (eq system-type 'gnu/linux)
-  (<span style="color: #FF6400;">setq</span> openwith-associations
+  (<span style="color: #FBDE2D;">setq</span> openwith-associations
         '((<span style="color: #ffa07a;">"\\.pdf$"</span> <span style="color: #ffa07a;">"acroread"</span> (file)) (<span style="color: #ffa07a;">"\\.mp3$"</span> <span style="color: #ffa07a;">"mplayer"</span> (file) )
           (<span style="color: #ffa07a;">"\\.mov</span><span style="color: #E9C062;">\\</span><span style="color: #ff0000;">|</span><span style="color: #ffa07a;">\\.RM$</span><span style="color: #E9C062;">\\</span><span style="color: #ff0000;">|</span><span style="color: #ffa07a;">\\.RMVB$</span><span style="color: #E9C062;">\\</span><span style="color: #ff0000;">|</span><span style="color: #ffa07a;">\\.avi$</span><span style="color: #E9C062;">\\</span><span style="color: #ff0000;">|</span><span style="color: #ffa07a;">\\.AVI$</span><span style="color: #E9C062;">\\</span><span style="color: #ff0000;">|</span><span style="color: #ffa07a;">\\.flv$</span><span style="color: #E9C062;">\\</span><span style="color: #ff0000;">|</span><span style="color: #ffa07a;">\\.mp4</span><span style="color: #E9C062;">\\</span><span style="color: #ff0000;">|</span><span style="color: #ffa07a;">\\.mkv$</span><span style="color: #E9C062;">\\</span><span style="color: #ff0000;">|</span><span style="color: #ffa07a;">\\.rmvb$"</span> <span style="color: #ffa07a;">"mplayer"</span> (file) )
 <span style="color: #AEAEAE;">;;          </span><span style="color: #AEAEAE;">("\\.jpe?g$\\|\\.png$\\|\\.bmp\\|\\.gif$" "gpicview" (file))</span>
@@ -73,7 +73,7 @@ emacswiki上有人提供了openwith.el 插件。用来实现对于不同后缀�
   )
 (<span style="color: #FBDE2D;">when</span> (eq system-type 'windows-nt)
   <span style="color: #AEAEAE;">;;</span><span style="color: #AEAEAE;">windows &#19978;&#20351;&#29992;w32-shell-execute &#35843;&#29992;&#31995;&#32479;&#30340;&#30456;&#24212;&#31243;&#24207;&#25171;&#24320;</span>
-  (<span style="color: #FF6400;">setq</span> openwith-associations
+  (<span style="color: #FBDE2D;">setq</span> openwith-associations
         '((<span style="color: #ffa07a;">"\\.pdf$"</span> <span style="color: #ffa07a;">"open"</span> (file)) (<span style="color: #ffa07a;">"\\.mp3$"</span> <span style="color: #ffa07a;">"open"</span> (file) )
           (<span style="color: #ffa07a;">"\\.mov</span><span style="color: #E9C062;">\\</span><span style="color: #ff0000;">|</span><span style="color: #ffa07a;">\\.RM$</span><span style="color: #E9C062;">\\</span><span style="color: #ff0000;">|</span><span style="color: #ffa07a;">\\.RMVB$</span><span style="color: #E9C062;">\\</span><span style="color: #ff0000;">|</span><span style="color: #ffa07a;">\\.avi$</span><span style="color: #E9C062;">\\</span><span style="color: #ff0000;">|</span><span style="color: #ffa07a;">\\.AVI$</span><span style="color: #E9C062;">\\</span><span style="color: #ff0000;">|</span><span style="color: #ffa07a;">\\.flv$</span><span style="color: #E9C062;">\\</span><span style="color: #ff0000;">|</span><span style="color: #ffa07a;">\\.mp4</span><span style="color: #E9C062;">\\</span><span style="color: #ff0000;">|</span><span style="color: #ffa07a;">\\.mkv$</span><span style="color: #E9C062;">\\</span><span style="color: #ff0000;">|</span><span style="color: #ffa07a;">\\.rmvb$"</span> <span style="color: #ffa07a;">"open"</span> (file) )
           (<span style="color: #ffa07a;">"\\.jpe?g$</span><span style="color: #E9C062;">\\</span><span style="color: #ff0000;">|</span><span style="color: #ffa07a;">\\.png$</span><span style="color: #E9C062;">\\</span><span style="color: #ff0000;">|</span><span style="color: #ffa07a;">\\.bmp</span><span style="color: #E9C062;">\\</span><span style="color: #ff0000;">|</span><span style="color: #ffa07a;">\\.gif$"</span> <span style="color: #ffa07a;">"open"</span> (file))
@@ -100,17 +100,17 @@ emacswiki上有人提供了openwith.el 插件。用来实现对于不同后缀�
     (<span style="color: #FBDE2D;">if</span> (string-match <span style="color: #ffa07a;">"\\.html?$"</span> file-name)
           (<span style="color: #FBDE2D;">if</span> (&gt; (string-to-number (shell-command-to-string <span style="color: #ffa07a;">"pgrep firefox | wc -l"</span>)) 0)
               (<span style="color: #FBDE2D;">progn</span>
-                (start-process-shell-command <span style="color: #ffa07a;">"firefox"</span> <span style="color: #D8FA3C;">nil</span> (format <span style="color: #ffa07a;">"echo ' show_matched_client({class=\"Firefox\" ,instance=\"Navigator\"},\"www\",\"/usr/bin/firefox %s  \" ,nil)' |awesome-client "</span> file-name))
-                (start-process <span style="color: #ffa07a;">"firefox-file"</span> <span style="color: #D8FA3C;">nil</span> <span style="color: #ffa07a;">"firefox"</span> file-name))
-            (start-process-shell-command <span style="color: #ffa07a;">"firefox"</span> <span style="color: #D8FA3C;">nil</span> (format <span style="color: #ffa07a;">"echo ' show_matched_client({class=\"Firefox\" ,instance=\"Navigator\"},\"www\",\"/usr/bin/firefox %s  \" ,nil)' |awesome-client "</span> file-name))
+                (start-process-shell-command <span style="color: #ffa07a;">"firefox"</span> nil (format <span style="color: #ffa07a;">"echo ' show_matched_client({class=\"Firefox\" ,instance=\"Navigator\"},\"www\",\"/usr/bin/firefox %s  \" ,nil)' |awesome-client "</span> file-name))
+                (start-process <span style="color: #ffa07a;">"firefox-file"</span> nil <span style="color: #ffa07a;">"firefox"</span> file-name))
+            (start-process-shell-command <span style="color: #ffa07a;">"firefox"</span> nil (format <span style="color: #ffa07a;">"echo ' show_matched_client({class=\"Firefox\" ,instance=\"Navigator\"},\"www\",\"/usr/bin/firefox %s  \" ,nil)' |awesome-client "</span> file-name))
             )
       (dired-find-file)
       )
     )
   )
-(<span style="color: #FBDE2D;">when</span> (<span style="color: #FBDE2D;">equal</span> system-type 'gnu/linux)
+(<span style="color: #FBDE2D;">when</span> (equal system-type 'gnu/linux)
   (eval-after-load 'dired
-  '(<span style="color: #FF6400;">define-key</span> dired-mode-map [(control return)] 'open-with-C-RET-on-linux)))
+  '(define-key dired-mode-map [(control return)] 'open-with-C-RET-on-linux)))
 
 <span style="color: #AEAEAE;">;; </span><span style="color: #AEAEAE;">&#20351;&#29992;&#22806;&#37096; &#25991;&#20214;&#31649;&#29702;&#22120; &#25171;&#24320;&#36873;&#20013;&#25991;&#20214;&#25152;&#22312;&#25991;&#20214;&#22841;</span>
 (<span style="color: #FBDE2D;">when</span> (eq system-type 'windows-nt)
@@ -127,14 +127,14 @@ emacswiki上有人提供了openwith.el 插件。用来实现对于不同后缀�
   (<span style="color: #FBDE2D;">defun</span> <span style="color: #FF6400;">explorer-open</span>()
 <span style="color: #ffa07a;">"&#29992;windows &#19978;&#30340;explorer.exe&#25171;&#24320;&#27492;&#25991;&#20214;&#22841;."</span>
     (<span style="color: #FBDE2D;">interactive</span>)
-    (<span style="color: #FBDE2D;">if</span> (<span style="color: #FBDE2D;">equal</span> major-mode 'dired-mode)
+    (<span style="color: #FBDE2D;">if</span> (equal major-mode 'dired-mode)
         (w32explore (expand-file-name (dired-get-filename)))
       (w32explore (expand-file-name (buffer-file-name)))
        )
     )
   (eval-after-load 'dired
-    '(<span style="color: #FF6400;">define-key</span> dired-mode-map (<span style="color: #FBDE2D;">quote</span> [C-M-return]) 'explorer-open))
-  (<span style="color: #FF6400;">global-set-key</span> (<span style="color: #FBDE2D;">quote</span> [C-M-return]) 'explorer-open)
+    '(define-key dired-mode-map (<span style="color: #FBDE2D;">quote</span> [C-M-return]) 'explorer-open))
+  (global-set-key (<span style="color: #FBDE2D;">quote</span> [C-M-return]) 'explorer-open)
 <span style="color: #AEAEAE;">;;  </span><span style="color: #AEAEAE;">(lambda () (interactive ) (w32explore (expand-file-name default-directory)))</span>
   )
 
@@ -142,10 +142,10 @@ emacswiki上有人提供了openwith.el 插件。用来实现对于不同后缀�
 (<span style="color: #FBDE2D;">when</span> (eq system-type 'gnu/linux)
   (<span style="color: #FBDE2D;">defun</span> <span style="color: #FF6400;">open-directory-with-pcmanfm</span>()
     (<span style="color: #FBDE2D;">interactive</span>)
-    (start-process <span style="color: #ffa07a;">"pcmanfm"</span>  <span style="color: #D8FA3C;">nil</span> <span style="color: #ffa07a;">"pcmanfm"</span> (expand-file-name  default-directory)))
+    (start-process <span style="color: #ffa07a;">"pcmanfm"</span>  nil <span style="color: #ffa07a;">"pcmanfm"</span> (expand-file-name  default-directory)))
   (eval-after-load 'dired
-    '(<span style="color: #FF6400;">define-key</span> dired-mode-map (<span style="color: #FBDE2D;">quote</span> [C-M-return]) 'open-directory-with-pcmanfm))
-  (<span style="color: #FF6400;">global-set-key</span> (<span style="color: #FBDE2D;">quote</span> [C-M-return]) (<span style="color: #FBDE2D;">quote</span> open-directory-with-pcmanfm))
+    '(define-key dired-mode-map (<span style="color: #FBDE2D;">quote</span> [C-M-return]) 'open-directory-with-pcmanfm))
+  (global-set-key (<span style="color: #FBDE2D;">quote</span> [C-M-return]) (<span style="color: #FBDE2D;">quote</span> open-directory-with-pcmanfm))
     )
 
 (<span style="color: #FBDE2D;">provide</span> '<span style="color: #D8FA3C;">joseph-openwith</span>)

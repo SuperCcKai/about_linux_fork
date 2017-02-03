@@ -47,28 +47,28 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgheadline1">link</a></li>
-<li><a href="#orgheadline2">安装</a>
+<li><a href="#sec-1">link</a></li>
+<li><a href="#sec-2">安装</a>
 <ul>
-<li><a href="#orgheadline3">安装特定的版本</a></li>
+<li><a href="#sec-2-1">安装特定的版本</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline4">pull 镜像</a></li>
-<li><a href="#orgheadline5">列出镜像 docker images</a></li>
-<li><a href="#orgheadline6">删除镜像 docker rmi imageId</a></li>
-<li><a href="#orgheadline7">创建镜像 docker commit</a></li>
-<li><a href="#orgheadline8">镜像的备份 恢复(save and load)</a></li>
-<li><a href="#orgheadline9">容器的备份 恢复 (export and import)</a></li>
-<li><a href="#orgheadline10">save 与export 的区别</a></li>
-<li><a href="#orgheadline11">DockerFile</a></li>
-<li><a href="#orgheadline12">把容器放到后面运行 attach</a></li>
+<li><a href="#sec-3">pull 镜像</a></li>
+<li><a href="#sec-4">列出镜像 docker images</a></li>
+<li><a href="#sec-5">删除镜像 docker rmi imageId</a></li>
+<li><a href="#sec-6">创建镜像 docker commit</a></li>
+<li><a href="#sec-7">镜像的备份 恢复(save and load)</a></li>
+<li><a href="#sec-8">容器的备份 恢复 (export and import)</a></li>
+<li><a href="#sec-9">save 与export 的区别</a></li>
+<li><a href="#sec-10">DockerFile</a></li>
+<li><a href="#sec-11">把容器放到后面运行 attach</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgheadline1" class="outline-2">
-<h2 id="orgheadline1">link</h2>
-<div class="outline-text-2" id="text-orgheadline1">
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">link</h2>
+<div class="outline-text-2" id="text-1">
 <p>
 <a href="http://dockerpool.com/static/books/docker_practice/basic_concept/repository.html">教程</a><br  />
 <a href="http://www.oschina.net/translate/why-you-dont-need-to-run-sshd-in-docker">为什么不需要在 Docker 容器中运行 sshd</a><br  />
@@ -76,9 +76,9 @@
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline2" class="outline-2">
-<h2 id="orgheadline2">安装</h2>
-<div class="outline-text-2" id="text-orgheadline2">
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2">安装</h2>
+<div class="outline-text-2" id="text-2">
 <p>
 centos 7 下的安装<br  />
 </p>
@@ -93,9 +93,9 @@ sudo docker run hello-world
 </pre>
 </div>
 </div>
-<div id="outline-container-orgheadline3" class="outline-3">
-<h3 id="orgheadline3">安装特定的版本</h3>
-<div class="outline-text-3" id="text-orgheadline3">
+<div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1">安装特定的版本</h3>
+<div class="outline-text-3" id="text-2-1">
 <p>
 centos8 默认安装的docker是1.8 版本 ，<br  />
 经常出现一个bug (Layer already being pulled by another client)<br  />
@@ -116,9 +116,9 @@ sudo mv docker.service  /etc/systemd/system
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline4" class="outline-2">
-<h2 id="orgheadline4">pull 镜像</h2>
-<div class="outline-text-2" id="text-orgheadline4">
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3">pull 镜像</h2>
+<div class="outline-text-2" id="text-3">
 <p>
 理论上:<br  />
 </p>
@@ -185,9 +185,9 @@ OPTIONS='&#x2013;selinux-enabled &#x2013;insecure-registry dl.dockerpool.com:500
 </div>
 </div>
 
-<div id="outline-container-orgheadline5" class="outline-2">
-<h2 id="orgheadline5">列出镜像 docker images</h2>
-<div class="outline-text-2" id="text-orgheadline5">
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4">列出镜像 docker images</h2>
+<div class="outline-text-2" id="text-4">
 <blockquote>
 <p>
 root@localhost ~ # docker images<br  />
@@ -200,9 +200,9 @@ dl.dockerpool.com:5000/centos   latest              87e5b6b3ccc1        15 month
 </div>
 </div>
 
-<div id="outline-container-orgheadline6" class="outline-2">
-<h2 id="orgheadline6">删除镜像 docker rmi imageId</h2>
-<div class="outline-text-2" id="text-orgheadline6">
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5">删除镜像 docker rmi imageId</h2>
+<div class="outline-text-2" id="text-5">
 <div class="org-src-container">
 
 <pre class="src src-sh">docker rmi imageId
@@ -212,9 +212,9 @@ docker rmi --force=true imageId
 </div>
 </div>
 
-<div id="outline-container-orgheadline7" class="outline-2">
-<h2 id="orgheadline7">创建镜像 docker commit</h2>
-<div class="outline-text-2" id="text-orgheadline7">
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6">创建镜像 docker commit</h2>
+<div class="outline-text-2" id="text-6">
 <div class="org-src-container">
 
 <pre class="src src-sh">docker run -t -i centos /bin/bash
@@ -275,9 +275,9 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 </div>
 </div>
 
-<div id="outline-container-orgheadline8" class="outline-2">
-<h2 id="orgheadline8">镜像的备份 恢复(save and load)</h2>
-<div class="outline-text-2" id="text-orgheadline8">
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7">镜像的备份 恢复(save and load)</h2>
+<div class="outline-text-2" id="text-7">
 <div class="org-src-container">
 
 <pre class="src src-sh">docker save -o image.tar imageid
@@ -303,9 +303,9 @@ docker tag iamgeId debian:latest
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline9" class="outline-2">
-<h2 id="orgheadline9">容器的备份 恢复 (export and import)</h2>
-<div class="outline-text-2" id="text-orgheadline9">
+<div id="outline-container-sec-8" class="outline-2">
+<h2 id="sec-8">容器的备份 恢复 (export and import)</h2>
+<div class="outline-text-2" id="text-8">
 <div class="org-src-container">
 
 <pre class="src src-sh">docker export &lt;CONTAINER ID&gt; &gt; /home/export.tar
@@ -314,9 +314,9 @@ cat /home/export.tar | sudo docker import - reposName:latest
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline10" class="outline-2">
-<h2 id="orgheadline10">save 与export 的区别</h2>
-<div class="outline-text-2" id="text-orgheadline10">
+<div id="outline-container-sec-9" class="outline-2">
+<h2 id="sec-9">save 与export 的区别</h2>
+<div class="outline-text-2" id="text-9">
 <p>
 导出后再导入(exported-imported)<br  />
 的镜像会丢失所有的历史，而保存后再加载（saveed-loaded）的镜像没有丢失<br  />
@@ -327,9 +327,9 @@ cat /home/export.tar | sudo docker import - reposName:latest
 </div>
 </div>
 
-<div id="outline-container-orgheadline11" class="outline-2">
-<h2 id="orgheadline11">DockerFile</h2>
-<div class="outline-text-2" id="text-orgheadline11">
+<div id="outline-container-sec-10" class="outline-2">
+<h2 id="sec-10">DockerFile</h2>
+<div class="outline-text-2" id="text-10">
 <div class="org-src-container">
 
 <pre class="src src-sh">docker build  -t tagname .
@@ -345,7 +345,6 @@ Dockerfile example:<br  />
 <p>
 FROM docker.io/centos:latest<br  />
 </p>
-
 <p>
 Run yum install -y go<br  />
 </p>
@@ -353,9 +352,9 @@ Run yum install -y go<br  />
 </div>
 </div>
 
-<div id="outline-container-orgheadline12" class="outline-2">
-<h2 id="orgheadline12">把容器放到后面运行 attach</h2>
-<div class="outline-text-2" id="text-orgheadline12">
+<div id="outline-container-sec-11" class="outline-2">
+<h2 id="sec-11">把容器放到后面运行 attach</h2>
+<div class="outline-text-2" id="text-11">
 <div class="org-src-container">
 
 <pre class="src src-sh"><span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">&#36825;&#37324;&#21152;&#20102;-d &#25918;&#21040;&#21518;&#21488;&#36816;&#34892;&#65292; &#21516;&#26102;&#21152;-t -i &#21542;&#21017;bash &#20250;&#31435;&#21363;&#36864;&#20986;</span>

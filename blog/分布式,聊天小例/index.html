@@ -45,90 +45,90 @@
 <h1>分布式,聊天小例</h1>
 <div class="org-src-container">
 
-<pre class="src src-erlang"><span style="color: #7fffd4;">-module</span>(msg).
-<span style="color: #7fffd4;">-compile</span>([export_all]).
-<span style="color: #AEAEAE;">%%</span><span style="color: #AEAEAE;">&#20998;&#24067;&#24335;&#32842;&#22825;,</span>
-<span style="color: #FF6400;">start_server</span>()-&gt;
-    <span style="color: #F8F8F8;">register</span> (server,<span style="color: #F8F8F8;">spawn</span>(msg,server,[[]])).
-<span style="color: #FF6400;">server</span>(<span style="color: #40E0D0;">UserList</span>)-&gt;
-    <span style="color: #FBDE2D;">receive</span>
-        {logon,<span style="color: #40E0D0;">UserInfo</span>} -&gt;
-            <span style="color: #8DA6CE;">server</span>(<span style="color: #8DA6CE;">handle_logon</span>(<span style="color: #40E0D0;">UserInfo</span>,<span style="color: #40E0D0;">UserList</span>));
-        {message2,[<span style="color: #40E0D0;">To</span>,<span style="color: #40E0D0;">From</span>,<span style="color: #40E0D0;">Msg</span>]}-&gt;
-            <span style="color: #8DA6CE;">io</span>:<span style="color: #8DA6CE;">format</span>(<span style="color: #ffa07a;">"a conn~n"</span>,[]),
-            <span style="color: #8DA6CE;">io</span>:<span style="color: #8DA6CE;">format</span>(<span style="color: #ffa07a;">"~w~n"</span>,[<span style="color: #40E0D0;">UserList</span>]),
-            <span style="color: #FBDE2D;">case</span> <span style="color: #8DA6CE;">lists</span>:<span style="color: #8DA6CE;">keysearch</span>(<span style="color: #40E0D0;">To</span>,1,<span style="color: #40E0D0;">UserList</span>) <span style="color: #FBDE2D;">of</span>
-                false -&gt;
-                    <span style="color: #8DA6CE;">io</span>:<span style="color: #8DA6CE;">format</span>(<span style="color: #ffa07a;">"user ~p doesnt exists ~n"</span>, [<span style="color: #40E0D0;">To</span>]);
-                {value,{<span style="color: #40E0D0;">_</span>,<span style="color: #40E0D0;">UserPid</span>}}-&gt;
-                    <span style="color: #8DA6CE;">io</span>:<span style="color: #8DA6CE;">format</span>(<span style="color: #ffa07a;">"Msg to ~p ~n"</span>, [<span style="color: #40E0D0;">To</span>]),
-                    <span style="color: #40E0D0;">UserPid</span>!{message2,{<span style="color: #40E0D0;">From</span>,<span style="color: #40E0D0;">Msg</span>}}
-            <span style="color: #FBDE2D;">end</span>,
-            <span style="color: #8DA6CE;">server</span>(<span style="color: #40E0D0;">UserList</span>);
-        <span style="color: #40E0D0;">_</span> -&gt;
-            <span style="color: #8DA6CE;">server</span>(<span style="color: #40E0D0;">UserList</span>)
-    <span style="color: #FBDE2D;">end</span>.
-<span style="color: #FF6400;">handle_logon</span>(<span style="color: #40E0D0;">UserInfo</span>,<span style="color: #40E0D0;">UserList</span>)-&gt;
-    [<span style="color: #40E0D0;">Username</span>,<span style="color: #40E0D0;">From</span>]=<span style="color: #40E0D0;">UserInfo</span>,
-    <span style="color: #FBDE2D;">case</span> <span style="color: #8DA6CE;">lists</span>:<span style="color: #8DA6CE;">keymember</span>(<span style="color: #40E0D0;">Username</span>,1,<span style="color: #40E0D0;">UserList</span>) <span style="color: #FBDE2D;">of</span>
-        true -&gt;
-            <span style="color: #40E0D0;">From</span> ! reject,
-            <span style="color: #8DA6CE;">io</span>:<span style="color: #8DA6CE;">format</span>(<span style="color: #ffa07a;">"server rejected ~p\n"</span>,[<span style="color: #40E0D0;">Username</span>]),
-            <span style="color: #40E0D0;">UserList</span>;
-        false -&gt;
-            <span style="color: #40E0D0;">From</span>!accept,
-            <span style="color: #8DA6CE;">io</span>:<span style="color: #8DA6CE;">format</span>(<span style="color: #ffa07a;">"server acceped ~p\n"</span>,[<span style="color: #40E0D0;">Username</span>]),
-            [{<span style="color: #40E0D0;">Username</span>,<span style="color: #40E0D0;">From</span>}|<span style="color: #40E0D0;">UserList</span>]
-    <span style="color: #FBDE2D;">end</span>
-        .
+<pre class="src src-erlang">-module(msg).
+-compile([export_all]).
+%%分布式聊天,
+start_server()-&gt;
+    register (server,spawn(msg,server,[[]])).
+server(UserList)-&gt;
+    receive
+	{logon,UserInfo} -&gt;
+	    server(handle_logon(UserInfo,UserList));
+	{message2,[To,From,Msg]}-&gt;
+	    io:format("a conn~n",[]),
+	    io:format("~w~n",[UserList]),
+	    case lists:keysearch(To,1,UserList) of
+		false -&gt;
+		    io:format("user ~p doesnt exists ~n", [To]);
+		{value,{_,UserPid}}-&gt;
+		    io:format("Msg to ~p ~n", [To]),
+		    UserPid!{message2,{From,Msg}}
+	    end,
+	    server(UserList);
+	_ -&gt;
+	    server(UserList)
+    end.
+handle_logon(UserInfo,UserList)-&gt;
+    [Username,From]=UserInfo,
+    case lists:keymember(Username,1,UserList) of
+	true -&gt;
+	    From ! reject,
+	    io:format("server rejected ~p\n",[Username]),
+	    UserList;
+	false -&gt;
+	    From!accept,
+	    io:format("server acceped ~p\n",[Username]),
+	    [{Username,From}|UserList]
+    end
+	.
 
-<span style="color: #FF6400;">message</span>(<span style="color: #40E0D0;">To</span>,<span style="color: #40E0D0;">Msg</span>)-&gt;
-    <span style="color: #FBDE2D;">case</span> <span style="color: #F8F8F8;">whereis</span>(client) <span style="color: #FBDE2D;">of</span>
-        undefined-&gt;
-            you_are_not_logged_on;
-        <span style="color: #40E0D0;">_</span> -&gt;
-            client!{message_req,{<span style="color: #40E0D0;">To</span>,<span style="color: #40E0D0;">Msg</span>}}
-    <span style="color: #FBDE2D;">end</span>
-    <span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">{server,server@jf.org} !{message2,[To,self(),Msg]}</span>
-    <span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">receive</span>
-    <span style="color: #AEAEAE;">%%     </span><span style="color: #AEAEAE;">{message2,{From,Msg}}-&gt;</span>
-    <span style="color: #AEAEAE;">%%         </span><span style="color: #AEAEAE;">io:format(" ~p: ~p\n",[To,Msg])</span>
-    <span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">end</span>
-        .
-<span style="color: #FF6400;">receive_msg</span>()-&gt;
-    <span style="color: #FBDE2D;">receive</span>
-        {message2,{<span style="color: #40E0D0;">From</span>,<span style="color: #40E0D0;">Msg</span>}}-&gt;
-            <span style="color: #8DA6CE;">io</span>:<span style="color: #8DA6CE;">format</span>(<span style="color: #ffa07a;">" ~p: ~p\n"</span>,[<span style="color: #40E0D0;">From</span>,<span style="color: #40E0D0;">Msg</span>]);
-        {message_req,{<span style="color: #40E0D0;">To</span>,<span style="color: #40E0D0;">Msg</span>}} -&gt;
-            {server,server@jf.org} !{message2,[<span style="color: #40E0D0;">To</span>,<span style="color: #F8F8F8;">self</span>(),<span style="color: #40E0D0;">Msg</span>]};
-        accept-&gt;
-            <span style="color: #8DA6CE;">io</span>:<span style="color: #8DA6CE;">format</span>(<span style="color: #ffa07a;">"acceped~n"</span>,[]),
-            true;
-        reject-&gt;
-            <span style="color: #8DA6CE;">io</span>:<span style="color: #8DA6CE;">format</span>(<span style="color: #ffa07a;">"rej~n"</span>,[]),
-            false
-    <span style="color: #FBDE2D;">end</span>,
-    <span style="color: #8DA6CE;">receive_msg</span>()
-        .
-<span style="color: #FF6400;">logon</span>(<span style="color: #40E0D0;">Username</span>)-&gt;
-    <span style="color: #FBDE2D;">case</span> <span style="color: #F8F8F8;">whereis</span>(client) <span style="color: #FBDE2D;">of</span>
-        undefined -&gt;
-            <span style="color: #F8F8F8;">register</span>(client, <span style="color: #F8F8F8;">spawn</span>(msg,receive_msg,[])),
-            {server,server@jf.org} !{logon,[<span style="color: #40E0D0;">Username</span>,<span style="color: #F8F8F8;">whereis</span>(client)]};
-        <span style="color: #40E0D0;">_</span> -&gt;
-            already_logged_on
-    <span style="color: #FBDE2D;">end</span>.
-<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">erl -name server</span>
-<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">msg:start_server().</span>
-<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">erl -name c1</span>
-<span style="color: #AEAEAE;">%%  </span><span style="color: #AEAEAE;">msg:logon("c1").</span>
-<span style="color: #AEAEAE;">%%  </span><span style="color: #AEAEAE;">erl -name c2</span>
-<span style="color: #AEAEAE;">%%  </span><span style="color: #AEAEAE;">msg:logon("c2").</span>
-<span style="color: #AEAEAE;">%%  </span><span style="color: #AEAEAE;">msg:message("c1","hello,c1,I am c2").</span>
-<span style="color: #AEAEAE;">%%  </span><span style="color: #AEAEAE;">msg:message("c2","hello,c2,I am c1").</span>
+message(To,Msg)-&gt;
+    case whereis(client) of
+	undefined-&gt;
+	    you_are_not_logged_on;
+	_ -&gt;
+	    client!{message_req,{To,Msg}}
+    end
+    %% {server,server@jf.org} !{message2,[To,self(),Msg]}
+    %% receive
+    %%     {message2,{From,Msg}}-&gt;
+    %%         io:format(" ~p: ~p\n",[To,Msg])
+    %% end
+	.
+receive_msg()-&gt;
+    receive
+	{message2,{From,Msg}}-&gt;
+	    io:format(" ~p: ~p\n",[From,Msg]);
+	{message_req,{To,Msg}} -&gt;
+	    {server,server@jf.org} !{message2,[To,self(),Msg]};
+	accept-&gt;
+	    io:format("acceped~n",[]),
+	    true;
+	reject-&gt;
+	    io:format("rej~n",[]),
+	    false
+    end,
+    receive_msg()
+	.
+logon(Username)-&gt;
+    case whereis(client) of
+	undefined -&gt;
+	    register(client, spawn(msg,receive_msg,[])),
+	    {server,server@jf.org} !{logon,[Username,whereis(client)]};
+	_ -&gt;
+	    already_logged_on
+    end.
+%% erl -name server
+%% msg:start_server().
+%% erl -name c1
+%%  msg:logon("c1").
+%%  erl -name c2
+%%  msg:logon("c2").
+%%  msg:message("c1","hello,c1,I am c2").
+%%  msg:message("c2","hello,c2,I am c1").
 
 
-<span style="color: #AEAEAE;">%% </span><span style="color: #AEAEAE;">whereis(RegName) -&gt;pid or port or undefined.</span>
+%% whereis(RegName) -&gt;pid or port or undefined.
 </pre>
 </div>
 

@@ -47,39 +47,39 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgheadline1">misc</a></li>
-<li><a href="#orgheadline7">用户管理 :</a>
+<li><a href="#sec-1">misc</a></li>
+<li><a href="#sec-2">用户管理 :</a>
 <ul>
-<li><a href="#orgheadline2">登陆：</a></li>
-<li><a href="#orgheadline3">创建用户 create user jixiuf identified by jixiuf_passwd;</a></li>
-<li><a href="#orgheadline4">切换用户 conn system/root;  disconnect</a></li>
-<li><a href="#orgheadline5">权限分系统权限和对象权限，系统权限是用户对数据库的控制权，对象权限是用户对其它用户所拥有数据对象的操作权限</a></li>
-<li><a href="#orgheadline6">使用profile 管理用户口令，profile 是口令限制，资源限制的命令集合，当建立数据库时，oracle 会自动建立名称为default 的profile ,当建立用户没有指定profile，则默认用此项分配给用户</a></li>
+<li><a href="#sec-2-1">登陆：</a></li>
+<li><a href="#sec-2-2">创建用户 create user jixiuf identified by jixiuf_passwd;</a></li>
+<li><a href="#sec-2-3">切换用户 conn system/root;  disconnect</a></li>
+<li><a href="#sec-2-4">权限分系统权限和对象权限，系统权限是用户对数据库的控制权，对象权限是用户对其它用户所拥有数据对象的操作权限</a></li>
+<li><a href="#sec-2-5">使用profile 管理用户口令，profile 是口令限制，资源限制的命令集合，当建立数据库时，oracle 会自动建立名称为default 的profile ,当建立用户没有指定profile，则默认用此项分配给用户</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline10">备份与恢复(导入导出)</a>
+<li><a href="#sec-3">备份与恢复(导入导出)</a>
 <ul>
-<li><a href="#orgheadline8">exp</a></li>
-<li><a href="#orgheadline9">导入 imp  (选项： userid tables fromuser touser file=d:/a.dmp full=y inctype=complete增量备份  rows=n不导入数据  ignore=y若表存在则只导数据)</a></li>
+<li><a href="#sec-3-1">exp</a></li>
+<li><a href="#sec-3-2">导入 imp  (选项： userid tables fromuser touser file=d:/a.dmp full=y inctype=complete增量备份  rows=n不导入数据  ignore=y若表存在则只导数据)</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline11">-&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;数据字典-----------------------------------------------------</a></li>
-<li><a href="#orgheadline12">-&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;表空间-----------------------------------</a></li>
-<li><a href="#orgheadline13">索引 index ------------------------------------------------------------------------------------</a></li>
-<li><a href="#orgheadline14">&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;ps/sql-----------------------------------------------</a></li>
-<li><a href="#orgheadline15">触发器 user_triggers------------------------------------------------------------------------------</a></li>
-<li><a href="#orgheadline16">变量类型------------------------------------------------------------------------------</a></li>
-<li><a href="#orgheadline17">抽象数据类型(面向对象的特性)-------------------------------------------------------------------</a></li>
-<li><a href="#orgheadline18">4 游标（隐式游标，显式游标。游标cursor 与游标变量ref cursor不同，前者有如是常量，后者是变量，）</a></li>
-<li><a href="#orgheadline19">动态SQL&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014; Except for multi-row queries(返回多条记录的查询), the dynamic string</a></li>
-<li><a href="#orgheadline20">-动态sql 与 bulk collect 集合操作 --------------------------------------------</a></li>
+<li><a href="#sec-4">-&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;数据字典-----------------------------------------------------</a></li>
+<li><a href="#sec-5">-&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;表空间-----------------------------------</a></li>
+<li><a href="#sec-6">索引 index ------------------------------------------------------------------------------------</a></li>
+<li><a href="#sec-7">&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;ps/sql-----------------------------------------------</a></li>
+<li><a href="#sec-8">触发器 user_triggers------------------------------------------------------------------------------</a></li>
+<li><a href="#sec-9">变量类型------------------------------------------------------------------------------</a></li>
+<li><a href="#sec-10">抽象数据类型(面向对象的特性)-------------------------------------------------------------------</a></li>
+<li><a href="#sec-11">4 游标（隐式游标，显式游标。游标cursor 与游标变量ref cursor不同，前者有如是常量，后者是变量，）</a></li>
+<li><a href="#sec-12">动态SQL&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014; Except for multi-row queries(返回多条记录的查询), the dynamic string</a></li>
+<li><a href="#sec-13">-动态sql 与 bulk collect 集合操作 --------------------------------------------</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgheadline1" class="outline-2">
-<h2 id="orgheadline1">misc</h2>
-<div class="outline-text-2" id="text-orgheadline1">
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">misc</h2>
+<div class="outline-text-2" id="text-1">
 <p>
 start d:/a.sql<br  />
 @    d:/a.sql<br  />
@@ -116,12 +116,12 @@ exp imp 备份 恢<br  />
 </div>
 </div>
 
-<div id="outline-container-orgheadline7" class="outline-2">
-<h2 id="orgheadline7">用户管理 :</h2>
-<div class="outline-text-2" id="text-orgheadline7">
-</div><div id="outline-container-orgheadline2" class="outline-3">
-<h3 id="orgheadline2">登陆：</h3>
-<div class="outline-text-3" id="text-orgheadline2">
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2">用户管理 :</h2>
+<div class="outline-text-2" id="text-2">
+</div><div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1">登陆：</h3>
+<div class="outline-text-3" id="text-2-1">
 <p>
 sqlplus scott/tiger<br  />
 sqlplus system/root as sysdba<br  />
@@ -133,9 +133,9 @@ system sys sysdba scott;; sys 超级管理员， 具有角色dba ; system 是系
 </div>
 </div>
 
-<div id="outline-container-orgheadline3" class="outline-3">
-<h3 id="orgheadline3">创建用户 create user jixiuf identified by jixiuf_passwd;</h3>
-<div class="outline-text-3" id="text-orgheadline3">
+<div id="outline-container-sec-2-2" class="outline-3">
+<h3 id="sec-2-2">创建用户 create user jixiuf identified by jixiuf_passwd;</h3>
+<div class="outline-text-3" id="text-2-2">
 <p>
 create user userName identified by yourPasswrod default tablespace users temporary tablespace temp quota 50M on users  quota 400K on temp;<br  />
 create user userName identified by yourPasswrod default tablespace ts1  temporary tablespace ts2  unlimited on ts1 ;<br  />
@@ -143,9 +143,9 @@ create user userName identified by yourPasswrod default tablespace ts1  temporar
 </div>
 </div>
 
-<div id="outline-container-orgheadline4" class="outline-3">
-<h3 id="orgheadline4">切换用户 conn system/root;  disconnect</h3>
-<div class="outline-text-3" id="text-orgheadline4">
+<div id="outline-container-sec-2-3" class="outline-3">
+<h3 id="sec-2-3">切换用户 conn system/root;  disconnect</h3>
+<div class="outline-text-3" id="text-2-3">
 <p>
 显示当前用户 show user<br  />
 更改密码 password userName<br  />
@@ -154,9 +154,9 @@ create user userName identified by yourPasswrod default tablespace ts1  temporar
 </div>
 </div>
 
-<div id="outline-container-orgheadline5" class="outline-3">
-<h3 id="orgheadline5">权限分系统权限和对象权限，系统权限是用户对数据库的控制权，对象权限是用户对其它用户所拥有数据对象的操作权限</h3>
-<div class="outline-text-3" id="text-orgheadline5">
+<div id="outline-container-sec-2-4" class="outline-3">
+<h3 id="sec-2-4">权限分系统权限和对象权限，系统权限是用户对数据库的控制权，对象权限是用户对其它用户所拥有数据对象的操作权限</h3>
+<div class="outline-text-3" id="text-2-4">
 <p>
 对象权限 ：如select ,update delete ,create index<br  />
 系统 权限 ：如create session 即连接到数据库<br  />
@@ -199,9 +199,9 @@ revoke  select on emp from jixiuf;<br  />
 
 
 
-<div id="outline-container-orgheadline6" class="outline-3">
-<h3 id="orgheadline6">使用profile 管理用户口令，profile 是口令限制，资源限制的命令集合，当建立数据库时，oracle 会自动建立名称为default 的profile ,当建立用户没有指定profile，则默认用此项分配给用户</h3>
-<div class="outline-text-3" id="text-orgheadline6">
+<div id="outline-container-sec-2-5" class="outline-3">
+<h3 id="sec-2-5">使用profile 管理用户口令，profile 是口令限制，资源限制的命令集合，当建立数据库时，oracle 会自动建立名称为default 的profile ,当建立用户没有指定profile，则默认用此项分配给用户</h3>
+<div class="outline-text-3" id="text-2-5">
 <p>
 (1) 帐户锁定：<br  />
 指定用户登陆时最多可以输入口令的次数，指定锁定时间，用dba 身份执行此命令<br  />
@@ -238,12 +238,12 @@ startup; 启动数据库<br  />
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline10" class="outline-2">
-<h2 id="orgheadline10">备份与恢复(导入导出)</h2>
-<div class="outline-text-2" id="text-orgheadline10">
-</div><div id="outline-container-orgheadline8" class="outline-3">
-<h3 id="orgheadline8">exp</h3>
-<div class="outline-text-3" id="text-orgheadline8">
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3">备份与恢复(导入导出)</h2>
+<div class="outline-text-2" id="text-3">
+</div><div id="outline-container-sec-3-1" class="outline-3">
+<h3 id="sec-3-1">exp</h3>
+<div class="outline-text-3" id="text-3-1">
 <p>
 导出: 三类 ,导出表，导出方案(一个用户对应一个方案)，导出数据库 用exp 命令<br  />
 在导入和导出的时候 要用到C:/oracle/product/10.1.0/Db_1/BIN/exp.exe<br  />
@@ -281,9 +281,9 @@ exp help=y 有帮助提示<br  />
 
 
 
-<div id="outline-container-orgheadline9" class="outline-3">
-<h3 id="orgheadline9">导入 imp  (选项： userid tables fromuser touser file=d:/a.dmp full=y inctype=complete增量备份  rows=n不导入数据  ignore=y若表存在则只导数据)</h3>
-<div class="outline-text-3" id="text-orgheadline9">
+<div id="outline-container-sec-3-2" class="outline-3">
+<h3 id="sec-3-2">导入 imp  (选项： userid tables fromuser touser file=d:/a.dmp full=y inctype=complete增量备份  rows=n不导入数据  ignore=y若表存在则只导数据)</h3>
+<div class="outline-text-3" id="text-3-2">
 <p>
 1 导入表<br  />
      (1) 导入自已的表<br  />
@@ -313,9 +313,9 @@ exp help=y 有帮助提示<br  />
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline11" class="outline-2">
-<h2 id="orgheadline11">-&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;数据字典-----------------------------------------------------</h2>
-<div class="outline-text-2" id="text-orgheadline11">
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4">-&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;数据字典-----------------------------------------------------</h2>
+<div class="outline-text-2" id="text-4">
 <p>
 user_xxx, all_xxx ,dba_xxx 如user_tables  dba_roles<br  />
 dba_users,dba_sys_privs dba_tab_privs dba_col_privs dba_role_privs<br  />
@@ -340,9 +340,9 @@ SELECT * FROM GLOBAL_NAME; 查询当前使用的数据库orcl<br  />
 </div>
 </div>
 
-<div id="outline-container-orgheadline12" class="outline-2">
-<h2 id="orgheadline12">-&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;表空间-----------------------------------</h2>
-<div class="outline-text-2" id="text-orgheadline12">
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5">-&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;表空间-----------------------------------</h2>
+<div class="outline-text-2" id="text-5">
 <p>
 段 区 块<br  />
 create tablespace tsName1 datafile 'd:/a.dbf' size 20m uniform  size 128k  大小20M  区的大小 128k<br  />
@@ -383,9 +383,9 @@ dba_tablespaces  dba_data_files<br  />
 </div>
 </div>
 
-<div id="outline-container-orgheadline13" class="outline-2">
-<h2 id="orgheadline13">索引 index ------------------------------------------------------------------------------------</h2>
-<div class="outline-text-2" id="text-orgheadline13">
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6">索引 index ------------------------------------------------------------------------------------</h2>
+<div class="outline-text-2" id="text-6">
 <p>
 1键压缩index<br  />
 </p>
@@ -514,9 +514,9 @@ select sys_context('USERENV','current_schema') from dual;<br  />
 
 
 
-<div id="outline-container-orgheadline14" class="outline-2">
-<h2 id="orgheadline14">&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;ps/sql-----------------------------------------------</h2>
-<div class="outline-text-2" id="text-orgheadline14">
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7">&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;ps/sql-----------------------------------------------</h2>
+<div class="outline-text-2" id="text-7">
 <div class="org-src-container">
 
 <pre class="src src-sql"><span style="color: #FBDE2D;">procedure</span> <span style="color: #AEAEAE;">---------------------------------------------------------------------------</span>
@@ -878,8 +878,8 @@ import java.<span style="color: #FBDE2D;">sql</span>.DriverManager;
       1  <span style="color: #FBDE2D;">create</span> <span style="color: #FBDE2D;">table</span> downFileList(
                id <span style="color: #FBDE2D;">number</span> <span style="color: #FBDE2D;">primary</span> <span style="color: #FBDE2D;">key</span>,
                <span style="color: #FBDE2D;">name</span> varchar2(40) <span style="color: #FBDE2D;">not</span> <span style="color: #FBDE2D;">null</span>,<span style="color: #AEAEAE;">--&#25991;&#20214;&#21517;</span>
-               filelocation bfile, <span style="color: #AEAEAE;">/*</span><span style="color: #AEAEAE;">&#25991;&#20214;&#23384;&#25918;&#20301;&#32622; binary file lob </span><span style="color: #AEAEAE;">*/</span>
-               description <span style="color: #8DA6CE;">clob</span>   <span style="color: #AEAEAE;">/*</span><span style="color: #AEAEAE;">&#25991;&#20214;&#25551;&#36848;</span><span style="color: #AEAEAE;">*/</span>
+               filelocation bfile, <span style="color: #AEAEAE;">/*</span><span style="color: #AEAEAE;">&#25991;&#20214;&#23384;&#25918;&#20301;&#32622; binary file lob */</span>
+               description <span style="color: #8DA6CE;">clob</span>   <span style="color: #AEAEAE;">/*</span><span style="color: #AEAEAE;">&#25991;&#20214;&#25551;&#36848;*/</span>
                );
        2&#27880;&#20876;&#30446;&#24405;
           <span style="color: #FBDE2D;">create</span> <span style="color: #FBDE2D;">or</span> replace directory filedir1 <span style="color: #FBDE2D;">as</span> <span style="color: #ffa07a;">'c:/filedir_for_oracle'</span>;
@@ -1020,9 +1020,9 @@ import java.<span style="color: #FBDE2D;">sql</span>.DriverManager;
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline15" class="outline-2">
-<h2 id="orgheadline15">触发器 user_triggers------------------------------------------------------------------------------</h2>
-<div class="outline-text-2" id="text-orgheadline15">
+<div id="outline-container-sec-8" class="outline-2">
+<h2 id="sec-8">触发器 user_triggers------------------------------------------------------------------------------</h2>
+<div class="outline-text-2" id="text-8">
 <p>
 1   三部分<br  />
     1 触发事件<br  />
@@ -1203,9 +1203,9 @@ drop trigger tg_test1;<br  />
 <hr  />
 </div>
 </div>
-<div id="outline-container-orgheadline16" class="outline-2">
-<h2 id="orgheadline16">变量类型------------------------------------------------------------------------------</h2>
-<div class="outline-text-2" id="text-orgheadline16">
+<div id="outline-container-sec-9" class="outline-2">
+<h2 id="sec-9">变量类型------------------------------------------------------------------------------</h2>
+<div class="outline-text-2" id="text-9">
 <p>
 1 标量（普通变量），2 record（结构体） ,3 集合（数组,map 等）<br  />
 </p>
@@ -1613,9 +1613,9 @@ end;<br  />
 </div>
 
 
-<div id="outline-container-orgheadline17" class="outline-2">
-<h2 id="orgheadline17">抽象数据类型(面向对象的特性)-------------------------------------------------------------------</h2>
-<div class="outline-text-2" id="text-orgheadline17">
+<div id="outline-container-sec-10" class="outline-2">
+<h2 id="sec-10">抽象数据类型(面向对象的特性)-------------------------------------------------------------------</h2>
+<div class="outline-text-2" id="text-10">
 <p>
  1 type  数据字典 user_types<br  />
 create or replace type addressType as object<br  />
@@ -1715,9 +1715,9 @@ declare<br  />
 
 
 
-<div id="outline-container-orgheadline18" class="outline-2">
-<h2 id="orgheadline18">4 游标（隐式游标，显式游标。游标cursor 与游标变量ref cursor不同，前者有如是常量，后者是变量，）</h2>
-<div class="outline-text-2" id="text-orgheadline18">
+<div id="outline-container-sec-11" class="outline-2">
+<h2 id="sec-11">4 游标（隐式游标，显式游标。游标cursor 与游标变量ref cursor不同，前者有如是常量，后者是变量，）</h2>
+<div class="outline-text-2" id="text-11">
 <p>
 4.1  ·隐式游标（执行sql时，oracle自动创建一个隐式游标，） sql游标有以下属性 sql%rowcount ,sql%found ,sql%notfount  (sql%的前缀，让系统检查隐式游标区域，去获得相应信息) 同理可知显式游标，有%rowcount %found %notfound  %ROWTYPE????<br  />
 </p>
@@ -2107,7 +2107,7 @@ goto &#x2013;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x
                                end if ;<br  />
                               v_i := v_i+1;<br  />
                     end loop;<br  />
-                    <a id="orgtarget1"></a><br  />
+                    <a id="end_loop_flag" name="end_loop_flag"></a><br  />
                     -&#x2014;这是goto 结束标记，好像不能放到end 前面（即程序的最后一个语句 ），例如，有下句话，可编译通过 ,无下句话编译&#x2013;不通过<br  />
                                 dbms_output.put_line('out of loop by using goto&#x2026; ');<br  />
                 end;<br  />
@@ -2239,9 +2239,9 @@ sqlcode()函数返回oracle错误号，sqlerrm() 返回错误信息<br  />
 <hr  />
 </div>
 </div>
-<div id="outline-container-orgheadline19" class="outline-2">
-<h2 id="orgheadline19">动态SQL&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014; Except for multi-row queries(返回多条记录的查询), the dynamic string</h2>
-<div class="outline-text-2" id="text-orgheadline19">
+<div id="outline-container-sec-12" class="outline-2">
+<h2 id="sec-12">动态SQL&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014; Except for multi-row queries(返回多条记录的查询), the dynamic string</h2>
+<div class="outline-text-2" id="text-12">
 <p>
                        can contain any SQL statement (不必包括末尾的分号) or<br  />
                        any PL/SQL block (包括末尾分号).<br  />
@@ -2352,9 +2352,9 @@ END;<br  />
 
 
 
-<div id="outline-container-orgheadline20" class="outline-2">
-<h2 id="orgheadline20">-动态sql 与 bulk collect 集合操作 --------------------------------------------</h2>
-<div class="outline-text-2" id="text-orgheadline20">
+<div id="outline-container-sec-13" class="outline-2">
+<h2 id="sec-13">-动态sql 与 bulk collect 集合操作 --------------------------------------------</h2>
+<div class="outline-text-2" id="text-13">
 <p>
 %BULK_ROWCOUNT<br  />
 </p>

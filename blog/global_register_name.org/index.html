@@ -51,13 +51,13 @@ global:unregister_name(Name).<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-erlang"> <span style="color: #40E0D0;">Resolve</span> = <span style="color: #FBDE2D;">fun</span>(<span style="color: #40E0D0;">_Name</span>,<span style="color: #40E0D0;">Pid1</span>,<span style="color: #40E0D0;">Pid2</span>) -&gt;
-     <span style="color: #FBDE2D;">case</span> <span style="color: #F8F8F8;">process_info</span>(<span style="color: #40E0D0;">Pid1</span>, message_queue_len) &gt; <span style="color: #F8F8F8;">process_info</span>(<span style="color: #40E0D0;">Pid2</span>, message_queue_len) <span style="color: #FBDE2D;">of</span>
-         true -&gt;<span style="color: #FF6400;"> </span><span style="color: #40E0D0;">Pid1</span>;
-         false -&gt;<span style="color: #FF6400;"> </span><span style="color: #40E0D0;">Pid2</span>
-     <span style="color: #FBDE2D;">end</span>
- <span style="color: #FBDE2D;">end</span>,
-<span style="color: #8DA6CE;">global</span>:<span style="color: #8DA6CE;">register_name</span>({zombie, 12}, <span style="color: #F8F8F8;">self</span>(), <span style="color: #40E0D0;">Resolve</span>).
+<pre class="src src-erlang"> Resolve = fun(_Name,Pid1,Pid2) -&gt;
+     case process_info(Pid1, message_queue_len) &gt; process_info(Pid2, message_queue_len) of
+	 true -&gt; Pid1;
+	 false -&gt; Pid2
+     end
+ end,
+global:register_name({zombie, 12}, self(), Resolve).
 </pre>
 </div>
 <p>
@@ -66,15 +66,18 @@ global:unregister_name(Name).<br  />
 
 <ul class="org-ul">
 <li>fun global:random_exit_name/3<br  />
-will kill a process randomly. This is the default option.<br  /></li>
+will kill a process randomly. This is the default option.<br  />
+</li>
 <li>fun global:random_notify_name/3<br  />
        will randomly pick one of the two processes as the one to<br  />
 survive, and it will send {global_name_conflict, Name} to the process<br  />
-that lost.<br  /></li>
+that lost.<br  />
+</li>
 <li>fun global:notify_all_name/3<br  />
       it unregisters both pids, and sends the message {global_name_conflict,<br  />
 Name, OtherPid} to both processes and lets them resolve the issue<br  />
-themselves so they re-register again.<br  /></li>
+themselves so they re-register again.<br  />
+</li>
 </ul>
 
 </div>

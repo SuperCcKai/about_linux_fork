@@ -47,18 +47,18 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgheadline1">寻址方式</a></li>
-<li><a href="#orgheadline2">代码示例</a></li>
-<li><a href="#orgheadline3">x86寄存器</a></li>
+<li><a href="#sec-1">寻址方式</a></li>
+<li><a href="#sec-2">代码示例</a></li>
+<li><a href="#sec-3">x86寄存器</a></li>
 </ul>
 </div>
 </div>
 <p>
 参考 <a href="http://learn.akae.cn/media/ch18s01.html">http://learn.akae.cn/media/ch18s01.html</a><br  />
 </p>
-<div id="outline-container-orgheadline1" class="outline-2">
-<h2 id="orgheadline1">寻址方式</h2>
-<div class="outline-text-2" id="text-orgheadline1">
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">寻址方式</h2>
+<div class="outline-text-2" id="text-1">
 <p>
 通过上一节的例子我们了解到，访问内存时在指令中可以用多种方式表示内存地址，比如<br  />
 可以用数组基地址、元素长度和下标三个量来表示，增加了寻址的灵活性。本节介绍x86常<br  />
@@ -100,18 +100,24 @@ data_items表示数组的基地址ADDRESS_OR_OFFSET<br  />
 
 
 <ul class="org-ul">
-<li>直接寻址（Direct Addressing Mode）。只使用ADDRESS_OR_OFFSET寻址，例如movl ADDRESS, %eax把ADDRESS地址处的32位数传送到eax寄存器。<br  /></li>
-<li>变址寻址（Indexed Addressing Mode） 。上一节的movl data_items(,%edi,4), %eax就属于这种寻址方式，用于访问数组元素比较方便。<br  /></li>
-<li>间接寻址（Indirect Addressing Mode）。只使用BASE_OR_OFFSET寻址，例如movl (%eax), %ebx，把eax寄存器的值看作地址，把内存中这个地址处的32位数传送到ebx寄存器。注意和movl %eax, %ebx区分开。<br  /></li>
-<li>基址寻址（Base Pointer Addressing Mode）。只使用ADDRESS_OR_OFFSET和BASE_OR_OFFSET寻址，例如movl 4(%eax), %ebx，用于访问结构体成员比较方便，例如一个结构体的基地址保存在eax寄存器中，其中一个成员在结构体内的偏移量是4字节，要把这个成员读上来就可以用这条指令。<br  /></li>
-<li>立即数寻址（Immediate Mode）。就是指令中有一个操作数是立即数，例如movl $12, %eax中的$12，这其实跟寻址没什么关系，但也算作一种寻址方式。<br  /></li>
-<li>寄存器寻址（Register Addressing Mode）。就是指令中有一个操作数是寄存器，例如movl $12, %eax中的%eax，这跟内存寻址没什么关系，但也算作一种寻址方式。在汇编程序中寄存器用助记符来表示，在机器指令中则要用几个Bit表示寄存器的编号，这几个Bit也可以看作寄存器的地址，但是和内存地址不在一个地址空间。<br  /></li>
+<li>直接寻址（Direct Addressing Mode）。只使用ADDRESS_OR_OFFSET寻址，例如movl ADDRESS, %eax把ADDRESS地址处的32位数传送到eax寄存器。<br  />
+</li>
+<li>变址寻址（Indexed Addressing Mode） 。上一节的movl data_items(,%edi,4), %eax就属于这种寻址方式，用于访问数组元素比较方便。<br  />
+</li>
+<li>间接寻址（Indirect Addressing Mode）。只使用BASE_OR_OFFSET寻址，例如movl (%eax), %ebx，把eax寄存器的值看作地址，把内存中这个地址处的32位数传送到ebx寄存器。注意和movl %eax, %ebx区分开。<br  />
+</li>
+<li>基址寻址（Base Pointer Addressing Mode）。只使用ADDRESS_OR_OFFSET和BASE_OR_OFFSET寻址，例如movl 4(%eax), %ebx，用于访问结构体成员比较方便，例如一个结构体的基地址保存在eax寄存器中，其中一个成员在结构体内的偏移量是4字节，要把这个成员读上来就可以用这条指令。<br  />
+</li>
+<li>立即数寻址（Immediate Mode）。就是指令中有一个操作数是立即数，例如movl $12, %eax中的$12，这其实跟寻址没什么关系，但也算作一种寻址方式。<br  />
+</li>
+<li>寄存器寻址（Register Addressing Mode）。就是指令中有一个操作数是寄存器，例如movl $12, %eax中的%eax，这跟内存寻址没什么关系，但也算作一种寻址方式。在汇编程序中寄存器用助记符来表示，在机器指令中则要用几个Bit表示寄存器的编号，这几个Bit也可以看作寄存器的地址，但是和内存地址不在一个地址空间。<br  />
+</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgheadline2" class="outline-2">
-<h2 id="orgheadline2">代码示例</h2>
-<div class="outline-text-2" id="text-orgheadline2">
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2">代码示例</h2>
+<div class="outline-text-2" id="text-2">
 <div class="org-src-container">
 
 <pre class="src src-asm">#PURPOSE: This program finds the maximum number of a
@@ -185,10 +191,12 @@ data_items类似于C语言中的数组名。data_items这个标号没有用.glob
 除了.long之外，常用的数据声明还有：<br  />
 </p>
 <ul class="org-ul">
-<li>.byte，也是声明一组数，每个数占8位<br  /></li>
+<li>.byte，也是声明一组数，每个数占8位<br  />
+</li>
 <li>.ascii，例如.ascii "Hello world"，声明11个数，取值为相应字符的ASCII码。注<br  />
 意，和C语言不同，这样声明的字符串末尾是没有'\0'字符的，如果需要以'\0'结尾<br  />
-可以声明为.ascii "Hello world\0"。<br  /></li>
+可以声明为.ascii "Hello world\0"。<br  />
+</li>
 </ul>
 
 <p>
@@ -250,9 +258,9 @@ less than or equal”。<br  />
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline3" class="outline-2">
-<h2 id="orgheadline3">x86寄存器</h2>
-<div class="outline-text-2" id="text-orgheadline3">
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3">x86寄存器</h2>
+<div class="outline-text-2" id="text-3">
 <p>
 x86的通用寄存器有eax、ebx、ecx、edx、edi、esi。这些寄存器在大多数指令中是可以任<br  />
 意选用的，比如movl指令可以把一个立即数传送到eax中，也可传送到ebx中。但也有一些<br  />

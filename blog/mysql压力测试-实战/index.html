@@ -83,55 +83,55 @@ use mysqlslap;
 <span style="color: #FBDE2D;">drop</span> <span style="color: #FBDE2D;">procedure</span> <span style="color: #FF6400;">if</span> <span style="color: #FBDE2D;">exists</span> `insert_tbl_test`$$
 
 <span style="color: #FBDE2D;">create</span> <span style="color: #FBDE2D;">procedure</span> `insert_tbl_test`(
-<span style="color: #FBDE2D;">IN</span> inaccountId <span style="color: #8DA6CE;">int</span>(11),<span style="color: #AEAEAE;">/**/</span>
-<span style="color: #FBDE2D;">IN</span> inaccountType <span style="color: #8DA6CE;">int</span>(11),<span style="color: #AEAEAE;">/**/</span>
-<span style="color: #FBDE2D;">IN</span> inplayerId <span style="color: #8DA6CE;">int</span>(11),<span style="color: #AEAEAE;">/**/</span>
-<span style="color: #FBDE2D;">IN</span> inheadHeroId <span style="color: #8DA6CE;">int</span>(11),<span style="color: #AEAEAE;">/**/</span>
-<span style="color: #FBDE2D;">IN</span> inplayerLevel <span style="color: #8DA6CE;">int</span>(11),<span style="color: #AEAEAE;">/**/</span>
-<span style="color: #FBDE2D;">IN</span> inplayerName <span style="color: #8DA6CE;">varchar</span>(255),<span style="color: #AEAEAE;">/**/</span>
-<span style="color: #FBDE2D;">IN</span> inlogTime datetime,<span style="color: #AEAEAE;">/**/</span>
-<span style="color: #FBDE2D;">IN</span> inclientVersion <span style="color: #8DA6CE;">varchar</span>(255),<span style="color: #AEAEAE;">/**/</span>
-<span style="color: #FBDE2D;">IN</span> inclientType <span style="color: #8DA6CE;">varchar</span>(255),<span style="color: #AEAEAE;">/**/</span>
-<span style="color: #FBDE2D;">IN</span> inissuers <span style="color: #8DA6CE;">varchar</span>(255),<span style="color: #AEAEAE;">/**/</span>
-<span style="color: #FBDE2D;">IN</span> inflashPlayerVersion <span style="color: #8DA6CE;">int</span>(11),<span style="color: #AEAEAE;">/**/</span>
-<span style="color: #FBDE2D;">IN</span> inconnectType <span style="color: #8DA6CE;">int</span>(11),<span style="color: #AEAEAE;">/**/</span>
-<span style="color: #FBDE2D;">IN</span> ingameServerName <span style="color: #8DA6CE;">varchar</span>(255),<span style="color: #AEAEAE;">/**/</span>
-<span style="color: #FBDE2D;">IN</span> inipAddr <span style="color: #8DA6CE;">varchar</span>(255),<span style="color: #AEAEAE;">/**/</span>
-<span style="color: #FBDE2D;">IN</span> inonOffType <span style="color: #8DA6CE;">int</span>(11) <span style="color: #AEAEAE;">/**/</span>
+<span style="color: #FBDE2D;">IN</span> inaccountId <span style="color: #8DA6CE;">int</span>(11),<span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+<span style="color: #FBDE2D;">IN</span> inaccountType <span style="color: #8DA6CE;">int</span>(11),<span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+<span style="color: #FBDE2D;">IN</span> inplayerId <span style="color: #8DA6CE;">int</span>(11),<span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+<span style="color: #FBDE2D;">IN</span> inheadHeroId <span style="color: #8DA6CE;">int</span>(11),<span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+<span style="color: #FBDE2D;">IN</span> inplayerLevel <span style="color: #8DA6CE;">int</span>(11),<span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+<span style="color: #FBDE2D;">IN</span> inplayerName <span style="color: #8DA6CE;">varchar</span>(255),<span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+<span style="color: #FBDE2D;">IN</span> inlogTime datetime,<span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+<span style="color: #FBDE2D;">IN</span> inclientVersion <span style="color: #8DA6CE;">varchar</span>(255),<span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+<span style="color: #FBDE2D;">IN</span> inclientType <span style="color: #8DA6CE;">varchar</span>(255),<span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+<span style="color: #FBDE2D;">IN</span> inissuers <span style="color: #8DA6CE;">varchar</span>(255),<span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+<span style="color: #FBDE2D;">IN</span> inflashPlayerVersion <span style="color: #8DA6CE;">int</span>(11),<span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+<span style="color: #FBDE2D;">IN</span> inconnectType <span style="color: #8DA6CE;">int</span>(11),<span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+<span style="color: #FBDE2D;">IN</span> ingameServerName <span style="color: #8DA6CE;">varchar</span>(255),<span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+<span style="color: #FBDE2D;">IN</span> inipAddr <span style="color: #8DA6CE;">varchar</span>(255),<span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+<span style="color: #FBDE2D;">IN</span> inonOffType <span style="color: #8DA6CE;">int</span>(11) <span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
 )
 <span style="color: #FBDE2D;">BEGIN</span>
 <span style="color: #FBDE2D;">insert</span> <span style="color: #FBDE2D;">into</span> `tbl_test`(
-`accountId`, <span style="color: #AEAEAE;">/**/</span>
-`accountType`, <span style="color: #AEAEAE;">/**/</span>
-`playerId`, <span style="color: #AEAEAE;">/**/</span>
-`headHeroId`, <span style="color: #AEAEAE;">/**/</span>
-`playerLevel`, <span style="color: #AEAEAE;">/**/</span>
-`playerName`, <span style="color: #AEAEAE;">/**/</span>
-`logTime`, <span style="color: #AEAEAE;">/**/</span>
-`clientVersion`, <span style="color: #AEAEAE;">/**/</span>
-`clientType`, <span style="color: #AEAEAE;">/**/</span>
-`issuers`, <span style="color: #AEAEAE;">/**/</span>
-`flashPlayerVersion`, <span style="color: #AEAEAE;">/**/</span>
-`connectType`, <span style="color: #AEAEAE;">/**/</span>
-`gameServerName`, <span style="color: #AEAEAE;">/**/</span>
-`ipAddr`, <span style="color: #AEAEAE;">/**/</span>
-`onOffType` <span style="color: #AEAEAE;">/**/</span>
+`accountId`, <span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+`accountType`, <span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+`playerId`, <span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+`headHeroId`, <span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+`playerLevel`, <span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+`playerName`, <span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+`logTime`, <span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+`clientVersion`, <span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+`clientType`, <span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+`issuers`, <span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+`flashPlayerVersion`, <span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+`connectType`, <span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+`gameServerName`, <span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+`ipAddr`, <span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+`onOffType` <span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
 ) <span style="color: #FBDE2D;">values</span>(
-inaccountId,<span style="color: #AEAEAE;">/**/</span>
-inaccountType,<span style="color: #AEAEAE;">/**/</span>
-inplayerId,<span style="color: #AEAEAE;">/**/</span>
-inheadHeroId,<span style="color: #AEAEAE;">/**/</span>
-inplayerLevel,<span style="color: #AEAEAE;">/**/</span>
-inplayerName,<span style="color: #AEAEAE;">/**/</span>
-inlogTime,<span style="color: #AEAEAE;">/**/</span>
-inclientVersion,<span style="color: #AEAEAE;">/**/</span>
-inclientType,<span style="color: #AEAEAE;">/**/</span>
-inissuers,<span style="color: #AEAEAE;">/**/</span>
-inflashPlayerVersion,<span style="color: #AEAEAE;">/**/</span>
-inconnectType,<span style="color: #AEAEAE;">/**/</span>
-ingameServerName,<span style="color: #AEAEAE;">/**/</span>
-inipAddr,<span style="color: #AEAEAE;">/**/</span>
- inonOffType <span style="color: #AEAEAE;">/**/</span>
+inaccountId,<span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+inaccountType,<span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+inplayerId,<span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+inheadHeroId,<span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+inplayerLevel,<span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+inplayerName,<span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+inlogTime,<span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+inclientVersion,<span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+inclientType,<span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+inissuers,<span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+inflashPlayerVersion,<span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+inconnectType,<span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+ingameServerName,<span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+inipAddr,<span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
+ inonOffType <span style="color: #AEAEAE;">/**</span><span style="color: #AEAEAE;">/</span>
 );
 <span style="color: #FBDE2D;">END</span>$$
 DELIMITER ;
@@ -143,9 +143,9 @@ DELIMITER ;
 </p>
 <div class="org-src-container">
 
-<pre class="src src-sql"><span style="color: #AEAEAE;">/* </span><span style="color: #AEAEAE;">&#20351;&#29992;&#23384;&#20648;&#36807;&#31243; </span><span style="color: #AEAEAE;">*/</span>
+<pre class="src src-sql"><span style="color: #AEAEAE;">/* </span><span style="color: #AEAEAE;">&#20351;&#29992;&#23384;&#20648;&#36807;&#31243; */</span>
 <span style="color: #FBDE2D;">call</span> insert_tbl_test(1,1,1,1,1,<span style="color: #ffa07a;">'name'</span>,<span style="color: #ffa07a;">'1989-01-26'</span>,<span style="color: #ffa07a;">'ver'</span>,<span style="color: #ffa07a;">'t'</span>,<span style="color: #ffa07a;">'dd'</span>,1,1,<span style="color: #ffa07a;">'name'</span>,<span style="color: #ffa07a;">'localhost'</span>,1);
- <span style="color: #AEAEAE;">/* </span><span style="color: #AEAEAE;">&#25110; </span><span style="color: #AEAEAE;">*/</span>
+ <span style="color: #AEAEAE;">/* </span><span style="color: #AEAEAE;">&#25110; */</span>
  <span style="color: #FBDE2D;">insert</span> <span style="color: #FBDE2D;">into</span> tbl_test(  `accountId`,  `accountType`,  `playerId`,  `headHeroId`,  `playerLevel`,  `playerName`,  `logTime`,  `clientVersion`,  `clientType`,  `issuers`,  `flashPlayerVersion`,  `connectType`,  `gameServerName`,  `ipAddr`,  `onOffType`  ) <span style="color: #FBDE2D;">values</span>(1,1,1,1,1,<span style="color: #ffa07a;">'name'</span>,<span style="color: #ffa07a;">'1989-01-26'</span>,<span style="color: #ffa07a;">'ver'</span>,<span style="color: #ffa07a;">'t'</span>,<span style="color: #ffa07a;">'dd'</span>,1,1,<span style="color: #ffa07a;">'name'</span>,<span style="color: #ffa07a;">'localhost'</span>,1);
 </pre>
 </div>

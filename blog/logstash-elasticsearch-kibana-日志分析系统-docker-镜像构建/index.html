@@ -46,30 +46,30 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgheadline1">本库地址 </a></li>
-<li><a href="#orgheadline2">官方docker 镜像</a></li>
-<li><a href="#orgheadline3">生成 包含 logstash elasticsearch kibana 的 docker 镜像</a></li>
-<li><a href="#orgheadline4">运行镜像</a></li>
+<li><a href="#sec-0-1">本库地址 </a></li>
+<li><a href="#sec-0-2">官方docker 镜像</a></li>
+<li><a href="#sec-0-3">生成 包含 logstash elasticsearch kibana 的 docker 镜像</a></li>
+<li><a href="#sec-0-4">运行镜像</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline5">logstash</a></li>
-<li><a href="#orgheadline9">Elasticsearch</a></li>
-<li><a href="#orgheadline51">kibana</a>
+<li><a href="#sec-1">logstash</a></li>
+<li><a href="#sec-2">Elasticsearch</a></li>
+<li><a href="#sec-3">kibana</a>
 <ul>
-<li><a href="#orgheadline52">kibana 加认证功能。</a></li>
-<li><a href="#orgheadline53">kibana 的一些查询</a></li>
-<li><a href="#orgheadline54">demo</a></li>
-<li><a href="#orgheadline55">kibana 的迁移</a></li>
+<li><a href="#sec-3-1">kibana 加认证功能。</a></li>
+<li><a href="#sec-3-2">kibana 的一些查询</a></li>
+<li><a href="#sec-3-3">demo</a></li>
+<li><a href="#sec-3-4">kibana 的迁移</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgheadline1" class="outline-3">
-<h3 id="orgheadline1">本库地址 <a href="https://github.com/jixiuf/logstashdocker">https://github.com/jixiuf/logstashdocker</a></h3>
+<div id="outline-container-sec-0-1" class="outline-3">
+<h3 id="sec-0-1">本库地址 <a href="https://github.com/jixiuf/logstashdocker">https://github.com/jixiuf/logstashdocker</a></h3>
 </div>
-<div id="outline-container-orgheadline2" class="outline-3">
-<h3 id="orgheadline2">官方docker 镜像</h3>
-<div class="outline-text-3" id="text-orgheadline2">
+<div id="outline-container-sec-0-2" class="outline-3">
+<h3 id="sec-0-2">官方docker 镜像</h3>
+<div class="outline-text-3" id="text-0-2">
 <p>
 <a href="https://hub.docker.com/_/logstash/">https://hub.docker.com/_/logstash/</a><br  />
 <a href="https://hub.docker.com/_/kibana/">https://hub.docker.com/_/kibana/</a><br  />
@@ -96,9 +96,9 @@ sudo docker run --name kibana --link es-1:elasticsearch -p 5601:5601 -d kibana
 </div>
 </div>
 
-<div id="outline-container-orgheadline3" class="outline-3">
-<h3 id="orgheadline3">生成 包含 logstash elasticsearch kibana 的 docker 镜像</h3>
-<div class="outline-text-3" id="text-orgheadline3">
+<div id="outline-container-sec-0-3" class="outline-3">
+<h3 id="sec-0-3">生成 包含 logstash elasticsearch kibana 的 docker 镜像</h3>
+<div class="outline-text-3" id="text-0-3">
 <p>
 网速可以的话，用官方的docker 镜像还是不错的，<br  />
 直接本目录下<br  />
@@ -118,9 +118,9 @@ sudo docker run --name kibana --link es-1:elasticsearch -p 5601:5601 -d kibana
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline4" class="outline-3">
-<h3 id="orgheadline4">运行镜像</h3>
-<div class="outline-text-3" id="text-orgheadline4">
+<div id="outline-container-sec-0-4" class="outline-3">
+<h3 id="sec-0-4">运行镜像</h3>
+<div class="outline-text-3" id="text-0-4">
 <div class="org-src-container">
 
 <pre class="src src-sh">sudo  docker run -t -i najaplus/logstash bash
@@ -128,9 +128,9 @@ sudo docker run --name kibana --link es-1:elasticsearch -p 5601:5601 -d kibana
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline5" class="outline-2">
-<h2 id="orgheadline5">logstash</h2>
-<div class="outline-text-2" id="text-orgheadline5">
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">logstash</h2>
+<div class="outline-text-2" id="text-1">
 <p>
 logstash 主要功能，收集与解析数据，<br  />
 从 日志文件或redis 队列中解析出日志数据，经过logstash 一些filter plugin<br  />
@@ -139,7 +139,7 @@ logstash 主要功能，收集与解析数据，<br  />
 </p>
 </div>
 
-<ul class="org-ul"><li><a id="orgheadline6"></a>测试logstash 是否成功安装<br  /><div class="outline-text-4" id="text-orgheadline6">
+<ul class="org-ul"><li><a id="sec-1-0-1" name="sec-1-0-1"></a>测试logstash 是否成功安装<br  /><div class="outline-text-4" id="text-1-0-1">
 <p>
 在镜像中运行<br  />
 </p>
@@ -156,14 +156,16 @@ logstash 主要功能，收集与解析数据，<br  />
 2016-05-06T17:30:17.219Z 40b8994c31cb hello<br  />
 </p>
 </blockquote>
-</div></li>
+</div>
+</li>
 
-<li><a id="orgheadline7"></a>logstash 官网 快速入门<br  /><div class="outline-text-4" id="text-orgheadline7">
+<li><a id="sec-1-0-2" name="sec-1-0-2"></a>logstash 官网 快速入门<br  /><div class="outline-text-4" id="text-1-0-2">
 <p>
 <a href="https://www.elastic.co/guide/en/logstash/current/getting-started-with-logstash.html">https://www.elastic.co/guide/en/logstash/current/getting-started-with-logstash.html</a><br  />
 </p>
-</div></li>
-<li><a id="orgheadline8"></a>logstash demo<br  /><div class="outline-text-4" id="text-orgheadline8">
+</div>
+</li>
+<li><a id="sec-1-0-3" name="sec-1-0-3"></a>logstash demo<br  /><div class="outline-text-4" id="text-1-0-3">
 <p>
 logstash_demo 目录下有几个demo<br  />
 </p>
@@ -173,19 +175,20 @@ logstash_demo 目录下有几个demo<br  />
 logstash -f logstash1.conf  --auto-reload
 </pre>
 </div>
-</div></li></ul>
+</div>
+</li></ul>
 </div>
 
-<div id="outline-container-orgheadline9" class="outline-2">
-<h2 id="orgheadline9">Elasticsearch</h2>
-<div class="outline-text-2" id="text-orgheadline9">
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2">Elasticsearch</h2>
+<div class="outline-text-2" id="text-2">
 <p>
 主要功能， 数据的存储与检索，基于json 格式存储，<br  />
 基于Lucene<br  />
 </p>
 </div>
 
-<ul class="org-ul"><li><a id="orgheadline16"></a>elasticsearch 的几个主要概念<br  /><ul class="org-ul"><li><a id="orgheadline10"></a>Cluster 集群<br  /><div class="outline-text-5" id="text-orgheadline10">
+<ul class="org-ul"><li><a id="sec-2-0-1" name="sec-2-0-1"></a>elasticsearch 的几个主要概念<br  /><ul class="org-ul"><li><a id="sec-2-0-1-1" name="sec-2-0-1-1"></a>Cluster 集群<br  /><div class="outline-text-5" id="text-2-0-1-1">
 <p>
 集群有个名字， 防止不同集群间混淆<br  />
 </p>
@@ -197,9 +200,10 @@ logstash -f logstash1.conf  --auto-reload
 <p>
 默认名称 elasticsearch<br  />
 </p>
-</div></li>
+</div>
+</li>
 
-<li><a id="orgheadline11"></a>Node 节点<br  /><div class="outline-text-5" id="text-orgheadline11">
+<li><a id="sec-2-0-1-2" name="sec-2-0-1-2"></a>Node 节点<br  /><div class="outline-text-5" id="text-2-0-1-2">
 <p>
 一个cluster 下分多个node<br  />
 </p>
@@ -217,32 +221,36 @@ logstash -f logstash1.conf  --auto-reload
 <pre class="src src-sh">elasticsearch  --cluster.name elasticsearch --node.name elasticsearch
 </pre>
 </div>
-</div></li>
+</div>
+</li>
 
-<li><a id="orgheadline12"></a>Index<br  /><div class="outline-text-5" id="text-orgheadline12">
+<li><a id="sec-2-0-1-3" name="sec-2-0-1-3"></a>Index<br  /><div class="outline-text-5" id="text-2-0-1-3">
 <p>
 一些具有共性的documents 的集合，可以认为 一个<br  />
 index 就是一个类别,比如我把游戏1的信息存到index1上 游戏2的信息存<br  />
 到index2上index 有名字一个cluster 可以有任意多个index<br  />
 </p>
-</div></li>
+</div>
+</li>
 
-<li><a id="orgheadline13"></a>Type<br  /><div class="outline-text-5" id="text-orgheadline13">
+<li><a id="sec-2-0-1-4" name="sec-2-0-1-4"></a>Type<br  /><div class="outline-text-5" id="text-2-0-1-4">
 <p>
 Index 下可以定义多个Type<br  />
 可以认为是编程语言里的struct/class<br  />
 a type is defined for documents that have a set of common fields.<br  />
 </p>
-</div></li>
+</div>
+</li>
 
-<li><a id="orgheadline14"></a>Document<br  /><div class="outline-text-5" id="text-orgheadline14">
+<li><a id="sec-2-0-1-5" name="sec-2-0-1-5"></a>Document<br  /><div class="outline-text-5" id="text-2-0-1-5">
 <p>
 docuemnt 存储具体和信息，如果Type 当成java里的Class ,则Document 可以认为是这个Class 的实例<br  />
 在 elasticsearch中它实际是一个json<br  />
 </p>
-</div></li>
+</div>
+</li>
 
-<li><a id="orgheadline15"></a>Shards&amp;Replication<br  /><div class="outline-text-5" id="text-orgheadline15">
+<li><a id="sec-2-0-1-6" name="sec-2-0-1-6"></a>Shards&amp;Replication<br  /><div class="outline-text-5" id="text-2-0-1-6">
 <p>
 架构层面上的东西 ，<br  />
 可以进行分片，及主从 这个可以参考mysql 的数据库分片 与主从<br  />
@@ -263,20 +271,22 @@ Each shard is in itself a fully-functional and independent<br  />
 存在的意义，<br  />
 </p>
 <ol class="org-ol">
-<li>备份，及当某个node 挂了 可以failover, 以保证 高可用性(hight available)<br  /></li>
-<li><p>
-查询可以在从库上进行<br  />
-</p>
+<li>备份，及当某个node 挂了 可以failover, 以保证 高可用性(hight available)<br  />
+</li>
+<li>查询可以在从库上进行<br  />
 
 <p>
 默认情况下 一个index 有5个shard, 每个shard 有一个 replica shards,即共有10个shards<br  />
 通常情况下 replica shard 肯定跟primary shard 不在同一个节点上(这样从库还真正有意义)<br  />
-</p></li>
+</p>
+</li>
 </ol>
-</div></li></ul></li>
+</div>
+</li></ul>
+</li>
 
 
-<li><a id="orgheadline17"></a>启动<br  /><div class="outline-text-4" id="text-orgheadline17">
+<li><a id="sec-2-0-2" name="sec-2-0-2"></a>启动<br  /><div class="outline-text-4" id="text-2-0-2">
 <p>
 elasticsearch 基于Lucene,而Lucene 使用java 编写，所以java jdk 是安装所必须的<br  />
 </p>
@@ -291,9 +301,10 @@ elasticsearch --cluster.name my_cluster_name --node.name my_node_name
 <p>
 启动之后9200端口会监听http 请求<br  />
 </p>
-</div></li>
+</div>
+</li>
 
-<li><a id="orgheadline18"></a>检查节点状态<br  /><div class="outline-text-4" id="text-orgheadline18">
+<li><a id="sec-2-0-3" name="sec-2-0-3"></a>检查节点状态<br  /><div class="outline-text-4" id="text-2-0-3">
 <div class="org-src-container">
 
 <pre class="src src-sh">curl <span style="color: #ffa07a;">'localhost:9200/_cat/health?v'</span>
@@ -306,9 +317,10 @@ epoch      timestamp cluster       status node.total node.data shards pri relo i
 1462637474 00:11:14  elasticsearch yellow          1         1      5   5    0    0        5             0                  -                 50.0%<br  />
 </p>
 </blockquote>
-</div></li>
+</div>
+</li>
 
-<li><a id="orgheadline19"></a>获取node 列表<br  /><div class="outline-text-4" id="text-orgheadline19">
+<li><a id="sec-2-0-4" name="sec-2-0-4"></a>获取node 列表<br  /><div class="outline-text-4" id="text-2-0-4">
 <div class="org-src-container">
 
 <pre class="src src-sh">curl <span style="color: #ffa07a;">'localhost:9200/_cat/nodes?v'</span>
@@ -321,9 +333,10 @@ host         ip           heap.percent ram.percent load node.role master name<br
 120.24.77.58 120.24.77.58            7          92 0.17 d         *      zjh<br  />
 </p>
 </blockquote>
-</div></li>
+</div>
+</li>
 
-<li><a id="orgheadline20"></a>查看集群上有哪个index<br  /><div class="outline-text-4" id="text-orgheadline20">
+<li><a id="sec-2-0-5" name="sec-2-0-5"></a>查看集群上有哪个index<br  /><div class="outline-text-4" id="text-2-0-5">
 <div class="org-src-container">
 
 <pre class="src src-sh">curl <span style="color: #ffa07a;">'localhost:9200/_cat/indices?v'</span>
@@ -338,9 +351,10 @@ yellow open   logstash-2016.05.07   5   1          6            0     17.3kb    
 <p>
 可以看到index 的名字， primary个数 ，replica个数 ,docuemnts数量，<br  />
 </p>
-</div></li>
+</div>
+</li>
 
-<li><a id="orgheadline21"></a>创建一个index<br  /><div class="outline-text-4" id="text-orgheadline21">
+<li><a id="sec-2-0-6" name="sec-2-0-6"></a>创建一个index<br  /><div class="outline-text-4" id="text-2-0-6">
 <div class="org-src-container">
 
 <pre class="src src-sh">curl -XPUT <span style="color: #ffa07a;">'localhost:9200/customer?pretty'</span>
@@ -366,17 +380,19 @@ curl -XPUT <span style="color: #ffa07a;">'http://localhost:9200/twitter/'</span>
 <span style="color: #ffa07a;">}'</span>
 </pre>
 </div>
-</div></li>
+</div>
+</li>
 
-<li><a id="orgheadline22"></a>删除某个index<br  /><div class="outline-text-4" id="text-orgheadline22">
+<li><a id="sec-2-0-7" name="sec-2-0-7"></a>删除某个index<br  /><div class="outline-text-4" id="text-2-0-7">
 <div class="org-src-container">
 
 <pre class="src src-sh">curl -XDELETE <span style="color: #ffa07a;">'localhost:9200/customer?pretty'</span>
 </pre>
 </div>
-</div></li>
+</div>
+</li>
 
-<li><a id="orgheadline23"></a>创建某个Type 的Documents<br  /><div class="outline-text-4" id="text-orgheadline23">
+<li><a id="sec-2-0-8" name="sec-2-0-8"></a>创建某个Type 的Documents<br  /><div class="outline-text-4" id="text-2-0-8">
 <p>
 这里在index:customer上创建了一个type 为 external id=1的document<br  />
 如果id=1的已经存在，则会替换之<br  />
@@ -415,9 +431,10 @@ curl -XPUT 'localhost:9200/custome2r/external/1?pretty' -d '<br  />
 "name": "John Doe"<br  />
 }'<br  />
 </p>
-</div></li>
+</div>
+</li>
 
-<li><a id="orgheadline24"></a>查询某个document<br  /><div class="outline-text-4" id="text-orgheadline24">
+<li><a id="sec-2-0-9" name="sec-2-0-9"></a>查询某个document<br  /><div class="outline-text-4" id="text-2-0-9">
 <div class="org-src-container">
 
 <pre class="src src-sh">curl -XGET <span style="color: #ffa07a;">'localhost:9200/customer/external/1?pretty'</span>
@@ -437,9 +454,10 @@ curl -XPUT 'localhost:9200/custome2r/external/1?pretty' -d '<br  />
 }<br  />
 </p>
 </blockquote>
-</div></li>
+</div>
+</li>
 
-<li><a id="orgheadline25"></a>update document<br  /><div class="outline-text-4" id="text-orgheadline25">
+<li><a id="sec-2-0-10" name="sec-2-0-10"></a>update document<br  /><div class="outline-text-4" id="text-2-0-10">
 <p>
 update 实际是先删除后增加<br  />
 </p>
@@ -466,17 +484,19 @@ script 文档 <a href="https://www.elastic.co/guide/en/elasticsearch/reference/c
 <p>
 目前的版本，script 操作只能会对一个docuemnt ,以后或许会支持类似于sql update 的操作 ，同时修改多个<br  />
 </p>
-</div></li>
+</div>
+</li>
 
-<li><a id="orgheadline26"></a>delete document<br  /><div class="outline-text-4" id="text-orgheadline26">
+<li><a id="sec-2-0-11" name="sec-2-0-11"></a>delete document<br  /><div class="outline-text-4" id="text-2-0-11">
 <div class="org-src-container">
 
 <pre class="src src-sh">curl -XDELETE <span style="color: #ffa07a;">'localhost:9200/customer/external/2?pretty'</span>
 </pre>
 </div>
-</div></li>
+</div>
+</li>
 
-<li><a id="orgheadline27"></a>批量操作<br  /><div class="outline-text-4" id="text-orgheadline27">
+<li><a id="sec-2-0-12" name="sec-2-0-12"></a>批量操作<br  /><div class="outline-text-4" id="text-2-0-12">
 <p>
 同时创建id=1,2的 type:external<br  />
 </p>
@@ -504,7 +524,7 @@ script 文档 <a href="https://www.elastic.co/guide/en/elasticsearch/reference/c
 </div>
 </div>
 
-<ul class="org-ul"><li><a id="orgheadline28"></a>批量从文件导入<br  /><div class="outline-text-5" id="text-orgheadline28">
+<ul class="org-ul"><li><a id="sec-2-0-12-1" name="sec-2-0-12-1"></a>批量从文件导入<br  /><div class="outline-text-5" id="text-2-0-12-1">
 <p>
 假如有文件 account.json<br  />
 </p>
@@ -539,9 +559,11 @@ health index pri rep docs.count docs.deleted store.size pri.store.size
 yellow bank    5   1       1000            0    424.4kb        424.4kb
 </pre>
 </div>
-</div></li></ul></li>
+</div>
+</li></ul>
+</li>
 
-<li><a id="orgheadline29"></a>查看mapping<br  /><div class="outline-text-4" id="text-orgheadline29">
+<li><a id="sec-2-0-13" name="sec-2-0-13"></a>查看mapping<br  /><div class="outline-text-4" id="text-2-0-13">
 <p>
 mapping 主要功能是用来指定 field 的类型的，<br  />
 默认在创建document 时， 有dynamic mapping 机制 自动指定field 类型等，<br  />
@@ -587,13 +609,14 @@ curl -XGET <span style="color: #ffa07a;">'http://localhost:9200/_all/_mapping?pr
 curl -XGET <span style="color: #ffa07a;">'http://localhost:9200/_all/_mapping/tweet,book'</span>
 </pre>
 </div>
-</div></li>
-<li><a id="orgheadline30"></a>put mapping<br  /><div class="outline-text-4" id="text-orgheadline30">
+</div>
+</li>
+<li><a id="sec-2-0-14" name="sec-2-0-14"></a>put mapping<br  /><div class="outline-text-4" id="text-2-0-14">
 <p>
 put mapping ,可以实现<br  />
 </p>
 </div>
-<ul class="org-ul"><li><a id="orgheadline31"></a>创建index 时 指定mapping<br  /><div class="outline-text-5" id="text-orgheadline31">
+<ul class="org-ul"><li><a id="sec-2-0-14-1" name="sec-2-0-14-1"></a>创建index 时 指定mapping<br  /><div class="outline-text-5" id="text-2-0-14-1">
 <div class="org-src-container">
 
 <pre class="src src-sh">curl -XPOST localhost:9200/test -d <span style="color: #ffa07a;">'{</span>
@@ -610,8 +633,9 @@ put mapping ,可以实现<br  />
 <span style="color: #ffa07a;">}'</span>
 </pre>
 </div>
-</div></li>
-<li><a id="orgheadline32"></a>向一个已经存在的index 加一个新的type (index 似乎必须存在)<br  /><div class="outline-text-5" id="text-orgheadline32">
+</div>
+</li>
+<li><a id="sec-2-0-14-2" name="sec-2-0-14-2"></a>向一个已经存在的index 加一个新的type (index 似乎必须存在)<br  /><div class="outline-text-5" id="text-2-0-14-2">
 <div class="org-src-container">
 
 <pre class="src src-sh">curl -XPUT <span style="color: #ffa07a;">'http://localhost:9200/gold'</span> -d <span style="color: #ffa07a;">'</span>
@@ -640,8 +664,9 @@ put mapping ,可以实现<br  />
  <span style="color: #AEAEAE;">#</span><span style="color: #AEAEAE;">https://www.elastic.co/guide/en/elasticsearch/reference/current//mapping-index.html</span>
 </pre>
 </div>
-</div></li>
-<li><a id="orgheadline33"></a>向一个已经存在的type 加一个新的field<br  /><div class="outline-text-5" id="text-orgheadline33">
+</div>
+</li>
+<li><a id="sec-2-0-14-3" name="sec-2-0-14-3"></a>向一个已经存在的type 加一个新的field<br  /><div class="outline-text-5" id="text-2-0-14-3">
 <div class="org-src-container">
 
 <pre class="src src-sh">curl -XPUT <span style="color: #ffa07a;">'http://localhost:9200/gold/_mapping/gold_change'</span> -d <span style="color: #ffa07a;">'</span>
@@ -665,9 +690,11 @@ put mapping ,可以实现<br  />
 比如， 本可能是时间的字段， 默认可能会是long<br  />
 实际是个long , 本默认是string<br  />
 </p>
-</div></li></ul></li>
+</div>
+</li></ul>
+</li>
 
-<li><a id="orgheadline34"></a>mapping types<br  /><div class="outline-text-4" id="text-orgheadline34">
+<li><a id="sec-2-0-15" name="sec-2-0-15"></a>mapping types<br  /><div class="outline-text-4" id="text-2-0-15">
 <p>
 string, date, long, double, boolean or ip<br  />
 object, nested 等json 或对象 等特殊类型<br  />
@@ -693,11 +720,12 @@ date 需要指定format<br  />
 同一个index 下 ， 相同名字的field ,不类在哪个type 中， 必须保证 此field 的类型 处处相同<br  />
 即 ，title 字段可能出现在user 可能出现在group 中 ， 不论在哪里 title 必须都是string 或别的类型<br  />
 </p>
-</div></li>
+</div>
+</li>
 
 
 
-<li><a id="orgheadline35"></a>Index Template<br  /><div class="outline-text-4" id="text-orgheadline35">
+<li><a id="sec-2-0-16" name="sec-2-0-16"></a>Index Template<br  /><div class="outline-text-4" id="text-2-0-16">
 <p>
 template 存在的意义是，比如logstash 在创建index  可能是根据日期<br  />
 创建不同的index ，以避免某个index 数据量过大，<br  />
@@ -736,9 +764,10 @@ curl -XPUT <span style="color: #ffa07a;">'http://localhost:9200/_template/gold_t
 <span style="color: #ffa07a;">  '</span>
 </pre>
 </div>
-</div></li>
+</div>
+</li>
 
-<li><a id="orgheadline46"></a>Search<br  /><ul class="org-ul"><li><a id="orgheadline36"></a>查所有<br  /><div class="outline-text-5" id="text-orgheadline36">
+<li><a id="sec-2-0-17" name="sec-2-0-17"></a>Search<br  /><ul class="org-ul"><li><a id="sec-2-0-17-1" name="sec-2-0-17-1"></a>查所有<br  /><div class="outline-text-5" id="text-2-0-17-1">
 <div class="org-src-container">
 
 <pre class="src src-sh"><span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">&#20004;&#31181;&#26041;&#24335;&#65292; &#19968;&#31181;&#36890;&#36807;&#21442;&#25968; &#65292;&#19968;&#31181;&#36890;&#36807;request body &#21457;&#36865;json&#20869;&#23481;</span>
@@ -778,9 +807,10 @@ curl -XPOST <span style="color: #ffa07a;">'localhost:9200/bank/_search?pretty'</
   ]}}
 </pre>
 </div>
-</div></li>
+</div>
+</li>
 
-<li><a id="orgheadline37"></a>查询语法<br  /><div class="outline-text-5" id="text-orgheadline37">
+<li><a id="sec-2-0-17-2" name="sec-2-0-17-2"></a>查询语法<br  /><div class="outline-text-5" id="text-2-0-17-2">
 <p>
 <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl.html</a><br  />
 查询语法，包含两个Context: Query Context和Filter Context<br  />
@@ -822,8 +852,10 @@ name=="age"<br  />
 filter:中 指定<br  />
 </p>
 <ol class="org-ol">
-<li>status必须== "published"<br  /></li>
-<li>publish_date &gt; 2015-01-01<br  /></li>
+<li>status必须== "published"<br  />
+</li>
+<li>publish_date &gt; 2015-01-01<br  />
+</li>
 </ol>
 <p>
 query 中 bool must,match 则是query context的<br  />
@@ -833,7 +865,7 @@ query 中 bool must,match 则是query context的<br  />
 </p>
 </div>
 
-<ul class="org-ul"><li><a id="orgheadline38"></a>size 指定返回多少个结果<br  /><div class="outline-text-6" id="text-orgheadline38">
+<ul class="org-ul"><li><a id="sec-2-0-17-2-1" name="sec-2-0-17-2-1"></a>size 指定返回多少个结果<br  /><div class="outline-text-6" id="text-2-0-17-2-1">
 <div class="org-src-container">
 
 <pre class="src src-sh">curl -XPOST <span style="color: #ffa07a;">'localhost:9200/bank/_search?pretty'</span> -d <span style="color: #ffa07a;">'</span>
@@ -843,8 +875,9 @@ query 中 bool must,match 则是query context的<br  />
 <span style="color: #ffa07a;">}'</span>
 </pre>
 </div>
-</div></li>
-<li><a id="orgheadline39"></a>from and sort 返回结果集的 第3，4，5条<br  /><div class="outline-text-6" id="text-orgheadline39">
+</div>
+</li>
+<li><a id="sec-2-0-17-2-2" name="sec-2-0-17-2-2"></a>from and sort 返回结果集的 第3，4，5条<br  /><div class="outline-text-6" id="text-2-0-17-2-2">
 <p>
 from 控制从哪条记录起始(0based)<br  />
 sort：使用balance 降序排列<br  />
@@ -860,9 +893,10 @@ sort：使用balance 降序排列<br  />
 <span style="color: #ffa07a;">}'</span>
 </pre>
 </div>
-</div></li>
+</div>
+</li>
 
-<li><a id="orgheadline40"></a>只返回特定的字段 _source<br  /><div class="outline-text-6" id="text-orgheadline40">
+<li><a id="sec-2-0-17-2-3" name="sec-2-0-17-2-3"></a>只返回特定的字段 _source<br  /><div class="outline-text-6" id="text-2-0-17-2-3">
 <div class="org-src-container">
 
 <pre class="src src-sh">curl -XPOST <span style="color: #ffa07a;">'localhost:9200/bank/_search?pretty'</span> -d <span style="color: #ffa07a;">'</span>
@@ -924,9 +958,10 @@ sort：使用balance 降序排列<br  />
 }
 </pre>
 </div>
-</div></li>
+</div>
+</li>
 
-<li><a id="orgheadline41"></a>Full Text Query (全文搜索) "match" "multi_match" 匹配级别的<br  /><div class="outline-text-6" id="text-orgheadline41">
+<li><a id="sec-2-0-17-2-4" name="sec-2-0-17-2-4"></a>Full Text Query (全文搜索) "match" "multi_match" 匹配级别的<br  /><div class="outline-text-6" id="text-2-0-17-2-4">
 <p>
 <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current//full-text-queries.html">https://www.elastic.co/guide/en/elasticsearch/reference/current//full-text-queries.html</a><br  />
 </p>
@@ -985,7 +1020,7 @@ match_phrase似乎跟match 是一样的(返回结果好像是一样的)<br  />
 </pre>
 </div>
 </div>
-<ul class="org-ul"><li><a id="orgheadline42"></a>根据字段查询选定条件的 (term 级别)<br  /><div class="outline-text-7" id="text-orgheadline42">
+<ul class="org-ul"><li><a id="sec-2-0-17-2-4-1" name="sec-2-0-17-2-4-1"></a>根据字段查询选定条件的 (term 级别)<br  /><div class="outline-text-7" id="text-2-0-17-2-4-1">
 <p>
 term, terms,range, exists,missing,prefix,wildcard ,regex,,type<br  />
 term 可以认为 那个字段 严格==查询的内容<br  />
@@ -1005,8 +1040,10 @@ term 可以认为 那个字段 严格==查询的内容<br  />
 &#25152;&#20197;&#19981;&#21305;&#37197;
 </pre>
 </div>
-</div></li></ul></li>
-<li><a id="orgheadline43"></a>bool 语法（must,must_not,should）<br  /><div class="outline-text-6" id="text-orgheadline43">
+</div>
+</li></ul>
+</li>
+<li><a id="sec-2-0-17-2-5" name="sec-2-0-17-2-5"></a>bool 语法（must,must_not,should）<br  /><div class="outline-text-6" id="text-2-0-17-2-5">
 <p>
 相当于 and not or<br  />
 </p>
@@ -1069,9 +1106,10 @@ term 可以认为 那个字段 严格==查询的内容<br  />
 <span style="color: #ffa07a;">  }'</span>
 </pre>
 </div>
-</div></li>
+</div>
+</li>
 
-<li><a id="orgheadline44"></a>filter 结果集的过滤<br  /><div class="outline-text-6" id="text-orgheadline44">
+<li><a id="sec-2-0-17-2-6" name="sec-2-0-17-2-6"></a>filter 结果集的过滤<br  /><div class="outline-text-6" id="text-2-0-17-2-6">
 <div class="org-src-container">
 
 <pre class="src src-sh">curl -XPOST <span style="color: #ffa07a;">'localhost:9200/bank/_search?pretty'</span> -d <span style="color: #ffa07a;">'</span>
@@ -1085,9 +1123,10 @@ term 可以认为 那个字段 严格==查询的内容<br  />
 <span style="color: #ffa07a;">  }'</span>
 </pre>
 </div>
-</div></li>
+</div>
+</li>
 
-<li><a id="orgheadline45"></a>Aggregations(合计) ==sql group by<br  /><div class="outline-text-6" id="text-orgheadline45">
+<li><a id="sec-2-0-17-2-7" name="sec-2-0-17-2-7"></a>Aggregations(合计) ==sql group by<br  /><div class="outline-text-6" id="text-2-0-17-2-7">
 <div class="org-src-container">
 
 <pre class="src src-sh">curl -XPOST <span style="color: #ffa07a;">'localhost:9200/bank/_search?pretty'</span> -d <span style="color: #ffa07a;">'</span>
@@ -1316,14 +1355,17 @@ size=0 意思是说只返回 统计结果 即下面的 aggregations里的数据,
 <span style="color: #ffa07a;">}'</span>
 </pre>
 </div>
-</div></li></ul></li></ul></li>
+</div>
+</li></ul>
+</li></ul>
+</li>
 
-<li><a id="orgheadline47"></a>elasticsearch 启动参数<br  /><div class="outline-text-4" id="text-orgheadline47">
+<li><a id="sec-2-0-18" name="sec-2-0-18"></a>elasticsearch 启动参数<br  /><div class="outline-text-4" id="text-2-0-18">
 <p>
 配置 elasticsearch 的JVM 参数<br  />
 </p>
 <blockquote>
-nil</blockquote>
+</blockquote>
 <p>
 两个环境变量， 尽量不要修改JAVA_OPTS,保持原样, 而修改 ES_JAVA_OPTS<br  />
 ES_HEAP_SIZE 设置 heap 大小(min =max=this)<br  />
@@ -1362,7 +1404,7 @@ vm.max_map_count.<br  />
 </div>
 
 
-<ul class="org-ul"><li><a id="orgheadline48"></a>停用 swap<br  /><div class="outline-text-5" id="text-orgheadline48">
+<ul class="org-ul"><li><a id="sec-2-0-18-1" name="sec-2-0-18-1"></a>停用 swap<br  /><div class="outline-text-5" id="text-2-0-18-1">
 <div class="org-src-container">
 
 <pre class="src src-sh">sudo swapoff -a
@@ -1372,11 +1414,13 @@ config/elasticsearch.yml
 &#31105;&#27490;&#23558;&#20869;&#23384;&#20013;&#30340; elasticsearch&#25968;&#25454; &#20132;&#25442;&#20986;&#20869;&#23384;
 </pre>
 </div>
-</div></li>
+</div>
+</li>
 
-<li><a id="orgheadline49"></a>mlockall<br  /></li></ul></li>
+<li><a id="sec-2-0-18-2" name="sec-2-0-18-2"></a>mlockall<br  /></li></ul>
+</li>
 
-<li><a id="orgheadline50"></a>配置<br  /><div class="outline-text-4" id="text-orgheadline50">
+<li><a id="sec-2-0-19" name="sec-2-0-19"></a>配置<br  /><div class="outline-text-4" id="text-2-0-19">
 <p>
 /etc/elasticsearch/elasticsearch.yml<br  />
 有些参数也可以在配置文件中配置<br  />
@@ -1398,20 +1442,21 @@ centos7 上 配置成service<br  />
 /usr/lib/systemd/system/elasticsearch.service<br  />
 /usr/lib/sysctl.d/elasticsearch.conf<br  />
 </p>
-</div></li></ul>
+</div>
+</li></ul>
 </div>
 
-<div id="outline-container-orgheadline51" class="outline-2">
-<h2 id="orgheadline51">kibana</h2>
-<div class="outline-text-2" id="text-orgheadline51">
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3">kibana</h2>
+<div class="outline-text-2" id="text-3">
 <p>
 数据的可视化， 主要功能 从 elasticsearch 中查询数据， 将数据以图表的形式展示<br  />
 </p>
 </div>
 
-<div id="outline-container-orgheadline52" class="outline-3">
-<h3 id="orgheadline52">kibana 加认证功能。</h3>
-<div class="outline-text-3" id="text-orgheadline52">
+<div id="outline-container-sec-3-1" class="outline-3">
+<h3 id="sec-3-1">kibana 加认证功能。</h3>
+<div class="outline-text-3" id="text-3-1">
 <p>
 默认情况下kibana 没有任何认证，如果需要放到外网访问， 很不安全。<br  />
 elasticsearch 官网有个插件 shield 可以实现认证及权限控制等功能。<br  />
@@ -1423,9 +1468,9 @@ elasticsearch 官网有个插件 shield 可以实现认证及权限控制等功�
 </div>
 </div>
 
-<div id="outline-container-orgheadline53" class="outline-3">
-<h3 id="orgheadline53">kibana 的一些查询</h3>
-<div class="outline-text-3" id="text-orgheadline53">
+<div id="outline-container-sec-3-2" class="outline-3">
+<h3 id="sec-3-2">kibana 的一些查询</h3>
+<div class="outline-text-3" id="text-3-2">
 <p>
 搜索框里可以<br  />
 </p>
@@ -1442,9 +1487,9 @@ kibana 的可视化 是在上述查询出来的数据上 进行 统计<br  />
 </div>
 </div>
 
-<div id="outline-container-orgheadline54" class="outline-3">
-<h3 id="orgheadline54">demo</h3>
-<div class="outline-text-3" id="text-orgheadline54">
+<div id="outline-container-sec-3-3" class="outline-3">
+<h3 id="sec-3-3">demo</h3>
+<div class="outline-text-3" id="text-3-3">
 <p>
 比如 我打印这样的日志 记录游戏资产变化（金币、钻石等通过key来区分）<br  />
 </p>
@@ -1461,9 +1506,9 @@ kibana 的可视化 是在上述查询出来的数据上 进行 统计<br  />
 </div>
 </div>
 
-<div id="outline-container-orgheadline55" class="outline-3">
-<h3 id="orgheadline55">kibana 的迁移</h3>
-<div class="outline-text-3" id="text-orgheadline55">
+<div id="outline-container-sec-3-4" class="outline-3">
+<h3 id="sec-3-4">kibana 的迁移</h3>
+<div class="outline-text-3" id="text-3-4">
 <p>
 你在kibana 界面里做的配置及 创建的查询 视图都保存在<br  />
 elasticsearch 内一个 叫 .kibana 的index 下<br  />

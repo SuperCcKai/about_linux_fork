@@ -55,15 +55,15 @@
   (<span style="color: #FBDE2D;">let</span> ((old-pos (point))
         m-end m-begin
         )
-    (<span style="color: #FBDE2D;">when</span> (re-search-forward <span style="color: #ffa07a;">"[ \t]+"</span>  <span style="color: #D8FA3C;">nil</span> <span style="color: #D8FA3C;">t</span>)
-      (<span style="color: #FF6400;">setq</span> m-begin (match-beginning 0))
-      (<span style="color: #FF6400;">setq</span> m-end (match-end 0))
+    (<span style="color: #FBDE2D;">when</span> (re-search-forward <span style="color: #ffa07a;">"[ \t]+"</span>  nil t)
+      (<span style="color: #FBDE2D;">setq</span> m-begin (match-beginning 0))
+      (<span style="color: #FBDE2D;">setq</span> m-end (match-end 0))
       (goto-char m-begin)
-      (<span style="color: #FBDE2D;">if</span> (<span style="color: #FBDE2D;">equal</span> old-pos m-end)
+      (<span style="color: #FBDE2D;">if</span> (equal old-pos m-end)
           (<span style="color: #FBDE2D;">progn</span>
-            (re-search-forward <span style="color: #ffa07a;">"[ \t]+"</span>  <span style="color: #D8FA3C;">nil</span> <span style="color: #D8FA3C;">t</span>)
+            (re-search-forward <span style="color: #ffa07a;">"[ \t]+"</span>  nil t)
             (goto-char (match-beginning 0)))
-        (<span style="color: #FBDE2D;">if</span> (<span style="color: #FBDE2D;">equal</span> m-begin old-pos)
+        (<span style="color: #FBDE2D;">if</span> (equal m-begin old-pos)
             (goto-char m-end)
             )))))
 </pre>
@@ -88,8 +88,8 @@
 <span style="color: #ffa07a;">Replaces default behaviour of comment-dwim, when it inserts comment at the end of the line."</span>
   (<span style="color: #FBDE2D;">interactive</span> <span style="color: #ffa07a;">"*P"</span>)
   (comment-normalize-vars)
-  (<span style="color: #FBDE2D;">if</span> (<span style="color: #FBDE2D;">and</span> (<span style="color: #FBDE2D;">not</span> (region-active-p)) (<span style="color: #FBDE2D;">not</span> (looking-at <span style="color: #ffa07a;">"[ \t]*$"</span>)))
-      (comment-<span style="color: #FBDE2D;">or</span>-uncomment-region (line-beginning-position) (line-end-position))
+  (<span style="color: #FBDE2D;">if</span> (<span style="color: #FBDE2D;">and</span> (not (region-active-p)) (not (looking-at <span style="color: #ffa07a;">"[ \t]*$"</span>)))
+      (comment-or-uncomment-region (line-beginning-position) (line-end-position))
     (comment-dwim arg)))
 </pre>
 </div>
@@ -99,7 +99,7 @@
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #FF6400;">define-key</span> java-mode-map <span style="color: #ffa07a;">";"</span>  'joseph-append-semicolon-at-eol)
+<pre class="src src-emacs-lisp">(define-key java-mode-map <span style="color: #ffa07a;">";"</span>  'joseph-append-semicolon-at-eol)
 
 <span style="color: #AEAEAE;">;;;</span><span style="color: #AEAEAE;">###</span><span style="color: #ffc0cb;">autoload</span>
 (<span style="color: #FBDE2D;">defun</span> <span style="color: #FF6400;">joseph-append-semicolon-at-eol</span>(<span style="color: #8DA6CE;">&amp;optional</span> arg)
@@ -138,16 +138,16 @@
 <div class="org-src-container">
 
 <pre class="src src-emacs-lisp"><span style="color: #AEAEAE;">;;;</span><span style="color: #AEAEAE;">###</span><span style="color: #ffc0cb;">autoload</span>
-(<span style="color: #FBDE2D;">defun</span> open-line-<span style="color: #FBDE2D;">or</span>-new-line-dep-pos()
+(<span style="color: #FBDE2D;">defun</span> <span style="color: #FF6400;">open-line-or-new-line-dep-pos</span>()
   <span style="color: #ffa07a;">"if point is in head of line then open-line</span>
 <span style="color: #ffa07a;">if point is at end of line , new-line-and-indent"</span>
   (<span style="color: #FBDE2D;">interactive</span>)
   (<span style="color: #FBDE2D;">if</span> (<span style="color: #FBDE2D;">and</span> (= (point) (point-at-bol))
-           (<span style="color: #FBDE2D;">not</span> (looking-at <span style="color: #ffa07a;">"^[ \t]*$"</span>)))
+           (not (looking-at <span style="color: #ffa07a;">"^[ \t]*$"</span>)))
       (<span style="color: #FBDE2D;">progn</span>
         (open-line 1)
         (indent-for-tab-command))
-    (newline-<span style="color: #FBDE2D;">and</span>-indent)))
+    (newline-and-indent)))
 </pre>
 </div>
 

@@ -47,17 +47,17 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgheadline1">dtd 使用 trang</a></li>
-<li><a href="#orgheadline2">xsd</a></li>
-<li><a href="#orgheadline3">&lt;uri resource="f" uri="s"/&gt;</a></li>
-<li><a href="#orgheadline4">&lt;uri pattern="p" uri="s"/&gt;</a></li>
-<li><a href="#orgheadline5">&lt;uri pattern="p" typeId="T"/&gt;</a></li>
-<li><a href="#orgheadline6">&lt;documentElement prefix="N" localName="E" uri="s"/&gt;</a></li>
-<li><a href="#orgheadline7">&lt;documentElement prefix="N" localName="E" typeId="T"/&gt;</a></li>
-<li><a href="#orgheadline8">&lt;transformURI fromPattern="p" toPattern="q"/&gt;</a></li>
-<li><a href="#orgheadline9">&lt;namespace ns="N" uri="s"/&gt; 与* &lt;namespace ns="N" typeId="T"/&gt;</a></li>
-<li><a href="#orgheadline10">如何定义一个typeId  &lt;typeId id="T" uri="s"/&gt;</a></li>
-<li><a href="#orgheadline11">也可以包含另一个schemas 文件</a></li>
+<li><a href="#sec-1">dtd 使用 trang</a></li>
+<li><a href="#sec-2">xsd</a></li>
+<li><a href="#sec-3">&lt;uri resource="f" uri="s"/&gt;</a></li>
+<li><a href="#sec-4">&lt;uri pattern="p" uri="s"/&gt;</a></li>
+<li><a href="#sec-5">&lt;uri pattern="p" typeId="T"/&gt;</a></li>
+<li><a href="#sec-6">&lt;documentElement prefix="N" localName="E" uri="s"/&gt;</a></li>
+<li><a href="#sec-7">&lt;documentElement prefix="N" localName="E" typeId="T"/&gt;</a></li>
+<li><a href="#sec-8">&lt;transformURI fromPattern="p" toPattern="q"/&gt;</a></li>
+<li><a href="#sec-9">&lt;namespace ns="N" uri="s"/&gt; 与* &lt;namespace ns="N" typeId="T"/&gt;</a></li>
+<li><a href="#sec-10">如何定义一个typeId  &lt;typeId id="T" uri="s"/&gt;</a></li>
+<li><a href="#sec-11">也可以包含另一个schemas 文件</a></li>
 </ul>
 </div>
 </div>
@@ -75,9 +75,9 @@ xsd-&#x2014;&gt;rng&#x2013;&#x2014;&gt;rnc<br  />
                  rngconv.jar    xsd -&#x2014;&gt;rnc<br  />
 </p>
 
-<div id="outline-container-orgheadline1" class="outline-2">
-<h2 id="orgheadline1">dtd 使用 trang</h2>
-<div class="outline-text-2" id="text-orgheadline1">
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">dtd 使用 trang</h2>
+<div class="outline-text-2" id="text-1">
 <p>
 将生成的hibernate-mapping-3.0.rnc复制到emacs的nXML-mode安装目录。<br  />
      (add-to-list 'rng-schema-locating-files (expand-file-name "~/.emacs.d/script/nxml/schemas.xml"))<br  />
@@ -89,7 +89,8 @@ xsd-&#x2014;&gt;rng&#x2013;&#x2014;&gt;rnc<br  />
 xml 代码<br  />
 </p>
 <ol class="org-ol">
-<li>&lt;typeId id="Hibernate HBM" uri="hibernate-mapping-3.0.rnc"/&gt;<br  /></li>
+<li>&lt;typeId id="Hibernate HBM" uri="hibernate-mapping-3.0.rnc"/&gt;<br  />
+</li>
 </ol>
 <p>
 在schema.xml文件中加入hbm的一种识别方式，这里将根据文件名以hbm.xml结尾，来识别这是一个Hibernate HBM类型的文件：<br  />
@@ -99,22 +100,21 @@ xml 代码<br  />
 <hr  />
 </div>
 </div>
-<div id="outline-container-orgheadline2" class="outline-2">
-<h2 id="orgheadline2">xsd</h2>
-<div class="outline-text-2" id="text-orgheadline2">
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2">xsd</h2>
+<div class="outline-text-2" id="text-2">
 <p>
 rngconv 将 xsd转换成rng格式供emacs nxml-mode 编辑xml文件使用<br  />
 </p>
 <ol class="org-ol">
-<li><p>
-java -jar rngconv.jar <a href="http://maven.apache.org/maven-v4_0_0.xsd">http://maven.apache.org/maven-v4_0_0.xsd</a> &gt;&gt; maven2.rng<br  />
+<li>java -jar rngconv.jar <a href="http://maven.apache.org/maven-v4_0_0.xsd">http://maven.apache.org/maven-v4_0_0.xsd</a> &gt;&gt; maven2.rng<br  />
 java -jar trang.jar maven2.rng maven2.rnc<br  />
-</p>
 
 <p>
 将maven2.rnc复制到nXML-mode安装目录中。修改schema.xml增加一种新的类型<br  />
     &lt;typeId id="Maven2" uri="maven2.rnc"/&gt;<br  />
-</p></li>
+</p>
+</li>
 </ol>
 
 <p>
@@ -122,8 +122,8 @@ java -jar trang.jar maven2.rng maven2.rnc<br  />
  &lt;namespace ns="<a href="http://maven.apache.org/POM/4.0.0">http://maven.apache.org/POM/4.0.0</a>" typeId="Maven2" /&gt;<br  />
 pom.xml 的头部声明是这样的<br  />
  &lt;project xmlns="<a href="http://maven.apache.org/POM/4.0.0">http://maven.apache.org/POM/4.0.0</a>"<br  />
-    xsi:schemaLocation="<a href="http://maven.apache.org/POM/4.0.0">http://maven.apache.org/POM/4.0.0</a> <a href="http://maven.apache.org/maven-v4_0_0.xsd">http://maven.apache.org/maven-v4_0_0.xsd</a>"<br  />
-    xmlns:xsi="<a href="http://www.w3.org/2001/XMLSchema-instance">http://www.w3.org/2001/XMLSchema-instance</a>"&gt;<br  />
+        xsi:schemaLocation="<a href="http://maven.apache.org/POM/4.0.0">http://maven.apache.org/POM/4.0.0</a> <a href="http://maven.apache.org/maven-v4_0_0.xsd">http://maven.apache.org/maven-v4_0_0.xsd</a>"<br  />
+        xmlns:xsi="<a href="http://www.w3.org/2001/XMLSchema-instance">http://www.w3.org/2001/XMLSchema-instance</a>"&gt;<br  />
 </p>
 
 
@@ -136,9 +136,9 @@ pom.xml 的头部声明是这样的<br  />
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline3" class="outline-2">
-<h2 id="orgheadline3">&lt;uri resource="f" uri="s"/&gt;</h2>
-<div class="outline-text-2" id="text-orgheadline3">
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3">&lt;uri resource="f" uri="s"/&gt;</h2>
+<div class="outline-text-2" id="text-3">
 <p>
 表示将f 对s(s is a schema file) 进行关联. f 可以是一个 full URL 也可以是一个本地的文件<br  />
  比如:&lt;uri resource="abc.xyz" uri="xyz.rnc"/&gt;<br  />
@@ -147,9 +147,9 @@ pom.xml 的头部声明是这样的<br  />
 </div>
 </div>
 
-<div id="outline-container-orgheadline4" class="outline-2">
-<h2 id="orgheadline4">&lt;uri pattern="p" uri="s"/&gt;</h2>
-<div class="outline-text-2" id="text-orgheadline4">
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4">&lt;uri pattern="p" uri="s"/&gt;</h2>
+<div class="outline-text-2" id="text-4">
 <p>
   相对于 &lt;uri pattern="p" uri="s"/&gt; 中的resource 所指定的内容是一个特定的不<br  />
   具通用性.pattern 可以是一个regexp 匹配某一类的文件.<br  />
@@ -159,9 +159,9 @@ pom.xml 的头部声明是这样的<br  />
 </div>
 </div>
 
-<div id="outline-container-orgheadline5" class="outline-2">
-<h2 id="orgheadline5">&lt;uri pattern="p" typeId="T"/&gt;</h2>
-<div class="outline-text-2" id="text-orgheadline5">
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5">&lt;uri pattern="p" typeId="T"/&gt;</h2>
+<div class="outline-text-2" id="text-5">
 <p>
 pattern 与前者相同,typeId 则是一个Id<br  />
 比如:<br  />
@@ -175,9 +175,9 @@ pattern 与前者相同,typeId 则是一个Id<br  />
 </div>
 </div>
 
-<div id="outline-container-orgheadline6" class="outline-2">
-<h2 id="orgheadline6">&lt;documentElement prefix="N" localName="E" uri="s"/&gt;</h2>
-<div class="outline-text-2" id="text-orgheadline6">
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6">&lt;documentElement prefix="N" localName="E" uri="s"/&gt;</h2>
+<div class="outline-text-2" id="text-6">
 <p>
 即如果一个xml 文件的根元素是E ,并且其namespace是N的话,将使用 schema s<br  />
 &lt;documentElement prefix="" localName="hibernate-mapping" uri="hibernate.rnc"/&gt;<br  />
@@ -195,9 +195,9 @@ pattern 与前者相同,typeId 则是一个Id<br  />
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline7" class="outline-2">
-<h2 id="orgheadline7">&lt;documentElement prefix="N" localName="E" typeId="T"/&gt;</h2>
-<div class="outline-text-2" id="text-orgheadline7">
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7">&lt;documentElement prefix="N" localName="E" typeId="T"/&gt;</h2>
+<div class="outline-text-2" id="text-7">
 <p>
 有了前两个,这个应该不难理解<br  />
 &lt;documentElement localName="stylesheet" typeId="XSLT"/&gt; ;所以root element<br  />
@@ -215,9 +215,9 @@ pattern 与前者相同,typeId 则是一个Id<br  />
 </div>
 </div>
 
-<div id="outline-container-orgheadline8" class="outline-2">
-<h2 id="orgheadline8">&lt;transformURI fromPattern="p" toPattern="q"/&gt;</h2>
-<div class="outline-text-2" id="text-orgheadline8">
+<div id="outline-container-sec-8" class="outline-2">
+<h2 id="sec-8">&lt;transformURI fromPattern="p" toPattern="q"/&gt;</h2>
+<div class="outline-text-2" id="text-8">
 <p>
 p 和q 里应该含有相同数量的"*" 他们是一一对应的<br  />
   &lt;transformURI fromPattern="*.xml" toPattern="*.rnc"/&gt;<br  />
@@ -225,9 +225,9 @@ p 和q 里应该含有相同数量的"*" 他们是一一对应的<br  />
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline9" class="outline-2">
-<h2 id="orgheadline9">&lt;namespace ns="N" uri="s"/&gt; 与* &lt;namespace ns="N" typeId="T"/&gt;</h2>
-<div class="outline-text-2" id="text-orgheadline9">
+<div id="outline-container-sec-9" class="outline-2">
+<h2 id="sec-9">&lt;namespace ns="N" uri="s"/&gt; 与* &lt;namespace ns="N" typeId="T"/&gt;</h2>
+<div class="outline-text-2" id="text-9">
 <p>
 &lt;namespace ns="<a href="http://www.w3.org/1999/xhtml">http://www.w3.org/1999/xhtml</a>" typeId="XHTML"/&gt;<br  />
 &lt;namespace ns="<a href="http://www.w3.org/1999/xhtml">http://www.w3.org/1999/xhtml</a>" uri="xhtml.rnc"/&gt;<br  />
@@ -242,9 +242,9 @@ p 和q 里应该含有相同数量的"*" 他们是一一对应的<br  />
 </div>
 </div>
 
-<div id="outline-container-orgheadline10" class="outline-2">
-<h2 id="orgheadline10">如何定义一个typeId  &lt;typeId id="T" uri="s"/&gt;</h2>
-<div class="outline-text-2" id="text-orgheadline10">
+<div id="outline-container-sec-10" class="outline-2">
+<h2 id="sec-10">如何定义一个typeId  &lt;typeId id="T" uri="s"/&gt;</h2>
+<div class="outline-text-2" id="text-10">
 <p>
 &lt;typeId id="XSLT" uri="xslt.rnc"/&gt;<br  />
 &lt;typeId id="XSLT<sub>alias</sub>" typeId="XSLT"/&gt;<br  />
@@ -253,9 +253,9 @@ p 和q 里应该含有相同数量的"*" 他们是一一对应的<br  />
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline11" class="outline-2">
-<h2 id="orgheadline11">也可以包含另一个schemas 文件</h2>
-<div class="outline-text-2" id="text-orgheadline11">
+<div id="outline-container-sec-11" class="outline-2">
+<h2 id="sec-11">也可以包含另一个schemas 文件</h2>
+<div class="outline-text-2" id="text-11">
 <p>
 &lt;include rules="F"/&gt;<br  />
 </p>

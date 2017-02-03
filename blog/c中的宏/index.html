@@ -69,15 +69,15 @@
 <li>规则1: 如果宏定义以#开头，不展开参数，直接替换。 规则1包括三句话<br  />
 <ul class="org-ul">
 <li>如果宏定义以#开头,<br  />
-在代码中遇到一个宏,而这个宏的定义,二话没说,第一个字符是#<br  /></li>
+在代码中遇到一个宏,而这个宏的定义,二话没说,第一个字符是#<br  />
+</li>
 <li>不展开参数<br  />
 无论参数有多复杂,把它作为一个字符串整体,不再进行展开,因为一个宏内容中<br  />
-可能包含另一个宏,正常情况下,这个宏中宏也会被展开,但遇到#则例外.<br  /></li>
-<li><p>
-直接替换。<br  />
+可能包含另一个宏,正常情况下,这个宏中宏也会被展开,但遇到#则例外.<br  />
+</li>
+<li>直接替换。<br  />
 把这个参数放到宏内容中参数的相应位置,即所谓的"直接替换".<br  />
 比如 下面这个宏<br  />
-</p>
 <div class="org-src-container">
 
 <pre class="src src-c"><span style="color: #7fffd4;">#define</span> <span style="color: #FF6400;">g</span>(<span style="color: #40E0D0;">a</span>) #a
@@ -86,16 +86,14 @@
 &#34429;&#28982;&#20256;&#36807;&#21435;&#30340;&#21442;&#25968;&#26159;&#21478;&#19968;&#20010;&#23439;,&#20294;&#24182;&#19981;&#25226;&#23427;&#24403;&#20316;&#23439;,<span style="color: #8DA6CE;">&#32780;&#20165;&#35748;&#20026;&#23427;&#26159;&#20010;&#23383;&#31526;&#20018;</span>
  <span style="color: #FF6400;">printf</span>(<span style="color: #ffa07a;">"%s\n"</span>, <span style="color: #8DA6CE;">g</span>(<span style="color: #40E0D0;">f</span>(1,2))); <span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#32467;&#26524;&#25171;: f(1,2)</span>
 </pre>
-</div></li>
-</ul></li>
+</div>
+</li>
 </ul>
-<ul class="org-ul">
+</li>
 <li>规则2:如果宏定义不以#开头，展开参数，直接替换，如果碰到的是#开头的宏，不继续往里层展开，往外层展开。<br  />
 <ul class="org-ul">
-<li><p>
-含义是,首先把参数作为一个宏进行展开,将其展开后的结果作为参数传到本宏<br  />
+<li>含义是,首先把参数作为一个宏进行展开,将其展开后的结果作为参数传到本宏<br  />
 中,然后才对本宏进行展开<br  />
-</p>
 <div class="org-src-container">
 
 <pre class="src src-c">printf(<span style="color: #ffa07a;">"%s\n"</span>, h(f(1,2))); <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">12</span>
@@ -107,8 +105,10 @@
 然后对h(12)进行展开,第一步展开的结果是g(12)<br  />
 g(12)展开的结果是12<br  />
 h(f(1,2))&#x2013;&gt;h(12)&#x2013;&gt;g(12)&#x2013;&gt;12<br  />
-</p></li>
-</ul></li>
+</p>
+</li>
+</ul>
+</li>
 </ul>
 
 

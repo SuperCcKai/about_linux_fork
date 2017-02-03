@@ -47,23 +47,23 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgheadline1">jenkins 运行</a></li>
-<li><a href="#orgheadline8">配置一个项目</a>
+<li><a href="#sec-1">jenkins 运行</a></li>
+<li><a href="#sec-2">配置一个项目</a>
 <ul>
-<li><a href="#orgheadline2">丢弃旧的构建</a></li>
-<li><a href="#orgheadline3">选择使用源码管理，或者手动管理代码</a></li>
-<li><a href="#orgheadline4">构建触发器</a></li>
-<li><a href="#orgheadline5">xcode 相关配置</a></li>
-<li><a href="#orgheadline6">上专到fir.im</a></li>
-<li><a href="#orgheadline7">构建后的操作</a></li>
+<li><a href="#sec-2-1">丢弃旧的构建</a></li>
+<li><a href="#sec-2-2">选择使用源码管理，或者手动管理代码</a></li>
+<li><a href="#sec-2-3">构建触发器</a></li>
+<li><a href="#sec-2-4">xcode 相关配置</a></li>
+<li><a href="#sec-2-5">上专到fir.im</a></li>
+<li><a href="#sec-2-6">构建后的操作</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgheadline1" class="outline-2">
-<h2 id="orgheadline1">jenkins 运行</h2>
-<div class="outline-text-2" id="text-orgheadline1">
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">jenkins 运行</h2>
+<div class="outline-text-2" id="text-1">
 <div class="org-src-container">
 
 <pre class="src src-sh">java -jar jenkins.war
@@ -74,12 +74,12 @@
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline8" class="outline-2">
-<h2 id="orgheadline8">配置一个项目</h2>
-<div class="outline-text-2" id="text-orgheadline8">
-</div><div id="outline-container-orgheadline2" class="outline-3">
-<h3 id="orgheadline2">丢弃旧的构建</h3>
-<div class="outline-text-3" id="text-orgheadline2">
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2">配置一个项目</h2>
+<div class="outline-text-2" id="text-2">
+</div><div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1">丢弃旧的构建</h3>
+<div class="outline-text-3" id="text-2-1">
 <p>
 策略：Log Rotation<br  />
 </p>
@@ -87,27 +87,27 @@
 
 
 <colgroup>
-<col  class="org-left" />
+<col  class="left" />
 
-<col  class="org-right" />
+<col  class="right" />
 </colgroup>
 <tbody>
 <tr>
-<td class="org-left">保持构建天数</td>
-<td class="org-right">3</td>
+<td class="left">保持构建天数</td>
+<td class="right">3</td>
 </tr>
 
 <tr>
-<td class="org-left">保持构建的最大个数</td>
-<td class="org-right">10</td>
+<td class="left">保持构建的最大个数</td>
+<td class="right">10</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-<div id="outline-container-orgheadline3" class="outline-3">
-<h3 id="orgheadline3">选择使用源码管理，或者手动管理代码</h3>
-<div class="outline-text-3" id="text-orgheadline3">
+<div id="outline-container-sec-2-2" class="outline-3">
+<h3 id="sec-2-2">选择使用源码管理，或者手动管理代码</h3>
+<div class="outline-text-3" id="text-2-2">
 <p>
 我机器上已经用svn 下载了源码，我选择手动管理<br  />
 </p>
@@ -121,27 +121,28 @@ svn cleanup ./dev
 svn revert -R ./dev
 <span style="color: #AEAEAE;">#</span><span style="color: #AEAEAE;">rm new files</span>
 <span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">svn status &#29366;&#24577;&#20026;&#8220;&#65311;&#8221;&#30340;&#25991;&#20214; &#30452;&#25509;&#21024;&#38500;&#65292;&#21363;&#26410;&#34987;&#31649;&#29702;&#30340;&#25991;&#20214;</span>
-svn status --no-ignore | grep <span style="color: #ffa07a;">'^\?'</span> |  perl -ne <span style="color: #ffa07a;">'print "$1\n" if $_ =~ /^\S+\s+(.*)$/'</span> |  tr <span style="color: #ffa07a;">'\n'</span> <span style="color: #ffa07a;">'\0'</span> | xargs -0 rm -rf
+<span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">jenkins &#20284;&#20046;&#19981;&#33021;&#25903;&#25345;&#24102;&#31649;&#36947;&#30340;&#21629;&#20196;&#65292;&#36825;&#34892;&#38656;&#35201;&#20889;&#25104;&#19968;&#20010;&#33050;&#26412;&#65292;&#35843;&#30456;&#24212;&#30340;&#33050;&#26412;</span>
+<span style="color: #AEAEAE;">#</span><span style="color: #AEAEAE;">svn status --no-ignore | grep '^\?' |  perl -ne 'print "$1\n" if $_ =~ /^\S+\s+(.*)$/' |  tr '\n' '\0' | xargs -0 rm -rf</span>
 svn up ./dev
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline4" class="outline-3">
-<h3 id="orgheadline4">构建触发器</h3>
-<div class="outline-text-3" id="text-orgheadline4">
+<div id="outline-container-sec-2-3" class="outline-3">
+<h3 id="sec-2-3">构建触发器</h3>
+<div class="outline-text-3" id="text-2-3">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
-<col  class="org-left" />
+<col  class="left" />
 
-<col  class="org-left" />
+<col  class="left" />
 </colgroup>
 <tbody>
 <tr>
-<td class="org-left">Build periodically</td>
-<td class="org-left">定期运行此项目</td>
+<td class="left">Build periodically</td>
+<td class="left">定期运行此项目</td>
 </tr>
 </tbody>
 </table>
@@ -152,19 +153,15 @@ svn up ./dev
 <p>
 Examples:<br  />
 </p>
-
 <p>
 H/15 * * * *<br  />
 </p>
-
 <p>
 H(0-29)/10 * * * *<br  />
 </p>
-
 <p>
 H 9-16/2 * * 1-5<br  />
 </p>
-
 <p>
 H H 1,15 1-11 *<br  />
 </p>
@@ -172,69 +169,68 @@ H H 1,15 1-11 *<br  />
 </div>
 </div>
 
-<div id="outline-container-orgheadline5" class="outline-3">
-<h3 id="orgheadline5">xcode 相关配置</h3>
-<div class="outline-text-3" id="text-orgheadline5">
+<div id="outline-container-sec-2-4" class="outline-3">
+<h3 id="sec-2-4">xcode 相关配置</h3>
+<div class="outline-text-3" id="text-2-4">
 <ol class="org-ol">
-<li><p>
-配置Target:即xcode的target<br  />
-</p>
+<li>配置Target:即xcode的target<br  />
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
-<col  class="org-left" />
+<col  class="left" />
 
-<col  class="org-left" />
+<col  class="left" />
 
-<col  class="org-left" />
+<col  class="left" />
 </colgroup>
 <tbody>
 <tr>
-<td class="org-left">Clean before build</td>
-<td class="org-left">勾上</td>
-<td class="org-left">&#xa0;</td>
+<td class="left">Clean before build</td>
+<td class="left">勾上</td>
+<td class="left">&#xa0;</td>
 </tr>
 
 <tr>
-<td class="org-left">Configuration</td>
-<td class="org-left">Release</td>
-<td class="org-left">或Debug</td>
+<td class="left">Configuration</td>
+<td class="left">Release</td>
+<td class="left">或Debug</td>
 </tr>
 </tbody>
 </table>
 <p>
 不同的target可以配置不同的证书、bid等，打出的包供不同用途使用<br  />
-</p></li>
+</p>
+</li>
 <li>Code signing &amp; OS X keychain options<br  />
 选中Unlock Keychain<br  />
-配置Keychain path为 ${HOME}/Library/Keychains/login.keychai 及密码，应该就是登录密码<br  /></li>
-<li><p>
-Advanced Xcode build options<br  />
-</p>
+配置Keychain path为 ${HOME}/Library/Keychains/login.keychai 及密码，应该就是登录密码<br  />
+</li>
+<li>Advanced Xcode build options<br  />
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
-<col  class="org-left" />
+<col  class="left" />
 
-<col  class="org-left" />
+<col  class="left" />
 </colgroup>
 <tbody>
 <tr>
-<td class="org-left">Xcode Project Directory</td>
-<td class="org-left">${WORKSPACE}/dev/client/cocos2d-x-2.2.6/projects/client/proj.ios/</td>
+<td class="left">Xcode Project Directory</td>
+<td class="left">${WORKSPACE}/dev/client/cocos2d-x-2.2.6/projects/client/proj.ios/</td>
 </tr>
 
 <tr>
-<td class="org-left">Xcode Project File</td>
-<td class="org-left">client.xcodeproj</td>
+<td class="left">Xcode Project File</td>
+<td class="left">client.xcodeproj</td>
 </tr>
 </tbody>
-</table></li>
-</ol>
-<ol class="org-ol">
-<li>上面的步骤相当于Xocde里Cmd-r run,生成app,下面则将生成的app导出成ipa<br  /></li>
+</table>
+</li>
+
+<li>上面的步骤相当于Xocde里Cmd-r run,生成app,下面则将生成的app导出成ipa<br  />
+</li>
 </ol>
 <div class="org-src-container">
 
@@ -249,39 +245,38 @@ cp zombiecave.ipa ~/site/zombiecave/${<span style="color: #40E0D0;">BUILD_ID</sp
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline6" class="outline-3">
-<h3 id="orgheadline6">上专到fir.im</h3>
-<div class="outline-text-3" id="text-orgheadline6">
+<div id="outline-container-sec-2-5" class="outline-3">
+<h3 id="sec-2-5">上专到fir.im</h3>
+<div class="outline-text-3" id="text-2-5">
 <ol class="org-ol">
-<li><p>
-fir.im Token 从fir.im上取<br  />
-</p>
+<li>fir.im Token 从fir.im上取<br  />
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
-<col  class="org-left" />
+<col  class="left" />
 
-<col  class="org-left" />
+<col  class="left" />
 </colgroup>
 <tbody>
 <tr>
-<td class="org-left">ExInclude IPA/APK File Nam</td>
-<td class="org-left"><b>*/*unaligned</b>.apk,**/*unsigned*.apk</td>
+<td class="left">ExInclude IPA/APK File Nam</td>
+<td class="left"><b>*/*unaligned</b>.apk,**/*unsigned*.apk</td>
 </tr>
 
 <tr>
-<td class="org-left">Build Notes</td>
-<td class="org-left">generated by jenkins</td>
+<td class="left">Build Notes</td>
+<td class="left">generated by jenkins</td>
 </tr>
 </tbody>
-</table></li>
+</table>
+</li>
 </ol>
 </div>
 </div>
-<div id="outline-container-orgheadline7" class="outline-3">
-<h3 id="orgheadline7">构建后的操作</h3>
-<div class="outline-text-3" id="text-orgheadline7">
+<div id="outline-container-sec-2-6" class="outline-3">
+<h3 id="sec-2-6">构建后的操作</h3>
+<div class="outline-text-3" id="text-2-6">
 <p>
 可以选择执行另一个job的构建<br  />
 </p>
@@ -294,7 +289,7 @@ fir.im Token 从fir.im上取<br  />
     <div>
       <div class="post-meta">
         <span title="post date" class="post-info">2016-12-21</span>
-        <span title="last modification date" class="post-info">2016-12-21</span>
+        <span title="last modification date" class="post-info">2017-01-22</span>
         <span title="tags" class="post-info"><a href="/tags/jenkins/">Jenkins</a>, <a href="/tags/cocos2dx/">Cocos2dx</a></span>
         <span title="author" class="post-info">纪秀峰</span>
       </div>

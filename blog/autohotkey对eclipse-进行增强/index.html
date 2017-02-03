@@ -80,7 +80,8 @@
 </p>
 <ul class="org-ul">
 <li>输入正则表达式中的星号*的过程有点麻烦，为什么不像Google一样用空格来分开<br  />
-关键字呢。<br  /></li>
+关键字呢。<br  />
+</li>
 <li>另外大部分人使用这个功能，我相信他最后是用鼠标点选最后过滤出来的文件，或者<br  />
 用上下键来选中相应的文件然后回车。无论是用哪种方式都与Emacs使用键盘进行快<br  />
 捷操作的理念相违背。sorry ,我已经深深地被Emacs毒害了。(用鼠标，这无疑是个<br  />
@@ -89,28 +90,26 @@
 选项时，突然发现这些候选项还是有点多，想再次输入一个关键字过滤一下后再进行<br  />
 选择。这又牵扯到焦点的问题了，现在焦点在文件列表中而不是文本框中,想继续输<br  />
 入关键字的话首先你得将光标定位到文本框。大多数人是用鼠标来完成的吧。我就不<br  />
-提醒你又用了一次鼠标了。<br  /></li>
+提醒你又用了一次鼠标了。<br  />
+</li>
 </ul>
 <p>
 那如何用AutoHotkey 来解决以上问题呢。<br  />
 </p>
 <ol class="org-ol">
-<li><p>
-最根本的办法当然是修改Eclipse的源代码了，但是我找了半天也没定位出这块功能<br  />
+<li>最根本的办法当然是修改Eclipse的源代码了，但是我找了半天也没定位出这块功能<br  />
 的源代码在什么文件里，后来就懒得找了，用Autohotkey简单的做一下处理，虽然<br  />
 还是有点小缺陷，但已经好许多了。我做的处理就是，当按下空格的时候它会输入<br  />
 星号。使用体验和用空格分隔关键字是相同的，缺点就是关键字的顺序必须按照文<br  />
 件名中出现的顺序来。代码是:<br  />
-</p>
 <div class="org-src-container">
 
 <pre class="src src-c">space::Send *
 </pre>
-</div></li>
-<li><p>
-第2个问题的解决方法是：<br  />
+</div>
+</li>
+<li>第2个问题的解决方法是：<br  />
 首先对Ctrl+n Ctrl+p 分别映射为Down, Up 键。<br  />
-</p>
 <div class="org-src-container">
 
 <pre class="src src-c">^p::send {Up}
@@ -315,7 +314,8 @@ ControlFocus ,<span style="color: #8DA6CE;">Edit1</span>
 <span style="color: #FBDE2D;">return</span>
 <span style="color: #7fffd4;">#IfWinActive</span>
 </pre>
-</div></li>
+</div>
+</li>
 </ol>
 
 </div>

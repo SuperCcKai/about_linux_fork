@@ -46,48 +46,48 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgheadline1">Introduction</a></li>
-<li><a href="#orgheadline2">Active &lt;Anything&gt;</a></li>
-<li><a href="#orgheadline3">keybindings when &lt;Anything&gt; is activated</a>
+<li><a href="#sec-1">Introduction</a></li>
+<li><a href="#sec-2">Active &lt;Anything&gt;</a></li>
+<li><a href="#sec-3">keybindings when &lt;Anything&gt; is activated</a>
 <ul>
-<li><a href="#orgheadline4">keybindings for select candiates</a></li>
-<li><a href="#orgheadline5">keybindings for execute actions</a></li>
-<li><a href="#orgheadline6">keybindings for edit</a></li>
+<li><a href="#sec-3-1">keybindings for select candiates</a></li>
+<li><a href="#sec-3-2">keybindings for execute actions</a></li>
+<li><a href="#sec-3-3">keybindings for edit</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline7">anything-source I have written</a>
+<li><a href="#sec-4">anything-source I have written</a>
 <ul>
-<li><a href="#orgheadline8">anything-explorer-history.ahk</a></li>
-<li><a href="#orgheadline12">anything-favorite-directories.ahk (with with   anything-explorer-history.ahk )</a></li>
-<li><a href="#orgheadline17">anything-run.ahk is a replacement of &lt;Win-r&gt;</a></li>
-<li><a href="#orgheadline18">anything-window-switch.ahk is a replacement of Alt-Tab</a></li>
-<li><a href="#orgheadline19">anything-process-manager.ahk</a></li>
-<li><a href="#orgheadline20">anything-services.ahk</a></li>
+<li><a href="#sec-4-1">anything-explorer-history.ahk</a></li>
+<li><a href="#sec-4-2">anything-favorite-directories.ahk (with with   anything-explorer-history.ahk )</a></li>
+<li><a href="#sec-4-3">anything-run.ahk is a replacement of &lt;Win-r&gt;</a></li>
+<li><a href="#sec-4-4">anything-window-switch.ahk is a replacement of Alt-Tab</a></li>
+<li><a href="#sec-4-5">anything-process-manager.ahk</a></li>
+<li><a href="#sec-4-6">anything-services.ahk</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline21">how to  write an anything-source</a>
+<li><a href="#sec-5">how to  write an anything-source</a>
 <ul>
-<li><a href="#orgheadline22">&lt;name&gt;  (required)</a></li>
-<li><a href="#orgheadline23">&lt;candidate&gt;  (required)</a></li>
-<li><a href="#orgheadline26">&lt;action&gt;  (required)</a></li>
-<li><a href="#orgheadline27">&lt;icon&gt; (optional)</a></li>
-<li><a href="#orgheadline28">&lt;match&gt; (optional) default: "anything_match"</a></li>
-<li><a href="#orgheadline29">&lt;anything-execute-action-at-once-if-one&gt; (optional)</a></li>
-<li><a href="#orgheadline30">&lt; anything-execute-action-at-once-if-one-even-no-keyword &gt; (optional)</a></li>
-<li><a href="#orgheadline31">&lt;anything-action-when-2-candidates-even-no-keyword&gt; (optional)</a></li>
-<li><a href="#orgheadline32">call anything</a></li>
+<li><a href="#sec-5-1">&lt;name&gt;  (required)</a></li>
+<li><a href="#sec-5-2">&lt;candidate&gt;  (required)</a></li>
+<li><a href="#sec-5-3">&lt;action&gt;  (required)</a></li>
+<li><a href="#sec-5-4">&lt;icon&gt; (optional)</a></li>
+<li><a href="#sec-5-5">&lt;match&gt; (optional) default: "anything_match"</a></li>
+<li><a href="#sec-5-6">&lt;anything-execute-action-at-once-if-one&gt; (optional)</a></li>
+<li><a href="#sec-5-7">&lt; anything-execute-action-at-once-if-one-even-no-keyword &gt; (optional)</a></li>
+<li><a href="#sec-5-8">&lt;anything-action-when-2-candidates-even-no-keyword&gt; (optional)</a></li>
+<li><a href="#sec-5-9">call anything</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline33">anything-properties</a></li>
-<li><a href="#orgheadline34">global variable</a></li>
-<li><a href="#orgheadline35">Known Bugs</a></li>
+<li><a href="#sec-6">anything-properties</a></li>
+<li><a href="#sec-7">global variable</a></li>
+<li><a href="#sec-8">Known Bugs</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgheadline1" class="outline-2">
-<h2 id="orgheadline1">Introduction</h2>
-<div class="outline-text-2" id="text-orgheadline1">
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">Introduction</h2>
+<div class="outline-text-2" id="text-1">
 <p>
 If you use GNU/Emacs  maybe you have known "Anything"<br  />
 maybe not ,<br  />
@@ -102,22 +102,32 @@ and have written an anything-source for it ,you can post it on  <a href="http://
 there are some screencast here(no voice) :<br  />
 </p>
 <ul class="org-ul">
-<li><a href="http://www.screenr.com/xxss">http://www.screenr.com/xxss</a><br  /></li>
-<li><a href="http://www.screenr.com/vp8s">http://www.screenr.com/vp8s</a> (new one )<br  /></li>
-<li><a href="http://www.screenr.com/BH7s">http://www.screenr.com/BH7s</a> and another one show anything-favorite-directories.ahk<br  /></li>
-<li><a href="http://www.screenr.com/MyHs">http://www.screenr.com/MyHs</a> and another show anything-window-switch.ahk<br  /></li>
-<li><a href="http://www.screenr.com/Zbjs">http://www.screenr.com/Zbjs</a> (new one ,show anything-services.ahk)<br  /></li>
+<li><a href="http://www.screenr.com/xxss">http://www.screenr.com/xxss</a><br  />
+</li>
+<li><a href="http://www.screenr.com/vp8s">http://www.screenr.com/vp8s</a> (new one )<br  />
+</li>
+<li><a href="http://www.screenr.com/BH7s">http://www.screenr.com/BH7s</a> and another one show anything-favorite-directories.ahk<br  />
+</li>
+<li><a href="http://www.screenr.com/MyHs">http://www.screenr.com/MyHs</a> and another show anything-window-switch.ahk<br  />
+</li>
+<li><a href="http://www.screenr.com/Zbjs">http://www.screenr.com/Zbjs</a> (new one ,show anything-services.ahk)<br  />
+</li>
 </ul>
 
 <p>
 you can also download these videos<br  />
 </p>
 <ul class="org-ul">
-<li><a href="http://screencast-repos.googlecode.com/files/anything-expl-run.mp4">anything-explore-history.ahk_anything-run.ahk.mp4</a><br  /></li>
-<li><a href="http://screencast-repos.googlecode.com/files/anything.ahk-anything-explorer-history.mp4">anything-explore-history.ahk.mp4</a><br  /></li>
-<li><a href="http://screencast-repos.googlecode.com/files/anything-window-switch.mp4">anything-window-switch.mp4</a><br  /></li>
-<li><a href="http://screencast-repos.googlecode.com/files/anything-fav-dir.mp4">anything-favorite-directories.ahk.mp4</a><br  /></li>
-<li><a href="http://screencast-repos.googlecode.com/files/anything-services.ahk.zip">http://screencast-repos.googlecode.com/files/anything-services.ahk.zip</a><br  /></li>
+<li><a href="http://screencast-repos.googlecode.com/files/anything-expl-run.mp4">anything-explore-history.ahk_anything-run.ahk.mp4</a><br  />
+</li>
+<li><a href="http://screencast-repos.googlecode.com/files/anything.ahk-anything-explorer-history.mp4">anything-explore-history.ahk.mp4</a><br  />
+</li>
+<li><a href="http://screencast-repos.googlecode.com/files/anything-window-switch.mp4">anything-window-switch.mp4</a><br  />
+</li>
+<li><a href="http://screencast-repos.googlecode.com/files/anything-fav-dir.mp4">anything-favorite-directories.ahk.mp4</a><br  />
+</li>
+<li><a href="http://screencast-repos.googlecode.com/files/anything-services.ahk.zip">http://screencast-repos.googlecode.com/files/anything-services.ahk.zip</a><br  />
+</li>
 </ul>
 
 <p>
@@ -128,129 +138,136 @@ and source code is host on <a href="https://github.com/jixiuf/my_autohotkey_scri
 you can follow these links ,and save them on you disk .<br  />
 </p>
 <ul class="org-ul">
-<li><a href="https://github.com/jixiuf/my_autohotkey_scripts/raw/master/ahk_scripts/anything.ahk">anything.ahk</a> (core)<br  /></li>
-<li><a href="https://github.com/jixiuf/my_autohotkey_scripts/raw/master/ahk_scripts/anything-explorer-history.ahk">anything-explorer-history.ahk</a> (an anything-source)<br  /></li>
-<li><a href="https://github.com/jixiuf/my_autohotkey_scripts/raw/master/ahk_scripts/anything-favorite-directories.ahk">anything-favorite-directories.ahk</a> (an anything-source)<br  /></li>
-<li><a href="https://github.com/jixiuf/my_autohotkey_scripts/raw/master/ahk_scripts/anything-run.ahk">anything-run.ahk</a> (an anything-source)<br  /></li>
-<li><a href="https://github.com/jixiuf/my_autohotkey_scripts/raw/master/ahk_scripts/anything-run-launch-plugin.ahk">anything-run-launch-plugin.ahk</a> (an anything-source work with anything-run.ahk)<br  /></li>
-<li><a href="https://github.com/jixiuf/my_autohotkey_scripts/raw/master/ahk_scripts/anything-window-switch.ahk">anything-window-switch.ahk</a> (an anything-source)<br  /></li>
-<li><a href="https://github.com/jixiuf/my_autohotkey_scripts/raw/master/ahk_scripts/anything-config.ahk">anything-config.ahk</a>  (config file)<br  /></li>
+<li><a href="https://github.com/jixiuf/my_autohotkey_scripts/raw/master/ahk_scripts/anything.ahk">anything.ahk</a> (core)<br  />
+</li>
+<li><a href="https://github.com/jixiuf/my_autohotkey_scripts/raw/master/ahk_scripts/anything-explorer-history.ahk">anything-explorer-history.ahk</a> (an anything-source)<br  />
+</li>
+<li><a href="https://github.com/jixiuf/my_autohotkey_scripts/raw/master/ahk_scripts/anything-favorite-directories.ahk">anything-favorite-directories.ahk</a> (an anything-source)<br  />
+</li>
+<li><a href="https://github.com/jixiuf/my_autohotkey_scripts/raw/master/ahk_scripts/anything-run.ahk">anything-run.ahk</a> (an anything-source)<br  />
+</li>
+<li><a href="https://github.com/jixiuf/my_autohotkey_scripts/raw/master/ahk_scripts/anything-run-launch-plugin.ahk">anything-run-launch-plugin.ahk</a> (an anything-source work with anything-run.ahk)<br  />
+</li>
+<li><a href="https://github.com/jixiuf/my_autohotkey_scripts/raw/master/ahk_scripts/anything-window-switch.ahk">anything-window-switch.ahk</a> (an anything-source)<br  />
+</li>
+<li><a href="https://github.com/jixiuf/my_autohotkey_scripts/raw/master/ahk_scripts/anything-config.ahk">anything-config.ahk</a>  (config file)<br  />
+</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgheadline2" class="outline-2">
-<h2 id="orgheadline2">Active &lt;Anything&gt;</h2>
-<div class="outline-text-2" id="text-orgheadline2">
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2">Active &lt;Anything&gt;</h2>
+<div class="outline-text-2" id="text-2">
 <p>
 to active anything.ahk , press F3 , or Windows+r , or Alt+TAB<br  />
 see  <a href="https://github.com/jixiuf/my_autohotkey_scripts/raw/master/ahk_scripts/anything-config.ahk">anything-config.ahk</a>  for detail<br  />
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline3" class="outline-2">
-<h2 id="orgheadline3">keybindings when &lt;Anything&gt; is activated</h2>
-<div class="outline-text-2" id="text-orgheadline3">
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3">keybindings when &lt;Anything&gt; is activated</h2>
+<div class="outline-text-2" id="text-3">
 <p>
 you can input search string just like google to narrow the candidates<br  />
 </p>
 </div>
-<div id="outline-container-orgheadline4" class="outline-3">
-<h3 id="orgheadline4">keybindings for select candiates</h3>
-<div class="outline-text-3" id="text-orgheadline4">
+<div id="outline-container-sec-3-1" class="outline-3">
+<h3 id="sec-3-1">keybindings for select candiates</h3>
+<div class="outline-text-3" id="text-3-1">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
-<col  class="org-left" />
+<col  class="left" />
 
-<col  class="org-left" />
+<col  class="left" />
 </colgroup>
 <thead>
 <tr>
-<th scope="col" class="org-left">Keybindings</th>
-<th scope="col" class="org-left">Desc</th>
+<th scope="col" class="left">Keybindings</th>
+<th scope="col" class="left">Desc</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="org-left">Down or Ctrl+n</td>
-<td class="org-left">select next candidate</td>
+<td class="left">Down or Ctrl+n</td>
+<td class="left">select next candidate</td>
 </tr>
 </tbody>
 <tbody>
 <tr>
-<td class="org-left">Up or Ctrl+p</td>
-<td class="org-left">select previous candidate</td>
+<td class="left">Up or Ctrl+p</td>
+<td class="left">select previous candidate</td>
 </tr>
 </tbody>
 <tbody>
 <tr>
-<td class="org-left">Ctrl+o</td>
-<td class="org-left">will select next source ,that means ,all candidate from first source will be send to last</td>
+<td class="left">Ctrl+o</td>
+<td class="left">will select next source ,that means ,all candidate from first source will be send to last</td>
 </tr>
 </tbody>
 <tbody>
 <tr>
-<td class="org-left">pageUp ,Alt-v</td>
-<td class="org-left">pageup</td>
+<td class="left">pageUp ,Alt-v</td>
+<td class="left">pageup</td>
 </tr>
 </tbody>
 <tbody>
 <tr>
-<td class="org-left">pageDn ,Ctrl-v(doesn't work very well),Ctrl-d</td>
-<td class="org-left">pageDn</td>
+<td class="left">pageDn ,Ctrl-v(doesn't work very well),Ctrl-d</td>
+<td class="left">pageDn</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
 
-<div id="outline-container-orgheadline5" class="outline-3">
-<h3 id="orgheadline5">keybindings for execute actions</h3>
-<div class="outline-text-3" id="text-orgheadline5">
+<div id="outline-container-sec-3-2" class="outline-3">
+<h3 id="sec-3-2">keybindings for execute actions</h3>
+<div class="outline-text-3" id="text-3-2">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
-<col  class="org-left" />
+<col  class="left" />
 
-<col  class="org-left" />
+<col  class="left" />
 </colgroup>
 <thead>
 <tr>
-<th scope="col" class="org-left">Keybindings</th>
-<th scope="col" class="org-left">Desc</th>
+<th scope="col" class="left">Keybindings</th>
+<th scope="col" class="left">Desc</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="org-left">&lt;Click&gt;and  &lt;Enter&gt;</td>
-<td class="org-left">to execute the default action with the selected candiate as parameter</td>
+<td class="left">&lt;Click&gt;and  &lt;Enter&gt;</td>
+<td class="left">to execute the default action with the selected candiate as parameter</td>
 </tr>
 </tbody>
 <tbody>
 <tr>
-<td class="org-left">&lt;Ctrl-j&gt;</td>
-<td class="org-left">to execute the second action(if has) with the selected candidate as parameter</td>
+<td class="left">&lt;Ctrl-j&gt;</td>
+<td class="left">to execute the second action(if has) with the selected candidate as parameter</td>
 </tr>
 </tbody>
 <tbody>
 <tr>
-<td class="org-left">&lt;Ctrl-m&gt;</td>
-<td class="org-left">to execute the third action(if has) with the selected candidate as parameter</td>
+<td class="left">&lt;Ctrl-m&gt;</td>
+<td class="left">to execute the third action(if has) with the selected candidate as parameter</td>
 </tr>
 </tbody>
 <tbody>
 <tr>
-<td class="org-left">&lt;Ctrl-k&gt;</td>
-<td class="org-left">to execute the forth action (if has)with the selected candidate as parameter</td>
+<td class="left">&lt;Ctrl-k&gt;</td>
+<td class="left">to execute the forth action (if has)with the selected candidate as parameter</td>
 </tr>
 </tbody>
 <tbody>
 <tr>
-<td class="org-left">&lt;Ctrl-e&gt;</td>
-<td class="org-left">to execute the fifth action (if has)with the selected candidate as parameter</td>
+<td class="left">&lt;Ctrl-e&gt;</td>
+<td class="left">to execute the fifth action (if has)with the selected candidate as parameter</td>
 </tr>
 </tbody>
 </table>
@@ -259,38 +276,38 @@ you can input search string just like google to narrow the candidates<br  />
 
 
 <colgroup>
-<col  class="org-left" />
+<col  class="left" />
 
-<col  class="org-left" />
+<col  class="left" />
 </colgroup>
 <thead>
 <tr>
-<th scope="col" class="org-left">Keybindings</th>
-<th scope="col" class="org-left">Desc</th>
+<th scope="col" class="left">Keybindings</th>
+<th scope="col" class="left">Desc</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="org-left">&lt;Alt-j&gt;</td>
-<td class="org-left">do the same to Ctrl-j ,but doesn't quit "Anything"</td>
+<td class="left">&lt;Alt-j&gt;</td>
+<td class="left">do the same to Ctrl-j ,but doesn't quit "Anything"</td>
 </tr>
 </tbody>
 <tbody>
 <tr>
-<td class="org-left">&lt;Alt-m&gt;</td>
-<td class="org-left">do the same to Ctrl-m ,but doesn't quit "Anything"</td>
+<td class="left">&lt;Alt-m&gt;</td>
+<td class="left">do the same to Ctrl-m ,but doesn't quit "Anything"</td>
 </tr>
 </tbody>
 <tbody>
 <tr>
-<td class="org-left">&lt;Alt-k&gt;</td>
-<td class="org-left">do the same to Ctrl-k ,but doesn't quit "Anything"</td>
+<td class="left">&lt;Alt-k&gt;</td>
+<td class="left">do the same to Ctrl-k ,but doesn't quit "Anything"</td>
 </tr>
 </tbody>
 <tbody>
 <tr>
-<td class="org-left">&lt;Alt-e&gt;</td>
-<td class="org-left">do the same to Ctrl-k ,but doesn't quit "Anything"</td>
+<td class="left">&lt;Alt-e&gt;</td>
+<td class="left">do the same to Ctrl-k ,but doesn't quit "Anything"</td>
 </tr>
 </tbody>
 </table>
@@ -300,77 +317,77 @@ you can input search string just like google to narrow the candidates<br  />
 
 
 <colgroup>
-<col  class="org-left" />
+<col  class="left" />
 
-<col  class="org-left" />
+<col  class="left" />
 </colgroup>
 <thead>
 <tr>
-<th scope="col" class="org-left">Keybindings</th>
-<th scope="col" class="org-left">Desc</th>
+<th scope="col" class="left">Keybindings</th>
+<th scope="col" class="left">Desc</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="org-left">&lt;Ctrl-L&gt;</td>
-<td class="org-left">will ignore all the candidates ,and treate the search string as candidate , and list all available "action" to execute on the special "candidate"</td>
+<td class="left">&lt;Ctrl-L&gt;</td>
+<td class="left">will ignore all the candidates ,and treate the search string as candidate , and list all available "action" to execute on the special "candidate"</td>
 </tr>
 </tbody>
 <tbody>
 <tr>
-<td class="org-left">&lt;Ctrl-i&gt;</td>
-<td class="org-left">do something similar to &lt;Ctrl-l&gt; ,but don't list all available "action" ,just execute the "action" special by "property": no_candidate_action</td>
+<td class="left">&lt;Ctrl-i&gt;</td>
+<td class="left">do something similar to &lt;Ctrl-l&gt; ,but don't list all available "action" ,just execute the "action" special by "property": no_candidate_action</td>
 </tr>
 </tbody>
 <tbody>
 <tr>
-<td class="org-left">&lt;Esc&gt;  &lt;Ctrl-g&gt;</td>
-<td class="org-left">quit Anything</td>
+<td class="left">&lt;Esc&gt;  &lt;Ctrl-g&gt;</td>
+<td class="left">quit Anything</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
 
-<div id="outline-container-orgheadline6" class="outline-3">
-<h3 id="orgheadline6">keybindings for edit</h3>
-<div class="outline-text-3" id="text-orgheadline6">
+<div id="outline-container-sec-3-3" class="outline-3">
+<h3 id="sec-3-3">keybindings for edit</h3>
+<div class="outline-text-3" id="text-3-3">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
-<col  class="org-left" />
+<col  class="left" />
 
-<col  class="org-left" />
+<col  class="left" />
 </colgroup>
 <thead>
 <tr>
-<th scope="col" class="org-left">Keybindings</th>
-<th scope="col" class="org-left">Desc</th>
+<th scope="col" class="left">Keybindings</th>
+<th scope="col" class="left">Desc</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="org-left">backspace and Ctrl-h</td>
-<td class="org-left">back delete a char</td>
+<td class="left">backspace and Ctrl-h</td>
+<td class="left">back delete a char</td>
 </tr>
 </tbody>
 <tbody>
 <tr>
-<td class="org-left">Ctrl-y</td>
-<td class="org-left">paste</td>
+<td class="left">Ctrl-y</td>
+<td class="left">paste</td>
 </tr>
 </tbody>
 <tbody>
 <tr>
-<td class="org-left">Ctrl-w</td>
-<td class="org-left">copy  and quit anything session</td>
+<td class="left">Ctrl-w</td>
+<td class="left">copy  and quit anything session</td>
 </tr>
 </tbody>
 <tbody>
 <tr>
-<td class="org-left">Alt-w</td>
-<td class="org-left">copy without quit anything session</td>
+<td class="left">Alt-w</td>
+<td class="left">copy without quit anything session</td>
 </tr>
 </tbody>
 </table>
@@ -378,33 +395,39 @@ you can input search string just like google to narrow the candidates<br  />
 </div>
 </div>
 
-<div id="outline-container-orgheadline7" class="outline-2">
-<h2 id="orgheadline7">anything-source I have written</h2>
-<div class="outline-text-2" id="text-orgheadline7">
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4">anything-source I have written</h2>
+<div class="outline-text-2" id="text-4">
 <p>
 Now I have wrote 6 &lt;anything-source&gt; for anything.ahk<br  />
 </p>
 <ul class="org-ul">
 <li>anything-explorer-history.ahk ,<br  />
-anything-source : &lt;anything_explorer_history_source&gt; defined here.<br  /></li>
+anything-source : &lt;anything_explorer_history_source&gt; defined here.<br  />
+</li>
 <li>anything-favorite-directories.ahk,<br  />
-anything-source: &lt;anything_favorite_directories_source&gt; defined here.<br  /></li>
+anything-source: &lt;anything_favorite_directories_source&gt; defined here.<br  />
+</li>
 <li>anything-run.ahk (a replacement of Windows+r)<br  />
          anything-source: &lt;anything_run_source&gt; defined here.<br  />
 anything-run-launch-plugin.ahk (work together with anything-run.ahk)<br  />
-         anything-source:   &lt;anything_run_launch_source&gt;  defined here.<br  /></li>
+         anything-source:   &lt;anything_run_launch_source&gt;  defined here.<br  />
+</li>
 <li>anything-window-switch.ahk (a replacement of Alt-Tab)<br  />
-&lt;anything_window_switcher_source&gt; and<br  /></li>
+&lt;anything_window_switcher_source&gt; and<br  />
+</li>
 <li>anything-precess-manager.ahk<br  />
-anything-source: &lt;anything_precess_manager_source&gt; defined here.<br  /></li>
+anything-source: &lt;anything_precess_manager_source&gt; defined here.<br  />
+</li>
 <li>anything-services.ahk<br  />
-anything-source: &lt;anything_services_source&gt; defined here.<br  /></li>
+anything-source: &lt;anything_services_source&gt; defined here.<br  />
+</li>
 </ul>
 </div>
 
-<div id="outline-container-orgheadline8" class="outline-3">
-<h3 id="orgheadline8">anything-explorer-history.ahk</h3>
-<div class="outline-text-3" id="text-orgheadline8">
+<div id="outline-container-sec-4-1" class="outline-3">
+<h3 id="sec-4-1">anything-explorer-history.ahk</h3>
+<div class="outline-text-3" id="text-4-1">
 <p>
 when you visit directory (double click on a directory,up or back ) in<br  />
 explorer.exe ,it can remember directories you have visited ,then you can<br  />
@@ -420,7 +443,7 @@ how to configure anything-explorer-history.ahk<br  />
 </p>
 </div>
 
-<ul class="org-ul"><li><a id="orgheadline9"></a>if you only have one anything-source :<br  /><div class="outline-text-4" id="text-orgheadline9">
+<ul class="org-ul"><li><a id="sec-4-1-1" name="sec-4-1-1"></a>if you only have one anything-source :<br  /><div class="outline-text-4" id="text-4-1-1">
 <p>
 anything_explorer_history_source  (defined in  anything-explorer-history.ahk)<br  />
 you can use it like this :<br  />
@@ -432,9 +455,10 @@ you can use it like this :<br  />
 f3::anything(anything_explorer_history_source)
 </pre>
 </div>
-</div></li>
+</div>
+</li>
 
-<li><a id="orgheadline10"></a>if you also have other anything-sources ,<br  /><div class="outline-text-4" id="text-orgheadline10">
+<li><a id="sec-4-1-2" name="sec-4-1-2"></a>if you also have other anything-sources ,<br  /><div class="outline-text-4" id="text-4-1-2">
 <p>
  default  : it is included in anything-config.ahk<br  />
  you just need add<br  />
@@ -457,8 +481,9 @@ for example :<br  />
  <span style="color: #FBDE2D;">return</span>
 </pre>
 </div>
-</div></li>
-<li><a id="orgheadline11"></a>actions for anything-explorer-history.ahk<br  /><div class="outline-text-4" id="text-orgheadline11">
+</div>
+</li>
+<li><a id="sec-4-1-3" name="sec-4-1-3"></a>actions for anything-explorer-history.ahk<br  /><div class="outline-text-4" id="text-4-1-3">
 <div class="org-src-container">
 
 <pre class="src src-c">anything_explorer_history_source[<span style="color: #ffa07a;">"action"</span>]:=Array(<span style="color: #ffa07a;">"visit_directory"</span>,<span style="color: #ffa07a;">"delete_from_directory_history"</span> ,<span style="color: #ffa07a;">"delete_all_directory_history"</span>)
@@ -468,66 +493,67 @@ for example :<br  />
 
 
 <colgroup>
-<col  class="org-left" />
+<col  class="left" />
 
-<col  class="org-left" />
+<col  class="left" />
 
-<col  class="org-left" />
+<col  class="left" />
 </colgroup>
 <thead>
 <tr>
-<th scope="col" class="org-left">actions</th>
-<th scope="col" class="org-left">description</th>
-<th scope="col" class="org-left">key binding</th>
+<th scope="col" class="left">actions</th>
+<th scope="col" class="left">description</th>
+<th scope="col" class="left">key binding</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="org-left">visit_directory</td>
-<td class="org-left">visit selected directory</td>
-<td class="org-left">&lt;Click&gt;and  &lt;Enter&gt;</td>
+<td class="left">visit_directory</td>
+<td class="left">visit selected directory</td>
+<td class="left">&lt;Click&gt;and  &lt;Enter&gt;</td>
 </tr>
 </tbody>
 <tbody>
 <tr>
-<td class="org-left">delete_from_directory_history</td>
-<td class="org-left">delete select directory from  directory history</td>
-<td class="org-left">&lt;Ctrl-j&gt;</td>
+<td class="left">delete_from_directory_history</td>
+<td class="left">delete select directory from  directory history</td>
+<td class="left">&lt;Ctrl-j&gt;</td>
 </tr>
 </tbody>
 <tbody>
 <tr>
-<td class="org-left">delete_all_directory_history</td>
-<td class="org-left">add a new directory to  directory history</td>
-<td class="org-left">&lt;Ctrl-m&gt;</td>
+<td class="left">delete_all_directory_history</td>
+<td class="left">add a new directory to  directory history</td>
+<td class="left">&lt;Ctrl-m&gt;</td>
 </tr>
 </tbody>
 <tbody>
 <tr>
-<td class="org-left">list all actions for current candidate</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">TAB</td>
+<td class="left">list all actions for current candidate</td>
+<td class="left">&#xa0;</td>
+<td class="left">TAB</td>
 </tr>
 </tbody>
 <tbody>
 <tr>
-<td class="org-left">list all actions</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&lt;Ctrl-L&gt;</td>
+<td class="left">list all actions</td>
+<td class="left">&#xa0;</td>
+<td class="left">&lt;Ctrl-L&gt;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left">-&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;+&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;+---------------------</td>
 </tr>
 </tbody>
 </table>
-<ul class="org-ul">
-<li>it will visit your selected directory in current Explorer.exe (if current activated window is Explorer.exe)<br  /></li>
-<li>it will visit your selected directory in current cmd.exe (if current activated window is cmd.exe)<br  /></li>
-<li>it will visit your selected directory in current msys.bat (if current activated window is msys.bat)<br  /></li>
-</ul>
-</div></li></ul>
+</div>
+</li></ul>
 </div>
 
-<div id="outline-container-orgheadline12" class="outline-3">
-<h3 id="orgheadline12">anything-favorite-directories.ahk (with with   anything-explorer-history.ahk )</h3>
-<div class="outline-text-3" id="text-orgheadline12">
+<div id="outline-container-sec-4-2" class="outline-3">
+<h3 id="sec-4-2">anything-favorite-directories.ahk (with with   anything-explorer-history.ahk )</h3>
+<div class="outline-text-3" id="text-4-2">
 <p>
  anything-favorite-directories.ahk  do something similiar to <a href="https://github.com/jixiuf/my_autohotkey_scripts/raw/master/ahk_scripts/anything-explorer-history.ahk">anything-explorer-history.ahk</a> <br  />
  add your favorite directories ,and visit it using "Anything".<br  />
@@ -539,7 +565,7 @@ for example :<br  />
 </div>
 
 
-<ul class="org-ul"><li><a id="orgheadline13"></a>how to configure it .<br  /><div class="outline-text-4" id="text-orgheadline13">
+<ul class="org-ul"><li><a id="sec-4-2-1" name="sec-4-2-1"></a>how to configure it .<br  /><div class="outline-text-4" id="text-4-2-1">
 <p>
 if you use anything-favorites-directory as the only source for anything.ahk<br  />
 you just need to bind it to a key like this :<br  />
@@ -573,16 +599,18 @@ default have added to  anything-config.ahk<br  />
  <span style="color: #FBDE2D;">return</span>
 </pre>
 </div>
-</div></li>
+</div>
+</li>
 
-<li><a id="orgheadline14"></a>how to add a new Folder to your favorite-directories<br  /><div class="outline-text-4" id="text-orgheadline14">
+<li><a id="sec-4-2-2" name="sec-4-2-2"></a>how to add a new Folder to your favorite-directories<br  /><div class="outline-text-4" id="text-4-2-2">
 <p>
 for this anything-source , your favorite directories<br  />
 are the candidates ,so before you can use it ,you should<br  />
 add some candidates (some directories).<br  />
 </p>
 <ol class="org-ol">
-<li>first activate "Anything" (default press F3 )<br  /></li>
+<li>first activate "Anything" (default press F3 )<br  />
+</li>
 </ol>
 <p>
 2 Press &lt;Ctrl-L&gt; list all available actions select<br  />
@@ -596,75 +624,81 @@ anything_favorite_directories_source have three actions<br  />
 <pre class="src src-c">anything_favorite_directories_source[<span style="color: #ffa07a;">"action"</span>]:=Array(<span style="color: #ffa07a;">"anything_favorite_directories_visit"</span>,<span style="color: #ffa07a;">"anything_favorite_directories_delete"</span>,<span style="color: #ffa07a;">"anything_favorite_directories_add"</span>)
 </pre>
 </div>
-</div></li>
-<li><a id="orgheadline15"></a>actions for anything-favorite-directories.ahk<br  /><div class="outline-text-4" id="text-orgheadline15">
+</div>
+</li>
+<li><a id="sec-4-2-3" name="sec-4-2-3"></a>actions for anything-favorite-directories.ahk<br  /><div class="outline-text-4" id="text-4-2-3">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
-<col  class="org-left" />
+<col  class="left" />
 
-<col  class="org-left" />
+<col  class="left" />
 
-<col  class="org-left" />
+<col  class="left" />
 </colgroup>
 <thead>
 <tr>
-<th scope="col" class="org-left">actions</th>
-<th scope="col" class="org-left">description</th>
-<th scope="col" class="org-left">key binding</th>
+<th scope="col" class="left">actions</th>
+<th scope="col" class="left">description</th>
+<th scope="col" class="left">key binding</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="org-left">anything_favorite_directories_visit</td>
-<td class="org-left">visit selected directory</td>
-<td class="org-left">&lt;Click&gt;and  &lt;Enter&gt;</td>
+<td class="left">anything_favorite_directories_visit</td>
+<td class="left">visit selected directory</td>
+<td class="left">&lt;Click&gt;and  &lt;Enter&gt;</td>
 </tr>
 </tbody>
 <tbody>
 <tr>
-<td class="org-left">anything_favorite_directories_delete</td>
-<td class="org-left">delete select directory from favorite directories</td>
-<td class="org-left">&lt;Ctrl-j&gt;</td>
+<td class="left">anything_favorite_directories_delete</td>
+<td class="left">delete select directory from favorite directories</td>
+<td class="left">&lt;Ctrl-j&gt;</td>
 </tr>
 </tbody>
 <tbody>
 <tr>
-<td class="org-left">anything_favorite_directories_add</td>
-<td class="org-left">add a new directory to favorite directories</td>
-<td class="org-left">&lt;Ctrl-m&gt;</td>
+<td class="left">anything_favorite_directories_add</td>
+<td class="left">add a new directory to favorite directories</td>
+<td class="left">&lt;Ctrl-m&gt;</td>
 </tr>
 </tbody>
 <tbody>
 <tr>
-<td class="org-left">list all actions for current candidate</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">TAB</td>
+<td class="left">list all actions for current candidate</td>
+<td class="left">&#xa0;</td>
+<td class="left">TAB</td>
 </tr>
 </tbody>
 <tbody>
 <tr>
-<td class="org-left">list all actions</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&lt;Ctrl-L&gt;</td>
+<td class="left">list all actions</td>
+<td class="left">&#xa0;</td>
+<td class="left">&lt;Ctrl-L&gt;</td>
 </tr>
 </tbody>
 </table>
-</div></li>
+</div>
+</li>
 
-<li><a id="orgheadline16"></a>then you can use "Anything" selected one of your favorite directory<br  /><div class="outline-text-4" id="text-orgheadline16">
+<li><a id="sec-4-2-4" name="sec-4-2-4"></a>then you can use "Anything" selected one of your favorite directory<br  /><div class="outline-text-4" id="text-4-2-4">
 <ul class="org-ul">
-<li>it will visit your selected directory in current Explorer.exe (if current activated window is Explorer.exe)<br  /></li>
-<li>it will visit your selected directory in current cmd.exe (if current activated window is cmd.exe)<br  /></li>
-<li>it will visit your selected directory in current msys.bat (if current activated window is msys.bat)<br  /></li>
+<li>it will visit your selected directory in current Explorer.exe (if current activated window is Explorer.exe)<br  />
+</li>
+<li>it will visit your selected directory in current cmd.exe (if current activated window is cmd.exe)<br  />
+</li>
+<li>it will visit your selected directory in current msys.bat (if current activated window is msys.bat)<br  />
+</li>
 </ul>
-</div></li></ul>
+</div>
+</li></ul>
 </div>
 
-<div id="outline-container-orgheadline17" class="outline-3">
-<h3 id="orgheadline17">anything-run.ahk is a replacement of &lt;Win-r&gt;</h3>
-<div class="outline-text-3" id="text-orgheadline17">
+<div id="outline-container-sec-4-3" class="outline-3">
+<h3 id="sec-4-3">anything-run.ahk is a replacement of &lt;Win-r&gt;</h3>
+<div class="outline-text-3" id="text-4-3">
 <p>
 it could remember old command too. when you press &lt;Windows+r&gt;<br  />
 about how to use it .see comments in anything-run.ahk<br  />
@@ -710,9 +744,9 @@ anything_multiple_sources(sources)
 </div>
 </div>
 
-<div id="outline-container-orgheadline18" class="outline-3">
-<h3 id="orgheadline18">anything-window-switch.ahk is a replacement of Alt-Tab</h3>
-<div class="outline-text-3" id="text-orgheadline18">
+<div id="outline-container-sec-4-4" class="outline-3">
+<h3 id="sec-4-4">anything-window-switch.ahk is a replacement of Alt-Tab</h3>
+<div class="outline-text-3" id="text-4-4">
 
 <div class="figure">
 <p><img src="/assets/blog/anything-doc.org/anything-ws.JPG" alt="anything-ws.JPG" /><br  />
@@ -723,7 +757,7 @@ anything_multiple_sources(sources)
 <pre class="src src-c"><span style="color: #7fffd4;">#include</span> anything.ahk
 <span style="color: #7fffd4;">#include</span> anything-window-<span style="color: #FBDE2D;">switch</span>.ahk 
  !Tab::
-; <span style="color: #8DA6CE;">custom</span> <span style="color: #FF6400;">anything</span>-properties (window width <span style="color: #FBDE2D;">and</span> <span style="color: #8DA6CE;">window</span> <span style="color: #40E0D0;">height</span>)
+; <span style="color: #8DA6CE;">custom</span> <span style="color: #FF6400;">anything</span>-properties (window width and <span style="color: #8DA6CE;">window</span> <span style="color: #40E0D0;">height</span>)
  my_anything_properties:=Object()
  my_anything_properties[<span style="color: #ffa07a;">"win_width"</span>]:= 900    
  my_anything_properties[<span style="color: #ffa07a;">"win_height"</span>]:= 180
@@ -748,59 +782,59 @@ actions for anything-window-switch.ahk<br  />
 
 
 <colgroup>
-<col  class="org-left" />
+<col  class="left" />
 
-<col  class="org-left" />
+<col  class="left" />
 
-<col  class="org-left" />
+<col  class="left" />
 </colgroup>
 <thead>
 <tr>
-<th scope="col" class="org-left">actions</th>
-<th scope="col" class="org-left">description</th>
-<th scope="col" class="org-left">key binding</th>
+<th scope="col" class="left">actions</th>
+<th scope="col" class="left">description</th>
+<th scope="col" class="left">key binding</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="org-left">anything_ws_activate_window</td>
-<td class="org-left">visit selected window</td>
-<td class="org-left">&lt;Click&gt;and  &lt;Enter&gt;</td>
+<td class="left">anything_ws_activate_window</td>
+<td class="left">visit selected window</td>
+<td class="left">&lt;Click&gt;and  &lt;Enter&gt;</td>
 </tr>
 </tbody>
 <tbody>
 <tr>
-<td class="org-left">anything_ws_close_window</td>
-<td class="org-left">close selected window</td>
-<td class="org-left">&lt;Ctrl-j&gt;</td>
+<td class="left">anything_ws_close_window</td>
+<td class="left">close selected window</td>
+<td class="left">&lt;Ctrl-j&gt;</td>
 </tr>
 </tbody>
 <tbody>
 <tr>
-<td class="org-left">anything_ws_assign_key_4_current_window</td>
-<td class="org-left">assign some special "TEXT" to your selected window ,then you can use it to selected the assigned window</td>
-<td class="org-left">&lt;Ctrl-m&gt;</td>
+<td class="left">anything_ws_assign_key_4_current_window</td>
+<td class="left">assign some special "TEXT" to your selected window ,then you can use it to selected the assigned window</td>
+<td class="left">&lt;Ctrl-m&gt;</td>
 </tr>
 </tbody>
 <tbody>
 <tr>
-<td class="org-left">anything_ws_kill_process</td>
-<td class="org-left">kill process of selected window</td>
-<td class="org-left">&lt;Ctrl-k&gt;</td>
+<td class="left">anything_ws_kill_process</td>
+<td class="left">kill process of selected window</td>
+<td class="left">&lt;Ctrl-k&gt;</td>
 </tr>
 </tbody>
 <tbody>
 <tr>
-<td class="org-left">anything_ws_exclude_window_by_class</td>
-<td class="org-left">don't list this window as candidates(excluded by ahk_class)</td>
-<td class="org-left">&lt;Ctrl-e&gt;</td>
+<td class="left">anything_ws_exclude_window_by_class</td>
+<td class="left">don't list this window as candidates(excluded by ahk_class)</td>
+<td class="left">&lt;Ctrl-e&gt;</td>
 </tr>
 </tbody>
 <tbody>
 <tr>
-<td class="org-left">list all actions for current candidate</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">TAB</td>
+<td class="left">list all actions for current candidate</td>
+<td class="left">&#xa0;</td>
+<td class="left">TAB</td>
 </tr>
 </tbody>
 </table>
@@ -814,9 +848,9 @@ next time you press Alt-TAB ,and type "www" Firefox is activated<br  />
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline19" class="outline-3">
-<h3 id="orgheadline19">anything-process-manager.ahk</h3>
-<div class="outline-text-3" id="text-orgheadline19">
+<div id="outline-container-sec-4-5" class="outline-3">
+<h3 id="sec-4-5">anything-process-manager.ahk</h3>
+<div class="outline-text-3" id="text-4-5">
 <p>
 is a process manager , you can use it kill a selected process<br  />
 or change the priority of the process<br  />
@@ -857,9 +891,9 @@ anything(anything_process_manager_source)
 </div>
 
 
-<div id="outline-container-orgheadline20" class="outline-3">
-<h3 id="orgheadline20">anything-services.ahk</h3>
-<div class="outline-text-3" id="text-orgheadline20">
+<div id="outline-container-sec-4-6" class="outline-3">
+<h3 id="sec-4-6">anything-services.ahk</h3>
+<div class="outline-text-3" id="text-4-6">
 <p>
 is a Windows Services Manager ,just like services.msc<br  />
 it can start a stopped service ,or stop a running service<br  />
@@ -902,22 +936,30 @@ anything(anything_services_source)
 </div>
 
 
-<div id="outline-container-orgheadline21" class="outline-2">
-<h2 id="orgheadline21">how to  write an anything-source</h2>
-<div class="outline-text-2" id="text-orgheadline21">
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5">how to  write an anything-source</h2>
+<div class="outline-text-2" id="text-5">
 <p>
 an anything-source is an Object with some pre-defined properties<br  />
 now it support 8 anything-source-properties :<br  />
 </p>
 <ul class="org-ul">
-<li>name<br  /></li>
-<li>action<br  /></li>
-<li>candidate<br  /></li>
-<li>icon<br  /></li>
-<li>match<br  /></li>
-<li>anything-execute-action-at-once-if-one<br  /></li>
-<li>anything-execute-action-at-once-if-one-even-no-keyword<br  /></li>
-<li>anything-action-when-2-candidates-even-no-keyword<br  /></li>
+<li>name<br  />
+</li>
+<li>action<br  />
+</li>
+<li>candidate<br  />
+</li>
+<li>icon<br  />
+</li>
+<li>match<br  />
+</li>
+<li>anything-execute-action-at-once-if-one<br  />
+</li>
+<li>anything-execute-action-at-once-if-one-even-no-keyword<br  />
+</li>
+<li>anything-action-when-2-candidates-even-no-keyword<br  />
+</li>
 </ul>
 <p>
 for example:<br  />
@@ -928,9 +970,9 @@ for example:<br  />
 </pre>
 </div>
 </div>
-<div id="outline-container-orgheadline22" class="outline-3">
-<h3 id="orgheadline22">&lt;name&gt;  (required)</h3>
-<div class="outline-text-3" id="text-orgheadline22">
+<div id="outline-container-sec-5-1" class="outline-3">
+<h3 id="sec-5-1">&lt;name&gt;  (required)</h3>
+<div class="outline-text-3" id="text-5-1">
 <p>
 &lt;name&gt; is a string ,it is just a name of this anything-source<br  />
 </p>
@@ -941,16 +983,16 @@ for example:<br  />
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline23" class="outline-3">
-<h3 id="orgheadline23">&lt;candidate&gt;  (required)</h3>
-<div class="outline-text-3" id="text-orgheadline23">
+<div id="outline-container-sec-5-2" class="outline-3">
+<h3 id="sec-5-2">&lt;candidate&gt;  (required)</h3>
+<div class="outline-text-3" id="text-5-2">
 <p>
 &lt;candidate&gt; is an array of all candidates ,or a function name(string)<br  />
 without parameter which return an array .<br  />
 each element of the array can be :<br  />
 </p>
 </div>
-<ul class="org-ul"><li><a id="orgheadline24"></a>a string<br  /><div class="outline-text-4" id="text-orgheadline24">
+<ul class="org-ul"><li><a id="sec-5-2-1" name="sec-5-2-1"></a>a string<br  /><div class="outline-text-4" id="text-5-2-1">
 <p>
  this string will be displayed on listview , so that you can select one<br  />
  of the candidates ,and execute action on your selected candidate.<br  />
@@ -973,8 +1015,9 @@ or<br  />
 my_source[<span style="color: #ffa07a;">"candidate"</span>]:=<span style="color: #ffa07a;">"my_candidates_fun"</span>
 </pre>
 </div>
-</div></li>
-<li><a id="orgheadline25"></a>an array<br  /><div class="outline-text-4" id="text-orgheadline25">
+</div>
+</li>
+<li><a id="sec-5-2-2" name="sec-5-2-2"></a>an array<br  /><div class="outline-text-4" id="text-5-2-2">
 <p>
 the first element of this array must be a string ,the string will be<br  />
 displayed on listview ,and you can selected one of the candidates ,and<br  />
@@ -993,12 +1036,13 @@ see &lt;action&gt;<br  />
              )
 </pre>
 </div>
-</div></li></ul>
+</div>
+</li></ul>
 </div>
 
-<div id="outline-container-orgheadline26" class="outline-3">
-<h3 id="orgheadline26">&lt;action&gt;  (required)</h3>
-<div class="outline-text-3" id="text-orgheadline26">
+<div id="outline-container-sec-5-3" class="outline-3">
+<h3 id="sec-5-3">&lt;action&gt;  (required)</h3>
+<div class="outline-text-3" id="text-5-3">
 <p>
 &lt;action&gt; is a function name(string) or a list of function name (array).<br  />
 and those functions must have one parameter. actually the parameter is<br  />
@@ -1050,9 +1094,9 @@ my_source[<span style="color: #ffa07a;">"action"</span>]:=my_action
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline27" class="outline-3">
-<h3 id="orgheadline27">&lt;icon&gt; (optional)</h3>
-<div class="outline-text-3" id="text-orgheadline27">
+<div id="outline-container-sec-5-4" class="outline-3">
+<h3 id="sec-5-4">&lt;icon&gt; (optional)</h3>
+<div class="outline-text-3" id="text-5-4">
 <p>
 &lt;icon&gt; is a function(string) which return an ImageList.<br  />
 this property is optional .if this property isn't empty<br  />
@@ -1074,9 +1118,9 @@ my_source[<span style="color: #ffa07a;">"icon"</span>]:=my_icon
 </div>
 </div>
 
-<div id="outline-container-orgheadline28" class="outline-3">
-<h3 id="orgheadline28">&lt;match&gt; (optional) default: "anything_match"</h3>
-<div class="outline-text-3" id="text-orgheadline28">
+<div id="outline-container-sec-5-5" class="outline-3">
+<h3 id="sec-5-5">&lt;match&gt; (optional) default: "anything_match"</h3>
+<div class="outline-text-3" id="text-5-5">
 <p>
 if it has value for example:<br  />
 </p>
@@ -1112,9 +1156,9 @@ and these tow function is defined in anything.ahk<br  />
 </div>
 </div>
 
-<div id="outline-container-orgheadline29" class="outline-3">
-<h3 id="orgheadline29">&lt;anything-execute-action-at-once-if-one&gt; (optional)</h3>
-<div class="outline-text-3" id="text-orgheadline29">
+<div id="outline-container-sec-5-6" class="outline-3">
+<h3 id="sec-5-6">&lt;anything-execute-action-at-once-if-one&gt; (optional)</h3>
+<div class="outline-text-3" id="text-5-6">
 <p>
 if it has value  for example:<br  />
 </p>
@@ -1130,9 +1174,9 @@ then if only one candidate left on the listview it will execute the<br  />
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline30" class="outline-3">
-<h3 id="orgheadline30">&lt; anything-execute-action-at-once-if-one-even-no-keyword &gt; (optional)</h3>
-<div class="outline-text-3" id="text-orgheadline30">
+<div id="outline-container-sec-5-7" class="outline-3">
+<h3 id="sec-5-7">&lt; anything-execute-action-at-once-if-one-even-no-keyword &gt; (optional)</h3>
+<div class="outline-text-3" id="text-5-7">
 <p>
   if it has value<br  />
 for example<br  />
@@ -1150,9 +1194,9 @@ as parameter auto. you needn't press &lt;Enter&gt; here.<br  />
 </div>
 </div>
 
-<div id="outline-container-orgheadline31" class="outline-3">
-<h3 id="orgheadline31">&lt;anything-action-when-2-candidates-even-no-keyword&gt; (optional)</h3>
-<div class="outline-text-3" id="text-orgheadline31">
+<div id="outline-container-sec-5-8" class="outline-3">
+<h3 id="sec-5-8">&lt;anything-action-when-2-candidates-even-no-keyword&gt; (optional)</h3>
+<div class="outline-text-3" id="text-5-8">
 <p>
 the value of it is a function accept two parameters<br  />
 </p>
@@ -1172,22 +1216,19 @@ without press RETURN by youself.<br  />
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline32" class="outline-3">
-<h3 id="orgheadline32">call anything</h3>
-<div class="outline-text-3" id="text-orgheadline32">
+<div id="outline-container-sec-5-9" class="outline-3">
+<h3 id="sec-5-9">call anything</h3>
+<div class="outline-text-3" id="text-5-9">
 <ol class="org-ol">
-<li><p>
-anything(source)<br  />
-</p>
+<li>anything(source)<br  />
 <div class="org-src-container">
 
 <pre class="src src-c">anything(my_source)
 </pre>
-</div></li>
+</div>
+</li>
 
-<li><p>
-anything_multiple_sources(sources) with other anything-source<br  />
-</p>
+<li>anything_multiple_sources(sources) with other anything-source<br  />
 <div class="org-src-container">
 
 <pre class="src src-c"><span style="color: #D8FA3C;">sources</span> := Array()
@@ -1195,11 +1236,10 @@ sources.Insert(my_source)
 sources.Insert(other_source)
 anything_multiple_sources(sources)
 </pre>
-</div></li>
+</div>
+</li>
 
-<li><p>
-anything_with_properties(anything-source,anything-properties)<br  />
-</p>
+<li>anything_with_properties(anything-source,anything-properties)<br  />
 <div class="org-src-container">
 
 <pre class="src src-c"><span style="color: #D8FA3C;">my_anything_properties</span>:=Object()
@@ -1207,10 +1247,9 @@ my_anything_properties[<span style="color: #ffa07a;">"win_width"</span>]:= 900
 my_anything_properties[<span style="color: #ffa07a;">"win_height"</span>]:= 180
 anything_with_properties(my_source,my_anything_properties)
 </pre>
-</div></li>
-<li><p>
-anything_multiple_sources_with_properties(anything-sources,anything-properties)<br  />
-</p>
+</div>
+</li>
+<li>anything_multiple_sources_with_properties(anything-sources,anything-properties)<br  />
 <div class="org-src-container">
 
 <pre class="src src-c"><span style="color: #D8FA3C;">my_anything_properties</span>:=Object()
@@ -1222,103 +1261,104 @@ sources.insert(my_source)
 sources.insert(other_source)
 anything_multiple_sources_with_properties(sources,my_anything_properties)
 </pre>
-</div></li>
+</div>
+</li>
 </ol>
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline33" class="outline-2">
-<h2 id="orgheadline33">anything-properties</h2>
-<div class="outline-text-2" id="text-orgheadline33">
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6">anything-properties</h2>
+<div class="outline-text-2" id="text-6">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
-<col  class="org-left" />
+<col  class="left" />
 
-<col  class="org-left" />
+<col  class="left" />
 
-<col  class="org-left" />
+<col  class="left" />
 
-<col  class="org-left" />
+<col  class="left" />
 </colgroup>
 <thead>
 <tr>
-<th scope="col" class="org-left">properties</th>
-<th scope="col" class="org-left">description</th>
-<th scope="col" class="org-left">default vaule</th>
-<th scope="col" class="org-left">type</th>
+<th scope="col" class="left">properties</th>
+<th scope="col" class="left">description</th>
+<th scope="col" class="left">default vaule</th>
+<th scope="col" class="left">type</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="org-left">win_width</td>
-<td class="org-left">the width of anything window</td>
-<td class="org-left">900</td>
-<td class="org-left">integer</td>
+<td class="left">win_width</td>
+<td class="left">the width of anything window</td>
+<td class="left">900</td>
+<td class="left">integer</td>
 </tr>
 
 <tr>
-<td class="org-left">win_height</td>
-<td class="org-left">the height of anything window</td>
-<td class="org-left">510</td>
-<td class="org-left">integer</td>
+<td class="left">win_height</td>
+<td class="left">the height of anything window</td>
+<td class="left">510</td>
+<td class="left">integer</td>
 </tr>
 
 <tr>
-<td class="org-left">Transparent</td>
-<td class="org-left">the transparent of anything window</td>
-<td class="org-left">225</td>
-<td class="org-left">integer</td>
+<td class="left">Transparent</td>
+<td class="left">the transparent of anything window</td>
+<td class="left">225</td>
+<td class="left">integer</td>
 </tr>
 
 <tr>
-<td class="org-left">WindowColor</td>
-<td class="org-left">the color of anything window</td>
-<td class="org-left">"black"</td>
-<td class="org-left">string</td>
+<td class="left">WindowColor</td>
+<td class="left">the color of anything window</td>
+<td class="left">"black"</td>
+<td class="left">string</td>
 </tr>
 
 <tr>
-<td class="org-left">ControlColor</td>
-<td class="org-left">the color of control on anything window</td>
-<td class="org-left">"black"</td>
-<td class="org-left">string</td>
+<td class="left">ControlColor</td>
+<td class="left">the color of control on anything window</td>
+<td class="left">"black"</td>
+<td class="left">string</td>
 </tr>
 
 <tr>
-<td class="org-left">FontSize</td>
-<td class="org-left">the font size of font on anyting window</td>
-<td class="org-left">12</td>
-<td class="org-left">integer</td>
+<td class="left">FontSize</td>
+<td class="left">the font size of font on anyting window</td>
+<td class="left">12</td>
+<td class="left">integer</td>
 </tr>
 
 <tr>
-<td class="org-left">FontColor</td>
-<td class="org-left">the font colorof font on anyting window</td>
-<td class="org-left">"c7cfc00"</td>
-<td class="org-left">string</td>
+<td class="left">FontColor</td>
+<td class="left">the font colorof font on anyting window</td>
+<td class="left">"c7cfc00"</td>
+<td class="left">string</td>
 </tr>
 
 <tr>
-<td class="org-left">FontWeight</td>
-<td class="org-left">the font weight weight on font on anything window</td>
-<td class="org-left">"bold"</td>
-<td class="org-left">bold, italic, strike, underline, and norm</td>
+<td class="left">FontWeight</td>
+<td class="left">the font weight weight on font on anything window</td>
+<td class="left">"bold"</td>
+<td class="left">bold, italic, strike, underline, and norm</td>
 </tr>
 
 <tr>
-<td class="org-left">quit_when_lose_focus</td>
-<td class="org-left">auto quit anything when anything lose focus (yes or no)</td>
-<td class="org-left">"yes"</td>
-<td class="org-left">"yes" or "no"</td>
+<td class="left">quit_when_lose_focus</td>
+<td class="left">auto quit anything when anything lose focus (yes or no)</td>
+<td class="left">"yes"</td>
+<td class="left">"yes" or "no"</td>
 </tr>
 
 <tr>
-<td class="org-left">no_candidate_action</td>
-<td class="org-left">when no candiates left and you press Ctrl-i ,this function is called</td>
-<td class="org-left">"anything_do_nothing"</td>
-<td class="org-left">a function name (accept one parameter)</td>
+<td class="left">no_candidate_action</td>
+<td class="left">when no candiates left and you press Ctrl-i ,this function is called</td>
+<td class="left">"anything_do_nothing"</td>
+<td class="left">a function name (accept one parameter)</td>
 </tr>
 </tbody>
 </table>
@@ -1327,42 +1367,42 @@ see " how to  write an anything-source"/"call anything" section about how to use
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline34" class="outline-2">
-<h2 id="orgheadline34">global variable</h2>
-<div class="outline-text-2" id="text-orgheadline34">
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7">global variable</h2>
+<div class="outline-text-2" id="text-7">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
-<col  class="org-left" />
+<col  class="left" />
 
-<col  class="org-left" />
+<col  class="left" />
 </colgroup>
 <thead>
 <tr>
-<th scope="col" class="org-left">global variable name</th>
-<th scope="col" class="org-left">description</th>
+<th scope="col" class="left">global variable name</th>
+<th scope="col" class="left">description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="org-left">anything_wid</td>
-<td class="org-left">anything window id</td>
+<td class="left">anything_wid</td>
+<td class="left">anything window id</td>
 </tr>
 
 <tr>
-<td class="org-left">anything_pattern</td>
-<td class="org-left">anything pattern you have typed in the textfield</td>
+<td class="left">anything_pattern</td>
+<td class="left">anything pattern you have typed in the textfield</td>
 </tr>
 
 <tr>
-<td class="org-left">anything_properties</td>
-<td class="org-left">an Array of current anything propeties</td>
+<td class="left">anything_properties</td>
+<td class="left">an Array of current anything propeties</td>
 </tr>
 
 <tr>
-<td class="org-left">anything_previous_activated_win_id</td>
-<td class="org-left">previous activated win_id before anthing-window appera</td>
+<td class="left">anything_previous_activated_win_id</td>
+<td class="left">previous activated win_id before anthing-window appera</td>
 </tr>
 </tbody>
 </table>
@@ -1390,16 +1430,14 @@ you can do it like this:<br  />
 </div>
 </div>
 
-<div id="outline-container-orgheadline35" class="outline-2">
-<h2 id="orgheadline35">Known Bugs</h2>
-<div class="outline-text-2" id="text-orgheadline35">
+<div id="outline-container-sec-8" class="outline-2">
+<h2 id="sec-8">Known Bugs</h2>
+<div class="outline-text-2" id="text-8">
 <ul class="org-ul">
-<li><p>
-when sometimes you type too quickly , letters get dropped from<br  />
+<li>when sometimes you type too quickly , letters get dropped from<br  />
 search key , the letters get typed and then deleted .<br  />
 or you type "ab" but got "ba".<br  />
 or you type "abc" ,only "ab" are used to filter candidates<br  />
-</p>
 
 <p>
 Becuase I use Input() in a loop to read what you have typed<br  />
@@ -1408,11 +1446,10 @@ the Input() hasn't been called . so the letter would be dropped<br  />
 I try to fix this by compare %anything_pattern% with text in the textfield<br  />
 if they are different ,then I know some letter got dropped ,but it seems<br  />
 doesn't work very well(Now is fixed.)<br  />
-</p></li>
-
-<li><p>
-anything-explorer-history.ahk must be the last included file<br  />
 </p>
+</li>
+
+<li>anything-explorer-history.ahk must be the last included file<br  />
 
 <p>
 maybe the reason is<br  />
@@ -1423,7 +1460,8 @@ there is some code look like this<br  />
    #IfWinActive ahk_class ExploreWClass|CabinetWClass<br  />
 or<br  />
    Return<br  />
-</p></li>
+</p>
+</li>
 </ul>
 </div>
 </div>
@@ -1432,8 +1470,8 @@ or<br  />
 </div>
     <div>
       <div class="post-meta">
-        <span title="post date" class="post-info">2016-12-28</span>
-        <span title="last modification date" class="post-info">2016-01-14</span>
+        <span title="post date" class="post-info">2011-06-26</span>
+        <span title="last modification date" class="post-info">2017-01-22</span>
         <span title="tags" class="post-info"><a href="/tags/autohotkey/">AutoHotKey</a>, <a href="/tags/windows/">Windows</a></span>
         <span title="author" class="post-info">纪秀峰</span>
       </div>
@@ -1474,7 +1512,7 @@ or<br  />
       <div class="footer">
         <p>Generated by <a href="http://www.gnu.org/software/emacs/">Emacs</a> 26.x (<a href="http://orgmode.org">Org mode</a> 8.x)</p>
         <p>
-          Copyright &copy; 2012 - <span id="footerYear"></span> <a href="mailto:jixiuf &lt;at&gt; gmail &lt;dot&gt; com">纪秀峰</a>
+          Copyright &copy; 2012 - <span id="footerYear"></span> <a href="mailto:jixiuf &lt;at&gt; qq &lt;dot&gt; com">纪秀峰</a>
           &nbsp;&nbsp;-&nbsp;&nbsp;
           Powered by <a href="https://github.com/kelvinh/org-page" target="_blank">org-page</a>
           <script type="text/javascript">document.getElementById("footerYear").innerHTML = (new Date()).getFullYear();</script>

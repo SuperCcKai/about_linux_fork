@@ -47,14 +47,14 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgheadline1">context之.context中.WithValue(ctx,key,value) 数据的存储与传递</a></li>
-<li><a href="#orgheadline2">context 之 WithCancel 与 Done()</a></li>
+<li><a href="#sec-1">context之.context中.WithValue(ctx,key,value) 数据的存储与传递</a></li>
+<li><a href="#sec-2">context 之 WithCancel 与 Done()</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgheadline1" class="outline-2">
-<h2 id="orgheadline1">context之.context中.WithValue(ctx,key,value) 数据的存储与传递</h2>
-<div class="outline-text-2" id="text-orgheadline1">
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">context之.context中.WithValue(ctx,key,value) 数据的存储与传递</h2>
+<div class="outline-text-2" id="text-1">
 <p>
 vitess 代码中到处充斥着它的身影,初读时颇为不解，<br  />
 仔细看了下context 的代码 ，大概明白Context 设计的用意。<br  />
@@ -80,59 +80,59 @@ vitess 代码中到处充斥着它的身影,初读时颇为不解，<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-go"><span style="color: #FBDE2D;">type</span> <span style="color: #8DA6CE;">User</span> <span style="color: #FBDE2D;">struct</span> {...}
+<pre class="src src-go">type User struct {...}
 
-<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#23450;&#20041;&#19968;&#31181;&#31867;&#22411;key ,&#27880;&#24847;&#36825;&#37324;&#26159;&#23567;&#20889;&#30340; &#65292;&#21363;&#22312;package &#22806;&#37096;&#26159;&#26080;&#27861;&#35775;&#38382;&#21040;key</span>
-<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#36825;&#26679;&#23601;&#21487;&#20197;&#20445;&#35777;&#23545;&#21482;&#33021;&#22312;package user &#20013;&#20351;&#29992;key&#31867;&#22411;</span>
-<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#27599;&#20010;package &#20013;&#37117;&#23450;&#20041;&#19968;&#20010;&#30456;&#24212;&#30340;key ,</span>
-<span style="color: #FBDE2D;">type</span> <span style="color: #8DA6CE;">key</span> <span style="color: #8DA6CE;">int</span>
+// 定义一种类型key ,注意这里是小写的 ，即在package 外部是无法访问到key
+// 这样就可以保证对只能在package user 中使用key类型
+// 每个package 中都定义一个相应的key ,
+type key int
 
-<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">Context &#20013;&#20250;&#26377;&#21508;&#31181;&#31867;&#22411;&#30340;&#25968;&#25454;&#65292;&#27599;&#31181;&#25968;&#25454;&#26377;&#19968;&#20010;key</span>
-<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#20197;userKey &#20026;user.User&#23545;&#24212;&#30340;key,userKey &#26410;&#23548;&#20986;&#65292; &#21363;&#22312;package user</span>
-<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#22806;&#37096;&#26080;&#27861;&#35775;&#38382;&#21040;userKey,&#23545;&#23427;&#30340;&#35775;&#38382;&#65292;&#20351;&#29992;&#19979;&#38754;&#25552;&#20379;&#30340;user.NewContext</span>
-<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#21644; user.FromContext &#26469;&#23384;&#20648;&#21644;&#35775;&#38382;</span>
-<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#19981;&#35201;&#30452;&#25509;&#20351;&#29992;&#36825;&#20010;&#21464;&#37327;</span>
-<span style="color: #FBDE2D;">var</span> userKey key = 0
+// Context 中会有各种类型的数据，每种数据有一个key
+// 以userKey 为user.User对应的key,userKey 未导出， 即在package user
+// 外部无法访问到userKey,对它的访问，使用下面提供的user.NewContext
+// 和 user.FromContext 来存储和访问
+// 不要直接使用这个变量
+var userKey key = 0
 
-<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#25226;u &#23384;&#20648;&#21040;Context &#20013;&#65292; (&#20351;&#29992;&#19978;&#38754;&#23450;&#20041;&#30340;userKey&#21464;&#37327;&#20316;&#20026;key)</span>
-<span style="color: #FBDE2D;">func</span> <span style="color: #FF6400;">NewContext</span>(ctx <span style="color: #8DA6CE;">context.Context</span>, u *<span style="color: #8DA6CE;">User</span>) <span style="color: #8DA6CE;">context.Context</span> {
-    <span style="color: #FBDE2D;">return</span> context.<span style="color: #FF6400;">WithValue</span>(ctx, userKey, u)
+// 把u 存储到Context 中， (使用上面定义的userKey变量作为key)
+func NewContext(ctx context.Context, u *User) context.Context {
+    return context.WithValue(ctx, userKey, u)
 }
 
-<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#20174;Context &#20013; &#21462;&#22238;userKey &#23545;&#24212;&#30340;user.User</span>
-<span style="color: #FBDE2D;">func</span> <span style="color: #FF6400;">FromContext</span>(ctx <span style="color: #8DA6CE;">context.Context</span>) (*<span style="color: #8DA6CE;">User</span>, <span style="color: #8DA6CE;">bool</span>) {
-    u, ok := ctx.<span style="color: #FF6400;">Value</span>(userKey).(*<span style="color: #8DA6CE;">User</span>)
-    <span style="color: #FBDE2D;">return</span> u, ok
+// 从Context 中 取回userKey 对应的user.User
+func FromContext(ctx context.Context) (*User, bool) {
+    u, ok := ctx.Value(userKey).(*User)
+    return u, ok
 }
 </pre>
 </div>
 
 <div class="org-src-container">
 
-<pre class="src src-go"><span style="color: #FBDE2D;">package</span> main
+<pre class="src src-go">package main
 
-<span style="color: #FBDE2D;">import</span> (
+import (
 
-    <span style="color: #ffa07a;">"golang.org/x/net/context"</span>
+    "golang.org/x/net/context"
 )
 
-<span style="color: #FBDE2D;">func</span> <span style="color: #FF6400;">main</span>() {
-    ctx := context.<span style="color: #FF6400;">Background</span>() <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#26368;&#22522;&#30784;&#30340;&#19968;&#20010;Context &#65292;&#37324;&#38754;&#20160;&#20040;&#37117;&#27809;&#23384;&#20648;</span>
-    u := user.<span style="color: #8DA6CE;">User</span>{}
-    ctx = ctx.<span style="color: #FF6400;">NewContext</span>(ctx, &amp;u) <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#25226; *user.User &#31867;&#22411;&#30340;u  &#23384;&#19968;ctx &#20013;</span>
-    <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#20551;&#22914; &#36824;&#26377;&#21478;&#19968;&#20010;package &#21483;&#65292; group</span>
+func main() {
+    ctx := context.Background() // 最基础的一个Context ，里面什么都没存储
+    u := user.User{}
+    ctx = ctx.NewContext(ctx, &amp;u) // 把 *user.User 类型的u  存一ctx 中
+    // 假如 还有另一个package 叫， group
 
-    g := group.<span style="color: #8DA6CE;">Group</span>{}
-    ctx = ctx.<span style="color: #FF6400;">NewContext</span>(ctx, &amp;g) <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#25226; *group.Group &#31867;&#22411;&#30340;g  &#23384;&#19968;ctx &#20013;</span>
-    <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#29616;&#22312; ctx &#20013;&#23384;&#20102;user &#21644;group &#30340;&#25968;&#25454;&#65292;</span>
-    <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">ctx &#20250;&#20570;&#20026;&#21442;&#25968;&#22312; &#21508;&#20010;&#20989;&#25968;&#20013;&#36827;&#34892;&#20256;&#36882;</span>
-    <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#20363;&#22914;&#22312;&#26576;&#20010;&#20989;&#25968;&#29992;&#65292; &#20320;&#38656;&#35201;&#35775;&#38382;&#37324;&#38754;&#30340;user</span>
-    <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#36890;&#36807;&#19979;&#38754;&#36825;&#31181;&#26041;&#24335;&#26469;&#33719;&#24471;</span>
-    u, ok := user.<span style="color: #FF6400;">FromContext</span>(ctx)
-    g, ok := group.<span style="color: #FF6400;">Fromcontext</span>(ctx)
-    <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#27880;&#24847;&#21040;&#23384;&#21040;context &#20013;&#30340;&#25968;&#25454;&#22522;&#26412;&#37117;&#26159;&#25351;&#38024;&#31867;&#22411;&#65292; &#21363;&#38656;&#35201;&#20462;&#25913;&#25968;&#25454;&#26102;&#65292;&#21482;&#38656;&#35201;&#20462;&#25913;&#21363;&#21487;</span>
-    <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#19981;&#38656;&#35201;&#25226;&#25351;&#38024;&#37325;&#26032;&#23384;&#21040;context &#20013;&#65292;&#20284;&#20046; &#33509;&#19981;&#23384;&#25351;&#38024;&#32780;&#26159;&#23384;struct&#32467;&#26500;&#30340;&#35805;&#65292; &#21453;&#22797;&#30340;NewContext</span>
-    <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#20250;&#23548;&#33268;context &#20013;&#30340;&#25968;&#25454;&#26080;&#38480;&#22686;&#22823;</span>
+    g := group.Group{}
+    ctx = ctx.NewContext(ctx, &amp;g) // 把 *group.Group 类型的g  存一ctx 中
+    // 现在 ctx 中存了user 和group 的数据，
+    // ctx 会做为参数在 各个函数中进行传递
+    // 例如在某个函数用， 你需要访问里面的user
+    // 通过下面这种方式来获得
+    u, ok := user.FromContext(ctx)
+    g, ok := group.Fromcontext(ctx)
+    // 注意到存到context 中的数据基本都是指针类型， 即需要修改数据时，只需要修改即可
+    // 不需要把指针重新存到context 中，似乎 若不存指针而是存struct结构的话， 反复的NewContext
+    // 会导致context 中的数据无限增大
 }
 </pre>
 </div>
@@ -141,36 +141,36 @@ context中 如何存储数据的，看下代码， 其实很简单<br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-go"><span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">Use context Values only for request-scoped data that transits processes and</span>
-<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">APIs, not for passing optional parameters to functions.</span>
-<span style="color: #FBDE2D;">func</span> <span style="color: #FF6400;">WithValue</span>(parent <span style="color: #8DA6CE;">Context</span>, key <span style="color: #FBDE2D;">interface</span>{}, val <span style="color: #FBDE2D;">interface</span>{}) <span style="color: #8DA6CE;">Context</span> {
-    <span style="color: #FBDE2D;">return</span> &amp;<span style="color: #8DA6CE;">valueCtx</span>{parent, key, val}
+<pre class="src src-go">// Use context Values only for request-scoped data that transits processes and
+// APIs, not for passing optional parameters to functions.
+func WithValue(parent Context, key interface{}, val interface{}) Context {
+    return &amp;valueCtx{parent, key, val}
 }
 
-<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">A valueCtx carries a key-value pair.  It implements Value for that key and</span>
-<span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">delegates all other calls to the embedded Context.</span>
-<span style="color: #FBDE2D;">type</span> <span style="color: #8DA6CE;">valueCtx</span> <span style="color: #FBDE2D;">struct</span> {
+// A valueCtx carries a key-value pair.  It implements Value for that key and
+// delegates all other calls to the embedded Context.
+type valueCtx struct {
     Context
-    key, val <span style="color: #FBDE2D;">interface</span>{}
+    key, val interface{}
 }
 
-<span style="color: #FBDE2D;">func</span> (c *<span style="color: #8DA6CE;">valueCtx</span>) <span style="color: #FF6400;">String</span>() <span style="color: #8DA6CE;">string</span> {
-    <span style="color: #FBDE2D;">return</span> fmt.<span style="color: #FF6400;">Sprintf</span>(<span style="color: #ffa07a;">"%v.WithValue(%#v, %#v)"</span>, c.Context, c.key, c.val)
+func (c *valueCtx) String() string {
+    return fmt.Sprintf("%v.WithValue(%#v, %#v)", c.Context, c.key, c.val)
 }
 
-<span style="color: #FBDE2D;">func</span> (c *<span style="color: #8DA6CE;">valueCtx</span>) <span style="color: #FF6400;">Value</span>(key <span style="color: #FBDE2D;">interface</span>{}) <span style="color: #FBDE2D;">interface</span>{} {
-    <span style="color: #FBDE2D;">if</span> c.key == key {
-        <span style="color: #FBDE2D;">return</span> c.val
+func (c *valueCtx) Value(key interface{}) interface{} {
+    if c.key == key {
+	return c.val
     }
-    <span style="color: #FBDE2D;">return</span> c.Context.<span style="color: #FF6400;">Value</span>(key)
+    return c.Context.Value(key)
 }
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline2" class="outline-2">
-<h2 id="orgheadline2">context 之 WithCancel 与 Done()</h2>
-<div class="outline-text-2" id="text-orgheadline2">
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2">context 之 WithCancel 与 Done()</h2>
+<div class="outline-text-2" id="text-2">
 <p>
 提供一个如何使用 WithCancel() 与Done()的示例<br  />
 当某个goroutine A 等待别的goroutine B返回结果给他的时候<br  />
@@ -182,52 +182,52 @@ C 调cancel() 可以让A 不再继续等待，继续往下走<br  />
 
 <div class="org-src-container">
 
-<pre class="src src-go"><span style="color: #FBDE2D;">package</span> main
+<pre class="src src-go">package main
 
-<span style="color: #FBDE2D;">import</span> (
-    <span style="color: #ffa07a;">"fmt"</span>
-    <span style="color: #ffa07a;">"net/http"</span>
-    <span style="color: #ffa07a;">"time"</span>
+import (
+    "fmt"
+    "net/http"
+    "time"
 
-    <span style="color: #ffa07a;">"golang.org/x/net/context"</span>
+    "golang.org/x/net/context"
 )
 
-<span style="color: #FBDE2D;">func</span> <span style="color: #FF6400;">doALongJob</span>(r <span style="color: #FBDE2D;">chan</span> <span style="color: #8DA6CE;">string</span>) {
-    time.<span style="color: #FF6400;">Sleep</span>(time.Second * 5)
-    fmt.<span style="color: #FF6400;">Println</span>(<span style="color: #ffa07a;">"job is done"</span>)
-    r &lt;- <span style="color: #ffa07a;">"&#32463;&#21382;&#20102;&#28459;&#38271;&#30340;&#36807;&#31243;&#65292;&#29992;&#25143;&#31561;&#21040;&#20102;&#24819;&#35201;&#30340;&#25968;&#25454;"</span>
-    fmt.<span style="color: #FF6400;">Println</span>(<span style="color: #ffa07a;">"doALongJob is end"</span>)
+func doALongJob(r chan string) {
+    time.Sleep(time.Second * 5)
+    fmt.Println("job is done")
+    r &lt;- "经历了漫长的过程，用户等到了想要的数据"
+    fmt.Println("doALongJob is end")
 }
-<span style="color: #FBDE2D;">func</span> <span style="color: #FF6400;">handleTest</span>(w <span style="color: #8DA6CE;">http.ResponseWriter</span>, req *<span style="color: #8DA6CE;">http.Request</span>) {
-    <span style="color: #FBDE2D;">defer</span> req.Body.<span style="color: #FF6400;">Close</span>()
-    ctx := context.<span style="color: #FF6400;">Background</span>()
-    <span style="color: #FBDE2D;">var</span> cancel context.CancelFunc
-    ctx, cancel = context.<span style="color: #FF6400;">WithCancel</span>(ctx)
-    <span style="color: #FBDE2D;">defer</span> <span style="color: #FF6400;">cancel</span>()
-    <span style="color: #FBDE2D;">go</span> <span style="color: #FBDE2D;">func</span>() {
-        <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#25105; &#65288;&#21035;&#30340;&#36827;&#31243; &#65289; &#21487;&#20197;&#35753;&#26412;&#36827;&#31243;&#21462;&#28040;&#31561;&#24453;&#25968;&#25454;&#30340;&#36820;&#22238;</span>
-        time.<span style="color: #FF6400;">Sleep</span>(2 * time.Second)
-        fmt.<span style="color: #FF6400;">Println</span>(<span style="color: #ffa07a;">"&#31561;&#19981;&#21450;&#20102;&#65292; &#19981;&#20877;&#31561;&#24453;"</span>)
-        <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#22914;&#26524;&#27492;&#22788;&#27809;&#26377;&#35843;&#29992;cancel() ,&#27983;&#35272;&#22120;&#19978;&#20250;&#19968;&#30452;&#31561;&#21040; &#24819;&#36807;&#30340;&#32467;&#26524;</span>
-        <span style="color: #FF6400;">cancel</span>()
+func handleTest(w http.ResponseWriter, req *http.Request) {
+    defer req.Body.Close()
+    ctx := context.Background()
+    var cancel context.CancelFunc
+    ctx, cancel = context.WithCancel(ctx)
+    defer cancel()
+    go func() {
+	// 我 （别的进程 ） 可以让本进程取消等待数据的返回
+	time.Sleep(2 * time.Second)
+	fmt.Println("等不及了， 不再等待")
+	// 如果此处没有调用cancel() ,浏览器上会一直等到 想过的结果
+	cancel()
     }()
 
-    <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#36825;&#37324;&#32531;&#20914;1&#20010;&#65292; &#21363; &#65292;&#23601;&#31639;&#25105;&#25918;&#24323;&#20174;resultChan &#35835;&#25968;&#25454;&#65292;doALongJob&#22788;&#20381;&#28982;&#21487;&#20197;&#24448;&#37324;&#38754;&#20889;&#20837;&#19968;&#20010;&#25968;&#25454;&#65292;&#20174;&#32780;&#27491;&#24120;&#36864;&#20986;</span>
-    <span style="color: #FBDE2D;">var</span> reusultChan <span style="color: #FBDE2D;">chan</span> <span style="color: #8DA6CE;">string</span> = <span style="color: #F8F8F8;">make</span>(<span style="color: #FBDE2D;">chan</span> <span style="color: #8DA6CE;">string</span>, 1)
-    <span style="color: #FBDE2D;">go</span> <span style="color: #FF6400;">doALongJob</span>(reusultChan)
-    <span style="color: #FBDE2D;">select</span> {
-    <span style="color: #FBDE2D;">case</span> &lt;-ctx.<span style="color: #FF6400;">Done</span>():
-        fmt.<span style="color: #FF6400;">Println</span>(<span style="color: #ffa07a;">"&#36208;&#21040;ctx.Done()&#65292;&#20998;&#25903;&#65292;&#35828;&#26126;&#29992;&#25143;&#19981;&#24895;&#24847;&#32487;&#32493;&#31561;&#24453;&#20102; with err:"</span>, ctx.<span style="color: #FF6400;">Err</span>())
-        w.<span style="color: #FF6400;">Write</span>([]<span style="color: #FF6400;">byte</span>(<span style="color: #ffa07a;">"&#36208;&#21040;ctx.Done()&#65292;&#20998;&#25903;&#65292;&#35828;&#26126;&#29992;&#25143;&#19981;&#24895;&#24847;&#32487;&#32493;&#31561;&#24453;&#20102; with err:"</span> + ctx.<span style="color: #FF6400;">Err</span>().<span style="color: #FF6400;">Error</span>()))
-    <span style="color: #FBDE2D;">case</span> result := &lt;-reusultChan:
-        w.<span style="color: #FF6400;">Write</span>([]<span style="color: #FF6400;">byte</span>(result))
-        fmt.<span style="color: #FF6400;">Println</span>(result)
+    // 这里缓冲1个， 即 ，就算我放弃从resultChan 读数据，doALongJob处依然可以往里面写入一个数据，从而正常退出
+    var reusultChan chan string = make(chan string, 1)
+    go doALongJob(reusultChan)
+    select {
+    case &lt;-ctx.Done():
+	fmt.Println("走到ctx.Done()，分支，说明用户不愿意继续等待了 with err:", ctx.Err())
+	w.Write([]byte("走到ctx.Done()，分支，说明用户不愿意继续等待了 with err:" + ctx.Err().Error()))
+    case result := &lt;-reusultChan:
+	w.Write([]byte(result))
+	fmt.Println(result)
     }
 
 }
-<span style="color: #FBDE2D;">func</span> <span style="color: #FF6400;">main</span>() {
-    http.<span style="color: #FF6400;">HandleFunc</span>(<span style="color: #ffa07a;">"/"</span>, handleTest)
-    http.<span style="color: #FF6400;">ListenAndServe</span>(<span style="color: #ffa07a;">":8080"</span>, <span style="color: #D8FA3C;">nil</span>)
+func main() {
+    http.HandleFunc("/", handleTest)
+    http.ListenAndServe(":8080", nil)
 }
 </pre>
 </div>

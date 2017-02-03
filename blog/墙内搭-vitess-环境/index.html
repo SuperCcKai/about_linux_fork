@@ -47,66 +47,66 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgheadline1">墙内在centos7上搭 vitess 环境</a></li>
-<li><a href="#orgheadline2">检查 ulimit 等</a></li>
-<li><a href="#orgheadline3">设置环境变量</a></li>
-<li><a href="#orgheadline4">启动etcd(global topology service  and  local topology service)</a>
+<li><a href="#sec-1">墙内在centos7上搭 vitess 环境</a></li>
+<li><a href="#sec-2">检查 ulimit 等</a></li>
+<li><a href="#sec-3">设置环境变量</a></li>
+<li><a href="#sec-4">启动etcd(global topology service  and  local topology service)</a>
 <ul>
-<li><a href="#orgheadline5">本地启动 etcd   (global topology  and local topology)</a></li>
-<li><a href="#orgheadline6">docker 中运行etcd</a></li>
+<li><a href="#sec-4-1">本地启动 etcd   (global topology  and local topology)</a></li>
+<li><a href="#sec-4-2">docker 中运行etcd</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline9">启动vtctld</a>
+<li><a href="#sec-5">启动vtctld</a>
 <ul>
-<li><a href="#orgheadline7">本地启动vtctld</a></li>
-<li><a href="#orgheadline8">docker 启动 vtctld</a></li>
+<li><a href="#sec-5-1">本地启动vtctld</a></li>
+<li><a href="#sec-5-2">docker 启动 vtctld</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline13">启动vttablets</a>
+<li><a href="#sec-6">启动vttablets</a>
 <ul>
-<li><a href="#orgheadline10">本地启动vttablets</a></li>
-<li><a href="#orgheadline11">docker 启动vttablets</a></li>
-<li><a href="#orgheadline12">如何停掉docker 中的vttablets</a></li>
+<li><a href="#sec-6-1">本地启动vttablets</a></li>
+<li><a href="#sec-6-2">docker 启动vttablets</a></li>
+<li><a href="#sec-6-3">如何停掉docker 中的vttablets</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline14">Initialize the new keyspace</a></li>
-<li><a href="#orgheadline15">Initialize MySQL databases</a></li>
-<li><a href="#orgheadline16">建表</a></li>
-<li><a href="#orgheadline17">backup 备份</a></li>
-<li><a href="#orgheadline18">启动 vtgate</a></li>
-<li><a href="#orgheadline19">启动客户端 连接 vitess 集群</a></li>
-<li><a href="#orgheadline20">关于 &#x2013;volumes-from vtctld-name</a></li>
-<li><a href="#orgheadline21">vtctld vtctl vtctlclient的关系</a></li>
-<li><a href="#orgheadline42">一些常用的命令</a>
+<li><a href="#sec-7">Initialize the new keyspace</a></li>
+<li><a href="#sec-8">Initialize MySQL databases</a></li>
+<li><a href="#sec-9">建表</a></li>
+<li><a href="#sec-10">backup 备份</a></li>
+<li><a href="#sec-11">启动 vtgate</a></li>
+<li><a href="#sec-12">启动客户端 连接 vitess 集群</a></li>
+<li><a href="#sec-13">关于 &#x2013;volumes-from vtctld-name</a></li>
+<li><a href="#sec-14">vtctld vtctl vtctlclient的关系</a></li>
+<li><a href="#sec-15">一些常用的命令</a>
 <ul>
-<li><a href="#orgheadline22">GetKeyspaces 查有哪些keyspace</a></li>
-<li><a href="#orgheadline23">查某cell=test  keyspace=test_keyspace shard=0 的主从关系</a></li>
-<li><a href="#orgheadline24">ListAllTablets 查cell=test下有哪些 tablets</a></li>
-<li><a href="#orgheadline25">ListTablets 查某个tablet 的具体信息</a></li>
-<li><a href="#orgheadline26">Validate 查测global replication graph各个节点可达，并检测各cell 的tablets 一致</a></li>
-<li><a href="#orgheadline27">ValidateKeyspace 只查测指定keyspace</a></li>
-<li><a href="#orgheadline28">FindAllShardsInKeyspace 查keyspace=test_keyspace 内有哪些shard信息</a></li>
-<li><a href="#orgheadline29">ApplySchema [-allow_long_unavailability] {-sql=&lt;sql&gt; || -sql-file=&lt;filename&gt;} &lt;keyspace&gt;</a></li>
-<li><a href="#orgheadline30">ValidateSchemaKeyspace 检测keyspace=test_keyspace上表结构是否与各slave 同步</a></li>
-<li><a href="#orgheadline31">ValidateSchemaShard 检测keyspace=test_keyspace shard=0上表结构是否与各slave 同步</a></li>
-<li><a href="#orgheadline32">ValidateVersionKeyspace</a></li>
-<li><a href="#orgheadline33">GetEndPoints</a></li>
-<li><a href="#orgheadline34">GetSrvKeyspace 查询 cell=test keyspace=test_keyspace 的Srv信息</a></li>
-<li><a href="#orgheadline35">ReparentTablet 让指定的 tablet 变成master 类型</a></li>
-<li><a href="#orgheadline36">EmergencyReparentShard 将 keyspace='test_keyspace' shard=0 上的 tablet=test-0000000101 设置成当前master</a></li>
-<li><a href="#orgheadline37">StartSlave 将tablet= test-0000000101 的salve 节点进行 同步</a></li>
-<li><a href="#orgheadline38">ExecuteFetchAsDba 在指定的tablet 上执行sql 语句</a></li>
-<li><a href="#orgheadline39">UpdateTabletAddrs 更改tablet 的host or ip or port</a></li>
-<li><a href="#orgheadline40">DeleteTablet 删除一个Tablet</a></li>
-<li><a href="#orgheadline41">ChangeSlaveType 改变一个tablet 的slave类型</a></li>
+<li><a href="#sec-15-1">GetKeyspaces 查有哪些keyspace</a></li>
+<li><a href="#sec-15-2">查某cell=test  keyspace=test_keyspace shard=0 的主从关系</a></li>
+<li><a href="#sec-15-3">ListAllTablets 查cell=test下有哪些 tablets</a></li>
+<li><a href="#sec-15-4">ListTablets 查某个tablet 的具体信息</a></li>
+<li><a href="#sec-15-5">Validate 查测global replication graph各个节点可达，并检测各cell 的tablets 一致</a></li>
+<li><a href="#sec-15-6">ValidateKeyspace 只查测指定keyspace</a></li>
+<li><a href="#sec-15-7">FindAllShardsInKeyspace 查keyspace=test_keyspace 内有哪些shard信息</a></li>
+<li><a href="#sec-15-8">ApplySchema [-allow_long_unavailability] {-sql=&lt;sql&gt; || -sql-file=&lt;filename&gt;} &lt;keyspace&gt;</a></li>
+<li><a href="#sec-15-9">ValidateSchemaKeyspace 检测keyspace=test_keyspace上表结构是否与各slave 同步</a></li>
+<li><a href="#sec-15-10">ValidateSchemaShard 检测keyspace=test_keyspace shard=0上表结构是否与各slave 同步</a></li>
+<li><a href="#sec-15-11">ValidateVersionKeyspace</a></li>
+<li><a href="#sec-15-12">GetEndPoints</a></li>
+<li><a href="#sec-15-13">GetSrvKeyspace 查询 cell=test keyspace=test_keyspace 的Srv信息</a></li>
+<li><a href="#sec-15-14">ReparentTablet 让指定的 tablet 变成master 类型</a></li>
+<li><a href="#sec-15-15">EmergencyReparentShard 将 keyspace='test_keyspace' shard=0 上的 tablet=test-0000000101 设置成当前master</a></li>
+<li><a href="#sec-15-16">StartSlave 将tablet= test-0000000101 的salve 节点进行 同步</a></li>
+<li><a href="#sec-15-17">ExecuteFetchAsDba 在指定的tablet 上执行sql 语句</a></li>
+<li><a href="#sec-15-18">UpdateTabletAddrs 更改tablet 的host or ip or port</a></li>
+<li><a href="#sec-15-19">DeleteTablet 删除一个Tablet</a></li>
+<li><a href="#sec-15-20">ChangeSlaveType 改变一个tablet 的slave类型</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgheadline1" class="outline-2">
-<h2 id="orgheadline1">墙内在centos7上搭 vitess 环境</h2>
-<div class="outline-text-2" id="text-orgheadline1">
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">墙内在centos7上搭 vitess 环境</h2>
+<div class="outline-text-2" id="text-1">
 <p>
 <a href="https://github.com/jixiuf/vitess-build-patch">https://github.com/jixiuf/vitess-build-patch</a><br  />
 有些墙外的文件 ，放到了 这个仓库中<br  />
@@ -125,9 +125,9 @@
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline2" class="outline-2">
-<h2 id="orgheadline2">检查 ulimit 等</h2>
-<div class="outline-text-2" id="text-orgheadline2">
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2">检查 ulimit 等</h2>
+<div class="outline-text-2" id="text-2">
 <div class="org-src-container">
 
 <pre class="src src-sh">cat /etc/security/limits.conf
@@ -135,15 +135,17 @@
 </div>
 <blockquote>
 <ul class="org-ul">
-<li>soft nofile 102400<br  /></li>
-<li>hard nofile 102400<br  /></li>
+<li>soft nofile 102400<br  />
+</li>
+<li>hard nofile 102400<br  />
+</li>
 </ul>
 </blockquote>
 </div>
 </div>
-<div id="outline-container-orgheadline3" class="outline-2">
-<h2 id="orgheadline3">设置环境变量</h2>
-<div class="outline-text-2" id="text-orgheadline3">
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3">设置环境变量</h2>
+<div class="outline-text-2" id="text-3">
 <p>
 VTROOT<br  />
 VTDATAROOT<br  />
@@ -160,9 +162,9 @@ mkdir -p $<span style="color: #40E0D0;">VTDATAROOT</span>/backups
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline4" class="outline-2">
-<h2 id="orgheadline4">启动etcd(global topology service  and  local topology service)</h2>
-<div class="outline-text-2" id="text-orgheadline4">
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4">启动etcd(global topology service  and  local topology service)</h2>
+<div class="outline-text-2" id="text-4">
 <p>
 <a href="go_etcd.html">etcd介绍</a><br  />
 关于下面提到的cell(数据中心等概念 传送门中有介绍)<br  />
@@ -175,9 +177,9 @@ mkdir -p $<span style="color: #40E0D0;">VTDATAROOT</span>/backups
 下面启动的两个etcd 分别代表两个集群，一个做为 global topology 一个作为数据中心:test 的local topology<br  />
 </p>
 </div>
-<div id="outline-container-orgheadline5" class="outline-3">
-<h3 id="orgheadline5">本地启动 etcd   (global topology  and local topology)</h3>
-<div class="outline-text-3" id="text-orgheadline5">
+<div id="outline-container-sec-4-1" class="outline-3">
+<h3 id="sec-4-1">本地启动 etcd   (global topology  and local topology)</h3>
+<div class="outline-text-3" id="text-4-1">
 <div class="org-src-container">
 
 <pre class="src src-sh"> <span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">&#40664;&#35748;etcd client &#20860;&#21548;&#22312;localhost:2379&#31471;&#21475;</span>
@@ -194,9 +196,9 @@ etcdctl -C <span style="color: #ffa07a;">"http://127.0.0.1:2379"</span> get /vt/
 </div>
 </div>
 
-<div id="outline-container-orgheadline6" class="outline-3">
-<h3 id="orgheadline6">docker 中运行etcd</h3>
-<div class="outline-text-3" id="text-orgheadline6">
+<div id="outline-container-sec-4-2" class="outline-3">
+<h3 id="sec-4-2">docker 中运行etcd</h3>
+<div class="outline-text-3" id="text-4-2">
 <p>
 关于国内如何构建 vitess/etcd 镜像 见<br  />
 <a href="https://github.com/jixiuf/vitess-build-patch">https://github.com/jixiuf/vitess-build-patch</a><br  />
@@ -243,12 +245,12 @@ docker run .. &#x2013;env cell="test" ..指定cell 的值<br  />
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline9" class="outline-2">
-<h2 id="orgheadline9">启动vtctld</h2>
-<div class="outline-text-2" id="text-orgheadline9">
-</div><div id="outline-container-orgheadline7" class="outline-3">
-<h3 id="orgheadline7">本地启动vtctld</h3>
-<div class="outline-text-3" id="text-orgheadline7">
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5">启动vtctld</h2>
+<div class="outline-text-2" id="text-5">
+</div><div id="outline-container-sec-5-1" class="outline-3">
+<h3 id="sec-5-1">本地启动vtctld</h3>
+<div class="outline-text-3" id="text-5-1">
 <p>
 vtctld 是一个http server , 可以通过它查看 lock server(etcd/zookeeper )里的信息<br  />
 </p>
@@ -305,9 +307,9 @@ web 访问15000 端口验证vtctld 是否启动成功<br  />
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline8" class="outline-3">
-<h3 id="orgheadline8">docker 启动 vtctld</h3>
-<div class="outline-text-3" id="text-orgheadline8">
+<div id="outline-container-sec-5-2" class="outline-3">
+<h3 id="sec-5-2">docker 启动 vtctld</h3>
+<div class="outline-text-3" id="text-5-2">
 <div class="org-src-container">
 
 <pre class="src src-sh">sudo docker run  -p 15000:15000 -p 15999:15999 --link=etcd-cell-test --link=etcd-global:etcd-global-alias --name=vtctld-name -d -u vitess vitess/lite:latest bash -c <span style="color: #ffa07a;">'mkdir -p $VTDATAROOT/{backups,tmp}&amp;&amp;</span>
@@ -328,29 +330,29 @@ web 访问15000 端口验证vtctld 是否启动成功<br  />
 </pre>
 </div>
 <ol class="org-ol">
-<li>注意这里的 &#x2013;link 将etcd 对应的容器链接起来，下面vtctld 起动的时候通过 <a href="http://etcd-global:2379">http://etcd-global:2379</a> 来访问etcd<br  /></li>
-<li><p>
-这条指令使用 vitess/lite:latest 镜像生成 此镜像内有<br  />
+<li>注意这里的 &#x2013;link 将etcd 对应的容器链接起来，下面vtctld 起动的时候通过 <a href="http://etcd-global:2379">http://etcd-global:2379</a> 来访问etcd<br  />
+</li>
+<li>这条指令使用 vitess/lite:latest 镜像生成 此镜像内有<br  />
 VOLUME /vt/vtdataroot<br  />
 这条指令，会创建一个数据卷，而运行后的 vtctld 会把数据存到这个目录/vt/vtdataroot<br  />
-</p>
 <div class="org-src-container">
 
 <pre class="src src-sh">sudo docker run --rm --volumes-from vtctld-name  -ti debian:jessie
       <span style="color: #AEAEAE;">#</span><span style="color: #AEAEAE;">&#36890;&#36807;&#36825;&#26465;&#21629;&#20196; &#22312;&#36825;&#20010;&#26032;&#21551;&#21160;&#30340;&#23481;&#22120;&#20013;&#20320;&#21487;&#20197;&#30475;&#21040; /vt/vtdataroot &#36825;&#20010;&#30446;&#24405;</span>
       <span style="color: #AEAEAE;">#</span><span style="color: #AEAEAE;">&#36825;&#37324;&#38754;&#30340;&#20869;&#23481;&#23601;&#26159; vtctld-name &#36825;&#20010;&#23481;&#22120;&#37324;&#30340;&#25968;&#25454;&#21367;</span>
 </pre>
-</div></li>
+</div>
+</li>
 </ol>
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline13" class="outline-2">
-<h2 id="orgheadline13">启动vttablets</h2>
-<div class="outline-text-2" id="text-orgheadline13">
-</div><div id="outline-container-orgheadline10" class="outline-3">
-<h3 id="orgheadline10">本地启动vttablets</h3>
-<div class="outline-text-3" id="text-orgheadline10">
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6">启动vttablets</h2>
+<div class="outline-text-2" id="text-6">
+</div><div id="outline-container-sec-6-1" class="outline-3">
+<h3 id="sec-6-1">本地启动vttablets</h3>
+<div class="outline-text-3" id="text-6-1">
 <p>
 或者手动使用 <a href="https://github.com/jixiuf/vitess-build-patch/blob/master/docker/vttablet/vttablet-up.sh">https://github.com/jixiuf/vitess-build-patch/blob/master/docker/vttablet/vttablet-up.sh</a> 启动时<br  />
 设置环境变量指定cell 的值:<br  />
@@ -363,9 +365,9 @@ VOLUME /vt/vtdataroot<br  />
 </div>
 </div>
 
-<div id="outline-container-orgheadline11" class="outline-3">
-<h3 id="orgheadline11">docker 启动vttablets</h3>
-<div class="outline-text-3" id="text-orgheadline11">
+<div id="outline-container-sec-6-2" class="outline-3">
+<h3 id="sec-6-2">docker 启动vttablets</h3>
+<div class="outline-text-3" id="text-6-2">
 <p>
 如果构建镜像 移步 <a href="https://github.com/jixiuf/vitess-build-patch/tree/master/docker/vttablet">https://github.com/jixiuf/vitess-build-patch/tree/master/docker/vttablet</a><br  />
 启动3 个vttablets<br  />
@@ -448,9 +450,9 @@ deployer@localhost docker/vttablet $ etcdctl -C "<a href="http://127.0.0.1:3379"
 </div>
 </div>
 
-<div id="outline-container-orgheadline12" class="outline-3">
-<h3 id="orgheadline12">如何停掉docker 中的vttablets</h3>
-<div class="outline-text-3" id="text-orgheadline12">
+<div id="outline-container-sec-6-3" class="outline-3">
+<h3 id="sec-6-3">如何停掉docker 中的vttablets</h3>
+<div class="outline-text-3" id="text-6-3">
 <div class="org-src-container">
 
 <pre class="src src-sh">sudo docker exec vttablet-name-1 vttablet-down.sh
@@ -480,9 +482,9 @@ vtctlclient -server localhost:15999 StartSlave test-0000000102
 </div>
 </div>
 
-<div id="outline-container-orgheadline14" class="outline-2">
-<h2 id="orgheadline14">Initialize the new keyspace</h2>
-<div class="outline-text-2" id="text-orgheadline14">
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7">Initialize the new keyspace</h2>
+<div class="outline-text-2" id="text-7">
 <p>
 By launching tablets assigned to a nonexistent keyspace, we've<br  />
 essentially created a new keyspace. To complete the initialization<br  />
@@ -498,9 +500,9 @@ sudo docker run --rm  --link=vtctld-name  --link=etcd-global:etcd-global-alias -
 </div>
 </div>
 
-<div id="outline-container-orgheadline15" class="outline-2">
-<h2 id="orgheadline15">Initialize MySQL databases</h2>
-<div class="outline-text-2" id="text-orgheadline15">
+<div id="outline-container-sec-8" class="outline-2">
+<h2 id="sec-8">Initialize MySQL databases</h2>
+<div class="outline-text-2" id="text-8">
 <p>
 上面默认创建的3个tablets 都是 replica类型的， 在 vttablet-up.sh脚本中指定的<br  />
 且创建的时候不能指定为Master 类型，<br  />
@@ -549,9 +551,9 @@ test-0000000102 test_keyspace 0 replica 172.17.0.7:15102 172.17.0.7:33102 []<br 
 </div>
 </div>
 
-<div id="outline-container-orgheadline16" class="outline-2">
-<h2 id="orgheadline16">建表</h2>
-<div class="outline-text-2" id="text-orgheadline16">
+<div id="outline-container-sec-9" class="outline-2">
+<h2 id="sec-9">建表</h2>
+<div class="outline-text-2" id="text-9">
 <div class="org-src-container">
 
 <pre class="src src-sh">sudo docker run --rm  --link=vtctld-name  --link=etcd-global:etcd-global-alias --link=etcd-cell-test  -u vitess vitess/base vtctlclient  -server vtctld-name:15999 ApplySchema -sql <span style="color: #ffa07a;">"CREATE TABLE test_table (id BIGINT AUTO_INCREMENT,msg VARCHAR(250),PRIMARY KEY(id)) Engine=InnoDB"</span>  test_keyspace
@@ -590,9 +592,9 @@ test-0000000102 test_keyspace 0 replica 172.17.0.7:15102 172.17.0.7:33102 []<br 
 </blockquote>
 </div>
 </div>
-<div id="outline-container-orgheadline17" class="outline-2">
-<h2 id="orgheadline17">backup 备份</h2>
-<div class="outline-text-2" id="text-orgheadline17">
+<div id="outline-container-sec-10" class="outline-2">
+<h2 id="sec-10">backup 备份</h2>
+<div class="outline-text-2" id="text-10">
 <p>
 第一次建完表后，最好进行一次备份，一些从库如果意外当掉，并且数据丢失的话，<br  />
 它可以自动从最近的一次备份开始与master 同步数据<br  />
@@ -627,9 +629,9 @@ E0126 17:12:52.130768       1 vtctl.go:100] action failed: ListBackups no regist
 </blockquote>
 </div>
 </div>
-<div id="outline-container-orgheadline18" class="outline-2">
-<h2 id="orgheadline18">启动 vtgate</h2>
-<div class="outline-text-2" id="text-orgheadline18">
+<div id="outline-container-sec-11" class="outline-2">
+<h2 id="sec-11">启动 vtgate</h2>
+<div class="outline-text-2" id="text-11">
 <p>
 正式环境中， 应该启动多个vtgate 实际来负载均衡<br  />
 注意这里的几个重要参数，<br  />
@@ -655,9 +657,9 @@ E0126 17:12:52.130768       1 vtctl.go:100] action failed: ListBackups no regist
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline19" class="outline-2">
-<h2 id="orgheadline19">启动客户端 连接 vitess 集群</h2>
-<div class="outline-text-2" id="text-orgheadline19">
+<div id="outline-container-sec-12" class="outline-2">
+<h2 id="sec-12">启动客户端 连接 vitess 集群</h2>
+<div class="outline-text-2" id="text-12">
 <p>
 <a href="https://github.com/youtube/vitess/blob/master/examples/local/client.go">https://github.com/youtube/vitess/blob/master/examples/local/client.go</a><br  />
 vitess 源码有一个测试 client.go<br  />
@@ -684,9 +686,9 @@ deployer@localhost examples/local (master) $<br  />
 </blockquote>
 </div>
 </div>
-<div id="outline-container-orgheadline20" class="outline-2">
-<h2 id="orgheadline20">关于 &#x2013;volumes-from vtctld-name</h2>
-<div class="outline-text-2" id="text-orgheadline20">
+<div id="outline-container-sec-13" class="outline-2">
+<h2 id="sec-13">关于 &#x2013;volumes-from vtctld-name</h2>
+<div class="outline-text-2" id="text-13">
 <p>
 在docker启动中启动vttables vtgates 时加了参数&#x2013;volumes-from vtctld-name<br  />
 而其使用的镜像中都有一句<br  />
@@ -703,9 +705,9 @@ deployer@localhost examples/local (master) $<br  />
 </div>
 </div>
 
-<div id="outline-container-orgheadline21" class="outline-2">
-<h2 id="orgheadline21">vtctld vtctl vtctlclient的关系</h2>
-<div class="outline-text-2" id="text-orgheadline21">
+<div id="outline-container-sec-14" class="outline-2">
+<h2 id="sec-14">vtctld vtctl vtctlclient的关系</h2>
+<div class="outline-text-2" id="text-14">
 <p>
 vtctld 是个守护进程<br  />
 vtctlclient 需要vtctld的存在才能进行相应的操作 需要-server 指向vtctld的端口<br  />
@@ -727,12 +729,12 @@ vtctlclient 需要vtctld的存在才能进行相应的操作 需要-server 指�
 </div>
 </div>
 
-<div id="outline-container-orgheadline42" class="outline-2">
-<h2 id="orgheadline42">一些常用的命令</h2>
-<div class="outline-text-2" id="text-orgheadline42">
-</div><div id="outline-container-orgheadline22" class="outline-3">
-<h3 id="orgheadline22">GetKeyspaces 查有哪些keyspace</h3>
-<div class="outline-text-3" id="text-orgheadline22">
+<div id="outline-container-sec-15" class="outline-2">
+<h2 id="sec-15">一些常用的命令</h2>
+<div class="outline-text-2" id="text-15">
+</div><div id="outline-container-sec-15-1" class="outline-3">
+<h3 id="sec-15-1">GetKeyspaces 查有哪些keyspace</h3>
+<div class="outline-text-3" id="text-15-1">
 <div class="org-src-container">
 
 <pre class="src src-sh">vtctlclient -server=127.0.0.1:15999  GetKeyspaces
@@ -747,9 +749,9 @@ test_keyspace<br  />
 </div>
 </div>
 
-<div id="outline-container-orgheadline23" class="outline-3">
-<h3 id="orgheadline23">查某cell=test  keyspace=test_keyspace shard=0 的主从关系</h3>
-<div class="outline-text-3" id="text-orgheadline23">
+<div id="outline-container-sec-15-2" class="outline-3">
+<h3 id="sec-15-2">查某cell=test  keyspace=test_keyspace shard=0 的主从关系</h3>
+<div class="outline-text-3" id="text-15-2">
 <div class="org-src-container">
 
 <pre class="src src-sh">vtctlclient -server=127.0.0.1:15999 GetShardReplication test test_keyspace/0
@@ -785,9 +787,9 @@ sudo docker run --rm  --link=vtctld-name  --link=etcd-global:etcd-global-alias -
 </div>
 </div>
 
-<div id="outline-container-orgheadline24" class="outline-3">
-<h3 id="orgheadline24">ListAllTablets 查cell=test下有哪些 tablets</h3>
-<div class="outline-text-3" id="text-orgheadline24">
+<div id="outline-container-sec-15-3" class="outline-3">
+<h3 id="sec-15-3">ListAllTablets 查cell=test下有哪些 tablets</h3>
+<div class="outline-text-3" id="text-15-3">
 <div class="org-src-container">
 
 <pre class="src src-sh">vtctlclient -server=127.0.0.1:15999  ListAllTablets test
@@ -804,9 +806,9 @@ test-0000000102 test_keyspace 0 replica 172.17.0.7:15102 172.17.0.7:33102 []<br 
 </div>
 </div>
 
-<div id="outline-container-orgheadline25" class="outline-3">
-<h3 id="orgheadline25">ListTablets 查某个tablet 的具体信息</h3>
-<div class="outline-text-3" id="text-orgheadline25">
+<div id="outline-container-sec-15-4" class="outline-3">
+<h3 id="sec-15-4">ListTablets 查某个tablet 的具体信息</h3>
+<div class="outline-text-3" id="text-15-4">
 <div class="org-src-container">
 
 <pre class="src src-sh">vtctlclient -server=127.0.0.1:15999  ListTablets test-0000000100
@@ -821,9 +823,9 @@ test-0000000100 test_keyspace 0 master 172.17.0.5:15100 172.17.0.5:33100 []<br  
 </div>
 </div>
 
-<div id="outline-container-orgheadline26" class="outline-3">
-<h3 id="orgheadline26">Validate 查测global replication graph各个节点可达，并检测各cell 的tablets 一致</h3>
-<div class="outline-text-3" id="text-orgheadline26">
+<div id="outline-container-sec-15-5" class="outline-3">
+<h3 id="sec-15-5">Validate 查测global replication graph各个节点可达，并检测各cell 的tablets 一致</h3>
+<div class="outline-text-3" id="text-15-5">
 <p>
 -ping-tablets 表时是否检测各tablets<br  />
 GetShardReplication<br  />
@@ -846,9 +848,9 @@ E0127 09:59:18.087638   11676 main.go:51] Remote error: rpc error: code = 2 desc
 </div>
 </div>
 
-<div id="outline-container-orgheadline27" class="outline-3">
-<h3 id="orgheadline27">ValidateKeyspace 只查测指定keyspace</h3>
-<div class="outline-text-3" id="text-orgheadline27">
+<div id="outline-container-sec-15-6" class="outline-3">
+<h3 id="sec-15-6">ValidateKeyspace 只查测指定keyspace</h3>
+<div class="outline-text-3" id="text-15-6">
 <div class="org-src-container">
 
 <pre class="src src-sh">vtctlclient -server=127.0.0.1:15999  ValidateKeyspace -ping-tablets test_keyspace
@@ -857,9 +859,9 @@ E0127 09:59:18.087638   11676 main.go:51] Remote error: rpc error: code = 2 desc
 </div>
 </div>
 
-<div id="outline-container-orgheadline28" class="outline-3">
-<h3 id="orgheadline28">FindAllShardsInKeyspace 查keyspace=test_keyspace 内有哪些shard信息</h3>
-<div class="outline-text-3" id="text-orgheadline28">
+<div id="outline-container-sec-15-7" class="outline-3">
+<h3 id="sec-15-7">FindAllShardsInKeyspace 查keyspace=test_keyspace 内有哪些shard信息</h3>
+<div class="outline-text-3" id="text-15-7">
 <div class="org-src-container">
 
 <pre class="src src-sh">vtctlclient -server=127.0.0.1:15999  FindAllShardsInKeyspace test_keyspace
@@ -898,18 +900,18 @@ served_types 不太了解是什么东西<br  />
 </div>
 </div>
 
-<div id="outline-container-orgheadline29" class="outline-3">
-<h3 id="orgheadline29">ApplySchema [-allow_long_unavailability] {-sql=&lt;sql&gt; || -sql-file=&lt;filename&gt;} &lt;keyspace&gt;</h3>
-<div class="outline-text-3" id="text-orgheadline29">
+<div id="outline-container-sec-15-8" class="outline-3">
+<h3 id="sec-15-8">ApplySchema [-allow_long_unavailability] {-sql=&lt;sql&gt; || -sql-file=&lt;filename&gt;} &lt;keyspace&gt;</h3>
+<div class="outline-text-3" id="text-15-8">
 <p>
 执行建表语句等<br  />
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgheadline30" class="outline-3">
-<h3 id="orgheadline30">ValidateSchemaKeyspace 检测keyspace=test_keyspace上表结构是否与各slave 同步</h3>
-<div class="outline-text-3" id="text-orgheadline30">
+<div id="outline-container-sec-15-9" class="outline-3">
+<h3 id="sec-15-9">ValidateSchemaKeyspace 检测keyspace=test_keyspace上表结构是否与各slave 同步</h3>
+<div class="outline-text-3" id="text-15-9">
 <div class="org-src-container">
 
 <pre class="src src-sh">vtctlclient -server=127.0.0.1:15999  ValidateSchemaKeyspace test_keyspace
@@ -917,9 +919,9 @@ served_types 不太了解是什么东西<br  />
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline31" class="outline-3">
-<h3 id="orgheadline31">ValidateSchemaShard 检测keyspace=test_keyspace shard=0上表结构是否与各slave 同步</h3>
-<div class="outline-text-3" id="text-orgheadline31">
+<div id="outline-container-sec-15-10" class="outline-3">
+<h3 id="sec-15-10">ValidateSchemaShard 检测keyspace=test_keyspace shard=0上表结构是否与各slave 同步</h3>
+<div class="outline-text-3" id="text-15-10">
 <div class="org-src-container">
 
 <pre class="src src-sh">vtctlclient -server=127.0.0.1:15999  ValidateSchemaShard test_keyspace/0
@@ -927,9 +929,9 @@ served_types 不太了解是什么东西<br  />
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline32" class="outline-3">
-<h3 id="orgheadline32">ValidateVersionKeyspace</h3>
-<div class="outline-text-3" id="text-orgheadline32">
+<div id="outline-container-sec-15-11" class="outline-3">
+<h3 id="sec-15-11">ValidateVersionKeyspace</h3>
+<div class="outline-text-3" id="text-15-11">
 <p>
 查测 指定keyspace上的 master 的版本是否与各slave 一致<br  />
 </p>
@@ -940,9 +942,9 @@ served_types 不太了解是什么东西<br  />
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline33" class="outline-3">
-<h3 id="orgheadline33">GetEndPoints</h3>
-<div class="outline-text-3" id="text-orgheadline33">
+<div id="outline-container-sec-15-12" class="outline-3">
+<h3 id="sec-15-12">GetEndPoints</h3>
+<div class="outline-text-3" id="text-15-12">
 <p>
 查 cell=test,keyspace=test_keyspace shard=0 tableType=master 的EndPoints 信息<br  />
 </p>
@@ -973,9 +975,9 @@ endpoints 似乎是列出 tablets 兼听在哪些端口等信息<br  />
 </blockquote>
 </div>
 </div>
-<div id="outline-container-orgheadline34" class="outline-3">
-<h3 id="orgheadline34">GetSrvKeyspace 查询 cell=test keyspace=test_keyspace 的Srv信息</h3>
-<div class="outline-text-3" id="text-orgheadline34">
+<div id="outline-container-sec-15-13" class="outline-3">
+<h3 id="sec-15-13">GetSrvKeyspace 查询 cell=test keyspace=test_keyspace 的Srv信息</h3>
+<div class="outline-text-3" id="text-15-13">
 <p>
 这个不太明白 ,served_type<br  />
 </p>
@@ -1019,9 +1021,9 @@ endpoints 似乎是列出 tablets 兼听在哪些端口等信息<br  />
 </blockquote>
 </div>
 </div>
-<div id="outline-container-orgheadline35" class="outline-3">
-<h3 id="orgheadline35">ReparentTablet 让指定的 tablet 变成master 类型</h3>
-<div class="outline-text-3" id="text-orgheadline35">
+<div id="outline-container-sec-15-14" class="outline-3">
+<h3 id="sec-15-14">ReparentTablet 让指定的 tablet 变成master 类型</h3>
+<div class="outline-text-3" id="text-15-14">
 <p>
 似乎只有在各节点都正常运行的时候这个命令才有可能有效<br  />
 我测试的时候，发现正常的情况下， 也不用把指定的 tablet 切成master<br  />
@@ -1033,9 +1035,9 @@ endpoints 似乎是列出 tablets 兼听在哪些端口等信息<br  />
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline36" class="outline-3">
-<h3 id="orgheadline36">EmergencyReparentShard 将 keyspace='test_keyspace' shard=0 上的 tablet=test-0000000101 设置成当前master</h3>
-<div class="outline-text-3" id="text-orgheadline36">
+<div id="outline-container-sec-15-15" class="outline-3">
+<h3 id="sec-15-15">EmergencyReparentShard 将 keyspace='test_keyspace' shard=0 上的 tablet=test-0000000101 设置成当前master</h3>
+<div class="outline-text-3" id="text-15-15">
 <p>
 这个命令用于紧急情况下的修复（master 节点已经当掉）<br  />
 这个命令会建议你用哪个slave 来暂代master<br  />
@@ -1055,9 +1057,9 @@ deployer@localhost examples/local (master) $<br  />
 </blockquote>
 </div>
 </div>
-<div id="outline-container-orgheadline37" class="outline-3">
-<h3 id="orgheadline37">StartSlave 将tablet= test-0000000101 的salve 节点进行 同步</h3>
-<div class="outline-text-3" id="text-orgheadline37">
+<div id="outline-container-sec-15-16" class="outline-3">
+<h3 id="sec-15-16">StartSlave 将tablet= test-0000000101 的salve 节点进行 同步</h3>
+<div class="outline-text-3" id="text-15-16">
 <p>
 如果发现某slave 节点数据不同步，可用此命令<br  />
 </p>
@@ -1068,9 +1070,9 @@ deployer@localhost examples/local (master) $<br  />
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline38" class="outline-3">
-<h3 id="orgheadline38">ExecuteFetchAsDba 在指定的tablet 上执行sql 语句</h3>
-<div class="outline-text-3" id="text-orgheadline38">
+<div id="outline-container-sec-15-17" class="outline-3">
+<h3 id="sec-15-17">ExecuteFetchAsDba 在指定的tablet 上执行sql 语句</h3>
+<div class="outline-text-3" id="text-15-17">
 <div class="org-src-container">
 
 <pre class="src src-sh">vtctlclient -server localhost:15999 ExecuteFetchAsDba    test-0000000100 <span style="color: #ffa07a;">"select * from test_table"</span>
@@ -1113,9 +1115,9 @@ deployer@localhost examples/local (master) $<br  />
 </blockquote>
 </div>
 </div>
-<div id="outline-container-orgheadline39" class="outline-3">
-<h3 id="orgheadline39">UpdateTabletAddrs 更改tablet 的host or ip or port</h3>
-<div class="outline-text-3" id="text-orgheadline39">
+<div id="outline-container-sec-15-18" class="outline-3">
+<h3 id="sec-15-18">UpdateTabletAddrs 更改tablet 的host or ip or port</h3>
+<div class="outline-text-3" id="text-15-18">
 <p>
 -hostname<br  />
 -ip-addr<br  />
@@ -1130,12 +1132,12 @@ deployer@localhost examples/local (master) $<br  />
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline40" class="outline-3">
-<h3 id="orgheadline40">DeleteTablet 删除一个Tablet</h3>
+<div id="outline-container-sec-15-19" class="outline-3">
+<h3 id="sec-15-19">DeleteTablet 删除一个Tablet</h3>
 </div>
-<div id="outline-container-orgheadline41" class="outline-3">
-<h3 id="orgheadline41">ChangeSlaveType 改变一个tablet 的slave类型</h3>
-<div class="outline-text-3" id="text-orgheadline41">
+<div id="outline-container-sec-15-20" class="outline-3">
+<h3 id="sec-15-20">ChangeSlaveType 改变一个tablet 的slave类型</h3>
+<div class="outline-text-3" id="text-15-20">
 <div class="org-src-container">
 
 <pre class="src src-sh">vtctlclient -server=127.0.0.1:15999  ChangeSlaveType test-0000000100 spare
@@ -1144,7 +1146,8 @@ vtctlclient -server=127.0.0.1:15999  ListAllTablets test
 </pre>
 </div>
 <ul class="org-ul">
-<li>更多命令 <a href="http://vitess.io/reference/vtctl.html">http://vitess.io/reference/vtctl.html</a><br  /></li>
+<li>更多命令 <a href="http://vitess.io/reference/vtctl.html">http://vitess.io/reference/vtctl.html</a><br  />
+</li>
 </ul>
 </div>
 </div>

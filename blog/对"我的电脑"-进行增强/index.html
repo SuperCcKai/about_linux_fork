@@ -47,13 +47,13 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgheadline1">复制当前文件的路径</a></li>
-<li><a href="#orgheadline2">Alt+h 一键显隐扩展名</a></li>
-<li><a href="#orgheadline3">Ctl+Alt+c 在当前路径下打开Cmd.exe 窗口。</a></li>
-<li><a href="#orgheadline4">Alt+n 新建文本文件 Shift+= 新建文件夹</a></li>
-<li><a href="#orgheadline5">焦点的移动</a></li>
-<li><a href="#orgheadline6">用键盘进行管理</a></li>
-<li><a href="#orgheadline7">Ctrl+e 用Emacs编辑器打开选中的文件</a></li>
+<li><a href="#sec-1">复制当前文件的路径</a></li>
+<li><a href="#sec-2">Alt+h 一键显隐扩展名</a></li>
+<li><a href="#sec-3">Ctl+Alt+c 在当前路径下打开Cmd.exe 窗口。</a></li>
+<li><a href="#sec-4">Alt+n 新建文本文件 Shift+= 新建文件夹</a></li>
+<li><a href="#sec-5">焦点的移动</a></li>
+<li><a href="#sec-6">用键盘进行管理</a></li>
+<li><a href="#sec-7">Ctrl+e 用Emacs编辑器打开选中的文件</a></li>
 </ul>
 </div>
 </div>
@@ -62,16 +62,19 @@
 AutoHotKey几个简单的小例子</a> 中已经有一个关于对资源管理器中实现Ctl+alt+h<br  />
 <a href="AutoHotKey_1.html#sec-2_3">一键显隐 隐藏文件</a>的功能，这里再给出其他几个与资源管理器有关的功能增强。<br  />
 </p>
-<div id="outline-container-orgheadline1" class="outline-2">
-<h2 id="orgheadline1">复制当前文件的路径</h2>
-<div class="outline-text-2" id="text-orgheadline1">
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">复制当前文件的路径</h2>
+<div class="outline-text-2" id="text-1">
 <p>
 这段代码实现<br  />
 </p>
 <ul class="org-ul">
-<li>Alt+1 : copy 选中文件的名称<br  /></li>
-<li>Alt+2 : copy 当前路径名<br  /></li>
-<li>Alt+3 : copy 选中文件的完整路径名<br  /></li>
+<li>Alt+1 : copy 选中文件的名称<br  />
+</li>
+<li>Alt+2 : copy 当前路径名<br  />
+</li>
+<li>Alt+3 : copy 选中文件的完整路径名<br  />
+</li>
 </ul>
 <div class="org-src-container">
 
@@ -106,34 +109,34 @@ AutoHotKey几个简单的小例子</a> 中已经有一个关于对资源管理�
 </div>
 </div>
 
-<div id="outline-container-orgheadline2" class="outline-2">
-<h2 id="orgheadline2">Alt+h 一键显隐扩展名</h2>
-<div class="outline-text-2" id="text-orgheadline2">
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2">Alt+h 一键显隐扩展名</h2>
+<div class="outline-text-2" id="text-2">
 <div class="org-src-container">
 
-<pre class="src src-xahk"><span style="color: #87cefa;">SetTitleMatchMode</span> Regex <span style="color: #AEAEAE;">;</span><span style="color: #AEAEAE;">&#21487;&#20197;&#20351;&#29992;&#27491;&#21017;&#34920;&#36798;&#24335;&#23545;&#26631;&#39064;&#36827;&#34892;&#21305;&#37197;</span>
-#<span style="color: #87cefa;">IfWinActive</span> <span style="color: #FBDE2D;">ahk_class</span> CabinetWClass|ExploreWClass
-<span style="color: #AEAEAE;">;</span><span style="color: #AEAEAE;">Alt+h TOGGLES FILE EXTENSIONS</span>
+<pre class="src src-xahk">SetTitleMatchMode Regex ;可以使用正则表达式对标题进行匹配
+#IfWinActive ahk_class CabinetWClass|ExploreWClass
+;Alt+h TOGGLES FILE EXTENSIONS
 !h::
-<span style="color: #87cefa;">RegRead</span>, HiddenFiles_<span style="color: #FBDE2D;">Status</span>, <span style="color: #FBDE2D;">HKEY_CURRENT_USER</span>, Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced, HideFileExt
-<span style="color: #87cefa;">If</span> HiddenFiles_<span style="color: #FBDE2D;">Status</span> = 1
-     <span style="color: #87cefa;">RegWrite</span>, <span style="color: #FBDE2D;">REG_DWORD</span>, <span style="color: #FBDE2D;">HKEY_CURRENT_USER</span>, Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced, HideFileExt, 0
-<span style="color: #87cefa;">Else</span>
-   <span style="color: #87cefa;">RegWrite</span>, <span style="color: #FBDE2D;">REG_DWORD</span>, <span style="color: #FBDE2D;">HKEY_CURRENT_USER</span>, Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced, HideFileExt, 1
-<span style="color: #87cefa;">WinGetClass</span>, eh_Class,A
-<span style="color: #87cefa;">If</span> (eh_Class = <span style="color: #ffa07a;">"#32770"</span> <span style="color: #FBDE2D;">OR</span> <span style="color: #40E0D0;">A_OSVersion</span> = <span style="color: #ffa07a;">"WIN_VISTA"</span>)
-   <span style="color: #87cefa;">send</span>, {<span style="color: #D8FA3C;">F5</span>}
-<span style="color: #87cefa;">Else</span> <span style="color: #87cefa;">PostMessage</span>, 0x111, 28931,,, A
-<span style="color: #87cefa;">Return</span>
-#<span style="color: #87cefa;">IfWinActive</span>
+RegRead, HiddenFiles_Status, HKEY_CURRENT_USER, Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced, HideFileExt
+If HiddenFiles_Status = 1
+     RegWrite, REG_DWORD, HKEY_CURRENT_USER, Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced, HideFileExt, 0
+Else
+   RegWrite, REG_DWORD, HKEY_CURRENT_USER, Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced, HideFileExt, 1
+WinGetClass, eh_Class,A
+If (eh_Class = "#32770" OR A_OSVersion = "WIN_VISTA")
+   send, {F5}
+Else PostMessage, 0x111, 28931,,, A
+Return
+#IfWinActive
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgheadline3" class="outline-2">
-<h2 id="orgheadline3">Ctl+Alt+c 在当前路径下打开Cmd.exe 窗口。</h2>
-<div class="outline-text-2" id="text-orgheadline3">
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3">Ctl+Alt+c 在当前路径下打开Cmd.exe 窗口。</h2>
+<div class="outline-text-2" id="text-3">
 <div class="org-src-container">
 
 <pre class="src src-c"><span style="color: #8DA6CE;">SetTitleMatchMode</span> <span style="color: #40E0D0;">Regex</span> ;&#21487;&#20197;&#20351;&#29992;&#27491;&#21017;&#34920;&#36798;&#24335;&#23545;&#26631;&#39064;&#36827;&#34892;&#21305;&#37197;
@@ -162,9 +165,9 @@ AutoHotKey几个简单的小例子</a> 中已经有一个关于对资源管理�
 </div>
 </div>
 
-<div id="outline-container-orgheadline4" class="outline-2">
-<h2 id="orgheadline4">Alt+n 新建文本文件 Shift+= 新建文件夹</h2>
-<div class="outline-text-2" id="text-orgheadline4">
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4">Alt+n 新建文本文件 Shift+= 新建文件夹</h2>
+<div class="outline-text-2" id="text-4">
 <div class="org-src-container">
 
 <pre class="src src-c">; create new text file
@@ -202,14 +205,18 @@ ControlGetText, ExplorePath, Edit1, <span style="color: #8DA6CE;">A</span>
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline5" class="outline-2">
-<h2 id="orgheadline5">焦点的移动</h2>
-<div class="outline-text-2" id="text-orgheadline5">
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5">焦点的移动</h2>
+<div class="outline-text-2" id="text-5">
 <ul class="org-ul">
-<li>Ctrl+, 选中第一个文件<br  /></li>
-<li>Ctrl+. 选中最后一个文件<br  /></li>
-<li>ctrl+; 定位到左侧目录树<br  /></li>
-<li>ctrl+L 定位在地址栏<br  /></li>
+<li>Ctrl+, 选中第一个文件<br  />
+</li>
+<li>Ctrl+. 选中最后一个文件<br  />
+</li>
+<li>ctrl+; 定位到左侧目录树<br  />
+</li>
+<li>ctrl+L 定位在地址栏<br  />
+</li>
 </ul>
 <div class="org-src-container">
 
@@ -237,20 +244,27 @@ ControlGetText, ExplorePath, Edit1, <span style="color: #8DA6CE;">A</span>
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline6" class="outline-2">
-<h2 id="orgheadline6">用键盘进行管理</h2>
-<div class="outline-text-2" id="text-orgheadline6">
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6">用键盘进行管理</h2>
+<div class="outline-text-2" id="text-6">
 <p>
 一些绑定模拟Emacs 中Dired（Emacs中目录管理工具） 的操作。<br  />
 </p>
 <ul class="org-ul">
-<li>Ctrl+n 向下移动<br  /></li>
-<li>Ctrl+p 向上移动<br  /></li>
-<li>Ctrl+f 向右移动<br  /></li>
-<li>Ctrl+b 向左移动<br  /></li>
-<li>Ctrl+h 如果在左侧的资源管理器中，表示折叠目录树<br  /></li>
-<li>Ctrl+j 基本相当于回车（进入子目录后后选中第一个文件）<br  /></li>
-<li>Ctrl+u 上层目录，并选中第一个文件<br  /></li>
+<li>Ctrl+n 向下移动<br  />
+</li>
+<li>Ctrl+p 向上移动<br  />
+</li>
+<li>Ctrl+f 向右移动<br  />
+</li>
+<li>Ctrl+b 向左移动<br  />
+</li>
+<li>Ctrl+h 如果在左侧的资源管理器中，表示折叠目录树<br  />
+</li>
+<li>Ctrl+j 基本相当于回车（进入子目录后后选中第一个文件）<br  />
+</li>
+<li>Ctrl+u 上层目录，并选中第一个文件<br  />
+</li>
 </ul>
 <div class="org-src-container">
 
@@ -298,9 +312,9 @@ ControlGetText, ExplorePath, Edit1, <span style="color: #8DA6CE;">A</span>
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline7" class="outline-2">
-<h2 id="orgheadline7">Ctrl+e 用Emacs编辑器打开选中的文件</h2>
-<div class="outline-text-2" id="text-orgheadline7">
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7">Ctrl+e 用Emacs编辑器打开选中的文件</h2>
+<div class="outline-text-2" id="text-7">
 <div class="org-src-container">
 
 <pre class="src src-c">;;&#38656;&#35201; emacsclientw <span style="color: #8DA6CE;">&#22312;Path&#36335;&#24452;&#19979;</span>
