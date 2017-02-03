@@ -4,20 +4,20 @@
     <title>一个人的狂欢</title>
     <link>http://jixiuf.github.io</link>
     <description></description>
-    <pubDate>五, 03  2 2017 17:08:12 CST</pubDate>
-    <lastBuildDate>五, 03  2 2017 17:08:12 CST</lastBuildDate>
+    <pubDate>五, 03  2 2017 17:47:07 CST</pubDate>
+    <lastBuildDate>五, 03  2 2017 17:47:07 CST</lastBuildDate>
     <docs>http://www.rssboard.org/rss-specification</docs>
     <generator>Org-page static site generator (https://github.com/kelvinh/org-page)</generator>
     <item>
       <title>AutoHotKey 简介</title>
-      <link>http://jixiuf.github.io/blog/autohotkey-简介/</link>
+      <link>http://jixiuf.github.io/blog/AutoHotKey_Introduce.html</link>
       <description><![CDATA[autohotkey 简介]]></description>
       <pubDate>2017-01-22</pubDate>
-      <guid>http://jixiuf.github.io/blog/autohotkey-简介/</guid>
+      <guid>http://jixiuf.github.io/blog/AutoHotKey_Introduce.html</guid>
     </item>
     <item>
       <title>anything-doc.org</title>
-      <link>http://jixiuf.github.io/blog/anything-doc.org/</link>
+      <link>http://jixiuf.github.io/blog/anything-doc.html</link>
       <description><![CDATA[<div>
 <div class="post">
 <h1>anything-doc.org</h1>
@@ -413,12 +413,12 @@ explorer.exe ,it can remember directories you have visited ,then you can<br  />
 press &lt;F3&gt; to active "Anything" list all directory history you have<br  />
 visited. ,you can revisit it easily with anything-explorer-history.ahk .<br  />
 how to configure anything-explorer-history.ahk<br  />
-<img src="/assets/blog/anything-doc.org/anything-directory-history1.JPG" alt="anything-directory-history1.JPG" /><br  />
-<img src="/assets/blog/anything-doc.org/anything-directory-history2.JPG" alt="anything-directory-history2.JPG" /><br  />
-<img src="/assets/blog/anything-doc.org/anything-directory-history3.JPG" alt="anything-directory-history3.JPG" /><br  />
-<img src="/assets/blog/anything-doc.org/anything-directory-history4.JPG" alt="anything-directory-history4.JPG" /><br  />
-<img src="/assets/blog/anything-doc.org/anything-directory-history5.JPG" alt="anything-directory-history5.JPG" /><br  />
-<img src="/assets/blog/anything-doc.org/anything-directory-history6.JPG" alt="anything-directory-history6.JPG" /><br  />
+<img src="/assets/blog/anything-doc.html/anything-directory-history1.JPG" alt="anything-directory-history1.JPG" /><br  />
+<img src="/assets/blog/anything-doc.html/anything-directory-history2.JPG" alt="anything-directory-history2.JPG" /><br  />
+<img src="/assets/blog/anything-doc.html/anything-directory-history3.JPG" alt="anything-directory-history3.JPG" /><br  />
+<img src="/assets/blog/anything-doc.html/anything-directory-history4.JPG" alt="anything-directory-history4.JPG" /><br  />
+<img src="/assets/blog/anything-doc.html/anything-directory-history5.JPG" alt="anything-directory-history5.JPG" /><br  />
+<img src="/assets/blog/anything-doc.html/anything-directory-history6.JPG" alt="anything-directory-history6.JPG" /><br  />
 </p>
 </div>
 
@@ -536,10 +536,10 @@ for example :<br  />
 <p>
  anything-favorite-directories.ahk  do something similiar to <a href="https://github.com/jixiuf/my_autohotkey_scripts/raw/master/ahk_scripts/anything-explorer-history.ahk">anything-explorer-history.ahk</a> <br  />
  add your favorite directories ,and visit it using "Anything".<br  />
-<img src="/assets/blog/anything-doc.org/anything-fav-history1.JPG" alt="anything-fav-history1.JPG" /><br  />
-<img src="/assets/blog/anything-doc.org/anything-fav-history2.JPG" alt="anything-fav-history2.JPG" /><br  />
-<img src="/assets/blog/anything-doc.org/anything-fav-history3.JPG" alt="anything-fav-history3.JPG" /><br  />
-<img src="/assets/blog/anything-doc.org/anything-fav-history4.JPG" alt="anything-fav-history4.JPG" /><br  />
+<img src="/assets/blog/anything-doc.html/anything-fav-history1.JPG" alt="anything-fav-history1.JPG" /><br  />
+<img src="/assets/blog/anything-doc.html/anything-fav-history2.JPG" alt="anything-fav-history2.JPG" /><br  />
+<img src="/assets/blog/anything-doc.html/anything-fav-history3.JPG" alt="anything-fav-history3.JPG" /><br  />
+<img src="/assets/blog/anything-doc.html/anything-fav-history4.JPG" alt="anything-fav-history4.JPG" /><br  />
 </p>
 </div>
 
@@ -681,7 +681,7 @@ anything_favorite_directories_source have three actions<br  />
 <p>
 it could remember old command too. when you press &lt;Windows+r&gt;<br  />
 about how to use it .see comments in anything-run.ahk<br  />
-<img src="/assets/blog/anything-doc.org/anything-run1.JPG" alt="anything-run1.JPG" /><br  />
+<img src="/assets/blog/anything-doc.html/anything-run1.JPG" alt="anything-run1.JPG" /><br  />
 </p>
 
 <div class="org-src-container">
@@ -728,7 +728,7 @@ anything_multiple_sources(sources)
 <div class="outline-text-3" id="text-4-4">
 
 <div class="figure">
-<p><img src="/assets/blog/anything-doc.org/anything-ws.JPG" alt="anything-ws.JPG" /><br  />
+<p><img src="/assets/blog/anything-doc.html/anything-ws.JPG" alt="anything-ws.JPG" /><br  />
 </p>
 </div>
 <div class="org-src-container">
@@ -833,8 +833,8 @@ next time you press Alt-TAB ,and type "www" Firefox is activated<br  />
 <p>
 is a process manager , you can use it kill a selected process<br  />
 or change the priority of the process<br  />
-   <img src="/assets/blog/anything-doc.org/anything-process.jpg" alt="anything-process.jpg" /><br  />
-   <img src="/assets/blog/anything-doc.org/anything-process2.jpg" alt="anything-process2.jpg" /><br  />
+   <img src="/assets/blog/anything-doc.html/anything-process.jpg" alt="anything-process.jpg" /><br  />
+   <img src="/assets/blog/anything-doc.html/anything-process2.jpg" alt="anything-process2.jpg" /><br  />
 </p>
 <div class="org-src-container">
 
@@ -877,8 +877,8 @@ anything(anything_process_manager_source)
 is a Windows Services Manager ,just like services.msc<br  />
 it can start a stopped service ,or stop a running service<br  />
 or change the start type of a service &lt;Manual&gt; &lt;Disabled&gt;&lt;Automictal&gt;<br  />
-   <img src="/assets/blog/anything-doc.org/anything-services1.JPG" alt="anything-services1.JPG" /><br  />
-   <img src="/assets/blog/anything-doc.org/anything-services2.JPG" alt="anything-services2.JPG" /><br  />
+   <img src="/assets/blog/anything-doc.html/anything-services1.JPG" alt="anything-services1.JPG" /><br  />
+   <img src="/assets/blog/anything-doc.html/anything-services2.JPG" alt="anything-services2.JPG" /><br  />
 </p>
 <div class="org-src-container">
 
@@ -1448,18 +1448,18 @@ or<br  />
 </div>
 </div>]]></description>
       <pubDate>2017-01-22</pubDate>
-      <guid>http://jixiuf.github.io/blog/anything-doc.org/</guid>
+      <guid>http://jixiuf.github.io/blog/anything-doc.html</guid>
     </item>
     <item>
       <title>jenkins打包xcode项目</title>
-      <link>http://jixiuf.github.io/blog/jenkins打包xcode项目/</link>
+      <link>http://jixiuf.github.io/blog/jenkins_xcode.html</link>
       <description><![CDATA[jenkins打包xcode项目]]></description>
       <pubDate>2017-01-22</pubDate>
-      <guid>http://jixiuf.github.io/blog/jenkins打包xcode项目/</guid>
+      <guid>http://jixiuf.github.io/blog/jenkins_xcode.html</guid>
     </item>
     <item>
       <title>Emacs可以做什么(功能演示)</title>
-      <link>http://jixiuf.github.io/blog/emacs可以做什么(功能演示)/</link>
+      <link>http://jixiuf.github.io/blog/what-emacs-can-do.html</link>
       <description><![CDATA[<div>
 <div class="post">
 <h1>Emacs可以做什么(功能演示)</h1>
@@ -2010,11 +2010,11 @@ M-w 复制一个区域，但是如果没有区域被选中，则复制当前行<
 </div>
 </div>]]></description>
       <pubDate>2017-01-22</pubDate>
-      <guid>http://jixiuf.github.io/blog/emacs可以做什么(功能演示)/</guid>
+      <guid>http://jixiuf.github.io/blog/what-emacs-can-do.html</guid>
     </item>
     <item>
       <title>网上即时聊天原理(mochiweb+jquery实现)</title>
-      <link>http://jixiuf.github.io/blog/网上即时聊天原理(mochiweb+jquery实现)/</link>
+      <link>http://jixiuf.github.io/blog/mochiweb_comet_chat.html</link>
       <description><![CDATA[<div>
 <div class="post">
 <h1>网上即时聊天原理(mochiweb+jquery实现)</h1>
@@ -2167,11 +2167,11 @@ Room ! {self(), post, list_to_binary(proplists:get_value("message", Data))},
 </div>
 </div>]]></description>
       <pubDate>2017-01-22</pubDate>
-      <guid>http://jixiuf.github.io/blog/网上即时聊天原理(mochiweb+jquery实现)/</guid>
+      <guid>http://jixiuf.github.io/blog/mochiweb_comet_chat.html</guid>
     </item>
     <item>
       <title>mochiweb 的使用 及 可开tcp连接数的(http长连接) 测试</title>
-      <link>http://jixiuf.github.io/blog/mochiweb-的使用-及-可开tcp连接数的(http长连接)-测试/</link>
+      <link>http://jixiuf.github.io/blog/mochiweb_http_load.html</link>
       <description><![CDATA[<div>
 <div class="post">
 <h1>mochiweb 的使用 及 可开tcp连接数的(http长连接) 测试</h1>
@@ -2308,14 +2308,14 @@ tcp<sub>load</sub><sub>test</sub>.erl
 </div>
 </div>]]></description>
       <pubDate>2017-01-22</pubDate>
-      <guid>http://jixiuf.github.io/blog/mochiweb-的使用-及-可开tcp连接数的(http长连接)-测试/</guid>
+      <guid>http://jixiuf.github.io/blog/mochiweb_http_load.html</guid>
     </item>
     <item>
       <title>mysql压力测试</title>
-      <link>http://jixiuf.github.io/blog/mysql压力测试/</link>
+      <link>http://jixiuf.github.io/blog/benchmark.html</link>
       <description><![CDATA[mysql压力测试]]></description>
       <pubDate>2017-01-22</pubDate>
-      <guid>http://jixiuf.github.io/blog/mysql压力测试/</guid>
+      <guid>http://jixiuf.github.io/blog/benchmark.html</guid>
     </item>
     <item>
       <title>纪秀峰_个人简历</title>
@@ -2326,17 +2326,17 @@ tcp<sub>load</sub><sub>test</sub>.erl
     </item>
     <item>
       <title>linux拾遗</title>
-      <link>http://jixiuf.github.io/blog/linux拾遗/</link>
+      <link>http://jixiuf.github.io/blog/linux.html</link>
       <description><![CDATA[linux拾遗]]></description>
       <pubDate>2016-12-14</pubDate>
-      <guid>http://jixiuf.github.io/blog/linux拾遗/</guid>
+      <guid>http://jixiuf.github.io/blog/linux.html</guid>
     </item>
     <item>
       <title>android ndk 编译libpng openssl</title>
-      <link>http://jixiuf.github.io/blog/android-ndk-编译libpng-openssl/</link>
+      <link>http://jixiuf.github.io/blog/android-ndk-compile-libpng-openssl.html</link>
       <description><![CDATA[android ndk 编译libpng openssl]]></description>
       <pubDate>2016-11-14</pubDate>
-      <guid>http://jixiuf.github.io/blog/android-ndk-编译libpng-openssl/</guid>
+      <guid>http://jixiuf.github.io/blog/android-ndk-compile-libpng-openssl.html</guid>
     </item>
   </channel>
 </rss>
