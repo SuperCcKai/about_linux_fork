@@ -40,6 +40,7 @@
   (require 'ls-lisp)
   (setq-default ls-lisp-use-insert-directory-program nil))
 
+(setq org-html-link-org-files-as-html t)
 
 
 ;;; the following is only needed if you install org-page manually
@@ -55,7 +56,7 @@
 ;;; for commenting, you can choose either disqus or duoshuo
 (setq op/personal-disqus-shortname "jixiuf")
 (setq op/personal-duoshuo-shortname "jixiuf")
-(setq op/theme-root-directory "./org-page-themes")
+(setq op/theme-root-directory (expand-file-name "./org-page-themes"))
 (setq op/theme 'jixiuf_theme)
 (setq op/highlight-render 'htmlize)
 ;;; the configuration below are optional
@@ -80,7 +81,7 @@
     (when (and (buffer-file-name b)
                (file-in-directory-p (buffer-file-name b) op/repository-directory))
       (kill-buffer b)))
-  (op/do-publication nil (format "HEAD^%d" n) t nil)
+  (op/do-publication nil (format "HEAD~%d" n) t nil)
   ;; (publish-single-project "note-src")
   ;; ;; (publish-my-note-html)
   ;; (publish-single-project "note-html")
