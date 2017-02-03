@@ -139,7 +139,7 @@
     :show-meta nil
     :show-comment nil
     :uri-generator jixiuf/generate-uri
-    :uri-template "/about/"
+    :uri-template "/about"
     :sort-by :date
     :category-index nil)))
 
@@ -163,6 +163,7 @@ can contain following parameters:
 %y: year of creation date
 %m: month of creation date
 %d: day of creation date
+%f: filename (a.org->a.html)
 %t: title of current buffer"
   (let ((uri-template (or (op/read-org-option "URI")
                           default-uri-template))
@@ -170,7 +171,7 @@ can contain following parameters:
                                      (fix-timestamp-string creation-date)
                                    (format-time-string "%Y-%m-%d"))
                                  "-"))
-        (html-file-name (concat (buffer-file-name) ".html"))
+        (html-file-name (concat (file-name-base (buffer-file-name)) ".html"))
         (encoded-title (encode-string-to-url title)))
     (format-spec uri-template `((?y . ,(car date-list))
                                 (?m . ,(cadr date-list))
