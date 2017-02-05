@@ -7,3 +7,5 @@ all:
 
 preview:
 	make -C ./build preview
+run-emacs:
+	make -C ./build run-emacs
