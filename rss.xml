@@ -4,10 +4,17 @@
     <title>一个人的狂欢</title>
     <link>http://jixiuf.github.io</link>
     <description></description>
-    <pubDate>五, 03  2 2017 23:50:42 CST</pubDate>
-    <lastBuildDate>五, 03  2 2017 23:50:42 CST</lastBuildDate>
+    <pubDate>一, 06  2 2017 00:10:02 CST</pubDate>
+    <lastBuildDate>一, 06  2 2017 00:10:02 CST</lastBuildDate>
     <docs>http://www.rssboard.org/rss-specification</docs>
     <generator>Org-page static site generator (https://github.com/kelvinh/org-page)</generator>
+    <item>
+      <title>emacs下的git工具 magit 简介</title>
+      <link>http://jixiuf.github.io/blog/000100-emacs-magit.html</link>
+      <description><![CDATA[magit 系列教程]]></description>
+      <pubDate>2017-02-05</pubDate>
+      <guid>http://jixiuf.github.io/blog/000100-emacs-magit.html</guid>
+    </item>
     <item>
       <title>AutoHotKey 简介</title>
       <link>http://jixiuf.github.io/blog/AutoHotKey_Introduce.html</link>
@@ -2330,13 +2337,6 @@ tcp<sub>load</sub><sub>test</sub>.erl
       <description><![CDATA[linux拾遗]]></description>
       <pubDate>2016-12-14</pubDate>
       <guid>http://jixiuf.github.io/blog/linux.html</guid>
-    </item>
-    <item>
-      <title>android ndk 编译libpng openssl</title>
-      <link>http://jixiuf.github.io/blog/android-ndk-compile-libpng-openssl.html</link>
-      <description><![CDATA[android ndk 编译libpng openssl]]></description>
-      <pubDate>2016-11-14</pubDate>
-      <guid>http://jixiuf.github.io/blog/android-ndk-compile-libpng-openssl.html</guid>
     </item>
   </channel>
 </rss>
