@@ -489,3 +489,16 @@ awk -F, '!a[$1]++' urfile
 以第一列（逗号分隔）为索引的数组元素的值为0则输出，输出后数组元素值++， 后面的行$1相同时a[$1]的值就不为0了。
 
 #+END_QUOTE
+* awk 替换
+  #+BEGIN_SRC sh
+    awk '{sub(/6.5.4/,"6.5.7");print}' globalrc
+  #+END_SRC
+* awk 在指定的行添加内容添加行
+  #+BEGIN_SRC sh
+    awk -v "n=line-number"\
+     -v 'line1=import "github.com/gogo/protobuf/gogoproto/gogo.proto"; '\
+     -v 'line2=option (gogoproto.marshaler_all) = true;'\
+     -v 'line3=option (gogoproto.sizer_all) = true;'\
+     -v 'line4=option (gogoproto.unmarshaler_all) = true;'\
+     '(NR==2) { print line1;print line2;print line3;print line4 } 1;'  pf.proto
+  #+END_SRC
