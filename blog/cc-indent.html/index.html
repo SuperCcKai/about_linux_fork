@@ -230,7 +230,7 @@
    <span style="color: #D8FA3C;">note</span>:                                                              <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">((label 112))</span>
      {                                                                <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">((block-open) (statement 399))</span>
 <span style="color: #7fffd4;"> #ifdef</span> LOCK                                                          <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">((statement-block-intro 675) (cpp-macro))</span>
-         <span style="color: #8DA6CE;">Lock</span> <span style="color: #40E0D0;">acquire</span>();                                              <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">((statement-block-intro 675))</span>
+         <span style="color: #8DA6CE;">Lock</span> <span style="color: #FF6400;">acquire</span>();                                              <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">((statement-block-intro 675))</span>
 <span style="color: #7fffd4;"> #endif</span>                                                               <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">((statement 822) (cpp-macro))LOCK</span>
          slap_pop();                                                  <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">((statement 822))</span>
          cout &lt;&lt; <span style="color: #ffa07a;">"I played "</span>                                          <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">((statement 956))</span>
@@ -250,7 +250,7 @@
 <span style="color: #FBDE2D;">public</span> <span style="color: #8DA6CE;">void</span> <span style="color: #FF6400;">watch</span>(<span style="color: #8DA6CE;">Observable</span> <span style="color: #40E0D0;">o</span>) { <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">((annotation-top-cont 2)) &#23545;method class&#36827;&#34892; annotation&#22768;&#26126;</span>
     <span style="color: #D8FA3C;">@NonNull</span>                      <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">((defun-block-intro 2))</span>
         <span style="color: #8DA6CE;">Observer</span> <span style="color: #40E0D0;">obs</span> = <span style="color: #FBDE2D;">new</span> <span style="color: #8DA6CE;">Observer</span>() { <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">((annotation-var-cont 125))&#23545;&#21464;&#37327;&#36827;&#34892; annotation&#22768;&#26126; </span>
-            <span style="color: #FBDE2D;">public</span> <span style="color: #8DA6CE;">void</span> update(<span style="color: #8DA6CE;">Observable</span> <span style="color: #40E0D0;">o</span>, <span style="color: #8DA6CE;">Object</span> <span style="color: #40E0D0;">arg</span>) { <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">((inexpr-class&#20869;&#37096;&#31867;) (inclass 187) (topmost-intro 182)),&#23427;&#20855;&#26377;&#26222;&#36890;inclass&#30340;&#29305;&#24615;,&#21516;&#26102;&#26377;inexpr-class&#30340;&#29305;&#24615;</span>
+            <span style="color: #FBDE2D;">public</span> <span style="color: #8DA6CE;">void</span> <span style="color: #FF6400;">update</span>(<span style="color: #8DA6CE;">Observable</span> <span style="color: #40E0D0;">o</span>, <span style="color: #8DA6CE;">Object</span> <span style="color: #40E0D0;">arg</span>) { <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">((inexpr-class&#20869;&#37096;&#31867;) (inclass 187) (topmost-intro 182)),&#23427;&#20855;&#26377;&#26222;&#36890;inclass&#30340;&#29305;&#24615;,&#21516;&#26102;&#26377;inexpr-class&#30340;&#29305;&#24615;</span>
             history.addElement(arg);                   <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">((defun-block-intro 259))</span>
         }                                              <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">((inline-close 259))</span>
     };                                                 <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">((inexpr-class) (class-close 187))</span>
@@ -266,7 +266,7 @@
 <div class="org-src-container">
 
 <pre class="src src-c++"><span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">res</span> = ({                    <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">((topmost-intro 1))</span>
-    <span style="color: #8DA6CE;">int</span> y = foo (); <span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">z</span>;  <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">((inexpr-statement) (statement-block-intro 1)) ,(inexpr-statement)&#34920;&#31034;&#23427;&#22788;&#20110;&#19968;&#20010;statement&#30340;&#20869;&#37096;&#30340;&#34920;&#36798;&#31034;</span>
+    <span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">y</span> = foo (); <span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">z</span>;  <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">((inexpr-statement) (statement-block-intro 1)) ,(inexpr-statement)&#34920;&#31034;&#23427;&#22788;&#20110;&#19968;&#20010;statement&#30340;&#20869;&#37096;&#30340;&#34920;&#36798;&#31034;</span>
         <span style="color: #FBDE2D;">if</span> (y &gt; 0) z = y; <span style="color: #FBDE2D;">else</span> z = - y; <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">((statement 64))</span>
         z;                              <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">((statement 146))</span>
     });                                 <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">((inexpr-statement) (block-close 1))</span>
@@ -422,7 +422,7 @@
       <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
       <script src="/media/js/main.js"></script>
       <div class="footer">
-        <p>Generated by <a href="http://www.gnu.org/software/emacs/">Emacs</a> 26.x (<a href="http://orgmode.org">Org mode</a> 8.x)</p>
+        <p>Generated by <a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.x (<a href="http://orgmode.org">Org mode</a> 8.x)</p>
         <p>
           Copyright &copy; 2012 - <span id="footerYear"></span> <a href="mailto:jixiuf &lt;at&gt; gmail &lt;dot&gt; com">纪秀峰</a>
           &nbsp;&nbsp;-&nbsp;&nbsp;

@@ -946,7 +946,7 @@ i *= <span style="color: #FBDE2D;">static_cast</span>&lt;<span style="color: #8D
  {
    <span style="color: #8DA6CE;">string</span> <span style="color: #40E0D0;">str</span>=string(<span style="color: #ffa07a;">"hello"</span>);
    <span style="color: #8DA6CE;">string</span> <span style="color: #40E0D0;">world</span>=string(<span style="color: #ffa07a;">"world"</span>);
-   <span style="color: #8DA6CE;">Name</span> <span style="color: #40E0D0;">name</span>(str);
+   <span style="color: #8DA6CE;">Name</span> <span style="color: #FF6400;">name</span>(str);
    name.copy(world);  <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#20256;&#36807;&#26469;&#30340;&#26159;string &#31867;&#22411;&#65292; &#20294;&#26159;copy()&#25509;&#21463;&#30340;&#26159;Name,&#32534;&#35793;&#22120;&#20250;&#33258;&#21160;&#29992;string&#35843;&#29992;Name&#30340;&#30456;&#24212;&#26500;&#36896;&#20989;&#25968;</span>
    <span style="color: #FBDE2D;">return</span> 0;
  }
@@ -1687,7 +1687,7 @@ p=make_pair(<span style="color: #ffa07a;">"hello"</span>, 300);
 }
 
 
-   <span style="color: #FBDE2D;">for</span> (map&lt;string,<span style="color: #8DA6CE;">int</span>&gt;::iterator it=m.begin(); it!=m.end(); it++) {
+   <span style="color: #FBDE2D;">for</span> (map&lt;string,<span style="color: #8DA6CE;">int</span>&gt;::<span style="color: #8DA6CE;">iterator</span> <span style="color: #40E0D0;">it</span>=m.begin(); it!=m.end(); it++) {
      <span style="color: #8DA6CE;">pair</span>&lt;<span style="color: #8DA6CE;">string</span>,<span style="color: #8DA6CE;">int</span>&gt; <span style="color: #40E0D0;">p</span> = *it;
      <span style="color: #D8FA3C;">std</span>::cout &lt;&lt; p.first &lt;&lt;<span style="color: #ffa07a;">"="</span>&lt;&lt;p.second &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
     }
@@ -2262,7 +2262,7 @@ v.push_back(string(<span style="color: #ffa07a;">"3"</span>));
 {
 <span style="color: #FBDE2D;">public</span>:
   <span style="color: #8DA6CE;">Nptr</span> *<span style="color: #40E0D0;">nptr</span>;
-  <span style="color: #FF6400;">Obj</span>(<span style="color: #8DA6CE;">int</span> *<span style="color: #40E0D0;">i</span> ):nptr( <span style="color: #FBDE2D;">new</span> <span style="color: #8DA6CE;">Nptr</span>(1,i)) {}
+  <span style="color: #FF6400;">Obj</span>(<span style="color: #8DA6CE;">int</span> *<span style="color: #40E0D0;">i</span> ):<span style="color: #40E0D0;">nptr</span>( <span style="color: #FBDE2D;">new</span> <span style="color: #8DA6CE;">Nptr</span>(1,i)) {}
   <span style="color: #FBDE2D;">virtual</span> ~<span style="color: #FF6400;">Obj</span>(){
     <span style="color: #D8FA3C;">std</span>::cout &lt;&lt; <span style="color: #ffa07a;">"nptr.cnt--"</span> &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
     <span style="color: #FBDE2D;">if</span> (--nptr-&gt;cnt==0){
@@ -2289,9 +2289,9 @@ v.push_back(string(<span style="color: #ffa07a;">"3"</span>));
 
 <span style="color: #8DA6CE;">int</span> <span style="color: #FF6400;">main</span>(<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">argc</span>, <span style="color: #8DA6CE;">char</span> *<span style="color: #40E0D0;">argv</span>[]){
   <span style="color: #8DA6CE;">int</span> *<span style="color: #40E0D0;">i</span>   = <span style="color: #FBDE2D;">new</span> <span style="color: #8DA6CE;">int</span>(3) ;
-  <span style="color: #8DA6CE;">Obj</span> <span style="color: #40E0D0;">obj</span>(i);
+  <span style="color: #8DA6CE;">Obj</span> <span style="color: #FF6400;">obj</span>(i);
   <span style="color: #D8FA3C;">std</span>::cout &lt;&lt; obj.nptr-&gt;get_cnt()&lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
-  <span style="color: #8DA6CE;">Obj</span> <span style="color: #40E0D0;">obj2</span>(obj);
+  <span style="color: #8DA6CE;">Obj</span> <span style="color: #FF6400;">obj2</span>(obj);
   <span style="color: #D8FA3C;">std</span>::cout &lt;&lt; obj.nptr-&gt;get_cnt()&lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
   <span style="color: #8DA6CE;">Obj</span> <span style="color: #40E0D0;">obj3</span>=obj2;
 
@@ -2387,7 +2387,7 @@ v.push_back(string(<span style="color: #ffa07a;">"3"</span>));
 <li>[] 下标<br  />
 <div class="org-src-container">
 
-<pre class="src src-c++"><span style="color: #8DA6CE;">Class</span>&amp; <span style="color: #FBDE2D;">operator</span><span style="color: #FF6400;">[]</span>(<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">index</span>);
+<pre class="src src-c++">Class&amp; <span style="color: #FBDE2D;">operator</span>[](<span style="color: #8DA6CE;">int</span> <span style="color: #40E0D0;">index</span>);
 </pre>
 </div>
 </li>
@@ -3100,7 +3100,7 @@ a.deallocate(str,2);<span style="color: #AEAEAE;">//</span><span style="color: #
 
   <span style="color: #D8FA3C;">std</span>::cout &lt;&lt; <span style="color: #ffa07a;">"new called"</span> &lt;&lt; <span style="color: #D8FA3C;">std</span>::endl;
   <span style="color: #FBDE2D;">if</span> (<span style="color: #FBDE2D;">sizeof</span>(T)!= sz){<span style="color: #AEAEAE;">//</span><span style="color: #AEAEAE;">&#36825;&#37324;&#20570;&#26816;&#26597; &#65292;&#20445;&#35777;&#20256;&#36807;&#26469;&#26159;T&#26412;&#36523;&#65292; &#32780;&#38750;&#20854;&#23376;&#31867;</span>
-    <span style="color: #FBDE2D;">throw</span> <span style="color: #D8FA3C;">std</span>::runtime_error(<span style="color: #ffa07a;">"CacheObj wrong size"</span>);
+    <span style="color: #FBDE2D;">throw</span> <span style="color: #D8FA3C;">std</span>::<span style="color: #8DA6CE;">runtime_error</span>(<span style="color: #ffa07a;">"CacheObj wrong size"</span>);
   }
   <span style="color: #FBDE2D;">if</span>(!free_list){               <span style="color: #AEAEAE;">// </span><span style="color: #AEAEAE;">&#22914;&#26524;free_list null</span>
     <span style="color: #8DA6CE;">T</span>* <span style="color: #40E0D0;">array</span>=t_allocator.allocate(incr_size);
@@ -3202,7 +3202,7 @@ a.deallocate(str,2);<span style="color: #AEAEAE;">//</span><span style="color: #
       <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
       <script src="/media/js/main.js"></script>
       <div class="footer">
-        <p>Generated by <a href="http://www.gnu.org/software/emacs/">Emacs</a> 26.x (<a href="http://orgmode.org">Org mode</a> 8.x)</p>
+        <p>Generated by <a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.x (<a href="http://orgmode.org">Org mode</a> 8.x)</p>
         <p>
           Copyright &copy; 2012 - <span id="footerYear"></span> <a href="mailto:jixiuf &lt;at&gt; gmail &lt;dot&gt; com">纪秀峰</a>
           &nbsp;&nbsp;-&nbsp;&nbsp;
