@@ -48,10 +48,10 @@
 
 (setq org-confirm-babel-evaluate nil)
 
-(setq op/site-main-title "一个人的狂欢")
+(setq op/site-main-title "拾遗笔记")
 (setq op/site-sub-title "")
 (setq op/personal-github-link "http://github.com/jixiuf")
-(setq op/repository-directory "..")
+(setq op/repository-directory "../")    ;must ends with /
 (setq op/site-domain "http://jixiuf.github.io")
 ;;; for commenting, you can choose either disqus or duoshuo
 (setq op/personal-disqus-shortname "jixiuf")

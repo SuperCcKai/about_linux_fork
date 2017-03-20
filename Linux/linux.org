@@ -403,6 +403,11 @@ Modeline "1440x900_75.00"  136.75  1440 1536 1688 1936  900 903 909 942 -hsync +
      实际实现了 将SELINUX=enforcing 换成SELINUX=disabled 这个功能
 * grep
 **  grep -v 过滤 不匹配的行
+** grep -P 以perl正则来匹配(linux支持,mac不支持)
+   过滤@的行, 但是不过滤@case的行
+   #+BEGIN_SRC sh
+   grep -P "@(?!case)" #用到了零宽断言 (即@后不为case的)
+   #+END_SRC
 **  grep [a,A]..[b,B]* file  在文件中查找a（或A）开头，第四个字母为b（或B）的所有单词
 **  grep -E 'string1|string2' file        搜寻文件中或者存在string1或者存在string2的行
 **  利用grep -c 来作instr()用
@@ -484,3 +489,16 @@ awk -F, '!a[$1]++' urfile
 以第一列（逗号分隔）为索引的数组元素的值为0则输出，输出后数组元素值++， 后面的行$1相同时a[$1]的值就不为0了。
 
 #+END_QUOTE
+* awk 替换
+  #+BEGIN_SRC sh
+    awk '{sub(/6.5.4/,"6.5.7");print}' globalrc
+  #+END_SRC
+* awk 在指定的行添加内容添加行
+  #+BEGIN_SRC sh
+    awk -v "n=line-number"\
+     -v 'line1=import "github.com/gogo/protobuf/gogoproto/gogo.proto"; '\
+     -v 'line2=option (gogoproto.marshaler_all) = true;'\
+     -v 'line3=option (gogoproto.sizer_all) = true;'\
+     -v 'line4=option (gogoproto.unmarshaler_all) = true;'\
+     '(NR==2) { print line1;print line2;print line3;print line4 } 1;'  pf.proto
+  #+END_SRC
