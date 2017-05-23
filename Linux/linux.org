@@ -9,7 +9,7 @@
 #+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
 #+TAGS: :Linux:
-* 几个工具
+* COMMENT 几个工具
 - nload 查看网卡流量
 - nethogs iptrafr iftop 查看具体的进程发包收包情况
   sudo yum install nethogs
@@ -24,6 +24,27 @@
 - nc -u localhost 7777 nc 可以跟telnet 一样， 不过支持udp telnet
 - 创建虚拟ftp 用户 ftpasswd --passwd --file=/etc/ftpd.passwd --name=ftp  --home=/home/ftp --shell=/bin/false --uid 508
 - exit code $?  echo $?
+  [ $? -eq 0 ] || exit $?; # exit for none-zero return code
+  #+BEGIN_SRC sh
+        # this will trap any errors or commands with non-zero exit status
+        # by calling function catch_errors()
+        trap catch_errors ERR;
+
+        #
+        # ... the rest of the script goes here
+        #
+
+        function catch_errors() {
+        # do whatever on errors
+        #
+        #
+        echo "script aborted, because of errors";
+        exit $?;
+        }
+        find /asda
+        echo "oo"
+  #+END_SRC
+
 - strace -p 29064 >/tmp/strace.log 2>&1
    cat strace.log|cut -f 1 -d "("|sort|uniq -c
    统计某进程系统调用的信息 ，比如归个系统调用多
