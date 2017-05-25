@@ -9,7 +9,7 @@
 #+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
 #+TAGS: :Linux:
-* COMMENT 几个工具
+* 几个工具
 - nload 查看网卡流量
 - nethogs iptrafr iftop 查看具体的进程发包收包情况
   sudo yum install nethogs
@@ -513,6 +513,7 @@ awk -F, '!a[$1]++' urfile
 * awk 替换
   #+BEGIN_SRC sh
     awk '{sub(/6.5.4/,"6.5.7");print}' globalrc
+    awk '{sub(/package design/,"package cavedesign");print >"db_defs_design_select.go"}' ./data/output/db_defs_design_select.go
   #+END_SRC
 * awk 在指定的行添加内容添加行
   #+BEGIN_SRC sh
