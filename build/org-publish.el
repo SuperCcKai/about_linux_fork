@@ -1,11 +1,34 @@
 ;;; -*- coding:utf-8 -*-
-;; (eval-when-compile
-;;   (require 'joseph_byte_compile_include)
-;;   (require 'org)
-;;   ;; (require 'org-html nil t)
-;;   (require 'ox-html nil t)
-;;   (require 'yasnippet)
-;;   (require 'joseph-outline-lazy))
+
+;; #+OPTIONS:   H:2 num:nil toc:t \n:nil @:t ::t |:t ^:nil -:t f:t *:t <:t
+
+;; H:         set the number of headline levels for export
+;; num:       turn on/off section-numbers
+;; toc:       turn on/off table of contents, or set level limit (integer)
+;; \n:        turn on/off line-break-preservation (DOES NOT WORK)
+;; @:         turn on/off quoted HTML tags
+;; ::         turn on/off fixed-width sections
+;; |:         turn on/off tables
+;; ^:         turn on/off TeX-like syntax for sub- and superscripts.  If
+;; you write "^:{}", a_{b} will be interpreted, but
+;; the simple a_b will be left as it is.
+;; -:         turn on/off conversion of special strings.
+;; f:         turn on/off footnotes like this[1].
+;; todo:      turn on/off inclusion of TODO keywords into exported text
+;; tasks:     turn on/off inclusion of tasks (TODO items), can be nil to remove
+;; all tasks, todo to remove DONE tasks, or list of kwds to keep
+;; pri:       turn on/off priority cookies
+;; tags:      turn on/off inclusion of tags, may also be not-in-toc
+;; <:         turn on/off inclusion of any time/date stamps like DEADLINES
+;; *:         turn on/off emphasized text (bold, italic, underlined)
+;; TeX:       turn on/off simple TeX macros in plain text
+;; LaTeX:     configure export of LaTeX fragments.  Default auto
+;; skip:      turn on/off skipping the text before the first heading
+;; author:    turn on/off inclusion of author name/email into exported file
+;; email:     turn on/off inclusion of author email into exported file
+;; creator:   turn on/off inclusion of creator info into exported file
+;; timestamp: turn on/off inclusion creation time into exported file
+;; d:         turn on/off inclusion of drawers
 
 ;; (require 'org-publish nil t)
 (require 'ox-publish nil t)

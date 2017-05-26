@@ -338,6 +338,26 @@ Modeline "1440x900_75.00"  136.75  1440 1536 1688 1936  900 903 909 942 -hsync +
 
   ssh -L 3307:serverip:3306 root@serverip -N
   则直接访问本机3307端口 相当于方法serverip的3306端口
+** ssh 反向tunnel 实现借助外网机访问内网机服务器
+   参考 https://my.oschina.net/abcfy2/blog/177094
+  1. 在内网机上运行以下命令，则访问dev.najaplus.com 的3009端口相当于访问 内网机的22端口
+    #+BEGIN_SRC sh
+    autossh -M 5678 -NR 3009:localhost:22 deployer@dev.najaplus.com
+        # 不太理理5678端口的作用
+    #+END_SRC
+  2.  在外网机上运行以下命令
+    #+BEGIN_SRC sh
+        实际上登录到内网相的22端口，即登录内网机的ssh,(内网机需要启动sshd)
+    ssh -p 3009 jixiuf@localhost
+    #+END_SRC
+    另外在外网机上可以看到3009牌listen状态，且绑定在127.0.0.1,也就是说只能从本机对3009进行访问
+    [[file:../img/linux-2017-05-24-22-50-37.png]]
+
+同相的道理，假如内网机80端口有web服务
+    autossh -M 5679 -NR 3008:localhost:80 deployer@dev.najaplus.com
+    则在外网访问外网的3008端口 相当于访问内网机的80端口
+    结合nginx 代理3008端口即在任意地址访问外网的80端口来实现访问内网的服务
+
 * tsocks 配置
   wget ,git  通过ssh tunnel 连网
   tsocks wget http://googletest.googlecode.com/files/gtest-1.5.0.tar.bz2
