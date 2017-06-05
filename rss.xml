@@ -4,28 +4,35 @@
     <title>拾遗笔记</title>
     <link>http://jixiuf.github.io</link>
     <description></description>
-    <pubDate>三, 24  5 2017 23:01:46 CST</pubDate>
-    <lastBuildDate>三, 24  5 2017 23:01:46 CST</lastBuildDate>
+    <pubDate>一, 05  6 2017 10:28:33 CST</pubDate>
+    <lastBuildDate>一, 05  6 2017 10:28:33 CST</lastBuildDate>
     <docs>http://www.rssboard.org/rss-specification</docs>
     <generator>Org-page static site generator (https://github.com/kelvinh/org-page)</generator>
     <item>
       <title>linux拾遗</title>
       <link>http://jixiuf.github.io/blog/linux.html</link>
       <description><![CDATA[linux拾遗]]></description>
-      <pubDate>2017-05-24</pubDate>
+      <pubDate>2017-06-05</pubDate>
       <guid>http://jixiuf.github.io/blog/linux.html</guid>
+    </item>
+    <item>
+      <title>jenkins打包xcode项目</title>
+      <link>http://jixiuf.github.io/blog/jenkins_xcode.html</link>
+      <description><![CDATA[jenkins打包xcode项目]]></description>
+      <pubDate>2017-05-26</pubDate>
+      <guid>http://jixiuf.github.io/blog/jenkins_xcode.html</guid>
     </item>
     <item>
       <title>让helm表现的更像ido</title>
       <link>http://jixiuf.github.io/blog/00011-emacs-make-helm-like-ido.html</link>
-      <description><![CDATA[让helm表现的更像ido]]></description>
+      <description><![CDATA[]]></description>
       <pubDate>2017-03-13</pubDate>
       <guid>http://jixiuf.github.io/blog/00011-emacs-make-helm-like-ido.html</guid>
     </item>
     <item>
       <title>nginx拾遗</title>
       <link>http://jixiuf.github.io/blog/nginx.html</link>
-      <description><![CDATA[nginx.org]]></description>
+      <description><![CDATA[]]></description>
       <pubDate>2017-02-24</pubDate>
       <guid>http://jixiuf.github.io/blog/nginx.html</guid>
     </item>
@@ -49,13 +56,6 @@
       <description><![CDATA[]]></description>
       <pubDate>2017-01-22</pubDate>
       <guid>http://jixiuf.github.io/blog/anything-doc.html</guid>
-    </item>
-    <item>
-      <title>jenkins打包xcode项目</title>
-      <link>http://jixiuf.github.io/blog/jenkins_xcode.html</link>
-      <description><![CDATA[]]></description>
-      <pubDate>2017-01-22</pubDate>
-      <guid>http://jixiuf.github.io/blog/jenkins_xcode.html</guid>
     </item>
     <item>
       <title>Emacs可以做什么(功能演示)</title>

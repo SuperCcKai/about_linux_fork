@@ -29,7 +29,6 @@
         <ul>
           <li><a href="/blog/">Blog</a></li>
           <li><a href="/tags/">Tags</a></li>
-          <li><a href="/tags/">Tags</a></li>
           <li><a href="/about/">About</a></li>
           <li><a href="http://github.com/jixiuf">GitHub</a></li>
           <li><a href="/rss.xml">RSS</a></li>
@@ -48,52 +47,124 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">IOSTAT 介绍</a></li>
-<li><a href="#sec-2">VMSTAT 介绍</a></li>
-<li><a href="#sec-3">free 命令详解</a></li>
-<li><a href="#sec-4">使某一目录下创建的所有文件目录的groupname 都是 当前用户所属的组</a></li>
-<li><a href="#sec-5">umask</a></li>
-<li><a href="#sec-6">setfacl</a></li>
-<li><a href="#sec-7">mbr and dd</a></li>
-<li><a href="#sec-8">ctags</a></li>
-<li><a href="#sec-9">nmap</a></li>
-<li><a href="#sec-10">tcpdump</a></li>
-<li><a href="#sec-11">mac shutdown</a></li>
-<li><a href="#sec-12">linux下分辨率调整</a></li>
-<li><a href="#sec-13">通过ssh 连接远程机器上的mysql 等</a></li>
-<li><a href="#sec-14">ssh socat</a></li>
-<li><a href="#sec-15">ssh tunnel</a>
+<li><a href="#sec-1">几个工具</a></li>
+<li><a href="#sec-2">IOSTAT 介绍</a></li>
+<li><a href="#sec-3">VMSTAT 介绍</a></li>
+<li><a href="#sec-4">free 命令详解</a></li>
+<li><a href="#sec-5">使某一目录下创建的所有文件目录的groupname 都是 当前用户所属的组</a></li>
+<li><a href="#sec-6">umask</a></li>
+<li><a href="#sec-7">setfacl</a></li>
+<li><a href="#sec-8">mbr and dd</a></li>
+<li><a href="#sec-9">ctags</a></li>
+<li><a href="#sec-10">nmap</a></li>
+<li><a href="#sec-11">tcpdump</a></li>
+<li><a href="#sec-12">mac shutdown</a></li>
+<li><a href="#sec-13">linux下分辨率调整</a></li>
+<li><a href="#sec-14">通过ssh 连接远程机器上的mysql 等</a></li>
+<li><a href="#sec-15">ssh socat</a></li>
+<li><a href="#sec-16">ssh tunnel</a>
 <ul>
-<li><a href="#sec-15-1">ssh 反向tunnel 实现借助外网机访问内网机服务器</a></li>
+<li><a href="#sec-16-1">ssh 反向tunnel 实现借助外网机访问内网机服务器</a></li>
 </ul>
 </li>
-<li><a href="#sec-16">tsocks 配置</a></li>
-<li><a href="#sec-17">adb shell</a></li>
-<li><a href="#sec-18">curl demo</a></li>
-<li><a href="#sec-19">time sync</a></li>
-<li><a href="#sec-20">sed 一些用法</a></li>
-<li><a href="#sec-21">grep</a>
+<li><a href="#sec-17">tsocks 配置</a></li>
+<li><a href="#sec-18">adb shell</a></li>
+<li><a href="#sec-19">curl demo</a></li>
+<li><a href="#sec-20">time sync</a></li>
+<li><a href="#sec-21">sed 一些用法</a></li>
+<li><a href="#sec-22">grep</a>
 <ul>
-<li><a href="#sec-21-1">grep -v 过滤 不匹配的行</a></li>
-<li><a href="#sec-21-2">grep -P 以perl正则来匹配(linux支持,mac不支持)</a></li>
-<li><a href="#sec-21-3">grep [a,A]..[b,B]* file  在文件中查找a（或A）开头，第四个字母为b（或B）的所有单词</a></li>
-<li><a href="#sec-21-4">grep -E 'string1|string2' file        搜寻文件中或者存在string1或者存在string2的行</a></li>
-<li><a href="#sec-21-5">利用grep -c 来作instr()用</a></li>
+<li><a href="#sec-22-1">grep -v 过滤 不匹配的行</a></li>
+<li><a href="#sec-22-2">grep -P 以perl正则来匹配(linux支持,mac不支持)</a></li>
+<li><a href="#sec-22-3">grep [a,A]..[b,B]* file  在文件中查找a（或A）开头，第四个字母为b（或B）的所有单词</a></li>
+<li><a href="#sec-22-4">grep -E 'string1|string2' file        搜寻文件中或者存在string1或者存在string2的行</a></li>
+<li><a href="#sec-22-5">利用grep -c 来作instr()用</a></li>
 </ul>
 </li>
-<li><a href="#sec-22">find</a></li>
-<li><a href="#sec-23">“.”点号替代单个字符</a></li>
-<li><a href="#sec-24">shell for if example</a></li>
-<li><a href="#sec-25">用python 格式化json</a></li>
-<li><a href="#sec-26">awk 怎么去除如果第一列相同，则只取一行？</a></li>
-<li><a href="#sec-27">awk 替换</a></li>
-<li><a href="#sec-28">awk 在指定的行添加内容添加行</a></li>
+<li><a href="#sec-23">find</a></li>
+<li><a href="#sec-24">“.”点号替代单个字符</a></li>
+<li><a href="#sec-25">shell for if example</a></li>
+<li><a href="#sec-26">用python 格式化json</a></li>
+<li><a href="#sec-27">awk 怎么去除如果第一列相同，则只取一行？</a></li>
+<li><a href="#sec-28">awk 替换</a></li>
+<li><a href="#sec-29">awk 在指定的行添加内容添加行</a></li>
 </ul>
 </div>
 </div>
 <div id="outline-container-sec-1" class="outline-2">
-<h2 id="sec-1">IOSTAT 介绍</h2>
+<h2 id="sec-1">几个工具</h2>
 <div class="outline-text-2" id="text-1">
+<ul class="org-ul">
+<li>nload 查看网卡流量<br  />
+</li>
+<li>nethogs iptrafr iftop 查看具体的进程发包收包情况<br  />
+sudo yum install nethogs<br  />
+</li>
+<li>rkhunter linux 安全工具，扫描后门程序（需要刚装机时建立样本进行对比)<br  />
+rkhunter &#x2013;propupd 刚装完机 用此命令建立样本<br  />
+rkhunter -c   check<br  />
+rkhunter –-update  更新数据库，<br  />
+</li>
+
+<li>lsof -i:8888  查看兼听8888端口的程序<br  />
+</li>
+<li>top 按M按内存排序<br  />
+</li>
+<li>tmux<br  />
+</li>
+<li>nc -u localhost 7777 nc 可以跟telnet 一样， 不过支持udp telnet<br  />
+</li>
+<li>创建虚拟ftp 用户 ftpasswd &#x2013;passwd &#x2013;file=/etc/ftpd.passwd &#x2013;name=ftp  &#x2013;home=/home/ftp &#x2013;shell=/bin/false &#x2013;uid 508<br  />
+</li>
+<li>exit code $?  echo $?<br  />
+[ $? -eq 0 ] || exit $?; # exit for none-zero return code<br  />
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">this will trap any errors or commands with non-zero exit status</span>
+<span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">by calling function catch_errors()</span>
+<span style="color: #FBDE2D;">trap</span> catch_errors ERR;
+
+<span style="color: #AEAEAE;">#</span>
+<span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">... the rest of the script goes here</span>
+<span style="color: #AEAEAE;">#</span>
+
+<span style="color: #FBDE2D;">function</span> <span style="color: #FF6400;">catch_errors</span>() {
+<span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">do whatever on errors</span>
+<span style="color: #AEAEAE;">#</span>
+<span style="color: #AEAEAE;">#</span>
+<span style="color: #F8F8F8;">echo</span> <span style="color: #ffa07a;">"script aborted, because of errors"</span>;
+<span style="color: #FBDE2D;">exit</span> $<span style="color: #40E0D0;">?</span>;
+}
+find /asda
+<span style="color: #F8F8F8;">echo</span> <span style="color: #ffa07a;">"oo"</span>
+</pre>
+</div>
+</li>
+
+<li>strace -p 29064 &gt;/tmp/strace.log 2&gt;&amp;1<br  />
+cat strace.log|cut -f 1 -d "("|sort|uniq -c<br  />
+统计某进程系统调用的信息 ，比如归个系统调用多<br  />
+</li>
+</ul>
+
+
+<ul class="org-ul">
+<li>tmux attach<br  />
+C-bd  退出<br  />
+C-b0 C-b1 C-b2  切tag<br  />
+C-bs list sessions<br  />
+C-bn C-bp next prev<br  />
+C-bc 新建tag<br  />
+</li>
+</ul>
+</div>
+</div>
+
+
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2">IOSTAT 介绍</h2>
+<div class="outline-text-2" id="text-2">
 <p>
 Iostat（Input Output statistics）反映了磁盘I/O情况和CPU 活动。<br  />
 基本语法： iostat &lt;options&gt; interval count<br  />
@@ -152,9 +223,9 @@ SUSE 10 和9 iostat 参数数量略有不同，suse 10 多出rkB/s ,wkB/两个�
 </div>
 </div>
 
-<div id="outline-container-sec-2" class="outline-2">
-<h2 id="sec-2">VMSTAT 介绍</h2>
-<div class="outline-text-2" id="text-2">
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3">VMSTAT 介绍</h2>
+<div class="outline-text-2" id="text-3">
 <p>
 Vmstat（Virtual Memory Statistics）反映了进程的虚拟内存、虚拟内存、磁盘、trap和cpu的活动情况<br  />
 基本语法：vmstat &lt;options&gt; interval count<br  />
@@ -171,47 +242,87 @@ option - 让你指定所需的信息类型，例如 paging -p , cache -c ,.inter
 报告说明：<br  />
 </p>
 
+<ul class="org-ul">
+<li>procs<br  />
+<ul class="org-ul">
+<li>r:<br  />
+</li>
+</ul>
 <p>
-    procs<br  />
-n    r:<br  />
-   运行的和等待(CPU时间片)运行的进程数，这个值也可以判断是否需要增加CPU(长期大于1)<br  />
-n    b:<br  />
-   处于不可中断状态的进程数，常见的情况是由IO引起的<br  />
-l    memory<br  />
-n    swpd: 切换到交换内存上的内存(默认以KB为单位)<br  />
+运行的和等待(CPU时间片)运行的进程数，这个值也可以判断是否需要增加CPU(长期大于1)<br  />
+</p>
+<ul class="org-ul">
+<li>b:<br  />
+</li>
+</ul>
+<p>
+处于不可中断状态的进程数，常见的情况是由IO引起的<br  />
+</p>
+</li>
+<li>memory<br  />
+<ul class="org-ul">
+<li>swpd: 切换到交换内存上的内存(默认以KB为单位)<br  />
 如果 swpd 的值不为0，或者还比较大，比如超过100M了，但是 si, so 的值长期为 0，这种情况我们可以不用担心，不会影响系统性能。<br  />
-n    free: 空闲的物理内存<br  />
-n    buff: 作为buffer cache的内存，对块设备的读写进行缓冲<br  />
-n    cache: 作为page cache的内存, 文件系统的cache<br  />
+</li>
+<li>free: 空闲的物理内存<br  />
+</li>
+<li>buff: 作为buffer cache的内存，对块设备的读写进行缓冲<br  />
+</li>
+<li>cache: 作为page cache的内存, 文件系统的cache<br  />
 如果 cache 的值大的时候，说明cache住的文件数多，如果频繁访问到的文件都能被cache住，那么磁盘的读IO bi 会非常小。<br  />
-l    Swap<br  />
-n    si: 交换内存使用，由磁盘调入内存<br  />
-n    so: 交换内存使用，由内存调入磁盘<br  />
+</li>
+</ul>
+</li>
+<li>Swap<br  />
+<ul class="org-ul">
+<li>si: 交换内存使用，由磁盘调入内存<br  />
+</li>
+<li>so: 交换内存使用，由内存调入磁盘<br  />
 内存够用的时候，这2个值都是0，如果这2个值长期大于0时，系统性能会受到影响。磁盘IO和CPU资源都会被消耗。<br  />
 常有人看到空闲内存(free)很少或接近于0时，就认为内存不够用了，实际上不能光看这一点的，还要结合si,so，如果free很少，但是si,so也很少(大多时候是0)，那么不用担心，系统性能这时不会受到影响的。<br  />
-l    io<br  />
-n    bi: 从块设备读入的数据总量(读磁盘) (KB/s)，<br  />
-n    bo: 写入到块设备的数据总理(写磁盘) (KB/s)<br  />
+</li>
+</ul>
+</li>
+<li>io<br  />
+<ul class="org-ul">
+<li>bi: 从块设备读入的数据总量(读磁盘) (KB/s)，<br  />
+</li>
+<li>bo: 写入到块设备的数据总理(写磁盘) (KB/s)<br  />
 随机磁盘读写的时候，这2个 值越大（如超出1M），能看到CPU在IO等待的值也会越大<br  />
-l    system<br  />
-n    in: 每秒产生的中断次数<br  />
-n    cs: 每秒产生的上下文切换次数<br  />
+</li>
+</ul>
+</li>
+<li>system<br  />
+<ul class="org-ul">
+<li>in: 每秒产生的中断次数<br  />
+</li>
+<li>cs: 每秒产生的上下文切换次数<br  />
 上面这2个值越大，会看到由内核消耗的CPU时间会越多<br  />
-l    cpu<br  />
-n    us: 用户进程消耗的CPU时间百分比<br  />
+</li>
+</ul>
+</li>
+<li>cpu<br  />
+<ul class="org-ul">
+<li>us: 用户进程消耗的CPU时间百分比<br  />
 us 的值比较高时，说明用户进程消耗的CPU时间多，但是如果长期超过50% 的使用，那么我们就该考虑优化程序算法或者进行加速了<br  />
-n    sy: 内核进程消耗的CPU时间百分比<br  />
+</li>
+<li>sy: 内核进程消耗的CPU时间百分比<br  />
 sy 的值高时，说明系统内核消耗的CPU资源多，这并不是良性的表现，我们应该检查原因。<br  />
-n    wa: IO等待消耗的CPU时间百分比<br  />
+</li>
+<li>wa: IO等待消耗的CPU时间百分比<br  />
 wa 的值高时，说明IO等待比较严重，这可能是由于磁盘大量作随机访问造成，也有可能是磁盘的带宽出现瓶颈(块操作)。<br  />
-n    id: CPU处在空闲状态时间百分比<br  />
-</p>
+</li>
+<li>id: CPU处在空闲状态时间百分比<br  />
+</li>
+</ul>
+</li>
+</ul>
 </div>
 </div>
 
-<div id="outline-container-sec-3" class="outline-2">
-<h2 id="sec-3">free 命令详解</h2>
-<div class="outline-text-2" id="text-3">
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4">free 命令详解</h2>
+<div class="outline-text-2" id="text-4">
 <p>
 因为LINUX的内核机制，一般情况下不需要特意去释放已经使用的cache。这些cache起来的内容可以增加文件以及的读写速度。<br  />
 先说下free命令怎么看内存<br  />
@@ -269,9 +380,9 @@ echo 3 &gt; /proc/sys/vm/drop_caches<br  />
 </div>
 </div>
 
-<div id="outline-container-sec-4" class="outline-2">
-<h2 id="sec-4">使某一目录下创建的所有文件目录的groupname 都是 当前用户所属的组</h2>
-<div class="outline-text-2" id="text-4">
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5">使某一目录下创建的所有文件目录的groupname 都是 当前用户所属的组</h2>
+<div class="outline-text-2" id="text-5">
 <div class="org-src-container">
 
 <pre class="src src-sh">chmod g+s dir1
@@ -282,9 +393,9 @@ dir1以下的FILE和FOLDER组名都是当前用户所属的组<br  />
 </p>
 </div>
 </div>
-<div id="outline-container-sec-5" class="outline-2">
-<h2 id="sec-5">umask</h2>
-<div class="outline-text-2" id="text-5">
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6">umask</h2>
+<div class="outline-text-2" id="text-6">
 <p>
 umask就是指定“当前用户在建立文件或目录时候的属性默认值”<br  />
 对于文件来说，这一数字的最大值分别是6。<br  />
@@ -296,9 +407,9 @@ umask就是指定“当前用户在建立文件或目录时候的属性默认值
 </p>
 </div>
 </div>
-<div id="outline-container-sec-6" class="outline-2">
-<h2 id="sec-6">setfacl</h2>
-<div class="outline-text-2" id="text-6">
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7">setfacl</h2>
+<div class="outline-text-2" id="text-7">
 <p>
 /etc/fstab 里加 acl 选项<br  />
 </p>
@@ -347,9 +458,9 @@ perms directory, groupA will have rwx permission on them too.
 </div>
 </div>
 </div>
-<div id="outline-container-sec-7" class="outline-2">
-<h2 id="sec-7">mbr and dd</h2>
-<div class="outline-text-2" id="text-7">
+<div id="outline-container-sec-8" class="outline-2">
+<h2 id="sec-8">mbr and dd</h2>
+<div class="outline-text-2" id="text-8">
 <p>
 MBR=主引导区记录。硬盘的0磁道的第一个扇区称为MBR，它的大小是512字节，而这个区域<br  />
 可以分为三个部分。第一部分为pre-boot区（预启动区），占446字节；第二部分是<br  />
@@ -371,32 +482,32 @@ dd &lt;mbr512.img <span style="color: #40E0D0;">bs</span>=1 <span style="color: 
 </div>
 </div>
 </div>
-<div id="outline-container-sec-8" class="outline-2">
-<h2 id="sec-8">ctags</h2>
-<div class="outline-text-2" id="text-8">
+<div id="outline-container-sec-9" class="outline-2">
+<h2 id="sec-9">ctags</h2>
+<div class="outline-text-2" id="text-9">
 <p>
 <a href="http://blog.csdn.net/moiyer/article/details/5438962">http://blog.csdn.net/moiyer/article/details/5438962</a><br  />
 </p>
 </div>
 </div>
-<div id="outline-container-sec-9" class="outline-2">
-<h2 id="sec-9">nmap</h2>
-<div class="outline-text-2" id="text-9">
-</div><ul class="org-ul"><li><a id="sec-9-0-1" name="sec-9-0-1"></a>IP<br  /><div class="outline-text-4" id="text-9-0-1">
+<div id="outline-container-sec-10" class="outline-2">
+<h2 id="sec-10">nmap</h2>
+<div class="outline-text-2" id="text-10">
+</div><ul class="org-ul"><li><a id="sec-10-0-1" name="sec-10-0-1"></a>IP<br  /><div class="outline-text-4" id="text-10-0-1">
 <p>
 ip 地址范围 192.168.1.0/24<br  />
 192.168.1.1-254<br  />
 </p>
 </div>
 </li>
-<li><a id="sec-9-0-2" name="sec-9-0-2"></a>Port<br  /><div class="outline-text-4" id="text-9-0-2">
+<li><a id="sec-10-0-2" name="sec-10-0-2"></a>Port<br  /><div class="outline-text-4" id="text-10-0-2">
 <p>
 指定端口 : -p80 -p1-1024<br  />
 </p>
 </div>
 </li>
 
-<li><a id="sec-9-0-3" name="sec-9-0-3"></a>-s 开头的 表示扫描<br  /><div class="outline-text-4" id="text-9-0-3">
+<li><a id="sec-10-0-3" name="sec-10-0-3"></a>-s 开头的 表示扫描<br  /><div class="outline-text-4" id="text-10-0-3">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -434,18 +545,18 @@ nmap -sT 192.168.1.101<br  />
 </div>
 </li></ul>
 </div>
-<div id="outline-container-sec-10" class="outline-2">
-<h2 id="sec-10">tcpdump</h2>
-<div class="outline-text-2" id="text-10">
+<div id="outline-container-sec-11" class="outline-2">
+<h2 id="sec-11">tcpdump</h2>
+<div class="outline-text-2" id="text-11">
 <p>
 sudo tcpdump port 80 # only 80 端口<br  />
 sudo tcpdump -w filename port 80   # write to filename似乎 -w 参数不能太靠后<br  />
 </p>
 </div>
 </div>
-<div id="outline-container-sec-11" class="outline-2">
-<h2 id="sec-11">mac shutdown</h2>
-<div class="outline-text-2" id="text-11">
+<div id="outline-container-sec-12" class="outline-2">
+<h2 id="sec-12">mac shutdown</h2>
+<div class="outline-text-2" id="text-12">
 <p>
 . 10分钟后关机 sudo shutdown -h +10<br  />
 . 晚上8点关机 sudo shutdown -h 20:00<br  />
@@ -454,9 +565,9 @@ sudo tcpdump -w filename port 80   # write to filename似乎 -w 参数不能太�
 </div>
 
 
-<div id="outline-container-sec-12" class="outline-2">
-<h2 id="sec-12">linux下分辨率调整</h2>
-<div class="outline-text-2" id="text-12">
+<div id="outline-container-sec-13" class="outline-2">
+<h2 id="sec-13">linux下分辨率调整</h2>
+<div class="outline-text-2" id="text-13">
 <p>
 <a href="http://blog.csdn.net/wangfaqiang/article/details/6289959">http://blog.csdn.net/wangfaqiang/article/details/6289959</a><br  />
 </p>
@@ -497,9 +608,9 @@ EndSection<br  />
 </blockquote>
 </div>
 </div>
-<div id="outline-container-sec-13" class="outline-2">
-<h2 id="sec-13">通过ssh 连接远程机器上的mysql 等</h2>
-<div class="outline-text-2" id="text-13">
+<div id="outline-container-sec-14" class="outline-2">
+<h2 id="sec-14">通过ssh 连接远程机器上的mysql 等</h2>
+<div class="outline-text-2" id="text-14">
 <p>
 通常的情况是远程 42.62.14.55 上有一个mysql ,兼听在3306端口上<br  />
 但是防火墙阻止直接连3306端口<br  />
@@ -513,9 +624,9 @@ ssh -L 3307:localhost:3306 username@42.62.14.55 -N<br  />
 </p>
 </div>
 </div>
-<div id="outline-container-sec-14" class="outline-2">
-<h2 id="sec-14">ssh socat</h2>
-<div class="outline-text-2" id="text-14">
+<div id="outline-container-sec-15" class="outline-2">
+<h2 id="sec-15">ssh socat</h2>
+<div class="outline-text-2" id="text-15">
 <p>
 我局域网ip 是192.168.1网段的<br  />
 </p>
@@ -542,9 +653,9 @@ sudo ssh -o ProxyCommand='socat - socks:122.224.249.55:%h:%p,socksport=9991' use
 </p>
 </div>
 </div>
-<div id="outline-container-sec-15" class="outline-2">
-<h2 id="sec-15">ssh tunnel</h2>
-<div class="outline-text-2" id="text-15">
+<div id="outline-container-sec-16" class="outline-2">
+<h2 id="sec-16">ssh tunnel</h2>
+<div class="outline-text-2" id="text-16">
 <p>
 socks5 7070端口<br  />
 ssh -p 2222  -D 0.0.0.0:7070 deployer@se.najaplus.com -N -4<br  />
@@ -557,9 +668,9 @@ ssh -L 3307:serverip:3306 root@serverip -N<br  />
 则直接访问本机3307端口 相当于方法serverip的3306端口<br  />
 </p>
 </div>
-<div id="outline-container-sec-15-1" class="outline-3">
-<h3 id="sec-15-1">ssh 反向tunnel 实现借助外网机访问内网机服务器</h3>
-<div class="outline-text-3" id="text-15-1">
+<div id="outline-container-sec-16-1" class="outline-3">
+<h3 id="sec-16-1">ssh 反向tunnel 实现借助外网机访问内网机服务器</h3>
+<div class="outline-text-3" id="text-16-1">
 <p>
 参考 <a href="https://my.oschina.net/abcfy2/blog/177094">https://my.oschina.net/abcfy2/blog/177094</a><br  />
 </p>
@@ -596,9 +707,9 @@ ssh -p 3009 jixiuf@localhost
 </div>
 </div>
 
-<div id="outline-container-sec-16" class="outline-2">
-<h2 id="sec-16">tsocks 配置</h2>
-<div class="outline-text-2" id="text-16">
+<div id="outline-container-sec-17" class="outline-2">
+<h2 id="sec-17">tsocks 配置</h2>
+<div class="outline-text-2" id="text-17">
 <p>
 wget ,git  通过ssh tunnel 连网<br  />
 tsocks wget <a href="http://googletest.googlecode.com/files/gtest-1.5.0.tar.bz2">http://googletest.googlecode.com/files/gtest-1.5.0.tar.bz2</a><br  />
@@ -619,9 +730,9 @@ vim /usr/local/etc/tsocks.conf<br  />
 </p>
 </div>
 </div>
-<div id="outline-container-sec-17" class="outline-2">
-<h2 id="sec-17">adb shell</h2>
-<div class="outline-text-2" id="text-17">
+<div id="outline-container-sec-18" class="outline-2">
+<h2 id="sec-18">adb shell</h2>
+<div class="outline-text-2" id="text-18">
 <p>
 su<br  />
  mount -o remount,rw /  /<br  />
@@ -638,9 +749,9 @@ adb logcat 查看手机上的运行日志，此项可以用来查错<br  />
 </p>
 </div>
 </div>
-<div id="outline-container-sec-18" class="outline-2">
-<h2 id="sec-18">curl demo</h2>
-<div class="outline-text-2" id="text-18">
+<div id="outline-container-sec-19" class="outline-2">
+<h2 id="sec-19">curl demo</h2>
+<div class="outline-text-2" id="text-19">
 <p>
 curl <a href="https://api.sandbox.paypal.com/v1/oauth2/token">https://api.sandbox.paypal.com/v1/oauth2/token</a> -H "Accept: application/json"<br  />
 -H "Accept-Language: en_US"<br  />
@@ -650,9 +761,9 @@ curl <a href="https://api.sandbox.paypal.com/v1/oauth2/token">https://api.sandbo
 </p>
 </div>
 </div>
-<div id="outline-container-sec-19" class="outline-2">
-<h2 id="sec-19">time sync</h2>
-<div class="outline-text-2" id="text-19">
+<div id="outline-container-sec-20" class="outline-2">
+<h2 id="sec-20">time sync</h2>
+<div class="outline-text-2" id="text-20">
 <div class="org-src-container">
 
 <pre class="src src-sh">cat /etc/ntp.conf|grep server&#20250;&#21015;&#20986;&#20960;&#20010;&#26381;&#21153;&#22120;
@@ -685,9 +796,9 @@ watch ntpq -p
 </div>
 </div>
 
-<div id="outline-container-sec-20" class="outline-2">
-<h2 id="sec-20">sed 一些用法</h2>
-<div class="outline-text-2" id="text-20">
+<div id="outline-container-sec-21" class="outline-2">
+<h2 id="sec-21">sed 一些用法</h2>
+<div class="outline-text-2" id="text-21">
 <ol class="org-ol">
 <li>最常见的 sed 's/old/new/g' filename<br  />
 </li>
@@ -730,15 +841,15 @@ sed  -i <span style="color: #ffa07a;">".bak"</span> <span style="color: #ffa07a;
 </ol>
 </div>
 </div>
-<div id="outline-container-sec-21" class="outline-2">
-<h2 id="sec-21">grep</h2>
-<div class="outline-text-2" id="text-21">
-</div><div id="outline-container-sec-21-1" class="outline-3">
-<h3 id="sec-21-1">grep -v 过滤 不匹配的行</h3>
+<div id="outline-container-sec-22" class="outline-2">
+<h2 id="sec-22">grep</h2>
+<div class="outline-text-2" id="text-22">
+</div><div id="outline-container-sec-22-1" class="outline-3">
+<h3 id="sec-22-1">grep -v 过滤 不匹配的行</h3>
 </div>
-<div id="outline-container-sec-21-2" class="outline-3">
-<h3 id="sec-21-2">grep -P 以perl正则来匹配(linux支持,mac不支持)</h3>
-<div class="outline-text-3" id="text-21-2">
+<div id="outline-container-sec-22-2" class="outline-3">
+<h3 id="sec-22-2">grep -P 以perl正则来匹配(linux支持,mac不支持)</h3>
+<div class="outline-text-3" id="text-22-2">
 <p>
 过滤@的行, 但是不过滤@case的行<br  />
 </p>
@@ -749,15 +860,15 @@ sed  -i <span style="color: #ffa07a;">".bak"</span> <span style="color: #ffa07a;
 </div>
 </div>
 </div>
-<div id="outline-container-sec-21-3" class="outline-3">
-<h3 id="sec-21-3">grep [a,A]..[b,B]* file  在文件中查找a（或A）开头，第四个字母为b（或B）的所有单词</h3>
+<div id="outline-container-sec-22-3" class="outline-3">
+<h3 id="sec-22-3">grep [a,A]..[b,B]* file  在文件中查找a（或A）开头，第四个字母为b（或B）的所有单词</h3>
 </div>
-<div id="outline-container-sec-21-4" class="outline-3">
-<h3 id="sec-21-4">grep -E 'string1|string2' file        搜寻文件中或者存在string1或者存在string2的行</h3>
+<div id="outline-container-sec-22-4" class="outline-3">
+<h3 id="sec-22-4">grep -E 'string1|string2' file        搜寻文件中或者存在string1或者存在string2的行</h3>
 </div>
-<div id="outline-container-sec-21-5" class="outline-3">
-<h3 id="sec-21-5">利用grep -c 来作instr()用</h3>
-<div class="outline-text-3" id="text-21-5">
+<div id="outline-container-sec-22-5" class="outline-3">
+<h3 id="sec-22-5">利用grep -c 来作instr()用</h3>
+<div class="outline-text-3" id="text-22-5">
 <div class="org-src-container">
 
 <pre class="src src-sh"><span style="color: #AEAEAE;">#</span><span style="color: #AEAEAE;">!/bin/</span><span style="color: #FBDE2D;">sh</span>
@@ -773,9 +884,9 @@ sed  -i <span style="color: #ffa07a;">".bak"</span> <span style="color: #ffa07a;
 </div>
 </div>
 </div>
-<div id="outline-container-sec-22" class="outline-2">
-<h2 id="sec-22">find</h2>
-<div class="outline-text-2" id="text-22">
+<div id="outline-container-sec-23" class="outline-2">
+<h2 id="sec-23">find</h2>
+<div class="outline-text-2" id="text-23">
 <div class="org-src-container">
 
 <pre class="src src-sh"><span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">&#20462;&#25913;&#26102;&#38388;&#22312;10&#22825;&#21069;&#30340;&#37117;&#21024;&#38500;</span>
@@ -787,9 +898,9 @@ find . -maxdepth 1 -mtime -10 -exec rm  -rf {} <span style="color: #ffa07a;">\;<
 </div>
 </div>
 
-<div id="outline-container-sec-23" class="outline-2">
-<h2 id="sec-23">“.”点号替代单个字符</h2>
-<div class="outline-text-2" id="text-23">
+<div id="outline-container-sec-24" class="outline-2">
+<h2 id="sec-24">“.”点号替代单个字符</h2>
+<div class="outline-text-2" id="text-24">
 <p>
 这个用法真的非常非常有用，极力推荐。<br  />
 grep [a,A]..[b,B]* file  在文件中查找a（或A）开头，第四个字母为b（或B）的所有单词<br  />
@@ -799,9 +910,9 @@ sed 's/^&#x2026;..//g' file        删除文件所有行的前5列<br  />
 </div>
 </div>
 
-<div id="outline-container-sec-24" class="outline-2">
-<h2 id="sec-24">shell for if example</h2>
-<div class="outline-text-2" id="text-24">
+<div id="outline-container-sec-25" class="outline-2">
+<h2 id="sec-25">shell for if example</h2>
+<div class="outline-text-2" id="text-25">
 <div class="org-src-container">
 
 <pre class="src src-sh" id="name">  <span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">&#36807;&#28388;&#25481;&#24320;&#22836;&#26159;#&#30340;&#27880;&#37322;&#34892;</span>
@@ -828,18 +939,18 @@ sed 's/^&#x2026;..//g' file        删除文件所有行的前5列<br  />
 
 
 
-<div id="outline-container-sec-25" class="outline-2">
-<h2 id="sec-25">用python 格式化json</h2>
-<div class="outline-text-2" id="text-25">
+<div id="outline-container-sec-26" class="outline-2">
+<h2 id="sec-26">用python 格式化json</h2>
+<div class="outline-text-2" id="text-26">
 <p>
 cat a.json|python -m json.tool<br  />
 </p>
 </div>
 </div>
 
-<div id="outline-container-sec-26" class="outline-2">
-<h2 id="sec-26">awk 怎么去除如果第一列相同，则只取一行？</h2>
-<div class="outline-text-2" id="text-26">
+<div id="outline-container-sec-27" class="outline-2">
+<h2 id="sec-27">awk 怎么去除如果第一列相同，则只取一行？</h2>
+<div class="outline-text-2" id="text-27">
 <blockquote>
 <p>
 例如：<br  />
@@ -874,19 +985,20 @@ eeeeeee,tttttttttt,44444444<br  />
 </blockquote>
 </div>
 </div>
-<div id="outline-container-sec-27" class="outline-2">
-<h2 id="sec-27">awk 替换</h2>
-<div class="outline-text-2" id="text-27">
+<div id="outline-container-sec-28" class="outline-2">
+<h2 id="sec-28">awk 替换</h2>
+<div class="outline-text-2" id="text-28">
 <div class="org-src-container">
 
 <pre class="src src-sh">awk <span style="color: #ffa07a;">'{sub(/6.5.4/,"6.5.7");print}'</span> globalrc
+awk <span style="color: #ffa07a;">'{sub(/package design/,"package cavedesign");print &gt;"db_defs_design_select.go"}'</span> ./data/output/db_defs_design_select.go
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-sec-28" class="outline-2">
-<h2 id="sec-28">awk 在指定的行添加内容添加行</h2>
-<div class="outline-text-2" id="text-28">
+<div id="outline-container-sec-29" class="outline-2">
+<h2 id="sec-29">awk 在指定的行添加内容添加行</h2>
+<div class="outline-text-2" id="text-29">
 <div class="org-src-container">
 
 <pre class="src src-sh">awk -v <span style="color: #ffa07a;">"n=line-number"</span><span style="color: #ffa07a;">\</span>
@@ -905,7 +1017,7 @@ eeeeeee,tttttttttt,44444444<br  />
     <div>
       <div class="post-meta">
         <span title="post date" class="post-info">2013-02-17</span>
-        <span title="last modification date" class="post-info">2017-05-24</span>
+        <span title="last modification date" class="post-info">2017-06-05</span>
         <span title="tags" class="post-info"><a href="/tags/linux/">Linux</a></span>
         <span title="author" class="post-info">纪秀峰</span>
       </div>
