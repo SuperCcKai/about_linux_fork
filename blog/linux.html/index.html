@@ -244,26 +244,27 @@ option - 让你指定所需的信息类型，例如 paging -p , cache -c ,.inter
 
 <ul class="org-ul">
 <li>procs<br  />
-<ul class="org-ul">
+<ol class="org-ol">
 <li>r:<br  />
 </li>
-</ul>
+</ol>
 <p>
 运行的和等待(CPU时间片)运行的进程数，这个值也可以判断是否需要增加CPU(长期大于1)<br  />
 </p>
-<ul class="org-ul">
+<ol class="org-ol">
 <li>b:<br  />
 </li>
-</ul>
+</ol>
 <p>
 处于不可中断状态的进程数，常见的情况是由IO引起的<br  />
 </p>
 </li>
 <li>memory<br  />
-<ul class="org-ul">
+<ol class="org-ol">
 <li>swpd: 切换到交换内存上的内存(默认以KB为单位)<br  />
 如果 swpd 的值不为0，或者还比较大，比如超过100M了，但是 si, so 的值长期为 0，这种情况我们可以不用担心，不会影响系统性能。<br  />
 </li>
+<li></li>
 <li>free: 空闲的物理内存<br  />
 </li>
 <li>buff: 作为buffer cache的内存，对块设备的读写进行缓冲<br  />
@@ -271,38 +272,42 @@ option - 让你指定所需的信息类型，例如 paging -p , cache -c ,.inter
 <li>cache: 作为page cache的内存, 文件系统的cache<br  />
 如果 cache 的值大的时候，说明cache住的文件数多，如果频繁访问到的文件都能被cache住，那么磁盘的读IO bi 会非常小。<br  />
 </li>
-</ul>
+</ol>
 </li>
 <li>Swap<br  />
-<ul class="org-ul">
+<ol class="org-ol">
 <li>si: 交换内存使用，由磁盘调入内存<br  />
 </li>
 <li>so: 交换内存使用，由内存调入磁盘<br  />
+</li>
+</ol>
+<p>
 内存够用的时候，这2个值都是0，如果这2个值长期大于0时，系统性能会受到影响。磁盘IO和CPU资源都会被消耗。<br  />
 常有人看到空闲内存(free)很少或接近于0时，就认为内存不够用了，实际上不能光看这一点的，还要结合si,so，如果free很少，但是si,so也很少(大多时候是0)，那么不用担心，系统性能这时不会受到影响的。<br  />
-</li>
-</ul>
+</p>
 </li>
 <li>io<br  />
-<ul class="org-ul">
+<ol class="org-ol">
 <li>bi: 从块设备读入的数据总量(读磁盘) (KB/s)，<br  />
 </li>
 <li>bo: 写入到块设备的数据总理(写磁盘) (KB/s)<br  />
-随机磁盘读写的时候，这2个 值越大（如超出1M），能看到CPU在IO等待的值也会越大<br  />
 </li>
-</ul>
+</ol>
+<p>
+随机磁盘读写的时候，这2个 值越大（如超出1M），能看到CPU在IO等待的值也会越大<br  />
+</p>
 </li>
 <li>system<br  />
-<ul class="org-ul">
+<ol class="org-ol">
 <li>in: 每秒产生的中断次数<br  />
 </li>
 <li>cs: 每秒产生的上下文切换次数<br  />
 上面这2个值越大，会看到由内核消耗的CPU时间会越多<br  />
 </li>
-</ul>
+</ol>
 </li>
 <li>cpu<br  />
-<ul class="org-ul">
+<ol class="org-ol">
 <li>us: 用户进程消耗的CPU时间百分比<br  />
 us 的值比较高时，说明用户进程消耗的CPU时间多，但是如果长期超过50% 的使用，那么我们就该考虑优化程序算法或者进行加速了<br  />
 </li>
@@ -314,7 +319,7 @@ wa 的值高时，说明IO等待比较严重，这可能是由于磁盘大量作
 </li>
 <li>id: CPU处在空闲状态时间百分比<br  />
 </li>
-</ul>
+</ol>
 </li>
 </ul>
 </div>
