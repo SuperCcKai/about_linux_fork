@@ -105,6 +105,14 @@ curl -L http://127.0.0.1:4001/v2/keys/mykey2
       will be forwarding requests to itself until its resources
       (memory, file descriptors) are eventually depleted.
       在使用etcd 的proxy 时 ，需要特别注意
+      需要特别注意的是如果多个地址，用逗号隔开，而不是写多次参数
+      #+BEGIN_SRC sh
+      etcd -name cave -initial-advertise-peer-urls http://10.44.37.249:2380 \
+       -listen-peer-urls http://10.44.37.249:2380 \
+       -listen-client-urls http://127.0.0.1:2379,http://10.44.37.249:2379 \
+       -advertise-client-urls http://10.44.37.249:2379,http://127.0.0.1:2379
+
+      #+END_SRC
 
 
    listen-client-urls 对client 开放， 即你curl set get 时用的端口
