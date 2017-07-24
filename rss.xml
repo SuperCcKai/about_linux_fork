@@ -4,10 +4,17 @@
     <title>拾遗笔记</title>
     <link>http://jixiuf.github.io</link>
     <description></description>
-    <pubDate>一, 05  6 2017 10:31:43 CST</pubDate>
-    <lastBuildDate>一, 05  6 2017 10:31:43 CST</lastBuildDate>
+    <pubDate>一, 24  7 2017 12:19:40 CST</pubDate>
+    <lastBuildDate>一, 24  7 2017 12:19:40 CST</lastBuildDate>
     <docs>http://www.rssboard.org/rss-specification</docs>
     <generator>Org-page static site generator (https://github.com/kelvinh/org-page)</generator>
+    <item>
+      <title>etcd 总结</title>
+      <link>http://jixiuf.github.io/blog/go_etcd.html</link>
+      <description><![CDATA[etcd 总结]]></description>
+      <pubDate>2017-06-08</pubDate>
+      <guid>http://jixiuf.github.io/blog/go_etcd.html</guid>
+    </item>
     <item>
       <title>linux拾遗</title>
       <link>http://jixiuf.github.io/blog/linux.html</link>
@@ -70,13 +77,6 @@
       <description><![CDATA[]]></description>
       <pubDate>2017-01-22</pubDate>
       <guid>http://jixiuf.github.io/blog/mochiweb_comet_chat.html</guid>
-    </item>
-    <item>
-      <title>mochiweb 的使用 及 可开tcp连接数的(http长连接) 测试</title>
-      <link>http://jixiuf.github.io/blog/mochiweb_http_load.html</link>
-      <description><![CDATA[]]></description>
-      <pubDate>2017-01-22</pubDate>
-      <guid>http://jixiuf.github.io/blog/mochiweb_http_load.html</guid>
     </item>
   </channel>
 </rss>
