@@ -33,7 +33,7 @@ EmacsWiki个人主页：      http://emacswiki.org/Joseph
 Erlang个人代码仓库为学习Erlang过程中写的一些代码;
 EmacsWiki个人主页  为我为Emacs开源社区贡献的代码。
 * 专业技能：
-+ 两年golang 游戏后端开发经验（2014-3~2016-1）
++ 两年golang 游戏后端开发经验,了解docker、etcd、vitess等开源项目（2014-3~2016-1）
 + 一年erlang 游戏后端开发经验（2012-9 ~ 2014~3）
 + 熟悉java、eclipse 写过插件 https://github.com/emacs-java/eclipse_goto_editor
 + 简单了解python,用其做过 游戏管理后台
