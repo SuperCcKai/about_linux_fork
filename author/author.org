@@ -26,12 +26,8 @@
 * 自我介绍：
 GitHub个人主页：            https://github.com/jixiuf
 公司Golang部分开源代码： https://github.com/0studio （90%以上是我提交）
-Erlang个人代码仓库:       https://github.com/jixiuf/helloerlang
-EmacsWiki个人主页：      http://emacswiki.org/Joseph
 个人博客:                 http://jixiuf.github.io
 以上几个网址是个人成果的展示，
-Erlang个人代码仓库为学习Erlang过程中写的一些代码;
-EmacsWiki个人主页  为我为Emacs开源社区贡献的代码。
 * 专业技能：
 + 三年半年golang 游戏后端开发经验,了解docker、etcd、vitess等开源项目（2014-3~）
 + 两年erlang 游戏后端开发经验（2012-3 ~ 2014~3）
