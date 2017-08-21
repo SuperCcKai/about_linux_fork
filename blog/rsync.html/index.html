@@ -44,10 +44,9 @@
 <div class="post">
 <h1>rsync.org</h1>
 <p>
-rsyncd.conf<br  />
+rsyncd.conf<br />
 </p>
 <div class="org-src-container">
-
 <pre class="src src-sh"><span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">/etc/rsyncd.conf</span>
 
 <span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">Minimal configuration file for rsync daemon</span>
@@ -78,16 +77,14 @@ use <span style="color: #40E0D0;">chroot</span> = yes
 </pre>
 </div>
 <p>
-/etc/rsyncd_pass.conf<br  />
+/etc/rsyncd_pass.conf<br />
 </p>
 <div class="org-src-container">
-
 <pre class="src src-sh">jixiuf:jixiuf
 root:root
 </pre>
 </div>
 <div class="org-src-container">
-
 <pre class="src src-sh">rsync  -ahqzt  /home/jixiuf/Linux-C.pdf jixiuf@127.0.0.1::sql_remote  --password-file=/home/jixiuf/passwd
 -a &#23384;&#26723;&#27169;&#24335;
 -h &#20445;&#23384;&#30828;&#36830;&#25509;
@@ -98,16 +95,14 @@ root:root
 </pre>
 </div>
 <div class="org-src-container">
-
 <pre class="src src-sh">cat /home/jixiuf/passwd
 jixiuf
 </pre>
 </div>
 <p>
-inotify监控目录 inotify-tools<br  />
+inotify监控目录 inotify-tools<br />
 </p>
 <div class="org-src-container">
-
 <pre class="src src-sh"><span style="color: #AEAEAE;">#</span><span style="color: #AEAEAE;">/bin/sh</span>
 <span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">REMOTE_IP=192.168.1.202</span>
 <span style="color: #40E0D0;">REMOTE_IP</span>=127.0.0.1
@@ -126,9 +121,9 @@ inotify监控目录 inotify-tools<br  />
 <span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">rsync /home/jixiuf/notes.org $REMOTE_IP::$REMOTE_DIR</span>
 
 <span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">&#22312;&#23545;&#30446;&#24405;&#36827;&#34892;&#30417;&#25511;&#20043;&#21069;&#65292;&#20808;&#25226;&#24050;&#32463;&#23384;&#22312;&#30340;&#25991;&#20214;&#12288;&#19978;&#20256;&#21040;&#26381;&#21153;&#22120;</span>
-<span style="color: #40E0D0;">FileCnt</span>=<span style="color: #ff00ff;">`find $LOCAL_SRC_DIR  -maxdepth 2 -type f  -name "*.sql"|wc -l`</span>
+<span style="color: #40E0D0;">FileCnt</span>=<span style="color: #fa8072;">`find $LOCAL_SRC_DIR  -maxdepth 2 -type f  -name "*.sql"|wc -l`</span>
 <span style="color: #FBDE2D;">if</span> ! [ $<span style="color: #40E0D0;">FileCnt</span> == 0 ] ; <span style="color: #FBDE2D;">then</span>
-    <span style="color: #FBDE2D;">for</span> i<span style="color: #FBDE2D;"> in</span> <span style="color: #ff00ff;">`find $LOCAL_SRC_DIR -maxdepth 2 -type f  -name "*.sql"`</span>
+    <span style="color: #FBDE2D;">for</span> i<span style="color: #FBDE2D;"> in</span> <span style="color: #fa8072;">`find $LOCAL_SRC_DIR -maxdepth 2 -type f  -name "*.sql"`</span>
     <span style="color: #FBDE2D;">do</span>
         <span style="color: #40E0D0;">relativePath</span>=${<span style="color: #40E0D0;">i</span>:${#<span style="color: #40E0D0;">LOCAL_SRC_DIR</span>}}
         <span style="color: #F8F8F8;">echo</span> $<span style="color: #40E0D0;">relativePath</span>
@@ -167,9 +162,9 @@ inotifywait -mrq --exclude <span style="color: #ffa07a;">'.#.*'</span> -e moved_
         rm -f $<span style="color: #40E0D0;">Dir</span>$<span style="color: #40E0D0;">File</span>
     <span style="color: #FBDE2D;">fi</span>
     <span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">&#20026;&#20102;&#20197;&#38450;&#19975;&#19968;&#26377;&#28431;&#32593;&#20043;&#40060;&#65292;&#27599;&#27425;&#26377;&#26032;&#30340;&#25991;&#20214;&#21019;&#24314;&#26102;&#20063;&#36827;&#34892;&#19968;&#27425;&#20840;&#30446;&#24405;&#25195;&#25551;</span>
-    <span style="color: #40E0D0;">FileCnt</span>=<span style="color: #ff00ff;">`find $LOCAL_SRC_DIR  -maxdepth 2 -type f  -name "*.sql"|wc -l`</span>
+    <span style="color: #40E0D0;">FileCnt</span>=<span style="color: #fa8072;">`find $LOCAL_SRC_DIR  -maxdepth 2 -type f  -name "*.sql"|wc -l`</span>
     <span style="color: #FBDE2D;">if</span> ! [ $<span style="color: #40E0D0;">FileCnt</span> == 0 ] ; <span style="color: #FBDE2D;">then</span>
-        <span style="color: #FBDE2D;">for</span> i<span style="color: #FBDE2D;"> in</span> <span style="color: #ff00ff;">`find $LOCAL_SRC_DIR -maxdepth 2 -type f  -name "*.sql"`</span>
+        <span style="color: #FBDE2D;">for</span> i<span style="color: #FBDE2D;"> in</span> <span style="color: #fa8072;">`find $LOCAL_SRC_DIR -maxdepth 2 -type f  -name "*.sql"`</span>
         <span style="color: #FBDE2D;">do</span>
             <span style="color: #40E0D0;">relativePath</span>=${<span style="color: #40E0D0;">i</span>:${#<span style="color: #40E0D0;">LOCAL_SRC_DIR</span>}}
             <span style="color: #F8F8F8;">echo</span> $<span style="color: #40E0D0;">relativePath</span>
@@ -186,12 +181,12 @@ inotifywait -mrq --exclude <span style="color: #ffa07a;">'.#.*'</span> -e moved_
 <span style="color: #FBDE2D;">done</span>
 <span style="color: #AEAEAE;">#</span>
 <span style="color: #AEAEAE;"># </span><span style="color: #AEAEAE;">rsync  -ahqzt  /home/jixiuf/Linux-C.pdf jixiuf@127.0.0.1::sql_remote  --password-file=/home/jixiuf/passwd</span>
+
 </pre>
 </div>
 
 
 <div class="org-src-container">
-
 <pre class="src src-sh">/usr/local/bin/inotifywait -mrq -e modify,delete,create,attrib ${<span style="color: #40E0D0;">src</span>}
 -m &#26159;&#20445;&#25345;&#19968;&#30452;&#30417;&#21548;
 -r &#26159;&#36882;&#24402;&#26597;&#30475;&#30446;&#24405;
@@ -204,7 +199,7 @@ inotifywait -mrq --exclude <span style="color: #ffa07a;">'.#.*'</span> -e moved_
     <div>
       <div class="post-meta">
         <span title="post date" class="post-info">2012-11-01</span>
-        <span title="last modification date" class="post-info">2016-01-14</span>
+        <span title="last modification date" class="post-info">2017-08-17</span>
         <span title="tags" class="post-info"><a href="/tags/linux/">Linux</a></span>
         <span title="author" class="post-info">纪秀峰</span>
       </div>
@@ -243,7 +238,7 @@ inotifywait -mrq --exclude <span style="color: #ffa07a;">'.#.*'</span> -e moved_
       <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
       <script src="/media/js/main.js"></script>
       <div class="footer">
-        <p>Generated by <a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.x (<a href="http://orgmode.org">Org mode</a> 8.x)</p>
+        <p>Generated by <a href="http://www.gnu.org/software/emacs/">Emacs</a> 26.x (<a href="http://orgmode.org">Org mode</a> 9.x)</p>
         <p>
           Copyright &copy; 2012 - <span id="footerYear"></span> <a href="mailto:jixiuf &lt;at&gt; gmail &lt;dot&gt; com">纪秀峰</a>
           &nbsp;&nbsp;-&nbsp;&nbsp;

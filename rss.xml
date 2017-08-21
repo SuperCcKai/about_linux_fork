@@ -4,10 +4,17 @@
     <title>拾遗笔记</title>
     <link>http://jixiuf.github.io</link>
     <description></description>
-    <pubDate>四, 17  8 2017 22:39:32 CST</pubDate>
-    <lastBuildDate>四, 17  8 2017 22:39:32 CST</lastBuildDate>
+    <pubDate>一, 21 8月 2017 13:44:33 CST</pubDate>
+    <lastBuildDate>一, 21 8月 2017 13:44:33 CST</lastBuildDate>
     <docs>http://www.rssboard.org/rss-specification</docs>
     <generator>Org-page static site generator (https://github.com/kelvinh/org-page)</generator>
+    <item>
+      <title>go语言一些开源的package拾遗</title>
+      <link>http://jixiuf.github.io/blog/go_package.html</link>
+      <description><![CDATA[go语言一些开源的package拾遗]]></description>
+      <pubDate>2017-08-21</pubDate>
+      <guid>http://jixiuf.github.io/blog/go_package.html</guid>
+    </item>
     <item>
       <title>纪秀峰_个人简历</title>
       <link>http://jixiuf.github.io/author/</link>
@@ -70,13 +77,6 @@
       <description><![CDATA[]]></description>
       <pubDate>2017-02-24</pubDate>
       <guid>http://jixiuf.github.io/blog/nginx.html</guid>
-    </item>
-    <item>
-      <title>emacs下的git工具 magit 简介</title>
-      <link>http://jixiuf.github.io/blog/000100-emacs-magit.html</link>
-      <description><![CDATA[]]></description>
-      <pubDate>2017-02-05</pubDate>
-      <guid>http://jixiuf.github.io/blog/000100-emacs-magit.html</guid>
     </item>
   </channel>
 </rss>

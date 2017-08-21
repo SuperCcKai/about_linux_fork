@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <title>go语言一些开源的package拾遗 - 拾遗笔记</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="纪秀峰" />
+    <meta name="description" content="go语言一些开源的package拾遗" />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="/media/css/main.css" type="text/css">
+    <!-- <link rel="stylesheet" href="/media/css/prettify.css" type="text/css"> -->
+  </head>
+  <body class="container">
+<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- ji -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-6633117582073327"
+     data-ad-slot="1629980291"
+     data-ad-format="link"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+    
+    <div>
+      <header class="masthead">
+        <h1 class="masthead-title"><a href="/">拾遗笔记</a></h1>
+        <p></p>
+        <ul>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/tags/">Tags</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="http://github.com/jixiuf">GitHub</a></li>
+          <li><a href="/rss.xml">RSS</a></li>
+        </ul>
+        <form method="get" id="searchform" action="http://www.google.com/search">
+          <input type="text" class="field" name="q" id="s" placeholder="Search">
+          <input type="hidden" name="as_sitesearch" value="jixiuf.github.io">
+        </form>
+      </header>
+    </div>
+
+<div>
+<div class="post">
+<h1>go语言一些开源的package拾遗</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org2da5a17">解析命令行参数的工具 gopkg.in/alecthomas/kingpin.v2</a></li>
+<li><a href="#org6383ce2">日志相关</a>
+<ul>
+<li><a href="#orgca5ade0"></a></li>
+<li><a href="#org3f81ea8"></a></li>
+</ul>
+</li>
+<li><a href="#orgfba5a7c">读取配置文件 相关(json ,yaml,环境变量,etcd,命令行参数)</a></li>
+<li><a href="#orgfcbb1c6"></a></li>
+<li><a href="#orgb9af18d"></a></li>
+<li><a href="#orgc0da421"></a></li>
+<li><a href="#org30ae7ec"></a></li>
+<li><a href="#orgf83e66e"></a></li>
+</ul>
+</div>
+</div>
+<p>
+在看一些golang 的开源项目的时候  ，看到他们用到的一些第三方库，感觉还不错<br />
+记下来以备后用,看多少加多少<br />
+最近在看<a href="https://github.com/hyperledger/fabric">https://github.com/hyperledger/fabric</a><br />
+</p>
+<div id="outline-container-org2da5a17" class="outline-2">
+<h2 id="org2da5a17">解析命令行参数的工具 gopkg.in/alecthomas/kingpin.v2</h2>
+<div class="outline-text-2" id="text-org2da5a17">
+<p>
+轻松实现以下格式的命令行参数<br />
+</p>
+<blockquote>
+<p>
+usage: main [&lt;flags&gt;] &lt;command&gt; [&lt;args&gt; &#x2026;]<br />
+Flags:<br />
+    &#x2013;help     Show context-sensitive help (also try &#x2013;help-long and &#x2013;help-man).<br />
+-d, &#x2013;dir="."  directory of data<br />
+Commands:<br />
+help [&lt;command&gt;&#x2026;]<br />
+    Show help.<br />
+accountlist [&lt;n&gt;]<br />
+    get all account List.<br />
+short<br />
+    get short info about our chainblock system.<br />
+account &lt;name&gt;<br />
+    get account info.<br />
+blocklist<br />
+    get all blocklist.<br />
+block &lt;name&gt;<br />
+    get block info.<br />
+</p>
+</blockquote>
+<div class="org-src-container">
+<pre class="src src-go">var (
+    dir              = kingpin.Flag("dir", "directory of data").Short('d').Default(".").String()
+    accountListCMD   = kingpin.Command("accountlist", "get all account List.")
+    accountListLimit = accountListCMD.Arg("n", "limit account count").Int()
+    shortCMD         = kingpin.Command("short", "get short info about our chainblock system.")
+    accountCMD       = kingpin.Command("account", "get account info.")
+    accountName      = accountCMD.Arg("name", "account name").Required().String()
+    blockListCMD     = kingpin.Command("blocklist", "get all blocklist.")
+    blockCMD         = kingpin.Command("block", "get  block info.")
+    blockName        = blockCMD.Arg("name", "block name").Required().String()
+)
+
+func main() {
+    kingpin.Parse()
+    switch kingpin.MustParse(kingpin.Parse(), nil) {
+    // Register user
+    case shortCMD.FullCommand():
+	printChain(*dir)
+	return
+    case accountListCMD.FullCommand():
+	printAccountList(*dir, *accountListLimit)
+	return
+    case blockListCMD.FullCommand():
+	printBlockList(*dir)
+	return
+    case blockCMD.FullCommand():
+	if blockName == nil || *blockName == "" {
+	    fmt.Printf("please give an account name like this:%s %s %s\n", os.Args[0], os.Args[1], "block{blockid}")
+	    return
+	}
+	printBlock(*dir, *blockName)
+	return
+
+    case accountCMD.FullCommand():
+	if accountName == nil || *accountName == "" {
+	    fmt.Printf("please give an account name like this:%s %s %s\n", os.Args[0], os.Args[1], "account{accountid}")
+	    return
+	}
+	printAccount(*dir, *accountName)
+	return
+    }
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org6383ce2" class="outline-2">
+<h2 id="org6383ce2">日志相关</h2>
+<div class="outline-text-2" id="text-org6383ce2">
+</div><div id="outline-container-orgca5ade0" class="outline-3">
+<h3 id="orgca5ade0"><a href="http://github.com/cihub/seelog">http://github.com/cihub/seelog</a></h3>
+</div>
+<div id="outline-container-org3f81ea8" class="outline-3">
+<h3 id="org3f81ea8"><a href="http://github.com/op/go-logging">http://github.com/op/go-logging</a></h3>
+<div class="outline-text-3" id="text-org3f81ea8">
+<p>
+可以支持多种backend ,包括seelog 、文件等<br />
+可以实现按模块定制日志输出级别（通过正则匹配package名实现）<br />
+使用示例 <a href="http://github.com/hyperledger/fabric/common/flogging/logging.go">http://github.com/hyperledger/fabric/common/flogging/logging.go</a><br />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgfba5a7c" class="outline-2">
+<h2 id="orgfba5a7c">读取配置文件 相关(json ,yaml,环境变量,etcd,命令行参数)</h2>
+<div class="outline-text-2" id="text-orgfba5a7c">
+<p>
+<a href="http://github.com/spf13/viper">http://github.com/spf13/viper</a><br />
+可以设定默认值，以各种方式读取配置，各个配置可以相互覆盖,甚至可以通过e,tcd、Consul等方式进行读取<br />
+也自以可选的进行加密<br />
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgfcbb1c6" class="outline-2">
+<h2 id="orgfcbb1c6"><a href="http://github.com/dgryski/go-jump">http://github.com/dgryski/go-jump</a></h2>
+<div class="outline-text-2" id="text-orgfcbb1c6">
+<p>
+golang 使用memcached 集群时有用到一致性哈希算法，这是一种实现<br />
+纯计算 内在占用少<br />
+</p>
+</div>
+</div>
+<div id="outline-container-orgb9af18d" class="outline-2">
+<h2 id="orgb9af18d"><a href="http://github.com/pquerna/ffjson">http://github.com/pquerna/ffjson</a></h2>
+<div class="outline-text-2" id="text-orgb9af18d">
+<p>
+json decode encode 加速<br />
+</p>
+</div>
+</div>
+<div id="outline-container-orgc0da421" class="outline-2">
+<h2 id="orgc0da421"><a href="http://github.com/tools/godep">http://github.com/tools/godep</a></h2>
+<div class="outline-text-2" id="text-orgc0da421">
+<p>
+go 包版本管理工具,<br />
+</p>
+</div>
+</div>
+<div id="outline-container-org30ae7ec" class="outline-2">
+<h2 id="org30ae7ec"><a href="http://github.com/gogo/protobuf/proto">http://github.com/gogo/protobuf/proto</a></h2>
+<div class="outline-text-2" id="text-org30ae7ec">
+<p>
+protobuf decode encode 加速<br />
+可以实现为每条协议 生成 Marshaler UnMarshaler Size 等函数<br />
+生成减少一次内在copy ,并且序列化反序列化的代码在编译期就生成 ，速度提升<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-makefile"> <span style="color: #FF6400;">default</span>:
+       @mkdir -p ../pb/
+       @awk -v <span style="color: #ffa07a;">"n=line-number"</span>\
+-v <span style="color: #ffa07a;">'line1=import "github.com/gogo/protobuf/gogoproto/gogo.proto"; '</span>\
+-v <span style="color: #ffa07a;">'line2=option (gogoproto.marshaler_all) = true;'</span>\
+-v <span style="color: #ffa07a;">'line3=option (gogoproto.sizer_all) = true;'</span>\
+-v <span style="color: #ffa07a;">'line4=option (gogoproto.unmarshaler_all) = true;'</span>\
+<span style="color: #ffa07a;">'(NR==2) { print line1;print line2;print line3;print line4 } 1'</span>  base.proto&gt;base2.proto
+       protoc --proto_path=$$GOPATH/src/github.com/gogo/protobuf/protobuf:$$GOPATH/src/:. --gogo_out=.  base2.proto
+       @mv base2.pb.go ../pb/base.pb.go
+       @rm -f base2.proto
+       cp -f base.proto ../pb/base_bak.proto
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf83e66e" class="outline-2">
+<h2 id="orgf83e66e"><a href="http://github.com/stretchr/testify/assert">http://github.com/stretchr/testify/assert</a></h2>
+<div class="outline-text-2" id="text-orgf83e66e">
+<p>
+写测试用的工具 demo:<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-go">assert.True(t, true, "should be true")
+</pre>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+    <div>
+      <div class="post-meta">
+        <span title="post date" class="post-info">2017-08-21</span>
+        <span title="last modification date" class="post-info">2017-08-21</span>
+        <span title="tags" class="post-info">N/A</span>
+        <span title="author" class="post-info">纪秀峰</span>
+      </div>
+      <section>
+        <h1>Comments</h1>
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+          //var disqus_developer = 1;
+          var disqus_identifier = "/blog/go_package.html";
+          var disqus_url = "http://jixiuf.github.io/blog/go_package.html";
+          var disqus_shortname = 'jixiuf';
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        <div class="ds-thread"></div>
+        <script type="text/javascript">
+          var duoshuoQuery = {short_name:'jixiuf'};
+          (function() {
+          var ds = document.createElement('script');
+          ds.type = 'text/javascript';ds.async = true;
+          ds.src = 'http://static.duoshuo.com/embed.js';
+          ds.charset = 'UTF-8';
+          (document.getElementsByTagName('head')[0]
+          || document.getElementsByTagName('body')[0]).appendChild(ds);
+          })();
+        </script>
+      </section>
+      <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+      <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.js"></script> -->
+      <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script src="/media/js/main.js"></script>
+      <div class="footer">
+        <p>Generated by <a href="http://www.gnu.org/software/emacs/">Emacs</a> 26.x (<a href="http://orgmode.org">Org mode</a> 9.x)</p>
+        <p>
+          Copyright &copy; 2012 - <span id="footerYear"></span> <a href="mailto:jixiuf &lt;at&gt; qq &lt;dot&gt; com">纪秀峰</a>
+          &nbsp;&nbsp;-&nbsp;&nbsp;
+          Powered by <a href="https://github.com/kelvinh/org-page" target="_blank">org-page</a>
+          <script type="text/javascript">document.getElementById("footerYear").innerHTML = (new Date()).getFullYear();</script>
+        </p>
+      </div>
+    </div>
+
+  </body>
+</html>
