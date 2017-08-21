@@ -115,3 +115,8 @@
         @rm -f base2.proto
         cp -f base.proto ../pb/base_bak.proto
   #+END_SRC
+* http://github.com/stretchr/testify/assert
+  写测试用的工具 demo:
+  #+BEGIN_SRC go
+  	assert.True(t, true, "should be true")
+  #+END_SRC
