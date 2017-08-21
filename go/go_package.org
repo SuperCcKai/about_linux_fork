@@ -1,0 +1,117 @@
+# -*- coding:utf-8 -*-
+#+LANGUAGE:  zh
+#+TITLE:     go语言一些开源的package拾遗
+#+AUTHOR:    纪秀峰
+#+EMAIL:     jixiuf@qq.com
+#+DATE:     2017-08-21 一
+#+DESCRIPTION:go语言一些开源的package拾遗
+#+KEYWORDS:
+#+TAGS:
+#+FILETAGS:
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
+#+LATEX_HEADER: \usepackage{fontspec}
+#+LATEX_HEADER: \setmainfont{PingFang SC}
+在看一些golang 的开源项目的时候  ，看到他们用到的一些第三方库，感觉还不错
+记下来以备后用,看多少加多少
+最近在看https://github.com/hyperledger/fabric
+*  解析命令行参数的工具 gopkg.in/alecthomas/kingpin.v2
+  轻松实现以下格式的命令行参数
+  #+BEGIN_QUOTE
+    usage: main [<flags>] <command> [<args> ...]
+    Flags:
+        --help     Show context-sensitive help (also try --help-long and --help-man).
+    -d, --dir="."  directory of data
+    Commands:
+    help [<command>...]
+        Show help.
+    accountlist [<n>]
+        get all account List.
+    short
+        get short info about our chainblock system.
+    account <name>
+        get account info.
+    blocklist
+        get all blocklist.
+    block <name>
+        get block info.
+  #+END_QUOTE
+  #+BEGIN_SRC go
+    var (
+        dir              = kingpin.Flag("dir", "directory of data").Short('d').Default(".").String()
+        accountListCMD   = kingpin.Command("accountlist", "get all account List.")
+        accountListLimit = accountListCMD.Arg("n", "limit account count").Int()
+        shortCMD         = kingpin.Command("short", "get short info about our chainblock system.")
+        accountCMD       = kingpin.Command("account", "get account info.")
+        accountName      = accountCMD.Arg("name", "account name").Required().String()
+        blockListCMD     = kingpin.Command("blocklist", "get all blocklist.")
+        blockCMD         = kingpin.Command("block", "get  block info.")
+        blockName        = blockCMD.Arg("name", "block name").Required().String()
+    )
+
+    func main() {
+        kingpin.Parse()
+        switch kingpin.MustParse(kingpin.Parse(), nil) {
+        // Register user
+        case shortCMD.FullCommand():
+            printChain(*dir)
+            return
+        case accountListCMD.FullCommand():
+            printAccountList(*dir, *accountListLimit)
+            return
+        case blockListCMD.FullCommand():
+            printBlockList(*dir)
+            return
+        case blockCMD.FullCommand():
+            if blockName == nil || *blockName == "" {
+                fmt.Printf("please give an account name like this:%s %s %s\n", os.Args[0], os.Args[1], "block{blockid}")
+                return
+            }
+            printBlock(*dir, *blockName)
+            return
+
+        case accountCMD.FullCommand():
+            if accountName == nil || *accountName == "" {
+                fmt.Printf("please give an account name like this:%s %s %s\n", os.Args[0], os.Args[1], "account{accountid}")
+                return
+            }
+            printAccount(*dir, *accountName)
+            return
+        }
+  #+END_SRC
+* 日志相关
+** http://github.com/cihub/seelog
+** http://github.com/op/go-logging
+   可以支持多种backend ,包括seelog 、文件等
+   可以实现按模块定制日志输出级别（通过正则匹配package名实现）
+   使用示例 http://github.com/hyperledger/fabric/common/flogging/logging.go
+* 读取配置文件 相关(json ,yaml,环境变量,etcd,命令行参数)
+  http://github.com/spf13/viper
+  可以设定默认值，以各种方式读取配置，各个配置可以相互覆盖,甚至可以通过e,tcd、Consul等方式进行读取
+  也自以可选的进行加密
+
+* http://github.com/dgryski/go-jump
+  golang 使用memcached 集群时有用到一致性哈希算法，这是一种实现
+  纯计算 内在占用少
+* http://github.com/pquerna/ffjson
+  json decode encode 加速
+* http://github.com/tools/godep
+  go 包版本管理工具,
+* http://github.com/gogo/protobuf/proto
+  protobuf decode encode 加速
+  可以实现为每条协议 生成 Marshaler UnMarshaler Size 等函数
+  生成减少一次内在copy ,并且序列化反序列化的代码在编译期就生成 ，速度提升
+  #+BEGIN_SRC makefile
+  default:
+        @mkdir -p ../pb/
+        @awk -v "n=line-number"\
+ -v 'line1=import "github.com/gogo/protobuf/gogoproto/gogo.proto"; '\
+ -v 'line2=option (gogoproto.marshaler_all) = true;'\
+ -v 'line3=option (gogoproto.sizer_all) = true;'\
+ -v 'line4=option (gogoproto.unmarshaler_all) = true;'\
+ '(NR==2) { print line1;print line2;print line3;print line4 } 1'  base.proto>base2.proto
+        protoc --proto_path=$$GOPATH/src/github.com/gogo/protobuf/protobuf:$$GOPATH/src/:. --gogo_out=.  base2.proto
+        @mv base2.pb.go ../pb/base.pb.go
+        @rm -f base2.proto
+        cp -f base.proto ../pb/base_bak.proto
+  #+END_SRC
