@@ -47,19 +47,20 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org2da5a17">解析命令行参数的工具 gopkg.in/alecthomas/kingpin.v2</a></li>
-<li><a href="#org6383ce2">日志相关</a>
+<li><a href="#orgddcda40">解析命令行参数的工具 gopkg.in/alecthomas/kingpin.v2</a></li>
+<li><a href="#org05fc77c">日志相关</a>
 <ul>
-<li><a href="#orgca5ade0"></a></li>
-<li><a href="#org3f81ea8"></a></li>
+<li><a href="#org6557055">github.com/cihub/seelog</a></li>
+<li><a href="#orgb93eece">github.com/op/go-logging</a></li>
 </ul>
 </li>
-<li><a href="#orgfba5a7c">读取配置文件 相关(json ,yaml,环境变量,etcd,命令行参数)</a></li>
-<li><a href="#orgfcbb1c6"></a></li>
-<li><a href="#orgb9af18d"></a></li>
-<li><a href="#orgc0da421"></a></li>
-<li><a href="#org30ae7ec"></a></li>
-<li><a href="#orgf83e66e"></a></li>
+<li><a href="#org212e9fa">读取配置文件 相关(json ,yaml,环境变量,etcd,命令行参数)</a></li>
+<li><a href="#orgdcb003f">github.com/dgryski/go-jump</a></li>
+<li><a href="#org7574ca7">github.com/pquerna/ffjson</a></li>
+<li><a href="#org008ba1a">github.com/tools/godep</a></li>
+<li><a href="#org7ef2195">github.com/gogo/protobuf/proto</a></li>
+<li><a href="#orgebe36b9">github.com/stretchr/testify/assert</a></li>
+<li><a href="#org3804050">leveldb 的hashmap cache 实现可以参考使用</a></li>
 </ul>
 </div>
 </div>
@@ -68,9 +69,9 @@
 记下来以备后用,看多少加多少<br />
 最近在看<a href="https://github.com/hyperledger/fabric">https://github.com/hyperledger/fabric</a><br />
 </p>
-<div id="outline-container-org2da5a17" class="outline-2">
-<h2 id="org2da5a17">解析命令行参数的工具 gopkg.in/alecthomas/kingpin.v2</h2>
-<div class="outline-text-2" id="text-org2da5a17">
+<div id="outline-container-orgddcda40" class="outline-2">
+<h2 id="orgddcda40">解析命令行参数的工具 gopkg.in/alecthomas/kingpin.v2</h2>
+<div class="outline-text-2" id="text-orgddcda40">
 <p>
 轻松实现以下格式的命令行参数<br />
 </p>
@@ -141,62 +142,62 @@ func main() {
 </div>
 </div>
 </div>
-<div id="outline-container-org6383ce2" class="outline-2">
-<h2 id="org6383ce2">日志相关</h2>
-<div class="outline-text-2" id="text-org6383ce2">
-</div><div id="outline-container-orgca5ade0" class="outline-3">
-<h3 id="orgca5ade0"><a href="http://github.com/cihub/seelog">http://github.com/cihub/seelog</a></h3>
+<div id="outline-container-org05fc77c" class="outline-2">
+<h2 id="org05fc77c">日志相关</h2>
+<div class="outline-text-2" id="text-org05fc77c">
+</div><div id="outline-container-org6557055" class="outline-3">
+<h3 id="org6557055">github.com/cihub/seelog</h3>
 </div>
-<div id="outline-container-org3f81ea8" class="outline-3">
-<h3 id="org3f81ea8"><a href="http://github.com/op/go-logging">http://github.com/op/go-logging</a></h3>
-<div class="outline-text-3" id="text-org3f81ea8">
+<div id="outline-container-orgb93eece" class="outline-3">
+<h3 id="orgb93eece">github.com/op/go-logging</h3>
+<div class="outline-text-3" id="text-orgb93eece">
 <p>
 可以支持多种backend ,包括seelog 、文件等<br />
 可以实现按模块定制日志输出级别（通过正则匹配package名实现）<br />
-使用示例 <a href="http://github.com/hyperledger/fabric/common/flogging/logging.go">http://github.com/hyperledger/fabric/common/flogging/logging.go</a><br />
+使用示例 github.com/hyperledger/fabric/common/flogging/logging.go<br />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgfba5a7c" class="outline-2">
-<h2 id="orgfba5a7c">读取配置文件 相关(json ,yaml,环境变量,etcd,命令行参数)</h2>
-<div class="outline-text-2" id="text-orgfba5a7c">
+<div id="outline-container-org212e9fa" class="outline-2">
+<h2 id="org212e9fa">读取配置文件 相关(json ,yaml,环境变量,etcd,命令行参数)</h2>
+<div class="outline-text-2" id="text-org212e9fa">
 <p>
-<a href="http://github.com/spf13/viper">http://github.com/spf13/viper</a><br />
+github.com/spf13/viper<br />
 可以设定默认值，以各种方式读取配置，各个配置可以相互覆盖,甚至可以通过e,tcd、Consul等方式进行读取<br />
 也自以可选的进行加密<br />
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgfcbb1c6" class="outline-2">
-<h2 id="orgfcbb1c6"><a href="http://github.com/dgryski/go-jump">http://github.com/dgryski/go-jump</a></h2>
-<div class="outline-text-2" id="text-orgfcbb1c6">
+<div id="outline-container-orgdcb003f" class="outline-2">
+<h2 id="orgdcb003f">github.com/dgryski/go-jump</h2>
+<div class="outline-text-2" id="text-orgdcb003f">
 <p>
 golang 使用memcached 集群时有用到一致性哈希算法，这是一种实现<br />
 纯计算 内在占用少<br />
 </p>
 </div>
 </div>
-<div id="outline-container-orgb9af18d" class="outline-2">
-<h2 id="orgb9af18d"><a href="http://github.com/pquerna/ffjson">http://github.com/pquerna/ffjson</a></h2>
-<div class="outline-text-2" id="text-orgb9af18d">
+<div id="outline-container-org7574ca7" class="outline-2">
+<h2 id="org7574ca7">github.com/pquerna/ffjson</h2>
+<div class="outline-text-2" id="text-org7574ca7">
 <p>
 json decode encode 加速<br />
 </p>
 </div>
 </div>
-<div id="outline-container-orgc0da421" class="outline-2">
-<h2 id="orgc0da421"><a href="http://github.com/tools/godep">http://github.com/tools/godep</a></h2>
-<div class="outline-text-2" id="text-orgc0da421">
+<div id="outline-container-org008ba1a" class="outline-2">
+<h2 id="org008ba1a">github.com/tools/godep</h2>
+<div class="outline-text-2" id="text-org008ba1a">
 <p>
 go 包版本管理工具,<br />
 </p>
 </div>
 </div>
-<div id="outline-container-org30ae7ec" class="outline-2">
-<h2 id="org30ae7ec"><a href="http://github.com/gogo/protobuf/proto">http://github.com/gogo/protobuf/proto</a></h2>
-<div class="outline-text-2" id="text-org30ae7ec">
+<div id="outline-container-org7ef2195" class="outline-2">
+<h2 id="org7ef2195">github.com/gogo/protobuf/proto</h2>
+<div class="outline-text-2" id="text-org7ef2195">
 <p>
 protobuf decode encode 加速<br />
 可以实现为每条协议 生成 Marshaler UnMarshaler Size 等函数<br />
@@ -219,14 +220,81 @@ protobuf decode encode 加速<br />
 </div>
 </div>
 </div>
-<div id="outline-container-orgf83e66e" class="outline-2">
-<h2 id="orgf83e66e"><a href="http://github.com/stretchr/testify/assert">http://github.com/stretchr/testify/assert</a></h2>
-<div class="outline-text-2" id="text-orgf83e66e">
+<div id="outline-container-orgebe36b9" class="outline-2">
+<h2 id="orgebe36b9">github.com/stretchr/testify/assert</h2>
+<div class="outline-text-2" id="text-orgebe36b9">
 <p>
 写测试用的工具 demo:<br />
 </p>
 <div class="org-src-container">
 <pre class="src src-go">assert.True(t, true, "should be true")
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org3804050" class="outline-2">
+<h2 id="org3804050">leveldb 的hashmap cache 实现可以参考使用</h2>
+<div class="outline-text-2" id="text-org3804050">
+<p>
+<a href="https://github.com/syndtr/goleveldb/blob/master/leveldb/cache/cache.go">https://github.com/syndtr/goleveldb/blob/master/leveldb/cache/cache.go</a><br />
+目前似乎key 只支持uint64,不支持string<br />
+支持namespace,即一个 namespace 和key 两个参数才惟一确定一条数据<br />
+hash 算法全用 murmur<br />
+hash 算法将namespace与key 与seed 算出一个hash值（uint32）,<br />
+然后根据hash值的低位4字节 分配到一个桶内（bucket）,后期随着桶内元素的增加，会增加桶的数量<br />
+重新进行hash,<br />
+</p>
+
+<div class="org-src-container">
+<pre class="src src-go">    type mNode struct {
+	buckets         []unsafe.Pointer // []*mBucket n个桶桶
+	mask            uint32
+	pred            unsafe.Pointer // *mNode
+	resizeInProgess int32
+
+	overflow        int32
+	growThreshold   int32
+	shrinkThreshold int32
+    }
+    type mBucket struct {
+	mu     sync.Mutex
+	node   []*Node
+	frozen bool
+    }
+// Node is a 'cache node'.
+type Node struct {
+    r *Cache
+
+    hash    uint32
+    ns, key uint64
+
+    mu    sync.Mutex
+    size  int
+    value Value					// 真正存数据
+
+    ref   int32
+    onDel []func()
+
+    CacheData unsafe.Pointer
+}
+</pre>
+</div>
+<p>
+demo<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-go">c := cache.NewCache(nil)
+h := c.Get(1, 11, func() (int, cache.Value) { return 5, "hello" })
+fmt.Println(h.Value().(string))
+h.Release()						// 用完就得release()
+</pre>
+</div>
+<div class="org-src-container">
+<pre class="src src-go">var c *cache.Cache
+c = cache.NewCache(cache.NewLRU(20)) // 这种情况支持lru的hash ,当占用内存达到20时，将会采用lru算法清除最久没使用的数据
+for i := 0; i &lt; 1000; i++ {
+	c.Get(1, uint64(i), func() (int, cache.Value) { return 4, "world" + strconv.Itoa(i) }).Release()
+}
 </pre>
 </div>
 </div>
@@ -237,7 +305,7 @@ protobuf decode encode 加速<br />
     <div>
       <div class="post-meta">
         <span title="post date" class="post-info">2017-08-21</span>
-        <span title="last modification date" class="post-info">2017-08-21</span>
+        <span title="last modification date" class="post-info">2017-08-22</span>
         <span title="tags" class="post-info">N/A</span>
         <span title="author" class="post-info">纪秀峰</span>
       </div>

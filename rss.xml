@@ -4,15 +4,15 @@
     <title>拾遗笔记</title>
     <link>http://jixiuf.github.io</link>
     <description></description>
-    <pubDate>一, 21 8月 2017 13:44:33 CST</pubDate>
-    <lastBuildDate>一, 21 8月 2017 13:44:33 CST</lastBuildDate>
+    <pubDate>二, 22 8月 2017 18:05:05 CST</pubDate>
+    <lastBuildDate>二, 22 8月 2017 18:05:05 CST</lastBuildDate>
     <docs>http://www.rssboard.org/rss-specification</docs>
     <generator>Org-page static site generator (https://github.com/kelvinh/org-page)</generator>
     <item>
       <title>go语言一些开源的package拾遗</title>
       <link>http://jixiuf.github.io/blog/go_package.html</link>
       <description><![CDATA[go语言一些开源的package拾遗]]></description>
-      <pubDate>2017-08-21</pubDate>
+      <pubDate>2017-08-22</pubDate>
       <guid>http://jixiuf.github.io/blog/go_package.html</guid>
     </item>
     <item>
@@ -25,7 +25,7 @@
     <item>
       <title>go net包里的异步IO实现原理分析</title>
       <link>http://jixiuf.github.io/blog/go_epoll.html</link>
-      <description><![CDATA[go IO模型分析(epoll为例)]]></description>
+      <description><![CDATA[]]></description>
       <pubDate>2017-08-02</pubDate>
       <guid>http://jixiuf.github.io/blog/go_epoll.html</guid>
     </item>
