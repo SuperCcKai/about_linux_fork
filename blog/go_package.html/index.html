@@ -47,20 +47,20 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgddcda40">解析命令行参数的工具 gopkg.in/alecthomas/kingpin.v2</a></li>
-<li><a href="#org05fc77c">日志相关</a>
+<li><a href="#org1d22e7b">解析命令行参数的工具 gopkg.in/alecthomas/kingpin.v2</a></li>
+<li><a href="#org9b8e98d">日志相关</a>
 <ul>
-<li><a href="#org6557055">github.com/cihub/seelog</a></li>
-<li><a href="#orgb93eece">github.com/op/go-logging</a></li>
+<li><a href="#orgc41bc4c">github.com/cihub/seelog</a></li>
+<li><a href="#org6c88814">github.com/op/go-logging</a></li>
 </ul>
 </li>
-<li><a href="#org212e9fa">读取配置文件 相关(json ,yaml,环境变量,etcd,命令行参数)</a></li>
-<li><a href="#orgdcb003f">github.com/dgryski/go-jump</a></li>
-<li><a href="#org7574ca7">github.com/pquerna/ffjson</a></li>
-<li><a href="#org008ba1a">github.com/tools/godep</a></li>
-<li><a href="#org7ef2195">github.com/gogo/protobuf/proto</a></li>
-<li><a href="#orgebe36b9">github.com/stretchr/testify/assert</a></li>
-<li><a href="#org3804050">leveldb 的hashmap cache 实现可以参考使用</a></li>
+<li><a href="#org96deb70">读取配置文件 相关(json ,yaml,环境变量,etcd,命令行参数)</a></li>
+<li><a href="#org866b694">github.com/dgryski/go-jump</a></li>
+<li><a href="#orga944ee3">github.com/pquerna/ffjson</a></li>
+<li><a href="#org5372c56">github.com/tools/godep</a></li>
+<li><a href="#org29da561">github.com/gogo/protobuf/proto</a></li>
+<li><a href="#orgd623bd7">github.com/stretchr/testify/assert</a></li>
+<li><a href="#org6de1e82">leveldb 的hashmap cache与LRU 实现可以参考使用</a></li>
 </ul>
 </div>
 </div>
@@ -69,9 +69,9 @@
 记下来以备后用,看多少加多少<br />
 最近在看<a href="https://github.com/hyperledger/fabric">https://github.com/hyperledger/fabric</a><br />
 </p>
-<div id="outline-container-orgddcda40" class="outline-2">
-<h2 id="orgddcda40">解析命令行参数的工具 gopkg.in/alecthomas/kingpin.v2</h2>
-<div class="outline-text-2" id="text-orgddcda40">
+<div id="outline-container-org1d22e7b" class="outline-2">
+<h2 id="org1d22e7b">解析命令行参数的工具 gopkg.in/alecthomas/kingpin.v2</h2>
+<div class="outline-text-2" id="text-org1d22e7b">
 <p>
 轻松实现以下格式的命令行参数<br />
 </p>
@@ -142,15 +142,15 @@ func main() {
 </div>
 </div>
 </div>
-<div id="outline-container-org05fc77c" class="outline-2">
-<h2 id="org05fc77c">日志相关</h2>
-<div class="outline-text-2" id="text-org05fc77c">
-</div><div id="outline-container-org6557055" class="outline-3">
-<h3 id="org6557055">github.com/cihub/seelog</h3>
+<div id="outline-container-org9b8e98d" class="outline-2">
+<h2 id="org9b8e98d">日志相关</h2>
+<div class="outline-text-2" id="text-org9b8e98d">
+</div><div id="outline-container-orgc41bc4c" class="outline-3">
+<h3 id="orgc41bc4c">github.com/cihub/seelog</h3>
 </div>
-<div id="outline-container-orgb93eece" class="outline-3">
-<h3 id="orgb93eece">github.com/op/go-logging</h3>
-<div class="outline-text-3" id="text-orgb93eece">
+<div id="outline-container-org6c88814" class="outline-3">
+<h3 id="org6c88814">github.com/op/go-logging</h3>
+<div class="outline-text-3" id="text-org6c88814">
 <p>
 可以支持多种backend ,包括seelog 、文件等<br />
 可以实现按模块定制日志输出级别（通过正则匹配package名实现）<br />
@@ -159,9 +159,9 @@ func main() {
 </div>
 </div>
 </div>
-<div id="outline-container-org212e9fa" class="outline-2">
-<h2 id="org212e9fa">读取配置文件 相关(json ,yaml,环境变量,etcd,命令行参数)</h2>
-<div class="outline-text-2" id="text-org212e9fa">
+<div id="outline-container-org96deb70" class="outline-2">
+<h2 id="org96deb70">读取配置文件 相关(json ,yaml,环境变量,etcd,命令行参数)</h2>
+<div class="outline-text-2" id="text-org96deb70">
 <p>
 github.com/spf13/viper<br />
 可以设定默认值，以各种方式读取配置，各个配置可以相互覆盖,甚至可以通过e,tcd、Consul等方式进行读取<br />
@@ -170,34 +170,34 @@ github.com/spf13/viper<br />
 </div>
 </div>
 
-<div id="outline-container-orgdcb003f" class="outline-2">
-<h2 id="orgdcb003f">github.com/dgryski/go-jump</h2>
-<div class="outline-text-2" id="text-orgdcb003f">
+<div id="outline-container-org866b694" class="outline-2">
+<h2 id="org866b694">github.com/dgryski/go-jump</h2>
+<div class="outline-text-2" id="text-org866b694">
 <p>
 golang 使用memcached 集群时有用到一致性哈希算法，这是一种实现<br />
 纯计算 内在占用少<br />
 </p>
 </div>
 </div>
-<div id="outline-container-org7574ca7" class="outline-2">
-<h2 id="org7574ca7">github.com/pquerna/ffjson</h2>
-<div class="outline-text-2" id="text-org7574ca7">
+<div id="outline-container-orga944ee3" class="outline-2">
+<h2 id="orga944ee3">github.com/pquerna/ffjson</h2>
+<div class="outline-text-2" id="text-orga944ee3">
 <p>
 json decode encode 加速<br />
 </p>
 </div>
 </div>
-<div id="outline-container-org008ba1a" class="outline-2">
-<h2 id="org008ba1a">github.com/tools/godep</h2>
-<div class="outline-text-2" id="text-org008ba1a">
+<div id="outline-container-org5372c56" class="outline-2">
+<h2 id="org5372c56">github.com/tools/godep</h2>
+<div class="outline-text-2" id="text-org5372c56">
 <p>
 go 包版本管理工具,<br />
 </p>
 </div>
 </div>
-<div id="outline-container-org7ef2195" class="outline-2">
-<h2 id="org7ef2195">github.com/gogo/protobuf/proto</h2>
-<div class="outline-text-2" id="text-org7ef2195">
+<div id="outline-container-org29da561" class="outline-2">
+<h2 id="org29da561">github.com/gogo/protobuf/proto</h2>
+<div class="outline-text-2" id="text-org29da561">
 <p>
 protobuf decode encode 加速<br />
 可以实现为每条协议 生成 Marshaler UnMarshaler Size 等函数<br />
@@ -220,9 +220,9 @@ protobuf decode encode 加速<br />
 </div>
 </div>
 </div>
-<div id="outline-container-orgebe36b9" class="outline-2">
-<h2 id="orgebe36b9">github.com/stretchr/testify/assert</h2>
-<div class="outline-text-2" id="text-orgebe36b9">
+<div id="outline-container-orgd623bd7" class="outline-2">
+<h2 id="orgd623bd7">github.com/stretchr/testify/assert</h2>
+<div class="outline-text-2" id="text-orgd623bd7">
 <p>
 写测试用的工具 demo:<br />
 </p>
@@ -232,9 +232,9 @@ protobuf decode encode 加速<br />
 </div>
 </div>
 </div>
-<div id="outline-container-org3804050" class="outline-2">
-<h2 id="org3804050">leveldb 的hashmap cache 实现可以参考使用</h2>
-<div class="outline-text-2" id="text-org3804050">
+<div id="outline-container-org6de1e82" class="outline-2">
+<h2 id="org6de1e82">leveldb 的hashmap cache与LRU 实现可以参考使用</h2>
+<div class="outline-text-2" id="text-org6de1e82">
 <p>
 <a href="https://github.com/syndtr/goleveldb/blob/master/leveldb/cache/cache.go">https://github.com/syndtr/goleveldb/blob/master/leveldb/cache/cache.go</a><br />
 目前似乎key 只支持uint64,不支持string<br />
@@ -284,7 +284,10 @@ demo<br />
 </p>
 <div class="org-src-container">
 <pre class="src src-go">c := cache.NewCache(nil)
-h := c.Get(1, 11, func() (int, cache.Value) { return 5, "hello" })
+h := c.Get(1, 11, func() (int, cache.Value) { return 5, "hello" }) // namespace=1,key==11
+fmt.Println(h.Value().(string))
+h.Release()						// 用完就得release()
+h = c.Get(1, 11, nil)
 fmt.Println(h.Value().(string))
 h.Release()						// 用完就得release()
 </pre>
@@ -295,6 +298,19 @@ c = cache.NewCache(cache.NewLRU(20)) // 这种情况支持lru的hash ,当占用�
 for i := 0; i &lt; 1000; i++ {
 	c.Get(1, uint64(i), func() (int, cache.Value) { return 4, "world" + strconv.Itoa(i) }).Release()
 }
+</pre>
+</div>
+<p>
+如果不需要namespace ,即所有的key在同一个namespace下，<br />
+则以用NamespaceGetter包装一下,以后Get 只需要 传key 不需要传namespace<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-go">    var c *cache.Cache
+    c = cache.NewCache(cache.NewLRU(20)) // 这种情况支持lru的hash ,当占用内存达到20时，将会采用lru算法清除最久没使用的数据
+geter:=cache.NamespaceGetter{Cache: c, NS: 0}
+geter.Get(11, func() (int, cache.Value) { return 5, "hello" }).Release() // namespace=1,key==11
+geter.Get(11).Release()
+
 </pre>
 </div>
 </div>
