@@ -80,24 +80,24 @@
         }
   #+END_SRC
 * 日志相关
-** http://github.com/cihub/seelog
-** http://github.com/op/go-logging
+** github.com/cihub/seelog
+** github.com/op/go-logging
    可以支持多种backend ,包括seelog 、文件等
    可以实现按模块定制日志输出级别（通过正则匹配package名实现）
-   使用示例 http://github.com/hyperledger/fabric/common/flogging/logging.go
+   使用示例 github.com/hyperledger/fabric/common/flogging/logging.go
 * 读取配置文件 相关(json ,yaml,环境变量,etcd,命令行参数)
-  http://github.com/spf13/viper
+  github.com/spf13/viper
   可以设定默认值，以各种方式读取配置，各个配置可以相互覆盖,甚至可以通过e,tcd、Consul等方式进行读取
   也自以可选的进行加密
 
-* http://github.com/dgryski/go-jump
+* github.com/dgryski/go-jump
   golang 使用memcached 集群时有用到一致性哈希算法，这是一种实现
   纯计算 内在占用少
-* http://github.com/pquerna/ffjson
+* github.com/pquerna/ffjson
   json decode encode 加速
-* http://github.com/tools/godep
+* github.com/tools/godep
   go 包版本管理工具,
-* http://github.com/gogo/protobuf/proto
+* github.com/gogo/protobuf/proto
   protobuf decode encode 加速
   可以实现为每条协议 生成 Marshaler UnMarshaler Size 等函数
   生成减少一次内在copy ,并且序列化反序列化的代码在编译期就生成 ，速度提升
@@ -115,8 +115,78 @@
         @rm -f base2.proto
         cp -f base.proto ../pb/base_bak.proto
   #+END_SRC
-* http://github.com/stretchr/testify/assert
+* github.com/stretchr/testify/assert
   写测试用的工具 demo:
   #+BEGIN_SRC go
   	assert.True(t, true, "should be true")
   #+END_SRC
+* leveldb 的hashmap cache与LRU 实现可以参考使用
+  https://github.com/syndtr/goleveldb/blob/master/leveldb/cache/cache.go
+  目前似乎key 只支持uint64,不支持string
+  支持namespace,即一个 namespace 和key 两个参数才惟一确定一条数据
+  hash 算法全用 murmur
+  hash 算法将namespace与key 与seed 算出一个hash值（uint32）,
+  然后根据hash值的低位4字节 分配到一个桶内（bucket）,后期随着桶内元素的增加，会增加桶的数量
+  重新进行hash,
+
+  #+BEGIN_SRC go
+        type mNode struct {
+            buckets         []unsafe.Pointer // []*mBucket n个桶桶
+            mask            uint32
+            pred            unsafe.Pointer // *mNode
+            resizeInProgess int32
+
+            overflow        int32
+            growThreshold   int32
+            shrinkThreshold int32
+        }
+        type mBucket struct {
+            mu     sync.Mutex
+            node   []*Node
+            frozen bool
+        }
+    // Node is a 'cache node'.
+    type Node struct {
+        r *Cache
+
+        hash    uint32
+        ns, key uint64
+
+        mu    sync.Mutex
+        size  int
+        value Value					// 真正存数据
+
+        ref   int32
+        onDel []func()
+
+        CacheData unsafe.Pointer
+    }
+  #+END_SRC
+  demo
+  #+BEGIN_SRC go
+    c := cache.NewCache(nil)
+    h := c.Get(1, 11, func() (int, cache.Value) { return 5, "hello" }) // namespace=1,key==11
+    fmt.Println(h.Value().(string))
+    h.Release()						// 用完就得release()
+    h = c.Get(1, 11, nil)
+    fmt.Println(h.Value().(string))
+    h.Release()						// 用完就得release()
+  #+END_SRC
+  #+BEGIN_SRC go
+	var c *cache.Cache
+	c = cache.NewCache(cache.NewLRU(20)) // 这种情况支持lru的hash ,当占用内存达到20时，将会采用lru算法清除最久没使用的数据
+	for i := 0; i < 1000; i++ {
+		c.Get(1, uint64(i), func() (int, cache.Value) { return 4, "world" + strconv.Itoa(i) }).Release()
+	}
+  #+END_SRC
+  如果不需要namespace ,即所有的key在同一个namespace下，
+  则以用NamespaceGetter包装一下,以后Get 只需要 传key 不需要传namespace
+  #+BEGIN_SRC go
+	var c *cache.Cache
+	c = cache.NewCache(cache.NewLRU(20)) // 这种情况支持lru的hash ,当占用内存达到20时，将会采用lru算法清除最久没使用的数据
+    geter:=cache.NamespaceGetter{Cache: c, NS: 0}
+    geter.Get(11, func() (int, cache.Value) { return 5, "hello" }).Release() // namespace=1,key==11
+    geter.Get(11).Release()
+
+  #+END_SRC
+
