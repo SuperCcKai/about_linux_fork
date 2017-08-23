@@ -190,6 +190,44 @@
 
   #+END_SRC
 
+* leveldb 的memdb 实现分析
+  关于跳表可以参考  http://blog.sina.com.cn/s/blog_72995dcc01017w1t.html,不再
+  跳表是一种随机化的数据结构，目前开源软件 Redis 和 LevelDB 都有用到它，
+  它的效率和红黑树以及 AVL 树不相上下O(logn)，但跳表的原理相当简单，只要你能熟练操作链表，
+  就能轻松实现一个 SkipList
+
+  主要实现使用skiplist 跳转来实现
+  #+BEGIN_SRC go
+      type DB struct {
+        cmp comparer.BasicComparer
+        rnd *rand.Rand
+
+        mu     sync.RWMutex
+        kvData []byte 				// key and value 都 append到此，通过偏移量来定位key value
+        nodeData  []int				// 记录key value 的偏移量等信息
+        prevNode  [tMaxHeight]int
+        maxHeight int
+        n         int
+        kvSize    int
+    }
+  #+END_SRC
+  优点 ，内存连续，GC压力应该小一点，缺点似乎单从Put Get 来看，并不如golang 自带的map 快
+  当然leveldb可能有其他方面的考虑，如iterator等
+   这个benchmark中， 所有带2的都是RWMutex+map 的实现，其他则是goleveldb.memdb的
+   可以看出来，memdb比map 大概慢一个数量级,rwMutex+map能满足你需求的时候 就不要考虑memdb了
+  #+BEGIN_QUOTE
+    BenchmarkPut2       	 1000000	      1059 ns/op
+    BenchmarkPutRandom2 	20000000	        81.0 ns/op
+    BenchmarkGet2       	10000000	       110 ns/op
+    BenchmarkGetRandom2 	 3000000	       462 ns/op
+    BenchmarkPut        	 1000000	      1584 ns/op
+    BenchmarkPutRandom  	 1000000	      2969 ns/op
+    BenchmarkGet        	 1000000	      1863 ns/op
+    BenchmarkGetRandom  	 1000000	      3831 ns/op
+  #+END_QUOTE
+
+
+
 * 乱入之一个位操作的小技巧
   声明位常量的时候可以这样声明
   #+BEGIN_SRC go
