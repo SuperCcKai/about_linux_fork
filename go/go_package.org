@@ -190,3 +190,14 @@
 
   #+END_SRC
 
+* 乱入之一个位操作的小技巧
+  声明位常量的时候可以这样声明
+  #+BEGIN_SRC go
+    type Strict uint
+
+    const (
+        StrictManifest        Strict = 1 << iota // 1
+        StrictJournalChecksum                    // 2
+        StrictJournal                            // 4
+    )
+  #+END_SRC
