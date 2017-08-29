@@ -335,3 +335,5 @@
         return fmt.Sprintf("%x-%x-%x-%x-%x", id[0:4], id[4:6], id[6:8], id[8:10], id[10:])
     }
   #+END_SRC
+* github.com/eapache/queue
+  一个简单的非并发安全的queue(非常简单)
