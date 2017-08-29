@@ -391,3 +391,7 @@
         http.ListenAndServe("localhost:3000", router)   // Start the server!
     }
   #+END_SRC
+* github.com/mitchellh/mapstructure
+  实现 了 将一个 map[string]interface{} 转成结构体的功能
+  比如遇到以下问题： 一串json ,在未解析json某些字段之前，并不知道具体还有哪些字段
+  则可以将json 先转成map[string]interface{},然后判断之后利用此包再转成具体的struct
