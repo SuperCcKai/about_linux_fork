@@ -15,6 +15,12 @@
 在看一些golang 的开源项目的时候  ，看到他们用到的一些第三方库，感觉还不错
 记下来以备后用,看多少加多少
 最近在看https://github.com/hyperledger/fabric
+* 日志相关
+** github.com/cihub/seelog
+** github.com/op/go-logging
+   可以支持多种backend ,包括seelog 、文件等
+   可以实现按模块定制日志输出级别（通过正则匹配package名实现）
+   使用示例 github.com/hyperledger/fabric/common/flogging/logging.go
 *  解析命令行参数的工具 gopkg.in/alecthomas/kingpin.v2
   轻松实现以下格式的命令行参数
   #+BEGIN_QUOTE
@@ -79,12 +85,67 @@
             return
         }
   #+END_SRC
-* 日志相关
-** github.com/cihub/seelog
-** github.com/op/go-logging
-   可以支持多种backend ,包括seelog 、文件等
-   可以实现按模块定制日志输出级别（通过正则匹配package名实现）
-   使用示例 github.com/hyperledger/fabric/common/flogging/logging.go
+* github.com/spf13/cobra 命令行相关
+  可以参考 https://studygolang.com/articles/7588
+  似乎是可以用这个工具帮你生成一部分代码,然后去填充每个具体的命令的实现
+  demo
+  #+BEGIN_SRC go
+      package main
+
+    import (
+        "fmt"
+        "strings"
+
+        "github.com/spf13/cobra"
+    )
+
+    func main() {
+
+        var echoTimes int
+
+        var cmdPrint = &cobra.Command{
+            Use:   "print [string to print]",
+            Short: "Print anything to the screen",
+            Long: `print is for printing anything back to the screen.
+                For many years people have printed back to the screen.
+                `,
+            Run: func(cmd *cobra.Command, args []string) {
+                fmt.Println("Print: " + strings.Join(args, " "))
+            },
+        }
+
+        var cmdEcho = &cobra.Command{
+            Use:   "echo [string to echo]",
+            Short: "Echo anything to the screen",
+            Long: `echo is for echoing anything back.
+                Echo works a lot like print, except it has a child command.
+                `,
+            Run: func(cmd *cobra.Command, args []string) {
+                fmt.Println("Print: " + strings.Join(args, " "))
+            },
+        }
+
+        var cmdTimes = &cobra.Command{
+            Use:   "times [# times] [string to echo]",
+            Short: "Echo anything to the screen more times",
+            Long: `echo things multiple times back to the user by providing
+                a count and a string.`,
+            Run: func(cmd *cobra.Command, args []string) {
+                for i := 0; i < echoTimes; i++ {
+                    fmt.Println("Echo: " + strings.Join(args, " "))
+                }
+            },
+        }
+
+        cmdTimes.Flags().IntVarP(&echoTimes, "times", "t", 1, "times to echo the input")
+
+        var rootCmd = &cobra.Command{Use: "app"}
+        rootCmd.AddCommand(cmdPrint, cmdEcho)
+        cmdEcho.AddCommand(cmdTimes)
+        rootCmd.Execute()
+    }
+  #+END_SRC
+
 * 读取配置文件 相关(json ,yaml,环境变量,etcd,命令行参数)
   github.com/spf13/viper
   可以设定默认值，以各种方式读取配置，各个配置可以相互覆盖,甚至可以通过e,tcd、Consul等方式进行读取
