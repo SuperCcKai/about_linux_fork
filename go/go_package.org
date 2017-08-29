@@ -337,3 +337,57 @@
   #+END_SRC
 * github.com/eapache/queue
   一个简单的非并发安全的queue(非常简单)
+* github.com/fsouza/go-dockerclient docker的go客户端
+  demo:
+  #+BEGIN_SRC go
+    import (
+        "fmt"
+        "github.com/fsouza/go-dockerclient"
+    )
+    func main() {
+        endpoint := "unix:///var/run/docker.sock"
+        client, _ := docker.NewClient(endpoint)
+        imgs, _ := client.ListImages(docker.ListImagesOptions{All: false})
+        for _, img := range imgs {
+            fmt.Println("ID: ", img.ID)
+            fmt.Println("RepoTags: ", img.RepoTags)
+            fmt.Println("Created: ", img.Created)
+            fmt.Println("Size: ", img.Size)
+            fmt.Println("VirtualSize: ", img.VirtualSize)
+            fmt.Println("ParentId: ", img.ParentID)
+        }
+    }
+  #+END_SRC
+* github.com/gocraft/web 一个轻量http框架
+  #+BEGIN_SRC go
+      package main
+
+    import (
+        "github.com/gocraft/web"
+        "fmt"
+        "net/http"
+        "strings"
+    )
+
+    type Context struct {
+        HelloCount int
+    }
+
+    func (c *Context) SetHelloCount(rw web.ResponseWriter, req *web.Request, next web.NextMiddlewareFunc) {
+        c.HelloCount = 3
+        next(rw, req)
+    }
+
+    func (c *Context) SayHello(rw web.ResponseWriter, req *web.Request) {
+        fmt.Fprint(rw, strings.Repeat("Hello ", c.HelloCount), "World!")
+    }
+
+    func main() {
+        router := web.New(Context{}).                   // Create your router
+            Middleware(web.LoggerMiddleware).           // Use some included middleware
+            Middleware(web.ShowErrorsMiddleware).       // ...
+            Middleware((*Context).SetHelloCount).       // Your own middleware!
+            Get("/", (*Context).SayHello)               // Add a route
+        http.ListenAndServe("localhost:3000", router)   // Start the server!
+    }
+  #+END_SRC
