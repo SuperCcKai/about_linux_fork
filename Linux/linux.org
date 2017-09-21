@@ -67,6 +67,7 @@ option - 让你指定所需信息的设备，像磁盘、cpu或者终端(-d , -c
 -tdc ) 。x 选项给出了完整的统计结果。iostat的默认参数是tdc(terminal,
 disk, and CPU)。如果任何其他的选项被指定，这个默认参数将被完全替代。
 
+如 iostat -d -k  -x 1 10
 interval – 统计运行的间隔时间（秒），
 count – 统计运行的次数
 
@@ -86,6 +87,11 @@ avgqu-sz: 平均I/O队列长度。即 delta(aveq)/s/1000 (因为aveq的单位为
 await:    平均每次设备I/O操作的等待时间 (毫秒)。
 svctm:   平均每次设备I/O操作的服务时间 (毫秒)。
 %util:      一秒中有百分之多少的时间用于 I/O 操作，或者说一秒中有多少时间 I/O 队列是非空的。
+比如当发现util 比较高时， 我们知道io操作比较频繁
+
+[[file:../img/linux-2017-09-21-21-50-02.png]]
+可以用lsof /dev/vdb 查看当前io主要针对的文件是什么，比如发现日志比较费io
+[[file:../img/linux-2017-09-21-21-50-54.png]]
 
 注意：
 
