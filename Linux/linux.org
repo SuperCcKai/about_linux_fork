@@ -545,3 +545,8 @@ awk -F, '!a[$1]++' urfile
      -v 'line4=option (gogoproto.unmarshaler_all) = true;'\
      '(NR==2) { print line1;print line2;print line3;print line4 } 1;'  pf.proto
   #+END_SRC
+* ab http压测
+  ab -c 100 -n 100 http://url 并发100 ，共1000个请求
+一个请求 响应时间20ms左右为佳，随着并发量会略有增加 但100ms是个阀值
+超过100ms 虽然也可能正常，但该考虑优化， 比如加缓存等
+   [[file:../img/linux-2017-09-21-21-26-38.png]]
