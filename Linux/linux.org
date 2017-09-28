@@ -324,6 +324,26 @@ Modeline "1440x900_75.00"  136.75  1440 1536 1688 1936  900 903 909 942 -hsync +
    # ssh -L <localport>hostname<remoteport> <username>@<servername>
   这个时候在你的本机会开一个3307端口
   然后 mysql -uroot -ppass -P3307 就可以连上这个mysql了
+* iptables 作端口转发
+#+BEGIN_SRC sh
+#!/bin/sh
+    pro='tcp'
+    NAT_Host='101.200.145.250'
+    NAT_Port=3005
+    Dst_Host='101.200.145.250'
+    Dst_Port=9001
+    iptables -t nat -A PREROUTING  -m $pro -p $pro --dport $NAT_Port -j DNAT --to-destination $Dst_Host:$Dst_Port
+    iptables -t nat -A POSTROUTING -m $pro -p $pro --dport $Dst_Port -d $Dst_Host -j SNAT --to-source $NAT_Host
+#+END_SRC
+   以上脚本 当访问 NAT_Host:NAT_Port 时，请求会被转发到 Dst_Host:Dst_Port 端口
+若不管用
+有可能需要把 /etc/sysconfig/iptables 内下面两行注释掉 重启iptables
+#+BEGIN_QUOTE
+#-A INPUT -j REJECT --reject-with icmp-host-prohibited         //这两行最好是注释掉。在一般的白名单设置中，如果这两行不注释，也会造成iptables对端口的设置无效
+#-A FORWARD -j REJECT --reject-with icmp-host-prohibited
+
+#+END_QUOTE
+
 * ssh socat
   我局域网ip 是192.168.1网段的
 
