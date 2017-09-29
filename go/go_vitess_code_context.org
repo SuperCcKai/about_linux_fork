@@ -166,3 +166,56 @@ context中 如何存储数据的，看下代码， 其实很简单
         http.ListenAndServe(":8080", nil)
     }
   #+END_SRC
+* withTimeout
+#+BEGIN_SRC go
+  package main
+
+  import (
+      "fmt"
+      "net/http"
+      "time"
+
+      "context"
+      "math/rand"
+  )
+
+  func doALongJob(ctx context.Context, r chan string) {
+      time.Sleep(time.Second + time.Second*time.Duration(rand.Intn(5))) // 模拟做一个很费时的操作
+      fmt.Println("job is done")
+      select {
+      case <-ctx.Done(): // job done 后，发现已经超时，不必再将结果仍给r
+          close(r)
+          fmt.Println("doALongJob found that it already timeout")
+      case r <- "经历了漫长的过程，用户等到了想要的数据":
+          // 将结果扔给r,等对方接收
+      }
+      fmt.Println("doALongJob is end")
+
+  }
+
+  func handleTest(w http.ResponseWriter, req *http.Request) {
+      defer req.Body.Close()
+      ctx := context.Background()
+      var cancel context.CancelFunc
+      ctx, cancel = context.WithTimeout(ctx, time.Second*3)
+      defer cancel()
+
+      // 这里缓冲1个， 即 ，就算我放弃从resultChan 读数据，doALongJob处依然可以往里面写入一个数据，从而正常退出
+      var reusultChan chan string = make(chan string)
+      go doALongJob(ctx, reusultChan)
+      select {
+      case <-ctx.Done(): // 超时
+          fmt.Println("走到ctx.Done()，分支，说明用户不愿意继续等待了 with err:", ctx.Err())
+          w.Write([]byte("走到ctx.Done()，分支，说明用户不愿意继续等待了 with err:" + ctx.Err().Error()))
+      case result := <-reusultChan:
+          w.Write([]byte(result))
+          fmt.Println(result)
+      }
+
+  }
+
+  func main() {
+      http.HandleFunc("/", handleTest)
+      http.ListenAndServe(":8080", nil)
+  }
+#+END_SRC
