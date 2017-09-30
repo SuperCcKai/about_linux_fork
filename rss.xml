@@ -4,16 +4,23 @@
     <title>拾遗笔记</title>
     <link>http://jixiuf.github.io</link>
     <description></description>
-    <pubDate>四, 21  9 2017 21:53:20 CST</pubDate>
-    <lastBuildDate>四, 21  9 2017 21:53:20 CST</lastBuildDate>
+    <pubDate>五, 29  9 2017 20:08:58 CST</pubDate>
+    <lastBuildDate>五, 29  9 2017 20:08:58 CST</lastBuildDate>
     <docs>http://www.rssboard.org/rss-specification</docs>
     <generator>Org-page static site generator (https://github.com/kelvinh/org-page)</generator>
     <item>
       <title>linux拾遗</title>
       <link>http://jixiuf.github.io/blog/linux.html</link>
       <description><![CDATA[linux拾遗]]></description>
-      <pubDate>2017-09-21</pubDate>
+      <pubDate>2017-09-29</pubDate>
       <guid>http://jixiuf.github.io/blog/linux.html</guid>
+    </item>
+    <item>
+      <title>vitess 代码阅读之Context</title>
+      <link>http://jixiuf.github.io/blog/go_vitess_code_context.html</link>
+      <description><![CDATA[vitess 代码阅读之Context]]></description>
+      <pubDate>2017-09-29</pubDate>
+      <guid>http://jixiuf.github.io/blog/go_vitess_code_context.html</guid>
     </item>
     <item>
       <title>mac 上利用rvi抓iphone的包</title>
@@ -70,13 +77,6 @@
       <description><![CDATA[]]></description>
       <pubDate>2017-05-26</pubDate>
       <guid>http://jixiuf.github.io/blog/jenkins_xcode.html</guid>
-    </item>
-    <item>
-      <title>让helm表现的更像ido</title>
-      <link>http://jixiuf.github.io/blog/00011-emacs-make-helm-like-ido.html</link>
-      <description><![CDATA[]]></description>
-      <pubDate>2017-03-13</pubDate>
-      <guid>http://jixiuf.github.io/blog/00011-emacs-make-helm-like-ido.html</guid>
     </item>
   </channel>
 </rss>

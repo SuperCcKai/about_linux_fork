@@ -47,39 +47,39 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">context之.context中.WithValue(ctx,key,value) 数据的存储与传递</a></li>
-<li><a href="#sec-2">context 之 WithCancel 与 Done()</a></li>
+<li><a href="#orgaa118ae">context之.context中.WithValue(ctx,key,value) 数据的存储与传递</a></li>
+<li><a href="#org91e18b1">context 之 WithCancel 与 Done()</a></li>
+<li><a href="#orgcf031b9">withTimeout</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-sec-1" class="outline-2">
-<h2 id="sec-1">context之.context中.WithValue(ctx,key,value) 数据的存储与传递</h2>
-<div class="outline-text-2" id="text-1">
+<div id="outline-container-orgaa118ae" class="outline-2">
+<h2 id="orgaa118ae">context之.context中.WithValue(ctx,key,value) 数据的存储与传递</h2>
+<div class="outline-text-2" id="text-orgaa118ae">
 <p>
-vitess 代码中到处充斥着它的身影,初读时颇为不解，<br  />
-仔细看了下context 的代码 ，大概明白Context 设计的用意。<br  />
-作一简短的记录<br  />
-学golang 之前， 有过一年多的erlang 开发经验，erlang 中也存在类似的<br  />
-轻量级进程，等同于golang 中的goroutine,erlang 中的进程有各自的进程字典<br  />
-进程字典只可以在本进程中访问，而golang 没有进程字典，要想存储，一般是放到map<br  />
-中 ，对map 的访问需要加锁，速度自然会慢上一些。vitess 没有采用map 来存储这类信息<br  />
-而是把数据作为参数在各个函数间传递，此种方式缺点是每<br  />
-个函数都需要多一个参数用来,传递数据，翻一下vitess 的代码 就会发现好多函数的第一个参数<br  />
-都是Context ,Context 中存储了各种类型的数据<br  />
-至于Context 一个参数是如何来存储各种数据的 ，下面简单说明一下<br  />
-先说一下 如何使用：<br  />
+vitess 代码中到处充斥着它的身影,初读时颇为不解，<br />
+仔细看了下context 的代码 ，大概明白Context 设计的用意。<br />
+作一简短的记录<br />
+学golang 之前， 有过一年多的erlang 开发经验，erlang 中也存在类似的<br />
+轻量级进程，等同于golang 中的goroutine,erlang 中的进程有各自的进程字典<br />
+进程字典只可以在本进程中访问，而golang 没有进程字典，要想存储，一般是放到map<br />
+中 ，对map 的访问需要加锁，速度自然会慢上一些。vitess 没有采用map 来存储这类信息<br />
+而是把数据作为参数在各个函数间传递，此种方式缺点是每<br />
+个函数都需要多一个参数用来,传递数据，翻一下vitess 的代码 就会发现好多函数的第一个参数<br />
+都是Context ,Context 中存储了各种类型的数据<br />
+至于Context 一个参数是如何来存储各种数据的 ，下面简单说明一下<br />
+先说一下 如何使用：<br />
 </p>
 
 <p>
-使用Context  ,需要使用golang 的package 来配合， 基本上一个package 里定义一种Struct<br  />
-此package 需要存储的信息都在这个Struct里， 然后Context 会存储Struct内的信息<br  />
+使用Context  ,需要使用golang 的package 来配合， 基本上一个package 里定义一种Struct<br />
+此package 需要存储的信息都在这个Struct里， 然后Context 会存储Struct内的信息<br />
 </p>
 
 <p>
-假设有 package user<br  />
+假设有 package user<br />
 </p>
 <div class="org-src-container">
-
 <pre class="src src-go">type User struct {...}
 
 // 定义一种类型key ,注意这里是小写的 ，即在package 外部是无法访问到key
@@ -108,7 +108,6 @@ func FromContext(ctx context.Context) (*User, bool) {
 </div>
 
 <div class="org-src-container">
-
 <pre class="src src-go">package main
 
 import (
@@ -137,10 +136,9 @@ func main() {
 </pre>
 </div>
 <p>
-context中 如何存储数据的，看下代码， 其实很简单<br  />
+context中 如何存储数据的，看下代码， 其实很简单<br />
 </p>
 <div class="org-src-container">
-
 <pre class="src src-go">// Use context Values only for request-scoped data that transits processes and
 // APIs, not for passing optional parameters to functions.
 func WithValue(parent Context, key interface{}, val interface{}) Context {
@@ -168,20 +166,19 @@ func (c *valueCtx) Value(key interface{}) interface{} {
 </div>
 </div>
 </div>
-<div id="outline-container-sec-2" class="outline-2">
-<h2 id="sec-2">context 之 WithCancel 与 Done()</h2>
-<div class="outline-text-2" id="text-2">
+<div id="outline-container-org91e18b1" class="outline-2">
+<h2 id="org91e18b1">context 之 WithCancel 与 Done()</h2>
+<div class="outline-text-2" id="text-org91e18b1">
 <p>
-提供一个如何使用 WithCancel() 与Done()的示例<br  />
-当某个goroutine A 等待别的goroutine B返回结果给他的时候<br  />
-C 调cancel() 可以让A 不再继续等待，继续往下走<br  />
-当然 cancel() 并不影响B 继续执行,只是给了b 提前退出的机会<br  />
-下面的示例 访问 <a href="http://127.0.0.1:8080">http://127.0.0.1:8080</a><br  />
-后，等2秒钟会看到 cancel()被调用后的效果<br  />
+提供一个如何使用 WithCancel() 与Done()的示例<br />
+当某个goroutine A 等待别的goroutine B返回结果给他的时候<br />
+C 调cancel() 可以让A 不再继续等待，继续往下走<br />
+当然 cancel() 并不影响B 继续执行,只是给了b 提前退出的机会<br />
+下面的示例 访问 <a href="http://127.0.0.1:8080">http://127.0.0.1:8080</a><br />
+后，等2秒钟会看到 cancel()被调用后的效果<br />
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-go">package main
 
 import (
@@ -233,13 +230,71 @@ func main() {
 </div>
 </div>
 </div>
+<div id="outline-container-orgcf031b9" class="outline-2">
+<h2 id="orgcf031b9">withTimeout</h2>
+<div class="outline-text-2" id="text-orgcf031b9">
+<div class="org-src-container">
+<pre class="src src-go">package main
+
+import (
+    "fmt"
+    "net/http"
+    "time"
+
+    "context"
+    "math/rand"
+)
+
+func doALongJob(ctx context.Context, r chan string) {
+    time.Sleep(time.Second + time.Second*time.Duration(rand.Intn(5))) // 模拟做一个很费时的操作
+    fmt.Println("job is done")
+    select {
+    case &lt;-ctx.Done(): // job done 后，发现已经超时，不必再将结果仍给r
+	close(r)
+	fmt.Println("doALongJob found that it already timeout")
+    case r &lt;- "经历了漫长的过程，用户等到了想要的数据":
+	// 将结果扔给r,等对方接收
+    }
+    fmt.Println("doALongJob is end")
+
+}
+
+func handleTest(w http.ResponseWriter, req *http.Request) {
+    defer req.Body.Close()
+    ctx := context.Background()
+    var cancel context.CancelFunc
+    ctx, cancel = context.WithTimeout(ctx, time.Second*3)
+    defer cancel()
+
+    // 这里缓冲1个， 即 ，就算我放弃从resultChan 读数据，doALongJob处依然可以往里面写入一个数据，从而正常退出
+    var reusultChan chan string = make(chan string)
+    go doALongJob(ctx, reusultChan)
+    select {
+    case &lt;-ctx.Done(): // 超时
+	fmt.Println("走到ctx.Done()，分支，说明用户不愿意继续等待了 with err:", ctx.Err())
+	w.Write([]byte("走到ctx.Done()，分支，说明用户不愿意继续等待了 with err:" + ctx.Err().Error()))
+    case result := &lt;-reusultChan:
+	w.Write([]byte(result))
+	fmt.Println(result)
+    }
+
+}
+
+func main() {
+    http.HandleFunc("/", handleTest)
+    http.ListenAndServe(":8080", nil)
+}
+</pre>
+</div>
+</div>
+</div>
 
 </div>
 </div>
     <div>
       <div class="post-meta">
         <span title="post date" class="post-info">2016-03-29</span>
-        <span title="last modification date" class="post-info">2016-03-30</span>
+        <span title="last modification date" class="post-info">2017-09-29</span>
         <span title="tags" class="post-info"><a href="/tags/vitess/">Vitess</a>, <a href="/tags/mysql/">Mysql</a>, <a href="/tags/golang/">Golang</a></span>
         <span title="author" class="post-info">纪秀峰</span>
       </div>
@@ -278,7 +333,7 @@ func main() {
       <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
       <script src="/media/js/main.js"></script>
       <div class="footer">
-        <p>Generated by <a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.x (<a href="http://orgmode.org">Org mode</a> 8.x)</p>
+        <p>Generated by <a href="http://www.gnu.org/software/emacs/">Emacs</a> 26.x (<a href="http://orgmode.org">Org mode</a> 9.x)</p>
         <p>
           Copyright &copy; 2012 - <span id="footerYear"></span> <a href="mailto:jixiuf &lt;at&gt; gmail &lt;dot&gt; com">纪秀峰</a>
           &nbsp;&nbsp;-&nbsp;&nbsp;
