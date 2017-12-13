@@ -47,15 +47,15 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgaa118ae">context之.context中.WithValue(ctx,key,value) 数据的存储与传递</a></li>
-<li><a href="#org91e18b1">context 之 WithCancel 与 Done()</a></li>
-<li><a href="#orgcf031b9">withTimeout</a></li>
+<li><a href="#orgd079329">context之.context中.WithValue(ctx,key,value) 数据的存储与传递</a></li>
+<li><a href="#orgddc19aa">context 之 WithCancel 与 Done()</a></li>
+<li><a href="#org55c4ef7">withTimeout</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgaa118ae" class="outline-2">
-<h2 id="orgaa118ae">context之.context中.WithValue(ctx,key,value) 数据的存储与传递</h2>
-<div class="outline-text-2" id="text-orgaa118ae">
+<div id="outline-container-orgd079329" class="outline-2">
+<h2 id="orgd079329">context之.context中.WithValue(ctx,key,value) 数据的存储与传递</h2>
+<div class="outline-text-2" id="text-orgd079329">
 <p>
 vitess 代码中到处充斥着它的身影,初读时颇为不解，<br />
 仔细看了下context 的代码 ，大概明白Context 设计的用意。<br />
@@ -166,9 +166,9 @@ func (c *valueCtx) Value(key interface{}) interface{} {
 </div>
 </div>
 </div>
-<div id="outline-container-org91e18b1" class="outline-2">
-<h2 id="org91e18b1">context 之 WithCancel 与 Done()</h2>
-<div class="outline-text-2" id="text-org91e18b1">
+<div id="outline-container-orgddc19aa" class="outline-2">
+<h2 id="orgddc19aa">context 之 WithCancel 与 Done()</h2>
+<div class="outline-text-2" id="text-orgddc19aa">
 <p>
 提供一个如何使用 WithCancel() 与Done()的示例<br />
 当某个goroutine A 等待别的goroutine B返回结果给他的时候<br />
@@ -230,9 +230,9 @@ func main() {
 </div>
 </div>
 </div>
-<div id="outline-container-orgcf031b9" class="outline-2">
-<h2 id="orgcf031b9">withTimeout</h2>
-<div class="outline-text-2" id="text-orgcf031b9">
+<div id="outline-container-org55c4ef7" class="outline-2">
+<h2 id="org55c4ef7">withTimeout</h2>
+<div class="outline-text-2" id="text-org55c4ef7">
 <div class="org-src-container">
 <pre class="src src-go">package main
 
