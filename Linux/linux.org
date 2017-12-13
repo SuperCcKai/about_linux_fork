@@ -156,6 +156,29 @@ option - 让你指定所需的信息类型，例如 paging -p , cache -c ,.inter
      wa 的值高时，说明IO等待比较严重，这可能是由于磁盘大量作随机访问造成，也有可能是磁盘的带宽出现瓶颈(块操作)。
   4. id: CPU处在空闲状态时间百分比
 
+* 几个性能相关工具
+dstat -tlcnimr --tcp -D xvdc
+[[file:../img/linux-2017-12-13-12-36-26.png]]
+mpstat -P ALL 1
+[[file:../img/linux-2017-12-13-12-36-41.png]]
+pidstat 1
+[[file:../img/linux-2017-12-13-12-36-49.png]]
+iostat -xz 1
+vmstat 1
+
+* 压测用工具
+** ab -n 1000000 -c 1000 -p /tmp/a -T application/json  -H "X-UID: 1000000013" http://diary.dev.igetget.com/diary/v1/data/list
+ -n 总请求数
+ -c 并发数
+  其中/tmp/a 为post 的内容
+** siege -c 1000  -b -q -r 1000000   -H "X-Uid: 1000100366" -H "X-Av: 3.0.9" -H "X-D: aaa" -f choicesnow.txt
+    -c 并发
+    -r  repetition 次数，重复次数
+    -b  表示benchmark
+    -q quiet
+    -f 后是文件， 里面内容每行表示一个http的请求，形如
+       http://baidu.com POST column_id=1&id=2
+       http://google.com POST column_id=1&id=2
 * free 命令详解
 因为LINUX的内核机制，一般情况下不需要特意去释放已经使用的cache。这些cache起来的内容可以增加文件以及的读写速度。
 先说下free命令怎么看内存
