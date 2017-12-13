@@ -166,19 +166,6 @@ pidstat 1
 iostat -xz 1
 vmstat 1
 
-* 压测用工具
-** ab -n 1000000 -c 1000 -p /tmp/a -T application/json  -H "X-UID: 1000000013" http://diary.dev.igetget.com/diary/v1/data/list
- -n 总请求数
- -c 并发数
-  其中/tmp/a 为post 的内容
-** siege -c 1000  -b -q -r 1000000   -H "X-Uid: 1000100366" -H "X-Av: 3.0.9" -H "X-D: aaa" -f choicesnow.txt
-    -c 并发
-    -r  repetition 次数，重复次数
-    -b  表示benchmark
-    -q quiet
-    -f 后是文件， 里面内容每行表示一个http的请求，形如
-       http://baidu.com POST column_id=1&id=2
-       http://google.com POST column_id=1&id=2
 * free 命令详解
 因为LINUX的内核机制，一般情况下不需要特意去释放已经使用的cache。这些cache起来的内容可以增加文件以及的读写速度。
 先说下free命令怎么看内存
@@ -602,6 +589,19 @@ awk -F, '!a[$1]++' urfile
      -v 'line4=option (gogoproto.unmarshaler_all) = true;'\
      '(NR==2) { print line1;print line2;print line3;print line4 } 1;'  pf.proto
   #+END_SRC
+* 压测用工具
+** ab -n 1000000 -c 1000 -p /tmp/a -T application/json  -H "X-UID: 1000000013" http://diary.dev.igetget.com/diary/v1/data/list
+ -n 总请求数
+ -c 并发数
+  其中/tmp/a 为post 的内容
+** siege -c 1000  -b -q -r 1000000   -H "X-Uid: 1000100366" -H "X-Av: 3.0.9" -H "X-D: aaa" -f choicesnow.txt
+    -c 并发
+    -r  repetition 次数，重复次数
+    -b  表示benchmark
+    -q quiet
+    -f 后是文件， 里面内容每行表示一个http的请求，形如
+       http://baidu.com POST column_id=1&id=2
+       http://google.com POST column_id=1&id=2
 * ab http压测
   ab -c 100 -n 100 http://url 并发100 ，共1000个请求
 一个请求 响应时间20ms左右为佳，随着并发量会略有增加 但100ms是个阀值
