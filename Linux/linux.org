@@ -600,8 +600,8 @@ awk -F, '!a[$1]++' urfile
     -b  表示benchmark
     -q quiet
     -f 后是文件， 里面内容每行表示一个http的请求，形如
-       http://baidu.com POST column_id=1&id=2
-       http://google.com POST column_id=1&id=2
+       baidu.com POST column_id=1&id=2
+       google.com POST column_id=1&id=2
 * ab http压测
   ab -c 100 -n 100 http://url 并发100 ，共1000个请求
 一个请求 响应时间20ms左右为佳，随着并发量会略有增加 但100ms是个阀值
