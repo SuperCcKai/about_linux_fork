@@ -659,3 +659,13 @@ awk -F, '!a[$1]++' urfile
     降级开关
     读降级 写降级(异地多活,数据中心出问题，不允许写，但是可读) 如数据库
 
+* ssh 避免输入密码的办法
+  #+BEGIN_SRC sh
+        #!/usr/bin/expect
+        spawn ssh hello@ip
+        expect "*password:"
+        send "yourpasswordhere"
+        expect "*#"
+        interact
+
+  #+END_SRC
