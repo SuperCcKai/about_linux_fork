@@ -12,8 +12,26 @@
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
 #+LATEX_HEADER: \usepackage{fontspec}
 #+LATEX_HEADER: \setmainfont{PingFang SC}
+* consul 的一些角色
 
-* start.sh 脚本
+Consul Cluster有Server和Client两种角色。不管是Server还是Client，统称为
+Agent，Consul Client是相对无状态的，只负责转发RPC到Server，资源开销很
+少。Server是一个有一组扩展功能的代理，这些功能包括参与Raft选举，维护集
+群状态，响应RPC查询，与其他数据中心交互WAN gossip和转发查询给leader或
+者远程数据中心。在每个数据中心，client和server是混合的。一般建议有3-5
+台server。这是基于有故障情况下的可用性和性能之间的权衡结果，因为越多的
+机器加入达成共识越慢，Server之间会选举出一个leader。然而，并不限制
+client的数量，它们可以很容易的扩展到数千或者数万台。
+
+服务可能有几十上百或者更多个，这些服务分布在各个独立的项目（微服务）中，
+而某一个微服务又部署在一台以上的虚机或者物理机上。在各自提供服务的项目
+中如果写死consul集群的IP和端口的时候就会将所有的服务都注册在同一个
+consul集群的server上，虽然当这个server挂掉的时候集群依然能够提供服务，
+但是将所有的服务注册在某一个节点上本身就是不合理的。这样在注册的时候增
+加Nginx负载将注册服务的请求平均分布到集群中不同的consul节点上，同样在
+获取服务的时候也要经过Nginx这一层进行负载
+
+    * start.sh 脚本
 #+BEGIN_SRC sh
   #!/bin/sh
   leader="10.163.146.174"
