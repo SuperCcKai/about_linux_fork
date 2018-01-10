@@ -1,0 +1,96 @@
+# -*- coding:utf-8 -*-
+#+LANGUAGE:  zh
+#+TITLE:     consul集群拾遗
+#+AUTHOR:    纪秀峰
+#+EMAIL:     jixiuf@qq.com
+#+DATE:     2018-01-10 三
+#+DESCRIPTION:consul集群拾遗
+#+KEYWORDS: Go
+#+TAGS:
+#+FILETAGS:
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
+#+LATEX_HEADER: \usepackage{fontspec}
+#+LATEX_HEADER: \setmainfont{PingFang SC}
+
+* start.sh 脚本
+#+BEGIN_SRC sh
+  #!/bin/sh
+  leader="10.163.146.174"
+  privateIP=`ifconfig | perl -nle 's/dr:(\S+)/print $1/e'|grep "^10\."|tr -d "\n"`
+  sed "s/#leader#/$leader/g" conf_template_json|sed "s/#privateIP#/$privateIP/g" >conf.json
+  /data/consul/consul agent -server -config-dir /data/consul/
+  # curl -XPUT --data 'pong' --header "X-Consul-Token: "tokenssssssssssssss" http://top1:8500/v1/kv/ping
+  # curl -XGET --data 'ping' --header "X-Consul-Token: "tokenssssssssssssss" http://top1:8500/v1/kv/ping
+
+#+END_SRC
+* 配置文件模版
+#+BEGIN_SRC js
+  {
+      "datacenter"         : "iget-topology-aliyun",
+      "data_dir"           : "/data/consul/data",
+      "log_level"          : "INFO",
+      "server"             : true,
+      "bootstrap_expect"   : 2,
+      "bind_addr"          : "#privateIP#",
+      "client_addr"        : "0.0.0.0",
+      "rejoin_after_leave" : true,
+      "retry_join"         : ["#leader#"],
+      "retry_interval"     : "5s",
+      "retry_max"          : 2,
+      "enable_syslog"      : true,
+      "ui"                 : true,
+      "encrypt"            : "tgYw4Me7aJAEgjzY6bX2FQ==",
+      "acl_datacenter"     :"iget-topology-aliyun",
+      "acl_default_policy" :"deny",
+      "acl_down_policy"    :"deny",
+      "acl_master_token"   :"master-tokens",
+      "acl_token": "client-tokens",
+      "acl_agent_token":"agent-tokens-节点间同步数据验证权限用"
+
+  }
+#+END_SRC
+    + server： 以server身份启动。
+    + bootstrap-expect：集群要求的最少server数量，当低于这个数量，集群即失效。
+    + data-dir：data存放的目录，更多信息请参阅consul数据同步机制
+    + node：节点id，在同一集群不能重复。
+    + bind：监听的ip地址。
+    + client 客户端的ip地址
+    + encrypt  节点之间通信，避免其他集群节点乱入 ,可以使用consul keygen 生成
+    + 几个tokens 可以用 uuidgen生成
+
+* ACL 权限
+  启动 5个节点分别使用上面的配置启动之后,访问任一节点的8500端口即可web方式管理consul
+   在 设置中 输入上面配置的acl_master_token ,即具有的相应的管理权限
+
+    [[file:../img/go_consul-2018-01-10-22-23-35.png]]
+** Anonymous Token 匿名用户的访问权限
+  1. 如下 对所有的key具有只读限制，只 以lock/ 为前缀的key 有写权限
+  2. 对node 信息具有只读权限 可以使用consul members 查看各节点信息而不用输入tokens (consul members -token tokensssssssssss)
+  3. 对consul service 具有只读权限
+   #+BEGIN_QUOTE
+        key "" {
+        policy = "read"
+        }
+        key "lock/" {
+        policy = "write"
+        }
+        node "" {policy  = "read"}
+        service "consul" {policy  = "read"}
+   #+END_QUOTE
+** Master Token 绝对权限,什么都不用配置就具有所有权限
+** 其他权限需要你自己配置了
+*** 比如我配的agent
+     这个token 我配到 acl_agent_token对应的字段上了，用于node各节点间同步一些信息
+     配置完这个之后token才会生成，生成后需要你把consul停掉，然后配置到acl_agent_token这个字段上再重启
+    #+BEGIN_QUOTE
+    node "" {policy = "write"}
+    service "" {policy = "read"}
+    #+END_QUOTE
+** client
+比如这个token我打算用于 consul的使用者用于set get 操作，
+#+BEGIN_QUOTE
+    key "key_2" { policy = "read" }
+    key "key_3" { policy = "deny" }
+    key "" {policy = "write"}
+#+END_QUOTE
