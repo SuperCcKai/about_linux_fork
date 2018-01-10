@@ -51,13 +51,20 @@
   }
 #+END_SRC
     + server： 以server身份启动。
-    + bootstrap-expect：集群要求的最少server数量，当低于这个数量，集群即失效。
+    + bootstrap-expect：集群要求的最少server数量，当低于这个数量，集群即失效,当大于这个，则开始选举leader组集群
     + data-dir：data存放的目录，更多信息请参阅consul数据同步机制
     + node：节点id，在同一集群不能重复。
     + bind：监听的ip地址。
     + client 客户端的ip地址
     + encrypt  节点之间通信，避免其他集群节点乱入 ,可以使用consul keygen 生成
     + 几个tokens 可以用 uuidgen生成
+** 几个简单的命令
+   consul members 查看各节点信息
+   consul info 查看具体信息，比如谁是leader等
+   curl -XPUT --data 'pong' --header "X-Consul-Token: "tokenssssssssssssss" http://top1:8500/v1/kv/ping
+   curl -XGET --data 'ping' --header "X-Consul-Token: "tokenssssssssssssss" http://top1:8500/v1/kv/ping
+   consul  kv put hello world
+   consul  kv get hello
 
 * ACL 权限
   启动 5个节点分别使用上面的配置启动之后,访问任一节点的8500端口即可web方式管理consul
@@ -87,10 +94,24 @@
     node "" {policy = "write"}
     service "" {policy = "read"}
     #+END_QUOTE
-** client
-比如这个token我打算用于 consul的使用者用于set get 操作，
+*** 比如我配置的client
+比如我把这个token 配到 acl_token字段上，可以通过设置权限来控制默认kv 的权限
+比如我设置成
 #+BEGIN_QUOTE
     key "key_2" { policy = "read" }
     key "key_3" { policy = "deny" }
     key "" {policy = "write"}
 #+END_QUOTE
+#+BEGIN_SRC sh
+    则这几个命令 不必传token 就可以执行成功
+   curl -XPUT --data 'pong'  http://top1:8500/v1/kv/ping
+   curl -XGET --data 'ping'  http://top1:8500/v1/kv/ping
+   consul  kv put hello world
+   consul  kv get hello
+#+END_SRC
+#+BEGIN_QUOTE
+    而把权限设置成这样，上面几个命令就会出403  Permission denied
+    key "" {policy = "deny"}
+#+END_QUOTE
+
+***  当然也可以提供一个token 给程序用，用来精细控制各个业务的权限
