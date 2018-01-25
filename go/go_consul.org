@@ -31,6 +31,14 @@ consul集群的server上，虽然当这个server挂掉的时候集群依然能�
 加Nginx负载将注册服务的请求平均分布到集群中不同的consul节点上，同样在
 获取服务的时候也要经过Nginx这一层进行负载
 
+    在server前面挡一层nginx 或slb可能不是好的做法，另一种方式是在每个
+ECS或docker内置一个consul client,而容器内的服务只与本容器内的consul
+client交互， 由consul client与consul server集群交互。
+
+容器内的consul client负责watch 服务，当服务当掉，consul client负责通知到集群
+当consul client 当掉，consul 集群会把与它同ip的服务踢掉
+
+
     * start.sh 脚本
 #+BEGIN_SRC sh
   #!/bin/sh
