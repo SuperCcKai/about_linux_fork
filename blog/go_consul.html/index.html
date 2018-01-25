@@ -47,25 +47,25 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org966ca4a">consul 的一些角色</a></li>
-<li><a href="#org3184fe0">配置文件模版</a>
+<li><a href="#orge01a752">consul 的一些角色</a></li>
+<li><a href="#orgf98b8b5">配置文件模版</a>
 <ul>
-<li><a href="#orgbcbb410">几个简单的命令</a></li>
+<li><a href="#org6ecd181">几个简单的命令</a></li>
 </ul>
 </li>
-<li><a href="#org8da744c">ACL 权限</a>
+<li><a href="#org5c63e1f">ACL 权限</a>
 <ul>
-<li><a href="#org762f94e">Anonymous Token 匿名用户的访问权限</a></li>
-<li><a href="#orge215635">Master Token 绝对权限,什么都不用配置就具有所有权限</a></li>
-<li><a href="#org1896f0e">其他权限需要你自己配置了</a></li>
+<li><a href="#orgf37adaa">Anonymous Token 匿名用户的访问权限</a></li>
+<li><a href="#org028cd55">Master Token 绝对权限,什么都不用配置就具有所有权限</a></li>
+<li><a href="#org2301d43">其他权限需要你自己配置了</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org966ca4a" class="outline-2">
-<h2 id="org966ca4a">consul 的一些角色</h2>
-<div class="outline-text-2" id="text-org966ca4a">
+<div id="outline-container-orge01a752" class="outline-2">
+<h2 id="orge01a752">consul 的一些角色</h2>
+<div class="outline-text-2" id="text-orge01a752">
 <p>
 Consul Cluster有Server和Client两种角色。不管是Server还是Client，统称为<br />
 Agent，Consul Client是相对无状态的，只负责转发RPC到Server，资源开销很<br />
@@ -87,6 +87,18 @@ consul集群的server上，虽然当这个server挂掉的时候集群依然能�
 获取服务的时候也要经过Nginx这一层进行负载<br />
 </p>
 
+<p>
+    在server前面挡一层nginx 或slb可能不是好的做法，另一种方式是在每个<br />
+ECS或docker内置一个consul client,而容器内的服务只与本容器内的consul<br />
+client交互， 由consul client与consul server集群交互。<br />
+</p>
+
+<p>
+容器内的consul client负责watch 服务，当服务当掉，consul client负责通知到集群<br />
+当consul client 当掉，consul 集群会把与它同ip的服务踢掉<br />
+</p>
+
+
 <ul class="org-ul">
 <li>start.sh 脚本<br /></li>
 </ul>
@@ -103,9 +115,9 @@ sed <span style="color: #ffa07a;">"s/#leader#/$leader/g"</span> conf_template_js
 </div>
 </div>
 </div>
-<div id="outline-container-org3184fe0" class="outline-2">
-<h2 id="org3184fe0">配置文件模版</h2>
-<div class="outline-text-2" id="text-org3184fe0">
+<div id="outline-container-orgf98b8b5" class="outline-2">
+<h2 id="orgf98b8b5">配置文件模版</h2>
+<div class="outline-text-2" id="text-orgf98b8b5">
 <div class="org-src-container">
 <pre class="src src-js">{
     <span style="color: #ffa07a;">"datacenter"</span>         : <span style="color: #ffa07a;">"iget-topology-aliyun"</span>,
@@ -143,9 +155,9 @@ sed <span style="color: #ffa07a;">"s/#leader#/$leader/g"</span> conf_template_js
 <li>几个tokens 可以用 uuidgen生成<br /></li>
 </ul>
 </div>
-<div id="outline-container-orgbcbb410" class="outline-3">
-<h3 id="orgbcbb410">几个简单的命令</h3>
-<div class="outline-text-3" id="text-orgbcbb410">
+<div id="outline-container-org6ecd181" class="outline-3">
+<h3 id="org6ecd181">几个简单的命令</h3>
+<div class="outline-text-3" id="text-org6ecd181">
 <p>
 consul members 查看各节点信息<br />
 consul info 查看具体信息，比如谁是leader等<br />
@@ -158,9 +170,9 @@ consul  kv get hello<br />
 </div>
 </div>
 
-<div id="outline-container-org8da744c" class="outline-2">
-<h2 id="org8da744c">ACL 权限</h2>
-<div class="outline-text-2" id="text-org8da744c">
+<div id="outline-container-org5c63e1f" class="outline-2">
+<h2 id="org5c63e1f">ACL 权限</h2>
+<div class="outline-text-2" id="text-org5c63e1f">
 <p>
 启动 5个节点分别使用上面的配置启动之后,访问任一节点的8500端口即可web方式管理consul<br />
  在 设置中 输入上面配置的acl_master_token ,即具有的相应的管理权限<br />
@@ -172,9 +184,9 @@ consul  kv get hello<br />
 </p>
 </div>
 </div>
-<div id="outline-container-org762f94e" class="outline-3">
-<h3 id="org762f94e">Anonymous Token 匿名用户的访问权限</h3>
-<div class="outline-text-3" id="text-org762f94e">
+<div id="outline-container-orgf37adaa" class="outline-3">
+<h3 id="orgf37adaa">Anonymous Token 匿名用户的访问权限</h3>
+<div class="outline-text-3" id="text-orgf37adaa">
 <ol class="org-ol">
 <li>如下 对所有的key具有只读限制，只 以lock/ 为前缀的key 有写权限<br /></li>
 <li>对node 信息具有只读权限 可以使用consul members 查看各节点信息而不用输入tokens (consul members -token tokensssssssssss)<br /></li>
@@ -196,16 +208,16 @@ service "consul" {policy  = "read"}<br />
 </ol>
 </div>
 </div>
-<div id="outline-container-orge215635" class="outline-3">
-<h3 id="orge215635">Master Token 绝对权限,什么都不用配置就具有所有权限</h3>
+<div id="outline-container-org028cd55" class="outline-3">
+<h3 id="org028cd55">Master Token 绝对权限,什么都不用配置就具有所有权限</h3>
 </div>
-<div id="outline-container-org1896f0e" class="outline-3">
-<h3 id="org1896f0e">其他权限需要你自己配置了</h3>
-<div class="outline-text-3" id="text-org1896f0e">
+<div id="outline-container-org2301d43" class="outline-3">
+<h3 id="org2301d43">其他权限需要你自己配置了</h3>
+<div class="outline-text-3" id="text-org2301d43">
 </div>
 <ul class="org-ul">
-<li><a id="orgb761e63"></a>比如我配的agent<br />
-<div class="outline-text-4" id="text-orgb761e63">
+<li><a id="org60b3c6b"></a>比如我配的agent<br />
+<div class="outline-text-4" id="text-org60b3c6b">
 <p>
 这个token 我配到 acl_agent_token对应的字段上了，用于node各节点间同步一些信息<br />
 配置完这个之后token才会生成，生成后需要你把consul停掉，然后配置到acl_agent_token这个字段上再重启<br />
@@ -218,8 +230,8 @@ service "" {policy = "read"}<br />
 </blockquote>
 </div>
 </li>
-<li><a id="org20eda00"></a>比如我配置的client<br />
-<div class="outline-text-4" id="text-org20eda00">
+<li><a id="org3710d0d"></a>比如我配置的client<br />
+<div class="outline-text-4" id="text-org3710d0d">
 <p>
 比如我把这个token 配到 acl_token字段上，可以通过设置权限来控制默认kv 的权限<br />
 比如我设置成<br />
@@ -248,7 +260,7 @@ key "" {policy = "deny"}<br />
 </div>
 </li>
 
-<li><a id="orgb956c5a"></a>当然也可以提供一个token 给程序用，用来精细控制各个业务的权限<br /></li>
+<li><a id="orga2bf3a3"></a>当然也可以提供一个token 给程序用，用来精细控制各个业务的权限<br /></li>
 </ul>
 </div>
 </div>
@@ -258,7 +270,7 @@ key "" {policy = "deny"}<br />
     <div>
       <div class="post-meta">
         <span title="post date" class="post-info">2018-01-10</span>
-        <span title="last modification date" class="post-info">2018-01-10</span>
+        <span title="last modification date" class="post-info">2018-01-25</span>
         <span title="tags" class="post-info">N/A</span>
         <span title="author" class="post-info">纪秀峰</span>
       </div>
