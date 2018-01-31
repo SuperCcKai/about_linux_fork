@@ -1,0 +1,34 @@
+# -*- coding:utf-8 -*-
+#+LANGUAGE:  zh
+#+TITLE:     redis拾遗
+#+AUTHOR:    jixiuf
+#+EMAIL:     jixiuf@qq.com
+#+DATE:     2018-01-31 三
+#+DESCRIPTION:redis拾遗
+#+KEYWORDS:
+#+TAGS:
+#+FILETAGS:
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
+#+LATEX_HEADER: \usepackage{fontspec}
+#+LATEX_HEADER: \setmainfont{PingFang SC}
+* 参考资料：
+1. redis内存优化：https://cachecloud.github.io/2017/02/16/Redis%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/
+2. Instagram的Redis实践 http://www.cnblogs.com/Laymen/articles/6803485.html
+3. Efficient Redis Caching Through Hashing
+   https://sorentwo.com/2015/08/10/efficient-redis-caching-through-hashing.html
+
+
+* 实用工具：
+1. rdb ：分析redis内存占用情况
+      rdb -c memory ./hins3544773_data_20180130032206.rdb --bytes 128 -f ~/work/temp/memory0130.csv
+      [[file:../img/redis-2018-01-31-17-29-48.png]]
+       比如首行 168 表示redis 实际分配了的多少内存，后面的57是key value 的大小,可以看到内存利用率并不高
+2. redis内存分析
+    redis-memory-for-key -s r-2ze6ae913e05e3f4.redis.rds.aliyuncs.com -a XXX 80179951
+3. redis-profile 优化建议
+    redis-profiler -k "user.*" -k "friends.*" -f memoryreport.html /var/redis/6379/dump.rdb
+* 优化点
+        根据调研，目前redis内存优化，大的方面尽可能的让redis采用压缩方式存储，比如ziplist/zipmap编码。
+(ziplist编码需要设置hash-max-ziplist-entries 、 hash-max-ziplist-value这两个参数，需要重启redis实例)
+ziplist 可以压缩内存约6~7倍，但cpu会增加2~3倍，需要做权衡
